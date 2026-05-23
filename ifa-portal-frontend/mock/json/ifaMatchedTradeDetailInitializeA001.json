@@ -1,0 +1,93 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[
+    {
+      "brandCode": "2733",
+      "brandName": "あらた",
+      "marginTradeTypeText": "6ヶ月",
+      "tradeDate": "20230320",
+      "updateTime": "20230323 111022",
+      "tradeList": [
+        {
+          "tradeTime": "110000",
+          "tradeQuantity": "1000",
+          "tradePrice": "2000",
+          "contractAmount": "200000",
+          "market": "東証",
+          "depositType": "1",
+          "ecOrderNo": "324000",
+          "cancelStatus": "0"
+        },
+        {
+          "tradeTime": "",
+          "tradeQuantity": "",
+          "tradePrice": "",
+          "contractAmount": "",
+          "market": "",
+          "depositType": "",
+          "ecOrderNo": "",
+          "cancelStatus": ""
+        },
+        {
+          "tradeTime": "110000",
+          "tradeQuantity": "1000",
+          "tradePrice": "2000",
+          "contractAmount": "200000",
+          "market": "東証",
+          "depositType": "1",
+          "ecOrderNo": "324000",
+          "cancelStatus": "0"
+        }
+      ],
+      "settlementPositionList": [
+        {
+          "openTradeDate": "20230322",
+          "lastTradeDate": "",
+          "bargainMarket": "0",
+          "orgNewTradeDate": "20230322",
+          "builtPrice": "2500",
+          "orderQuantity": "1000",
+          "actualQuantity": "1000",
+          "averageTradePrice": "2600",
+          "costTotal": "3168",
+          "settlementLossProfit": "6832"
+        },
+        {
+          "openTradeDate": "",
+          "lastTradeDate": "",
+          "bargainMarket": "",
+          "orgNewTradeDate": "",
+          "builtPrice": "",
+          "orderQuantity": "",
+          "actualQuantity": "",
+          "averageTradePrice": "",
+          "costTotal": "",
+          "settlementLossProfit": ""
+        },
+        {
+          "openTradeDate": "20230322",
+          "lastTradeDate": "20230525",
+          "bargainMarket": "0",
+          "orgNewTradeDate": "20230322",
+          "builtPrice": "2500",
+          "orderQuantity": "1000",
+          "actualQuantity": "0",
+          "averageTradePrice": "2600",
+          "costTotal": "3168",
+          "settlementLossProfit": "6832"
+        }
+      ],
+      "deliveryDate": "20230323",
+      "tradeClassification": "5",
+      "paymentDeadline": "",
+      "notSpecificDepositTradeType": ""
+    }
+  ]
+}

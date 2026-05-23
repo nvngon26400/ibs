@@ -1,0 +1,17 @@
+{
+  "domainId": "AGENT_KANJI",
+  "domainName": "代理人名",
+  "dataType": "文字列",
+  "precision": 36,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 36,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

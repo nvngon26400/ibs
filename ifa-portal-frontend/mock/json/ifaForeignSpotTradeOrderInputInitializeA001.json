@@ -1,0 +1,62 @@
+{
+	"totalSize": 10,
+	"maxRownum": 0,
+	"overMaxRownum": false,
+	"message": "",
+	"errorLevel": 0,
+	"requestedTime": "23/07/05 12:00",
+	"title": "",
+	"returnCode": "I9999",
+	"dataList": [
+		{
+			"countryCode": "",
+			"brandSearchCountryCodeList": [],
+			"brandCode": "",
+			"depositType": "",
+			"limitPriceText": "USD",
+			"marketAbbreviation": "",
+			"buySellTypeName": "0",
+
+			"stopOrderPriceKindList": "1",
+			"orderPriceKindList": [],
+			"selectAblePeriodTermsList": [
+				"CARRY_OVER_ORDER"
+			],
+      "depositTypeList": ["1", "2"],
+			"stockPriceKindList": ["YEN_SETTLEMENT"],
+			"buyingPowerDomesticList": [
+				{
+					"yenBuyingPowerGeneralAccount": "888888",
+					"nisaBuyLimitList": [{
+					"availableBuyingLimit": "2222222",
+					"annualAvailableBuyingLimit": "2024",
+					"accountClassification": "2222223"
+					},
+					{
+						"availableBuyingLimit": "522025",
+						"annualAvailableBuyingLimit": "2025",
+						"accountClassification": "522026"
+					}
+			],
+				"yenBuyingPowerJrNisa": "333333",
+					"accountClassificationJrNisa": ""
+				}		
+			],
+			"buyingPowerForeignList": [
+				{
+					"foreignBuyingPower": "777777",
+					"currencyCode": "USD",
+					"foreignBuyingPowerJrNisa": "222222",
+					"currencyCodeJrNisa": "AUD"
+				}
+			],
+			"buyReservePowerWholeAccountAreaCurrencyCode": "HKD",
+			"yenBuyingPowerGeneralAccount": "888888",
+			"foreignBuyingPowerJrNisa": "222222",
+			"buyReservePowerJuniorNisaAccountAreaCurrencyCode": "EUR",
+			"yenBuyingPowerJrNisa": "333333",
+			"sellAbleProtectionClassification": "COLLATERAL_SECURITIES",
+			"acPosition": "0"	
+		}
+	]
+}

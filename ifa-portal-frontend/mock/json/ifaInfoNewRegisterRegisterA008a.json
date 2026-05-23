@@ -1,0 +1,17 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "registerFile1": "PC_list のコピー_5.xlsx",
+      "registerFile2": null,
+      "registerFile3": "CORDYS.OPERATING_MASTER_5.csv"
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/05/29 14:45:06",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

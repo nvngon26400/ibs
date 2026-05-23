@@ -1,0 +1,92 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "bbApplyList": [
+                {
+                    "brandCode": "11111",
+                    "brandName": "ソニー",
+                    "butenCode": "Z64",
+                    "accountNumber": "417572",
+                    "customerName": "川崎",
+                    "bbQuantity": "100",
+                    "bbPrice": "10009.9999",
+                    "bbGestureValue": "1",
+                    "bbInvestorAttName": "個人",
+                    "bbSeq": "1",
+                    "quantitySairyou": "88888888",
+                    "choseReason": "1",
+                    "bbRemark": "稼働確認",
+                    "kanyuKbn": "1",
+                    "receiveOrderType": "1",
+                    "checkResult": "OK",
+                    "checkResultSetList": [
+                        {
+                            "status": "OK",
+                            "msg": ""
+                        }
+                    ]
+                },
+                {
+                    "brandCode": "04340",
+                    "brandName": "アップル",
+                    "butenCode": "Z64",
+                    "accountNumber": "417572",
+                    "customerName": "川崎",
+                    "bbQuantity": "100",
+                    "bbPrice": "10009.9999",
+                    "bbGestureValue": "1",
+                    "bbInvestorAttName": "個人",
+                    "bbSeq": "1",
+                    "quantitySairyou": "88888888",
+                    "choseReason": "1",
+                    "bbRemark": "稼働確認",
+                    "kanyuKbn": "1",
+                    "receiveOrderType": "1",
+                    "checkResult": "NGあり",
+                    "checkResultSetList": [
+                        {
+                            "status": "ERROR",
+                            "msg": "入力した部店口座は存在しません。<br>部店: [Z64]、口座: [417572]"
+                        }
+                    ]
+                },
+                {
+                    "brandCode": "04180",
+                    "brandName": "東京電力",
+                    "butenCode": "Z64",
+                    "accountNumber": "417572",
+                    "customerName": "横浜",
+                    "bbQuantity": "200",
+                    "bbPrice": "10000",
+                    "bbGestureValue": "2",
+                    "bbInvestorAttName": "個人",
+                    "bbSeq": "1",
+                    "quantitySairyou": "100",
+                    "choseReason": "2",
+                    "bbRemark": "稼働確認",
+                    "kanyuKbn": "2",
+                    "receiveOrderType": "2",
+                    "checkResult": "警告あり",
+                    "checkResultSetList": [
+                        {
+                            "status": "WARNING",
+                            "msg": "裁量配分割当回数は５回以上です。ご確認ください。"
+                        },
+                        {
+                            "status": "WARNING",
+                            "msg": "投資家属性は\"1, 2, 3, 4\"中の属性を入力してください。<br/>1:個人、2:事業法人、3:地域金融機関、4:その他法人(学校法人等)"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/01/31 14:53:03",
+    "title": null,
+    "returnCode": "SUCCESS"
+}

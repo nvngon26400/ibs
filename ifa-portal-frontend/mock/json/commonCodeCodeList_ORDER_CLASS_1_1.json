@@ -1,0 +1,8 @@
+{
+  "dataList": [
+    { "key": "1", "value": "通常/逆指値" },
+    { "key": "2", "value": "OCO" },
+    { "key": "3", "value": "IFD" },
+    { "key": "4", "value": "IFDOCO" }
+  ]
+}

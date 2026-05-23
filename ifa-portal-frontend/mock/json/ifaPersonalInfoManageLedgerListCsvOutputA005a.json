@@ -1,0 +1,11 @@
+{
+    "totalSize": 1,
+    "maxRownum": 5000,
+    "overMaxRownum": true,
+    "dataList": [],
+    "message": "1件のcsv出力を行います。",
+    "errorLevel": 2,
+    "requestedTime": "2024/05/31 18:00:28",
+    "title": "C:/Users/FIN-08662/Desktop/work/download/20240531180028432_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX_555.csv",
+    "returnCode": "warnings.dataList.csv.output"
+}

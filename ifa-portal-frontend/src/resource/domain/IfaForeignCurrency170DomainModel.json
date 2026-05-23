@@ -1,0 +1,17 @@
+{
+  "domainId": "FOREIGN_CURRENCY17_0",
+  "domainName": "外貨17_0",
+  "dataType": "金額",
+  "precision": 17,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 22,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "各通貨単位",
+  "htmlTag": "ifa-input-amount"
+}

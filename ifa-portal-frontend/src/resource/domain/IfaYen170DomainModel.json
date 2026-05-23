@@ -1,0 +1,17 @@
+{
+  "domainId": "YEN17_0",
+  "domainName": "円貨17_0",
+  "dataType": "金額",
+  "precision": 17,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 22,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "円",
+  "htmlTag": "ifa-input-amount"
+}

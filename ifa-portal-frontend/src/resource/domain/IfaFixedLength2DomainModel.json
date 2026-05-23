@@ -1,0 +1,17 @@
+{
+  "domainId": "FIXED_LENGTH2",
+  "domainName": "固定文字列2",
+  "dataType": "文字列",
+  "precision": 2,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 2,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "FOREIGN_SECURITY_INFO_ISSUE_METHOD",
+  "domainName": "外国証券情報の交付方法",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

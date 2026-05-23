@@ -1,0 +1,18 @@
+
+{
+  "frameworkSessionId": "33547594-c91a-4e54-8485-7c5bc4506035",
+  "authToken": "PlGLqnm65fjDFi1fM4Kxy21xFFC8nGTwQ75YDKlxsbgKPlavT8vrPGXnAhlJMiSQ",
+  "lastRequestSec": 1683872894194,
+  "requestTimeOutSec": 30,
+  "rPPOptions": null,
+  "userAccount": null,
+  "idleLimitSec": 10000000000000,
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/10/18 18:42:05",
+  "title": null,
+  "returnCode": "notvu"
+}

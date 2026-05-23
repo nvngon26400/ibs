@@ -1,0 +1,24 @@
+{
+	"totalSize": 1,
+	"maxRownum": 1,
+	"overMaxRownum": false,
+	"dataList": [
+			{
+					"managerAlertComplianceReport": {
+							"thisMonthUnreplyFlag": null,
+							"titleThisMonth": null,
+							"lastMonthUnreplyFlag": null,
+							"titleLastMonth": null
+					},
+					"managerAlertSelfAssessment": {
+							"registerYearMonthThisMonth": null,
+							"registerYearMonthLastMonth": null
+					}
+			}
+	],
+	"message": "",
+	"errorLevel": 0,
+	"requestedTime": "2024/12/20 11:47:46",
+	"title": null,
+	"returnCode": "SUCCESS"
+}

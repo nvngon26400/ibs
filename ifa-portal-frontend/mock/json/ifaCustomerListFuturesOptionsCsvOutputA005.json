@@ -1,0 +1,11 @@
+{
+  "totalSize": 13,
+  "maxRownum": 700000,
+  "overMaxRownum": true,
+  "dataList": [],
+  "message": "13件のcsv出力を行います。",
+  "errorLevel": 2,
+  "requestedTime": "2024/06/17 09:41:02",
+  "title": "d:/temp/20240617094102825_null_555.csv",
+  "returnCode": "warnings.dataList.csv.output"
+}

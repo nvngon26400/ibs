@@ -1,0 +1,17 @@
+{
+  "domainId": "BRAND_NAME1000",
+  "domainName": "銘柄名1000",
+  "dataType": "文字列",
+  "precision": 1000,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 1000,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": null
+}

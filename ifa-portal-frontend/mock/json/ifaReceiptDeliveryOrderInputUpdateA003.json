@@ -1,0 +1,25 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "newOpenInterestNumber" : "999",
+    "parentStockConstructionDate" : "2024/1/1",
+    "constructionDate" : "2024/1/2",
+    "openPrice" : "888",
+    "paymentDeadlineDate": "10",
+    "dateKbn": "Y",
+    "newPrice" : "7777",
+    "maxOrderableQuantity" : "66666",
+    "paymentDeadlineCalculation": "10年",
+    "deliveryDateT2" : "2024/12/10",
+    "cashOnDeliveryT2" : "5555555",
+    "deliveryDateT3" : "2024/12/11",
+    "cashOnDeliveryT3" : "444444444"
+  }]
+}

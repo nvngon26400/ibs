@@ -1,0 +1,15 @@
+{
+  "dispName": "",
+  "extLinkFlag": "1",
+  "postRequest": {
+    "_ControlId": "WPLETadR001Control",
+    "_DataStoreID": "DSWPLETadR001Control",
+    "_PageID": "WPLETadR001Rlgn20",
+    "_ActionID": "RealCCSDaikoLogin",
+    "ccs_op_id": "dummyCcsOpId",
+    "user_id": "csadm01",
+    "expansion": "q9wFQrm5ZYfySMuqqyLrSpn1c4bb4amw",
+    "getFlg": "on"
+  },
+  "linkUrl": "https://site1.sbisec.co.jp/ETGate"
+}

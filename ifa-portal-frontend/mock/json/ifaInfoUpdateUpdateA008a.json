@@ -1,0 +1,18 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "registerFileName1": "A008aFile1.txt",
+      "registerFileName2": "A008aFile2.txt",
+      "registerFileName3": "A008aFile3.txt",
+      "fileDirectory": "C:/Users/FIN-08662/Desktop/work/upload/"
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2023/09/14 23:03:56",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

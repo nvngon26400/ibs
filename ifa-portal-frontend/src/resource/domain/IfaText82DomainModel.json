@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT82",
+  "domainName": "テキスト82",
+  "dataType": "文字列",
+  "precision": 82,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 82,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

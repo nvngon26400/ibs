@@ -1,0 +1,17 @@
+{
+  "domainId": "CLASS3",
+  "domainName": "区分値3",
+  "dataType": "文字列",
+  "precision": 3,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 3,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

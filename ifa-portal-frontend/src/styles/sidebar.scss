@@ -1,0 +1,399 @@
+#app {
+
+  .main-container {
+    min-height: 100%;
+    transition: margin-left .28s;
+    margin-left: $sideBarWidth;
+    position: relative;
+  }
+
+  .sidebar-container {
+    transition: width 0.28s;
+    width: $sideBarWidth !important;
+    background-color: $menuBg;
+    height: 100%;
+    position: fixed;
+    font-size: 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+
+    // reset element-ui css
+    .horizontal-collapse-transition {
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    }
+
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+    }
+
+    .el-scrollbar__bar.is-vertical {
+      right: 0px;
+    }
+
+    .el-scrollbar {
+      height: 100%;
+    }
+
+    &.has-logo {
+      .el-scrollbar {
+        height: calc(100% - 50px);
+      }
+    }
+
+    .is-horizontal {
+      display: none;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .svg-icon {
+      margin-right: 8px;
+      height: 20px;
+    }
+
+    .sub-el-icon {
+      margin-right: 8px;
+      margin-left: -2px;
+    }
+
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100% !important;
+    }
+/**/
+.el-menu-item.is-active.submenu-title-noDropdown {
+  &:hover{
+    background-color: $menuHover !important;
+    color: $subBlueColor !important;
+
+  }
+}
+    .submenu-title-noDropdown,
+    .el-sub-menu__title {
+      &:hover {
+        background-color: $menuHover !important;
+        color: $subBlueColor !important;;
+      }
+    }
+
+    .is-active>.el-sub-enu__title {
+      color: $subMenuActiveText !important;
+      &:hover {
+        color: $subBlueColor !important;
+      }
+    }
+
+    & .nest-menu .el-sub-menu>.el-sub-menu__title,
+    & .el-sub-menu .el-menu-item {
+      min-width: $sideBarWidth !important;
+      background-color: $subMenuBg !important;
+
+      &:hover {
+        background-color: $subMenuHover !important;
+        color: $subBlueColor !important;
+      }
+    }
+  }
+
+  .hideSidebar {
+    .sidebar-container {
+      width: 54px !important;
+    }
+
+    .main-container {
+      margin-left: 54px;
+    }
+
+    .submenu-title-noDropdown {
+      &:hover {
+        background-color: $menuHover !important;
+        color: $subBlueColor !important;
+      }
+      padding: 0 !important;
+      position: relative;
+
+      .el-tooltip {
+        padding: 0 !important;
+
+        .svg-icon {
+          margin-left: 20px;
+          height: 20px;
+        }
+
+        .sub-el-icon {
+          margin-left: 19px;
+        }
+      }
+    }
+
+    .el-sub-menu {
+      overflow: hidden;
+
+      &>.el-sub-menu__title {
+
+        .svg-icon {
+          margin-left: 20px;
+          height: 20px;
+        }
+
+        .sub-el-icon {
+          margin-left: 19px;
+        }
+
+        // .el-sub-menu__icon-arrow {
+        //   /*display: none;*/
+        // }
+      }
+    }
+
+    .el-menu--collapse {
+      .el-sub-menu {
+        &>.el-sub-menu__title {
+          &>span {
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  .el-menu--collapse .el-menu .el-sub-menu {
+    min-width: $sideBarWidth !important;
+  }
+
+  .el-menu--collapse .el-sub-menu__icon-arrow {
+    display: none;
+  }
+
+  .withoutAnimation {
+
+    .main-container,
+    .sidebar-container {
+      transition: none;
+    }
+  }
+}
+
+// when menu collapsed
+.el-menu--vertical {
+  &>.el-menu {
+    .svg-icon {
+      margin-right: 16px;
+      height: 20px;
+    }
+    .sub-el-icon {
+      margin-right: 8px;
+      margin-left: -2px;
+    }
+  }
+
+  .nest-menu .el-sub-menu>.el-sub-menu__title,
+  .el-menu-item {
+    &:hover {
+      // you can use $subMenuHover
+      background-color: $menuHover !important;
+      color: $subBlueColor !important;
+    }
+  }
+
+  // the scroll bar appears when the subMenu is too long
+  >.el-menu--popup {
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar-track-piece {
+      background: #d3dce6;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #99a9bf;
+      border-radius: 20px;
+    }
+  }
+}
+$icon-list: (
+  angle-down,
+  angle-left,
+  angle-right,
+  angle-up,
+  arrow-down,
+  arrow-left,
+  arrow-right,
+  arrows-maximize,
+  arrow-trend-up,
+  arrow-up,
+  award,
+  balloon,
+  balloon-exclamation,
+  bars,
+  bell,
+  calendar,
+  calendar-dollar-in,
+  calendar-repeat,
+  calendar-yen-in,
+  card,
+  card-plus,
+  caution,
+  caution-fill,
+  chart-candlestick,
+  chart-candlestick-down,
+  chart-candlestick-fill,
+  chart-candlestick-fill-down,
+  chart-candlestick-fill-up,
+  chart-candlestick-up,
+  chart-close,
+  chartline-3parts,
+  chartline-fibonacci,
+  check,
+  check-circle,
+  check-circle-fill,
+  chirp,
+  circle,
+  clipboard-trend-up-cursor,
+  clock,
+  close,
+  cloud,
+  cloud-fill,
+  convert-dollar,
+  convert-yen,
+  desktop,
+  dollar,
+  dollar-card,
+  dollar-equilibrium,
+  dollar-in,
+  dollar-out,
+  dollar-transfer,
+  dots-menu,
+  download,
+  download-csv,
+  download-pdf,
+  edit,
+  ellipsis,
+  equilibrium,
+  equilibrium-cut,
+  eraser,
+  eraser-all,
+  error,
+  error-fill,
+  exchange,
+  external,
+  eye,
+  eye-close,
+  faq,
+  file,
+  file-arrow-down,
+  file-graph,
+  file-yen,
+  fillter-etf,
+  filter-fill,
+  filter-funnel,
+  fire,
+  flag,
+  flag-fill,
+  font-sizing,
+  four-squares,
+  gear,
+  gift,
+  glass-plus,
+  glass-simple,
+  globe,
+  headset,
+  help,
+  home,
+  horizontal-bar-chart,
+  information,
+  item-plus,
+  launcher,
+  line-segment-diagonal,
+  line-segment-diagonal-parallel,
+  line-segment-horizontal,
+  line-segment-vertical,
+  list,
+  lock,
+  login,
+  logo-futures-trading,
+  logo-options-trading,
+  logout,
+  magnet,
+  mail-plus,
+  minus,
+  mobile-splitscreen,
+  moon,
+  moon-fill,
+  order,
+  pencil,
+  pie-chart,
+  plane,
+  play,
+  plus,
+  priceboard,
+  print,
+  qa,
+  ranking,
+  rate-settings,
+  reload,
+  return,
+  rise,
+  rotate-landscape,
+  rotate-portrait,
+  search,
+  settings,
+  simulator-option,
+  simulator-profit-loss,
+  simulator-span,
+  sort,
+  speaker-high,
+  speaker-low,
+  speaker-off,
+  star,
+  star-check,
+  star-fill,
+  star-fill-minus,
+  star-half-fill,
+  star-plus,
+  stock-loan,
+  strategy,
+  sun,
+  sun-fill,
+  transfer-downarrow,
+  translation,
+  trash-can,
+  triangle-,
+  triangle-fill-down,
+  triangle-fill-up,
+  umbrella,
+  umbrella-fill,
+  unlock,
+  upload,
+  user,
+  user-settings,
+  window,
+  yen,
+  yen-card,
+  yen-equilibrium,
+  yen-in,
+  yen-out
+);
+$icon-dir: '~@/assets/icons/seeds/1.0.0/image/font-icon';
+@each $icon in $icon-list {
+  .seeds-#{$icon} {
+    content: url($icon-dir + '/' + $icon + '.svg');
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "VOLUME8",
+  "domainName": "数量8",
+  "dataType": "数値",
+  "precision": 8,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 10,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-quantity"
+}

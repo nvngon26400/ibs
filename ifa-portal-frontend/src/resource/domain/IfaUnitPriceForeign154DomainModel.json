@@ -1,0 +1,17 @@
+{
+  "domainId": "UNIT_PRICE_FOREIGN15_4",
+  "domainName": "単価_外貨15_4",
+  "dataType": "金額",
+  "precision": 15,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 19,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "各通貨単位",
+  "htmlTag": "ifa-input-amount"
+}

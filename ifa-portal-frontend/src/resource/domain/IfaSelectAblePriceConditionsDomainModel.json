@@ -1,0 +1,17 @@
+{
+  "domainId": "SELECT_ABLE_PRICE_CONDITIONS",
+  "domainName": "選択可能価格条件",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-select"
+}

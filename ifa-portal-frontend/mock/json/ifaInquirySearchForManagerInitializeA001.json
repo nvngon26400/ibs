@@ -1,0 +1,53 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "toiawaseDList": [
+        {
+          "toiawaseCd": "aa   ",
+          "toiawaseMei": "IFA専用-注文"
+        },
+        {
+          "toiawaseCd": "ab   ",
+          "toiawaseMei": "IFA専用-投資相談・勧誘"
+        },
+        {
+          "toiawaseCd": "ac   ",
+          "toiawaseMei": "IFA専用-問い合わせ・案内"
+        },
+        {
+          "toiawaseCd": "ad   ",
+          "toiawaseMei": "IFA専用-面談"
+        },
+        {
+          "toiawaseCd": "af   ",
+          "toiawaseMei": "IFA専用-ヒアリング"
+        },
+        {
+          "toiawaseCd": "ah   ",
+          "toiawaseMei": "IFA専用-アフターフォロー等"
+        },
+        {
+          "toiawaseCd": "ai   ",
+          "toiawaseMei": "IFA専用-アテンション"
+        },
+        {
+          "toiawaseCd": "aj   ",
+          "toiawaseMei": "IFA専用-その他"
+        },
+        {
+          "toiawaseCd": "ak   ",
+          "toiawaseMei": "IFA専用-申請"
+        }
+      ],
+      "comment": "【確認事項】録音・接触履歴へ新住所は入力済みですか。\n【お客さまへのご案内事項】返送の際は必ず同封の返信用封筒にて返送をお願いします。\n本人確認書類については、同封されている「ご本人確認書類提出のお願い」を確認してください。"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

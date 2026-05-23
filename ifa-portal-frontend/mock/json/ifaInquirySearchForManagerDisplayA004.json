@@ -1,0 +1,47 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "inquirySearchList": [
+        { "butenCode": "D01", "accountNumber": "600967", "nameKanji": "木村慎司1", "nameKana": "キシムラシンジ1", "brokerChargeCode": "0001", "brokerChargeName": "鈴木太郎", "brokerCode": "0001", "brokerName": "仲介業者A", "branchCode": "001", "branchName": "支店A", "toiawaseDMei": "IFA専用-面談", "toiawaseMei": "信用面談", "toiawaseSMei": "", "cr": "クレーム", "juuyoudo": "高", "houkou": "イン", "taiouSts": "対応1", "ifaToiawaseNo": "ifaToiawaseNo01", 
+          "inquiryDetailList": [
+            { "nyuuryokuNichiji": "2025/8/19 12:00:00", "naiyou": "内容①", "nyuuryokuSha": "佐藤岩瀬1" }
+          ]
+        },
+        { "butenCode": "196", "accountNumber": "416801", "nameKanji": "木村慎司2", "nameKana": "キシムラシンジ2", "brokerChargeCode": "0002", "brokerChargeName": "鈴木太郎2", "brokerCode": "0001", "brokerName": "仲介業者A", "branchCode": "002", "branchName": "支店B", "toiawaseDMei": "IFA専用-その他", "toiawaseMei": "", "toiawaseSMei": "", "cr": "リクエスト", "juuyoudo": "中", "houkou": "アウト", "taiouSts": "対応2", "ifaToiawaseNo": "ifaToiawaseNo02", 
+          "inquiryDetailList": [
+            { "nyuuryokuNichiji": "2025/8/22 12:00:00", "naiyou": "内容②", "nyuuryokuSha": "佐藤岩瀬2" },
+            { "nyuuryokuNichiji": "2025/8/20 12:00:00", "naiyou": "内容③", "nyuuryokuSha": "佐藤岩瀬3" },
+            { "nyuuryokuNichiji": "2025/8/21 12:00:00", "naiyou": "内容④", "nyuuryokuSha": "佐藤岩瀬4" }
+          ]
+        },
+        { "butenCode": "Z43", "accountNumber": "600969", "nameKanji": "木村慎司3", "nameKana": "キシムラシンジ3", "brokerChargeCode": "0008", "brokerChargeName": "鈴木太郎8", "brokerCode": "0003", "brokerName": "仲介業者C", "branchCode": "004", "branchName": "支店D", "toiawaseDMei": "IFA専用-問い合わせ・案内", "toiawaseMei": "移管出庫（譲渡含む）", "toiawaseSMei": "", "cr": "クレーム", "juuyoudo": "高", "houkou": "イン", "taiouSts": "対応5", "ifaToiawaseNo": "ifaToiawaseNo03", 
+          "inquiryDetailList": [
+            { "nyuuryokuNichiji": "2025/8/13 12:00:00", "naiyou": "内容⑤", "nyuuryokuSha": "佐藤岩瀬5" },
+            { "nyuuryokuNichiji": "2025/8/25 12:00:00", "naiyou": "内容⑥", "nyuuryokuSha": "佐藤岩瀬6" }
+          ]
+        },
+        { "butenCode": "Z44", "accountNumber": "60096Z", "nameKanji": "木村慎司4", "nameKana": "キシムラシンジ4", "brokerChargeCode": "0002", "brokerChargeName": "鈴木太郎2", "brokerCode": "0001", "brokerName": "仲介業者A", "branchCode": "001", "branchName": "支店A", "toiawaseDMei": "アカウント", "toiawaseMei": "EXPRESS口座開設", "toiawaseSMei": "確認書類・必要書類の確認", "cr": "クレーム", "juuyoudo": "低", "houkou": "イン", "taiouSts": "対応7", "ifaToiawaseNo": "ifaToiawaseNo04", 
+          "inquiryDetailList": [
+            { "nyuuryokuNichiji": "2025/8/11 12:00:00", "naiyou": "内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦内容⑦", "nyuuryokuSha": "佐藤岩瀬7" }
+          ]
+        },
+        { "butenCode": "Z46", "accountNumber": "60096Z", "nameKanji": "木村慎司4", "nameKana": "キシムラシンジ4", "brokerChargeCode": "0002", "brokerChargeName": "鈴木太郎2", "brokerCode": "0001", "brokerName": "仲介業者A", "branchCode": "001", "branchName": "支店A", "toiawaseDMei": "国内株式(現物)", "toiawaseMei": "取引ルール", "toiawaseSMei": "注文/約定ルール（執行条件、呼値・制限値幅、ストップ配分）", "cr": "クレーム", "juuyoudo": "中", "houkou": "イン", "taiouSts": "対応8", "ifaToiawaseNo": "ifaToiawaseNo05", 
+          "inquiryDetailList": [
+            { "nyuuryokuNichiji": "2025/8/19 12:00:00", "naiyou": "内容⑧\n内容⑧\n内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧内容⑧", "nyuuryokuSha": "プランAコース10" },
+            { "nyuuryokuNichiji": "2025/8/7 12:00:00", "naiyou": "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345", "nyuuryokuSha": "佐藤岩瀬11" },
+            { "nyuuryokuNichiji": "2025/8/24 12:00:00", "naiyou": "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcde", "nyuuryokuSha": "佐藤岩瀬12" },
+            { "nyuuryokuNichiji": "2025/11/22 12:00:00", "naiyou": "内容⑪", "nyuuryokuSha": "佐藤岩瀬13" }
+          ]
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

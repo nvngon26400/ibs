@@ -1,0 +1,85 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "spotMarginTradeList": [
+                {
+                    "brandCode": "7974 ",
+                    "brandName": "任天堂",
+                    "tradeClassification": "1",
+                    "depositType": "0",
+                    "quantity": "100",
+                    "averagePrice": "6651",
+                    "taxAmountCapitalGain": "1234",
+                    "commCost": "5678",
+                    "settlementAmount": "669390",
+                    "collateralEligibleType": "0",
+                    "dayTrade": "0",
+                    "tradeDate": "20231013",
+                    "settlementDate": "20231017",
+                    "paymentDeadline": "",
+                    "marginTradeClassification": "1"
+                }
+            ],
+            "spotMarginTradeCount": "2",
+            "receiptDeliveryTradeList": [
+                {
+                    "ecOrderNo": "000103",
+                    "brandCode": "8306",
+                    "brandName": "三菱ＵＦＪフィナンシャル・グループ",
+                    "tradeCd": "1",
+                    "depositType": "1",
+                    "quantity": "100",
+                    "cost": "24445",
+                    "settlementAmount": "85055",
+                    "coercionType": "",
+                    "constructionDate": "20230818",
+                    "newPrice": "1095",
+                    "tradeDate": "20231020",
+                    "orderDayTime": "20231020163045",
+                    "marginTradeClassification": "6ヶ月"
+                },
+                {
+                    "ecOrderNo": "000104",
+                    "brandCode": "9076",
+                    "brandName": "セイノーホールディングス（株）",
+                    "tradeCd": "0",
+                    "depositType": "0",
+                    "quantity": "200",
+                    "cost": "88740",
+                    "settlementAmount": "317260",
+                    "coercionType": "",
+                    "constructionDate": "20230919",
+                    "newPrice": "2030",
+                    "tradeDate": "20231020",
+                    "orderDayTime": "20231020162545",
+                    "marginTradeClassification": "6ヶ月"
+                },
+                {
+                    "ecOrderNo": "000104",
+                    "brandCode": "9076",
+                    "brandName": "セイノーホールディングス（株）",
+                    "tradeCd": "5",
+                    "depositType": "0",
+                    "quantity": "200",
+                    "cost": "88740",
+                    "settlementAmount": "317260",
+                    "coercionType": "",
+                    "constructionDate": "20230919",
+                    "newPrice": "2030",
+                    "tradeDate": "20231020",
+                    "orderDayTime": "20231020162545",
+                    "marginTradeClassification": "6ヶ月"
+                }
+            ],
+            "receiptDeliveryTradeCount": "2"
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/03/06 16:32:06",
+    "title": null,
+    "returnCode": "SUCCESS"
+}

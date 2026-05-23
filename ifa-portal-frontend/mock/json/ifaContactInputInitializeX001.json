@@ -1,0 +1,101 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "toiawaseDList": [
+        {
+          "toiawaseCd": "aa",
+          "toiawaseMei": "IFA専用-注文"
+        },
+        {
+          "toiawaseCd": "ab",
+          "toiawaseMei": "IFA専用-投資相談・勧誘"
+        },
+        {
+          "toiawaseCd": "ac",
+          "toiawaseMei": "IFA専用-問い合わせ・案内"
+        },
+        {
+          "toiawaseCd": "ad",
+          "toiawaseMei": "IFA専用-面談"
+        },
+        {
+          "toiawaseCd": "af",
+          "toiawaseMei": "IFA専用-ヒアリング"
+        },
+        {
+          "toiawaseCd": "ah",
+          "toiawaseMei": "IFA専用-アフターフォロー等"
+        },
+        {
+          "toiawaseCd": "ai",
+          "toiawaseMei": "IFA専用-アテンション"
+        },
+        {
+          "toiawaseCd": "aj",
+          "toiawaseMei": "IFA専用-その他"
+        },
+        {
+          "toiawaseCd": "ak",
+          "toiawaseMei": "IFA専用-申請"
+        }
+      ],
+      "toiawaseList": [
+        {
+          "toiawaseCd": "aa08",
+          "toiawaseMei": "IFAポータル経由"
+        }
+      ],
+      "toiawaseSList": [
+      ],
+      "toiawaseDCd": "aa",
+      "toiawaseCd": "aa08",
+      "toiawaseSCd": "",
+      "toiawaseNaiyou": "問合せ内容１　問合せ内容１　問合せ内容１",
+      "juuyoudo": "2",
+      "cream": "2",
+      "request": "1",
+      "houkou": "1",
+      "taiouSts": "0",
+      "houmonbi": "20250415",
+      "nextHoumonbi": "20250425",
+      "sessyokuKeiro": "E",
+      "toiawaseNo": "toiawaseNo8888",
+      "ifaToiawaseNo": "ifaToiawaseNo0010",
+      "ifaNyuuryokuFlg": "0",
+      "answerList": [
+        {
+          "ifaToiawaseNo": "toiawaseNo1",
+          "toiawaseNo": "toiawaseNo1",
+          "ifaKaitouNo": "kaitouNo1",
+          "kaitouNo": "kaitouNo1",
+          "tourokuGroup": "0",
+          "kaitouNaiyou": "回答1　回答1　回答1"
+        },
+        {
+          "ifaToiawaseNo": "toiawaseNo2",
+          "toiawaseNo": "toiawaseNo2",
+          "ifaKaitouNo": "kaitouNo2",
+          "kaitouNo": "kaitouNo2",
+          "tourokuGroup": "0",
+          "kaitouNaiyou": ""
+        },
+        {
+          "ifaToiawaseNo": "toiawaseNo3",
+          "toiawaseNo": "toiawaseNo3",
+          "ifaKaitouNo": "kaitouNo3",
+          "kaitouNo": "kaitouNo3",
+          "tourokuGroup": "0",
+          "kaitouNaiyou": "回答3"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

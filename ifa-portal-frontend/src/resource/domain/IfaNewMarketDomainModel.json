@@ -1,0 +1,17 @@
+{
+  "domainId": "NEW_MARKET",
+  "domainName": "新規市場",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

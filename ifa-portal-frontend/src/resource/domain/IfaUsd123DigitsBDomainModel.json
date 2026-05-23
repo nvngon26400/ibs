@@ -1,0 +1,17 @@
+{
+  "domainId": "USD12_3_DIGITS_B",
+  "domainName": "米ドル12_3_B",
+  "dataType": "金額",
+  "precision": 12,
+  "digit": 3,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 15,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "USD",
+  "htmlTag": "ifa-input-amount"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "STOCKS13",
+  "domainName": "株数13",
+  "dataType": "数値",
+  "precision": 13,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 17,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "株",
+  "htmlTag": "ifa-input-quantity"
+}

@@ -1,0 +1,82 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "knockInBrandHoldingList": [
+              {
+                  "sbmBondCode": "OTSTAR001",
+                  "butenCode": "OB1",
+                  "accountNumber": "860001",
+                  "customerAttribute": "A",
+                  "customerNameKanji": "名前",
+                  "customerNameKana": "なまえ",
+                  "dealerNumber": "001",
+                  "brokerCode": "OBR1",
+                  "brokerName": "株式会社テスト",
+                  "brokerageBranchCode": "OC1",
+                  "brokerBranchName": "株式会社テスト",
+                  "brokerChargeCode": "OBC1",
+                  "brokerChargeName": "テスト担当",
+                  "brandName": "顧客アラートCSV",
+                  "holdingQuantity": "100",
+                  "pdfNoticeUrl": "/test/test.pdf",
+                  "judgmentBrandName": "グロース市場250指数",
+                  "price": "694.37",
+                  "knockInLevelPrice": "23599.42",
+                  "knockinDate": "20240712"
+              },
+              {
+                "sbmBondCode": "OTSTAR001",
+                "butenCode": "OB1",
+                "accountNumber": "860001",
+                "customerAttribute": "A",
+                "customerNameKanji": "名前",
+                "customerNameKana": "なまえ",
+                "dealerNumber": "001",
+                "brokerCode": "OBR1",
+                "brokerName": "株式会社テスト",
+                "brokerageBranchCode": "OC1",
+                "brokerBranchName": "株式会社テスト",
+                "brokerChargeCode": "OBC1",
+                "brokerChargeName": "テスト担当",
+                "brandName": "顧客アラートCSV",
+                "holdingQuantity": "100",
+                "pdfNoticeUrl": "/test/test.pdf",
+                "judgmentBrandName": " ,グロース市場250指数,判定銘柄改行テスト",
+                "price": "694.37,1234.120,-123.00",
+                "knockInLevelPrice": "23599.42,12345.400,-0.12,123.0",
+                "knockinDate": "20240712, ,20240622, "
+            },
+            {
+              "sbmBondCode": null,
+              "butenCode": null,
+              "accountNumber": null,
+              "customerAttribute": null,
+              "customerNameKanji": null,
+              "customerNameKana": null,
+              "dealerNumber": null,
+              "brokerCode": null,
+              "brokerName": null,
+              "brokerageBranchCode": null,
+              "brokerBranchName": null,
+              "brokerChargeCode": null,
+              "brokerChargeName": null,
+              "brandName": null,
+              "holdingQuantity": null,
+              "pdfNoticeUrl": null,
+              "judgmentBrandName": null,
+              "price": null,
+              "knockInLevelPrice": null,
+              "knockinDate": null
+          }
+          ]
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/06/13 18:17:35",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

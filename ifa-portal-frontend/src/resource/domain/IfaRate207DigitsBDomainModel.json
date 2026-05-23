@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE20_7_DIGITS_B",
+  "domainName": "レート20_7_B",
+  "dataType": "レート",
+  "precision": 20,
+  "digit": 7,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 25,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": "ifa-input-amount"
+}

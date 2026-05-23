@@ -1,0 +1,17 @@
+{
+  "domainId": "SUBSCRIPT_BB_DRAWING_RESULT",
+  "domainName": "募集・BB抽選結果",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

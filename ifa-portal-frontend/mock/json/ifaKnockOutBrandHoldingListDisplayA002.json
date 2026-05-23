@@ -1,0 +1,80 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "knockOutBrandHoldingList": [
+                {
+                    "sbmBondCode": "OTSTAR001",
+                    "butenCode": "OB1",
+                    "accountNumber": "860001",
+                    "customerAttribute": "A",
+                    "customerNameKanji": "名前",
+                    "customerNameKana": "ナマエ",
+                    "dealerNumber": "001",
+                    "brokerCode": "OBR1",
+                    "brokerName": "株式会社テスト",
+                    "brokerageBranchCode": "OC1",
+                    "brokerBranchName": "株式会社テスト",
+                    "brokerChargeCode": "OBC1",
+                    "brokerChargeName": "テスト担当",
+                    "brandName": "顧客アラートCSV",
+                    "holdingQuantity": "100",
+                    "pdfNoticeUrl": "/test/test.pdf",
+                    "judgmentBrandName": "グロース市場250指数",
+                    "price": "694.37",
+                    "earlyRedemptionLevelPrice": "32449.21",
+                    "earlyRedemptionDeterminationDate": "20240714"
+                },{
+                    "sbmBondCode": "OTSTAR001",
+                    "butenCode": "OB1",
+                    "accountNumber": "860001",
+                    "customerAttribute": "A",
+                    "customerNameKanji": "名前",
+                    "customerNameKana": "ナマエ",
+                    "dealerNumber": "001",
+                    "brokerCode": "OBR1",
+                    "brokerName": "株式会社テスト",
+                    "brokerageBranchCode": "OC1",
+                    "brokerBranchName": "株式会社テスト",
+                    "brokerChargeCode": "OBC1",
+                    "brokerChargeName": "テスト担当",
+                    "brandName": "顧客アラートCSV",
+                    "holdingQuantity": "100",
+                    "pdfNoticeUrl": "/test/test.pdf",
+                    "judgmentBrandName": "グロース市場250指数, ,改行",
+                    "price": "694.37,-123.12, ",
+                    "earlyRedemptionLevelPrice": "-12,32449.21, ",
+                    "earlyRedemptionDeterminationDate": " ,20240714"
+                },{
+                    "sbmBondCode": "",
+                    "butenCode": "",
+                    "accountNumber": "",
+                    "customerAttribute": "",
+                    "customerNameKanji": "",
+                    "customerNameKana": "",
+                    "dealerNumber": "",
+                    "brokerCode": "",
+                    "brokerName": "",
+                    "brokerageBranchCode": "",
+                    "brokerBranchName": "",
+                    "brokerChargeCode": "",
+                    "brokerChargeName": "",
+                    "brandName": "",
+                    "holdingQuantity": "",
+                    "pdfNoticeUrl": "",
+                    "judgmentBrandName": "",
+                    "price": "",
+                    "earlyRedemptionLevelPrice": "",
+                    "earlyRedemptionDeterminationDate": ""
+                }
+            ]
+        }
+    ],
+    "message": null,
+    "errorLevel": 0,
+    "requestedTime": "2024/06/14 16:48:33",
+    "title": null,
+    "returnCode": "SUCCESS"
+}

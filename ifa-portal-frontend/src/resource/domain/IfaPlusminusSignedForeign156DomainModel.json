@@ -1,0 +1,17 @@
+{
+  "domainId": "PLUSMINUS_SIGNED_FOREIGN_15_6",
+  "domainName": "符号付外貨_15_6（+-）",
+  "dataType": "金額",
+  "precision": 15,
+  "digit": 6,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "signedWithCommaZeroPadding",
+  "formattedDigit": 18,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "各通貨単位",
+  "htmlTag": "ifa-input-amount"
+}

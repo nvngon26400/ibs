@@ -1,0 +1,14 @@
+/* 顧客別メニュー用 */
+/* 適用させる場合は子コンポーネントのクラスを:deep()で指定する */
+.customer-menu-wrapper .width-style :deep(.el-form-item) {
+  display: flex;
+  align-items: center;
+}
+.customer-menu-wrapper .width-style :deep(.el-form-item__label) {
+  display: flex;
+  align-items: center;
+  align-self: center;
+}
+.customer-menu-wrapper .width-style :deep(.el-input.is-disabled .el-input__inner) {
+  background-color: initial;
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "DEPOSIT_BALANCE_LIST_SPECIFIC_DEPOSIT_TYPE",
+  "domainName": "非特定預り区分（預り残高一覧）",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

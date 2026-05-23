@@ -1,0 +1,17 @@
+{
+  "domainId": "BRAND_CODE14",
+  "domainName": "銘柄コード14",
+  "dataType": "文字列",
+  "precision": 14,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 14,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

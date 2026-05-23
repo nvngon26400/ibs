@@ -1,0 +1,37 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "sbpNo": "1",
+          "title": "仲介業者タイトル",
+          "category": "01",
+          "status": "0",
+          "suggestion": "要望",
+          "registeredAttachFile1": "000001_登録済みファイル.txt",
+          "registeredAttachFile2": "000001_登録済みファイル_1.txt",
+          "registeredAttachFile3": null,
+          "sugBoxUnreadItems": "0",
+          "answerList": [
+              {
+                  "answerNo": "1",
+                  "answerContents": "【対応状況】\n現在、システム開発チームにて実現可能性の調査を進めております。業務効率化に資する重要なご提案と認識しており、今後のバージョンアップの候補として前向きに検討させていただきます。\n\nなお、具体的な対応時期につきましては、他の要望との優先順位や技術的な検討を踏まえ、改めてご連絡させていただきます。\n\n今後とも、より良いシステム運用のためにご協力を賜りますよう、よろしくお願い申し上げます。",
+                  "createTime": "2025-06-20 09:36:42",
+                  "answerUpdateTime": "2025-06-20 18:17:44"
+              },
+              {
+                  "answerNo": "2",
+                  "answerContents": "登録",
+                  "createTime": "2025-06-20 18:18:04",
+                  "answerUpdateTime": "2025-06-20 18:18:04"
+              }
+          ]
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/06/24 15:51:13",
+  "title": null,
+  "returnCode": "正常終了"
+}

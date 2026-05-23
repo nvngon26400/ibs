@@ -1,0 +1,17 @@
+{
+  "domainId": "JR_ISA_CONTRACT_TYPE",
+  "domainName": "ジュニアISA契約区分",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

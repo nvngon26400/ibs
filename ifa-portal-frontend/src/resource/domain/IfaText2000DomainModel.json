@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT2000",
+  "domainName": "テキスト2000",
+  "dataType": "文字列",
+  "precision": 2000,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 2000,
+  "verticalAlign": "T",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "URL",
+  "domainName": "URL",
+  "dataType": "文字列",
+  "precision": 500,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "url",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 500,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

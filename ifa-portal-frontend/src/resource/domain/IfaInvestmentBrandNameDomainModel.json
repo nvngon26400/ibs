@@ -1,0 +1,17 @@
+{
+  "domainId": "INVESTMENT_BRAND_NAME",
+  "domainName": "投信銘柄名",
+  "dataType": "文字列",
+  "precision": 256,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 256,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

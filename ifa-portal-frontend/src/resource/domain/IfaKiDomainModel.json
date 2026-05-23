@@ -1,0 +1,17 @@
+{
+  "domainId": "KI",
+  "domainName": "KI有無",
+  "dataType": "文字列",
+  "precision": 2,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 2,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": null
+}

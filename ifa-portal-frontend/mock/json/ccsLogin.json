@@ -1,0 +1,18 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "logoutUrl": "http://localhost:3000/sso/ccsUserLogout",
+      "loginUrl": "http://localhost:3000/sso/ccsUserLogin",
+      "transitionUrl": "http://localhost:3000/sso/ccsUserView",
+      "tempUrl": "http://localhost:3000/sso/ccsTempUrl"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/08/06 14:13:21",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

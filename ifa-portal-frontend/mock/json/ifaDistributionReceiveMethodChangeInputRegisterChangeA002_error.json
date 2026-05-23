@@ -1,0 +1,11 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "分配金受取方法を変更できませんでした。",
+  "errorLevel": -1,
+  "requestedTime": "2023/12/06 12:34:56",
+  "title": "",
+  "returnCode": "errors.dmt.distributionsReceipt.failed",
+  "dataList": []
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "BROKER_CODE_EXCLUDE",
+  "domainName": "仲介業者除外",
+  "dataType": "文字列",
+  "precision": 1,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 1,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": null
+}

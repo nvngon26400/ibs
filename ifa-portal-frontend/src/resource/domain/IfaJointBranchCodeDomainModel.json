@@ -1,0 +1,17 @@
+{
+  "domainId": "JOINT_BRANCH_CODE",
+  "domainName": "共募支店コード",
+  "dataType": "文字列",
+  "precision": 3,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 3,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

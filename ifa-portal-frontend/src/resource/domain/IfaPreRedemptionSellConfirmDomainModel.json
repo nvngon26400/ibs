@@ -1,0 +1,17 @@
+{
+  "domainId": "PRE_REDEMPTION_SELL_CONFIRM",
+  "domainName": "償還前売却確認",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

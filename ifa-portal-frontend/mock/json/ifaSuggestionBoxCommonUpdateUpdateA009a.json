@@ -1,0 +1,17 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "registerFileName1": "80__2.txt",
+          "registerFileName2": "80_sample_2",
+          "registerFileName3": "80_sample_2.txt"
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/06/23 16:49:30",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

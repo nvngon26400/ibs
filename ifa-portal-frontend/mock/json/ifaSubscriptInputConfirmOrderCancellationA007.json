@@ -1,0 +1,35 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "butenCode": "123",
+      "accountNumber": "1234",
+      "sendCorrectLogicJudgeFlag": "BROKERUPDATE",
+      "bbPeriodTo": "20241231",
+      "brandCode": "210987654321",
+      "bookBuildingPresentationFrom": "20240101",
+      "detailNumber": "1",
+      "updateTimeForOrderExclusivity": "",
+      "recruitmentOrderDate": "",
+      "contractAmount": "152415787517139777762.6",
+      "depositType": "H",
+      "lotteryResult": "1",
+      "bbQuantityAlloc": "1234567890",
+      "sellBuyUnitType": "株",
+      "orderStatus": "0",
+      "quantity": "1234567890",
+      "kanyuKbn": "1",
+      "jutyuKbn": "3",
+      "mokuromiKoufuKbn": "3",
+      "importantMatterType": "0",
+      "orderFlag": "4"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/02 12:34:56",
+  "title": null,
+  "returnCode": null
+}

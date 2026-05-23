@@ -1,0 +1,17 @@
+{
+  "domainId": "FIXED_LENGTH3",
+  "domainName": "固定文字列3",
+  "dataType": "文字列",
+  "precision": 3,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 3,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

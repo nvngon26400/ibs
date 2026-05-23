@@ -1,0 +1,17 @@
+{
+  "domainId": "UNIT_PRICE_YEN10_1_DIGITS_C",
+  "domainName": "単価_円貨10_1_C",
+  "dataType": "金額",
+  "precision": 10,
+  "digit": 1,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 13,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "円",
+  "htmlTag": "ifa-input-amount"
+}

@@ -1,0 +1,38 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "todayBaseMarginDepositRate8": "999.99",
+          "todayBaseForeignCurrencyactualDeposit": "504898.52",
+          "todayBaseMarginDepositCache": "1512829.39",
+          "todayBaseAmericaAlternativeSecuritiesTotal": "0.00",
+          "todayBaseTotalOpenInterestValuationLoss": "-4838.53",
+          "todayBaseTotalSettlementProfitLoss": "0.00",
+          "todayBaseTotalExpensesPaid": "-129.02",
+          "todayBaseForeignReferenceMarginDeposit": "999.99",
+          "todayBaseReferenceSecurityDeposit": "504898.52",
+          "todayBaseForeignCurrencydeposit": "70001.76",
+          "todayBaseTotalAppraisalValueOfSecuritiesInCustody": "0.00",
+          "todayBaseConstructionPriceTotal": "1597.27",
+          "markToBaseMarginDepositRate8": "999.99",
+          "markToBaseForeignCurrencyactualDeposit": "1444898.52",
+          "markToBaseMarginDepositCache": "1512829.39",
+          "markToBaseAmericaAlternativeSecuritiesTotal": "0.00",
+          "markToBaseTotalOpenInterestValuationLoss": "-4838.53",
+          "markToBaseTotalSettlementProfitLoss": "0.00",
+          "markToBaseTotalExpensesPaid": "-129.02",
+          "markToBaseForeignReferenceMarginDeposit": "-",
+          "markToBaseReferenceSecurityDeposit": "-",
+          "markToBaseForeignCurrencydeposit": "-",
+          "markToBaseTotalAppraisalValueOfSecuritiesInCustody": "-",
+          "markToBaseConstructionPriceTotal": "11597.27"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/02/29 11:19:58",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

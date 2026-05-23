@@ -1,0 +1,17 @@
+{
+  "domainId": "MARKET",
+  "domainName": "市場（国内）",
+  "dataType": "文字列",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

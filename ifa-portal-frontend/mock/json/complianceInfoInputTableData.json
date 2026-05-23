@@ -1,0 +1,920 @@
+{
+  "data": {
+    "items": [
+      {
+        "status": 0,
+        "preview": "1",
+        "title": "コンプライアンス通信（2022年3月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2022/03",
+        "disclosureFlag": "0",
+        "lectureId": "11",
+        "overview": "2022年03月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "2",
+        "title": "コンプライアンス通信（2022年2月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2022/02",
+        "overview": "2022年02月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "3",
+        "title": "コンプライアンス通信（2022年1月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2022/01",
+        "overview": "2022年01月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 0,
+        "preview": "1",
+        "title": "コンプライアンス通信（2021年12月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/12",
+        "overview": "2021年12月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 0,
+        "preview": "2",
+        "title": "コンプライアンス通信（2021年11月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/11",
+        "overview": "2021年11月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "3",
+        "title": "コンプライアンス通信（2021年10月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/10",
+        "overview": "2021年10月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "1",
+        "title": "コンプライアンス通信（2021年9月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/09",
+        "overview": "2021年09月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "2",
+        "title": "コンプライアンス通信（2021年8月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/08",
+        "overview": "2021年08月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "1",
+        "title": "コンプライアンス通信（2021年7月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/07",
+        "overview": "2021年07月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "2",
+        "title": "コンプライアンス通信（2021年6月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/06",
+        "overview": "2021年06月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "3",
+        "title": "コンプライアンス通信（2021年5月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/05",
+        "overview": "2021年05月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "4",
+        "title": "コンプライアンス通信（2021年4月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/04",
+        "overview": "2021年04月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "5",
+        "title": "コンプライアンス通信（2021年3月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/03",
+        "overview": "2021年03月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "6",
+        "title": "コンプライアンス通信（2021年2月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/02",
+        "overview": "2021年02月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "7",
+        "title": "コンプライアンス通信（2021年1月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2021/01",
+        "overview": "2021年01月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "1",
+        "title": "コンプライアンス通信（2020年12月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/12",
+        "overview": "2020年12月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "2",
+        "title": "コンプライアンス通信（2020年11月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/11",
+        "overview": "2020年11月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "3",
+        "title": "コンプライアンス通信（2020年10月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/10",
+        "overview": "2020年10月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "1",
+        "title": "コンプライアンス通信（2020年9月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/09",
+        "overview": "2020年09月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "2",
+        "title": "コンプライアンス通信（2020年8月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/08",
+        "overview": "2020年08月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "3",
+        "title": "コンプライアンス通信（2020年7月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/07",
+        "overview": "2020年07月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "1",
+        "title": "コンプライアンス通信（2020年6月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/06",
+        "overview": "2020年06月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "2",
+        "title": "コンプライアンス通信（2020年5月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/05",
+        "overview": "2020年05月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "status": 1,
+        "preview": "3",
+        "title": "コンプライアンス通信（2020年4月号）",
+        "change": "変更",
+        "delete": "削除",
+        "lastUpdateDate": "2022/01/07",
+        "yearMonth": "2020/04",
+        "overview": "2020年04月のコンプライアンス通信情報",
+        "file1": [
+          {
+            "name": "file1.pdf",
+            "url": ""
+          }
+        ],
+        "comment1": "コメント1",
+        "comment2": "コメント2",
+        "file2": [
+          {
+            "name": "file2.pdf",
+            "url": ""
+          }
+        ],
+        "comment3": "コメント3",
+        "file3": [
+          {
+            "name": "file3.pdf",
+            "url": ""
+          }
+        ],
+        "commentContent": "コメント4",
+        "contentFile": [
+          {
+            "name": "contentFile.pdf",
+            "url": ""
+          }
+        ]
+      }
+    ]
+  }
+}

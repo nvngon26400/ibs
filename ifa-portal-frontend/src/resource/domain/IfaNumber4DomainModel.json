@@ -1,0 +1,17 @@
+{
+  "domainId": "NUMBER4",
+  "domainName": "数値4",
+  "dataType": "数値",
+  "precision": 4,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 4,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,27 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [{
+    "declineRateKbn": "0",
+    "butenCode": "197",
+    "accountNumber": "1161264",
+    "investmentTrustAssociationCode": "9l31115A",
+    "standardDate": "20231108",
+    "mutualFundBrandName": "楽天-楽天日本株4.3倍プル",
+    "price": "10000",
+    "diff": "-1000",
+    "rateOfDecline": "-10.00",
+    "customerName": "佐藤太郎",
+    "statusClassification": "0",
+    "responseMethodClassification": "9",
+    "otherContentsClassification": "99",
+    "otherDetail": "test",
+    "customerResponseDate": "20240827"
+  }],
+  "message": "",
+  "errorLevel": "0",
+  "requestedTime": "2023/10/16 16:55:05",
+  "title": null,
+  "returnCode": null
+}

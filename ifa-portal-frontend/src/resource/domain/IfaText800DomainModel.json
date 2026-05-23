@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT800",
+  "domainName": "テキスト800",
+  "dataType": "文字列",
+  "precision": 800,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 800,
+  "verticalAlign": "T",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

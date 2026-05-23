@@ -1,0 +1,11 @@
+{
+    "totalSize": 0,
+    "maxRownum": 0,
+    "overMaxRownum": false,
+    "dataList": [],
+    "message": "ステータスおよび回答内容を登録しました。",
+    "errorLevel": 0,
+    "requestedTime": "2025/06/26 09:37:00",
+    "title": null,
+    "returnCode": "info.insertCompleted"
+}

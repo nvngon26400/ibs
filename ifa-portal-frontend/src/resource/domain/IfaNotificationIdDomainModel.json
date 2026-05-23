@@ -1,0 +1,17 @@
+{
+  "domainId": "NOTIFICATION_ID",
+  "domainName": "お知らせID",
+  "dataType": "数値",
+  "precision": 10,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 10,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "UNIT_PRICE_FOREIGN12_DIGITS_D",
+  "domainName": "単価_外貨12_D",
+  "dataType": "金額",
+  "precision": 12,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 15,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "各通貨単位",
+  "htmlTag": "ifa-input-amount"
+}

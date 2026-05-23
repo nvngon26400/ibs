@@ -1,0 +1,19 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "settlementDateT0": "2023/09/21",
+    "settlementDateT1": "2023/09/22",
+    "newBuildingCapacityT0": "123456789012345",
+    "newBuildingCapacityT1": "223456789012345",
+    "maintenanceRateJpyAmountDescriptionMessage": "維持率（円貨）テストメッセージ",
+    "rateT0": "123",
+    "rateT1": "223"
+  }]
+}

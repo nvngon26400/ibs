@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE17_4_DIGITS_B",
+  "domainName": "レート17_4_B",
+  "dataType": "レート",
+  "precision": 17,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 22,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": "ifa-input-amount"
+}

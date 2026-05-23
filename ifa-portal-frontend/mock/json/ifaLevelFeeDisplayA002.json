@@ -1,0 +1,50 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "levelFeeList": [
+                {
+                  "dateYmd": "20250601",
+                  "dateYm": null,
+                  "brokerCode": "9001",
+                  "brokerName": "仲介業者名",
+                  "empCode": "0001",
+                  "brokerChargeName": "営業員名",
+                  "butenCode": "A01",
+                  "accountNumber": "800001",
+                  "dealerNumber": "123",
+                  "customerNameKanji": "試験太郎",
+                  "customerNameKana": "シケンタロウ",
+                  "valuationTotalJpyAmount": "2000000000",
+                  "fee": "54794.5205",
+                  "branchCode": "921",
+                  "branchName": "支店名"
+              },
+              {
+                  "dateYmd": "20250601",
+                  "dateYm": "202506",
+                  "brokerCode": "1234",
+                  "brokerName": "仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名仲介業者名",
+                  "empCode": "1234",
+                  "brokerChargeName": "営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名営業員名",
+                  "butenCode": "123",
+                  "accountNumber": "1234567",
+                  "customerNameKanji": "顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名顧客名",
+                  "customerNameKana": "コキャクメイコキャクメイコキャクメイコキャクメイコキャクメイコキャクメイコキャクメイコキャクメイコキャクメイコキャクメイコキャクメイコキャクメイコキャ",
+                  "dealerNumber": "123456",
+                  "valuationTotalJpyAmount": "1234567890123.4567",
+                  "fee": "1234567890123.4567",
+                  "branchCode": "123",
+                  "branchName": "支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店名支店"
+              }
+          ]
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025/06/05 13:42:51",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

@@ -1,0 +1,15 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+    "searchResultCount": 0
+    }
+  ],
+  "message": "担当者情報を登録しました。",
+  "errorLevel": 0,
+  "requestedTime": "2023/10/12 16:55:05",
+  "title": "ログイン者管理(管理者用)",
+  "returnCode": null
+}

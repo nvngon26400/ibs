@@ -1,0 +1,128 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "sellUnableDetailList": [
+        {
+          "securityType": "国内株式",
+          "brandCodeBrandName": "1301 極洋",
+          "depositType": "ジュニアNISA口座 特定預り",
+          "fundDepositType": "",
+          "collateralEligibleType": "適格",
+          "restrictionCount": "0000000000001000",
+          "reason": "保振移管",
+          "limitedPeriodStart": "20171213",
+          "limitedPeriodFinish": "20171213",
+          "substituteStart": "20171213",
+          "substituteFinish": "20171213",
+          "registeredDate": "2017/12/12 16:37"
+        },
+        {
+          "securityType": "投資信託",
+          "brandCodeBrandName": "0248-57 日本３資産ファンド　成長コース",
+          "depositType": "総合口座 NISA預り（つみたて投資枠）",
+          "fundDepositType": "(口数)",
+          "collateralEligibleType": "適格",
+          "restrictionCount": "100000",
+          "reason": "名義書換出庫（出庫中）",
+          "limitedPeriodStart": "20171213",
+          "limitedPeriodFinish": "20171213",
+          "substituteStart": "",
+          "substituteFinish": "",
+          "registeredDate": "2017/12/12 16:35"
+        },
+        {
+          "securityType": "投資信託",
+          "brandCodeBrandName": "0248-57 日本３資産ファンド　成長コース",
+          "depositType": "ジュニアNISA口座 NISA預り（継続管理勘定）",
+          "fundDepositType": "(金額)",
+          "collateralEligibleType": "不適格",
+          "restrictionCount": "1000",
+          "reason": "特定→一般",
+          "limitedPeriodStart": "20171213",
+          "limitedPeriodFinish": "20171213",
+          "substituteStart": "",
+          "substituteFinish": "",
+          "registeredDate": "2017/12/12"
+        },
+        {
+          "securityType": "投資信託",
+          "brandCodeBrandName": "0248-57 日本３資産ファンド　成長コース",
+          "depositType": "",
+          "fundDepositType": "(金額)",
+          "collateralEligibleType": "不適格",
+          "restrictionCount": "1000",
+          "reason": "特定→一般",
+          "limitedPeriodStart": "20171213",
+          "limitedPeriodFinish": "20171213",
+          "substituteStart": "",
+          "substituteFinish": "",
+          "registeredDate": "2017/12/12"
+        },
+        {
+          "securityType": "投資信託",
+          "brandCodeBrandName": "0248-57 日本３資産ファンド　成長コース",
+          "depositType": "ジュニアNISA口座 NISA預り（継続管理勘定）",
+          "fundDepositType": "",
+          "collateralEligibleType": "不適格",
+          "restrictionCount": "1000",
+          "reason": "特定→一般",
+          "limitedPeriodStart": "20171213",
+          "limitedPeriodFinish": "20171213",
+          "substituteStart": "",
+          "substituteFinish": "",
+          "registeredDate": "2017/12/12"
+        },
+        {
+          "securityType": "",
+          "brandCodeBrandName": "",
+          "depositType": "",
+          "fundDepositType": "",
+          "collateralEligibleType": "",
+          "restrictionCount": "",
+          "reason": "",
+          "limitedPeriodStart": "",
+          "limitedPeriodFinish": "",
+          "substituteStart": "",
+          "substituteFinish": "",
+          "registeredDate": ""
+        },
+        {
+          "securityType": "投資信託",
+          "brandCodeBrandName": "0248-57 日本３資産ファンド　成長コーステストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト",
+          "depositType": "NISA預り（つみたて投資枠）",
+          "fundDepositType": "（口数）",
+          "collateralEligibleType": "不適格",
+          "restrictionCount": "1000000000000000",
+          "reason": "その他（WEB非表示）",
+          "limitedPeriodStart": "20171213",
+          "limitedPeriodFinish": "20171213",
+          "substituteStart": "20171213",
+          "substituteFinish": "20171213",
+          "registeredDate": "2017/12/12 16:35"
+        },
+        {
+          "securityType": null,
+          "brandCodeBrandName": null,
+          "depositType": null,
+          "fundDepositType": null,
+          "collateralEligibleType": null,
+          "restrictionCount": null,
+          "reason": null,
+          "limitedPeriodStart": null,
+          "limitedPeriodFinish": null,
+          "substituteStart": null,
+          "substituteFinish": null,
+          "registeredDate": null
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": "0",
+  "requestedTime": "2023/10/16 16:55:05",
+  "title": null,
+  "returnCode": null
+}

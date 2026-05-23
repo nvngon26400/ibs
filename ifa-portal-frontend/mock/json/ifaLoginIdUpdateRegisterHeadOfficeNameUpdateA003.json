@@ -1,0 +1,26 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "brokerNameList": [
+        {
+          "value": "株式会社リスクマネジメント・ラボラトリー ?",
+          "key": "900"
+        },
+        {
+          "value": "SBIマネープラザ株式会社",
+          "key": "999"
+        }
+      ],
+      "branchNameList": null,
+      "chargeNameList": null
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/02/15 14:47:32",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

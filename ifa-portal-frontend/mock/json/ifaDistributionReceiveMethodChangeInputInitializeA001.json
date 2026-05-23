@@ -1,0 +1,24 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/12/06 12:34:56",
+  "title": "",
+  "returnCode": "SUCCESS",
+  "dataList": [
+    {
+      "fundName": "SCSKインデックスファンド",
+      "unitVolume": "1234567890123456",
+      "sellingVolume": "1234567890123456",
+      "method": "受取",
+      "distributionReceiveClassification": "1",
+      "infoMsg": null,
+      "times": "0123",
+      "issue1": "4",
+      "issue2": "56",
+      "depositType": "7"
+    }
+  ]
+}

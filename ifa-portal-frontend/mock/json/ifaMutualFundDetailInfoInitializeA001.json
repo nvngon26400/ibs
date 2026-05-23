@@ -1,0 +1,78 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "updateTime": "2024/04/22 16:33",
+      "fundOfficalName": "ＳＢＩ岡三−ＲＯＢＯＰＲＯファンド",
+      "priceDate": "20231121",
+      "price": "12300",
+      "basePriceUnit": "10000",
+      "diff": "10000",
+      "ratio": "-0.00001",
+      "junshisan": "99999999999",
+      "w52Takane": "12400",
+      "w52Takanedate": "20230102",
+      "w52Yasune": "12200",
+      "w52Yasunedate": "20230103",
+      "thisMonthClosedDayList": [
+        {
+          "closedDay": "20231121",
+          "businessDayFlag": "1"
+        },
+        {
+          "closedDay": "20231122",
+          "businessDayFlag": null
+        },
+        {
+          "closedDay": "20231120",
+          "businessDayFlag": null
+        }
+      ],
+      "nextMonthClosedDayList": [
+        {
+          "closedDay": "20231220",
+          "businessDayFlag": null
+        }
+      ],
+      "deadlineDateRecent": "2023/11/24",
+      "deadlineDateNext": "2023/11/25",
+      "deadlines": "1500",
+      "shrineNotificationUpdateDate": "23/11/01 ",
+      "shrineNotificationContents": "<td class=\"_table__data __left\"><div style=\"color: red;\">本ファンドの「<a style=\"text-decoration:underline; color: blue;\" id=\"notificationContent\" href=\"/\">投信マイレージサービス</a>」におけるポイント付与率は月間平均保有額に対し年率0.042%になります。</div>",
+      "outsourcingCompanyNotificationUpdateDate": "23/11/02 ",
+      "outsourcingCompanyNotificationContents": "<td class=\"_table__data __left\"> <div style=\"color: red;\">信託報酬率変更のお知らせがございました。<br>詳しくは<a style=\"text-decoration:underline; color: blue;\" id=\"notificationContent\" href=\"/\" >こちら</a>をご確認ください。</div>",
+      "wealthAdvisorCommentUpdateDate": "23/11/03 ",
+      "wealthAdvisorCommentContents": "<div style=\"color: red;\">コメント本文</div>",
+      "course": "金額",
+      "kyoukaiCd": "0931123C",
+      "fundTypeName": "申込不可",
+      "operationPolicy": "運用方針",
+      "buyUnitWord": "金額：100円以上1円単位／積立：100円以上1円単位",
+      "sellSharesWord": "口数：100口以上1口単位／金額：100円以上1円単位\n※定期売却の場合は 金額：1000円以上1円単位",
+      "individualPrincipal": "1円",
+      "buyCommLeft": "1円未満 0.0円、1円以上1円未満 0.0円、1円以上1円未満 0.0円、1円以上1円未満 0.0円、1円以上1円未満 0.0円、1円以上1円未満 0.0円、1円以上 0.0円",
+      "buyCommRight": "2円未満 2.20%、2円以上4円未満 4.40%、4円以上6円未満 6.60%、6円以上8円未満 8.80%、8円以上10円未満 11.00%、10円以上12円未満 13.20%、14円以上 15.40%",
+      "buyCommNisaLeft": "NISA預り（成長投資枠）：なし",
+      "buyCommNisaRight": "NISA預り（成長投資枠）：16円未満 17.60%、16円以上18円未満 19.80%、18円以上20円未満 22.00%、20円以上22円未満 24.20%、22円以上24円未満 26.40%、24円以上26円未満 28.60%、28円以上 30.80%",
+      "trustFeeAmount": "10000",
+      "partialRedemptionCharge": "信託財産留保額",
+      "feeContent": "なし",
+      "preferentialRedemptionApplication": "あり\n※買付手数料無料の場合は適用されません。",
+      "shrineDeadlines": "15:00",
+      "tradeDate": "当日（国内・海外の休場により遅れる場合がございます）",
+      "settlementDate": "約定日から3営業日後",
+      "settleLastDay": "1215",
+      "dividendHandling": "分配金（扱い）",
+      "distributionReceiveMethodWord": "金額：証券口座でのお受取または再投資",
+      "settingDate": "2024/04/17",
+      "redemptionDate": "2045/12/19（繰上償還予定）"
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/04/22 16:33:55",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

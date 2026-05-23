@@ -1,0 +1,32 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "toiawaseList": [
+        {
+          "toiawaseCd": "aa01 ",
+          "toiawaseMei": "国内株式"
+        },
+        {
+          "toiawaseCd": "aa02 ",
+          "toiawaseMei": "外国株式"
+        },
+        {
+          "toiawaseCd": "aa03 ",
+          "toiawaseMei": "投信"
+        },
+        {
+          "toiawaseCd": "aa04 ",
+          "toiawaseMei": "円貨建債券"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

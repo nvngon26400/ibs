@@ -1,0 +1,24 @@
+import Logger from '@/utils/ifaLog.js'
+import { getFormattedDateValue } from '@/components/Date/js/IfaDatePickerFunction.js'
+export class IfaPortalNotificationNewRegisterA007RequestModel {
+  constructor(obj) {
+    Logger.debug(obj)
+    let importantNotificationValue = ''
+    let nonDisplayValue = ''
+    if (obj.importantNotification) {
+      importantNotificationValue = '1'
+    } else {
+      importantNotificationValue = '0'
+    }
+    if (obj.nonDisplay) {
+      nonDisplayValue = '1'
+    } else {
+      nonDisplayValue = '0'
+    }
+    this.displayPeriodFrom = obj.period[0] ? getFormattedDateValue(obj.period[0], 'date8') : '' // 表示期間From
+    this.displayPeriodTo = obj.period[1] ? getFormattedDateValue(obj.period[1], 'date8') : '' // 表示期間To
+    this.notificationContent = obj.notificationContent ? obj.notificationContent : '' // お知らせ内容
+    this.importantNotification = obj.importantNotification ? importantNotificationValue : '0' // 重要なお知らせ
+    this.nonDisplay = obj.nonDisplay ? nonDisplayValue : '0' // 非表示
+  }
+}

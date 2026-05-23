@@ -1,0 +1,17 @@
+{
+  "domainId": "PLUSMINUS_SIGNED_CURRENCY_9_0",
+  "domainName": "符号付価格_9_0（+-）",
+  "dataType": "金額",
+  "precision": 9,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "signedWithCommaInteger",
+  "formattedDigit": 11,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

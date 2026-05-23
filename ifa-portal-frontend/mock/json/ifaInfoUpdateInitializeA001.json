@@ -1,0 +1,189 @@
+{
+	"totalSize": 1,
+	"maxRownum": 1,
+	"overMaxRownum": false,
+	"dataList": [
+			{
+					"notificationCategoryList": [
+							{
+									"t9nInfoCat": "1",
+									"t9nName": "商品",
+									"requiredFlag": "1"
+							},
+							{
+									"t9nInfoCat": "2",
+									"t9nName": "コンプライアンス",
+									"requiredFlag": "1"
+							},
+							{
+									"t9nInfoCat": "3",
+									"t9nName": "IPO・PO",
+									"requiredFlag": "1"
+							},
+							{
+									"t9nInfoCat": "4",
+									"t9nName": "その他",
+									"requiredFlag": "1"
+							},
+							{
+									"t9nInfoCat": "10",
+									"t9nName": "株式関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "11",
+									"t9nName": "債券関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "12",
+									"t9nName": "投信関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "13",
+									"t9nName": "外国株式/ETF関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "14",
+									"t9nName": "マーケット情報",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "15",
+									"t9nName": "じぶん年金関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "16",
+									"t9nName": "保険関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "17",
+									"t9nName": "目安箱",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "20",
+									"t9nName": "セミナー資料",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "21",
+									"t9nName": "営業サポートツール_その他",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "22",
+									"t9nName": "顧客郵送関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "23",
+									"t9nName": "金融庁関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "24",
+									"t9nName": "リードキット関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "25",
+									"t9nName": "業務フロー関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "26",
+									"t9nName": "各種マニュアル",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "27",
+									"t9nName": "積立関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "28",
+									"t9nName": "口座開設関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "29",
+									"t9nName": "口座属性変更関連",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "5",
+									"t9nName": "業務関連のお知らせ",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "30",
+									"t9nName": "業務関連資料_その他",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "31",
+									"t9nName": "研修ビデオ",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "32",
+									"t9nName": "規程・マニュアル",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "33",
+									"t9nName": "コンプライアンス通信(過去配信分)",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "34",
+									"t9nName": "書類",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "6",
+									"t9nName": "コンプライアンスからのお知らせ",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "35",
+									"t9nName": "コンプライアンス関連_その他",
+									"requiredFlag": "0"
+							},
+							{
+									"t9nInfoCat": "36",
+									"t9nName": "マイサポート",
+									"requiredFlag": "0"
+							}
+					],
+					"documentKindInput1": "1",
+					"updateTime": "2023-11-22 09:00:00",
+					"title": "t4nTitle",
+					"createBy": "corCreateBy",
+					"updateUser": "corUpdateBy",
+					"registerDayTime": "2023-11-21 09:00:00",
+					"contents": "t4nContent",
+					"attachFileComment1": "t4nFileCom1",
+					"attachFileComment2": "t4nFileCom2",
+					"attachFileComment3": "t4nFileCom3",
+					"url": "t4nUrl",
+					"urlComment": "corUrlCom",
+					"corReferenceCondition": "",
+					"disclaimer": "1",
+					"corReadFlg": "1",
+					"attachFileName1": "test1.txt",
+					"attachFileName2": "test2.txt",
+					"attachFileName3": "test3.txt"
+			}
+	],
+	"message": null,
+	"errorLevel": 0,
+	"requestedTime": "2024/05/29 11:05:18",
+	"title": null,
+	"returnCode": "SUCCESS"
+}

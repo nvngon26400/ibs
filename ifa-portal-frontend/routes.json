@@ -1,0 +1,19 @@
+{
+  "/login/*": "/$1",
+  "/common/composite/*": "/$1",
+  "/common/brokerMaintenance/*": "/$1",
+  "/common/*": "/$1",
+  "/*": "/$1",
+  "/ifa-portal-gw/v1/common/*": "/$1",
+  "/brokerageMenu/customerMenu/*":"/$1",
+  "/brokerageMenu/commFee/*":"/$1",
+  "/sso/*": "/$1",
+  "/systemManageMenu/loginUserManage/IfaRepAdd/*": "/$1",
+  "/systemManageMenu/loginUserManage/*": "/$1",
+  "/brokerMaintenance/*": "/$1",
+  "/wholePortal/*": "/$1",
+  "/faq/*": "/$1",
+  "/newAccountOpenImcompleteStatus/*": "/$1",
+  "/onLineAccountOpen/*": "/$1",
+  "/suggestionBox/*": "/$1"
+}

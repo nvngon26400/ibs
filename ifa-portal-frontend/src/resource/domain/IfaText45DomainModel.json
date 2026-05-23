@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT45",
+  "domainName": "テキスト45",
+  "dataType": "文字列",
+  "precision": 45,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 45,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

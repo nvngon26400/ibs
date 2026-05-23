@@ -1,0 +1,106 @@
+{
+  "totalSize": 16683,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/09/16 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": [
+    {
+      "updateTime": "2023/09/02 10:42:14",
+      "displayBaseDate": "2023/09/09(5営業日後)",
+      "domesticStockCollateralValuationTotal": "22536073",
+      "domesticMutualCollateralValuationTotal": "83324",
+      "alternativeSecuritiesTotal": "22619397",
+      "settlementDateList": [
+        {
+          "settlementDate": "2023/09/02",
+          "collateralSecurityDeliverIn": "10000",
+          "collateralSecurityDeliverOut": "10000",
+          "alternativeSecuritiesTotal": "22536075",
+          "displayBaseDate": "2023/09/02(当日)"
+        },
+        {
+          "settlementDate": "2023/09/03",
+          "collateralSecurityDeliverIn": "10000",
+          "collateralSecurityDeliverOut": "10000",
+          "alternativeSecuritiesTotal": "22536075",
+          "displayBaseDate": "2023/09/03(1営業日後)"
+        },
+        {
+          "settlementDate": "2023/09/04",
+          "collateralSecurityDeliverIn": "10000",
+          "collateralSecurityDeliverOut": "10000",
+          "alternativeSecuritiesTotal": "22536075",
+          "displayBaseDate": "2023/09/04(2営業日後)"
+        },
+        {
+          "settlementDate": "2023/09/05",
+          "collateralSecurityDeliverIn": "10000",
+          "collateralSecurityDeliverOut": "10000",
+          "alternativeSecuritiesTotal": "22536075",
+          "displayBaseDate": "2023/09/05(3営業日後)"
+        },
+        {
+          "settlementDate": "2023/09/09",
+          "collateralSecurityDeliverIn": "10000",
+          "collateralSecurityDeliverOut": "10000",
+          "alternativeSecuritiesTotal": "22536075",
+          "displayBaseDate": "2023/09/09(4営業日後)"
+        },
+        {
+          "settlementDate": "2023/09/09",
+          "collateralSecurityDeliverIn": "0",
+          "collateralSecurityDeliverOut": "0",
+          "alternativeSecuritiesTotal": "22536075",
+          "displayBaseDate": "2023/09/09(5営業日後)"
+        }
+      ],
+      "detailList": [
+          {
+            "securityClass": "国内株式",
+            "brandCode": "6986",
+            "brandName": "双葉電子工業",
+            "depositType": "特定",
+            "contPosition": "1100",
+            "valuationPrice": "967",
+            "collateralAssessment": "80",
+            "collateralValuation": "850960",
+            "securityStockLendingClassification": "担保貸株"
+          }, {
+            "securityClass": "国内株式",
+            "brandCode": "7420",
+            "brandName": "佐鳥電機",
+            "depositType": "特定",
+            "contPosition": "500",
+            "valuationPrice": "811",
+            "collateralAssessment": "80",
+            "collateralValuation": "324400",
+            "securityStockLendingClassification": "担保貸株"
+          }, {
+            "securityClass": "投資信託",
+            "brandCode": "0019- 62",
+            "brandName": "コア３０インデックス",
+            "depositType": "特定(口数)",
+            "contPosition": "10000",
+            "valuationPrice": "11658",
+            "collateralAssessment": "80",
+            "collateralValuation": "9326",
+            "securityStockLendingClassification": "-"
+          }, {
+            "securityClass": "投資信託",
+            "brandCode": "0033- 83",
+            "brandName": "ビッグデータ活用　日本中小型株式ファンド",
+            "depositType": "特定",
+            "contPosition": "200000",
+            "valuationPrice": "13990",
+            "collateralAssessment": "80",
+            "collateralValuation": "223840",
+            "securityStockLendingClassification": "-"
+          }
+        ]
+    }
+  ]
+}

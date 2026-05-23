@@ -1,0 +1,17 @@
+{
+  "domainId": "OPEN_INTEREST_NO",
+  "domainName": "建玉No",
+  "dataType": "数値",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

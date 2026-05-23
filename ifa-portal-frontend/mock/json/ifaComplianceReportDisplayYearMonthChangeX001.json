@@ -1,0 +1,24 @@
+{
+  "totalSize": 1,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/09/16 12:00",
+  "title": "",
+  "returnCode": "0",
+  "dataList": [
+    {
+      "corTitle": "タイトルX001",
+      "corBrief": "概要X001",
+      "corContentsFileName": "コンテンツファイル名X001",
+      "corFileName1": "コンテンツファイル名1X001",
+      "corFileName2": "コンテンツファイル名2X001",
+      "corFileName3": "コンテンツファイル名3X001",
+      "confirmFlg": "0",
+      "corBrowseFlagInd": "0",
+      "corBrowseFlagBul": "0",
+      "confirmBtn": "0"
+    }
+  ]
+}

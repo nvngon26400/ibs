@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "nisaBuy": "NISA買付可能最大額 --円（--年投資可能枠基準）"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/01 17:03:03",
+  "title": null,
+  "returnCode": "0"
+}

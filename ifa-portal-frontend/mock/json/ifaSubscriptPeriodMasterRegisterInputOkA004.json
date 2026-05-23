@@ -1,0 +1,11 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": "BB募集期間情報を登録しました。",
+  "errorLevel": 1,
+  "requestedTime": "2024/04/02 17:33:25",
+  "title": null,
+  "returnCode": "info.insertCompleted",
+  "dataList": []
+}

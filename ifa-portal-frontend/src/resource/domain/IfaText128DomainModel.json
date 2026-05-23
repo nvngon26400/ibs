@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT128",
+  "domainName": "テキスト128",
+  "dataType": "文字列",
+  "precision": 128,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 128,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

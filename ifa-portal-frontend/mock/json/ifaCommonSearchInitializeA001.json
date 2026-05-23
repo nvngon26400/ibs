@@ -1,0 +1,13 @@
+{
+  "errorLevel": 0,
+  "message": "",
+  "requestedTime": "2023/09/19 18:42:05",
+  "returnCode": null,
+  "dataList": [
+    {
+      "brokerCodeAutoDispFlag": "0",
+      "branchCodeAutoDispFlag": "0",
+      "empCodeAutoDispFlag": "0"
+    }
+  ]
+}

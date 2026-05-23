@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY10_4_DIGITS_B",
+  "domainName": "価格10_4_B",
+  "dataType": "金額",
+  "precision": 10,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 12,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

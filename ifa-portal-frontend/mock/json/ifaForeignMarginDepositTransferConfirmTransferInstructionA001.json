@@ -1,0 +1,17 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "marginPositionPowerAfter": "164578.92",
+          "marginDepositRateAfter": "89.64",
+          "currencyCode": "USD"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/01/31 11:39:48",
+  "title": null,
+  "returnCode": "0"
+}

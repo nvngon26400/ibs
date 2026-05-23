@@ -1,0 +1,32 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "infoCategoryList": [
+        {
+          "t9nInfoCat": "35",
+          "t9nName": "2222"
+        },
+        {
+          "t9nInfoCat": "34",
+          "t9nName": "1111"
+        },
+        {
+          "t9nInfoCat": "33",
+          "t9nName": "1aaaa"
+        },
+        {
+          "t9nInfoCat": "32",
+          "t9nName": "1bbbb"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/12 13:36:37",
+  "title": null,
+  "returnCode": ""
+}

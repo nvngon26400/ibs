@@ -1,0 +1,17 @@
+{
+  "domainId": "ETF_SOLICITING_TRANSFERS",
+  "domainName": "乗換え勧誘(ETF)",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-radio"
+}

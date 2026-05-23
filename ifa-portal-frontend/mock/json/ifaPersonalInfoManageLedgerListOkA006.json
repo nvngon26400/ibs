@@ -1,0 +1,11 @@
+{
+    "totalSize": 0,
+    "maxRownum": 0,
+    "overMaxRownum": false,
+    "dataList": [],
+    "message": "個人情報管理台帳を更新しました。",
+    "errorLevel": 1,
+    "requestedTime": "2024/05/31 17:57:56",
+    "title": null,
+    "returnCode": "info.updateCompleted"
+}

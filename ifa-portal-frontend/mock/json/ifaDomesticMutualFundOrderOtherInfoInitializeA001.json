@@ -1,0 +1,32 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "butenCode": "315",
+      "accountNumber": "315002",
+      "customerNameKanji": "顧客アラートテスト顧客名顧客アラートテスト顧客名顧客アラートテスト顧客名",
+      "customerNameKana": "コキャクアラートテスト１コキャクアラートテスト２コキャクアラートテスト３",
+      "tradeKbn": "U",
+      "norikaeYuguKbn": "0",
+      "checkCompWrnAlert": "1",
+      "mokuromiKoufuKbn": "3",
+      "norikaeKanyuKbn": "1",
+      "conflictOfInterestExplain": "1",
+      "checkHiyou": "1",
+      "checkFukusu": "1",
+      "douitsuTukaKuniKbn": "1",
+      "tashaNorikaeKbn": "1",
+      "tankiSellKbn": "1",
+      "shokanMaeKbn": "1",
+      "userId": "3SCSK00A4SCSK001",
+      "userName": "0一二三四五六七一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/12 16:12:49",
+  "title": null,
+  "returnCode": null
+}

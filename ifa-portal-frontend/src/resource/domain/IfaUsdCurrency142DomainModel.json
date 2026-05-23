@@ -1,0 +1,17 @@
+{
+  "domainId": "USD_CURRENCY14_2",
+  "domainName": "米ドル14_2",
+  "dataType": "金額",
+  "precision": 14,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 18,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "USD",
+  "htmlTag": "ifa-input-amount"
+}

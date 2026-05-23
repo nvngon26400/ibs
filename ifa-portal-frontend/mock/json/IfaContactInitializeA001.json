@@ -1,0 +1,72 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "contactInfoList": [
+        {
+          "bigClass": "積立買付／定期売却",
+          "midClass": "",
+          "recordDate": "2024/05/27 15:00:53",
+          "details": "1",
+          "status": "",
+          "contents": "2024/05/27-2\n新規積立買付／定期売却",
+          "chargeName": "NRI高橋俊",
+          "callNo": "callNo001",
+          "subcallNo": "subcallNo0011",
+          "createUser": "createUser01",
+          "referenceKbn": "2",
+          "ifaToiawaseNo": "toiawaseNo1"
+        },
+        {
+          "bigClass": "書類請求",
+          "midClass": "",
+          "recordDate": "2024/05/27 14:29:07",
+          "details": "1",
+          "status": "",
+          "contents": "押下された明細の項目「参照元履歴区分」＝3(書類請求当日履歴)の場合、【書類請求一覧】画面へ遷移する（※ 一覧画面遷移）",
+          "chargeName": "NRI高橋俊",
+          "callNo": "callNo001",
+          "subcallNo": "subcallNo0011",
+          "createUser": "createUser01",
+          "referenceKbn": "3",
+          "ifaToiawaseNo": "toiawaseNo2"
+        },
+        {
+          "bigClass": "接触履歴（入力）",
+          "midClass": "PW再発行・紛失/忘却",
+          "recordDate": "2024/05/20 17:54:37",
+          "details": "1",
+          "status": "",
+          "contents": "2024/05/20-1",
+          "chargeName": "NRI高橋俊",
+          "callNo": "callNo001",
+          "subcallNo": "subcallNo0011",
+          "createUser": "createUser02",
+          "referenceKbn": "99",
+          "ifaToiawaseNo": "toiawaseNo3"
+        },
+        {
+          "bigClass": "為替取引注文",
+          "midClass": "",
+          "recordDate": "2024/05/20 17:54:37",
+          "details": "0",
+          "status": "対応済",
+          "contents": "パスワード忘れ",
+          "chargeName": "NRI高橋俊",
+          "callNo": "callNo001",
+          "subcallNo": "subcallNo0011",
+          "createUser": "createUser01",
+          "referenceKbn": "1",
+          "ifaToiawaseNo": "toiawaseNo4"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

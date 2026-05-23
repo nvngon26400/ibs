@@ -1,0 +1,27 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/10/01 12:00:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "selectedRowOrderTypeTrade": "0",
+    "selectedRowForeignCurrencyCurrencyCode": "HKD",
+    "selectedRowCurrency": "香港ドル",
+    "selectedRowOrderNumber": "00000001",
+    "selectedRowCycleNumber": "331331",
+    "selectedRowOrderEventId": "778778",
+    "orderNumber": "00000001",
+    "fxOrderStatus": "ORDERING",
+    "currencyCode": "HKD",
+    "quantity": "12345678901234567890",
+    "tradeKbn": "1",
+    "accountType": "JR_NISA",
+    "fxTrade": "REGULAR",
+    "fxTradeStatus": "PROCESSING",
+    "cycleNumber": "112233"
+  }]
+}

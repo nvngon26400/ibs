@@ -1,0 +1,17 @@
+{
+  "domainId": "CUSTOMER_ID",
+  "domainName": "顧客ID",
+  "dataType": "数値",
+  "precision": 9,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 9,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

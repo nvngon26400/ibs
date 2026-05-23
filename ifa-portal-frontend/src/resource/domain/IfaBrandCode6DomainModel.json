@@ -1,0 +1,17 @@
+{
+  "domainId": "BRAND_CODE6",
+  "domainName": "銘柄コード6",
+  "dataType": "文字列",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

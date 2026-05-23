@@ -1,0 +1,17 @@
+{
+  "domainId": "BUTEN_CODE__ARRAY",
+  "domainName": "部店コード（複数）",
+  "dataType": "文字列",
+  "precision": 30,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "threeDigitsWithComma",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": "threeDigitsWithComma",
+  "formattedDigit": 39,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

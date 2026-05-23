@@ -1,0 +1,39 @@
+{
+	"totalSize": 10,
+	"maxRownum": 0,
+	"overMaxRownum": false,
+	"message": "",
+	"errorLevel": 0,
+	"requestedTime": "2023/07/05 12:00:00",
+	"title": "",
+	"returnCode": "I9999",
+	"dataList": [
+		{
+			"brandCode": "AAPL",
+			"tradeCd": "5",
+			"paymentDeadline": "6",
+			"repayMethod": "0",
+			"repaymentOrder": "16",
+			"totalQuantity": "12345678",
+			"repayPositionDetailList": [
+				{
+					"builtMarket": "0",
+					"constructionDate": "20230406",
+					"parentStockTradeDate": "20230407",
+					"newPrice": "123456789012.12",
+					"positionNo": "45",
+					"contPosition": "1111",
+					"cost": "1111",
+					"unactualQuantity": "1111",
+					"orderQuantity": "123456789012345",
+					"profitAndLossReal": "123456789012345",
+					"specificPositionType": "1111",
+					"rightType": "1111"
+				}
+			],
+			"maxOrderableQuantity": "123456789012345",
+			"ctNightBatchFinishFlag": "0",
+			"paymentDeadlineCalculation": "6ヵ月"
+		}
+	]
+}

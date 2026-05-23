@@ -1,0 +1,30 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "title": "title02",
+      "displayedDate": "2025/11/21",
+      "fileType": "1",
+      "pdfSize": "1",
+      "pdfDirection": "1",
+      "detailedFileName": "画像.png",
+      "contentItemList": [
+        { "releaseNoteContentNo": "11", "menuName": "menuName11", "screenName": "screenName21", "content": "content31"},
+        { "releaseNoteContentNo": "12", "menuName": "menuName12", "screenName": "screenName22", "content": "content32"},
+        { "releaseNoteContentNo": "13", "menuName": "menuName13", "screenName": "screenName23", "content": "content33"},
+        { "releaseNoteContentNo": "14", "menuName": "menuName14", "screenName": "screenName24", "content": "content34"},
+        { "releaseNoteContentNo": "15", "menuName": "menuName15", "screenName": "screenName25", "content": "content35"},
+        { "releaseNoteContentNo": "16", "menuName": "menuName16", "screenName": "screenName26", "content": "content36"},
+        { "releaseNoteContentNo": "17", "menuName": "menuName17", "screenName": "screenName27", "content": "content37"},
+        { "releaseNoteContentNo": "18", "menuName": "menuName18", "screenName": "screenName28", "content": "content38"}
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/08/29 19:29:16",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

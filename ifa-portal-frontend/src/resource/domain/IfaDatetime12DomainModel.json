@@ -1,0 +1,17 @@
+{
+  "domainId": "DATETIME12",
+  "domainName": "西暦年月日時分12",
+  "dataType": "日付",
+  "precision": 16,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": "DATE",
+  "format": "datetime12",
+  "formattedDigit": 16,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

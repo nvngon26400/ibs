@@ -1,0 +1,17 @@
+{
+  "domainId": "DETAIL_CUSTOMER_CURRENCY_COUNTING_UNIT",
+  "domainName": "集計単位（明細/顧客/通貨毎）",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-radio"
+}

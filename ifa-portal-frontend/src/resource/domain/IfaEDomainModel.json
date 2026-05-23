@@ -1,0 +1,17 @@
+{
+  "domainId": "e",
+  "domainName": "e",
+  "dataType": "e",
+  "precision": e,
+  "digit": e,
+  "lengthFixed": true,
+エラー: チェック仕様の値「e」が不正です。
+  "javaType": "e",
+  "oracleType": "e",
+エラー: 表示形式の値「e」が不正です。
+  "formattedDigit": e,
+エラー: 配置（上中下）の値「e」が不正です。
+エラー: 配置（左中右）の値「e」が不正です。
+  "unit": "e",
+  "htmlTag": "e"
+}

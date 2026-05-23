@@ -1,0 +1,17 @@
+{
+  "domainId": "DISPLAY_ORDER",
+  "domainName": "表示順",
+  "dataType": "数値",
+  "precision": 7,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 7,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

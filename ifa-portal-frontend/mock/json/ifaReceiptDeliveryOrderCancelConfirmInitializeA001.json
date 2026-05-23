@@ -1,0 +1,30 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "brandCode": "1671 ",
+            "brandName": "ＷＴＩ原油価格連動型上場投信                                                    ",
+            "tradeCd": "8",
+            "orderQuantity": "      10",
+            "unTradeQuantity": "      10",
+            "depositType": "0",
+            "orderDayTime": "20230928125137",
+            "newPositionNumber": "     ",
+            "newTradeDate": "        ",
+            "newPrice": "0",
+            "paymentDeadline": " ",
+            "marginTradeTypeText": "-",
+            "market": "0",
+            "paymentDeadlineDate": "05",
+            "dateKbn": "Y",
+            "comIdR": "H"
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/06/03 15:52:53",
+    "title": null,
+    "returnCode": "SUCCESS"
+}

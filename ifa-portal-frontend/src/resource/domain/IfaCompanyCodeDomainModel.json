@@ -1,0 +1,17 @@
+{
+  "domainId": "COMPANY_CODE",
+  "domainName": "会社コード",
+  "dataType": "数値",
+  "precision": 5,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 5,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,44 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/10 12:00:00",
+  "title": "",
+  "returnCode": "SUCCESS",
+  "dataList": [
+    {
+      "registerDate": "202311",
+      "brokerCode": "0273",
+      "brokerName": "株式会社 Ｆａｎ１２３",
+      "selfAssessmentList": [
+        {
+          "selfInspectItemName": "自己点検記録簿テスト１",
+          "confirmation": "1",
+          "answerResult": "1",
+          "answerReason": null
+        },
+        {
+          "selfInspectItemName": "自己点検記録簿テスト２",
+          "confirmation": "1",
+          "answerResult": "0",
+          "answerReason": "回答結果NG"
+        },
+        {
+          "selfInspectItemName": "自己点検記録簿テスト３",
+          "confirmation": null,
+          "answerResult": null,
+          "answerReason": "AAA"
+        },
+        {
+          "selfInspectItemName": "自己点検記録簿テスト４",
+          "confirmation": null,
+          "answerResult": null,
+          "answerReason": "理由４"
+        }
+      ],
+      "memo": "メモ自己点検記録簿"
+    }
+  ]
+}

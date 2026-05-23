@@ -1,0 +1,57 @@
+.search-form__item {
+  margin: 0 0.2rem 0 0.2rem;
+  width: 200px;
+}
+.form-button__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: -30px 0.5rem 0 auto;
+}
+:deep(.el-dialog) {
+  padding-top: 0.5rem;
+  width: 80em;
+}
+:deep(.el-dialog__header) {
+  padding: 0;
+}
+.middle_input {
+  width: 120px;
+}
+.enter_info {
+  margin: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+:deep(.el-form-item__error) {
+  position: relative;
+  width: max-content;
+}
+:deep(.confirm-dialog) .el-dialog__header {
+  padding: 0;
+}
+:deep(.confirm-dialog) .el-dialog__body {
+  padding: 0;
+}
+:deep(.confirm-dialog) .el-dialog {
+  margin-top: 0vh;
+}
+:deep(.caption) {
+  margin: 0;
+}
+.dialog_footer {
+  padding: 10px 20px 20px;
+  text-align: right;
+  box-sizing: border-box;
+}
+.dialog_body {
+  padding: 15px 10px;
+}
+:deep(.confirm-dialog) .el-dialog {
+  padding-top: 0;
+}
+:deep(.el-divider) {
+  margin-bottom: 0px;
+}
+:deep(.el-form-item__error) {
+  position: relative;
+}

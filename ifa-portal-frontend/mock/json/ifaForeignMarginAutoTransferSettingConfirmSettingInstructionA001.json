@@ -1,0 +1,21 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "returnCode": "SUCCESS",
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2023/10/11 10:00:00",
+  "title": null,
+  "dataList":[
+    {
+      "apiRes": {
+        "registerMarginBuyingPowerShortfallSecurities": "1",
+        "registerMarginBuyingPowerShortfallCash": "1",
+        "registerMarginShortfallSecurities": "1",
+        "registerMarginShortfallCash": "1",
+        "registerDepositType": "PROTECTION_KEEPING"
+        }
+    }
+  ]
+}

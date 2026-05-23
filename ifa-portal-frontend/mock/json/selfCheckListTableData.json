@@ -1,0 +1,174 @@
+{
+  "data": {
+    "items": [
+      {
+        "registeredMonth": "2021/09",
+        "displayOrder": "1",
+        "checkContent": "チェック項目1",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/09",
+        "displayOrder": "2",
+        "checkContent": "チェック項目2",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/09",
+        "displayOrder": "3",
+        "checkContent": "チェック項目3",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/10",
+        "displayOrder": "1",
+        "checkContent": "チェック項目1",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/10",
+        "displayOrder": "2",
+        "checkContent": "チェック項目2",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/10",
+        "displayOrder": "3",
+        "checkContent": "チェック項目3",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/11",
+        "displayOrder": "1",
+        "checkContent": "チェック項目1",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/11",
+        "displayOrder": "2",
+        "checkContent": "チェック項目2",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/12",
+        "displayOrder": "1",
+        "checkContent": "チェック項目1",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/12",
+        "displayOrder": "2",
+        "checkContent": "チェック項目2",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/12",
+        "displayOrder": "3",
+        "checkContent": "チェック項目3",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/12",
+        "displayOrder": "4",
+        "checkContent": "チェック項目4",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/12",
+        "displayOrder": "5",
+        "checkContent": "チェック項目5",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/12",
+        "displayOrder": "6",
+        "checkContent": "チェック項目6",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2021/12",
+        "displayOrder": "7",
+        "checkContent": "チェック項目7",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/01",
+        "displayOrder": "1",
+        "checkContent": "チェック項目1",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/01",
+        "displayOrder": "2",
+        "checkContent": "チェック項目2",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/01",
+        "displayOrder": "3",
+        "checkContent": "チェック項目3",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/02",
+        "displayOrder": "1",
+        "checkContent": "チェック項目1",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/02",
+        "displayOrder": "2",
+        "checkContent": "チェック項目2",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/02",
+        "displayOrder": "3",
+        "checkContent": "チェック項目3",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/03",
+        "displayOrder": "1",
+        "checkContent": "チェック項目1",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/03",
+        "displayOrder": "2",
+        "checkContent": "チェック項目2",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      },
+      {
+        "registeredMonth": "2022/03",
+        "displayOrder": "3",
+        "checkContent": "チェック項目3",
+        "defaultConfirmValue": "はい",
+        "delete": "削除"
+      }
+    ]
+  }
+}

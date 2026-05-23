@@ -1,0 +1,15 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "pdfFileName": "sample.pdf"
+        }
+    ],
+    "message": null,
+    "errorLevel": 0,
+    "requestedTime": "2025/06/24 15:35:09",
+    "title": null,
+    "returnCode": "SUCCESS"
+}

@@ -1,0 +1,18 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "registerFileName1": "000057_登録ファイル1_皆様からの要望.txt",
+      "registerFileName2": "000057_登録ファイル2_皆様からの要望.txt",
+      "registerFileName3": "000057_登録ファイル3_皆様からの要望.txt",
+      "sbcNo": "000057"
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/07/25 21:03:11",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

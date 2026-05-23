@@ -1,0 +1,33 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+        "notificationList": [
+          {
+            "notificationId": "1",
+            "corReferenceCondition": "3",
+            "title": "1",
+            "registerDayTime": "1"
+          }
+        ],
+        "notificationViewStatusLookupList": [
+          {
+            "branchName": "SBIマネープラザ株式会社",
+            "subBrokerId": "1",
+            "employeeName": "坂井 益",
+            "employeeId": "1",
+            "t5nReadFlg": "1",
+            "readDate": "20230607",
+            "loginId": "1"
+          }
+        ]
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/20 01:38:50",
+  "title": null,
+  "returnCode": ""
+}

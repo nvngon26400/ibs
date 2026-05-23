@@ -1,0 +1,36 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2000-10-10 12:12:12",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "todayTradeList": [
+      {
+        "commodity":"Z56",
+        "buten":"123",
+        "accountNumber":"123456",
+        "course":"A",
+        "customerNameKanji":"森永莉沙）",
+        "customerNameKana": "IFAコース（プランA）",
+        "brandName": "AA",
+        "brandCode": "BB",
+        "openTradeKbn": "1",
+        "depositType": "1",
+        "tradeDate": "1",
+        "settlementDate": "2000-09-09 12:12:12",
+        "contractStock": "1111111",
+        "averageTradePrice": "123.0",
+        "empCode": "123",
+        "brokerChargeName": "234",
+        "brokerCode": "234",
+        "brokerName": "123",
+        "branchCode": "236",
+        "branchName": "235"
+      }
+    ]
+  }]
+}

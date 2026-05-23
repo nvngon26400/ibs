@@ -1,0 +1,387 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "customerList": [
+      
+        {
+          "butenCode": "456",
+          "accountNumber": "Z52-0001776",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "津村米吉",
+          "customerNameKana": "ツムラヨネキチ",
+          "openAcctDate": "2022/01/05",
+          "favoRegStatus": "1",
+          "customerCode": "11119199"
+        },
+        {
+          "butenCode": "546",
+          "accountNumber": "Z51-0001780",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "河口悟",
+          "customerNameKana": "カワグチサトル",
+          "openAcctDate": "2015/05/10",
+          "favoRegStatus": "0",
+          "customerCode": "11119201"
+        },
+        {
+          "butenCode": "286",
+          "accountNumber": "Z52-0001784",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "浦田愛奈",
+          "customerNameKana": "ウラタマナ",
+          "openAcctDate": "2015/09/14",
+          "favoRegStatus": "0",
+          "customerCode": "11119203"
+        },
+        {
+          "butenCode": "286",
+          "accountNumber": "Z52-0001786",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "蛭田千咲",
+          "customerNameKana": "ヒルタチサキ",
+          "openAcctDate": "2013/12/15",
+          "favoRegStatus": "1",
+          "customerCode": "11119204"
+        },
+        {
+          "butenCode": "200",
+          "accountNumber": "Z56-0596799",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "森永莉沙",
+          "customerNameKana": "モリナガリサ",
+          "openAcctDate": "2013/08/21",
+          "favoRegStatus": "0",
+          "customerCode": "11119206"
+        },
+        {
+          "butenCode": "777",
+          "accountNumber": "129-0001794",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "徳永勇夫",
+          "customerNameKana": "トクナガイサオ",
+          "openAcctDate": "2015/05/27",
+          "favoRegStatus": "0",
+          "customerCode": "11119208"
+        },
+        {
+          "butenCode": "178",
+          "accountNumber": "Z52-0001798",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "佐竹莉緒",
+          "customerNameKana": "サタケリオ",
+          "openAcctDate": "2013/09/23",
+          "favoRegStatus": "1",
+          "customerCode": "11119210"
+        },
+        {
+          "butenCode": "253",
+          "accountNumber": "Z52-0001800",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "西沢謙二",
+          "customerNameKana": "ニシザワケンジ",
+          "openAcctDate": "2017/03/23",
+          "favoRegStatus": "1",
+          "customerCode": "11119211"
+        },
+        {
+          "butenCode": "856",
+          "accountNumber": "Z52-0001808",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "新倉愛子",
+          "customerNameKana": "ニイクラアイコ",
+          "openAcctDate": "2020/08/13",
+          "favoRegStatus": "1",
+          "customerCode": "11119215"
+        },
+        {
+          "butenCode": "745",
+          "accountNumber": "129-0001810",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "香坂秀樹",
+          "customerNameKana": "コウサカヒデキ",
+          "openAcctDate": "2011/04/24",
+          "favoRegStatus": "1",
+          "customerCode": "11119216"
+        },
+        {
+          "butenCode": "888",
+          "accountNumber": "Z41-0001812",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "日野遥奈",
+          "customerNameKana": "ヒノハルナ",
+          "openAcctDate": "2011/06/07",
+          "favoRegStatus": "1",
+          "customerCode": "11119217"
+        },
+        {
+          "butenCode": "644",
+          "accountNumber": "Z44-0001814",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "深田武彦",
+          "customerNameKana": "フカダタケヒコ",
+          "openAcctDate": "2011/05/27",
+          "favoRegStatus": "1",
+          "customerCode": "11119218"
+        },
+        {
+          "butenCode": "386",
+          "accountNumber": "Z51-0001816",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "高畑響",
+          "customerNameKana": "タカハタヒビキ",
+          "openAcctDate": "2020/08/06",
+          "favoRegStatus": "0",
+          "customerCode": "11119219"
+        },
+        {
+          "butenCode": "243",
+          "accountNumber": "Z52-0001818",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "大淵寅雄",
+          "customerNameKana": "オオフチトラオ",
+          "openAcctDate": "2019/07/27",
+          "favoRegStatus": "0",
+          "customerCode": "11119220"
+        },
+        {
+          "butenCode": "999",
+          "accountNumber": "129-0001820",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "坂下明弘",
+          "customerNameKana": "サカシタアキヒロ",
+          "openAcctDate": "2013/04/14",
+          "favoRegStatus": "1",
+          "customerCode": "11119221"
+        },
+        {
+          "butenCode": "222",
+          "accountNumber": "Z41-0001822",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "保田晴奈",
+          "customerNameKana": "ヤスダハルナ",
+          "openAcctDate": "2020/11/29",
+          "favoRegStatus": "1",
+          "customerCode": "11119222"
+        },
+        {
+          "butenCode": "655",
+          "accountNumber": "Z44-0001824",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "石倉莉菜",
+          "customerNameKana": "イシクラリナ",
+          "openAcctDate": "2018/12/29",
+          "favoRegStatus": "1",
+          "customerCode": "11119223"
+        },
+        {
+          "butenCode": "947",
+          "accountNumber": "Z51-0001826",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "松田美奈",
+          "customerNameKana": "マツダミナ",
+          "openAcctDate": "2014/06/13",
+          "favoRegStatus": "1",
+          "customerCode": "11119224"
+        },
+        {
+          "butenCode": "000",
+          "accountNumber": "Z52-0001828",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "高瀬菫",
+          "customerNameKana": "タカセスミレ",
+          "openAcctDate": "2019/10/18",
+          "favoRegStatus": "1",
+          "customerCode": "11119225"
+        },
+        {
+          "butenCode": "444",
+          "accountNumber": "129-0001830",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "古屋寅雄",
+          "customerNameKana": "フルヤトラオ",
+          "openAcctDate": "2020/10/21",
+          "favoRegStatus": "1",
+          "customerCode": "11119226"
+        },
+        {
+          "butenCode": "836",
+          "accountNumber": "Z44-0001832",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "長沢豊明",
+          "customerNameKana": "ナガサワトヨアキ",
+          "openAcctDate": "2021/01/21",
+          "favoRegStatus": "0",
+          "customerCode": "11119227"
+        },
+        {
+          "butenCode": "232",
+          "accountNumber": "Z51-0001834",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "粕谷幸次",
+          "customerNameKana": "カスヤコウジ",
+          "openAcctDate": "2011/12/15",
+          "favoRegStatus": "1",
+          "customerCode": "11119228"
+        },
+        {
+          "butenCode": "018",
+          "accountNumber": "Z52-0001836",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "荻原範明",
+          "customerNameKana": "オギワラノリアキ",
+          "openAcctDate": "2020/08/05",
+          "favoRegStatus": "1",
+          "customerCode": "11119229"
+        },
+        {
+          "butenCode": "025",
+          "accountNumber": "Z52-0001838",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "池田啓之",
+          "customerNameKana": "イケダヒロユキ",
+          "openAcctDate": "2012/07/27",
+          "favoRegStatus": "1",
+          "customerCode": "11119230"
+        },
+        {
+          "butenCode": "376",
+          "accountNumber": "Z52-0001844",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "島田結香",
+          "customerNameKana": "シマダユウカ",
+          "openAcctDate": "2011/12/21",
+          "favoRegStatus": "0",
+          "customerCode": "11119233"
+        },
+        {
+          "butenCode": "888",
+          "accountNumber": "Z44-0001846",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "大城真弓",
+          "customerNameKana": "オオシロマユミ",
+          "openAcctDate": "2018/11/04",
+          "favoRegStatus": "0",
+          "customerCode": "11119234"
+        },
+        {
+          "butenCode": "255",
+          "accountNumber": "Z41-0001848",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "古川次夫",
+          "customerNameKana": "フルカワツグオ",
+          "openAcctDate": "2020/09/13",
+          "favoRegStatus": "0",
+          "customerCode": "11119235"
+        },
+        {
+          "butenCode": "726",
+          "accountNumber": "Z52-0001850",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "石塚美和子",
+          "customerNameKana": "イシヅカミワコ",
+          "openAcctDate": "2019/07/15",
+          "favoRegStatus": "1",
+          "customerCode": "11119236"
+        },
+        {
+          "butenCode": "277",
+          "accountNumber": "Z52-0001852",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "杉本美津子",
+          "customerNameKana": "スギモトミツコ",
+          "openAcctDate": "2012/12/10",
+          "favoRegStatus": "0",
+          "customerCode": "11119237"
+        },
+        {
+          "butenCode": "488",
+          "accountNumber": "Z51-0001856",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "安西好夫",
+          "customerNameKana": "アンザイヨシオ",
+          "openAcctDate": "2012/05/19",
+          "favoRegStatus": "0",
+          "customerCode": "11119239"
+        },
+        {
+          "butenCode": "223",
+          "accountNumber": "Z52-0001858",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "田畑香奈子",
+          "customerNameKana": "タハタカナコ",
+          "openAcctDate": "2020/09/28",
+          "favoRegStatus": "1",
+          "customerCode": "11119240"
+        },
+        {
+          "butenCode": "996",
+          "accountNumber": "Z41-0001862",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "大沢聖花",
+          "customerNameKana": "オオサワサヤカ",
+          "openAcctDate": "2020/11/08",
+          "favoRegStatus": "0",
+          "customerCode": "11119242"
+        },
+        {
+          "butenCode": "336",
+          "accountNumber": "Z44-0001864",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "野口洋希",
+          "customerNameKana": "ノグチヒロキ",
+          "openAcctDate": "2012/07/19",
+          "favoRegStatus": "1",
+          "customerCode": "11119243"
+        },
+        {
+          "butenCode": "655",
+          "accountNumber": "Z51-0001866",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "寺本美希",
+          "customerNameKana": "テラモトミキ",
+          "openAcctDate": "2017/11/01",
+          "favoRegStatus": "1",
+          "customerCode": "11119244"
+        },
+        {
+          "butenCode": "325",
+          "accountNumber": "Z52-0001870",
+          "tradeRestrictionSelect": "1",
+          "customerNameKanji": "岡山竜一",
+          "customerNameKana": "オカヤマリュウイチ",
+          "openAcctDate": "2020/10/04",
+          "favoRegStatus": "1",
+          "customerCode": "11119246"
+        },
+        {
+          "butenCode": "939",
+          "accountNumber": "Z44-0001904",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "株式会社 法人",
+          "customerNameKana": "ﾎｳｼﾞﾝ",
+          "openAcctDate": "2012/05/21",
+          "favoRegStatus": "1",
+          "customerCode": "11119248"
+        },
+        {
+          "butenCode": "222",
+          "accountNumber": "Z52-0001902",
+          "tradeRestrictionSelect": "0",
+          "customerNameKanji": "株式会社 △□物流",
+          "customerNameKana": "ｻﾝｶｸｼｶｸﾌﾞﾂﾘｭｳ",
+          "openAcctDate": "2014/05/01",
+          "favoRegStatus": "1",
+          "customerCode": "11119250"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/09/20 20:30:27",
+  "title": null,
+  "returnCode": ""
+}

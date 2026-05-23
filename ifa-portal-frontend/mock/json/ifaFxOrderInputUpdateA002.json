@@ -1,0 +1,25 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "referenceRate": "100.01",
+          "approximationRate": "100.01",
+          "denominator": "1",
+          "maxOrderableQuantity": "200.02",
+          "approximatePurchaseAmount": null,
+          "foreignCurrencyMax": "200.02",
+          "yenCurrencyMin": "1500",
+          "yenCurrencyMax": "23499",
+          "approximateDeliveryAmount": null,
+          "foreignApproximateDeliveryAmount": null,
+          "updateTime": "2025/02/20 15:06"
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/02/20 15:06:52",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

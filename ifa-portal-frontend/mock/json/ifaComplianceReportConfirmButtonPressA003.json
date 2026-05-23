@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/09/16 12:00",
+  "title": "",
+  "returnCode": "0",
+  "dataList": [
+    {
+      "confirmFlg": "1"
+    }  
+  ]
+}

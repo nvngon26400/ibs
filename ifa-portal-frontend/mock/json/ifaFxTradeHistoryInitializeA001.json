@@ -1,0 +1,27 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "requestedTime": "2024/05/22 16:32:56",
+  "dataList": [{
+    "currencyCodeList": [
+      {
+        "key": "0",
+        "name": "USD"
+      },
+      {
+        "key": "1",
+        "name": "EUR"
+      },
+      {
+        "key": "2",
+        "name": "AUD"
+      }
+    ],
+    "fxTradeHistoryComment": "為替取引履歴コメント"
+  }],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

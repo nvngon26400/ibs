@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT255",
+  "domainName": "テキスト255",
+  "dataType": "文字列",
+  "precision": 255,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 255,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

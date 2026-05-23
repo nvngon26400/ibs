@@ -1,0 +1,19 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/10/01 12:00:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "tradeKbn": "1",
+    "currencyCode": "HKD",
+    "quantity": "12345678901234567890",
+    "accountType": "JR_NISA",
+    "orderTypeDisplay": "orderTypeDisplay",
+    "depositType": "depositType",
+    "currency": "香港ドル"
+  }]
+}

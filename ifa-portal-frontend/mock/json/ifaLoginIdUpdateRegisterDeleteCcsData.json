@@ -1,0 +1,11 @@
+{
+  "totalSize":0,
+  "maxRownum":0,
+  "overMaxRownum":false,
+  "dataList":[],
+  "message":null,
+  "errorLevel":0,
+  "requestedTime":"2024/03/14 10:16:11",
+  "title":null,
+  "returnCode":"info.loginIdUpdateCompleted"
+}

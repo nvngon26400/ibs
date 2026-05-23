@@ -1,0 +1,17 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [{
+      "maxSellLimitQuantity": "101",
+      "maxBuyLimitQuantity": "91",
+      "specificBuyingPowerForeign": "1001",
+      "generalBuyingPowerForeign": "901",
+      "specificOrderAbleQuantity": "1010",
+      "generalOrderAbleQuantity": "910"
+  }],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "JOINT_REWARD_RATE",
+  "domainName": "支払率",
+  "dataType": "レート",
+  "precision": 10,
+  "digit": 7,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "noneWithCommaNoneZeroPadding",
+  "formattedDigit": 10,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": null
+}

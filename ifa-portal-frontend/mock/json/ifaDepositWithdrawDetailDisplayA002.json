@@ -1,0 +1,48 @@
+{
+  "totalSize": 1,
+  "maxRownum": 5000,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "msg": null,
+      "acquireCount": "1",
+      "dataCount": "1",
+      "depositWithdrawDetail": [
+        {
+          "buten": "107",
+          "accountNumber": "100007",
+          "course": "A",
+          "customerNameKanji": "顧客アラートテスト顧客名11150",
+          "customerNameKana": "コキャクアラート",
+          "depositsAndWithdrawalsDate": "20240523",
+          "trade": null,
+          "dispAbstract": null,
+          "withdraw": null,
+          "deposit": null,
+          "deliveryAmount": null,
+          "transferWithdraw": null,
+          "transferDeposit": null,
+          "empCode": "D107",
+          "brokerChargeName": "入出金明細テスト顧客名10001",
+          "brokerCode": "DI07",
+          "brokerName": "入出金明細テスト顧客名10001",
+          "branchCode": "107",
+          "branchName": "入出金明細テスト顧客名10001"
+        }
+      ],
+      "withdrawTotalAmount": "0",
+      "withdrawTotalCount": "0",
+      "depositTotalAmount": "0",
+      "depositTotalCount": "1",
+      "transferWithdrawTotalAmount": "0",
+      "transferWithdrawTotalCount": "0",
+      "transferDepositTotalAmount": "0",
+      "transferDepositTotalCount": "0"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/07/08 17:54:52",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

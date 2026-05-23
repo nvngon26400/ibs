@@ -1,0 +1,17 @@
+{
+  "domainId": "UNIT_PRICE_YEN12_2_DIGITS_B",
+  "domainName": "単価_円貨12_2_B",
+  "dataType": "金額",
+  "precision": 12,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 16,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "円",
+  "htmlTag": "ifa-input-amount"
+}

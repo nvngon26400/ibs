@@ -1,0 +1,11 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "returnCode": "SUCCESS",
+  "message": "外債買付代金情報を登録しました。",
+  "errorLevel": 1,
+  "requestedTime": "2026/04/06 11:00:00",
+  "title": null,
+  "dataList": []
+}

@@ -1,0 +1,20 @@
+{
+	"totalSize": 10,
+	"maxRownum": 0,
+	"overMaxRownum": false,
+	"message": "",
+	"errorLevel": 0,
+	"requestedTime": "2023/07/05 12:00:00",
+	"title": "",
+	"returnCode": "I9999",
+	"dataList": [
+		{
+			"repCustomerCommComment": "※先物・OPに関しての前営業日表示は前前営業日16：30～前営業日15：30の取引を表示しています。",
+			"spotStockPointReferenceAbleList": [
+				"0509",
+				"0510",
+				"0511"
+			]
+		}
+	]
+}

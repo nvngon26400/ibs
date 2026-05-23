@@ -1,0 +1,42 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "butenCode": "315",
+          "accountNumber": "315001",
+          "customerName": "testCustomer",
+          "openAcctDate": "2019/07/25",
+          "investmentPolicyType": "01",
+          "profession": "A ",
+          "stockSpotInvestExperienceYears": "0年",
+          "officeName": "testOfficeName",
+          "financialAssets": "300万円未満",
+          "complianceRank": "E",
+          "edelivAgreementDate": "2024/02/19",
+          "corporationType": "1",
+          "financialAssetsType": "01",
+          "discretionAlloCount": "0",
+          "discretionAllocateAbleTimes": "8",
+          "depositAssetAmount": "万円",
+          "brandPullDownList": [
+              "テスト用Z（0001Z）",
+              "テスト用Z（0002Z）",
+              "テスト用Z（0003Z）"
+          ],
+          "brandCodeList": [
+              "0001Z",
+              "0002Z",
+              "0003Z"
+          ],
+          "buyingPower": null,
+          "transitionSourceScreen": "SUB0201_01-01"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/02/21 14:58:59",
+  "title": null,
+  "returnCode": null
+}

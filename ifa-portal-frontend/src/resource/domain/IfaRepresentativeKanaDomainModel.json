@@ -1,0 +1,17 @@
+{
+  "domainId": "REPRESENTATIVE_KANA",
+  "domainName": "代表者カナ",
+  "dataType": "文字列",
+  "precision": 54,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 54,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

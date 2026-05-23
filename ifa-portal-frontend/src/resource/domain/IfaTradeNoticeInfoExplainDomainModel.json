@@ -1,0 +1,17 @@
+{
+  "domainId": "TRADE_NOTICE_INFO_EXPLAIN",
+  "domainName": "取引注意情報の説明",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-check"
+}

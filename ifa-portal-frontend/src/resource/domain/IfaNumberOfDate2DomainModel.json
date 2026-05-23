@@ -1,0 +1,17 @@
+{
+  "domainId": "NUMBER_OF_DATE2",
+  "domainName": "日数2",
+  "dataType": "数値",
+  "precision": 2,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": "withCommaInteger",
+  "formattedDigit": 2,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT_FULL24",
+  "domainName": "テキスト24（全角）",
+  "dataType": "文字列",
+  "precision": 24,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 24,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-text"
+}

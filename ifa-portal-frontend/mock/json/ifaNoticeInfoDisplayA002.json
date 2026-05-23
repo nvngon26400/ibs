@@ -1,0 +1,90 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "noticeInfoList": [
+                {
+                    "cautionKind": "リスク説明未2",
+                    "memo": "株",
+                    "accuralDate": "2009-01-07 00:00:00",
+                    "dealtPerson": "鈴木　明彦"
+                },
+                {
+                    "cautionKind": "リスク説明未3",
+                    "memo": "株",
+                    "accuralDate": "2009-01-07 00:00:00",
+                    "dealtPerson": ""
+                }
+            ],
+            "tradeRestrictionList": [
+                {
+                    "restrictionCode": "001",
+                    "restrictionContents": "国内株式現物買い（日中）",
+                    "confirmDeadline": "2019-04-03 11:23:34"
+                },
+                {
+                    "restrictionCode": "002",
+                    "restrictionContents": "国内株式現物買い（PTS）",
+                    "confirmDeadline": "2019-04-01 11:23:34"
+                },
+                {
+                    "restrictionCode": "004",
+                    "restrictionContents": "国内株式現物売り（PTS）",
+                    "confirmDeadline": "2019-04-02 11:23:34"
+                },
+                {
+                    "restrictionCode": "005",
+                    "restrictionContents": "国内株式信用新規（日中）",
+                    "confirmDeadline": "2019-04-01 11:23:34"
+                },
+                {
+                    "restrictionCode": "007",
+                    "restrictionContents": "国内株式信用返済（日中）",
+                    "confirmDeadline": "2019-04-01 11:23:34"
+                },
+                {
+                    "restrictionCode": "008",
+                    "restrictionContents": "国内株式信用返済（PTS）",
+                    "confirmDeadline": "2019-04-02 11:23:34"
+                },
+                {
+                    "restrictionCode": "009",
+                    "restrictionContents": "現引",
+                    "confirmDeadline": "2019-04-01 11:23:34"
+                },
+                {
+                    "restrictionCode": "010",
+                    "restrictionContents": "現渡",
+                    "confirmDeadline": "2019-04-02 11:23:34"
+                },
+                {
+                    "restrictionCode": "011",
+                    "restrictionContents": "投信信託継続募集申込",
+                    "confirmDeadline": "2019-04-01 11:23:34"
+                },
+                {
+                    "restrictionCode": "012",
+                    "restrictionContents": "投資信託解約・買取請求",
+                    "confirmDeadline": "2019-04-02 11:23:34"
+                },
+                {
+                    "restrictionCode": "013",
+                    "restrictionContents": "投資信託スイッチ",
+                    "confirmDeadline": "2019-04-03 11:23:34"
+                },
+                {
+                    "restrictionCode": "014",
+                    "restrictionContents": "カバードワラント買い（eワラント証券）",
+                    "confirmDeadline": "2019-04-02 11:23:34"
+                }
+            ]
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/06/21 22:15:41",
+    "title": null,
+    "returnCode": ""
+}

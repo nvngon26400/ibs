@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE5_2_DIGITS_B",
+  "domainName": "レート5_2_B",
+  "dataType": "レート",
+  "precision": 5,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": "ifa-input-rate"
+}

@@ -1,0 +1,26 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/01 21:48:52",
+  "title": "",
+  "returnCode": "SUCCESS",
+  "dataList": [
+      {
+          "fileDirectory": "c:\\temp\\",
+          "title": "NISA/iDeco関連",
+          "contents": "2024年1月より新NISAが開始となります。<br>既存のNISAから精度が変更となりますので、お客様への周知をお願いいたします。\r\nまた、新NISAで買付できる投資信託の銘柄は毎月分配型等は対象外となり、月に上限10蔓延までが積立投資が可能となります。<br>......",
+          "url": "http://yahoo.co.jp",
+          "urlComment": "yahooジャパン",
+          "attachDocument1": "新NISA説明資料1",
+          "attachDocument2": "新NISA説明資料2",
+          "attachDocument3": "新NISA説明資料3",
+          "attachDocumentComment1": "新NISAの説明資料1",
+          "attachDocumentComment2": "新NISAの説明資料2",
+          "attachDocumentComment3": "新NISAの説明資料3",
+          "disclaimer": "0"
+      }
+  ]
+}

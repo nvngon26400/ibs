@@ -1,0 +1,17 @@
+{
+  "domainId": "DISTRIBUTION_RECEIVE_METHOD",
+  "domainName": "分配金受取方法指定",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-select"
+}

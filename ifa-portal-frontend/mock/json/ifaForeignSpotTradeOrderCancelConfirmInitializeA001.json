@@ -1,0 +1,41 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "countryCd": "US",
+      "orderNumber": "I02024040210001011",
+      "orderSubNumber": "A02024040310001011",
+      "brandInformationList": {
+        "brandCode": "FST01",
+        "brandName": "銘柄名_思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益思佰益_銘柄名"
+      },
+      "limitPriceText": "USD",
+      "marketInformationList": {
+        "marketName": "市場略名市場略名市場略",
+        "marketCode": "US_NASDAQ",
+        "countryCode": "US"
+      },
+      "tradeCd": "0",
+      "foreignQuantity": "9999999904",
+      "priceConditionsType": "3",
+      "hiddenOrderPrice": "999999906",
+      "stopOrderPrice2": "999999905",
+      "periodRadio": "0",
+      "period": "",
+      "depositType": "1",
+      "kessaiHoho": "2",
+      "orderDate": "2024-03-20T09:28:28Z",
+      "domesticTradeDate": "2024-03-25",
+      "foreignTradeDate": "2024-03-21",
+      "tradeKbn": "3",
+      "brandListedStatus": "TRADABLE"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/02 18:59:05",
+  "title": null,
+  "returnCode": null
+}

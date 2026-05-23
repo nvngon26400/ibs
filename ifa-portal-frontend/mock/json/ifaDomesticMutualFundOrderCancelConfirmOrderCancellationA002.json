@@ -1,0 +1,21 @@
+{
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": [{
+    "brandCode": "0033-083",
+    "brandName": "サンプル株式会社",
+    "tradeCd": "1",
+    "amount": "235",
+    "unit": "3234",
+    "depositType": "0",
+    "pointType": "2",
+    "point": "123",
+    "callcenterClassification": "1",
+    "buyCancelMethod": "1",
+    "orderDayTime": "20211017134200",
+    "ecOrderNo": "2353"
+  }]
+}

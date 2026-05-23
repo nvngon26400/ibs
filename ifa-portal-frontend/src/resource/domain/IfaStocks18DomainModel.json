@@ -1,0 +1,17 @@
+{
+  "domainId": "STOCKS18",
+  "domainName": "株数18",
+  "dataType": "数値",
+  "precision": 18,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 23,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "株",
+  "htmlTag": "ifa-input-quantity"
+}

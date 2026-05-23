@@ -1,0 +1,30 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "ticker":  "AAPL",
+    "brandName":  "アップル",
+    "market":  "東証",
+    "trade":  "1",
+    "limit":  "1",
+    "openTradeDate":  "20231111",
+    "lastTradeDate":  "20231115",
+    "depositTypeName":  "2",
+    "positionQuantity":  "1000",
+    "unitPriceForeign":  "2000",
+    "foreignNewPositionAmount":  "3000",
+    "foreignNewComm":  "4000",
+    "interest":  "5000",
+    "stockLendingPrice":  "6000",
+    "foreignManagePrice":  "7000",
+    "nameTransferPrice":  "8000",
+    "costForeign":  "9000",
+    "isIndividual":  "1"
+  }]
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "PLUSMINUS_SIGNED_UNIT_PRICE_6_2",
+  "domainName": "符号付単価_6_2（+-）",
+  "dataType": "金額",
+  "precision": 6,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "signedWithCommaZeroPadding",
+  "formattedDigit": 8,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

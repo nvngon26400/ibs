@@ -1,0 +1,33 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "customerDestinationBankAccountList": [
+              {
+                  "brokerName": "0000000001",
+                  "brokerChargeCode": "0001",
+                  "employeeName": "0000000001",
+                  "butenCode": "001",
+                  "accountNumber": "1",
+                  "customerAttributeName": "0000000001",
+                  "customerNameKanji": "漢字",
+                  "customerNameKana": "カナ",
+                  "bankNameKanji": "0000000001",
+                  "branchNameKanji": "0000000001",
+                  "depositType": "普通預金",
+                  "destinationAccountNumber": "0000001",
+                  "brokerCode": "0001",
+                  "brokerageBranchCode": "001",
+                  "branchNameOfBroker": "0000000001"
+              }
+          ]
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/01/26 14:28:04",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

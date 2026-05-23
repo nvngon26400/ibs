@@ -1,0 +1,75 @@
+{
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": [
+    {
+      "butenCode": "Z52",
+      "accountNumber": "0001776",
+      "customerNameKanji": "津村米吉",
+      "customerNameKana": "ツムラヨネキチ",
+      "brandCode": "123",
+      "brandName": "ホクリョウ",
+      "commodityAccountDeposit": "株式（総合口座－特定預り）",
+      "domesticStockDepositList": [{
+        "holdingStock": "10",
+        "getPriceReferencePrice": "12216",
+        "currentPrice": "15850",
+        "acquireAmountReferenceAmount": "122160",
+        "valuation": "158500",
+        "valuationProfitAndLoss": "36340",
+        "depositDate": "20160301",
+        "protectionSubstitutionClass": "保護預り",
+        "storageReason": "買付"
+      },{
+        "holdingStock": "10",
+        "getPriceReferencePrice": "12216",
+        "currentPrice": "15850",
+        "acquireAmountReferenceAmount": "122160",
+        "valuation": "158500",
+        "valuationProfitAndLoss": "-36340",
+        "depositDate": "20160301",
+        "protectionSubstitutionClass": "保護預り",
+        "storageReason": "買付"
+      },{
+        "holdingStock": "10",
+        "getPriceReferencePrice": "12216",
+        "currentPrice": "15850",
+        "acquireAmountReferenceAmount": "122160",
+        "valuation": "158500",
+        "valuationProfitAndLoss": "-36340",
+        "depositDate": "20160301",
+        "protectionSubstitutionClass": "保護預り",
+        "storageReason": "売却"
+      },{
+        "holdingStock": "10",
+        "getPriceReferencePrice": "12216",
+        "currentPrice": "15850",
+        "acquireAmountReferenceAmount": "122160",
+        "valuation": "158500",
+        "valuationProfitAndLoss": "-36340",
+        "depositDate": "20160301",
+        "protectionSubstitutionClass": "保護預り",
+        "storageReason": "買付"
+      },{
+        "holdingStock": "",
+        "getPriceReferencePrice": "",
+        "currentPrice": "",
+        "acquireAmountReferenceAmount": "",
+        "valuation": "",
+        "valuationProfitAndLoss": "",
+        "depositDate": "",
+        "protectionSubstitutionClass": "",
+        "storageReason": ""
+      }],
+      "mutualFundLotDepositList": [],
+      "mutualFundAmountDepositList": [],
+      "domesticClaimDepositList": [],
+      "foreignClaimDepositList": [],
+      "foreignStockDepositList": [],
+      "foreignMmfDepositList": []
+    }
+  ]
+}

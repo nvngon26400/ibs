@@ -1,0 +1,40 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "individualRepList": [
+              {
+                  "userId": "102",
+                  "employeeName": "営業員2"
+              },
+              {
+                  "userId": "001",
+                  "employeeName": "営業員A"
+              },
+              {
+                  "userId": "002",
+                  "employeeName": "営業員B"
+              },
+              {
+                  "userId": "003",
+                  "employeeName": "営業員C"
+              },
+              {
+                  "userId": "004",
+                  "employeeName": "営業員D"
+              },
+              {
+                  "userId": "005",
+                  "employeeName": "営業員E"
+              }
+          ]
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/01/24 17:07:22",
+  "title": null,
+  "returnCode": "0"
+}

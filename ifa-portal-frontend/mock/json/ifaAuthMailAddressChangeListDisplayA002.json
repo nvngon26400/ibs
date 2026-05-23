@@ -1,0 +1,23 @@
+{
+  "totalSize": 1,
+  "maxRownum": 5000,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "authMailAddressList": [
+        {
+          "userId": "2SCSK006",
+          "branchName": "\u5B87\u90FD\u5BAE\u4E2D\u592E\u652F\u5E97",
+          "brokerName": null,
+          "userName": "\u5F10\u306E\uFF16",
+          "mailAddress": "mikio.kusakabetest@scsk.jp"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024\u002F07\u002F12 10:37:13",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

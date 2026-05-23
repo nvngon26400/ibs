@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY14_4_DIGITS_B",
+  "domainName": "価格14_4_B",
+  "dataType": "金額",
+  "precision": 14,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 18,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-select"
+}

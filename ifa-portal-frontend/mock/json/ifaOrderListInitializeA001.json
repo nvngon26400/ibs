@@ -1,0 +1,15 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "orderListComment": "ご注意事項<br/>・IFAポータルからの注文のみを表示します。<br/>・株式分割などのコーポレートアクションがある場合、権利付き最終日の引け後から、権利落ち日の寄付きまでは、現在値が正しく反映されない可能性があります。"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/05/21 17:05:38",
+  "title": null,
+  "returnCode": null
+}

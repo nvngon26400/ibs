@@ -1,0 +1,47 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "title": "皆様からの要望データA-2",
+      "registerDate": "2025/07/30",
+      "status": "1",
+      "suggestion": "皆様からの要望データAです。\n改行を含む内容を登録しても正しく画面表示やCSV出力ができるかを確認します。\n登録済の添付ファイル１を削除のうえ、別のファイルを添付します。",
+      "attachFile1": "000002_皆様からの要望データA再登録.xlsx",
+      "attachFile2": "000002_皆様からの要望データA_1.xlsx",
+      "attachFile3": "000002_皆様からの要望データA_2.xlsx",
+      "answerList": [
+        {
+          "answerNo": "1",
+          "answerRegisterDate": "20250730",
+          "answerUpdateDate": "20250730",
+          "answerContents": "皆様からの要望データAに対する回答1です。\n更新しました。"
+        },
+        {
+          "answerNo": "2",
+          "answerRegisterDate": "20250730",
+          "answerUpdateDate": "20250730",
+          "answerContents": "皆様からの要望データAに対する回答2です。"
+        },
+        {
+          "answerNo": "3",
+          "answerRegisterDate": "20250730",
+          "answerUpdateDate": "20250730",
+          "answerContents": "皆様からの要望データAに対する回答3（確定済）です。"
+        },
+        {
+          "answerNo": "4",
+          "answerRegisterDate": "20250730",
+          "answerUpdateDate": "20250731",
+          "answerContents": "皆様からの要望データAに対する回答4です。\n2日目に更新しました。"
+        }
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/08/29 19:28:32",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

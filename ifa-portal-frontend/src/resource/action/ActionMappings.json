@@ -1,0 +1,1025 @@
+{
+  "CC013#A002": { "url": "/common/composite/ifaBrandPriceInfoUpdateMarketValueA002", "method": "post" },
+  "CC014#A001": { "url": "/common/composite/ifaBrandSearchInitializeA001", "method": "post" },
+  "CC014#A002": { "url": "/common/composite/ifaBrandSearchSearchBrandA002", "method": "post" },
+  "CC016#A002": { "url": "/common/composite/ifaNoticeInfoDisplayA002", "method": "post" },
+  "IfaCcsLink#A001": { "url": "/sso/userHasCcsData", "method": "post" },
+  "IfaCcsLink#A003": { "url": "/sso/updateCcsData", "method": "post" },
+  "IfaCcsLink#A002_1": { "url": "/common/ifaLinkUrlUrlAcquire", "method": "post" },
+  "IfaCcsLink#A002_2": { "url": "/sso/ccsLogin", "method": "post" },
+  "IfaCommonSearch#A001": { "url": "/common/composite/ifaCommonSearchInitializeA001", "method": "post"},
+  "IfaJointSubscriptSearch#A001": { "url": "/common/composite/ifaJointSubscriptSearchInitializeA001", "method": "post"},
+  "IfaDomesticBondsOrder#A003": { "url": "/url1", "method": "get"},
+  "IfaDomesticBondsOrder#A004": [{ "url": "/url2", "method": "get"}, { "url": "/url3", "method": "get"}],
+  "IfaDomesticBondsOrder#A005": [{ "url": "/url4", "method": "get"}, { "url": "/url5", "method": "get"}],
+  "IfaInputText#A001": { "url": "/common/ifaCheckUtilCheckFullWidthCharacter", "method": "post" },
+  "Navbar#A004": { "url": "/sso/clearCcsDataSelf", "method": "post" },
+  "ifaLinkUrlUrlAcquire": { "url": "/common/ifaLinkUrlUrlAcquire", "method": "post" },
+
+  "SUB00-00#A001": { "url": "/login/ifaLoginInitializeA001", "method": "post"},
+  "SUB00-00#A002": { "url": "/login/ifaAuthCodeInputAuthA002", "method": "post"},
+  "SUB00-00#A005": { "url": "/login/ifaMailAddressRegisterRegisterA005", "method": "post"},
+  "SUB00-00#A008": { "url": "/login/ifaLoginLoginA008", "method": "post"},
+
+  "SUB01-01#A001": { "url": "/wholePortal/ifaWholePortalHomeInitializeA001", "method": "post"},
+  "SUB01-01#A011": { "url": "/wholePortal/ifaWholePortalHomeBondMaturityRedemptionA011", "method": "post"},
+  "SUB01-01#A018": { "url": "/wholePortal/ifaWholePortalHomeUpdateA018", "method": "post"},
+  "SUB01-01#A021": { "url": "/wholePortal/ifaWholePortalHomeSearchDisplayA021", "method": "post"},
+
+  "SUB00-02#XXX001": { "url": "", "method": "post"},
+  "SUB00-02#XXX999": { "url": "", "method": "post"},
+
+  "SUB00-03_1#A003": { "url": "/login/ifaPasswordChangePasswordChangeA003", "method": "post"},
+
+  "SUB00-04#XXX001": { "url": "", "method": "post"},
+  "SUB00-04#XXX999": { "url": "", "method": "post"},
+
+  "SUB00_01-06_1#X001": { "url": "/suggestionBox/ifaSuggestionBoxPersonalInitializeX001", "method": "post"},
+  "SUB00_01-06_1#A002": { "url": "/suggestionBox/ifaSuggestionBoxPersonalDisplayA002", "method": "post"},
+
+  "SUB00_01-06_2#A001": { "url": "/suggestionBox/ifaSuggestionBoxPersonalDisplayA002", "method": "post"},
+  "SUB00_01-06_2#A006A": { "url": "/suggestionBox/ifaSuggestionBoxPersonalRegisterRegisterA006a", "method": "post"},
+  "SUB00_01-06_2#A006B": { "url": "/suggestionBox/ifaSuggestionBoxPersonalRegisterRegisterA006b", "method": "post"},
+
+  "SUB00_01-06_3#A001": { "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailInitializeA001", "method": "post"},
+  "SUB00_01-06_3#A002": [{ "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailDownloadA002a", "method": "post"},{ "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailDownloadA002b", "method": "post"}],
+  "SUB00_01-06_3#A007A": { "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailRegisterA007a", "method": "post"},
+  "SUB00_01-06_3#A007B": { "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailRegisterA007b", "method": "post"},
+
+  "SUB00_02-06_1#A001": { "url": "/suggestionBox/ifaSuggestionBoxCommonBrokerA001", "method": "post"},
+  "SUB00_02-06_1#A002": { "url": "/suggestionBox/ifaSuggestionBoxCommonBrokerA002", "method": "post"},
+  "SUB00_02-06_1#A006": [{ "url": "/suggestionBox/ifaSuggestionBoxCommonA006a", "method": "post" }, { "url": "/suggestionBox/ifaSuggestionBoxCommonA006b", "method": "post" }],
+
+  "SUB00_02-06_2#A001": { "url": "/suggestionBox/ifaSuggestionBoxCommonDetailInitializeA001", "method": "post"},
+  "SUB00_02-06_2#A002": [{ "url": "/suggestionBox/ifaSuggestionBoxCommonDetailDownloadA002a", "method": "post" }, { "url": "/suggestionBox/ifaSuggestionBoxCommonDetailDownloadA002b", "method": "post" }],  
+
+  "SUB00-05#X001": { "url": "/faq/ifaFaqInitialDisplayX001", "method": "post" },
+  "SUB00-05#A002": { "url": "/faq/ifaFaqFullTextSearchA002", "method": "post" },
+  "SUB00-05#A005": { "url": "/faq/ifaFaqContentsDisplayA005", "method": "post" },
+
+  "SUB00-07_1#A001": { "url": "/releaseNote/ifaReleaseNoteInitializeA001", "method": "post" },
+  "SUB00-07_1#A002": { "url": "/releaseNote/ifaReleaseNoteSelectDisplayYearA002", "method": "post" },
+  "SUB00-07_1#A003": { "url": "/releaseNote/ifaReleaseNoteUpdateNextDispFlgA003", "method": "post" },
+
+  "SUB00-07_2#A001": { "url": "/releaseNote/ifaReleaseNoteDetailInitializeA001", "method": "post" },
+
+  "SUB01-01#XXX001": { "url": "", "method": "post"},
+  "SUB01-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB01-02#A002": [{ "url": "/wholePortal/ifaCustomerAlertCsvOutputCsvOutputA002a", "method": "post"}, { "url": "/wholePortal/ifaCustomerAlertCsvOutputCsvOutputA002b", "method": "post"}],
+
+  "SUB01_03#A001": { "url": "/wholePortal/ifaInfoDetailInitializeA001", "method": "post"},
+  "SUB01_03#A003": [{ "url": "/wholePortal/ifaInfoDetailDownloadA003a", "method": "post"}, { "url": "/wholePortal/ifaInfoDetailDownloadA003b", "method": "post"}],
+
+  "SUB0201_01-01#A001": { "url": "/brokerageMenu/customerList/ifaCustomerListInitializeA001", "method": "post" },
+  "SUB0201_01-01#A002": { "url": "/brokerageMenu/customerList/ifaCustomerListDisplayA002", "method": "post" },
+  "SUB0201_01-01#A005": [{ "url": "/brokerageMenu/customerList/ifaCustomerListCsvOutputA005", "method": "post"}, { "url": "/brokerageMenu/customerList/ifaCustomerListCsvDownloadA005", "method": "post" }],
+  "SUB0201_01-01#A006": { "url": "/brokerageMenu/customerList/ifaCustomerListBbApplicationA006", "method": "post"},
+
+  "SUB0201_01-02#A001": { "url": "/brokerageMenu/customerList/ifaImprintInquiryInitializeA001", "method": "post"},
+
+  "SUB0201_02-01#XXX001": { "url": "", "method": "post"},
+  "SUB0201_02-01#A002": { "url": "/brokerageMenu/customerList/ifaCustomerListMarginDisplayA002", "method": "post" },
+  "SUB0201_02-01#A005": [{ "url": "/brokerageMenu/customerList/ifaCustomerListMarginCsvOutputA005a", "method": "post" }, { "url": "/brokerageMenu/customerList/ifaCustomerListMarginCsvOutputA005b", "method": "post" }],
+  "SUB0201_02-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB0201_03-01#A001": { "url": "/brokerageMenu/customerList/ifaCustomerListFuturesOptionsInitializeA001", "method": "post" },
+  "SUB0201_03-01#A002": { "url": "/brokerageMenu/customerList/ifaCustomerListFuturesOptionsDisplayA002", "method": "post" },
+  "SUB0201_03-01#A005": [{ "url": "/brokerageMenu/customerList/ifaCustomerListFuturesOptionsCsvOutputA005", "method": "post" }, { "url": "/brokerageMenu/customerList/ifaCustomerListFuturesOptionsCsvDownloadA005", "method": "post" }],
+
+  "SUB0202_00-01#A001": { "url": "/brokerageMenu/customerMenu/ifaCustomerSelectInitializeA001", "method": "post"},
+  "SUB0202_00-01#A004": { "url": "/brokerageMenu/customerMenu/ifaCustomerSelectFavoriteRegisterUnregisterA004", "method": "post"},
+  "SUB0202_00-01#X003": { "url": "/brokerageMenu/customerMenu/ifaCustomerSelectSearchX003", "method": "post"},
+
+  "SUB0202_00-02#A001": { "url": "/brokerageMenu/customerMenu/ifaCustomerPortalInitializeA001", "method": "post" },
+  "SUB0202_00-02#A011": { "url": "/brokerageMenu/customerMenu/ifaCustomerPortalMemoIFAUpdateA011", "method": "post"},
+  "SUB0202_00-02#A099": { "url": "/common/ifaCacheManageRemoveCustomerInfo", "method": "post" },
+
+  "SUB0202_0101-01#A001": { "url": "/brokerageMenu/customerMenu/ifaPortfolioInitializeA001", "method": "post"},
+
+  "SUB0202_0101-02#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0101-02#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_010201-01#XXX001": { "url": "", "method": "post"},
+  "SUB0202_010201-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_010201-01#A001": { "url": "/brokerageMenu/customerMenu/ifaHoldingSecurityListInitializeA001", "method": "post" },
+  "SUB0202_010201-01#A003": { "url": "/brokerageMenu/customerMenu/ifaHoldingSecurityListDomesticStockTradingA003", "method": "post" },
+  "SUB0202_010201-01#A012": { "url": "/brokerageMenu/customerMenu/ifaHoldingSecurityListAccountSelectionA012", "method": "post" },
+  "SUB0202_010201-01#A013": { "url": "/brokerageMenu/customerMenu/ifaHoldingSecurityListProductSelectionA013", "method": "post" },
+
+  "SUB0202_010201-02_1#A001": { "url": "/brokerageMenu/customerMenu/ifaDistributionReceiveMethodChangeInputInitializeA001", "method": "post" },
+  "SUB0202_010201-02_1#A002": { "url": "/brokerageMenu/customerMenu/ifaDistributionReceiveMethodChangeInputRegisterChangeA002", "method": "post" },
+
+  "SUB0202_010201-02_2#A001": { "url": "/brokerageMenu/customerMenu/ifaDistributionReceiveMethodChangeCompleteInitializeA001", "method": "post" },
+
+  "SUB0202_010201-03#A001": { "url": "/brokerageMenu/customerMenu/ifaSellUnableDetailInitializeA001", "method": "post"},
+  "SUB0202_010201-03#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_010201-04#A001": { "url": "/brokerageMenu/customerMenu/ifaDepositBalanceDetailInitializeA001", "method": "post" },
+  "SUB0202_010201-04#A004": { "url": "/brokerageMenu/customerMenu/ifaDepositBalanceDetailUpdateA004", "method": "post" },
+
+  "SUB0202_010202-01#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticPositionListInitializeA001", "method": "post" },
+  "SUB0202_010202-01#A002": { "url": "/brokerageMenu/customerMenu/ifaDomesticPositionListExpenseCalculationA002", "method": "post" },
+  "SUB0202_010202-03#A001": { "url": "/brokerageMenu/customerMenu/ifaBrandPositionListInitializeA001", "method": "post" },
+
+  "SUB0202_010203-01#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignPositionListInitializeA001", "method": "post"},
+  "SUB0202_010203-01#A002": { "url": "/brokerageMenu/customerMenu/ifaForeignPositionListPositionRepaymentA002", "method": "post"},
+
+  "SUB0202_010204-01#A001": { "url": "/brokerageMenu/customerMenu/ifaCollateralSecurityListInitializeA001", "method": "post"},
+  "SUB0202_010204-01#A004": { "url": "/brokerageMenu/customerMenu/ifaCollateralSecurityListUpdateA004", "method": "post"},
+
+  "SUB0202_010204-02#A001": { "url": "/brokerageMenu/customerMenu/ifaCollateralSecurityDeliverInOutDetailInitializeA001", "method": "post"},
+
+  "SUB0202_010301-01#A001": { "url": "/brokerageMenu/customerMenu/ifaBuyingPowerDomesticInitializeA001", "method": "post" },
+  "SUB0202_010301-01#A002": { "url": "/brokerageMenu/customerMenu/ifaUnsettleDetailInitializeA001", "method": "post" },
+  "SUB0202_010301-01#A003": { "url": "/brokerageMenu/customerMenu/ifaBuyingPowerDomesticReSearchA003", "method": "post" },
+
+  "SUB0202_010301-02#A001": { "url": "/brokerageMenu/customerMenu/ifaUnsettleDetailInitializeA001", "method": "post" },
+
+  "SUB0202_010302-01#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginPowerDomesticInitializeA001", "method": "post"},
+
+  "SUB0202_010302-02#A001": { "url": "/brokerageMenu/customerMenu/ifaShortPositionDividendAdjustDetailInitializeA001", "method": "post"},
+
+  "SUB0202_010302-03#X001": { "url": "/brokerageMenu/customerMenu/ifaRealEntrustDepositRateDomesticInitializeX001", "method": "post"},
+  "SUB0202_010302-03#A002": { "url": "/brokerageMenu/customerMenu/ifaRealEntrustDepositRateDomesticUpdateA002", "method": "post"},
+
+  "SUB0202_010303-01#A001": { "url" : "/brokerageMenu/customerMenu/ifaBuyingPowerForeignInitializeA001", "method" : "post"},
+  "SUB0202_010303-01#A002": { "url" : "/brokerageMenu/customerMenu/ifaBuyingPowerForeignReSearchA002", "method" : "post"},
+
+  "SUB0202_010304-01#XXX001": { "url": "", "method": "post"},
+  "SUB0202_010304-01#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginPowerForeignInitializeA001", "method": "post" },
+  "SUB0202_010304-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_010304-02#XXX001": { "url": "", "method": "post"},
+  "SUB0202_010304-02#A001": { "url": "/brokerageMenu/customerMenu/ifaRealEntrustDepositRateInitializeA001", "method": "post" },
+  "SUB0202_010304-02#A002": { "url": "/brokerageMenu/customerMenu/ifaRealEntrustDepositRateUpdateA002", "method": "post" },
+  "SUB0202_010304-02#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0104-01#A002": { "url": "/brokerageMenu/customerMenu/ifaOrderStatusListInitializeOrderListA002", "method": "post"},
+  "SUB0202_0104-01#A004": { "url": "/brokerageMenu/customerMenu/ifaOrderStatusListForeignStockCounterDetailDisplayA004", "method": "post"},
+  "SUB0202_0104-01#X001": { "url": "/brokerageMenu/customerMenu/ifaOrderStatusListInitializeX001", "method": "post"},
+
+  "SUB0202_0104-02#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignStockEntrustOrderTradeInfoInitializeA001", "method": "post" },
+
+  "SUB0202_0104-03#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignStockCounterDetailDisplayInitializeA001", "method": "post"},
+
+  "SUB0202_0105-01#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticTradeStatusListInitializeA001", "method": "post"},
+
+  "SUB0202_0105-02#A001": { "url": "/brokerageMenu/customerMenu/ifaMatchedTradeDetailInitializeA001", "method": "post" },
+  "SUB0202_0105-02#A003": { "url": "/brokerageMenu/customerMenu/ifaMatchedTradeDetailInitializeA003", "method": "post" },
+
+  "SUB0202_0109-01#A001": { "url": "/brokerageMenu/customerMenu/ifaCustomerTradeHistoryInitializeA001", "method": "post" },
+  "SUB0202_0109-01#A002": { "url": "/brokerageMenu/customerMenu/ifaCustomerTradeHistoryDisplayA002", "method": "post" },
+  "SUB0202_0109-01#A004": [
+    { "url": "/brokerageMenu/customerMenu/ifaCustomerTradeHistoryCsvOutputA004a", "method": "post" },
+    { "url": "/brokerageMenu/customerMenu/ifaCustomerTradeHistoryCsvOutputA004b", "method": "post" }
+  ],
+  "SUB0202_0106-01#A001": { "url": "/brokerageMenu/customerMenu/ifaContactInitializeA001", "method": "post" },
+  "SUB0202_0106-01#A002": { "url": "/brokerageMenu/customerMenu/ifaContactBigClassChangeA002", "method": "post" },
+  "SUB0202_0106-02#A001": { "url": "/brokerageMenu/customerMenu/ifaContactAcceptDetailInitializeA001", "method": "post" },
+
+  "SUB0202_0106-03#A001": { "url": "/brokerageMenu/customerMenu/ifaContactInputInitializeA001", "method": "post" },
+  "SUB0202_0106-03#X001": { "url": "/brokerageMenu/customerMenu/ifaContactInputInitializeX001", "method": "post" },
+  "SUB0202_0106-03#A002": { "url": "/brokerageMenu/customerMenu/ifaContactInputConfirmA002", "method": "post" },
+  "SUB0202_0106-03#A007": { "url": "/brokerageMenu/customerMenu/ifaContactInputCategoryChangeA007", "method": "post" },
+  "SUB0202_0106-03#A008": { "url": "/brokerageMenu/customerMenu/ifaContactInputCategoryChangeA008", "method": "post" },
+  "SUB0202_0106-04#A002": { "url": "/brokerageMenu/customerMenu/ifaContactConfirmInsertA002", "method": "post" },
+  "SUB0202_0106-06#A001": { "url": "/brokerageMenu/customerMenu/ifaContactDetailInitializeA001", "method": "post" },
+  "SUB0202_0106-07#A001": { "url": "/brokerageMenu/customerMenu/ifaContactCorrectInitializeA001", "method": "post" },
+  "SUB0202_0106-07#A003": { "url": "/brokerageMenu/customerMenu/ifaContactCorrectUpdateA003", "method": "post" },
+  "SUB0202_0106-08#A001": { "url": "/brokerageMenu/customerMenu/ifaContactCorrectHistoryInitializeA001", "method": "post" },
+
+  "SUB0202_0110-01_1#A001": { "url": "/brokerageMenu/customerMenu/IfaOtherRemainPowerRestrainInputInitializeA001", "method": "post"},
+  "SUB0202_0110-01_1#A002": { "url": "/brokerageMenu/customerMenu/IfaOtherRemainPowerRestrainInputOrderConfirmA002", "method": "post"},
+  "SUB0202_0110-01_2#A001": { "url": "/brokerageMenu/customerMenu/IfaOtherRemainPowerRestrainInputConfirmInitializeA001", "method": "post"},
+  "SUB0202_0110-01_2#A002": { "url": "/brokerageMenu/customerMenu/IfaOtherRemainPowerRestrainInputConfirmOrderPlacementA002", "method": "post"},
+  "SUB0202_0110-01_3#A001": { "url": "/brokerageMenu/customerMenu/IfaOtherRemainPowerRestrainInputCompleteInitializeA001", "method": "post"},
+  "SUB0202_0110-02_1#A001": { "url": "/brokerageMenu/customerMenu/IfaOtherRemainPowerRestrainCancelConfirmInitializeA001", "method": "post"},
+  "SUB0202_0110-02_1#A002": { "url": "/brokerageMenu/customerMenu/IfaOtherRemainPowerRestrainCancelConfirmOrderPlacementA002", "method": "post"},
+  "SUB0202_0110-02_2#A001": { "url": "/brokerageMenu/customerMenu/IfaOtherRemainPowerRestrainCancelCompleteInitializeA001", "method": "post"},
+
+  "SUB0202_0208-01_1#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderInputInitializeA001", "method": "post"},
+  "SUB0202_0208-01_1#A002": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderInputBrandSelectionMarketSelectionA002", "method": "post"},
+  "SUB0202_0208-01_1#A005": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderInputUpdateA005", "method": "post"},
+  "SUB0202_0208-01_1#A016": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderInputOrderConfirmA016", "method": "post"},
+
+  "SUB0202_0208-01_3#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderConfirmOrderPlacementA001", "method": "post" },
+
+  "SUB0202_0208-01_4#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0208-01_4#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0208-02#A001": { "url": "/brokerageMenu/customerMenu/ifaStockDetailInfoInitializeA001", "method": "post"},
+  "SUB0202_0208-02#A002": { "url": "/brokerageMenu/customerMenu/ifaStockDetailInfoUpdateA002", "method": "post"},
+
+  "SUB0202_0208-03_1#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderCorrectInputInitializeA001", "method": "post" },
+  "SUB0202_0208-03_1#A004": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderCorrectInputUpdateA004", "method": "post" },
+  "SUB0202_0208-03_1#A010": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderCorrectInputOrderConfirmA010", "method": "post" },
+
+  "SUB0202_0208-03_2#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderCorrectConfirmOrderPlacementA001", "method": "post"},
+
+  "SUB0202_0208-03_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0208-03_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0208-04_1#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderCancelConfirmInitializeA001", "method": "post" },
+  "SUB0202_0208-04_1#A002": { "url": "/brokerageMenu/customerMenu/ifaDomesticStockOrderCancelConfirmOrderPlacementA002", "method": "post" },
+
+  "SUB0202_0208-04_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0208-04_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-01_1#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderInputInitializeA001", "method": "post"},
+  "SUB0202_0212-01_1#A002": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderInputBrandSelectionMarketSelectionA002", "method": "post"},
+  "SUB0202_0212-01_1#A005": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderInputUpdateA005", "method": "post"},
+  "SUB0202_0212-01_1#A016": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderInputOrderConfirmA016", "method": "post"},
+  "SUB0202_0212-01_2#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderConfirmOrderPlacementA001", "method": "post"},
+
+  "SUB0202_0212-01_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-01_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-01_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-01_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-02_1#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-02_1#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderCorrectInputInitializeA001", "method": "post" },
+  "SUB0202_0212-02_1#A004": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderCorrectInputUpdateA004", "method": "post" },
+  "SUB0202_0212-02_1#A010": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderCorrectInputCorrectionConfirmA010", "method": "post" },
+  "SUB0202_0212-02_1#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-02_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-02_2#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderCorrectConfirmCorrectionOrderA001", "method": "post" },
+  "SUB0202_0212-02_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-02_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-02_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-03_1#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderCancelConfirmInitializeA001", "method": "post" },
+  "SUB0202_0212-03_1#A002": { "url": "/brokerageMenu/customerMenu/ifaMarginNewOrderCancelConfirmOrderPlacementA002", "method": "post" },
+
+  "SUB0202_0212-03_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-03_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-04_1#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderInputInitializeA001", "method": "post" },
+  "SUB0202_0212-04_1#A002": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderInputMarketSelectionA002", "method": "post" },
+  "SUB0202_0212-04_1#A004": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderInputUpdateA004", "method": "post" },
+  "SUB0202_0212-04_1#A016": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderInputOrderConfirmA016", "method": "post" },
+
+  "SUB0202_0212-04_2#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderConfirmOrderPlacementA001", "method": "post" },
+
+  "SUB0202_0212-05_1#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginMassRepayInputInitializeA001", "method": "post"},
+  "SUB0202_0212-05_1#A003": { "url": "/brokerageMenu/customerMenu/ifaMarginMassRepayInputRepaymentOrderA003", "method": "post"},
+  "SUB0202_0212-05_1#A010": { "url": "/brokerageMenu/customerMenu/ifaMarginMassRepayInputInitializeReturnA010", "method": "post"},
+
+  "SUB0202_0212-06_1#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderCorrectInputInitializeA001", "method": "post"},
+  "SUB0202_0212-06_1#A004": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderCorrectInputUpdateA004", "method": "post"},
+  "SUB0202_0212-06_1#A010": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderCorrectInputCorrectionConfirmA010", "method": "post"},
+
+  "SUB0202_0212-06_2#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderCorrectConfirmCorrectionOrderA001", "method": "post" },
+
+  "SUB0202_0212-07_1#A001": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderCancelConfirmInitializeA001", "method": "post"},
+  "SUB0202_0212-07_1#A002": { "url": "/brokerageMenu/customerMenu/ifaMarginRepayOrderCancelConfirmOrderPlacementA002", "method": "post"},
+
+  "SUB0202_0212-08_1#A003": { "url": "/brokerageMenu/customerMenu/ifaReceiptDeliveryOrderInputUpdateA003", "method": "post" },
+  "SUB0202_0212-08_1#A006": { "url": "/brokerageMenu/customerMenu/ifaReceiptDeliveryOrderInputOrderConfirmA006", "method": "post" },
+  "SUB0202_0212-08_1#X001": { "url": "/brokerageMenu/customerMenu/ifaReceiptDeliveryOrderInputInitializeX001", "method": "post" },
+  "SUB0202_0212-08_1#A011": { "url": "/brokerageMenu/customerMenu/ifaReceiptDeliveryOrderInputInitializeA001", "method": "post" },
+  "SUB0202_0212-08_2#A001": { "url": "/brokerageMenu/customerMenu/ifaReceiptDeliveryOrderConfirmOrderPlacementA001", "method": "post" },
+
+  "SUB0202_0212-08_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-08_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-08_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-08_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-09_1#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-09_1#A001": { "url": "/brokerageMenu/customerMenu/ifaReceiptDeliveryOrderCancelConfirmInitializeA001", "method": "post"},
+  "SUB0202_0212-09_1#A002": { "url": "/brokerageMenu/customerMenu/ifaReceiptDeliveryOrderCancelConfirmOrderPlacementA002", "method": "post"},
+  "SUB0202_0212-09_1#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0212-09_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0212-09_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0301-01_1#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderInputInitializeA001", "method": "post"},
+  "SUB0202_0301-01_1#A003": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderInputStockPriceDisplayA003", "method": "post"},
+  "SUB0202_0301-01_1#A005": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderInputUpdateA005", "method": "post"},
+  "SUB0202_0301-01_1#A013": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderInputOrderConfirmA013", "method": "post"},
+  "SUB0202_0301-01_1#A021": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderInputGetNewMainSiteA021", "method": "post"},
+
+  "SUB0202_0301-01_2#A004": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderConfirmUpdateA004", "method": "post"},
+  "SUB0202_0301-01_2#A010": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderConfirmOrderPlacementA010", "method": "post"},
+  "SUB0202_0301-01_2#A019": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderConfirmGetNewMainSiteA019", "method": "post"},
+
+  "SUB0202_0301-01_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0301-01_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0301-03_1#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderCancelConfirmInitializeA001", "method": "post"},
+  "SUB0202_0301-03_1#A010": { "url": "/brokerageMenu/customerMenu/ifaForeignSpotTradeOrderCancelConfirmOrderCancellationA010", "method": "post"},
+
+  "SUB0202_0301-03_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0301-03_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0302-01#A001": { "url": "/brokerageMenu/customerMenu/ifaPriceViewLookupForeignStockBrandListInitializeA001", "method": "post"},
+  "SUB0202_0302-01#A002": { "url": "/brokerageMenu/customerMenu/ifaPriceViewLookupForeignStockBrandListDisplayA002", "method": "post"},
+  "SUB0202_0302-01#A008": { "url": "/brokerageMenu/customerMenu/ifaPriceViewLookupForeignStockBrandListBackButtonRedisplayA008", "method": "post"},
+
+  "SUB0202_0302-02_1#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignStockCounterOrderInputInitializeA001", "method": "post"},
+  "SUB0202_0302-02_1#A002": { "url": "/brokerageMenu/customerMenu/ifaForeignStockCounterOrderInputUpdateA002", "method": "post"},
+  "SUB0202_0302-02_1#A008": { "url": "/brokerageMenu/customerMenu/ifaForeignStockCounterOrderInputOrderConfirmA008", "method": "post"},
+  "SUB0202_0302-02_1#A019": { "url": "/brokerageMenu/customerMenu/ifaForeignStockCounterOrderInputGetNewMainSiteA019", "method": "post"},
+
+  "SUB0202_0302-02_2#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignStockCounterOrderConfirmOrderPlacementA001", "method": "post"},
+  "SUB0202_0302-02_2#A002": { "url": "/brokerageMenu/customerMenu/ifaForeignStockCounterOrderConfirmUpdateA002", "method": "post"},
+  "SUB0202_0302-02_2#A019": { "url": "/brokerageMenu/customerMenu/ifaForeignStockCounterOrderConfirmGetNewMainSiteA019", "method": "post"},
+
+  "SUB0202_0302-02_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0302-02_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0303-01_1#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderInputInitializeA001", "method": "post"},
+  "SUB0202_0303-01_1#A003": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderInputStockPriceDisplayA003", "method": "post"},
+  "SUB0202_0303-01_1#A005": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderInputUpdateA005", "method": "post"},
+  "SUB0202_0303-01_1#A012": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderInputOrderConfirmA012", "method": "post"},
+  "SUB0202_0303-01_1#A019": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderInputDisplayReferenceMarginBalanceA019", "method": "post"},
+  "SUB0202_0303-01_1#A020": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderInputEstimatedConstructionFeeA020", "method": "post"},
+  "SUB0202_0303-01_1#A023": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderInputGetNewMainSiteA023", "method": "post"},
+
+  "SUB0202_0303-01_2#A004": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderConfirmUpdateA004", "method": "post" },
+  "SUB0202_0303-01_2#A010": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderConfirmOrderPlacementA010", "method": "post" },
+  "SUB0202_0303-01_2#A012": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeNewOrderConfirmGetNewMainSiteA012", "method": "post" },
+
+  "SUB0202_0303-01_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0303-01_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0303-03_1#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeOrderCancelConfirmInitializeA001", "method": "post" },
+  "SUB0202_0303-03_1#A010": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeOrderCancelConfirmOrderCancellationA010", "method": "post" },
+
+  "SUB0202_0303-03_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0303-03_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0303-04_1#A001" : { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeRepayOrderInputInitializeA001", "method": "post" },
+  "SUB0202_0303-04_1#A005" : { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeRepayOrderInputUpdateA005", "method": "post" },
+  "SUB0202_0303-04_1#A012" : { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeRepayOrderInputOrderConfirmA012", "method": "post" },
+  "SUB0202_0303-04_1#A021" : { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeRepayOrderInputGetNewMainSiteA021", "method": "post" },
+
+  "SUB0202_0303-04_2#A004" : { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeRepayOrderConfirmUpdateA004", "method": "post" },
+  "SUB0202_0303-04_2#A010" : { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeRepayOrderConfirmOrderPlacementA010", "method": "post" },
+  "SUB0202_0303-04_2#A012" : { "url": "/brokerageMenu/customerMenu/ifaForeignMarginTradeRepayOrderConfirmGetNewMainSiteA012", "method": "post" },
+
+  "SUB0202_0303-04_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0303-04_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0304-01_1#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginDepositTransferInputInitializeA001", "method": "post" },
+  "SUB0202_0304-01_1#A002": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginDepositTransferInputAccountSelectionA002", "method": "post" },
+  "SUB0202_0304-01_1#A003": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginDepositTransferInputDisplayResultA003", "method": "post" },
+  "SUB0202_0304-01_1#A004": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginDepositTransferInputTransferConfirmA004", "method": "post" },
+
+  "SUB0202_0304-01_2#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginDepositTransferConfirmTransferInstructionA001", "method": "post" },
+
+  "SUB0202_0304-01_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0304-01_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0305-01_1#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginCollateralTransferInputInitializeA001", "method": "post"},
+  "SUB0202_0305-01_1#A003": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginCollateralTransferInputDisplayResultA003", "method": "post"},
+  "SUB0202_0305-01_1#A004": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginCollateralTransferInputTransferConfirmA004", "method": "post"},
+
+  "SUB0202_0305-01_2#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginCollateralTransferConfirmTransferInstructionA001", "method": "post"},
+
+  "SUB0202_0305-01_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0305-01_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0306-01_1#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginAutoTransferSettingInputInitializeA001", "method": "post"},
+  "SUB0202_0306-01_1#A002": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginAutoTransferSettingInputSettingConfirmA002", "method": "post"},
+
+  "SUB0202_0306-01_2#A001": { "url": "/brokerageMenu/customerMenu/ifaForeignMarginAutoTransferSettingConfirmSettingInstructionA001", "method": "post"},
+
+  "SUB0202_0306-01_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0306-01_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0401-01#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundBuyAbleListInitializeA001", "method": "post"},
+  "SUB0202_0401-01#A002": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundBuyAbleListPurchaseDirectInputA002", "method": "post"},
+  "SUB0202_0401-01#A004": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundBuyAbleListAccumulateDirectInputA004", "method": "post"},
+  "SUB0202_0401-01#A007": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundBuyAbleListDirectInputSelectMFNameA007", "method": "post"},
+
+  "SUB0202_0401-02_1#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderInputInitializeA001", "method": "post" },
+  "SUB0202_0401-02_1#A004": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderInputResetA004", "method": "post" },
+  "SUB0202_0401-02_1#A005": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderInputAccountSelectionA005", "method": "post" },
+  "SUB0202_0401-02_1#A006": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderInputTransferPreferentialFrameChangeA006", "method": "post" },
+  "SUB0202_0401-02_1#A009": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderInputDepositCategoryChangeA009", "method": "post" },
+  "SUB0202_0401-02_1#A010": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderInputOrderConfirmA010", "method": "post" },
+  "SUB0202_0401-02_2#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderConfirmOrderPlacementA001", "method": "post" },
+
+  "SUB0202_0401-02_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0401-02_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0401-02_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0401-02_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0401-03#A001": { "url":"/brokerageMenu/customerMenu/ifaMutualFundDetailInfoInitializeA001", "method": "post" },
+
+  "SUB0202_0401-04_1#A001": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderCancelConfirmInitializeA001", "method": "post"},
+  "SUB0202_0401-04_1#A002": { "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundOrderCancelConfirmOrderCancellationA002", "method": "post"},
+
+  "SUB0202_0401-04_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0401-04_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0403-01#A001": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingBrandListInitializeA001",
+    "method": "post"
+  },
+  "SUB0202_0403-01#A002": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingBrandListInitializeA002",
+    "method": "post"
+  },
+  "SUB0202_0403-01#A003": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingBrandListAddA003",
+    "method": "post"
+  },
+  "SUB0202_0403-01#A004": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingBrandListChangeA004",
+    "method": "post"
+  },
+  "SUB0202_0403-01#A007": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingBrandListBulkChangeA007",
+    "method": "post"
+  },
+  "SUB0202_0403-02_1#A001": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingInputInitializeA001",
+    "method": "post"
+  },
+  "SUB0202_0403-02_1#A010": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingInputConfirmA010",
+    "method": "post"
+  },
+  "SUB0202_0403-02_1#A019": {
+    "url": "/brokerageMenu/customerMenu/ifaDomesticMutualFundDocAccumulationSettingsA019",
+    "method": "post"
+  },
+  "SUB0202_0403-02_2#A001": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingConfirmA001",
+    "method": "post"
+  },
+
+  "SUB0202_0403-03_1#A001": {
+    "url": "/brokerageMenu/customerMenu/IfaMutualFundAccumulateSettingChangeInputInitializeA001",
+    "method": "post"
+  },
+  "SUB0202_0403-03_2#A009": {
+    "url": "/brokerageMenu/customerMenu/IfaMutualFundAccumulateSettingChangeInputConfirmA009",
+    "method": "post"
+  },
+  "SUB0202_0403-03_3#A002": {
+    "url": "/brokerageMenu/customerMenu/IfaMutualFundAccumulateSettingChangeRegisterA002",
+    "method": "post"
+  },
+
+  "SUB0202_0403-04_1#A001": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingCancelConfirmInitializeA001",
+    "method": "post"
+  },
+  "SUB0202_0403-04_1#A003": {
+    "url": "/brokerageMenu/customerMenu/IfaMutualFundAccumulateSettingCancelConfirmCancelA003",
+    "method": "post"
+  },
+
+  "SUB0202_0403-05_1#A001": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingBulkChangeInputInitializeA001",
+    "method": "post"
+  },
+  "SUB0202_0403-05_2#A005": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingBulkChangeInputConfirmA005",
+    "method": "post"
+  },
+  "SUB0202_0403-05_3#A001": {
+    "url": "/brokerageMenu/customerMenu/ifaMutualFundAccumulateSettingBulkChangeRegisterA001",
+    "method": "post"
+  },
+
+  "SUB0202_0502-01#A001": { "url": "/brokerageMenu/customerMenu/ifaCurrencyDealtListOrderNewMarginA001", "method": "post"},
+  "SUB0202_0502-01#A002": { "url": "/brokerageMenu/customerMenu/ifaCurrencyDealtListPurchaseSaleA002", "method": "post"},
+
+  "SUB0202_0502-02_1#A001": { "url": "/brokerageMenu/customerMenu/ifaFxOrderInputInitializeA001", "method": "post"},
+  "SUB0202_0502-02_1#A002": { "url": "/brokerageMenu/customerMenu/ifaFxOrderInputUpdateA002", "method": "post"},
+  "SUB0202_0502-02_1#A008": { "url": "/brokerageMenu/customerMenu/ifaFxOrderInputOrderConfirmA008", "method": "post"},
+
+  "SUB0202_0502-02_2#A001": { "url": "/brokerageMenu/customerMenu/ifaFxOrderConfirmOrderPlacementA001", "method": "post"},
+
+  "SUB0202_0502-02_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0502-02_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0503-01#A001": { "url": "/brokerageMenu/customerMenu/ifaIfaCurrencyDealtListInitializeA001", "method": "post" },
+
+  "SUB0202_0503-02_1#A001": { "url": "/brokerageMenu/customerMenu/ifaIfaFxOrderInputInitializeA001", "method": "post"},
+  "SUB0202_0503-02_1#A002": { "url": "/brokerageMenu/customerMenu/ifaIfaFxOrderInputUpdateA002", "method": "post"},
+  "SUB0202_0503-02_1#A008": { "url": "/brokerageMenu/customerMenu/ifaIfaFxOrderInputOrderConfirmA008", "method": "post"},
+
+  "SUB0202_0503-02_2#A001": { "url": "/brokerageMenu/customerMenu/ifaIfaFxOrderConfirmOrderPlacementA001", "method": "post"},
+
+  "SUB0202_0503-02_3#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0503-02_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0501-01#A001": { "url": "/brokerageMenu/customerMenu/ifaFxTradeOrderLookupInitializeA001", "method": "post"},
+  "SUB0202_0501-01#A003": { "url": "/brokerageMenu/customerMenu/ifaFxTradeOrderLookupDisplayA003", "method": "post"},
+
+  "SUB0202_0501-02_1#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0501-02_1#A001": { "url": "/brokerageMenu/customerMenu/ifaFxTradeOrderCancelConfirmInitializeA001", "method": "post" },
+  "SUB0202_0501-02_1#A002": { "url": "/brokerageMenu/customerMenu/ifaFxTradeOrderCancelConfirmOrderCancellationA002", "method": "post" },
+  "SUB0202_0501-02_1#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0501-02_2#XXX001": { "url": "", "method": "post"},
+  "SUB0202_0501-02_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0202_0601-01#A001": { "url": "/brokerageMenu/customerMenu/ifaWithdrawInputInitializeA001", "method": "post"},
+  "SUB0202_0601-01#A002": { "url": "/brokerageMenu/customerMenu/ifaWithdrawInputSelectAcBalanceA002", "method": "post"},
+  "SUB0202_0601-01#A003": { "url": "/brokerageMenu/customerMenu/ifaWithdrawInputExecuteConfirmCheckA003", "method": "post"},
+  "SUB0202_0601-01#A004": { "url": "/brokerageMenu/customerMenu/ifaWithdrawInputCancelConfirmCheckA004", "method": "post"},
+  "SUB0202_0601-02_1#A001": { "url": "/brokerageMenu/customerMenu/ifaWithdrawExecuteConfirmA001", "method": "post"},
+  "SUB0202_0601-03_1#A001": { "url": "/brokerageMenu/customerMenu/ifaWithdrawCancelConfirmA001", "method": "post"},
+  "SUB0202_0601-02_2#A002": { "url": "/brokerageMenu/customerMenu/IfaWithdrawAcceptCompleteA002", "method": "post"},
+  "SUB0202_0601-03_2#A002": { "url": "/brokerageMenu/customerMenu/IfaWithdrawCancelCompleteA002", "method": "post"},
+
+  "SUB0202_0701-01#A001": { "url": "/brokerageMenu/customerMenu/ifaRegisterInfoA00InitializeA001", "method": "post"},
+
+  "SUB0202_0704-01#A001": { "url": "/brokerageMenu/customerMenu/ifaDocRequestInputInitializeA001", "method": "post"},
+  "SUB0202_0704-01#A002": { "url": "/brokerageMenu/customerMenu/ifaDocRequestInputSelectShoruiListA002", "method": "post"},
+  "SUB0202_0704-01#A003": { "url": "/brokerageMenu/customerMenu/ifaDocRequestInputSelectShoruiDateA003", "method": "post"},
+  "SUB0202_0704-01#A005": { "url": "/brokerageMenu/customerMenu/ifaDocRequestInputSelectMFNameA005", "method": "post"},
+  "SUB0202_0704-01#A007": { "url": "/brokerageMenu/customerMenu/ifaDocRequestExecuteConfirmA007", "method": "post"},
+  "SUB0202_0704-01#A008": { "url": "/brokerageMenu/customerMenu/ifaDocRequestCancelConfirmA008", "method": "post"},
+  "SUB0202_0704-01#A009": { "url": "/brokerageMenu/customerMenu/ifaDocRequestDetailA009", "method": "post"},
+  "SUB0202_0704-01#A013": { "url": "/brokerageMenu/customerMenu/ifaDocBMRequestCancelConfirmA013", "method": "post"},
+  "SUB0202_0704-01#A014": { "url": "/brokerageMenu/customerMenu/ifaDocBMRequestDetailA014", "method": "post"},
+  "SUB0202_0704-02_1#A002": { "url": "/brokerageMenu/customerMenu/ifaDocRequestExecuteConfirmA002", "method": "post"},
+  "SUB0202_0704-02_1#A005": { "url": "/brokerageMenu/customerMenu/ifaDocBMRequestExecuteConfirmA005", "method": "post"},
+  "SUB0202_0704-03_1#A002": { "url": "/brokerageMenu/customerMenu/ifaDocRequestCancelConfirmA002", "method": "post"},
+  "SUB0202_0704-03_1#A005": { "url": "/brokerageMenu/customerMenu/ifaDocBMRequestCancelConfirmA005", "method": "post"},
+
+  "SUB0202_0703-01#A001": { "url": "/brokerageMenu/customerMenu/ifaSendReceiveStatusLookupInitializeA001", "method": "post" },
+  "SUB0202_0703-01#A002": { "url": "/brokerageMenu/customerMenu/ifaSendReceiveStatusLookupDisplayA002", "method": "post" },
+  "SUB0202_0703-01#A003": { "url": "/brokerageMenu/customerMenu/ifaSendReceiveStatusLookupDisplayA003", "method": "post" },
+  "SUB0202_0703-01#A004": [
+    { "url": "/brokerageMenu/customerMenu/ifaSendReceiveStatusLookupCsvOutputA004a", "method": "post" },
+    { "url": "/brokerageMenu/customerMenu/ifaSendReceiveStatusLookupCsvOutputA004b", "method": "post" }
+  ],
+  "SUB0202_0703-02#A005": { "url": "/brokerageMenu/customerMenu/ifaSendReceiveStatusLookupSelectDocRequestAddInfoA005", "method": "post" },
+
+  "SUB0202_08-01#A001": { "url": "/brokerageMenu/customerMenu/ifaExternalLinkInitializeA001", "method": "post" },
+  "SUB0202_08-01#A003": { "url": "/brokerageMenu/customerMenu/ifaExternalLinkGetNewMainSiteA003", "method": "post" },
+
+  "SUB020301_01-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaJpyAmountUnpaidOverdraftAlertListDisplayA002", "method": "post"},
+  "SUB020301_01-01#A004": { "url": "/brokerageMenu/wholeCustomer/ifaJpyAmountUnpaidOverdraftAlertListTransitionA004", "method": "post"},
+
+  "SUB020301_01-02#A002": { "url": "/brokerageMenu/wholeCustomer/ifaDomesticMarginCollateralDeficientAlertListDisplayA002", "method": "post"},
+
+  "SUB020301_01-03#A002": { "url": "/brokerageMenu/wholeCustomer/ifaForeignAmountUnpaidOverdraftAlertListDisplayA002", "method": "post"},
+
+
+  "SUB020301_01-04#A002": { "url": "/brokerageMenu/wholeCustomer/ifaForeignMarginCollateralDeficientAlertListDisplayA002", "method": "post"},
+
+  "SUB020301_02-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaDomesticMarginPositionDueDateAlertDisplayA002", "method": "post"},
+
+  "SUB020301_02-02#A002": { "url": "/brokerageMenu/wholeCustomer/ifaForeignMarginPositionDueDateAlertDisplayA002", "method": "post"},
+
+  "SUB020301_03-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaMutualFundPriceChangeBrandHoldingListDisplayA002", "method": "post"},
+  "SUB020301_03-01#A004": [{"url": "/brokerageMenu/wholeCustomer/ifaMutualFundPriceChangeBrandHoldingListCsvOutputA004a", "method": "post"}, {"url": "/brokerageMenu/wholeCustomer/ifaMutualFundPriceChangeBrandHoldingListCsvOutputA004b", "method": "post"}],
+
+  "SUB020301_03-01_1#XXX001": { "url": "", "method": "post"},
+  "SUB020301_03-01_1#A001": { "url": "/brokerageMenu/wholeCustomer/ifaResponseStatusUpdateInitializeA001", "method": "post" },
+  "SUB020301_03-01_1#A006": { "url": "/brokerageMenu/wholeCustomer/ifaResponseStatusUpdateResponseStatusUpdateConfirmOkA006", "method": "post" },
+  "SUB020301_03-01_1#XXX999": { "url": "", "method": "post"},
+
+  "SUB020301_03-02#A002": { "url": "/brokerageMenu/wholeCustomer/ifaKnockInBrandHoldingListDisplayA002", "method": "post"},
+  "SUB020301_03-02#A004": [{ "url": "/brokerageMenu/wholeCustomer/ifaKnockInBrandHoldingListGetPDFA004a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaKnockInBrandHoldingListGetPDFA004b", "method": "post"}],
+
+  "SUB020301_03-03#A002": { "url": "/brokerageMenu/wholeCustomer/ifaKnockOutBrandHoldingListDisplayA002", "method": "post"},
+  "SUB020301_03-03#A004": [{ "url": "/brokerageMenu/wholeCustomer/ifaKnockOutBrandHoldingListGetPDFA004a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaKnockOutBrandHoldingListGetPDFA004b", "method": "post"}],
+
+  "SUB020302_0101-01#XXX001": { "url": "", "method": "post"},
+  "SUB020302_0101-01#A001": { "url": "/brokerageMenu/wholeCustomer/ifaOrderListInitializeA001", "method": "post"},
+  "SUB020302_0101-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaOrderListDisplayA002", "method": "post"},
+  "SUB020302_0101-01#A005": [{ "url": "/brokerageMenu/wholeCustomer/ifaOrderListCsvOutputA005a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaOrderListCsvOutputA005b", "method": "post"}],
+  "SUB020302_0101-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB020302_0101-03#XXX001": { "url": "", "method": "post"},
+  "SUB020302_0101-03#A001": { "url": "/brokerageMenu/wholeCustomer/ifaDomesticMutualFundOrderOtherInfoInitializeA001", "method": "post"},
+  "SUB020302_0101-03#XXX999": { "url": "", "method": "post"},
+
+  "SUB020302_0102-01#XXX001": { "url": "", "method": "post"},
+  "SUB020302_0102-01#A002": [{ "url": "/brokerageMenu/wholeCustomer/ifaTodayTradeListDisplayA002a", "method": "post" }, { "url": "/brokerageMenu/wholeCustomer/ifaTodayTradeListDisplayA002b", "method": "post" }],
+  "SUB020302_0102-01#A005": [{ "url": "/brokerageMenu/wholeCustomer/ifaTodayTradeListCsvOutputA005a", "method": "post" }, { "url": "/brokerageMenu/wholeCustomer/ifaTodayTradeListCsvOutputA005b", "method": "post" }],
+  "SUB020302_0102-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB020302_0104-01#A001": { "url": "/brokerageMenu/wholeCustomer/ifaCouponRedemptionPaymentScheduleListInitializeA001", "method": "post"},
+  "SUB020302_0104-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaCouponRedemptionPaymentScheduleListDisplayA002", "method": "post"},
+  "SUB020302_0104-01#A004": [{ "url": "/brokerageMenu/wholeCustomer/ifaCouponRedemptionPaymentScheduleListCsvOutputA004a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaCouponRedemptionPaymentScheduleListCsvOutputA004b", "method": "post"}],
+  "SUB020302_0104-01#A005": { "url": "/brokerageMenu/wholeCustomer/ifaCouponRedemptionPaymentScheduleListStructuredBondBrandInfoA005", "method": "post"},
+
+  "SUB020302_0104-02#A001": { "url": "/brokerageMenu/wholeCustomer/ifaStructuredBondBrandInfoInitializeA001", "method": "post" },
+
+  "SUB020302_0201-01#A001": { "url": "/brokerageMenu/wholeCustomer/ifaTradeHistoryInitializeA001", "method": "post"},
+  "SUB020302_0201-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaTradeHistoryDisplayA002", "method": "post"},
+  "SUB020302_0201-01#A005": [{ "url": "/brokerageMenu/wholeCustomer/ifaTradeHistoryCsvOutputA005", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaTradeHistoryCsvOutputA005b", "method": "post"}],
+
+  "SUB020302_0202-01#A001": { "url": "/brokerageMenu/wholeCustomer/ifaFxTradeHistoryInitializeA001", "method": "post"},
+  "SUB020302_0202-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaFxTradeHistoryDisplayA002", "method": "post"},
+  "SUB020302_0202-01#A004": [{ "url": "/brokerageMenu/wholeCustomer/ifaFxTradeHistoryCsvOutputA004a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaFxTradeHistoryCsvOutputA004b", "method": "post"}],
+
+  "SUB020302_0203-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaDepositWithdrawDetailDisplayA002", "method": "post"},
+  "SUB020302_0203-01#A004": [{ "url": "/brokerageMenu/wholeCustomer/ifaDepositWithdrawDetailCsvOutputA004", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaDepositWithdrawDetailCsvDownloadA004", "method": "post" }],
+
+  "SUB020302_0204-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaDeliverInOutDetailDisplayA002", "method": "post"},
+  "SUB020302_0204-01#A004": [{ "url": "/brokerageMenu/wholeCustomer/ifaDeliverInOutDetailCsvOutputA004", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaDeliverInOutDetailCsvDownloadA004", "method": "post" }],
+
+  "SUB020302_0301-01#XXX001": { "url": "", "method": "post"},
+  "SUB020302_0301-01#A001": { "url": "/brokerageMenu/wholeCustomer/ifaSecurityCashBalanceLookupInitializeA001", "method": "post" },
+  "SUB020302_0301-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaSecurityCashBalanceLookupDisplayA002", "method": "post" },
+  "SUB020302_0301-01#A006": [{ "url": "/brokerageMenu/wholeCustomer/ifaSecurityCashBalanceLookupCsvOutputA006a", "method": "post" }, { "url": "/brokerageMenu/wholeCustomer/ifaSecurityCashBalanceLookupCsvOutputA006b", "method": "post" }],
+  "SUB020302_0301-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB020302_0302-01#A002": [{ "url": "/brokerageMenu/wholeCustomer/ifaMarginPositionListDomesticDisplayA002a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaMarginPositionListDomesticDisplayA002b", "method": "post"}],
+  "SUB020302_0302-01#A004": [{ "url": "/brokerageMenu/wholeCustomer/ifaMarginPositionListDomesticCsvOutputA004a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaMarginPositionListDomesticCsvOutputA004b", "method": "post" }],
+
+  "SUB020302_0303-01#A002": [{ "url": "/brokerageMenu/wholeCustomer/ifaMarginPositionListForeignDisplayA002a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaMarginPositionListForeignDisplayA002b", "method": "post"}],
+  "SUB020302_0303-01#A005": { "url": "/common/brokerMaintenance/ifaForeignPositionDetailInitializeX001", "method": "post" },
+  "SUB020302_0303-01#A006": [{ "url": "/brokerageMenu/wholeCustomer/ifaMarginPositionListForeignCsvOutputA006a", "method": "post"}, { "url": "/brokerageMenu/wholeCustomer/ifaMarginPositionListForeignCsvOutputA006b", "method": "post" }],
+
+  "SUB020302_0401-01#A001": { "url": "/brokerageMenu/wholeCustomer/ifaTradeTrendSearchInitializeA001", "method": "post"},
+  "SUB020302_0401-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaTradeTrendSearchDisplayA002", "method": "post"},
+  "SUB020302_0401-01#A004": [{"url": "/brokerageMenu/wholeCustomer/ifaTradeTrendSearchCsvOutputA004a", "method": "post"}, {"url": "/brokerageMenu/wholeCustomer/ifaTradeTrendSearchCsvOutputA004b", "method": "post"}],
+
+  "SUB020303-01#XXX001": { "url": "", "method": "post"},
+  "SUB020303-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaCustomerDestinationBankAccountDisplayA002", "method": "post" },
+  "SUB020303-01#A004": [{ "url": "/brokerageMenu/wholeCustomer/ifaCustomerDestinationBankAccountCsvOutputA004a", "method": "post" }, { "url": "/brokerageMenu/wholeCustomer/ifaCustomerDestinationBankAccountCsvOutputA004b", "method": "post" }],
+  "SUB020303-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB020304-01#A001": { "url": "/brokerageMenu/wholeCustomer/ifaInquirySearchForManagerInitializeA001", "method": "post" },
+  "SUB020304-01#A002": { "url": "/brokerageMenu/wholeCustomer/ifaInquirySearchForManagerCategoryChangeA002", "method": "post" },
+  "SUB020304-01#A003": { "url": "/brokerageMenu/wholeCustomer/ifaInquirySearchForManagerCategoryChangeA003", "method": "post" },
+  "SUB020304-01#A004": { "url": "/brokerageMenu/wholeCustomer/ifaInquirySearchForManagerDisplayA004", "method": "post" },
+  "SUB020304-01#A006": [{ "url": "/brokerageMenu/wholeCustomer/ifaInquirySearchForManagerCsvOutputA006a", "method": "post" }, { "url": "/brokerageMenu/wholeCustomer/ifaInquirySearchForManagerCsvOutputA006b", "method": "post" }],
+
+  "SUB020305-01#XXX001": { "url": "", "method": "post"},
+  "SUB020305-01#A002": { "url": "/newAccountOpenImcompleteStatus/ifaNewAccountOpenImcompleteStatusDisplayA002", "method": "post" },
+  "SUB020305-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB0204_01-01#A001": { "url": "/brokerageMenu/ipoPo/ifaIpoPoBrandListInitializeA001", "method": "post" },
+  "SUB0204_01-01#A002": { "url": "/brokerageMenu/ipoPo/ifaIpoPoBrandListBbApplicationA002", "method": "post" },
+  "SUB0204_01-01#A004": { "url": "/brokerageMenu/ipoPo/ifaIpoPoBrandListBbSolicitationPeriodMasterRegistrationA004", "method": "post" },
+
+  "SUB0204_01-02_1#XXX001": { "url": "", "method": "post"},
+  "SUB0204_01-02_1#A001": { "url": "/brokerageMenu/ipoPo/ifaBbApplyInputInitializeIpoPoListTransitionA001", "method": "post"},
+  "SUB0204_01-02_1#A002": { "url": "/brokerageMenu/ipoPo/ifaBbApplyInputInitializeCustomerListTransitionA002", "method": "post"},
+  "SUB0204_01-02_1#A003": { "url": "/brokerageMenu/ipoPo/ifaBbApplyInputBrandChangeA003", "method": "post"},
+  "SUB0204_01-02_1#A004": { "url": "/brokerageMenu/ipoPo/ifaBbApplyInputBranchAccountNumberInputA004", "method": "post"},
+  "SUB0204_01-02_1#A005": { "url": "/brokerageMenu/ipoPo/ifaBbApplyInputApplicationConfirmA005", "method": "post"},
+  "SUB0204_01-02_1#XXX999": { "url": "", "method": "post"},
+
+  "SUB0204_01-02_2#XXX001": { "url": "", "method": "post"},
+  "SUB0204_01-02_2#A001": { "url": "/brokerageMenu/ipoPo/ifaBbApplyConfirmApplicationRegistrationA001", "method": "post" },
+  "SUB0204_01-02_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0204_01-02_3#XXX001": { "url": "", "method": "post"},
+  "SUB0204_01-02_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0204_01-03_1#A001": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCsvMassRegisterInitializeA001", "method": "post"},
+  "SUB0204_01-03_1#A003": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCsvMassRegisterConfirmA003", "method": "post"},
+  "SUB0204_01-03_1#A007": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCsvMassRegisterRegisterA007", "method": "post"},
+  "SUB0204_01-03_2#XXX001": { "url": "", "method": "post"},
+  "SUB0204_01-03_2#XXX999": { "url": "", "method": "post"},
+
+  "SUB0204_01-04_1#A001": { "url": "/brokerageMenu/ipoPo/ifaSubscriptPeriodMasterRegisterInputInitializeA001", "method": "post" },
+  "SUB0204_01-04_1#A004": { "url": "/brokerageMenu/ipoPo/ifaSubscriptPeriodMasterRegisterInputOkA004", "method": "post" },
+
+  "SUB0204_02-01#X002": { "url": "/brokerageMenu/ipoPo/ifaBbApplyListDisplayX002", "method": "post" },
+  "SUB0204_02-01#A004": [{ "url": "/brokerageMenu/ipoPo/ifaBbApplyListCsvOutputA004a", "method": "post" }, { "url": "/brokerageMenu/ipoPo/ifaBbApplyListCsvOutputA004b", "method": "post" }],
+  "SUB0204_02-01#A005": { "url": "/brokerageMenu/ipoPo/ifaBbApplyListBbCancellationCorrectionA005", "method": "post" },
+  "SUB0204_02-01#A006": { "url": "/brokerageMenu/ipoPo/ifaBbApplyListSubscriptInputA006", "method": "post" },
+
+  "SUB0204_02-02_1#A001": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCorrectCancelInputInitializeA001", "method": "post" },
+  "SUB0204_02-02_1#A002": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCorrectCancelInputCorrectA002", "method": "post" },
+  "SUB0204_02-02_1#A003": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCorrectCancelInputCancelA003", "method": "post" },
+  "SUB0204_02-02_1#A005": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCorrectCancelInputBackInitializeA005", "method": "post" },
+
+  "SUB0204_02-02_2#A001": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCorrectConfirmApplicationCorrectionA001", "method": "post"},
+
+  "SUB0204_02-03_2#A001": { "url": "/brokerageMenu/ipoPo/ifaBbApplyCancelConfirmApplicationCancellationA001", "method": "post"},
+
+  "SUB0204_02-02_3#XXX001": { "url": "", "method": "post"},
+  "SUB0204_02-02_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0204_02-03_3#XXX001": { "url": "", "method": "post"},
+  "SUB0204_02-03_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0204_02-04_1#A001": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputInitializeA001", "method": "post" },
+  "SUB0204_02-04_1#A002": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmIntermediaryRegistrationAdminCorrectionA002", "method": "post" },
+  "SUB0204_02-04_1#A003": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmIntermediaryCorrectionA003", "method": "post" },
+
+  "SUB0204_02-04_2#A001": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmOrderPlacementBrokerA001", "method": "post" },
+  "SUB0204_02-04_2#A002": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmOrderPlacementManagerA002", "method": "post" },
+  "SUB0204_02-04_2#A003": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmOrderUpdateMnagerA003", "method": "post" },
+  "SUB0204_02-04_2#A004": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmOrderCorrectionManagerA004", "method": "post" },
+  "SUB0204_02-04_2#A005": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmOrderUpdateBrokerA005", "method": "post" },
+  "SUB0204_02-04_2#A006": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmOrderCorrectionBrokerA006", "method": "post" },
+  "SUB0204_02-04_2#A007": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputConfirmOrderCancellationA007", "method": "post" },
+  "SUB0204_02-04_2#A008": { "url": "/brokerageMenu/ipoPo/ifaSubscriptInputBackInitializeA005", "method": "post" },
+
+  "SUB0204_02-04_3#XXX001": { "url": "", "method": "post"},
+  "SUB0204_02-04_3#XXX999": { "url": "", "method": "post"},
+
+  "SUB0204_02-05#A001": { "url": "/brokerageMenu/ipoPo/ifaStarUploadFileOutputListInitializeA001", "method": "post" },
+  "SUB0204_02-05#A002": [{"url": "/brokerageMenu/ipoPo/ifaStarUploadFileOutputListDownloadButtonPressA002a", "method": "post"}, {"url": "/brokerageMenu/ipoPo/ifaStarUploadFileOutputListDownloadButtonPressA002b", "method": "post"}],
+
+  "SUB020501-01#A001": { "url": "/brokerageMenu/commFee/ifaRepCustomerCommListInitializeA001", "method": "post"},
+  "SUB020501-01#A002": { "url": "/brokerageMenu/commFee/ifaRepCustomerCommListDisplayA002", "method": "post"},
+  "SUB020501-01#A004": [{ "url": "/brokerageMenu/commFee/ifaRepCustomerCommListCsvOutputA004a", "method": "post"},{ "url": "/brokerageMenu/commFee/ifaRepCustomerCommListCsvOutputA004b", "method": "post"}],
+
+  "SUB020502-01#A001": { "url": "/brokerageMenu/commFee/ifaCommFeeInitializeA001", "method": "post"},
+  "SUB020502-01#A002": { "url": "/brokerageMenu/commFee/ifaCommFeeDisplayA002", "method": "post"},
+  "SUB020502-01#A004": [{"url": "/brokerageMenu/commFee/ifaCommFeeCsvOutputA004a", "method": "post"}, {"url": "/brokerageMenu/commFee/ifaCommFeeCsvOutputA004b", "method": "post"}],
+
+  "SUB020502-02#A001": { "url": "/brokerageMenu/commFee/ifaOtherFeeDetailInitialDisplayA001", "method": "post"},
+
+  "SUB020503-01#A001": { "url": "/brokerageMenu/commFee/ifaTrustFeeInitializeA001", "method": "post"},
+  "SUB020503-01#A002": { "url": "/brokerageMenu/commFee/ifaTrustFeeDisplayA002", "method": "post"},
+  "SUB020503-01#A004": [{"url": "/brokerageMenu/commFee/ifaTrustFeeCsvOutputA004a", "method": "post"}, {"url": "/brokerageMenu/commFee/ifaTrustFeeCsvOutputA004b", "method": "post"}],
+
+  "SUB020504-01#A002": { "url": "/brokerageMenu/commFee/ifaSbiWrapManageFeeDisplayA002", "method": "post"},
+  "SUB020504-01#A003": [{ "url": "/brokerageMenu/commFee/ifaSbiWrapManageFeeCsvOutputA003", "method": "post"}, { "url": "/brokerageMenu/commFee/ifaSbiWrapManageFeeCsvDownloadA003", "method": "post" }],
+
+  "SUB020505-01#A001": { "url": "/brokerageMenu/commFee/ifaLevelFeeInitializeA001", "method": "post"},
+  "SUB020505-01#A002": { "url": "/brokerageMenu/commFee/ifaLevelFeeDisplayA002", "method": "post"},
+  "SUB020505-01#A004": [{"url": "/brokerageMenu/commFee/ifaLevelFeeCsvOutputA004a", "method": "post"}, {"url": "/brokerageMenu/commFee/ifaLevelFeeCsvOutputA004b", "method": "post"}],
+
+  "SUB0206_01-01#A001": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerManageInitializeA001", "method": "post"},
+  "SUB0206_01-01#A002": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerManageSearchDisplayA002", "method": "post"},
+  "SUB0206_01-01#A005": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerManageConfirmApproveA005", "method": "post"},
+  "SUB0206_01-01#A006": [{ "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerManageCsvOutputA006", "method": "post"}, { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerManageCsvDownloadA006", "method": "post" }],
+  "SUB0206_01-01#A007": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerManageConfirmDeleteA007", "method": "post"},
+  "SUB0206_01-01#A008": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerManageCustomerDetailA008", "method": "post"},
+
+  "SUB0206_01-02#A001": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerNewRegisterInitializeA001", "method": "post"},
+  "SUB0206_01-02#A002": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerNewRegisterConfirmRegisterA002", "method": "post"},
+  "SUB0206_01-02#A004": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerNewRegisterExecuteRegisterA004", "method": "post"},
+
+  "SUB0206_01-03#A001": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerCorrectInitializeA001", "method": "post"},
+  "SUB0206_01-03#A002": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerCorrectConfirmCorrectA002", "method": "post"},
+  "SUB0206_01-03#A004": {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptCustomerCorrectExecuteCorrectA004", "method": "post"},
+
+  "SUB0206_02-01#A001": { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptTradeListInitializeA001", "method": "post"},
+  "SUB0206_02-01#A002": { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptTradeListDisplayA002", "method": "post"},
+  "SUB0206_02-01#A003": [{ "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptTradeListCsvOutputA003", "method": "post"}, { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptTradeListCsvDownloadA003", "method": "post"}],
+
+  "SUB0206_03-01#A001": { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptTrustFeeInitializeA001", "method": "post"},
+  "SUB0206_03-01#A002": { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptTrustFeeDisplayA002", "method": "post"},
+  "SUB0206_03-01#A004": [{"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptTrustFeeCsvOutputA004a", "method": "post"}, {"url": "/brokerageMenu/jointSubscript/ifaJointSubscriptTrustFeeCsvOutputA004b", "method": "post"}],
+
+  "SUB0206_04-01#A001": { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptSecurityCashBalanceLookupInitializeA001", "method": "post" },
+  "SUB0206_04-01#A002": { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptSecurityCashBalanceLookupDisplayA002", "method": "post" },
+  "SUB0206_04-01#A004": [{ "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptSecurityCashBalanceLookupCsvOutputA004a", "method": "post" }, { "url": "/brokerageMenu/jointSubscript/ifaJointSubscriptSecurityCashBalanceLookupCsvOutputA004b", "method": "post" }],
+
+  "SUB0208_01-01#A001": {"url": "/brokerageMenu/jointMarket/ifaJointMarketTradeSearchInitializeA001", "method": "post"},
+  "SUB0208_01-01#A002": { "url": "/brokerageMenu/jointMarket/ifaJointMarketTradeSearchDisplayA002", "method": "post" },
+  "SUB0208_01-01#A004": [{ "url": "/brokerageMenu/jointMarket/ifaJointMarketTradeSearchCsvOutputA004", "method": "post" }, { "url": "/brokerageMenu/jointMarket/ifaJointMarketTradeSearchCsvDownloadA004", "method": "post" } ],
+
+  "SUB0208_02-01#A001": { "url": "/brokerageMenu/jointMarket/ifaJointMarketTrustFeeInitializeA001", "method": "post"},
+  "SUB0208_02-01#A002": { "url": "/brokerageMenu/jointMarket/ifaJointMarketTrustFeeDisplayA002", "method": "post"},
+  "SUB0208_02-01#A004": [{"url": "/brokerageMenu/jointMarket/ifaJointMarketTrustFeeCsvOutputA004a", "method": "post"}, {"url": "/brokerageMenu/jointMarket/ifaJointMarketTrustFeeCsvOutputA004b", "method": "post"}],
+  "SUB0207_0201#A001": { "url": "/onLineAccountOpen/ifaOnLineAccountOpenInitializeA001", "method": "post"},
+
+  "SUB0302-01#XXX001": { "url": "", "method": "post"},
+  "SUB0302-01#A001": { "url": "/infoMenu/ComplianceReport/ifaComplianceReportInitializeA001", "method": "post" },
+  "SUB0302-01#X001": { "url": "/infoMenu/ComplianceReport/ifaComplianceReportDisplayYearMonthChangeX001", "method": "post" },
+  "SUB0302-01#A003": { "url": "/infoMenu/ComplianceReport/ifaComplianceReportConfirmButtonPressA003", "method": "post" },
+  "SUB0302-01#A004": [{ "url": "/infoMenu/ComplianceReport/ifaComplianceReportContentFileA004a", "method": "post" }, { "url": "/infoMenu/ComplianceReport/ifaComplianceReportContentFileA004b", "method": "post" }],
+  "SUB0302-01#A005": [{ "url": "/infoMenu/ComplianceReport/ifaComplianceReportAttachFileA005a", "method": "post" }, { "url": "/infoMenu/ComplianceReport/ifaComplianceReportAttachFileA005b", "method": "post" }],
+  "SUB0302-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB0401_01-01#A001": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaComplianceReportViewStatusLookupInternalAdminInitializeA001", "method": "post" },
+  "SUB0401_01-01#A002": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaComplianceReportViewStatusLookupInternalAdminListDisplayA002", "method": "post" },
+  "SUB0401_01-01#A003": [{ "url": "/internalAdminMenu/monthlyImplementationItem/ifaComplianceReportViewStatusLookupInternalAdminCsvOutputA003a", "method": "post" },{ "url": "/internalAdminMenu/monthlyImplementationItem/ifaComplianceReportViewStatusLookupInternalAdminCsvOutputA003b", "method": "post" }],
+  "SUB0401_01-01#A004": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaComplianceReportViewStatusLookupInternalAdminSearchDisplayPortalA004", "method": "post" },
+
+  "SUB0401_02-01#A001": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaSelfInspectBlotterInitializeA001", "method": "post"},
+  "SUB0401_02-01#A002": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaSelfInspectBlotterDisplayYearMonthChangeA002", "method": "post"},
+  "SUB0401_02-01#A003": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaSelfInspectBlotterTopTransitionA003", "method": "post"},
+  "SUB0401_02-01#A004": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaSelfInspectBlotterRegistrationConfirmA004", "method": "post"},
+  "SUB0401_02-02#A001": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaSelfInspectBlotterRegisterConfirmInitializeA001", "method": "post" },
+  "SUB0401_02-02#A003": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaSelfInspectBlotterRegisterConfirmRegisterA003", "method": "post" },
+  "SUB0401_02-03#A002": { "url": "/internalAdminMenu/monthlyImplementationItem/ifaSelfInspectBlotterReplyConfirmReplyReasonInputCompleteA002", "method": "post" },
+
+  "SUB0401_02-02#XXX001": { "url": "", "method": "post"},
+  "SUB0401_02-02#XXX999": { "url": "", "method": "post"},
+
+  "SUB0401_02-03#XXX001": { "url": "", "method": "post"},
+  "SUB0401_02-03#XXX999": { "url": "", "method": "post"},
+
+  "SUB0402_01-01#XXX001": { "url": "", "method": "post"},
+  "SUB0402_01-01#A001": { "url": "/internalAdminMenu/formAcquire/ifaBrokerageSubLedgerAcquireinitializeA001", "method": "post"},
+  "SUB0402_01-01#A002": { "url": "/internalAdminMenu/formAcquire/ifaBrokerageSubLedgerAcquireDisplayA002", "method": "post"},
+  "SUB0402_01-01#A003": [{ "url": "/internalAdminMenu/formAcquire/ifaBrokerageSubLedgerAcquireDownloadA003a", "method": "post"}, { "url": "/internalAdminMenu/formAcquire/ifaBrokerageSubLedgerAcquireDownloadA003b", "method": "post"}],
+  "SUB0402_01-01#XXX999": { "url": "", "method": "post"},
+
+  "SUB0402_02-01#A001": { "url": "/internalAdminMenu/formAcquire/ifaContractNoteCustomerLedgerAcquireInitializeA001", "method": "post"},
+  "SUB0402_02-01#A002": { "url": "/internalAdminMenu/formAcquire/ifaContractNoteCustomerLedgerAcquireDisplayA002", "method": "post"},
+  "SUB0402_02-01#A003": [{ "url": "/internalAdminMenu/formAcquire/ifaContractNoteCustomerLedgerAcquireGetPDFA003a", "method": "post"}, { "url": "/internalAdminMenu/formAcquire/ifaContractNoteCustomerLedgerAcquireGetPDFA003b", "method": "post"}],
+
+  "SUB0403-01#A001": [{ "url": "/internalAdminMenu/personalInfoManage/ifaPersonalInfoManageLedgerListInitializeA001", "method": "post"}],
+  "SUB0403-01#A002": [{ "url": "/internalAdminMenu/personalInfoManage/ifaPersonalInfoManageLedgerListIfaPersonalInfoManageLedgerOperateManualDownloadA002a", "method": "post"},{ "url": "/internalAdminMenu/personalInfoManage/ifaPersonalInfoManageLedgerListIfaPersonalInfoManageLedgerOperateManualDownloadA002b", "method": "post"}],
+  "SUB0403-01#A003": [{ "url": "/internalAdminMenu/personalInfoManage/ifaPersonalInfoManageLedgerListDisplayA003", "method": "post"}],
+  "SUB0403-01#A005": [{ "url": "/internalAdminMenu/personalInfoManage/ifaPersonalInfoManageLedgerListCsvOutputA005a", "method": "post"},{ "url": "/internalAdminMenu/personalInfoManage/ifaPersonalInfoManageLedgerListCsvOutputA005b", "method": "post"}],
+  "SUB0403-01#A006": [{ "url": "/internalAdminMenu/personalInfoManage/ifaPersonalInfoManageLedgerListOkA006", "method": "post"}],
+
+  "SUB0404-01#A002": { "url": "/internalAdminMenu/authMailAddressChange/ifaAuthMailAddressChangeListDisplayA002", "method": "post"},
+  "SUB0404-01#A003": { "url": "/internalAdminMenu/authMailAddressChange/ifaAuthMailAddressChangeListUpdateA003", "method": "post"},
+
+  "SUB0404-02_1#A004": { "url": "/internalAdminMenu/authMailAddressChange/ifaAuthMailAddressUpdateOkA004", "method": "post"},
+
+  "SUB0405-01#A001": { "url": "/internalAdminMenu/payNotificationDocDownload/ifaPayNotificationDocDownloadInitializeA001", "method": "post"},
+  "SUB0405-01#A002": { "url": "/internalAdminMenu/payNotificationDocDownload/ifaPayNotificationDocDownloadDisplayA002", "method": "post"},
+  "SUB0405-01#A003": [{ "url": "/internalAdminMenu/payNotificationDocDownload/ifaPayNotificationDocDownloadPdfDownloadA003a", "method": "post"}, { "url": "/internalAdminMenu/payNotificationDocDownload/ifaPayNotificationDocDownloadPdfDownloadA003b", "method": "post"}],
+
+  "SUB0406-01#A001": { "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaByYearAccountQuantityFeeAmountLookupInitializeA001", "method": "post" },
+  "SUB0406-01#A002": { "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaByYearAccountQuantityFeeAmountLookupDisplayA002", "method": "post" },
+  "SUB0406-01#A004": [{ "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaByYearAccountQuantityFeeAmountLookupCsvOutputA004", "method": "post" }, { "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaByYearAccountQuantityFeeAmountLookupCsvDownloadA004", "method": "post" }],
+  "SUB0406-01#A005": { "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaByYearAccountQuantityFeeAmountLookupGetClosingMonthA005", "method": "post" },
+  "SUB0406-01#A007": [{ "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaByYearAccountQuantityFeeAmountLookupCsvOutputA007", "method": "post" }, { "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaByYearAccountQuantityFeeAmountLookupCsvDownloadA007", "method": "post" }],
+  "SUB0406-01_01#A001": { "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaBrokerCodeClosingMonthLoginInitializeA001", "method": "post" },
+  "SUB0406-01_01#A004": { "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaBrokerCodeClosingMonthLoginGetBrokerNameClosingMonthA004", "method": "post" },
+  "SUB0406-01_01#A006": { "url": "/internalAdminMenu/byYearAccountQuantityFeeAmountLookup/ifaBrokerCodeClosingMonthLoginUpdateBrokerCodeClosingMonthA006", "method": "post" },
+
+  "SUB0407_01#A001": { "url": "/internalAdminMenu/monthCustomerNum/ifaMonthCustomerNumInitializeA001", "method": "post"},
+  "SUB0407_01#A002": { "url": "/internalAdminMenu/monthCustomerNum/ifaMonthCustomerNumDisplayA002", "method": "post"},
+  "SUB0407_01#A004": [{ "url": "/internalAdminMenu/monthCustomerNum/ifaMonthCustomerNumCsvOutputA004", "method": "post"}, { "url": "/internalAdminMenu/monthCustomerNum/ifaMonthCustomerNumCsvDownloadA004", "method": "post"}],
+  "SUB0407_01#A005": [{ "url": "/internalAdminMenu/monthCustomerNum/ifaBrokerCustomerCsvOutputA005", "method": "post"}, { "url": "/internalAdminMenu/monthCustomerNum/ifaBrokerCustomerCsvDownloadA005", "method": "post"}],
+
+  "SUB0501_01-01#A001": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoRegisterLookupInitializeA001", "method": "post"},
+  "SUB0501_01-01#X001": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoRegisterLookupSearchDisplayX001", "method": "post"},
+  "SUB0501_01-01#A009": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoRegisterLookupDeleteA009", "method": "post"},
+
+  "SUB0501_01-02_1#A001": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoNewRegisterInitializeA001", "method": "post" },
+  "SUB0501_01-02_1#A008A": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoNewRegisterRegisterA008a", "method": "post" },
+  "SUB0501_01-02_1#A008B": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoNewRegisterRegisterA008b", "method": "post" },
+
+  "SUB0501_01-03_1#A001": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoUpdateInitializeA001", "method": "post" },
+  "SUB0501_01-03_1#A002": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoUpdateResetA002", "method": "post" },
+  "SUB0501_01-03_1#A008A": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoUpdateUpdateA008a", "method": "post" },
+  "SUB0501_01-03_1#A008B": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoUpdateUpdateA008b", "method": "post" },
+
+  "SUB0501_01-04#A002": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoRegisterViewerSettingInitializeInfoUpdateA002", "method": "post" },
+  "SUB0501_01-04#A009": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoRegisterViewerSettingIntermediarySearchA009", "method": "post" },
+  "SUB0501_01-04#A012": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoRegisterViewerSettingPersonInChargeListDisplayA012", "method": "post" },
+  "SUB0501_01-04#A016": { "url": "/companyEmployeeMenu/infoRegister/ifaInfoRegisterViewerSettingPersonInChargeSearchA016", "method": "post" },
+
+  "SUB0501_01-05#XXX001": { "url": "", "method": "post"},
+  "SUB0501_01-05#A001": { "url": "/companyEmployeeMenu/infoRegister/ifaNotificationViewStatusLookupInitializeA001", "method": "post" },
+  "SUB0501_01-05#A003": { "url": "/companyEmployeeMenu/infoRegister/ifaNotificationViewStatusLookupProxyOpeningOkA003", "method": "post" },
+  "SUB0501_01-05#A005": { "url": "/companyEmployeeMenu/infoRegister/ifaNotificationViewStatusLookupDeleteOkA005", "method": "post" },
+  "SUB0501_01-05#A006": [{"url": "/companyEmployeeMenu/infoRegister/ifaNotificationViewStatusLookupCsvDownloadA006a", "method": "post"}, {"url": "/companyEmployeeMenu/infoRegister/ifaNotificationViewStatusLookupCsvDownloadA006b", "method": "post"}],
+  "SUB0501_01-05#XXX999": { "url": "", "method": "post"},
+
+  "SUB0501_02#A001": { "url": "/companyEmployeeMenu/infoRegister/ifaDocClassListCategoryListA001", "method": "post" },
+  "SUB0501_02#A002": { "url": "/companyEmployeeMenu/infoRegister/ifaDocClassListCategoryRegistrationConfirmA002", "method": "post" },
+  "SUB0501_02#A003": { "url": "/companyEmployeeMenu/infoRegister/ifaDocClassListCategoryRegistrationA003", "method": "post" },
+  "SUB0501_02#A004": { "url": "/companyEmployeeMenu/infoRegister/ifaDocClassListCategoryUpdateConfirmA004", "method": "post" },
+  "SUB0501_02#A005": { "url": "/companyEmployeeMenu/infoRegister/ifaDocClassListCategoryUpdateA005", "method": "post" },
+  "SUB0501_02#A006": { "url": "/companyEmployeeMenu/infoRegister/ifaDocClassListCategoryDeletionConfirmA006", "method": "post" },
+  "SUB0501_02#A007": { "url": "/companyEmployeeMenu/infoRegister/ifaDocClassListCategoryDeletionA007", "method": "post" },
+
+  "SUB0505_01-01#A001": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoRegisterManagerInitializeA001", "method": "post" },
+  "SUB0505_01-01#A003": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoRegisterManagerStateA003", "method": "post" },
+  "SUB0505_01-01#A010": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoRegisterManagerDeleteA010", "method": "post" },
+
+  "SUB0504_02-01#A002": { "url": "/companyEmployeeMenu/tradeDataManage/ifaEdelivAgreementDataRegisterConfirmA002", "method": "post"},
+  "SUB0504_02-01#A003": { "url": "/companyEmployeeMenu/tradeDataManage/ifaEdelivAgreementDataRegisterRegisterA003", "method": "post"},
+  "SUB0504_04-01#A001": { "url": "/companyEmployeeMenu/tradeDataManage/ifaForeignBondBuyAmountInputListInitializeA001", "method": "post"},
+  "SUB0504_04-01#A004": {"url": "/companyEmployeeMenu/tradeDataManage/ifaForeignBondBuyAmountInputListDeleteA004", "method": "post"},
+  "SUB0504_04-02_1#A003": { "url": "/companyEmployeeMenu/tradeDataManage/ifaForeignBondBuyAmountInputInfoRegisterNameKanjiInputA003", "method": "post" },
+  "SUB0504_04-02_1#A005": { "url": "/companyEmployeeMenu/tradeDataManage/ifaForeignBondBuyAmountInputInfoRegisterInsertA005", "method": "post" },
+
+  "SUB0505_01-03_1#A002": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoRegisterRegistrationConfirmA002", "method": "post"},
+  "SUB0505_01-03_1#A006a": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoRegisterRegisterA006a", "method": "post"},
+  "SUB0505_01-03_1#A006b": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoRegisterRegisterA006b", "method": "post"},
+
+  "SUB0505_01-04_1#A001": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoUpdateInitializeA001", "method": "post"},
+  "SUB0505_01-04_1#A003": { "url": "/companyEmployeeMenu/complianceReport/checkSpecialCharactersA003", "method": "post"},
+  "SUB0505_01-04_1#A007a": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoUpdateUpdateA007a", "method": "post"},
+  "SUB0505_01-04_1#A007b": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportInfoUpdateUpdateA007b", "method": "post"},
+
+  "SUB0505_02-01#A001": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportViewStatusLookupManagerInitializeA001", "method": "post" },
+  "SUB0505_02-01#A002": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportViewStatusLookupManagerListDisplayA002", "method": "post" },
+  "SUB0505_02-01#A003": [{ "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportViewStatusLookupManagerCsvOutputA003a", "method": "post" }, { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportViewStatusLookupManagerCsvOutputA003b", "method": "post" }],
+  "SUB0505_02-01#A005": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportViewStatusLookupManagerNoNeedToViewSettingA005", "method": "post" },
+  "SUB0505_02-01#A007": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportViewStatusLookupManagerSearchDisplayPortalA007", "method": "post" },
+  "SUB0505_02-01#A008": { "url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportViewStatusLookupManagerViewReportA008", "method": "post" },
+
+
+  "SUB0505_03-01#A002": {"url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportBrokerBlockViewExcludeSettingAllBrokerNameDisplayA002", "method": "post"},
+  "SUB0505_03-01#A003": {"url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportBrokerBlockViewExcludeSettingSearchDisplayA003", "method": "post"},
+  "SUB0505_03-01#A004": {"url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportBrokerBlockViewExcludeSettingRegisterA004", "method": "post"},
+  "SUB0505_03-01#A005": {"url": "/companyEmployeeMenu/complianceReport/ifaComplianceReportBrokerBlockViewExcludeSettingRegistrationCancellationA005", "method": "post"},
+
+  "SUB0506_01-01#A001": { "url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectBlotterConfirmManagerInitializeA001", "method": "post" },
+  "SUB0506_01-01#A002": { "url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectBlotterConfirmManagerAllBrokerNameDisplayA002", "method": "post" },
+  "SUB0506_01-01#A003": { "url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectBlotterConfirmManagerSearchDisplayA003", "method": "post" },
+  "SUB0506_01-01#A004": [{ "url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectBlotterConfirmManagerCsvOutputA004", "method": "post" }, { "url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectBlotterConfirmManagerCsvDownloadA004", "method": "post" } ],
+
+  "SUB0506_01-02#A001": { "url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectBlotterDetailInitializeA001", "method": "post" },
+
+  "SUB0506_02-01#A001": {"url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectItemManageInitializeA001", "method": "post"},
+  "SUB0506_02-01#A002": {"url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectItemManageDisplayYearMonthChangeA002", "method": "post"},
+  "SUB0506_02-01#A003": {"url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectItemManageSearchDisplayA003", "method": "post"},
+  "SUB0506_02-01#A009": {"url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectItemManageUpdateA009", "method": "post"},
+  "SUB0506_02-01#A010": {"url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectItemManageDeleteA010", "method": "post"},
+  "SUB0506_02-01#A012": {"url": "/companyEmployeeMenu/selfInspect/ifaSelfInspectItemManageFileImportA012", "method": "post"},
+
+  "SUB0511_01-01#X001": { "url": "/suggestionBox/ifaSuggestionBoxPersonalFromBrokerInitializeX001", "method": "post"},
+  "SUB0511_01-01#A002": { "url": "/suggestionBox/ifaSuggestionBoxPersonalFromBrokerDisplayA002", "method": "post"},
+  "SUB0511_01-01#A006": [{ "url": "/suggestionBox/ifaSuggestionBoxPersonalCsvOutputA006a", "method": "post"}, { "url": "/suggestionBox/ifaSuggestionBoxPersonalCsvOutputA006b", "method": "post"}],
+
+  "SUB0511_01-02#A001": { "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailFromBrokerInitializeA001", "method": "post"},
+  "SUB0511_01-02#A002": [{ "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailFromBrokerDownloadA002a", "method": "post" }, { "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailFromBrokerDownloadA002b", "method": "post" }],
+  "SUB0511_01-02#A006": { "url": "/suggestionBox/ifaSuggestionBoxPersonalDetailFromBrokerRegisterA006", "method": "post"},
+
+  "SUB0511_02-01#A001": { "url": "/suggestionBox/ifaSuggestionBoxCommonHeadOfficerA001", "method": "post"},
+  "SUB0511_02-01#A002": { "url": "/suggestionBox/ifaSuggestionBoxCommonHeadOfficerA002", "method": "post"},
+
+  "SUB0511_02-02#A007A": { "url": "/suggestionBox/ifaSuggestionBoxCommonRegisterRegisterA007a", "method": "post"},
+  "SUB0511_02-02#A007B": { "url": "/suggestionBox/ifaSuggestionBoxCommonRegisterRegisterA007b", "method": "post"},
+
+  "SUB0511_02-03#A001": { "url": "/suggestionBox/ifaSuggestionBoxCommonUpdateInitializeA001", "method": "post"},
+  "SUB0511_02-03#A003": [{ "url": "/suggestionBox/ifaSuggestionBoxCommonUpdateDownloadA003a", "method": "post" }, { "url": "/suggestionBox/ifaSuggestionBoxCommonUpdateDownloadA003b", "method": "post" }],
+  "SUB0511_02-03#A009A": { "url": "/suggestionBox/ifaSuggestionBoxCommonUpdateUpdateA009a", "method": "post"},
+  "SUB0511_02-03#A009B": { "url": "/suggestionBox/ifaSuggestionBoxCommonUpdateUpdateA009b", "method": "post"},
+  
+  "SUB0513_01-01#A002": { "url": "/companyEmployeeMenu/jointContract/ifaJointContractMasterAllBrokerNameDisplayA002", "method": "post" },
+  "SUB0513_01-01#A003": { "url": "/companyEmployeeMenu/jointContract/ifaJointContractMasterSearchDisplayA003", "method": "post" },
+  "SUB0513_01-01#A006": { "url": "/companyEmployeeMenu/jointContract/ifaJointContractMasterUpdateA006", "method": "post" },
+  "SUB0513_01-01#A008": { "url": "/companyEmployeeMenu/jointContract/ifaJointContractMasterDeleteA008", "method": "post" },
+
+  
+  "SUB0513_01-02#A004": { "url": "/companyEmployeeMenu/jointContract/ifaJointContractMasterNewRegisterInsertConfirmA004", "method": "post" },
+  "SUB0513_01-02#A005": { "url": "/companyEmployeeMenu/jointContract/ifaJointContractMasterNewRegisterInsertA005", "method": "post" },
+
+  "SUB0512-01#A001": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteEmployeeInitializeA001", "method": "post"},
+  "SUB0512-01#A002": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteEmployeeSelectDisplayYearA002", "method": "post"},
+  "SUB0512-02#A006": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteRegisterConfirmA006", "method": "post"},
+  "SUB0512-02#A007A": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteRegisterA007a", "method": "post"},
+  "SUB0512-02#A007B": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteRegisterA007b", "method": "post"},
+  "SUB0512-03#A001": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteUpdateInitializeA001", "method": "post"},
+  "SUB0512-03#A004": [{ "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteUpdateDownloadA004a", "method": "post"}, { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteUpdateDownloadA004b", "method": "post"}],
+  "SUB0512-03#A008": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteUpdateConfirmA008", "method": "post"},
+  "SUB0512-03#A009A": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteUpdateUpdateA009a", "method": "post"},
+  "SUB0512-03#A009B": { "url": "/companyEmployeeMenu/releaseNote/ifaReleaseNoteUpdateUpdateA009b", "method": "post"},
+
+  "SUB0601_01-01#A001": { "url": "/systemManageMenu/loginUserManage/ifaLoginUserManageManagerLookupInitialDisplayA001", "method": "post"},
+  "SUB0601_01-01#A002": { "url": "/systemManageMenu/loginUserManage/ifaLoginUserManageManagerLookupSearchA002", "method": "post"},
+  "SUB0601_01-01#A003": { "url": "/systemManageMenu/loginUserManage/ifaLoginUserManageManagerLookupLoginIdNewRegisterA003", "method": "post"},
+  "SUB0601_01-01#A004": { "url": "/systemManageMenu/loginUserManage/ifaLoginUserManageManagerLookupLoginIdUpdateRegisterA004", "method": "post"},
+  "SUB0601_01-01#A006": { "url": "/systemManageMenu/loginUserManage/ifaLoginUserManageManagerLookupRepAddA006", "method": "post"},
+  "SUB0601_01-01#A007": { "url": "/systemManageMenu/loginUserManage/ifaLoginUserManageManagerLookupDeleteA007", "method": "post"},
+
+  "SUB0601_01-02_1#A001": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdNewRegisterInitialDisplayA001", "method": "post" },
+  "SUB0601_01-02_1#A002": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdNewRegisterAffiliationAuthorityUpdateA002", "method": "post" },
+  "SUB0601_01-02_1#A003": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdNewRegisterHeadOfficeNameUpdateA003", "method": "post" },
+  "SUB0601_01-02_1#A004": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdNewRegisterBrokerNameUpdateA004", "method": "post" },
+  "SUB0601_01-02_1#A005": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdNewRegisterBrokerBranchNameUpdateA005", "method": "post" },
+  "SUB0601_01-02_1#A006": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdNewRegisterResetA006", "method": "post" },
+  "SUB0601_01-02_1#A011": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdNewRegisterRegistrationOkA011", "method": "post" },
+
+  "SUB0601_01-03_1#A001": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdUpdateRegisterInitialDisplayA001", "method": "post" },
+  "SUB0601_01-03_1#A002": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdUpdateRegisterAffiliationAuthorityUpdateA002", "method": "post" },
+  "SUB0601_01-03_1#A003": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdUpdateRegisterHeadOfficeNameUpdateA003", "method": "post" },
+  "SUB0601_01-03_1#A004": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdUpdateRegisterBrokerNameUpdateA004", "method": "post" },
+  "SUB0601_01-03_1#A005": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdUpdateRegisterBrokerBranchNameUpdateA005", "method": "post" },
+  "SUB0601_01-03_1#A006": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdUpdateRegisterResetA006", "method": "post" },
+  "SUB0601_01-03_1#A014": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdUpdateRegisterUpdateOkA014", "method": "post" },
+  "SUB0601_01-03_1#A014_DeleteCcsData": { "url": "/systemManageMenu/loginUserManage/ifaLoginIdUpdateRegisterDeleteCcsData", "method": "post" },
+
+  "SUB0601_01-06_1#A001": { "url": "/systemManageMenu/loginUserManage/ifaRepAddInitialDisplayA001", "method": "post"},
+  "SUB0601_01-06_1#A002": { "url": "/systemManageMenu/loginUserManage/ifaRepAddBrokerNameUpdateA002", "method": "post"},
+  "SUB0601_01-06_1#A003": { "url": "/systemManageMenu/loginUserManage/ifaRepAddBrokerBranchNameUpdateA003", "method": "post"},
+  "SUB0601_01-06_1#A005": { "url": "/systemManageMenu/loginUserManage/ifaRepAddAddA005", "method": "post"},
+  "SUB0601_01-06_1#A006": { "url": "/systemManageMenu/loginUserManage/ifaRepAddAdditionOkA006", "method": "post"},
+
+  "SUB0601_01-06_1#A008": { "url": "/systemManageMenu/loginUserManage/ifaRepAddBranchNameUpdateA008", "method": "post"},
+
+  "SUB0602-01#A002": { "url": "/systemManageMenu/portalNotification/ifaPortalNotificationManagerLookupDisplayA002", "method": "post"},
+  "SUB0602-01#A008": { "url": "/systemManageMenu/portalNotification/ifaPortalNotificationManagerLookupPortalNoticeDeletionConfirmOkA008", "method": "post"},
+
+  "SUB0602-02_1#A007": { "url": "/systemManageMenu/portalNotification/ifaPortalNotificationNewRegisterPortalNoticeNewRegistrationOkA007", "method": "post" },
+
+  "SUB0602-04_1#A001": { "url": "/systemManageMenu/portalNotification/ifaPortalNotificationUpdateInitializeA001", "method": "post" },
+  "SUB0602-04_1#A004": { "url": "/systemManageMenu/portalNotification/ifaPortalNotificationUpdateResetA004", "method": "post" },
+  "SUB0602-04_1#A007": { "url": "/systemManageMenu/portalNotification/ifaPortalNotificationUpdatePortalNoticeUpdateConfirmOkA007", "method": "post" },
+
+  "SUB07-01#A001": { "url": "/common/ifaAddressSearch", "method": "post" },
+  "SUB07-03_1#A002": { "url": "/common/ifaBrandNameSearch", "method": "post" },
+
+  "SUB07-04#A002": { "url": "/common/brokerMaintenance/ifaForeignStockBrandSearchPopupSearchA002", "method": "post" },
+
+  "SUB07-05#X001": { "url": "/common/brokerMaintenance/ifaDomesticPositionDetailInitializeX001", "method": "post"},
+
+  "SUB07-06#X001": { "url": "/common/brokerMaintenance/ifaForeignPositionDetailInitializeX001", "method": "post"},
+
+  "SUB08-01#A001": { "url": "/sss/ifaSssLoginInitializeA001", "method": "post"},
+
+  "ZZZZZZZZZZZZ#XXX999": { "url": "", "method": ""}
+
+}

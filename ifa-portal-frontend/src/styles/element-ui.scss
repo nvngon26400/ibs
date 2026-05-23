@@ -1,0 +1,490 @@
+/*
+* ###
+*  Element UIスタイル上書き用SCSSファイル。
+* ###
+*/
+
+// 共通変数定義のimport。
+@import "./variables.scss";
+
+/* フレームワーク(Element-Admin)デフォルト指定値*/
+// refine element ui upload
+.el-upload {
+  input[type="file"] {
+    display: none !important;
+  }
+}
+
+.el-upload__input {
+  display: none;
+}
+.upload-container {
+  .el-upload {
+    width: 100%;
+
+    .el-upload-dragger {
+      width: 100%;
+      height: 200px;
+    }
+  }
+}
+/* el-row*/
+.el-row {
+  width: 100%;
+}
+
+/* ドロップダウンメニュー*/
+.el-dropdown-menu {
+  a {
+    display: block;
+  }
+}
+
+// to fix el-date-picker css style
+.el-range-separator {
+  box-sizing: content-box;
+}
+
+/* フレームワーク(Element-Admin)デフォルト指定値(ダイアログコンポーネント)*/
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  // margin: 0 auto;
+  max-height: 90%;
+  margin-top: 3%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ヘッダ パンくずリスト*/
+.el-breadcrumb__inner,
+.el-breadcrumb__inner a {
+  font-weight: 400;
+  color: #fff;
+}
+.el-breadcrumb__separator {
+  color: #fff;
+}
+
+/* テーブル(el-table) */
+.el-table {
+  font-size: $fontsize-nomal;
+}
+.el-table th,
+.el-table th.el-table__cell {
+  background-color: $horizontalTableHeaderColor;
+  color: #fff;
+}
+.el-table td {
+  height: 20px;
+}
+
+.el-table td,
+.el-table th {
+  padding: 0.1rem 0;
+}
+
+// 行ホバー時の背景色変更抑止。
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: unset;
+}
+
+/* 入力項目 */
+::placeholder {
+  color: $mainRuledLineColor;
+}
+.el-input__wrapper {
+  border: 1px solid $mainRuledLineColor;
+  height: 32px;
+}
+.el-input__inner,
+.el-range-input {
+  font-size: $fontsize-large;
+}
+
+.el-input.is-disabled .el-input__inner {
+  background-color: $disabledInputColor;
+}
+
+.ifa-input__text-default > .el-input__inner[readonly] {
+  background-color: $subBackGroundColor;
+}
+
+.ifa-input__text-default > .el-input__inner[readonly]:hover {
+  cursor: default;
+}
+
+.ifa-input__text-default > .el-input__inner[readonly]:focus {
+  border-color: #dcdfe6;
+}
+
+/* el-select */
+.el-select .el-input .el-select__caret {
+  color: $subBlueColor;
+  font-size: $fontsize-large;
+  font-weight: bold;
+}
+
+.el-select .el-input.is-disabled .el-select__caret {
+  color: $mainRuledLineColor;
+  font-size: $fontsize-large;
+  font-weight: bold;
+}
+
+.el-select-dropdown__item.selected {
+  // color: $subBlueColor;
+  &::after {
+    display: none;
+  }
+}
+
+/* カードコンポーネント */
+.el-card__body {
+  padding: 5px;
+}
+
+.el-row:has(.el-card) {
+  & div:has(.el-row):not(.el-dialog) {
+    width: 100%;
+  }
+}
+
+.el-card.is-always-shadow {
+  box-shadow: 0 4px 5px 0 rgb(184, 192, 207, 1);
+}
+
+.el-card:has(.pq-grid),
+.el-card__body:has(.pq-grid),
+.pq-grid {
+  width:100% !important
+}
+
+/* el-button */
+
+.el-button {
+  border-color: $mainBlueColor;
+  color: $mainBlueColor;
+
+  &.el-button--small {
+    height: 30px !important;
+    font-size: 14px !important;
+  }
+}
+
+.el-button--primary {
+  color: #fff;
+  background-color: $mainBlueColor;
+  border-color: $mainBlueColor;
+  font-size: $fontsize-nomal;
+}
+
+// .el-button--primary.is-plain {
+//   color: #1da6c6;
+//   background: #ecf5ff;
+//   border-color: #1da6c6;
+// }
+.el-table .cell {
+  line-height: 14px;
+}
+
+.el-button.is-disabled {
+  color: #676b74;
+  background-color: #f5f6f7;
+  border-color: $mainRuledLineColor;
+}
+
+// .el-button--primary.is-plain.is-disabled {
+//   color: #1da7c667;
+//   background: #ecf5ff;
+//   border-color: #1da7c667;
+// }
+
+/* Tab */
+.el-tabs__header {
+  margin: unset;
+}
+.el-tabs__item.is-top.is-active {
+  background-color: $subBlueColor !important;
+  color: #fff !important;
+}
+.el-tabs__nav-wrap {
+  border-bottom: 4px solid $subBlueColor;
+  .el-tabs__active-bar {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+.el-tabs__nav {
+  height: 2rem;
+  width: 4rem;
+  background-color: $mainBackGroundColor !important;
+}
+.el-tabs--border-card > .el-tabs__header {
+  background-color: #fff !important;
+}
+.el-tabs__item {
+  line-height: 2rem;
+  text-align: center;
+  color: $subBlueColor !important;
+  background-color: #fff !important;
+  border: 1px solid $subBlueColor !important;
+  margin-top: 2px !important;
+  margin-right: 2px !important;
+  margin-left: 1px !important;
+  border-radius: 2px 2px 0px 0px !important;
+
+  // 三点リーダーによる省略設定。(仮案)
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:hover {
+    background-color: $hoverBackGroundColor !important;
+  }
+}
+
+.el-tabs--border-card {
+  border: unset;
+}
+
+.el-tabs--border-card > .el-tabs__content {
+  padding: 5px;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  border-top: solid 3px $subBlueColor;
+  border-right: solid 1px $mainRuledLineColor;
+  border-bottom: solid 1px $mainRuledLineColor;
+  border-left: solid 1px $mainRuledLineColor;
+  background-color: #fff;
+}
+
+.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-disabled {
+  background-color: $mainBackGroundColor !important;
+  color: $subTextColor !important;
+  border: 1px solid $mainRuledLineColor !important;
+}
+// Form
+
+.el-form-item {
+  margin-bottom: 5px;
+}
+
+.el-form {
+  --ifa-input-validation-error-width: 200px;
+  .el-form-item__content {
+    display: block;
+    .el-form-item__error {
+      position: unset;
+      display: table;
+      width: var(--ifa-input-validation-error-width);
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+  }
+  }
+.el-form-item__label {
+  margin: 0.1rem 0.5rem;
+  height: 25px;
+  line-height: unset;
+}
+// フォームアイテムを左寄せで表示した時の必須の * の位置を調整する
+.el-form.el-form--label-left {
+  .el-form-item.asterisk-left {
+    --el-form-item__label--padding-left: calc(var(--font-size) * .75);
+    &.is-required {
+      --el-form-item__label--padding-left: 0;
+    }
+    .el-form-item__label {
+        padding-left: var(--el-form-item__label--padding-left);
+    }
+  }
+}
+
+.el-input--mini .el-input__inner {
+  font-size: 14px;
+}
+
+/* ポップオーバー(ツールチップ用途)箇所 */
+.el-popper.is-light{
+  border: 1px solid $subBlueColor;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0 4px 5px 0 rgb(184, 192, 207, 1);
+  border: 1px solid $subBlueColor;
+  opacity: 1;
+  color: $mainTextColor;
+}
+.el-popper.is-light .el-popper__arrow::before {
+  border: 1px solid $subBlueColor
+}
+
+/* icons */
+.el-icon-info {
+  color: $subBlueColor;
+}
+
+.el-icon-info:hover {
+  color: $subBlueColor;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+/* 折り畳み定義 */
+.el-collapse {
+  border: unset;
+}
+.el-collapse-item__wrap {
+  border: unset;
+}
+
+/* トグルスイッチ */
+.el-switch.is-checked .el-switch__core {
+  border-color: $subBackGroundColor;
+  background-color: $subBlueColor;
+}
+
+.el-switch__label {
+  color: $subBlueColor;
+  &.is-active {
+    color: $subBlueColor;
+  }
+}
+
+// .el-radio__original {
+//   opacity: 1 !important;
+//   z-index: unset !important;
+// }
+
+.el-radio__input {
+  &.is-disabled + span.el-radio__label {
+    color: $subTextColor;
+  }
+  .el-radio__inner:hover {
+    border-color: #dcdfe6;
+  }
+  &.is-checked + .el-radio__label {
+    color: $mainTextColor;
+  }
+  &.is-checked {
+    .el-radio__inner {
+      background: #fff;
+      border-color: $mainRuledLineColor;
+    }
+  }
+  .el-radio__inner::after {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: $subBlueColor;
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: $subBlueColor;
+  border-color: $subBlueColor;
+}
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: $mainTextColor;
+}
+
+.el-form-item__label,
+.el-checkbox,
+.el-radio,
+.el-input__inner {
+  color: $mainTextColor;
+}
+
+.el-checkbox__input.is-disabled + span.el-checkbox__label {
+  color: $subTextColor;
+}
+
+/* ラジオボタン */
+.el-radio-button__orig-radio:checked + .el-radio-button__inner {
+  background-color: $subBlueColor;
+  border-color: $subBlueColor;
+}
+
+.el-radio-button__inner {
+  color: $mainTextColor;
+}
+
+/* Nav Menu */
+
+.el-menu--horizontal {
+  height: 30px;
+  span {
+    .el-sub-menu__icon-arrow {
+      right: -2px;
+    }
+  }
+  .el-menu--popup {
+    .el-menu-item {
+      &.is-active {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .el-menu .el-menu-item {
+    color: $mainBlueColor;
+    &:hover {
+      color: $subBlueColor;
+      background-color: #fff;
+      opacity: 0.7;
+      text-decoration: underline;
+      text-decoration-color: rgba(9, 41, 135, 0.7);
+    }
+    &.is-active {
+      color: $subBlueColor;
+      font-weight: bold;
+    }
+  }
+
+  .el-menu-item {
+    line-height: 30px;
+    height: 30px;
+    color: $mainBlueColor;
+    &.is-active {
+      border-bottom: 2px solid $mainBlueColor;
+      color: $subBlueColor;
+      font-weight: bold;
+    }
+    &:not(.is-disabled):focus,
+    &:not(.is-disabled):hover {
+      color: $subBlueColor;
+      opacity: 0.7;
+      text-decoration: underline;
+      text-decoration-color: rgba(9, 41, 135, 0.7);
+    }
+  }
+  .el-sub-menu .el-sub-menu__title {
+    line-height: 30px;
+    height: 30px;
+    color: $mainBlueColor;
+    &:hover {
+      color: $subBlueColor !important;
+      background-color: #e6e8f0 !important;
+    }
+  }
+  & .el-sub-menu.is-active .el-sub-menu__title {
+    border-bottom: 2px solid $mainBlueColor;
+    color: $subBlueColor;
+    font-weight: bold;
+  }
+}
+/* collapse*/
+.el-collapse-item__arrow.is-active {
+  // OPEN時の矢印は上向き
+  transform: rotate(-90deg);
+}
+
+.el-link.el-link--primary {
+  color: $mainBlueColor;
+}
+.el-link.el-link--primary:hover {
+  color: $mainBlueColor;
+  opacity: 0.7;
+}

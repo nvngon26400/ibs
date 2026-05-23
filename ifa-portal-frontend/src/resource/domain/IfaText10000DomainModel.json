@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT10000",
+  "domainName": "テキスト10000",
+  "dataType": "文字列",
+  "precision": 10000,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 10000,
+  "verticalAlign": "T",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

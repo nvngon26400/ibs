@@ -1,0 +1,28 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "complianceReportList": [
+                {
+                    "titleDesc": " ",
+                    "titleValue": " "
+                },
+                {
+                    "titleDesc": "11",
+                    "titleValue": "11"
+                },
+                {
+                    "titleDesc": "2",
+                    "titleValue": "2"
+                }
+            ]
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/01/23 14:45:15",
+    "title": null,
+    "returnCode": "0"
+}

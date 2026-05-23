@@ -1,0 +1,26 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "tradeCd": "1",
+    "brandCode": "AAPL",
+    "depositType": "",
+    "acPosition": "3000",
+    "buyingPower": {
+      "deliveryDateT2": "20231215",
+      "deliveryDateT3": "20240913",
+      "wholeAccountT2": "14000",
+      "wholeAccountT3": "1203770",
+      "jrNisaAccountStatusT2": "6373",
+      "jrNisaAccountStatusT3": "9999999",
+      "nisaBuy": "120000"
+    },
+    "businessDayList": ["2023-11-20", "2023-11-21", "2023-11-22", "2023-11-24", "2023-11-27", "2023-11-28", "2023-11-29", "2023-11-30", "2023-12-01", "2023-12-04", "2023-12-05", "2023-12-06", "2023-12-07", "2023-12-08", "2023-12-11"]
+  }]
+}

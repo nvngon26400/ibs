@@ -1,0 +1,17 @@
+{
+  "domainId": "ERROR_CODE",
+  "domainName": "エラーコード",
+  "dataType": "文字列",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "PLUSMINUS_SIGNED_USD_17_2",
+  "domainName": "符号付米ドル_17_2（+-）",
+  "dataType": "金額",
+  "precision": 17,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "signedWithCommaZeroPadding",
+  "formattedDigit": 22,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "USD",
+  "htmlTag": "ifa-input-amount"
+}

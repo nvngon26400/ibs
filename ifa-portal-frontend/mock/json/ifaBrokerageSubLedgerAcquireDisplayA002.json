@@ -1,0 +1,28 @@
+{
+    "totalSize": 0,
+    "maxRownum": 0,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "createDate": "20210701",
+            "brokerCode": "0273",
+            "brokerName": "AAA",
+            "targetSecurity": "111",
+            "dl": "DL",
+            "fileName": "20210701"
+        },
+        {
+            "createDate": "20240701",
+            "brokerCode": "0275",
+            "brokerName": "BBB",
+            "targetSecurity": "222",
+            "dl": "DL",
+            "fileName": "20240701"
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/06/27 10:16:04",
+    "title": null,
+    "returnCode": null
+}

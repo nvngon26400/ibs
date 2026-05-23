@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE_ALPHANUMERIC_SYMBOL_6_0",
+  "domainName": "レート（英数字記号）6_0",
+  "dataType": "レート",
+  "precision": 6,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "alphaNumberSpecialPatternA",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": "ifa-input-rate"
+}

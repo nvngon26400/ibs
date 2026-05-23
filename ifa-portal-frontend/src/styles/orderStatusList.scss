@@ -1,0 +1,304 @@
+h2 {
+  margin-top: 40px;
+  margin-left: 5px;
+}
+h3 {
+  margin: 20px 5px 10px 5px;
+}
+.order-status-list {
+  margin: 0.2rem 0;
+}
+.order-status-list-table {
+  margin-bottom: 15px;
+  overflow: auto;
+}
+.el-radio-group {
+  margin-left: 5px;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.el-table th {
+  padding: 7px;
+  position: relative;
+  border: 1px solid rgb(215, 215, 215);
+  text-align: center;
+  vertical-align: center;
+}
+.el-table td {
+  padding: 5px;
+  position: relative;
+  border: 1px solid rgb(215, 215, 215);
+  vertical-align: center;
+}
+.el-table--border::after,
+.el-table--group::after,
+.el-table::before {
+  background-color: #00000000;
+}
+table.scroll {
+  display: block;
+  overflow-y: scroll;
+  height: calc(130vh / 2);
+  width: 100%;
+}
+table.scroll thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.order-table__left {
+  border-left: 1px solid rgb(215, 215, 215);
+}
+.order-table__top {
+  border-top: 1px solid rgb(215, 215, 215);
+}
+.even-row-color td {
+  background-color: rgb(245, 245, 245);
+}
+.update-button {
+  margin: 0 1rem 0.3rem 1rem;
+  text-align: right;
+}
+// orderStatusList.scss をインポートせずに作成した画面に
+// 新規に orderStatusList.scss をインポートした場合に副作用が発生する場合がある
+// その時に `order-status-list__el-dialog--disabled` クラスを追加することで副作用を個別にオフにする
+:deep(.el-dialog) {
+  &:not(.order-status-list__el-dialog--disabled) {
+    padding: 40px 20px 20px 20px;
+    width: 1200px;
+    min-width: 900px;
+    background-color: rgb(253, 253, 253);
+    .el-dialog__header {
+      padding: 0px;
+    }
+    .el-dialog__header span {
+      font-size: 18px;
+      margin: 0px;
+      font-weight: bold;
+    }
+    .el-dialog__title {
+      font-size: 18px;
+      margin: 0px;
+      font-weight: bold;
+      padding: 0px;
+    }
+    .el-dialog__body {
+      padding: 0px;
+      color: #18181A;
+    }
+  }
+}
+// orderStatusList.scss をインポートせずに作成した画面に
+// 新規に orderStatusList.scss をインポートした場合に副作用が発生する場合がある
+// その時に `order-status-list__el-collapse--disabled` クラスを追加することで副作用を個別にオフにする
+:deep(.el-collapse) {
+  &:not(.order-status-list__el-collapse--disabled) {
+    border-top: #ffffff;
+    border-bottom: #ffffff;
+    .el-collapse-item__wrap {
+      border-bottom: #ffffff;
+    }
+    .el-collapse-item {
+      margin: 20px 0pc;
+    }
+    .el-collapse-item__header {
+      font-size: 14px;
+      padding-left: 10px;
+    }
+  }
+}
+.buy-background-color {
+  &.el-dialog {
+    background: #fef0f0;
+    padding: 20px 20px 20px 20px;
+    // max-height: none;
+    max-height: 90%;
+    margin-top: 3%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .el-dialog__header {
+    font-weight: 700;
+  }
+  .el-dialog__body {
+    margin-top: -2rem;
+  }
+  .el-dialog__footer {
+    display: flex;
+    justify-content: left;
+    padding: 0 0 1rem 7rem;
+  }
+  .el-card__body {
+    padding-bottom: 0.5rem;
+  }
+}
+.sell-background-color {
+  &.el-dialog {
+    background: #ecf5ff;
+    padding: 20px 20px 20px 20px;
+    // max-height: none;
+    max-height: 90%;
+    margin-top: 3%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .el-dialog__header {
+    font-weight: 700;
+  }
+  .el-dialog__body {
+    margin-top: -2rem;
+  }
+  .el-dialog__footer {
+    display: flex;
+    justify-content: left;
+    padding: 0 0 1rem 7rem;
+  }
+  .el-card__body {
+    padding-bottom: 0.5rem;
+  }
+}
+.ifd-background-color {
+  &.el-dialog {
+    background: #e7dcf2;
+    padding: 20px 20px 20px 20px;
+    // max-height: none;
+    max-height: 90%;
+    margin-top: 3%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .el-dialog__header {
+    font-weight: 700;
+  }
+  .el-dialog__body {
+    margin-top: -2rem;
+  }
+  .el-dialog__footer {
+    display: flex;
+    justify-content: left;
+    padding: 0 0 1rem 7rem;
+  }
+  .el-card__body {
+    padding-bottom: 0.5rem;
+  }
+}
+.badge-item {
+  padding-top: 0.6rem;
+  padding-left: 0.5rem;
+}
+.clickable {
+  cursor: pointer;
+  &:hover {
+    background: rgba(0, 0, 0, .066)
+  }
+  padding: 0.3rem;
+}
+.acc-background-color {
+  &.el-dialog {
+    background: #faf5db;
+    padding: 20px 20px 20px 20px;
+    // max-height: none;
+    max-height: 90%;
+    margin-top: 3%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .el-dialog__header {
+    font-weight: 700;
+  }
+  .el-dialog__body {
+    margin-top: -2rem;
+  }
+  .el-dialog__footer {
+    display: flex;
+    justify-content: left;
+    padding: 0 0 1rem 7rem;
+  }
+  .el-card__body {
+    padding-bottom: 0.5rem;
+  }
+}
+.buy-font {
+  color: red;
+  font-weight: bold;
+}
+.sell-font {
+  color: blue;
+  font-weight: bold;
+}
+.list-font {
+  margin-left: 0.5rem;
+  font-weight: bold;
+  color: #18181A;
+}
+.ifd-oco-label {
+  margin-left: 1rem;
+  line-height: 1.5;
+  font-weight: bold;
+}
+._bold_black_l {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #18181A;
+}
+._bold_red_l {
+  font-size: 16.5px;
+  font-weight: 1000;
+  color: #ff1e00;
+}
+._bold_black_m {
+  font-size: 16px;
+  font-weight: 700;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: #18181A;
+}
+.dotted_border {
+  border-bottom: 1px dotted #dddddd;
+  padding: 0.5rem 0.2rem 0.2rem 0.5rem;
+}
+._black_s_bold {
+  font-size: 15px;
+  font-weight: 700;
+  color: #18181A;
+  padding-bottom: 0.5rem;
+}
+._black_ss_bold {
+  font-size: 14px;
+  font-weight: 700;
+  color: #18181A;
+  padding-bottom: 0.5rem;
+}
+._black_ss {
+  font-size: 14px;
+  font-weight: 100;
+  color: #18181A;
+  padding-bottom: 0.5rem;
+}
+.correction-bg-color {
+  background-color: rgb(255, 250, 210);
+}
+.ifd-oco-padding1 {
+  padding-left: 20px;
+}
+.ifd-oco-padding2 {
+  padding-left: 50px;
+}
+:deep(.el-form-item__label) {
+  margin-right: 0.5rem;
+  margin-left: 5rem;
+}
+.arrow {
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: -4px;
+  transform   : scale(1.4, 1);
+  color: black;
+}

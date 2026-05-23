@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT260",
+  "domainName": "テキスト260",
+  "dataType": "文字列",
+  "precision": 260,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 260,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

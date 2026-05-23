@@ -1,0 +1,17 @@
+{
+  "domainId": "YEN16_3_DIGITS_B",
+  "domainName": "円貨16_3_B",
+  "dataType": "金額",
+  "precision": 16,
+  "digit": 3,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 21,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "円",
+  "htmlTag": "ifa-input-amount"
+}

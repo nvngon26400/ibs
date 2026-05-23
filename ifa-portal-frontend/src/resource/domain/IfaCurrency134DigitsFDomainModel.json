@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY13_4_DIGITS_F",
+  "domainName": "価格13_4_F",
+  "dataType": "金額",
+  "precision": 13,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+エラー: 表示形式の値「{#,##0.#}|{#,##0.0}」が不正です。
+  "formattedDigit": 16,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

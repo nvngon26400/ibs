@@ -1,0 +1,6 @@
+version: 0.0
+os: linux
+files:
+  - source: dist
+    destination: /var/www/html/ui
+file_exists_behavior: OVERWRITE

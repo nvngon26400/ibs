@@ -1,0 +1,38 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+        "butenCode": "315",
+        "accountNumber": "315001",
+        "brandCode": "0001Z",
+        "bookBuildingPresentationFrom": "20230511",
+        "quantity": "100",
+        "marketOrder": "0",
+        "price": "",
+        "discountRate": "24",
+        "investorAttributeValue": "1",
+        "investorAttributeName": "個人",
+        "bbRemark": "123",
+        "discretionQuantity": "100",
+        "selectReason": "2",
+        "brandName": "テスト用Z",
+        "sellBuyUnitType": "2",
+        "issuePriceType": "2",
+        "customerNameKanji": "漢字",
+        "customerNameKana": "カナ",
+        "complianceRankCheckMsg": "",
+        "complianceRankCheckChkBoxLabel": "",
+        "discretionAllocateTimesOverFiveWarningMsg": "",
+        "financialAssetLessThanThirtyMillionYenDiscretionApplyWarningMsg": "金融資産が3,000万円未満での裁量申込です。",
+        "noticeInfoLevel": "1",
+        "transitionSourceScreen": "SUB0204_01-01"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/02/21 17:35:44",
+  "title": null,
+  "returnCode": null
+}

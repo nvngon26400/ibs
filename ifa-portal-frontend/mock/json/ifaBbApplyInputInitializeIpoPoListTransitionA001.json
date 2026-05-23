@@ -1,0 +1,35 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "brandCode": "0001Z",
+          "brand": "テスト用Z(0001Z)",
+          "applyUnit": "100株",
+          "unit": "100",
+          "sellBuyUnitType": "株",
+          "assumeCondition": "ディスカウント率・ストライクプライス・21%~82%",
+          "bookBuildingApplyPeriod": "2024/01/01 15:28~2024/02/29 15:29",
+          "lotDate": "2021/06/29 00:00~",
+          "bookBuildingPresentationFrom": "20230511",
+          "issuePriceType": "2",
+          "startPriceDisplay": "1000001",
+          "priceDisplayTick": "100",
+          "finishPriceDisplay": "1010002",
+          "startDiscountRate": "21",
+          "discountRateTick": "3",
+          "finishDiscountRate": "82",
+          "investorAttributePullDownList": ["個人", "法人", "テクスト"],
+          "transitionSourceScreen": "SUB0204_01-01",
+          "investorAttributeValueList": ["1", "2", "3"],
+          "periodUpdateMessage": "・発行決議日 10/12 ・ブックビル期間 10/31～（最短）11/7、（最長）11/13 \n・発行価格決定日（抽選日） 11/8～11/14のいずれか　・上場日11/16～11/22のいずれか \n・ブックビル期間 10/31～（最短）11/7、（最長）11/13 ・発行価格決定日（抽選日） 11/8～11/14のいずれか　・上場日11/16～11/22のいずれか　up",
+          "priceUpdateMessage": "発行価格1000円- \n手数料100円up"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/02/21 12:41:59",
+  "title": null,
+  "returnCode": null
+}

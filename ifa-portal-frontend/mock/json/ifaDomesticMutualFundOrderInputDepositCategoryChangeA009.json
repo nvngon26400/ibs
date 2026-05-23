@@ -1,0 +1,44 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "commRateList": [
+        {
+          "commRateConditions": 101,
+          "commRate": 1100.00
+        },
+        {
+          "commRateConditions": 201,
+          "commRate": 2200.00
+        },
+        {
+          "commRateConditions": 301,
+          "commRate": 3300.00
+        },
+        {
+          "commRateConditions": 401,
+          "commRate": 4400.00
+        },
+        {
+          "commRateConditions": 501,
+          "commRate": 5500.00
+        },
+        {
+          "commRateConditions": 601,
+          "commRate": 6600.00
+        },
+        {
+          "commRateConditions": 701,
+          "commRate": 7700.00
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/01 17:16:50",
+  "title": null,
+  "returnCode": "0"
+}

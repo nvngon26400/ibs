@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT22",
+  "domainName": "テキスト22",
+  "dataType": "文字列",
+  "precision": 22,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 22,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

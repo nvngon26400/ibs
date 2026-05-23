@@ -1,0 +1,17 @@
+{
+  "domainId": "UNITS16",
+  "domainName": "口数16",
+  "dataType": "数値",
+  "precision": 16,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 21,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "口",
+  "htmlTag": "ifa-input-quantity"
+}

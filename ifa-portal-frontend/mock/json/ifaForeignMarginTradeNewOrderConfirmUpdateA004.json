@@ -1,0 +1,27 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+        "priceBasicInfo": [{
+          "currentPrice": "567.0100",
+          "diffDateTime": "20230901170000",
+          "tick": "2",
+          "diff": "-0.42",
+          "ratio": "-0.21",
+          "start": "800.7900",
+          "high": "1.2700",
+          "low": "17.1200",
+          "volume": "1600",
+          "last": "1008.9300",
+          "lastDate": "20281213"
+        }]
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023\u002F09\u002F15 11:54:15",
+  "title": null,
+  "returnCode": "0"
+}

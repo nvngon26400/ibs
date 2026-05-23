@@ -1,0 +1,21 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "tradeCd": "3",
+    "brandCode": "0",
+    "settlementDateT0": "2023/09/21",
+    "settlementDateT1": "2023/09/22",
+    "newBuildingCapacityT0": "1000",
+    "newBuildingCapacityT1": "7",
+    "rateT0": "1000",
+    "rateT1": "100",
+    "businessDayList": ["2023-09-06 20:50:21","2023-09-07 13:21:04"]
+  }]
+}

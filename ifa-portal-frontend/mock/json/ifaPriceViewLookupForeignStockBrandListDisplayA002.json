@@ -1,0 +1,44 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [{
+      "updateTime": "12:30",
+      "brandList": [
+        {
+          "ticker": "AAPL",
+          "name": "アップル",
+          "sellPrice": "0.5",
+          "basePrice8": "1",
+          "buyPrice": "1.5",
+          "last": "1",
+          "diff": "10",
+          "tradeSuspendPriceChangeReason": "取引禁止理由または、価格変更理由"
+        },
+        {
+          "ticker": "BAC",
+          "name": "バンクオブアメリカ",
+          "sellPrice": "2000",
+          "basePrice8": "10",
+          "buyPrice": "取引停止",
+          "last": "9",
+          "diff": "10",
+          "tradeSuspendPriceChangeReason": "取引禁止理由または、価格変更理由"
+        },
+        {
+          "ticker": "BAC",
+          "name": "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろむめもらりるれろ",
+          "sellPrice": "2000",
+          "basePrice8": "10",
+          "buyPrice": "取引停止",
+          "last": "9",
+          "diff": "10",
+          "tradeSuspendPriceChangeReason": "取引禁止理由または、価格変更理由"
+        }
+      ]
+  }],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

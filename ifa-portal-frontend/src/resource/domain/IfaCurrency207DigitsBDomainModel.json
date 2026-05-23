@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY20_7_DIGITS_B",
+  "domainName": "価格20_7_B",
+  "dataType": "金額",
+  "precision": 20,
+  "digit": 7,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 25,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

@@ -1,0 +1,51 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "requestedTime": "2024/06/17 16:32:56",
+  "dataList": [{
+    "jointMarketTradeSearchList": [
+      {
+        "sumDateYmd": "2024-12-06",  
+        "brokerCode": "B12345",  
+        "brokerName": "ABC Brokerage", 
+        "brokerChargeCode": "E123",  
+        "brokerChargeName": "John Doe", 
+        "buten": "D001",  
+        "accountNumber": "1234567890",  
+        "customerAttribute": "Gold",  
+        "customerAttributeName": "Gold Member",  
+        "customerNameKanji": "山田太郎", 
+        "customerNameKana": "山田太郎",   
+        "securityClass": "Stocks",  
+        "brandCode": "BRND001",  
+        "brandName": "Tech Corp",  
+        "productRank": "A",  
+        "tradeCd": "T01",  
+        "tradeTypeName": "Buy", 
+        "depositName": "", 
+        "tradeDate": "2024-12-05",  
+        "settlementDate": "2024-12-07",  
+        "price": "1500",  
+        "quantity": "100",  
+        "contractAmountJpyAmount": "150000",  
+        "yenFee": "500",  
+        "yenDeliveryAmount": "149500",  
+        "currency": "JPY",  
+        "contractAmountForeign": "1500.00",  
+        "foreignDeliveryAmount": "1495.00",  
+        "jointRate": "0.05",  
+        "jointRewardPrice": "7500",
+        "fxRate": "1.0", 
+        "branchCode": "BR001",  
+        "branchName": "Tokyo Branch",   
+        "bondIntermediary": "Mediated",  
+        "usStockStoreEntrust": "OTC"
+      }
+    ]
+  }],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

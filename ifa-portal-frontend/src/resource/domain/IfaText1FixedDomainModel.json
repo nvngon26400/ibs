@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT1_FIXED",
+  "domainName": "テキスト1（固定長）",
+  "dataType": "文字列",
+  "precision": 1,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 1,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,58 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+    "brokerBranchNameList": [
+      {
+        "brokerBranchName": "デモ仲介業者支店_Z",
+        "subBrokerId": "0"
+      },
+      {
+        "brokerBranchName": "デモ仲介業者支店_Y",
+        "subBrokerId": "1"
+      },
+      {
+        "brokerBranchName": "デモ仲介業者支店_X",
+        "subBrokerId": "2"
+      },
+      {
+        "brokerBranchName": "デモ仲介業者支店_W",
+        "subBrokerId": "3"
+      },
+      {
+        "brokerBranchName": "デモ仲介業者支店_V",
+        "subBrokerId": "4"
+      }
+    ],
+    "employeeNameList": [
+      {
+        "employeeName": "デモ山 デモ太郎_Z",
+        "employeeId": "0"
+      },
+      {
+        "employeeName": "デモ山 デモ太郎_Y",
+        "employeeId": "1"
+      },
+      {
+        "employeeName": "デモ山 デモ太郎_X",
+        "employeeId": "2"
+      },
+      {
+        "employeeName": "デモ山 デモ太郎_W",
+        "employeeId": "3"
+      },
+      {
+        "employeeName": "デモ山 デモ太郎_V",
+        "employeeId": "4"
+      }
+    ]
+  }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/10/16 16:55:05",
+  "title": null,
+  "returnCode": null
+}

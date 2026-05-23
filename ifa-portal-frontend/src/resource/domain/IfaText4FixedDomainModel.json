@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT4_FIXED",
+  "domainName": "テキスト4（固定長）",
+  "dataType": "文字列",
+  "precision": 4,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 4,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

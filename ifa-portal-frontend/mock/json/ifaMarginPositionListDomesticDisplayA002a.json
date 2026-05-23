@@ -1,0 +1,42 @@
+{
+    "totalSize": 10,
+    "maxRownum": 0,
+    "overMaxRownum": false,
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "23/07/05 12:00",
+    "title": "",
+    "returnCode": "I9999",
+    "dataList":[
+        {
+            "butenCode":"Z56",
+            "accountNumber":"596799",
+            "customerNameKanji": "森永莉沙",
+            "customerNameKana": "モリナガリサ",
+            "course": "A",
+            "aPIProfile": "45",
+            "empCode": "5358",
+            "brokerChargeName": "坂井益",
+            "brokerCode": "5358",
+            "brokerName": "住信SBIネット株式会社",
+            "branchCode": "5358",
+            "branchName": "イソライト工業",
+            "brandCode": "5358"
+        },
+        {
+            "butenCode":"Z57",
+            "accountNumber":"596794",
+            "customerNameKanji": "森永莉沙",
+            "customerNameKana": "モリナガリサ",
+            "course": "A",
+            "aPIProfile": "45",
+            "empCode": "5358",
+            "brokerChargeName": "坂井益",
+            "brokerCode": "5358",
+            "brokerName": "住信SBIネット株式会社",
+            "branchCode": "5358",
+            "branchName": "イソライト工業",
+            "brandCode":"4008"
+        }
+    ]
+}

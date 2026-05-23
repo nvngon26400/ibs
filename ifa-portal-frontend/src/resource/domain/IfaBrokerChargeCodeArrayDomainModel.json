@@ -1,0 +1,17 @@
+{
+  "domainId": "BROKER_CHARGE_CODE_ARRAY",
+  "domainName": "営業員コード（複数）",
+  "dataType": "文字列",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fourDigitsAlphaNumberWithComma",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": "fourDigitsAlphaNumberWithComma",
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

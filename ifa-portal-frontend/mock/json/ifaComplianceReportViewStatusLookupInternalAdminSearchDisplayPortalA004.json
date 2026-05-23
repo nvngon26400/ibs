@@ -1,0 +1,17 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2000-10-10 12:12:12",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[
+  {"complianceReportList":[
+  {"confirmDateTime":"2023/10/12 11:11:11","brokerCode":"0509","brokerBranchName":"222","employeeId":"1","employeeName":"1","title":"2","codeName":"未確認","corBrowseFlag":"1"},
+  {"confirmDateTime":null,"brokerCode":"0509","brokerBranchName":"222","employeeId":"1","employeeName":"1","title":"1","codeName":null,"corBrowseFlag":"1"}
+  ]},
+  {"complianceReportTitleList":[{"titleDesc":"1","titleValue":"titleValue1"},{"titleDesc":"2","titleValue":"titleValue2"}
+  ]}]
+}

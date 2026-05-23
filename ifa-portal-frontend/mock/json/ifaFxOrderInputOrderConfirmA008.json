@@ -1,0 +1,32 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": null,
+  "returnCode": "SUCCESS",
+  "dataList": [
+    {
+      "currencyCode": "USD",
+      "currency": "米ドル",
+      "tradeKbn": "1",
+      "exchangeOrderAmount": "5000",
+      "settlementDate": "20231010",
+      "fxTrade": "REAL",
+      "fxRate": "5.1",
+      "approximateRateExchangeRateDateTime": "20231010 100000",
+      "yenDeliveryAmount": "5000000",
+      "accountType": "2",
+      "warningThreshold": "1000000",
+      "orderWarningexceedingThreshold": "注文ワーニングしきい値超過メッセージ",
+      "additionalPrice": "5000000",
+      "additionalPricePercent": "50",
+      "fxRateAdditionalType": "ADJUST_AMOUNT",
+      "saleMethod": "1",
+      "quantityDesignationMethod": "1",
+      "denominator": "2"
+    }
+  ]
+}

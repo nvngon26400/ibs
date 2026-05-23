@@ -1,0 +1,29 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [{
+    "brandCode" : "1111",
+    "openTradeKbn" : "0",
+    "paymentDeadline" : "6",
+    "newOpenMarket" : "0",
+    "newOpenInterestNumber" : "123",
+    "parentStockConstructionDate" : "20231212",
+    "constructionDate" : "20231215",
+    "openPrice" : "100",
+    "paymentDeadlineDate": "10",
+    "dateKbn": "Y",
+    "newPrice" : "6670",
+    "maxOrderableQuantity" : "1000",
+    "paymentDeadlineCalculation": "10年",
+    "deliveryDateT2" : "2023/12/10",
+    "cashOnDeliveryT2" : "1000000",
+    "deliveryDateT3" : "2023/12/11",
+    "cashOnDeliveryT3" : "1500000",
+    "quantityTradeUnit": "100"
+}],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

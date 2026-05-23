@@ -1,0 +1,17 @@
+{
+  "domainId": "PLUSMINUS_SIGNED_UNIT_PRICE_17_4_DIGITS_B",
+  "domainName": "符号付単価_17_4（+-）_B",
+  "dataType": "金額",
+  "precision": 17,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "signedWithCommaNoneZeroPadding",
+  "formattedDigit": 22,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "各通貨単位",
+  "htmlTag": "ifa-input-amount"
+}

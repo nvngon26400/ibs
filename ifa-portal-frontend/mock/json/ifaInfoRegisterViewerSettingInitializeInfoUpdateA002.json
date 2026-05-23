@@ -1,0 +1,28 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "viewerSetting": "3",
+          "notificationReferenceAuthorityList": null,
+          "registeredNotificationReferenceAuthorityList": ["3","6","9"],
+          "individualRepList": null,
+          "registeredIndividualRepList": [
+            {
+                "userId": "001",
+                "employeeName": "営業員A"
+            },
+            {
+                "userId": "101",
+                "employeeName": "営業員1"
+            }
+        ]
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/01/24 17:07:22",
+  "title": null,
+  "returnCode": "0"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "DEPOSIT_BALANCE_LIST_COURSE",
+  "domainName": "コース（預り残高一覧）",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": null
+}

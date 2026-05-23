@@ -1,0 +1,33 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": null,
+  "returnCode": "SUCCESS",
+  "dataList":[
+    {
+      "currencyCode": "USD",
+      "tradeKbn": "1",
+      "referenceRate": "115.81111",
+      "denominator": "2",
+      "currency": "米ドル",
+      "maxOrderableQuantity": "150080",
+      "approximatePurchaseAmount": "3000000",
+      "foreignSpinButtonRange": "100",
+      "closableQuantity": "100",
+      "foreignCurrencyMax": "10000",
+      "yenCurrencyMin": "100",
+      "yenCurrencyMax": "5000",
+      "tradeLimitMax": "10000.50",
+      "tradeLimitMin": "0.1",
+      "approximationRate": "1.5",
+      "decimalLength": "3",
+      "exchangeGroup": "FXCHANGE_GROUP_USD",
+      "warningThreshold": "1",
+      "jrNisaAccountStatus": "RESTRICTED_RELEASE_BEFORE"
+    }
+  ]
+}

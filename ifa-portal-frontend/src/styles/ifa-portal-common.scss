@@ -1,0 +1,162 @@
+// 共通変数定義のimport。
+@import "./variables.scss";
+
+.font-color__plus {
+  color: $buyOrPlusColor !important;
+  &.bold {
+    font-weight: bold;
+  }
+}
+
+.font-color__minus {
+  color: $sellOrMinusColor !important;
+  &.bold {
+    font-weight: bold;
+  }
+}
+
+.ifa-search-view__main-default {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+// テキスト入力項目の標準スタイル。
+.ifa-input__text-default {
+  width: 10rem;
+}
+
+// フォームラベルの上下サイズ
+.form_upper_label .el-form-item__label,
+.form_label .el-form-item__label,
+.input-label {
+  line-height: 1.7rem ;
+  font-weight: 700;
+}
+
+// プルダウン項目の標準スタイル。
+.ifa-input__select-default {
+  width: 15rem;
+}
+
+.card-content {
+  background: #F5F6F7 0% 0% no-repeat padding-box;
+  border-radius: 8px;
+  opacity: 1;
+  box-shadow: unset;
+}
+
+
+.ifa-notify__error {
+  background-color: #FFF0F0;
+  border: 1px solid $errorMessageFontColor;
+  h2, p {
+    color: $errorMessageFontColor !important;
+  }
+}
+
+.spinner-sample {
+  border-radius: 50%;
+  display: inline-block;
+  width: 150px;
+  margin: 50px;
+  height: 150px;
+  margin: 30px;
+  animation: 1s linear infinite rotation1;
+  border-top: 1.1em solid rgba(255, 255, 255, 0.1);
+  border-right: 1.1em solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1.1em solid #ffffff;
+  border-left: 1.1em solid #ffffff;
+}
+@keyframes rotation1 {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.my-loading {
+  .el-loading-text {
+    font-size: 4rem;
+    color: #fff;
+  }
+}
+
+// ツールチップ表示用アイコン用クラス。
+.info_icon {
+  color: $subBlueColor;
+  opacity: 0.7;
+}
+
+
+/* テーブルタグ用の共通定義 */
+// 垂直テーブル用の定義
+._table__body {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #a7b1c3;
+  box-shadow: 1px 2px 2px #ddd;
+}
+._table__header {
+  color: #18181a;
+  background-color: #E6E8F0;
+  border: 1px solid #a7b1c3;
+  padding: 2px 14px 2px 14px;
+}
+._table__data {
+  color: #18181a;
+  border: 1px solid #a7b1c3;
+  padding: 2px 14px 2px 14px;
+}
+
+// 水平テーブル用の定義
+._table__horizontal {
+  ._table__body {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #a7b1c3;
+    box-shadow: 1px 2px 2px #ddd;
+  }
+  ._table__header {
+    color: #fff;
+    background-color: #676B74;
+    border: 1px solid #a7b1c3;
+    padding: 2px 14px 2px 14px;
+    &.__vertical {
+      color: #18181a;
+      background-color: #E6E8F0;
+      border: 1px solid #a7b1c3;
+      padding: 2px 14px 2px 14px;
+    }
+  }
+  ._table__data {
+    color: #18181a;
+    border: 1px solid #a7b1c3;
+    padding: 2px 14px 2px 14px;
+  }
+}
+
+._table__data2 {
+  color: #606266;
+  border-bottom: 1px solid #a7b1c3;
+  padding: 2px 2px 2px 2px;
+}
+
+// ifa-date-pickerのサイズ指定用スタイル定義
+.ifa-date-picker.small {
+  .el-input__inner {
+    height: 30px;
+  }
+  &.el-range-editor.el-input__inner {
+    height: 30px;
+    position: absolute;
+    width: 310px;
+  }
+  .el-range__icon, .el-range-separator {
+    height: unset;
+
+  }
+  .el-input__prefix, .el-input__suffix {
+    top: -5px
+  }
+}

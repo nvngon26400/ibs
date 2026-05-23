@@ -1,0 +1,11 @@
+{
+  "totalSize":1,
+  "maxRownum":1,
+  "overMaxRownum":false,
+  "dataList":[{"complianceReportList":[{"titleDesc":"1","titleValue":"titleValue1"},{"titleDesc":"2","titleValue":"titleValue2"}]}],
+  "message":"正常終了",
+  "errorLevel":0,
+  "requestedTime":"2023/09/19 19:35:20",
+  "title":null,
+  "returnCode":"0"
+}

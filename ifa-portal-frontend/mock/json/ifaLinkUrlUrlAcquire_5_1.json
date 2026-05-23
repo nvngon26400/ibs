@@ -1,0 +1,6 @@
+{
+  "dispName": "口座属性変更照会",
+  "extLinkFlag": "1",
+  "postRequest": {},
+  "linkUrl": "https://tm.sbisec.co.jp:8443/reclw011"
+}

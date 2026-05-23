@@ -1,0 +1,17 @@
+{
+  "domainId": "USD17_0",
+  "domainName": "米ドル17_0",
+  "dataType": "金額",
+  "precision": 17,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 23,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "USD",
+  "htmlTag": "ifa-input-amount"
+}

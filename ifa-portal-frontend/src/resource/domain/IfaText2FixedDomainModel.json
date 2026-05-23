@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT2_FIXED",
+  "domainName": "テキスト2（固定長）",
+  "dataType": "文字列",
+  "precision": 2,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 2,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-text"
+}

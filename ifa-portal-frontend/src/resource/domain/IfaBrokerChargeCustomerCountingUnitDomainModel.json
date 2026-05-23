@@ -1,0 +1,17 @@
+{
+  "domainId": "BROKER_CHARGE_CUSTOMER_COUNTING_UNIT",
+  "domainName": "集計単位（仲介業者/営業員/顧客）",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-radio"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "PHONE_NUMBER",
+  "domainName": "電話番号",
+  "dataType": "文字列",
+  "precision": 17,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "alphaNumberSpecialPatternA",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 17,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE6_2_NONE_UNIT",
+  "domainName": "レート6_2（単位無し）",
+  "dataType": "レート",
+  "precision": 6,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 8,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-rate"
+}

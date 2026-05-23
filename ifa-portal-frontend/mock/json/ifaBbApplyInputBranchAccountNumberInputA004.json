@@ -1,0 +1,32 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "butenCode": "315",
+          "accountNumber": "315001",
+          "customerName": "testCustomer",
+          "openAcctDate": "2019/07/25",
+          "investmentPolicyType": "01",
+          "profession": "A ",
+          "stockSpotInvestExperienceYears": "0年",
+          "officeName": "testOfficeName",
+          "financialAssets": "300万円未満",
+          "complianceRank": "E",
+          "edelivAgreementDate": "null",
+          "corporationType": "1",
+          "financialAssetsType": "01",
+          "discretionAlloCount": "0",
+          "discretionAllocateAbleTimes": "8",
+          "depositAssetAmount": "万円",
+          "readTime": "2024/02/19 00:00",
+          "buyingPower": null
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/02/21 17:35:44",
+  "title": null,
+  "returnCode": null
+}

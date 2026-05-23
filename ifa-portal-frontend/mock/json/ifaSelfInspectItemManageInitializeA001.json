@@ -1,0 +1,50 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "registerDateList": [
+            {
+                "dateId": "202406",
+                "dateName": "2024年06月"
+            },
+            {
+                "dateId": "202407",
+                "dateName": "2024年07月"
+            },
+            {
+                "dateId": "202408",
+                "dateName": "2024年08月"
+            }
+          ],
+          "brokerTypeList": [
+            {
+                "brokerType": "1",
+                "classificationName": "二金・代理",
+                "registerStatus": "登録済"
+            },
+            {
+                "brokerType": "2",
+                "classificationName": "その他",
+                "registerStatus": "登録済"
+            },
+            {
+                "brokerType": "3",
+                "classificationName": "媒介",
+                "registerStatus": "未登録"
+            },
+            {
+                "brokerType": "4",
+                "classificationName": "非媒介",
+                "registerStatus": "未登録"
+            }
+          ]
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/01/26 14:28:04",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

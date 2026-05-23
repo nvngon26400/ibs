@@ -1,0 +1,17 @@
+{
+  "domainId": "FOREIGN_CURRENCY6_DIGITS_B",
+  "domainName": "外貨15_6_B",
+  "dataType": "金額",
+  "precision": 15,
+  "digit": 6,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 18,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "各通貨単位",
+  "htmlTag": "ifa-input-amount"
+}

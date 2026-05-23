@@ -1,0 +1,39 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "brandCode": "AAPL",
+    "brand": "APPLE",
+    "market": "0",
+    "newMarket": "0",
+    "limit": "6",
+    "positionDetailDeadLine": "20230505",
+    "openTradeDate": "20230506",
+    "lastTradeDate": "20230507",
+    "depositType": "1",
+    "stockNumTotal": "1234",
+    "positionPriceLabel": "1234567",
+    "constructionPriceTotal": "78912345",
+
+    "domesticNewComm": "1234",
+    "managePrice": "54321",
+    "rightProcessingCharge": "23141",
+    "dailyInterest": "52131",
+    "reverseDailyInterest": "51782",
+    "total": "5912838",
+
+    "newDepositRate": "100",
+    "cashDepositRate": "500",
+    "cashBuyDepositRate": "1235",
+    "withdrawTransferDepositRate": "150",
+    "additionalCollateralRegulations": "増担保銘柄",
+    "batchIndividualDisplayFlag": "1",
+    "repayPeriodShorterFlag": "1"
+  }]
+}

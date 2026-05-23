@@ -1,0 +1,17 @@
+{
+  "domainId": "CODE3",
+  "domainName": "番号3",
+  "dataType": "数値",
+  "precision": 3,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 3,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

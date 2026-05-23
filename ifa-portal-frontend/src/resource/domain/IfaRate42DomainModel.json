@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE4_2",
+  "domainName": "レート4_2",
+  "dataType": "レート",
+  "precision": 4,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 5,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "円/各通貨",
+  "htmlTag": "ifa-input-rate"
+}

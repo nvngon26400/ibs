@@ -1,0 +1,107 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "mutualFundSellBuyType": "1",
+      "fundCodeTimes": "2",
+      "fundCodeIssues": "3",
+      "depositType": " ",
+      "brandCode": "2-3",
+      "selectAccountType": " ",
+      "selectDepositType": " ",
+      "depositTypeList": [],
+      "brand": {
+        "brandName": "123",
+        "priceUnit": 10,
+        "minSalesLot": 0,
+        "minSalesUnitAmount": 0,
+        "salesUnitLot": 0,
+        "salesTradeUnitAmount": 0,
+        "cancelTradeUnitLot": 0,
+        "cancelTradeUnitAmount": 0,
+        "deadlines": "",
+        "buyMethodSelect": "",
+        "fundType": "1",
+        "reInvestmentClassification": "",
+        "brandSpecialClassification": "",
+        "basePrice": 0,
+        "priceDate": ""
+      },
+      "commRateList": [
+        {
+          "commRateConditions": 1,
+          "commRate": 1.10
+        },
+        {
+          "commRateConditions": 1,
+          "commRate": 1.10
+        },
+        {
+          "commRateConditions": 1,
+          "commRate": 1.10
+        },
+        {
+          "commRateConditions": 1,
+          "commRate": 1.10
+        },
+        {
+          "commRateConditions": 1,
+          "commRate": 1.10
+        },
+        {
+          "commRateConditions": 1,
+          "commRate": 1.10
+        },
+        {
+          "commRateConditions": 1,
+          "commRate": 1.10
+        }
+      ],
+      "switchingFavorableTreatmentRate": "適用外",
+      "handlerIndividualDataExistence": "",
+      "switchingFavorableTreatmentLimit": {
+        "wholeAccountThisMonth": null,
+        "wholeAccountNextMonth": null,
+        "jrNisaAccountThisMonth": null,
+        "jrNisaAccountNextMonth": null
+      },
+      "buyingPower": {
+        "wholeAccount": "20230928",
+        "jrNisaAccount": "20230928"
+      },
+      "depositInfo": {
+        "sellAbleLot": "0",
+        "sellAbleAmount": "0",
+        "approximateValuation": "0",
+        "approximateValuationDate": ""
+      },
+      "nisaBuy": "NISA買付可能最大額 --円（--年投資可能枠基準）",
+      "distributionReceiveMethodWord": null,
+      "point": {
+        "pointClass": "1",
+        "pointCount": "1",
+        "fixedPeriodPoint": "1",
+        "shortestExpirationDate": "1",
+        "minUsePointCount": "1",
+        "usePointUnit": "1",
+        "pointShowAreaFlag": "1",
+        "pointNameDisplayFlag": "1",
+        "pointCountDisplayFlag": "1",
+        "fixedPeriodPointDisplayFlag": "1",
+        "shortestExpirationDateDisplayFlag": "1",
+        "pointUseAreaFlag": "1"
+      },
+      "tradeCd": "0",
+      "transfersPreferentialQuotaApplication": null,
+      "shortTermSaleConfirm": "90日以内",
+      "preRedemptionSellConfirmSelect": "2ヶ月以内"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/01 16:55:45",
+  "title": null,
+  "returnCode": "0"
+}

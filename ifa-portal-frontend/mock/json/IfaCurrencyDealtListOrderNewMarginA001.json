@@ -1,0 +1,168 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+        "currencyList" : [{
+          "currencyCode": "USD",
+          "currencyName": "米ドル", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.38,
+          "referenceRateForSale": 111.31,
+          "decimalLength": 4
+        },{
+          "currencyCode": "HKD",
+          "currencyName": "香港ドル", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "",
+          "purchaseReferenceRate": 11,
+          "referenceRateForSale": 111,
+          "decimalLength": 2
+        },{
+          "currencyCode": "AUD",
+          "currencyName": "豪ドル", 
+          "fxTrade": "REAL" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.40,
+          "referenceRateForSale": 111.33,
+          "decimalLength": 2
+        },{
+          "currencyCode": "ZAR",
+          "currencyName": "南アランド", 
+          "fxTrade": "REAL" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.41,
+          "referenceRateForSale": 111.34,
+          "decimalLength": 2
+        },{
+          "currencyCode": "MXN",
+          "currencyName": "メキシコペソ", 
+          "fxTrade": "REAL" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.42,
+          "referenceRateForSale": 111.35,
+          "decimalLength": 2
+        },{
+          "currencyCode": "RUB",
+          "currencyName": "ロシアルーブル", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.43,
+          "referenceRateForSale": 111.36,
+          "decimalLength": 2
+        },{
+          "currencyCode": "TRY",
+          "currencyName": "トルコリラ", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.44,
+          "referenceRateForSale": 111.37,
+          "decimalLength": 2
+        },{
+          "currencyCode": "VND",
+          "currencyName": "ベトナムドン", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.45,
+          "referenceRateForSale": 111.38,
+          "decimalLength": 2
+        },{
+          "currencyCode": "KRW",
+          "currencyName": "韓国ウォン", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.46,
+          "referenceRateForSale": 111.39,
+          "decimalLength": 2
+        },{
+          "currencyCode": "NZD",
+          "currencyName": "ＮＺドル", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.47,
+          "referenceRateForSale": 111.40,
+          "decimalLength": 2
+        },{
+          "currencyCode": "IDR",
+          "currencyName": "インドネシアルピア", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.49,
+          "referenceRateForSale": 111.41,
+          "decimalLength": 2
+        },{
+          "currencyCode": "TRY",
+          "currencyName": "シンガポールドル", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.50,
+          "referenceRateForSale": 111.42,
+          "decimalLength": 2
+        },{
+          "currencyCode": "THB",
+          "currencyName": "タイバーツ", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.51,
+          "referenceRateForSale": 111.43,
+          "decimalLength": 2
+        },{
+          "currencyCode": "MYR",
+          "currencyName": "マレーシアリンギット", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.52,
+          "referenceRateForSale": 111.44,
+          "decimalLength": 2
+        },{
+          "currencyCode": "CNY",
+          "currencyName": "中国人民元", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.53,
+          "referenceRateForSale": 111.45,
+          "decimalLength": 2
+        },{
+          "currencyCode": "CAD",
+          "currencyName": "カナダドル", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.54,
+          "referenceRateForSale": 111.46,
+          "decimalLength": 2
+        },{
+          "currencyCode": "EUR",
+          "currencyName": "ユーロ", 
+          "fxTrade": "REGULAR" ,
+          "deadlines1": "21:30",
+          "deadlines2": "23:30",
+          "purchaseReferenceRate": 115.55,
+          "referenceRateForSale": 111.47,
+          "decimalLength": 2
+        }]
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/09/19 18:42:05",
+  "title": null,
+  "returnCode": null
+}

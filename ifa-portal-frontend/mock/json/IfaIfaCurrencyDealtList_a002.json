@@ -1,0 +1,29 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": {
+    "current": 113.56,
+    "country": "豪",
+    "name": "ドル",
+    "code": "AUD",
+    "realtime": true,
+    "deadlines": "['15:00']",
+    "deliveryDate": 1,
+    "spread": "0.25",
+    "charge": "2.00",
+    "min": "10.00",
+    "step": "0.01",
+    "spin": "100",
+    "unit": 1,
+    "fixed": 2,
+    "fixed2": 2,
+    "icon": "au",
+    "max": 30000000
+  }
+}

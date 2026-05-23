@@ -1,0 +1,115 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "complianceReportListList": [
+                {
+                    "lectureId": "8101",
+                    "userId": "complianceUser",
+                    "confirmDateTime": "2025-06-06 16:07:55",
+                    "brokerCode": "9001",
+                    "branchNameOfBranch": "支店名",
+                    "employeeId": "1001",
+                    "employeeName": "コンプラユーザ",
+                    "title": "コンプラテスト0606",
+                    "codeName": "確認済",
+                    "corBrowseFlag": "0",
+                    "viewReportFlag": "1"
+                }
+            ],
+            "complianceReportList": [
+                {
+                    "titleDesc": " ",
+                    "titleValue": " "
+                },
+                {
+                    "titleDesc": "コンプラ通信テスト用",
+                    "titleValue": "コンプラ通信テスト用"
+                },
+                {
+                    "titleDesc": "コンプラテスト0606",
+                    "titleValue": "コンプラテスト0606"
+                },
+                {
+                    "titleDesc": "コンプライアンス通信情報登録",
+                    "titleValue": "コンプライアンス通信情報登録"
+                },
+                {
+                    "titleDesc": "123466",
+                    "titleValue": "123466"
+                },
+                {
+                    "titleDesc": "未来月のテストデータ2023.04",
+                    "titleValue": "未来月のテストデータ2023.04"
+                },
+                {
+                    "titleDesc": "公開月のテストデータ2023.03",
+                    "titleValue": "公開月のテストデータ2023.03"
+                },
+                {
+                    "titleDesc": "MP4テスト",
+                    "titleValue": "MP4テスト"
+                },
+                {
+                    "titleDesc": "12345",
+                    "titleValue": "12345"
+                },
+                {
+                    "titleDesc": "コンプライアンス通信照会テスト1",
+                    "titleValue": "コンプライアンス通信照会テスト1"
+                },
+                {
+                    "titleDesc": "202210yzjtest",
+                    "titleValue": "202210yzjtest"
+                },
+                {
+                    "titleDesc": "202209yzjtest",
+                    "titleValue": "202209yzjtest"
+                },
+                {
+                    "titleDesc": "1235",
+                    "titleValue": "1235"
+                },
+                {
+                    "titleDesc": "状態更新テスト",
+                    "titleValue": "状態更新テスト"
+                },
+                {
+                    "titleDesc": "22",
+                    "titleValue": "22"
+                },
+                {
+                    "titleDesc": "abcd",
+                    "titleValue": "abcd"
+                },
+                {
+                    "titleDesc": "2021/12確認",
+                    "titleValue": "2021/12確認"
+                },
+                {
+                    "titleDesc": "テスト用",
+                    "titleValue": "テスト用"
+                },
+                {
+                    "titleDesc": "テスト",
+                    "titleValue": "テスト"
+                },
+                {
+                    "titleDesc": "2021/02",
+                    "titleValue": "2021/02"
+                },
+                {
+                    "titleDesc": "test",
+                    "titleValue": "test"
+                }
+            ]
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2025/06/06 16:07:55",
+    "title": null,
+    "returnCode": "0"
+}

@@ -1,0 +1,34 @@
+{
+  "totalSize": 1,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/09/16 12:00",
+  "title": "",
+  "returnCode": "0",
+  "dataList": [
+    {
+      "fileDir": "------",
+      "corCommunicationDate": "2023/10/11 10:10:10",
+      "slctYmList": [
+        { "lecId": "lectureId001", "communicationDate": "2023/01/01 10:10:10"},
+        { "lecId": "lectureId002", "communicationDate": "2011/12/01 10:10:10"},
+        { "lecId": "lectureId003", "communicationDate": "2023/03/01 10:10:10"},
+        { "lecId": "lectureId004", "communicationDate": "2023/04/01 10:10:10"},
+        { "lecId": "lectureId005", "communicationDate": "2024/01/01 10:10:10"}
+      ],
+      "slctYm": "2023/01/01 10:10:10",
+      "corTitle": "タイトル",
+      "corBrief": "概要",
+      "corContentsFileName": "コンテンツファイル名",
+      "corFileName1": "コンテンツファイル名1",
+      "corFileName2": "コンテンツファイル名2",
+      "corFileName3": "コンテンツファイル名3",
+      "confirmFlg": "1",
+      "corBrowseFlagInd": "2",
+      "corBrowseFlagBul": "2",
+      "confirmBtn": "1"
+    }
+  ]
+}

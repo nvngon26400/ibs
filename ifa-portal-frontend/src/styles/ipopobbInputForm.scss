@@ -1,0 +1,111 @@
+.form-button__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: -30px 0.5rem 0 auto;
+}
+:deep(.el-dialog) {
+  top: 0 !important;
+  margin-top: 0.5vh !important;
+  padding-top: 0.5rem;
+}
+:deep(.el-dialog__header) {
+  padding: 0;
+}
+
+.section_title {
+  height: 21px;
+}
+.search-form__item {
+  margin: 0 0.2rem 0 0.2rem;
+  width: 200px;
+}
+.middle_input {
+  width: 120px;
+}
+.input_field {
+  margin: 10px;
+  border-bottom: 1px solid #eee;
+}
+:deep(#warningApply) .el-checkbox__label {
+  font-weight: unset;
+}
+:deep(#marketChk) .el-checkbox__label {
+  font-weight: unset;
+}
+:deep(.el-alert) {
+  width: 92%;
+}
+:deep(.confirm-dialog) .el-dialog__header {
+  padding: 0;
+}
+.info_section {
+  margin: 15px 10px;
+}
+:deep(.el-form-item__error) {
+  width: max-content;
+  position: absolute;
+}
+.buy-background-color_card {
+  background-color: #fef0f0;
+}
+:deep(.price_input) {
+  width: 220px !important;
+}
+:deep(.el-form-item) {
+  margin-bottom: 10px !important;
+}
+:deep(.el-form-item__label),:deep(.el-form-item__content) {
+  line-height: 25px;
+  font-weight: bold;
+}
+:deep(.el-form-item__content) span {
+  white-space: nowrap
+}
+:deep(.el-form-item__label) {
+  justify-content: flex-start;
+  margin-left: 0px !important;
+  position: relative;
+  display: inline-block;
+}
+:deep(.ifa-input_base__wrapper) {
+  display: flex;
+  justify-content: flex-start;
+}
+:deep(.el-input.el-input--small.ifa-input_base.no-spin.small.with-control) {
+  width: 13.75rem !important;
+}
+.colon {
+  position: absolute;
+  left: -20px;
+}
+:deep(.el-row.input_field) {
+  margin: 10px 0px;
+}
+:deep(.el-form-item.asterisk-left.form_label.no-label) {
+  margin-right: 0px;
+}
+:deep(.el-card__body) {
+  margin-left: 30px;
+}
+:deep(.must-input>:first-child) {
+  position: relative;
+  left: -10px;
+  margin-right: 10px;
+}
+:deep(.market-checkbox .el-checkbox) {
+  padding: 0px 10px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  background-color: white;
+}
+:deep(.brand-code>.el-form-item__label::after) {
+  content: "：";
+  font-weight: bold;
+  display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -12px;
+  margin: auto;
+  vertical-align: middle;
+}

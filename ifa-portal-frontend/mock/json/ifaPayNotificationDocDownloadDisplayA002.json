@@ -1,0 +1,164 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/06/11 15:51:51",
+  "title": null,
+  "returnCode": "SUCCESS",
+  "dataList": [
+    {
+      "brokerPayNotificationDocInfoDateList": [
+        {
+          "dateYm": "2021/11",
+          "brokerCode": "0503",
+          "brokerName": "エムスリー株式会社エムスリー株式会社エムスリー株式会社エムスリー株式会社エムスリー株式会社エムスリー株式会社エムスリー株式会社エムスリー株式会社エムスリー株式会",
+          "firstConfirmDateTime": "2024/06/11 12:30",
+          "lastConfirmDateTime": "2024/06/12 12:30",
+          "dl": "PDFファイルのDL",
+          "versionNumber": "123456789"
+        },
+        {
+          "dateYm": "2021/11",
+          "brokerCode": "0504",
+          "brokerName": "株式会社セディナ",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "",
+          "brokerCode": "",
+          "brokerName": "",
+          "firstConfirmDateTime": "",
+          "lastConfirmDateTime": "",
+          "dl": "",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": null,
+          "brokerCode": null,
+          "brokerName": null,
+          "firstConfirmDateTime": null,
+          "lastConfirmDateTime": null,
+          "dl": null,
+          "versionNumber": null
+        },
+        {
+          "dateYm": "202111",
+          "brokerCode": "0503",
+          "brokerName": "エムスリー株式会社",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "202111",
+          "brokerCode": "0504",
+          "brokerName": "株式会社セディナ",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/10",
+          "brokerCode": "0508",
+          "brokerName": "住友SBIネット銀行株式会社",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/10",
+          "brokerCode": "0509",
+          "brokerName": "SBIマネープラザ株式会社",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/10",
+          "brokerCode": "0508",
+          "brokerName": "住友SBIネット銀行株式会社",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/10",
+          "brokerCode": "0509",
+          "brokerName": "SBIマネープラザ株式会社",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/09",
+          "brokerCode": "0509",
+          "brokerName": "SBIマネープラザ株式会社",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/09",
+          "brokerCode": "0504",
+          "brokerName": "株式会社セディナ",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/09",
+          "brokerCode": "0509",
+          "brokerName": "SBIマネープラザ株式会社",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/09",
+          "brokerCode": "0504",
+          "brokerName": "株式会社セディナ",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/08",
+          "brokerCode": "0255",
+          "brokerName": "株式会社セフネット",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        },
+        {
+          "dateYm": "2021/08",
+          "brokerCode": "0275",
+          "brokerName": "株式会社Fan",
+          "firstConfirmDateTime": "20240611 1230",
+          "lastConfirmDateTime": "20240612 1230",
+          "dl": "DL",
+          "versionNumber": ""
+        }
+      ],
+      "beforeSearchTargetDateYmFrom": "",
+      "beforeSearchTargetDateYmTo": "",
+      "beforeSearchBrokerCode": "",
+      "beforeSearchChkBrokerCodeExclude": ""
+    }
+  ]
+}

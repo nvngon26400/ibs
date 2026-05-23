@@ -1,0 +1,47 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "orderNumber": "I02022061609750602",
+    "orderSubNumber": "11111",
+    "depositType": "1",
+    "currencyTypeRadio": "2",
+    "kanyuKbn": "1",
+    "jutyuKbn": "1",
+    "warningApplyTrade": "申請・承認済み",
+    "importantMatterTypeClass": "説明済み",
+    "solicitationEtfType": "勧誘あり（説明記録、確認書受入）",
+    "engPubType": "AAAAAA",
+    "tradeCd":"4",
+    "currencyCode": "米ドル",
+    "tradeKbn": "3",
+    "foreignQuantity": "1000",
+    "orderPriceKindList": "1",
+    "hiddenOrderPrice": "3000",
+    "stopOrderPrice2": "2000",
+    "periodRadio": "0",
+    "period": "20220116",
+    "orderDate": "20220113 133000",
+    "domesticTradeDate": "20230925",
+    "foreignTradeDate": "20230924",
+    "repaymentMethodRadio": "0",
+    "sortOrderRadio": "16",
+    "marginDueDate": "0",
+    "stockTradeType": "MARGIN_CLOSE",
+    "BrandInfo": {
+      "brandCode": "TSLA",
+      "brandName": "ニコラ・テスラ"
+    },
+    "MarketInfo": {
+      "marketName": "NASDAQ",
+      "marketCode": "AAAA",
+      "countryCode": "US"
+    }
+  }]
+}

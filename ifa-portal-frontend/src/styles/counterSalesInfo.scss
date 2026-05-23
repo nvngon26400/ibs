@@ -1,0 +1,50 @@
+.form_body {
+  padding: 15px 20px;
+}
+._bold_black_m {
+  font-size: 16px;
+  font-weight: 700;
+  color: #606266;
+}
+:deep(.el-textarea__inner) {
+  resize: none;
+}
+.info-btn-area {
+  text-align: end;
+}
+
+:deep(.el-radio__label) {
+  font-weight: bold;
+}
+.label {
+  color: #606266;
+  font-weight: bold;
+}
+.caution {
+  color: #f56c6c;
+  font-weight: bold;
+}
+.caution_area {
+  background-color: #fef0f0;
+  padding: 5px 10px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+:deep(.brand_select) .el-input__inner {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.updatetime {
+  padding: 5px 10px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.code_input_text {
+  width: 12em;
+}
+
+:deep(.el-form-item__error) {
+  width: max-content;
+}

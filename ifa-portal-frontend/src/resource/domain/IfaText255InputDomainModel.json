@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT255_INPUT",
+  "domainName": "テキスト255_インプット",
+  "dataType": "文字列",
+  "precision": 255,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 255,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

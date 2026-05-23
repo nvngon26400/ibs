@@ -1,0 +1,17 @@
+{
+  "domainId": "CUST_NAME_KANJI",
+  "domainName": "顧客名（漢字）",
+  "dataType": "文字列",
+  "precision": 72,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 72,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,84 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "brokerList": [
+              {
+                  "brokerCode": "1211",
+                  "brokerName": "三十三銀行SBIマネープラザ"
+              },
+              {
+                  "brokerCode": "1525",
+                  "brokerName": "旧直営佐原"
+              },
+              {
+                  "brokerCode": "2008",
+                  "brokerName": "Fanネオライフ"
+              },
+              {
+                  "brokerCode": "2009",
+                  "brokerName": "さぎんマネースクエア"
+              },
+              {
+                  "brokerCode": "6021",
+                  "brokerName": "仲介業者_6021_999"
+              },
+              {
+                  "brokerCode": "1001",
+                  "brokerName": "東京中央銀行"
+              },
+              {
+                  "brokerCode": "9501",
+                  "brokerName": "9501-999"
+              },
+              {
+                  "brokerCode": "1081",
+                  "brokerName": "株式会社清水銀行"
+              },
+              {
+                  "brokerCode": "1082",
+                  "brokerName": "あおばファイナンシャルアドバイザー株式会社"
+              },
+              {
+                  "brokerCode": "1086",
+                  "brokerName": "株式会社愛媛銀行"
+              },
+              {
+                  "brokerCode": "1089",
+                  "brokerName": "株式会社京葉銀行"
+              },
+              {
+                  "brokerCode": "1074",
+                  "brokerName": "株式会社アンバー・アセット・マネジメント"
+              },
+              {
+                  "brokerCode": "1077",
+                  "brokerName": "株式会社エスイーシーキャピタル"
+              },
+              {
+                  "brokerCode": "0341",
+                  "brokerName": "有限会社きのうちエージェンシー"
+              },
+              {
+                  "brokerCode": "0512",
+                  "brokerName": "直販＋登録前"
+              },
+              {
+                  "brokerCode": "0344",
+                  "brokerName": "株式会社フォーユー"
+              },
+              {
+                  "brokerCode": "0346",
+                  "brokerName": "株式会社アルファコンサルティング"
+              }
+          ]
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/01/24 17:07:22",
+  "title": null,
+  "returnCode": "0"
+}

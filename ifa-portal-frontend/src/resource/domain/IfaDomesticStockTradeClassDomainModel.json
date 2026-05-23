@@ -1,0 +1,17 @@
+{
+  "domainId": "DOMESTIC_STOCK_TRADE_CLASS",
+  "domainName": "取引種別（国内株式）",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

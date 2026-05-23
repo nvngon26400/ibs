@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY8_0",
+  "domainName": "価格8_0",
+  "dataType": "金額",
+  "precision": 8,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 10,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

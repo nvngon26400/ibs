@@ -1,0 +1,40 @@
+{
+    "totalSize": 10,
+    "maxRownum": 0,
+    "overMaxRownum": false,
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2023/07/05 12:00:00",
+    "title": "",
+    "returnCode": "I9999",
+    "dataList":[{
+        "customerName": "藤川静枝 (フジカワシズエ)",
+        "accountNumber": "123-1234567",
+        "classificationDisplay": "支払額",
+        "searchResultCount": "2",
+        "sumSettlementAmount": "15000000",
+        "unsettleDetail": [
+            {
+                "kouban": "1",
+                "settlementDate": "20231010",
+                "tradeDate": "20231005",
+                "openTradeKbn": "1",
+                "dispAbstract": "摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容",
+                "quantity": "20",
+                "price": "654987",
+                "settlementAmount": "98765412"        
+            },
+            {
+                "kouban": "2",
+                "settlementDate": "20231010",
+                "tradeDate": "20231005",
+                "openTradeKbn": "1",
+                "dispAbstract": "摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容摘要内容",
+                "quantity": "20",
+                "price": "654987",
+                "settlementAmount": "-98765412"        
+            }
+
+        ]
+    }]
+}

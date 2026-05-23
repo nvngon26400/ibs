@@ -1,0 +1,256 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/06 12:00:00",
+  "title": "",
+  "returnCode": "SUCCESS",
+  "dataList": [
+    {
+      "registerDateList": [
+        {
+          "codeId": "201712",
+          "codeName": "2017年12月"
+        },
+        {
+          "codeId": "202310",
+          "codeName": "2023年10月"
+        },
+        {
+          "codeId": "202309",
+          "codeName": "2023年09月"
+        },
+        {
+          "codeId": "202308",
+          "codeName": "2023年08月"
+        },
+        {
+          "codeId": "202307",
+          "codeName": "2023年07月"
+        },
+        {
+          "codeId": "202306",
+          "codeName": "2023年06月"
+        },
+        {
+          "codeId": "202305",
+          "codeName": "2023年05月"
+        },
+        {
+          "codeId": "202304",
+          "codeName": "2023年04月"
+        },
+        {
+          "codeId": "202303",
+          "codeName": "2023年03月"
+        },
+        {
+          "codeId": "202302",
+          "codeName": "2023年02月"
+        },
+        {
+          "codeId": "202301",
+          "codeName": "2023年01月"
+        },
+        {
+          "codeId": "202212",
+          "codeName": "2022年12月"
+        },
+        {
+          "codeId": "202211",
+          "codeName": "2022年11月"
+        },
+        {
+          "codeId": "202210",
+          "codeName": "2022年10月"
+        },
+        {
+          "codeId": "202209",
+          "codeName": "2022年09月"
+        },
+        {
+          "codeId": "202208",
+          "codeName": "2022年08月"
+        },
+        {
+          "codeId": "202207",
+          "codeName": "2022年07月"
+        },
+        {
+          "codeId": "202206",
+          "codeName": "2022年06月"
+        },
+        {
+          "codeId": "202205",
+          "codeName": "2022年05月"
+        },
+        {
+          "codeId": "202204",
+          "codeName": "2022年04月"
+        },
+        {
+          "codeId": "202203",
+          "codeName": "2022年03月"
+        },
+        {
+          "codeId": "202202",
+          "codeName": "2022年02月"
+        },
+        {
+          "codeId": "202201",
+          "codeName": "2022年01月"
+        },
+        {
+          "codeId": "202112",
+          "codeName": "2021年12月"
+        },
+        {
+          "codeId": "202111",
+          "codeName": "2021年11月"
+        },
+        {
+          "codeId": "202110",
+          "codeName": "2021年10月"
+        },
+        {
+          "codeId": "202109",
+          "codeName": "2021年09月"
+        },
+        {
+          "codeId": "202108",
+          "codeName": "2021年08月"
+        },
+        {
+          "codeId": "202107",
+          "codeName": "2021年07月"
+        },
+        {
+          "codeId": "202106",
+          "codeName": "2021年06月"
+        },
+        {
+          "codeId": "202105",
+          "codeName": "2021年05月"
+        },
+        {
+          "codeId": "202104",
+          "codeName": "2021年04月"
+        },
+        {
+          "codeId": "202103",
+          "codeName": "2021年03月"
+        },
+        {
+          "codeId": "202102",
+          "codeName": "2021年02月"
+        },
+        {
+          "codeId": "202101",
+          "codeName": "2021年01月"
+        },
+        {
+          "codeId": "202012",
+          "codeName": "2020年12月"
+        },
+        {
+          "codeId": "202011",
+          "codeName": "2020年11月"
+        },
+        {
+          "codeId": "202010",
+          "codeName": "2020年10月"
+        },
+        {
+          "codeId": "202009",
+          "codeName": "2020年09月"
+        },
+        {
+          "codeId": "202008",
+          "codeName": "2020年08月"
+        },
+        {
+          "codeId": "202007",
+          "codeName": "2020年07月"
+        },
+        {
+          "codeId": "202006",
+          "codeName": "2020年06月"
+        },
+        {
+          "codeId": "202005",
+          "codeName": "2020年05月"
+        },
+        {
+          "codeId": "202004",
+          "codeName": "2020年04月"
+        },
+        {
+          "codeId": "202003",
+          "codeName": "2020年03月"
+        },
+        {
+          "codeId": "202002",
+          "codeName": "2020年02月"
+        },
+        {
+          "codeId": "202001",
+          "codeName": "2020年01月"
+        },
+        {
+          "codeId": "201912",
+          "codeName": "2019年12月"
+        },
+        {
+          "codeId": "201911",
+          "codeName": "2019年11月"
+        },
+        {
+          "codeId": "201910",
+          "codeName": "2019年10月"
+        },
+        {
+          "codeId": "201909",
+          "codeName": "2019年09月"
+        },
+        {
+          "codeId": "201908",
+          "codeName": "2019年08月"
+        },
+        {
+          "codeId": "201907",
+          "codeName": "2019年07月"
+        },
+        {
+          "codeId": "201906",
+          "codeName": "2019年06月"
+        },
+        {
+          "codeId": "201905",
+          "codeName": "2019年05月"
+        },
+        {
+          "codeId": "201904",
+          "codeName": "2019年04月"
+        },
+        {
+          "codeId": "201903",
+          "codeName": "2019年03月"
+        },
+        {
+          "codeId": "201902",
+          "codeName": "2019年02月"
+        },
+        {
+          "codeId": "201901",
+          "codeName": "2019年01月"
+        },
+        {
+          "codeId": "201812",
+          "codeName": "2018年12月"
+        }
+      ]
+    }
+  ]
+}

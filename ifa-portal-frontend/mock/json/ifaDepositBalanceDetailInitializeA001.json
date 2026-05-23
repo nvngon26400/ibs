@@ -1,0 +1,405 @@
+{
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": [
+    {
+      "butenCode": "Z52",
+      "accountNumber": "0001776",
+      "customerNameKanji": "津村米吉",
+      "customerNameKana": "ツムラヨネキチ",
+      "brandCode": "123",
+      "brandName": "ホクリョウ",
+      "commodityAccountDeposit": "株式（総合口座－特定預り）",
+      "domesticStockDepositList": [
+          {
+          "holdingStock": "10",
+          "getPriceReferencePrice": "12216",
+          "currentPrice": "15850",
+          "acquireAmountReferenceAmount": "122160",
+          "valuation": "158500",
+          "valuationProfitAndLoss": "36340",
+          "depositDate": "20160301",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "買付"
+        },{
+          "holdingStock": "10",
+          "getPriceReferencePrice": "12216",
+          "currentPrice": "15850",
+          "acquireAmountReferenceAmount": "122160",
+          "valuation": "158500",
+          "valuationProfitAndLoss": "-36340",
+          "depositDate": "20160301",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "買付"
+        },{
+          "holdingStock": "1234567890123456",
+          "getPriceReferencePrice": "1234567890123.12",
+          "currentPrice": "123456789.12",
+          "acquireAmountReferenceAmount": "12345678901234.123",
+          "valuation": "123456789012345.123",
+          "valuationProfitAndLoss": "123456789012345.12",
+          "depositDate": "20160301",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "最大桁数５"
+        },{
+          "holdingStock": "",
+          "getPriceReferencePrice": "",
+          "currentPrice": "",
+          "acquireAmountReferenceAmount": "",
+          "valuation": "",
+          "valuationProfitAndLoss": "",
+          "depositDate": "",
+          "protectionSubstitutionClass": "",
+          "storageReason": ""
+        }
+      ],
+      "mutualFundLotDepositList": [
+        {
+          "unitVolume": "16000",
+          "getPriceReferencePrice": "10911",
+          "currentPrice": "11088",
+          "acquireAmountReferenceAmount": "1403003",
+          "valuation": "1420747",
+          "valuationProfitAndLoss": "17740",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "買付"
+        },{
+          "unitVolume": "15000",
+          "getPriceReferencePrice": "10911",
+          "currentPrice": "11088",
+          "acquireAmountReferenceAmount": "1403003",
+          "valuation": "1420747",
+          "valuationProfitAndLoss": "-1740",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "売却"
+        },{
+          "unitVolume": "1234567890123456",
+          "getPriceReferencePrice": "1234567890123.12",
+          "currentPrice": "123456789.12",
+          "acquireAmountReferenceAmount": "1234567890123.123",
+          "valuation": "12345678901234567",
+          "valuationProfitAndLoss": "12345678901234567",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "最大桁数５"
+        },{
+          "unitVolume": "",
+          "getPriceReferencePrice": "",
+          "currentPrice": "",
+          "acquireAmountReferenceAmount": "",
+          "valuation": "",
+          "valuationProfitAndLoss": "",
+          "protectionSubstitutionClass": "",
+          "storageReason": ""
+        }
+      ],
+      "mutualFundAmountDepositList": [
+        {
+          "unitVolume": "999266",
+          "getPriceReferencePrice": "10078",
+          "currentPrice": "13294",
+          "depositDetailPriceUnit": "10000",
+          "acquireAmountReferenceAmount": "1403003",
+          "valuation": "1420707",
+          "valuationProfitAndLoss": "17740",
+          "protectionSubstitutionClass": "保護預り"
+        },{
+          "unitVolume": "266",
+          "getPriceReferencePrice": "34078",
+          "currentPrice": "53294",
+          "depositDetailPriceUnit": "10000",
+          "acquireAmountReferenceAmount": "13003",
+          "valuation": "1420707",
+          "valuationProfitAndLoss": "-17740",
+          "protectionSubstitutionClass": "保護預り"
+        },{
+          "unitVolume": "1234567890123456",
+          "getPriceReferencePrice": "1234567890123.12",
+          "currentPrice": "123456789.12",
+          "depositDetailPriceUnit": "1234567890",
+          "acquireAmountReferenceAmount": "1234567890123.123",
+          "valuation": "12345678901234567",
+          "valuationProfitAndLoss": "12345678901234567",
+          "protectionSubstitutionClass": "保護預り"
+        },{
+          "unitVolume": "",
+          "getPriceReferencePrice": "",
+          "currentPrice": "",
+          "depositDetailPriceUnit": "",
+          "acquireAmountReferenceAmount": "",
+          "valuation": "",
+          "valuationProfitAndLoss": "",
+          "protectionSubstitutionClass": ""
+        }
+      ],
+      "domesticClaimDepositList": [
+        {
+          "holdingFaceValue": "2000000",
+          "compoundInterest": "14",
+          "redemptionDate": "20220228",
+          "interestPaymentDate": "05/11-末日",
+          "exchangeRate": "-",
+          "getPriceReferencePrice": "95.5",
+          "contractExchange": "-",
+          "contractAmount": "1910000",
+          "depositDate": "20160115",
+          "valuation": "1910000",
+          "protectionSubstitutionClass": "保護預かり",
+          "storageReason": "買付"
+        },{
+          "holdingFaceValue": "20000",
+          "compoundInterest": "0",
+          "redemptionDate": "20220228",
+          "interestPaymentDate": "05/11-末日",
+          "exchangeRate": "-",
+          "getPriceReferencePrice": "21495.52",
+          "contractExchange": "-",
+          "contractAmount": "1910000",
+          "depositDate": "20160115",
+          "valuation": "1910000",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "買付"
+        },{
+          "holdingFaceValue": "20000",
+          "compoundInterest": " ",
+          "redemptionDate": " ",
+          "interestPaymentDate": "05/11-末日",
+          "exchangeRate": "-",
+          "getPriceReferencePrice": "21495.52",
+          "contractExchange": "-",
+          "contractAmount": "1910000",
+          "depositDate": "20160115",
+          "valuation": "1910000",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "買付"  
+        },{
+          "holdingFaceValue": "1234567890123456",
+          "compoundInterest": "123.123",
+          "redemptionDate": "20160115",
+          "interestPaymentDate": "最大文字数３０確認用最大文字数３０確認用最大文字数３０確認用",
+          "exchangeRate": "-",
+          "getPriceReferencePrice": "1234567890123.12",
+          "contractExchange": "-",
+          "contractAmount": "1234567890123456",
+          "depositDate": "20160115",
+          "valuation": "1234567890123456",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "買付"
+        },{
+          "holdingFaceValue": "",
+          "compoundInterest": "",
+          "redemptionDate": "",
+          "interestPaymentDate": "",
+          "exchangeRate": "",
+          "getPriceReferencePrice": "",
+          "contractExchange": "",
+          "contractAmount": "",
+          "depositDate": "",
+          "valuation": "",
+          "protectionSubstitutionClass": "",
+          "storageReason": ""
+        }
+      ],
+      "foreignClaimDepositList": [
+       {
+          "holdingFaceValue": "1234 USD",
+          "compoundInterest": "1.100",
+          "redemptionDate": "20281231",
+          "interestPaymentDate": "0/1-0",
+          "exchangeRate": "1234.5円/USD",
+          "unitPrice": "1234.6 USD",
+          "contractExchange": "1234.7円/USD",
+          "contractAmount": "12345 USD",
+          "depositDate": "",
+          "valuationJpAmount": null,
+          "protectionSubstitutionClass": "-",
+          "storageReason": "買付",
+          "currencyCode": "USD"
+        },
+        {
+          "holdingFaceValue": "1234 INR",
+          "compoundInterest": "1.100",
+          "redemptionDate": "20281231",
+          "interestPaymentDate": "0/1-0",
+          "exchangeRate": "1234.5円/INR",
+          "unitPrice": "1234.6 INR",
+          "contractExchange": "1234.7円/INR",
+          "contractAmount": "12345 INR",
+          "depositDate": "",
+          "valuationJpAmount": null,
+          "protectionSubstitutionClass": "-",
+          "storageReason": "買付",
+          "currencyCode": "INR"
+        },
+        {
+          "holdingFaceValue": "1234 IDR",
+          "compoundInterest": "1.100",
+          "redemptionDate": "20281231",
+          "interestPaymentDate": "0/1-0",
+          "exchangeRate": "1234.5円/IDR",
+          "unitPrice": "1234.6 IDR",
+          "contractExchange": "1234.7円/IDR",
+          "contractAmount": "12345 IDR",
+          "depositDate": "",
+          "valuationJpAmount": null,
+          "protectionSubstitutionClass": "-",
+          "storageReason": "買付",
+          "currencyCode": "IDR"
+        },{
+          "holdingFaceValue": "1234567890123456 USD",
+          "compoundInterest": "123.123",
+          "redemptionDate": "20220228",
+          "interestPaymentDate": "最大文字数３０確認用最大文字数３０確認用最大文字数３０確認用",
+          "exchangeRate": "123.123456円/USD",
+          "unitPrice": "1234567890123.12 USD",
+          "contractExchange": "123.123456円/USD",
+          "contractAmount": "1234567890123456 USD",
+          "depositDate": "20160115",
+          "valuationJpAmount": "1234567890123456",
+          "protectionSubstitutionClass": "保護預り",
+          "storageReason": "買付",
+          "currencyCode": "USD"
+        },{
+          "holdingFaceValue": " USD",
+          "compoundInterest": "",
+          "redemptionDate": "",
+          "interestPaymentDate": "",
+          "exchangeRate": "円/USD",
+          "unitPrice": " USD",
+          "contractExchange": "円/USD",
+          "contractAmount": " USD",
+          "depositDate": "",
+          "valuationJpAmount": "",
+          "protectionSubstitutionClass": "",
+          "storageReason": "",
+          "currencyCode": ""
+        },{
+          "holdingFaceValue": "",
+          "compoundInterest": "",
+          "redemptionDate": "",
+          "interestPaymentDate": "",
+          "exchangeRate": "",
+          "unitPrice": "",
+          "contractExchange": "",
+          "contractAmount": "",
+          "depositDate": "",
+          "valuationJpAmount": "",
+          "protectionSubstitutionClass": "",
+          "storageReason": "",
+          "currencyCode": ""
+        }
+      ],
+      "foreignClaimForeignCurrencyDepositList": [
+        {
+            "holdingFaceValue": "10000 USD",
+            "exchangeRate": "149.12円/USD",
+            "unitPrice": "322.6 USD",
+            "contractExchange": "112.00円/USD",
+            "contractAmount": "3226 USD",
+            "valuationJpAmount": "426170",
+            "protectionSubstitutionClass": "保護預り"
+        }
+      ],
+      "foreignStockDepositList": [
+      {
+        "holdingStock":"11",
+        "openPrice":"1234.5 USD",
+        "currentPrice":"1234.6 USD",
+        "getAmount":"1234.7 USD",
+        "valuation":"1234.8 USD",
+        "foreignProfitAndLoss":"1234.9 USD",
+        "fxValuationRate":"1234.0円/USD",
+        "valuationJpAmount":"286177",
+        "yenProfitLoss":"50590",
+        "protectionSubstitutionClass":"保護預り",
+        "currencyCode":"USD"
+      },{
+        "holdingStock":"11",
+        "openPrice":"1234.5 USD",
+        "currentPrice":"1234.6 USD",
+        "getAmount":"1234.7 USD",
+        "valuation":"1234.8 USD",
+        "foreignProfitAndLoss":"-1234.9 USD",
+        "fxValuationRate":"1234.0円/USD",
+        "valuationJpAmount":"286177",
+        "yenProfitLoss":"50590",
+        "protectionSubstitutionClass":"保護預り",
+        "currencyCode":"USD"
+      },{
+        "holdingStock": "1234567890123456",
+        "openPrice": "123456789.123456 USD",
+        "currentPrice": "123456789.123456 USD",
+        "getAmount": "12345678901.123456 USD",
+        "valuation": "12345678901.123456 USD",
+        "foreignProfitAndLoss": "12345678901.123456 USD",
+        "fxValuationRate": "123456789012345.12円/USD",
+        "valuationJpAmount": "12345678901234567",
+        "yenProfitLoss": "12345678901234567",
+        "protectionSubstitutionClass": "保護預り",
+        "currencyCode": "USD"
+      },{
+        "holdingStock": "",
+        "openPrice": " USD",
+        "currentPrice": " USD",
+        "getAmount": " USD",
+        "valuation": " USD",
+        "foreignProfitAndLoss": " USD",
+        "fxValuationRate": "円/USD",
+        "valuationJpAmount": "",
+        "yenProfitLoss": "",
+        "protectionSubstitutionClass": "",
+        "currencyCode": ""
+      },{
+        "holdingStock": "",
+        "openPrice": "",
+        "currentPrice": "",
+        "getAmount": "",
+        "valuation": "",
+        "foreignProfitAndLoss": "",
+        "fxValuationRate": "",
+        "valuationJpAmount": "",
+        "yenProfitLoss": "",
+        "protectionSubstitutionClass": "",
+        "currencyCode": ""
+      }
+      ],
+      "foreignMmfDepositList": [
+        {
+          "unitVolume":"1010745.82",
+          "foreignValuation":"1234.5 USD",
+          "fxValuationRate":"1234.6円/USD",
+          "valuation":"150338333",
+          "yenProfitLoss":"148124901",
+          "protectionSubstitutionClass":"保護預り",
+          "currencyCode":"USD"
+        },{
+          "unitVolume": "1234567890123456",
+          "foreignValuation": "12345678901.123456 USD",
+          "fxValuationRate": "123456789012345.12円/USD",
+          "valuation": "12345678901234567",
+          "yenProfitLoss": "12345678901234567",
+          "protectionSubstitutionClass": "保護預り",
+          "currencyCode": "USD"
+        },{
+          "unitVolume": "",
+          "foreignValuation": " USD",
+          "fxValuationRate": "円/USD",
+          "valuation": "",
+          "yenProfitLoss": "",
+          "protectionSubstitutionClass": "",
+          "currencyCode": ""
+        },{
+          "unitVolume": "",
+          "foreignValuation": "",
+          "fxValuationRate": "",
+          "valuation": "",
+          "yenProfitLoss": "",
+          "protectionSubstitutionClass": "",
+          "currencyCode": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT_FULL_HALF6",
+  "domainName": "テキスト（全角半角）6",
+  "dataType": "文字列",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "RESTRIC_NUMBER",
+  "domainName": "制限番号",
+  "dataType": "文字列",
+  "precision": 3,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": "zeroPadding",
+  "formattedDigit": 3,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

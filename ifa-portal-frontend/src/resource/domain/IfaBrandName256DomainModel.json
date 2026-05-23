@@ -1,0 +1,17 @@
+{
+  "domainId": "BRAND_NAME256",
+  "domainName": "銘柄名256",
+  "dataType": "文字列",
+  "precision": 256,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 256,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,30 @@
+{
+  "totalSize":1,
+  "maxRownum":1,
+  "overMaxRownum":false,
+  "dataList":[{
+    "tradeKbn": "1",
+    "orderDate": "20231010 10:10:10",
+    "orderNumber": "2023050112345678",
+    "quantity": "3",
+    "currencyCode": "USD",
+    "currency": "USD",
+    "contractExchangeRate": "20231010",
+    "contractExchangeRateDateTime": "20231010 10:10:10",
+    "selectedCurrencyInfo": "1",
+    "fxRateAdditionalType": "1",
+    "additionalPrice": "100000",
+    "deliveryAmount": "123456789",
+    "tradeTiming": "1",
+    "settlementDate": "20231010 10:10:10",
+    "orderWarningexceedingThreshold": "",
+    "warningThreshold": "123456789",
+    "addLinkAttention": "1",
+    "decimalLength": "1"
+  }],
+  "message":"正常終了",
+  "errorLevel":0,
+  "requestedTime":"2023/09/19 19:35:20",
+  "title":null,
+  "returnCode":"0"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY12_3",
+  "domainName": "価格12_3",
+  "dataType": "金額",
+  "precision": 12,
+  "digit": 3,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 15,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "各通貨単位",
+  "htmlTag": "ifa-input-amount"
+}

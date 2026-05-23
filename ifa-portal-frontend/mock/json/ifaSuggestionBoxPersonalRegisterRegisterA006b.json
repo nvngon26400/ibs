@@ -1,0 +1,11 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [],
+  "message": "あなたの要望を登録しました。",
+  "errorLevel": 1,
+  "requestedTime": "2025/06/30 19:11:41",
+  "title": null,
+  "returnCode": "info.insertCompleted"
+}

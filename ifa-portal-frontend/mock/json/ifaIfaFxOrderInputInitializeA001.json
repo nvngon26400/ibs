@@ -1,0 +1,31 @@
+{
+  "totalSize":1,
+  "maxRownum":1,
+  "overMaxRownum":false,
+  "dataList":[{
+    "currencyCode": "USD",
+    "tradeKbn": "1",
+    "currency": "米ドル",
+    "decimalLength": "1",
+    "exchangeGroup": "1",
+    "warningThreshold": "100000",
+    "closableQuantity": "10",
+    "tradeLimitMax": "10000000",
+    "tradeUnit": "0.01",
+    "foreignButtonRange": "20",
+    "referenceRate": "123456.12",
+    "computeExchangeRate": "0.5",
+    "denominator": "1",
+    "adjustPrice": "123456.7",
+    "maxOrderableQuantity": "6000000",
+    "approximatePurchaseAmount": "300000",
+    "foreignDesignationMaxValue": "999999",
+    "yenDesignationMinValue": "1",
+    "yenDesignationMaxValue": "999999"
+  }],
+  "message":"正常終了",
+  "errorLevel":0,
+  "requestedTime":"2023/09/19 19:35:20",
+  "title":null,
+  "returnCode":"0"
+}

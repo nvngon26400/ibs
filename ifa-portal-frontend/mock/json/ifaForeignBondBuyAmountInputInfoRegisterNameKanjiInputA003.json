@@ -1,0 +1,17 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "butenCode": "0001Z",
+          "accountNumber": "テスト用Z(0001Z)",
+          "nameKanji": "岸村眞治"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2026/04/15 11:35:20",
+  "title": null,
+  "returnCode": null
+}

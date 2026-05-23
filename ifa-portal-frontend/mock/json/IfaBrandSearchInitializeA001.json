@@ -1,0 +1,27 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+      {
+        "brandCode": "9999",
+        "brandName": "テスト銘柄001",
+        "selectMarketList": [
+          { "key": "6", "value": "福証" },
+          { "key": "8", "value": "札証" },
+          { "key": "2", "value": "名証" },
+          { "key": "7", "value": "PTS" },
+          { "key": "0", "value": "東証" },
+          { "key": "A", "value": "当社優先市場／SOR" }
+        ],
+        "topixFlg": "1",
+        "regKbn": "1",
+        "upperRankMkt": "0"
+      }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2023/09/14 23:02:26",
+    "title": null,
+    "returnCode": "SUCCESS"
+  }

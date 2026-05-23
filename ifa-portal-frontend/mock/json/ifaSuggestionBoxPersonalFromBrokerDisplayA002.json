@@ -1,0 +1,41 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "screenComment": "abc",
+      "requestList": [
+        {
+        "sbpNo": "000001",
+        "ansUpdateTime": "2025/06/10",
+        "registerDate": "2025/06/09",
+        "brokerCode": "2020",
+        "brokerName": "目安箱テスト",
+        "empCode": "0001",
+        "empName": "目安 箱太郎",
+        "title": "表示後タイトル１",
+        "category": "01",
+        "status": "0"
+        },
+        {
+          "sbpNo": "000002",
+          "ansUpdateTime": "2025/06/10",
+          "registerDate": "2025/06/09",
+          "brokerCode": "2020",
+          "brokerName": "目安箱テスト2",
+          "empCode": "0002",
+          "empName": "目安 箱太郎",
+          "title": "表示後タイトル２",
+          "category": "03",
+          "status": "9"
+        }
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/06/10 16:32:56",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

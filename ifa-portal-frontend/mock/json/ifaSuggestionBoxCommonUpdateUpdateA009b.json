@@ -1,0 +1,13 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {}
+  ],
+  "message": "皆様からの要望を更新しました",
+  "errorLevel": 1,
+  "requestedTime": "2024/05/29 14:45:49",
+  "title": null,
+  "returnCode": "info.updateCompleted"
+}

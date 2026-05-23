@@ -1,0 +1,35 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "otherFeeDetailList": [
+        {
+          "brokerName": "仲介業者A",
+          "targetDateYm": "202406",
+          "feeAmountTotal": "1",
+          "dealerNumber": "999999",
+          "sequentialNumber": "999",
+          "feeAmount": "1",
+          "otherFeeMessage": "共同募集による報酬金額（信頼）"
+        },
+        {
+          "brokerName": "仲介業者B",
+          "targetDateYm": "202407",
+          "feeAmountTotal": "1",
+          "dealerNumber": "111",
+          "sequentialNumber": "111",
+          "feeAmount": "1",
+          "otherFeeMessage": "共同募集による報酬金額"
+        }
+
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/05/29 14:42:49",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

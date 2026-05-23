@@ -1,0 +1,57 @@
+/* Design guidline color set */
+$mainBlueColor:#092987; // メインブルー
+$subBlueColor:#005FCC; // サブブルー
+$mainTextColor:#18181A; // メインテキストカラー
+$subTextColor:#676B74; // サブテキストカラー
+$buyOrPlusColor:#E5004C; // 買い・プラス・強調
+$sellOrMinusColor:#00847F; // 売り・マイナス
+$errorColor:#D10000; // エラー、警告
+$attentionColor:#FCEC2C; // 注意
+$disabledInputColor: #F5F6F7; // 入力項目非活性
+$errorMessageFontColor:#D10014;
+
+$mainBackGroundColor:#F5F6F7; // 背景
+$subBackGroundColor:#E6E8F0; // 背景(サブ)・非活性
+$errorBackGroundColor:#FFF0F0; // エラー・警告背景色
+$unenteredBackGroundColor:#FFFDE2; // 未入力ハイライト
+$hoverBackGroundColor:#EDF8FF; // ホバー時背景色
+$mainRuledLineColor:#A7B1C3; // 罫線
+$subRuledLineColor:#E6E8F0; // 罫線(サブ)
+
+$horizontalTableHeaderColor:#676B74; // 水平表示テーブルヘッダ色
+$virticalTableHeaderColor:#E6E8F0; // 垂直表示テーブルヘッダ色
+
+$fontfamily:  'Roboto',  'ヒラギノ角ゴシック W4', 'Hiragino Sans W4', 'Noto Sans JP', 'メイリオ', 'Meiryo', sans-serif;
+$fontsize-nomal: 14px;
+$fontsize-large: 16px;
+$fontsize-small: 14px;
+$fontsize-mini: 12px;
+
+
+// sidebar
+$menuText:$mainTextColor;
+$menuActiveText:$subBlueColor;
+$subMenuActiveText:$mainTextColor; //https://github.com/ElemeFE/element/issues/12951
+
+$menuBg:$subBackGroundColor;
+$menuHover:$subBackGroundColor;
+
+$subMenuBg:$subBackGroundColor;
+$subMenuHover:$subBackGroundColor;
+
+$sideBarWidth: 260px;
+
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+}
+
+

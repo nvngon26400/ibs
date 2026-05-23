@@ -1,0 +1,30 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "sbiWrapManageFeeInfoList": [
+        {
+          "brokerCode": "0001",
+          "brokerName": "0000000000",
+          "empCode": "0001",
+          "brokerChargeName": "0000000000",
+          "buten": "123",
+          "accountNumber": "123456",
+          "dealerNumber": "010",
+          "customerName": "0000000000",
+          "targetDateYmd": "20231101",
+          "operationFeeCollectionInfoId": "0000000000",
+          "name": "123",
+          "yenFee": "0"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/20 20:53:52",
+  "title": null,
+  "returnCode": "0"
+}

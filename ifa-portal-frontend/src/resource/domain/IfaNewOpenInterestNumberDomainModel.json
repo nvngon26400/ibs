@@ -1,0 +1,17 @@
+{
+  "domainId": "NEW_OPEN_INTEREST_NUMBER",
+  "domainName": "新規建玉指定番号",
+  "dataType": "数値",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

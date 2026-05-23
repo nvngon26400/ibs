@@ -1,0 +1,52 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "toiawaseDList": [
+        {
+          "toiawaseCd": "aa   ",
+          "toiawaseMei": "IFA専用-注文"
+        },
+        {
+          "toiawaseCd": "ab   ",
+          "toiawaseMei": "IFA専用-投資相談・勧誘"
+        },
+        {
+          "toiawaseCd": "ac   ",
+          "toiawaseMei": "IFA専用-問い合わせ・案内"
+        },
+        {
+          "toiawaseCd": "ad   ",
+          "toiawaseMei": "IFA専用-面談"
+        },
+        {
+          "toiawaseCd": "af   ",
+          "toiawaseMei": "IFA専用-ヒアリング"
+        },
+        {
+          "toiawaseCd": "ah   ",
+          "toiawaseMei": "IFA専用-アフターフォロー等"
+        },
+        {
+          "toiawaseCd": "ai   ",
+          "toiawaseMei": "IFA専用-アテンション"
+        },
+        {
+          "toiawaseCd": "aj   ",
+          "toiawaseMei": "IFA専用-その他"
+        },
+        {
+          "toiawaseCd": "ak   ",
+          "toiawaseMei": "IFA専用-申請"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

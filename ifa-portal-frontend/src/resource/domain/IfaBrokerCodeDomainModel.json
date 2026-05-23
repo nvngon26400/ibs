@@ -1,0 +1,17 @@
+{
+  "domainId": "BROKER_CODE",
+  "domainName": "仲介業者コード",
+  "dataType": "文字列",
+  "precision": 4,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 4,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

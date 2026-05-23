@@ -1,0 +1,72 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "requestList": [
+              {
+                  "totalRow": 4,
+                  "sbpNo": "000001",
+                  "ansUpdateTime": "2025-06-16 12:42:00",
+                  "registerDate": "2025-06-16 12:42:00",
+                  "brokerCode": "1111",
+                  "brokerName": null,
+                  "empCode": "0001",
+                  "empName": "長野銀行 営業員",
+                  "title": "仲介業者タイトル",
+                  "category": "01",
+                  "status": "0",
+                  "suggestion": "仲介業者要望"
+              },
+              {
+                  "totalRow": 4,
+                  "sbpNo": "000002",
+                  "ansUpdateTime": "2025-06-16 12:42:00",
+                  "registerDate": "2025-06-16 12:42:00",
+                  "brokerCode": "1111",
+                  "brokerName": null,
+                  "empCode": "0001",
+                  "empName": "bits011",
+                  "title": "更新タイトル",
+                  "category": "01",
+                  "status": "0",
+                  "suggestion": "更新要望"
+              },
+              {
+                  "totalRow": 4,
+                  "sbpNo": "000003",
+                  "ansUpdateTime": "2025-06-30 19:01:03",
+                  "registerDate": "2025-06-30 19:01:03",
+                  "brokerCode": "1111",
+                  "brokerName": null,
+                  "empCode": "0001",
+                  "empName": "長野銀行 営業員",
+                  "title": "テストタイトル",
+                  "category": "02",
+                  "status": "0",
+                  "suggestion": "要望"
+              },
+              {
+                  "totalRow": 4,
+                  "sbpNo": "000004",
+                  "ansUpdateTime": "2025-06-30 19:11:41",
+                  "registerDate": "2025-06-30 19:11:41",
+                  "brokerCode": "1111",
+                  "brokerName": null,
+                  "empCode": "0001",
+                  "empName": "長野銀行 営業員",
+                  "title": "テストタイトル",
+                  "category": "02",
+                  "status": "0",
+                  "suggestion": "要望"
+              }
+          ]
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/07/02 14:53:21",
+  "title": "/opt/download/csvTemporary/20250702145348490_test-redis-register-kanki_bits011.csv",
+  "returnCode": "正常終了"
+}

@@ -1,0 +1,24 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "tradeCd": "1",
+    "brandCode": "",
+    "depositType": "",
+    "buyingPower": {
+      "deliveryDateT2": "20231110",
+      "deliveryDateT3": "20231113",
+      "wholeAccountT2": "1100",
+      "wholeAccountT3": "1200",
+      "jrNisaAccountStatusT2": "1300",
+      "jrNisaAccountStatusT3": "1400",
+      "nisaBuy": "120000"
+    }
+  }]
+}

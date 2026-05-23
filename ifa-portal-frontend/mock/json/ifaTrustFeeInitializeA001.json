@@ -1,0 +1,13 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "requestedTime": "2024/06/17 16:32:56",
+  "dataList": [{
+    "trustFeeComment": "信託報酬コメント"
+  }],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE22_DIGITS_E",
+  "domainName": "レート22_E",
+  "dataType": "レート",
+  "precision": 22,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 28,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-rate"
+}

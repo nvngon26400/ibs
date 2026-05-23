@@ -1,0 +1,15 @@
+{
+    "totalSize": 0,
+    "maxRownum": 0,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "fileDirectory": "/opt/download/management/auxiliary/"
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/06/27 10:16:04",
+    "title": null,
+    "returnCode": null
+}

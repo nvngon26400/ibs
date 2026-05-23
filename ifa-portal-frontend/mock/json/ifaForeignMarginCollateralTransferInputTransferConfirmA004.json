@@ -1,0 +1,45 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "returnCode": "SUCCESS",
+    "message": null,
+    "errorLevel": 0,
+    "requestedTime": "2023/10/11 10:00:00",
+    "title": null,
+    "dataList": [
+        {
+            "collateralSecurityTransferInfo": [
+                {
+                    "collateralDepositListBrandCode": "AON",
+                    "collateralDepositListBrandName": "エーオン",
+                    "specificAccountCode": "1",
+                    "depositType": "PROTECTION_KEEPING",
+                    "valuatePrice": "319.01",
+                    "collateralAssessment": "70",
+                    "collateralValuation": "223.3",
+                    "transferQuantity": "1",
+                    "notReceivedQuantity": "0"
+                }
+            ],
+            "currentPower": {
+                "marginBuyingPower": "10000",
+                "totalCollateralValue": "15000",
+                "depositRate": "10"
+            },
+            "afterPower": {
+                "marginBuyingPower": "20000",
+                "totalCollateralValue": "25000",
+                "depositRate": "20"
+            },
+            "transferClassification": "SECURITIES_WITHDRAWAL",
+            "collateralSecurityTransferInfoList": [
+                {
+                  "collateralDepositListBrandCode": "AON",
+                  "specificAccountCode": "1",
+                  "depositType": "PROTECTION_KEEPING"
+                }
+            ]
+        }
+    ]
+}

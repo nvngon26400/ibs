@@ -1,0 +1,17 @@
+{
+  "domainId": "POINT8_WITH_UNIT",
+  "domainName": "ポイント8（単位つき）",
+  "dataType": "数値",
+  "precision": 8,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 10,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "ポイント",
+  "htmlTag": null
+}

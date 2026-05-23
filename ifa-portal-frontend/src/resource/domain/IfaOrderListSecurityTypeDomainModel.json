@@ -1,0 +1,17 @@
+{
+  "domainId": "ORDER_LIST_SECURITY_TYPE",
+  "domainName": "商品区分（注文一覧）",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": "ifa-input-select"
+}

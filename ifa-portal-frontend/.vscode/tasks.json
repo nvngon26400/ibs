@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": {
+                "owner": "custom",
+                "pattern": {
+                    "regexp": "ˆ$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Compiling...",
+                    "endsPattern": "Compiled .*"
+				},
+			},
+			"label": "npm: dev",
+			"isBackground": true,
+			"detail": "vue-cli-service serve"
+		}
+	]
+}

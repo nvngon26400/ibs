@@ -1,0 +1,17 @@
+{
+  "domainId": "FOREIGN_BUY_POWER_FLAG",
+  "domainName": "買付余力(外貨)有無",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

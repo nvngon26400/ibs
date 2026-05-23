@@ -1,0 +1,39 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "edelivAgreementDataList": [
+        {
+          "buten": "Z64",
+          "accountNumber": "417572",
+          "edelivAgreementDate": "2024/04/25",
+          "edelivAgreementKbn": "1",
+          "edelivAgreementKbnKanji": "承諾済",
+          "checkResult": "登録済",
+          "displayMessageFlag": "0",
+          "checkResultSetList": []
+        },
+        {
+          "buten": "Z99",
+          "accountNumber": "123456",
+          "edelivAgreementDate": "2024/01/01",
+          "edelivAgreementKbn": "0",
+          "edelivAgreementKbnKanji": "未承諾",
+          "checkResult": "NGあり",
+          "displayMessageFlag": "1",
+          "checkResultSetList": [
+            {
+              "status": "ERROR",
+              "msg": "入力した部店口座は存在しません。<br>部店: [Z99]、口座: [123456]"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "message": "1件のデータが登録されました。",
+  "messageId": "info.uploadInsertCompleted",
+  "errorLevel": "SUCCESS"
+}

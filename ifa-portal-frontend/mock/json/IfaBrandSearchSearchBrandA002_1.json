@@ -1,0 +1,27 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "searchResultCount": 1,
+      "searchResultDetail": [
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        }
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2023/09/14 23:03:56",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

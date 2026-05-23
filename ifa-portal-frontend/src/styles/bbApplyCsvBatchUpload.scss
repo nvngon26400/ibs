@@ -1,0 +1,39 @@
+.form-button__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: -30px 0.5rem 0 auto;
+}
+:deep(.el-dialog) {
+  top: 0 !important;
+  margin-top: 0.5vh !important;
+  padding-top: 0.5rem;
+  width: 1400px;
+}
+:deep(.el-dialog__header) {
+  padding: 0;
+}
+:deep(.pq-grid-top) ui-widget-header ui-corner-top {
+  visibility: hidden;
+}
+.fileupload_form {
+  margin-left: 10px;
+  margin-top: 28px;
+}
+.el-icon-info {
+  font-size: 30px;
+}
+.right_icon {
+  text-align: right;
+  margin-left: auto;
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+  top: 0px;
+}
+.display {
+  height: 110px;
+}
+:deep(.el-list-leave-active) {
+  transform: none !important;
+  transition: none !important;
+}

@@ -1,0 +1,30 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "orderDayTime": "20231017 162905",
+            "ecOrderNo": "00001",
+            "market": "1",
+            "brandCode": "3069",
+            "unTradeQuantity": "200",
+            "tradeCd": "7",
+            "depositType": "1",
+            "marginTradeTypeText": "6ヶ月",
+            "paymentDeadline": "1",
+            "newPrice": "300",
+            "newTradeDate": "20210407",
+            "newPositionNumber": "99001",
+            "brandName": "JFLA",
+            "paymentDeadlineDate": "05",
+            "dateKbn": "Y",
+            "comIdR": "H"
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/06/03 16:38:34",
+    "title": null,
+    "returnCode": ""
+}

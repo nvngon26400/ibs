@@ -1,0 +1,107 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "mutualFundSellBuyType": "2",
+            "fundCodeTimes": "0497",
+            "fundCodeIssues": " 27",
+            "depositType": "4",
+            "brandCode": "0497- 27",
+            "selectAccountType": " ",
+            "selectDepositType": "4",
+            "depositTypeList": [],
+            "brand": {
+                "brandName": "三菱ＵＦＪ－三菱ＵＦＪ　Ｊリート不動産株ファンド＜米ドル投資型＞３ヵ月決算型",
+                "priceUnit": 10000,
+                "minSalesLot": 0,
+                "minSalesUnitAmount": 100,
+                "salesUnitLot": 0,
+                "salesTradeUnitAmount": 1,
+                "cancelTradeUnitLot": 1,
+                "cancelTradeUnitAmount": 1,
+                "deadlines": "1500",
+                "buyMethodSelect": "2",
+                "fundType": "2",
+                "reInvestmentClassification": "2",
+                "brandSpecialClassification": "1",
+                "basePrice": 11657,
+                "priceDate": "20240409"
+            },
+            "commRateList": [
+                {
+                    "commRateConditions": 1000000000,
+                    "commRate": 0.0
+                },
+                {
+                    "commRateConditions": 1,
+                    "commRate": null
+                },
+                {
+                    "commRateConditions": 1,
+                    "commRate": null
+                },
+                {
+                    "commRateConditions": 1,
+                    "commRate": null
+                },
+                {
+                    "commRateConditions": 1,
+                    "commRate": null
+                },
+                {
+                    "commRateConditions": 1,
+                    "commRate": null
+                },
+                {
+                    "commRateConditions": 1,
+                    "commRate": null
+                }
+            ],
+            "switchingFavorableTreatmentRate": "100.000",
+            "handlerIndividualDataExistence": "1",
+            "switchingFavorableTreatmentLimit": {
+                "wholeAccountThisMonth": null,
+                "wholeAccountNextMonth": null,
+                "jrNisaAccountThisMonth": null,
+                "jrNisaAccountNextMonth": null
+            },
+            "buyingPower": {
+                "wholeAccount": null,
+                "jrNisaAccount": null
+            },
+            "depositInfo": {
+                "sellAbleLot": "100000",
+                "sellAbleAmount": "110741",
+                "approximateValuation": "116570",
+                "approximateValuationDate": "20240409"
+            },
+            "nisaBuy": null,
+            "distributionReceiveMethodWord": null,
+            "point": {
+                "pointClass": null,
+                "pointCount": null,
+                "fixedPeriodPoint": null,
+                "shortestExpirationDate": null,
+                "minUsePointCount": null,
+                "usePointUnit": null,
+                "pointShowAreaFlag": "0",
+                "pointNameDisplayFlag": "0",
+                "pointCountDisplayFlag": "0",
+                "fixedPeriodPointDisplayFlag": "0",
+                "shortestExpirationDateDisplayFlag": "0",
+                "pointUseAreaFlag": "0"
+            },
+            "tradeCd": "1",
+            "transfersPreferentialQuotaApplication": "項目非表示",
+            "shortTermSaleConfirm": "90日以内",
+            "preRedemptionSellConfirmSelect": "2ヶ月以内"
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/07/12 10:12:37",
+    "title": null,
+    "returnCode": "0"
+}

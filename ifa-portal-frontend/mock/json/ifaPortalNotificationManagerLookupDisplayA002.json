@@ -1,0 +1,50 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [{
+    "portalNotificationList": [
+      {
+        "notificationId": "1",
+        "notification": "2017/09/27【コンプライアンス関連マニュアル改定のお知らせ】<br><br>いつも大変お世話になっております。<br>平素は金融商品仲介業務にご尽力いただき誠に有難うございます。<br><br>以下のマニュアルにつきまして、当社ルールがより明確になるよう説明文を変更いたしました<br>それに伴い、マニュアルの改訂を行いましたのでお知らせいたします。<br><br>対象となるマニュアルは以下になります<br>・コンプライアンス関連実行項目第2巻Ver.27.1<br>・ビデオ研修資料Vol.10「投資信託と債券の短期売却と、乗換取引に関するルールについて」<br><br>ご確認くださいますようお願い申し上げます。<br><br>株式会社SBI証券　内部管理統括部",
+        "importantFlag": "1",
+        "nonDisplayFlag": "1",
+        "displayPeriodFrom": "2023-11-01 00:00:00",
+        "displayPeriodTo": "2023-11-01 00:00:00",
+        "registerDayTime": "2024-06-04 00:00:00"
+      },
+      {
+        "notificationId": "2",
+        "notification": "デモ用データ1",
+        "importantFlag": "1",
+        "nonDisplayFlag": "1",
+        "displayPeriodFrom": "2023-11-01 00:00:00",
+        "displayPeriodTo": "2023-11-01 00:00:00",
+        "registerDayTime": "2024-06-04 00:00:00"
+      },
+      {
+        "notificationId": "3",
+        "notification": "デモ用データ2",
+        "importantFlag": "1",
+        "nonDisplayFlag": "1",
+        "displayPeriodFrom": "2023-11-01 00:00:00",
+        "displayPeriodTo": "2023-11-01 00:00:00",
+        "registerDayTime": "2024-06-04 00:00:00"
+      },
+      {
+        "notificationId": "6",
+        "notification": "0000000006",
+        "importantFlag": "6",
+        "nonDisplayFlag": "6",
+        "displayPeriodFrom": "2023-11-01 00:00:00",
+        "displayPeriodTo": "2023-11-01 00:00:00",
+        "registerDayTime": "2024-06-04 00:00:00"
+    }
+    ]
+  }],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/03/13 13:24:09",
+  "title": null,
+  "returnCode": ""
+}

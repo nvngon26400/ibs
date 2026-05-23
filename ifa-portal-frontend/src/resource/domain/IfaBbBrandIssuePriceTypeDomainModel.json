@@ -1,0 +1,17 @@
+{
+  "domainId": "BB_BRAND_ISSUE_PRICE_TYPE",
+  "domainName": "BB銘柄発行価格区分",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": null,
+  "unit": null,
+  "htmlTag": null
+}

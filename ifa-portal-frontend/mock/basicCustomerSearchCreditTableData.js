@@ -1,0 +1,35 @@
+const data = {
+  items:
+  [
+    { mediatorName: '株式会社松浦恒産', employeeCode: '0000', brokerChargeName: '', butenCode: '307', accountNumber: '999015', course: 'インターネットコース', nameKanji: '123456789012345678901234567890123456789012345678901234567890123456789012', nameKana: 'マチダメグム', tcCompRank: 'B', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '0264', branchCode: '', branchName: '', deposit: '123456789' },
+    { mediatorName: 'CTE_仲介業者AA', employeeCode: '0010', brokerChargeName: '桜木花道test', butenCode: '307', accountNumber: '888001', course: 'インターネットコース', nameKanji: 'test11-1', nameKana: '*', tcCompRank: 'B', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '0275', branchCode: '001', branchName: '株式会社 Ｆａｎ 東京オフィス', deposit: '987654321' },
+    { mediatorName: 'CTE_仲介業者AA', employeeCode: '0030', brokerChargeName: '服部　昌憲', butenCode: 'Z51', accountNumber: '100841', course: 'インターネットコース', nameKanji: '顧客名CBVincyLi仲介業者Cテスト用', nameKana: '*', tcCompRank: 'C', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '0275', branchCode: '001', branchName: '株式会社 Ｆａｎ 東京オフィス', deposit: '134679' },
+    { mediatorName: 'SBIマネープラザ株式会社', employeeCode: '3006', brokerChargeName: 'wxtest', butenCode: 'Z41', accountNumber: '111111', course: 'IFAコース', nameKanji: '開設テスト０１９', nameKana: 'カイセツテスト', tcCompRank: 'Z', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '0509', branchCode: '000', branchName: 'SBIマネープラザ株式会社 本店', deposit: '976431' },
+    { mediatorName: 'SBIマネープラザ株式会社', employeeCode: '3081', brokerChargeName: '本橋歩夢', butenCode: 'Z43', accountNumber: '123009', course: 'インターネットコース', nameKanji: '顧客3(漢字)', nameKana: 'TEST20210701NAME_KANA', tcCompRank: 'A', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '0509', branchCode: '000', branchName: 'SBIマネープラザ株式会社 本店', deposit: '123' },
+    { mediatorName: '', employeeCode: '7778', brokerChargeName: '', butenCode: 'Z43', accountNumber: '510215', course: 'インターネットコース', nameKanji: 'TEST顧客名(漢字)', nameKana: 'TEST20210701NAME_KANA', tcCompRank: 'A', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '0509', branchCode: '', branchName: '', deposit: '456' },
+    { mediatorName: 'yunhui.zhao会社', employeeCode: '0004', brokerChargeName: 'チョウウンエ_本店_0004_7', butenCode: '197', accountNumber: '124', course: 'インターネットコース', nameKanji: 'CBLWJテスト用', nameKana: '*', tcCompRank: 'A', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '1014', branchCode: '000', branchName: '「yunhui.zhao」 本店', deposit: '789' },
+    { mediatorName: '株式会社スリー・エル', employeeCode: '0035', brokerChargeName: '半田　典久', butenCode: 'Z68', accountNumber: '410284', course: 'インターネットコース', nameKanji: 'CBLWJテスト用', nameKana: 'ｲﾝﾄﾖﾝ ﾃｽﾄ  ', tcCompRank: 'B', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '1021', branchCode: '000', branchName: '株式会社スリー・エル 本店', deposit: '123456789' },
+    { mediatorName: '株式会社スリー・エル', employeeCode: '0035', brokerChargeName: '半田　典久', butenCode: 'Z70', accountNumber: '129399', course: 'インターネットコース', nameKanji: 'CBLWJテスト用', nameKana: '*', tcCompRank: 'A', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '1021', branchCode: '000', branchName: '株式会社スリー・エル 本店', deposit: '123456789' },
+    { mediatorName: '筑邦銀行SBIマネープラザ', employeeCode: '0000', brokerChargeName: '', butenCode: 'Z14', accountNumber: '10143', course: 'インターネットコース', nameKanji: '開設テスト０１９', nameKana: 'カイセツテスト', tcCompRank: 'Z', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '1200', branchCode: '', branchName: '', deposit: '123456789' },
+    { mediatorName: '仙台銀行SBIマネープラザ', employeeCode: '0000', brokerChargeName: '', butenCode: '307', accountNumber: '621', course: 'インターネットコース', nameKanji: 'PO-CB1522テスト用', nameKana: '*', tcCompRank: 'C', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '1205', branchCode: '999', branchName: '仙台銀行SBIマネープラザ', deposit: '123456789' },
+    { mediatorName: '株式会社アイ・パートナーズフィナンシャル 新宿オフィス', employeeCode: '0003', brokerChargeName: '仲介業者ｰ内管ｰ李佳', butenCode: '196', accountNumber: '410012', course: 'インターネットコース', nameKanji: '顧客名CBVincyLi仲介業者テスト用', nameKana: '顧客名_姓(カナ)#1顧客名_名(カナ)#1', tcCompRank: 'Z', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '1522', branchCode: '001', branchName: '株式会社アイ・パートナーズフィナンシャル 新宿オフィス', deposit: '123456789' },
+    { mediatorName: '仲介業者_6021_999', employeeCode: '0004', brokerChargeName: 'yh.zhao_6021_001_0004', butenCode: '301', accountNumber: '16836', course: 'IFAコース（プランA-2）', nameKanji: '顧客名_姓(漢字)#1顧客名_名(漢字)#1', nameKana: '顧客名_姓(カナ)#1顧客名_名(カナ)#1', tcCompRank: 'C', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '6021', branchCode: '001', branchName: '仲介業者支店-6021-001', deposit: '123456789' },
+    { mediatorName: '仲介業者_6021_999', employeeCode: '0000', brokerChargeName: '', butenCode: 'Z41', accountNumber: '501573', course: 'コールセンターコース', nameKanji: '劉テスト仲業注文なし顧客０８', nameKana: 'ロ－ルオ－バ－゛', tcCompRank: 'B', evaluation: '0', deficitStatus: '', chargeFlg: '', brokerCode: '6021', branchCode: '', branchName: '', deposit: '123456789' }
+  ] }
+
+module.exports = [
+  {
+    url: '/ifa-mock/basicCustomerSearchCreditTableData/list',
+    type: 'get',
+    response: config => {
+      const items = data.items
+      return {
+        code: 20000,
+        data: {
+          total: items.length,
+          items: items
+        }
+      }
+    }
+  }
+]

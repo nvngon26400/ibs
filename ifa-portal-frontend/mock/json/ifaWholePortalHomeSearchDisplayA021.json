@@ -1,0 +1,100 @@
+{
+	"message": "",
+	"totalSize": 10,
+	"maxRownum": 0,
+	"overMaxRownum": false,
+	"errorLevel": 0,
+	"requestedTime": "2023/12/05 12:00:00",
+	"title": "",
+	"returnCode": "",
+	"dataList": [
+		{
+			"notificationList": [
+				{
+					"categoryName": "商品",
+					"updateTime": "",
+					"notificationId": "0",
+					"title": "【「金融商品仲介補助簿【募集・投資信託】分配金受取マトリクス」",
+					"registerDayTime": "2024/03/31"
+				},
+				{
+					"categoryName": "その他",
+					"updateTime": "",
+					"notificationId": "1",
+					"title": "テストA021タイトル",
+					"registerDayTime": "2024/02/28"
+				},
+				{
+					"categoryName": "IPO・PO",
+					"updateTime": "2022/01/07",
+					"notificationId": "2",
+					"title": "投資信託の勧誘について",
+					"registerDayTime": "2022/01/03"
+				},
+				{
+					"categoryName": "コンプライアンス",
+					"updateTime": "2022/01/07",
+					"notificationId": "3",
+					"title": "401Kセミナー資料の送付",
+					"registerDayTime": "2022/01/03"
+				},
+				{
+					"categoryName": "コンプライアンス",
+					"updateTime": "2021/12/24",
+					"notificationId": "4",
+					"title": "セミナー資料/保険関連",
+					"registerDayTime": "2021/12/24"
+				},
+				{
+					"categoryName": "その他",
+					"updateTime": "2021/12/24",
+					"notificationId": "5",
+					"title": "外国株式/ETF関連/401K",
+					"registerDayTime": "2021/12/24"
+				},
+				{
+					"categoryName": "",
+					"updateTime": "2021/12/24",
+					"notificationId": "6",
+					"title": "キャンペーン関連/株式/債券関連",
+					"registerDayTime": "2021/12/24"
+				},
+				{
+					"categoryName": "",
+					"updateTime": "2021/12/13",
+					"notificationId": "7",
+					"title": "保険関連",
+					"registerDayTime": "2021/12/13"
+				},
+				{
+					"categoryName": "",
+					"updateTime": "2021/12/13",
+					"notificationId": "8",
+					"title": "営業サポートツール/業務関連/コンプライアンス",
+					"registerDayTime": "2021/12/13"
+				},
+				{
+					"categoryName": "",
+					"updateTime": "2021/12/10",
+					"notificationId": "9",
+					"title": "マイサポート/業務関連/規定・マニュアル",
+					"registerDayTime": "2021/12/10"
+				},
+				{
+					"categoryName": "",
+					"updateTime": "2021/12/10",
+					"notificationId": "10",
+					"title": "株式関連/マイサポート",
+					"registerDayTime": "2021/12/10"
+				},
+				{
+					"categoryName": "",
+					"updateTime": "2021/12/10",
+					"notificationId": "11",
+					"title": "債券関連/保険関連/キャンペーン関連",
+					"registerDayTime": "2021/12/10"
+				}
+			]
+		}
+	]
+}

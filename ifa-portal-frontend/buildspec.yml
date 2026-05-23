@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+  build:
+    commands:
+      - echo "Building Vue.js application..."
+      - npm run build:integration
+      
+  post_build:
+    commands:
+      - echo "Copying files to deployment directory..."
+      - mv ./appspecIntegration.yml ./appspec.yml
+      - aws deploy push --application-name SBI-ifap-CodeDeploy-Cnt-Integration --s3-location s3://sbi-ifap-s3-cntartifact-integration202306/artifact.zip
+      # - aws s3 sync dist/ s3://sbi-cnt-codepipline-artifact-202306 --delete --exact-timestamps
+      
+artifacts:
+  type: zip
+  files:
+    - 'dist/**/*'
+    - appspec.yml
+  name: artifact
+  discard-paths: no

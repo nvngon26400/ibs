@@ -1,0 +1,17 @@
+{
+  "domainId": "DATE8_KANJI",
+  "domainName": "西暦年月日8（漢字）",
+  "dataType": "日付",
+  "precision": 11,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": "DATE",
+  "format": "date8Kanji",
+  "formattedDigit": 11,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-date-picker"
+}

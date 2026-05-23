@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY17_2_DIGITS_B",
+  "domainName": "価格17_2_B",
+  "dataType": "金額",
+  "precision": 17,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 22,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

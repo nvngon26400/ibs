@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT_DECIMAL12",
+  "domainName": "テキスト12（数字(小数)）",
+  "dataType": "文字列",
+  "precision": 12,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 12,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

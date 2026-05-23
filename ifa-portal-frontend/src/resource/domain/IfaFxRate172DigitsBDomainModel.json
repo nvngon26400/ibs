@@ -1,0 +1,17 @@
+{
+  "domainId": "FX_RATE17_2_DIGITS_B",
+  "domainName": "為替レート17_2_B",
+  "dataType": "レート",
+  "precision": 17,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 22,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-rate"
+}

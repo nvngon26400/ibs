@@ -1,0 +1,16 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "pdfFileName": "/opt/download/pdfTemporary/20250120202621133_8cf3e2e5-0eed-4e61-bc0b-068b22b680b1_bits011.pdf",
+          "pdfFileOutputName": "新NISAの説明資料1.pdf"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025/01/20 20:26:21",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "MAIL_ADDRESS",
+  "domainName": "メールアドレス",
+  "dataType": "文字列",
+  "precision": 127,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "mailAddress",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 127,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

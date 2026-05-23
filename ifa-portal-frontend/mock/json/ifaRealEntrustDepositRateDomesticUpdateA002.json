@@ -1,0 +1,58 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "butenCode": "123",
+          "accountNumber": "123456",
+          "todayBase": {
+              "entrustDepositRate": "45931",
+              "entrustDepositRateType": "1",
+              "marginDepositCache": "7848135",
+              "alternativeSecuritiesTotal": "20506185",
+              "totalOpenInterestValuationLoss": "-2752200",
+              "totalSettlementProfitLoss": "0",
+              "totalExpensesPaid": "-95415",
+              "currencyActualDeposit": "25506705",
+              "constructionPriceTotal": "5553200",
+              "referenceMarginDeposit": "45931",
+              "referenceMarginDepositType": "0",
+              "hybridDepositBalance": "0"
+          },
+          "nextBusinessDayBase": {
+              "entrustDepositRate": "45931",
+              "entrustDepositRateType": "1",
+              "marginDepositCache": "7848135",
+              "alternativeSecuritiesTotal": "20506185",
+              "totalOpenInterestValuationLoss": "-2752200",
+              "totalSettlementProfitLoss": "0",
+              "totalExpensesPaid": "-95415",
+              "currencyActualDeposit": "25506705",
+              "constructionPriceTotal": "5553200",
+              "referenceMarginDeposit": "45931",
+              "referenceMarginDepositType": "0",
+              "hybridDepositBalance": "0"
+          },
+          "markToBase": {
+              "entrustDepositRate": "45931",
+              "entrustDepositRateType": "1",
+              "marginDepositCache": "7848135",
+              "alternativeSecuritiesTotal": "20506185",
+              "totalOpenInterestValuationLoss": "-2752200",
+              "totalSettlementProfitLoss": "0",
+              "totalExpensesPaid": "-95415",
+              "currencyActualDeposit": "25506705",
+              "constructionPriceTotal": "5553200",
+              "referenceMarginDeposit": "45931",
+              "referenceMarginDepositType": "0",
+              "hybridDepositBalance": "0"
+          }
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2023/11/21 09:00:00",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

@@ -1,0 +1,50 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "priceBasicInfo": {
+      "currentPrice": "112.01",
+      "currentPriceDate": "2024-03-21T22:23:00Z",
+      "tick": "2",
+      "diff": "-0.92",
+      "ratio": "-0.71",
+      "start": "126.79",
+      "startPriceDate": "2024-03-09T00:00:00Z",
+      "high": "340.27",
+      "highPriceDate": "2024-03-09T00:00:00Z",
+      "low": "127.12",
+      "lowPriceDate": "2024-03-09T00:00:00Z",
+      "volume": "1695916",
+      "last": "128.93",
+      "lastDate": "21/09/13"
+    },
+    "buyingPowerForeignLis": [
+      {
+        "foreignBuyingPower": "8997833.93",
+        "currencyCode": "STUB",
+        "foreignBuyingPowerJrNisa": null,
+        "currencyCodeJrNisa": null
+      }
+    ],
+    "buyingPowerDomesticList": [
+      {
+        "yenBuyingPowerGeneralAccount": "14521814",
+        "nisaBuyLimitList": null,
+        "yenBuyingPowerJrNisa": null,
+        "accountClassificationJrNisa": null
+      }
+    ],    
+    "availabeForSale": "200000",
+    "sellableCustodyCategory": "1",
+    "sellableProtectionCategory": "PROTECTION_KEEPING",
+    "priceRangeNoLimit" : "false" ,
+    "priceRangeLimitMin" : "100.98769",
+    "priceRangeLimitMax" : "130.12341"
+}]
+}

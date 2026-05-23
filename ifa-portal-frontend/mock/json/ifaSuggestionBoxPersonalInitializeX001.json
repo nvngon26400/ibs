@@ -1,0 +1,41 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "screenComment": "abc",
+      "requestList": [
+        {
+        "sbpNo": "000001",
+        "ansUpdateTime": "2025/06/10",
+        "registerDate": "2025/06/09",
+        "brokerCode": null,
+        "brokerName": null,
+        "empCode": null,
+        "empName": null,
+        "title": "取引検索時間の改善依頼",
+        "category": "01",
+        "status": "0"
+        },
+        {
+          "sbpNo": "000002",
+          "ansUpdateTime": "2025/06/10",
+          "registerDate": "2025/06/09",
+          "brokerCode": null,
+          "brokerName": null,
+          "empCode": null,
+          "empName": null,
+          "title": "取引履歴画面における検索結果の最大表示件数拡大のお願い",
+          "category": "01",
+          "status": "0"
+        }
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/06/10 16:32:56",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

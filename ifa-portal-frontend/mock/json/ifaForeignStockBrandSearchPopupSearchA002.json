@@ -1,0 +1,38 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "marginNewSellExceptingList": [
+                {
+                    "brandCode": "AAPD",
+                    "brandName": "DRX �f�C���[ �A�b�v���� �x�A1�{ ETF",
+                    "countryCode": "US",
+                    "marketCode": "US_NASDAQ",
+                    "marketAbbreviatedName": "NASDAQ"
+                },
+                {
+                    "brandCode": "AAPL",
+                    "brandName": "�A�b�v��",
+                    "countryCode": "US",
+                    "marketCode": "US_NASDAQ",
+                    "marketAbbreviatedName": "NASDAQ"
+                },
+                {
+                    "brandCode": "AAPU",
+                    "brandName": "DRX �f�C���[ �A�b�v���� �u�� 1.5�{ ETF",
+                    "countryCode": "US",
+                    "marketCode": "US_NASDAQ",
+                    "marketAbbreviatedName": "NASDAQ"
+                }
+            ],
+            "marginNewSellList": null
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2024/01/24 17:07:22",
+    "title": null,
+    "returnCode": "0"
+}

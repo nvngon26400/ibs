@@ -1,0 +1,17 @@
+{
+  "domainId": "TIME6",
+  "domainName": "時刻6",
+  "dataType": "日付",
+  "precision": 8,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": "DATE",
+  "format": "time6",
+  "formattedDigit": 8,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,68 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "contactInfoList": [
+        {
+          "bigClass": "積立買付／定期売却",
+          "midClass": "",
+          "recordDate": "2024/05/27 15:00:53",
+          "details": "1",
+          "status": "",
+          "contents": "2024/05/27-2",
+          "chargeName": "NRI高橋俊",
+          "callNo": "callNo001",
+          "subcallNo": "subcallNo0011",
+          "referenceKbn": "2",
+          "ifaToiawaseNo": "toiawaseNo1"
+        },
+        {
+          "bigClass": "注文受付",
+          "midClass": "",
+          "recordDate": "2024/05/27 14:29:07",
+          "details": "1",
+          "status": "",
+          "contents": "2024/05/27-1",
+          "chargeName": "NRI高橋俊",
+          "callNo": "callNo001",
+          "subcallNo": "subcallNo0011",
+          "referenceKbn": "3",
+          "ifaToiawaseNo": "toiawaseNo2"
+        },
+        {
+          "bigClass": "受付のみ2",
+          "midClass": "",
+          "recordDate": "2024/05/20 17:54:37",
+          "details": "1",
+          "status": "",
+          "contents": "2024/05/20-1",
+          "chargeName": "NRI高橋俊",
+          "callNo": "callNo001",
+          "subcallNo": "subcallNo0011",
+          "referenceKbn": "01",
+          "ifaToiawaseNo": "toiawaseNo3"
+        },
+        {
+          "bigClass": "問合せ",
+          "midClass": "",
+          "recordDate": "2024/05/20 17:54:37",
+          "details": "0",
+          "status": "対応済",
+          "contents": "パスワード忘れ",
+          "chargeName": "NRI高橋俊",
+          "callNo": "callNo001",
+          "subcallNo": "subcallNo0011",
+          "referenceKbn": "01",
+          "ifaToiawaseNo": "toiawaseNo4"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

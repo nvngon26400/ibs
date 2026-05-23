@@ -1,0 +1,17 @@
+{
+  "domainId": "PLUSMINUS_SIGNED_YEN_9_0",
+  "domainName": "符号付円貨_9_0（+-）",
+  "dataType": "金額",
+  "precision": 9,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "signedWithCommaInteger",
+  "formattedDigit": 11,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "円",
+  "htmlTag": "ifa-input-amount"
+}

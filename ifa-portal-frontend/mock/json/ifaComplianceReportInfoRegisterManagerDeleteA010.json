@@ -1,0 +1,15 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "コンプライアンス通信情報を削除しました。",
+  "errorLevel": 0,
+  "requestedTime": "2000-10-10 12:12:12",
+  "title": "",
+  "returnCode": "info.deleteCompleted",
+  "dataList":[{"complianceReportList":[
+  {"disclosureFlag":"1","preview":"1","title":"0509","change":"変更","delete":"削除","lastUpdateDate":"2023/11/11"},
+  {"disclosureFlag":"1","preview":"1","title":"0509","change":"変更","delete":"削除","lastUpdateDate":"2023/12/12"},
+  {"disclosureFlag":"0","preview":"1","title":"0509","change":"変更","delete":"削除","lastUpdateDate":"2023/01/12"},
+  {"disclosureFlag":"0","preview":"1","title":"0509","change":"変更","delete":"削除","lastUpdateDate":"2023/02/12"}]}]
+}

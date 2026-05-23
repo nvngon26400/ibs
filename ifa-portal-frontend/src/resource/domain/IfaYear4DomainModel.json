@@ -1,0 +1,17 @@
+{
+  "domainId": "YEAR4",
+  "domainName": "西暦",
+  "dataType": "日付",
+  "precision": 4,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": "DATE",
+  "format": "date4",
+  "formattedDigit": 4,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

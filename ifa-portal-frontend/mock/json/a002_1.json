@@ -1,0 +1,62 @@
+{
+    "totalSize": 10,
+    "maxRownum": 0,
+    "overMaxRownum": false,
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "23/07/05 12:00",
+    "title": "",
+    "returnCode": "I9999",
+    "dataList":[
+        {
+            "butenCode":"Z56",
+            "accountNumber":"596799",
+            "brandCode":"5358"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"596799",
+            "brandCode":"4008"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"596799",
+            "brandCode":"6995"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"896080",
+            "brandCode":"8411"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"896080",
+            "brandCode":"4202"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"896080",
+            "brandCode":"5358"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"896080",
+            "brandCode":"4008"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"896080",
+            "brandCode":"6995"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"896080",
+            "brandCode":"4008"
+        },
+        {
+            "butenCode":"Z56",
+            "accountNumber":"896080",
+            "brandCode":"3133"
+        }
+    ]
+}

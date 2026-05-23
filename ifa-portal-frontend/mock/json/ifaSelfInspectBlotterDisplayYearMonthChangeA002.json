@@ -1,0 +1,54 @@
+{
+  "totalSize": 1,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [{
+    "selfAssessmentList": [
+      {
+        "selfCheckItemId": "4",
+        "selfAssessmentItemName": "顧客データを取り扱う従業員等から個人データの非開示に関する誓約書を徴求している。",
+        "reasonRequiredFlag": "0",
+        "confirmation": "1",
+        "answer": "",
+        "answerReason": "",
+        "answerCount": "0",
+        "answerResult": ""
+      },
+      {
+        "selfCheckItemId": "3",
+        "selfAssessmentItemName": "金融商品の勧誘や説明を行う際は商品のメリットだけでなく、必ずリスクや手数料等の費用の説明も行うよう指導している。",
+        "reasonRequiredFlag": "0",
+        "confirmation": "1",
+        "answer": "",
+        "answerReason": "",
+        "answerCount": "0",
+        "answerResult": ""
+      },
+      {
+        "selfCheckItemId": "2",
+        "selfAssessmentItemName": "二種金の場合はファンド名を理由欄に回答してください。",
+        "reasonRequiredFlag": "1",
+        "confirmation": "-",
+        "answer": "",
+        "answerReason": "○○ファンド",
+        "answerCount": "0",
+        "answerResult": "0"
+      },
+      {
+        "selfCheckItemId": "1",
+        "selfAssessmentItemName": "仲介業の営業所登録を行っているすべての営業所や事務所には、目立つ場所に登録票を掲示している。",
+        "reasonRequiredFlag": "0",
+        "confirmation": "",
+        "answer": "",
+        "answerReason": "",
+        "answerCount": "0",
+        "answerResult": ""
+      }
+    ]
+  }],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/03 21:32:05",
+  "title": null,
+  "returnCode": null
+}

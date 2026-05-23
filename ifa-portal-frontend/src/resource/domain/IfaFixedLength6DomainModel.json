@@ -1,0 +1,17 @@
+{
+  "domainId": "FIXED_LENGTH6",
+  "domainName": "固定文字列6",
+  "dataType": "文字列",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

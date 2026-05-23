@@ -1,0 +1,86 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "suggestionList": [
+        {
+          "totalCount": 7,
+          "sbcNo": "000002",
+          "updateDate": "2025/07/31",
+          "createDate": "2025/07/30",
+          "title": "皆様からの要望データA-2",
+          "category": "03",
+          "status": "1",
+          "suggestion": "皆様からの要望データAです。\n改行を含む内容を登録しても正しく画面表示やCSV出力ができるかを確認します。\n登録済の添付ファイル１を削除のうえ、別のファイルを添付します。"
+        },
+        {
+          "totalCount": 7,
+          "sbcNo": "000003",
+          "updateDate": "2025/07/30",
+          "createDate": "2025/07/30",
+          "title": "皆様からの要望データ予備1",
+          "category": "03",
+          "status": "0",
+          "suggestion": "皆様からの要望データ予備1です。"
+        },
+        {
+          "totalCount": 7,
+          "sbcNo": "000004",
+          "updateDate": "2025/07/30",
+          "createDate": "2025/07/30",
+          "title": "皆様からの要望データ予備2",
+          "category": "02",
+          "status": "1",
+          "suggestion": "皆様からの要望データ予備2です。"
+        },
+        {
+          "totalCount": 7,
+          "sbcNo": "000005",
+          "updateDate": "2025/07/31",
+          "createDate": "2025/07/30",
+          "title": "皆様からの要望データB",
+          "category": "04",
+          "status": "9",
+          "suggestion": "皆様からの要望データBです。"
+        },
+        {
+          "totalCount": 7,
+          "sbcNo": "000006",
+          "updateDate": "2025/07/31",
+          "createDate": "2025/07/30",
+          "title": "皆様からの要望データC",
+          "category": "03",
+          "status": "0",
+          "suggestion": "皆様からの要望データCです。\n2日目に更新しました。"
+        },
+        {
+          "totalCount": 7,
+          "sbcNo": "000007",
+          "updateDate": "2025/07/31",
+          "createDate": "2025/07/31",
+          "title": "皆様からの要望データD",
+          "category": "02",
+          "status": "0",
+          "suggestion": "皆様からの要望データDです。"
+        },
+        {
+          "totalCount": 7,
+          "sbcNo": "000008",
+          "updateDate": "2025/08/18",
+          "createDate": "2025/08/18",
+          "title": "あ",
+          "category": "01",
+          "status": "9",
+          "suggestion": "あ"
+        }
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/08/29 19:19:58",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

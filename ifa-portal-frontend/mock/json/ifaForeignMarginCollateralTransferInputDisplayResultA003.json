@@ -1,0 +1,24 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "returnCode": "SUCCESS",
+    "message": null,
+    "errorLevel": 0,
+    "requestedTime": "2023/10/11 10:00:00",
+    "title": null,
+    "dataList": [
+        {
+            "currentPower": {
+                "marginBuyingPower": "10000",
+                "totalCollateralValue": "15000",
+                "depositRate": "10"
+            },
+            "afterPower": {
+                "marginBuyingPower": "20000",
+                "totalCollateralValue": "25000",
+                "depositRate": "20"
+            }
+        }
+    ]
+}

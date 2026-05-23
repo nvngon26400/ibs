@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE13_2",
+  "domainName": "レート13_2",
+  "dataType": "レート",
+  "precision": 13,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 17,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": "ifa-input-rate"
+}

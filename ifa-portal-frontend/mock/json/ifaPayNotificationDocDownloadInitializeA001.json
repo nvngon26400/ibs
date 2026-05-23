@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/05/15 15:51:51",
+  "title": null,
+  "returnCode": "SUCCESS",
+  "dataList": [
+    {
+      "fileDirectory": "/opt/download/management/PaymentNotice/"
+    }
+  ]
+}

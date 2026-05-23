@@ -1,0 +1,257 @@
+{
+	"message": "",
+	"totalSize": 10,
+	"maxRownum": 0,
+	"overMaxRownum": false,
+	"errorLevel": 0,
+	"requestedTime": "2024/02/26 12:00:00",
+	"title": "",
+	"returnCode": "",
+	"dataList": [
+		{
+			"customerAlertList": [
+				{
+					"alertId": "0",
+					"alertDate": "20221010"
+				},
+				{
+					"alertId": "19",
+					"alertDate": "20221011"
+				},
+				{
+					"alertId": "3",
+					"alertDate": "20221012"
+				},
+				{
+					"alertId": "4",
+					"alertDate": "20221013"
+				},
+				{
+					"alertId": "",
+					"alertDate": "20221014"
+				},
+				{
+					"alertId": "6",
+					"alertDate": "20221015"
+				},
+				{
+					"alertId": "",
+					"alertDate": "20221016"
+				},
+				{
+					"alertId": "8",
+					"alertDate": "20221017"
+				},
+				{
+					"alertId": "9",
+					"alertDate": "20221018"
+				},
+				{
+					"alertId": "10",
+					"alertDate": "20221019"
+				},
+				{
+					"alertId": "11",
+					"alertDate": "20221020"
+				},
+				{
+					"alertId": "あ",
+					"alertDate": "20221021"
+				},
+				{
+					"alertId": "13",
+					"alertDate": "20221022"
+				},
+				{
+					"alertId": "000",
+					"alertDate": "20221023"
+				},
+				{
+					"alertId": "15",
+					"alertDate": "20221024"
+				},
+				{
+					"alertId": "16",
+					"alertDate": "20221025"
+				},
+				{
+					"alertId": "17",
+					"alertDate": "20221026"
+				},
+				{
+					"alertId": "18",
+					"alertDate": "20221027"
+				},
+				{
+					"alertId": "1",
+					"alertDate": null
+				}
+			],
+			"managerAlertComplianceReport": {
+					"thisMonthUnreplyFlag": "1",
+					"titleThisMonth": "今月タイトル",
+					"lastMonthUnreplyFlag": "1",
+					"titleLastMonth": "過去月タイトル"
+			},
+			"managerAlertSelfAssessment": {
+				"registerYearMonthThisMonth": "202311",
+				"registerYearMonthLastMonth": "201901"
+			},
+			"notificationCategoryList": [
+				{
+					"categoryId": "20",
+					"categoryName": "商品",
+					"requiredFlag": "1"
+				},
+				{
+					"categoryId": "2",
+					"categoryName": "コンプライアンス",
+					"requiredFlag": "1"
+				},
+				{
+					"categoryId": "3",
+					"categoryName": "IPO・PO",
+					"requiredFlag": "1"
+				},
+				{
+					"categoryId": "4",
+					"categoryName": "その他",
+					"requiredFlag": "1"
+				},
+				{
+					"categoryId": "5",
+					"categoryName": "株式関連",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "6",
+					"categoryName": "債券関連",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "7",
+					"categoryName": "投信関連",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "8",
+					"categoryName": "401K",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "9",
+					"categoryName": "セミナー資料",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "10",
+					"categoryName": "外国株式/ETF関連",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "11",
+					"categoryName": "マーケット情報",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "12",
+					"categoryName": "キャンペーン関連",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "13",
+					"categoryName": "保険関連",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "14",
+					"categoryName": "営業サポートツール_その他",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "15",
+					"categoryName": "顧客郵送関連",
+					"requiredFlag": "0"
+				},
+				{
+					"categoryId": "16",
+					"categoryName": "マイサポート",
+					"requiredFlag": "0"
+				}
+			],
+			"notificationList": [
+				{
+					"categoryName": "商品",
+					"updateTime": null,
+					"notificationId": "0",
+					"title": "あいうえおかきくけこき",
+					"registerDayTime": "2024/03/31"
+				},
+				{
+					"categoryName": "コンプライアンス",
+					"updateTime": null,
+					"notificationId": "1",
+					"title": "テスト初期表示タイトル",
+					"registerDayTime": "2024/01/24"
+				},
+				{
+					"categoryName": "IPO・PO",
+					"updateTime": "2022/01/07",
+					"notificationId": "2",
+					"title": "投資信託の勧誘について",
+					"registerDayTime": "2023/12/26"
+				},
+				{
+					"categoryName": "その他",
+					"updateTime": "2022/01/07",
+					"notificationId": "3",
+					"title": "401Kセミナー資料の送付",
+					"registerDayTime": "2022/01/03"
+				},
+				{
+					"categoryName": "IPO・PO",
+					"updateTime": "2021/12/24",
+					"notificationId": "4",
+					"title": "セミナー資料/保険関連",
+					"registerDayTime": "2021/12/24"
+				},
+				{
+					"categoryName": "商品",
+					"updateTime": "2021/12/24",
+					"notificationId": "5",
+					"title": "外国株式/ETF関連/401K",
+					"registerDayTime": "2021/12/24"
+				},
+				{
+					"categoryName": "商品",
+					"updateTime": "2021/12/24",
+					"notificationId": "6",
+					"title": "キャンペーン関連/株式/債券関連",
+					"registerDayTime": "2021/12/24"
+				},
+				{
+					"categoryName": "商品",
+					"updateTime": "2021/12/13",
+					"notificationId": "7",
+					"title": "保険関連",
+					"registerDayTime": "2021/12/13"
+				},
+				{
+					"categoryName": "商品",
+					"updateTime": "2021/12/13",
+					"notificationId": "8",
+					"title": "営業サポートツール/業務関連/コンプライアンス",
+					"registerDayTime": "2021/12/13"
+				},
+				{
+					"categoryName": "商品",
+					"updateTime": "2021/12/10",
+					"notificationId": "9",
+					"title": "マイサポート/業務関連/規定・マニュアル",
+					"registerDayTime": "2021/12/10"
+				}
+			],
+			"fileDirectory": "c:\\temp\\"
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "INFO_REGISTER_VIEWER_AUTHORITY_SELECT",
+  "domainName": "情報登録閲覧者権限選択",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-check"
+}

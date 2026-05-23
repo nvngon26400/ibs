@@ -1,0 +1,17 @@
+{
+  "domainId": "SUGGESTION_NUMBER",
+  "domainName": "要望No",
+  "dataType": "文字列",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "zeroPadding",
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": null
+}

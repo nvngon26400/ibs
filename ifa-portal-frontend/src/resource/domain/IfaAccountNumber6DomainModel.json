@@ -1,0 +1,17 @@
+{
+  "domainId": "ACCOUNT_NUMBER6",
+  "domainName": "口座番号6桁",
+  "dataType": "文字列",
+  "precision": 6,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

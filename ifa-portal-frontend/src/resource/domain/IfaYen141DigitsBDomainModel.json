@@ -1,0 +1,17 @@
+{
+  "domainId": "YEN14_1_DIGITS_B",
+  "domainName": "円貨14_1_B",
+  "dataType": "金額",
+  "precision": 14,
+  "digit": 1,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 19,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "円",
+  "htmlTag": "ifa-input-amount"
+}

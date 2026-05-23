@@ -1,0 +1,11 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "returnCode": "ERROR",
+  "message": "業務エラーが発生しました。",
+  "errorLevel": -1,
+  "requestedTime": "2023/10/11 10:00:00",
+  "title": null,
+  "dataList": null
+}

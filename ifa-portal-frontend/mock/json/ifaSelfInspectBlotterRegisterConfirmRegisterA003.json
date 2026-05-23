@@ -1,0 +1,87 @@
+{
+  "totalSize": 1,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [{
+    "registerDate": "202406",
+    "selfAssessmentList": [
+      {
+        "selfCheckItemId": "1",
+        "selfAssessmentItemName": "仲介業の営業所登録を行っているすべての営業所や事務所には、目立つ場所に登録票を掲示している。",
+        "nextSelfCheckId": "11",
+        "reasonRequiredFlag": "0",
+        "confirmation": "",
+        "answerReason": "",
+        "answerResult": "0"
+      },
+      {
+        "selfCheckItemId": "2",
+        "selfAssessmentItemName": "二種金の場合はファンド名を理由欄に回答してください。",
+        "nextSelfCheckId": "12",
+        "reasonRequiredFlag": "1",
+        "confirmation": "-",
+        "answerReason": "○○ファンド",
+        "answerResult": ""
+      },
+      {
+        "selfCheckItemId": "3",
+        "selfAssessmentItemName": "金融商品の勧誘や説明を行う際は商品のメリットだけでなく、必ずリスクや手数料等の費用の説明も行うよう指導している。",
+        "nextSelfCheckId": "13",
+        "reasonRequiredFlag": "0",
+        "confirmation": "1",
+        "answerReason": "",
+        "answerResult": ""
+      },
+      {
+        "selfCheckItemId": "4",
+        "selfAssessmentItemName": "顧客データを取り扱う従業員等から個人データの非開示に関する誓約書を徴求している。",
+        "nextSelfCheckId": "14",
+        "reasonRequiredFlag": "0",
+        "confirmation": "1",
+        "answerReason": "",
+        "answerResult": "0"
+      },
+      {
+        "selfCheckItemId": "5",
+        "selfAssessmentItemName": "仲介業の営業所登録を行っているすべての営業所や事務所には、目立つ場所に登録票を掲示している。",
+        "nextSelfCheckId": "15",
+        "reasonRequiredFlag": "0",
+        "confirmation": "",
+        "answerReason": "",
+        "answerResult": ""
+      },
+      {
+        "selfCheckItemId": "6",
+        "selfAssessmentItemName": "二種金の場合はファンド名を理由欄に回答してください。",
+        "nextSelfCheckId": "16",
+        "reasonRequiredFlag": "1",
+        "confirmation": "-",
+        "answerReason": "○○ファンド",
+        "answerResult": "0"
+      },
+      {
+        "selfCheckItemId": "7",
+        "selfAssessmentItemName": "金融商品の勧誘や説明を行う際は商品のメリットだけでなく、必ずリスクや手数料等の費用の説明も行うよう指導している。",
+        "nextSelfCheckId": "17",
+        "reasonRequiredFlag": "0",
+        "confirmation": "1",
+        "answerReason": "",
+        "answerResult": "0"
+      },
+      {
+        "selfCheckItemId": "8",
+        "selfAssessmentItemName": "顧客データを取り扱う従業員等から個人データの非開示に関する誓約書を徴求している。",
+        "nextSelfCheckId": "18",
+        "reasonRequiredFlag": "0",
+        "confirmation": "1",
+        "answerReason": "",
+        "answerResult": ""
+      }
+    ]
+  }],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/03 21:32:05",
+  "title": null,
+  "returnCode": null
+}

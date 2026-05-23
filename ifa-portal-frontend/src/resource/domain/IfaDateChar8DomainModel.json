@@ -1,0 +1,17 @@
+{
+  "domainId": "DATE_CHAR8",
+  "domainName": "西暦年月日文字列8",
+  "dataType": "日付",
+  "precision": 10,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": "date8",
+  "formattedDigit": 10,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

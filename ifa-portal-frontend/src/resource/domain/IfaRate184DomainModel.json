@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE18_4",
+  "domainName": "レート18_4",
+  "dataType": "レート",
+  "precision": 18,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaZeroPadding",
+  "formattedDigit": 23,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": "ifa-input-rate"
+}

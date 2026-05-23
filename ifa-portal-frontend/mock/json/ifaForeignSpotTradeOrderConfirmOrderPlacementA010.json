@@ -1,0 +1,109 @@
+{
+	"totalSize": 1,
+	"maxRownum": 1,
+	"overMaxRownum": false,
+	"dataList": [
+		{
+			"orderList": [
+				{
+					"orderNumber": "IFA999999900000001",
+					"orderSubNumber": "BUY999999900000001",
+					"limitPriceText": "USD",
+					"tradeKbn": "3",
+					"automaticBuyingCategory": "NORMAL_ORDER",
+					"orderQuantity": "2147483648",
+					"priceCondition": "3",
+					"hiddenOrderPrice": "999999905",
+					"triggerPrice": "999999906",
+					"trailStopWidth": "1999999907.07",
+					"executeBasePrice": "1999999908.88",
+					"periodRadio": "0",
+					"period": "",
+					"depositType": "H",
+					"settlementType": "1",
+					"settlementCurrency": "USD",
+					"fxRate": "199999999999909",
+					"averageTradePrice": "199999999999910",
+					"unTradeQuantity": "9999999011",
+					"tradeQuantity": "9999999912",
+					"contractAmountForeign": "199999999999013",
+					"contractAmountYen": "199999999999014",
+					"foreignDeliveryAmount": "199999999999015",
+					"yenDeliveryAmount": "199999999999016",
+					"deliveryAmount": "199999999999017",
+					"domesticforeignFee": "199999999999018",
+					"domesticyenFee": "199999999999019",
+					"domesticConsumptionTaxForeign": "1999999999990201",
+					"domesticConsumptionTaxYen": "199999999999021",
+					"foreignFee": "199999999999022",
+					"yenFee": "1999999999990123",
+					"localSettlementAmountForeign": "199999999999024",
+					"localSettlementAmountYen": "199999999999025",
+					"nisaFrameRestrictionAmount": "199999999999026",
+					"approximateCapitalGainsTax": "199999999999027",
+					"orderStatus": "ORDERING",
+					"tradeStatus": "NON_EXECUTION",
+					"orderStopSituation": "UNSPECIFIED",
+					"domesticTradeDate": "2024-03-25",
+					"domesticSettlementDate": "2024-03-27",
+					"localContractDate": "2024-03-21",
+					"localDeliveryDate": "2024-03-28",
+					"orderDate": "2024-03-20T09:28:28Z",
+					"tradeDateTime": "2024-03-21T10:29:29Z",
+					"expirationDateandTime": "2024-03-22T11:30:30Z"
+				}
+			],
+			"tradeCd": "0",
+			"brandClass": "STOCK",
+			"tradeLimit": "true",
+			"kanyuKbn": "1",
+			"receiveOrderType": "0",
+			"importantMatterType": "1",
+			"solicitationEtf": "1",
+			"engPubCheckbox": "1",
+			"checkList": [
+				{
+					"checkInsider": "1"
+				}
+			],
+			"alertCheckList": [
+				{
+					"tradingCautionInformation": "0",
+					"invitationCheck": "",
+					"noteInfoCheckbox": "",
+					"noteLimitCheck": "",
+					"priceLimitCheck": "",
+					"methodCheck": "",
+					"nextDayCheck": "",
+					"overseasEtfAlertConfirm": ""
+				}
+			],
+			"noticeInfoAlert": "当該顧客の外国株式取引に関わる注意情報があります。注意情報欄を確認してください。",
+			"noticeAlert": "「重要なお知らせ」が未確認です。重要なお知らせ取引制限欄や注意情報欄を確認してください。",
+			"complianceCheckList": [
+				{
+					"messageId": "warnings.cmn.complianceRank.need",
+					"complianceCheckMsg": "（△・◇）ワーニング申請・承認が必要です。",
+					"chkBoxLabel": "1"
+				}
+			],
+			"tradeNoticeInfoBrandMsg": "注文銘柄に対する取引注意情報があります。取引注意情報の内容を顧客へ説明後に注文を執行してください。",
+			"contractAmountOverMessage": "約定代金が誤発注防止措置の制限を超えています。",
+			"stopOrderInstantMessage": "逆指値注文が予め指定した参照価格に達した状態です。",
+			"nextBusinessDayMessage": "海外休場日のため、翌営業日の注文となります。",
+			"overseasEtfAlertMessage": "投資信託やETFを売却した資金でETFを購入する場合は「乗換え勧誘",
+			"localTradeDateLimitMsg": "海外休場日のため、翌営業日の注文となります。",
+			"overseasEtfAlert": "投資信託やETFを売却した資金でETFを購入する場合は「乗換え勧誘(ETF)」として確認書の受け入れが必要となります。乗換え勧誘ではないことを確認してください。",
+			"brandCode": "AABBC",
+			"brandName": "AABBC-NAME",
+			"countryCode": "US",
+			"marketAbbreviation": "NYSE",
+			"todayTradeLimitUrl": "https://search.sbisec.co.jp/v2/popwin/attention/stock/usstock.html"
+		}
+	],
+	"message": "",
+	"errorLevel": 0,
+	"requestedTime": "2024/03/15 12:14:33",
+	"title": null,
+	"returnCode": "0"
+}

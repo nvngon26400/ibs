@@ -1,0 +1,17 @@
+{
+  "domainId": "DATE6_YEAR_MONTH_KANJI",
+  "domainName": "西暦年月（漢字）",
+  "dataType": "日付",
+  "precision": 8,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": "DATE",
+  "format": "date6YearMonthKanji",
+  "formattedDigit": 8,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-month-picker"
+}

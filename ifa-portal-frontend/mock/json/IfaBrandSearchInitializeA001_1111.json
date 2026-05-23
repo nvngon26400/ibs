@@ -1,0 +1,26 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+      {
+        "brandCode": "1111",
+        "brandName": "テスト銘柄111",
+        "selectMarketList": [
+          { "key": "6", "value": "福証" },
+          { "key": "8", "value": "札証" },
+          { "key": "2", "value": "名証" },
+          { "key": "7", "value": "PTS" },
+          { "key": "0", "value": "東証" }
+        ],
+        "topixFlg": "0",
+        "regKbn": "0",
+        "upperRankMkt": "2"
+      }
+    ],
+    "message": "正常終了",
+    "errorLevel": 0,
+    "requestedTime": "2023/09/14 23:02:26",
+    "title": null,
+    "returnCode": "SUCCESS"
+  }

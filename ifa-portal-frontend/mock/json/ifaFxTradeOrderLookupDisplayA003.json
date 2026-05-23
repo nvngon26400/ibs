@@ -1,0 +1,47 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "tradeSuspendFlag": "0",
+            "fxOrderInfoList": [
+                {
+                    "orderDate": "2023-09-01 10:00",
+                    "fxOrderStatus": "ORDERING",
+                    "tradeDateTime": "",
+                    "deadlineDate": "2023-09-30 10:00",
+                    "currencyCode": "HKD",
+                    "tradeCd": "1",
+                    "quantity": "11",
+                    "deliveryAmount": "11",
+                    "contractRate": "11",
+                    "tradeKbn": "1",
+                    "fxTradeStatus": "",
+                    "orderStatus": "注文中",
+                    "accountType": "JR_NISA",
+                    "orderNumber": "00000001",
+                    "cycleNumber": "54321",
+                    "orderEventId": "11"
+                }
+            ],
+            "fxTradeMediateProprietyList": [
+                {
+                    "tradeCd": "1",
+                    "currencyCode": "HKD",
+                    "mediatePropriety": "1"
+                },
+                {
+                    "tradeCd": "2",
+                    "currencyCode": "IDR",
+                    "mediatePropriety": "0"
+                }
+            ]
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2023/09/30 10:00:00",
+    "title": null,
+    "returnCode": "0"
+}

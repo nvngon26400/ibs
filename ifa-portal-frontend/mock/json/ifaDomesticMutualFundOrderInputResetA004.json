@@ -1,0 +1,107 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "mutualFundSellBuyType": "1",
+          "fundCodeTimes": "0033",
+          "fundCodeIssues": "88",
+          "depositType": "1",
+          "brandCode": "123456789012",
+          "selectAccountType": " ",
+          "selectDepositType": " ",
+          "depositTypeList": [" ", 1],
+          "brand": {
+              "brandName": "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+              "priceUnit": 10,
+              "minSalesLot": 0,
+              "minSalesUnitAmount": 0,
+              "salesUnitLot": 0,
+              "salesTradeUnitAmount": 0,
+              "cancelTradeUnitLot": 0,
+              "cancelTradeUnitAmount": 0,
+              "deadlines": "1500",
+              "buyMethodSelect": "",
+              "fundType": "1",
+              "reInvestmentClassification": "",
+              "brandSpecialClassification": "",
+              "basePrice": 123456789,
+              "priceDate": ""
+          },
+          "commRateList": [
+              {
+                  "commRateConditions": 10000,
+                  "commRate": 12345.10
+              },
+              {
+                  "commRateConditions": 10000,
+                  "commRate": 12345.10
+              },
+              {
+                  "commRateConditions": 10000,
+                  "commRate": 12345.10
+              },
+              {
+                  "commRateConditions": 10000,
+                  "commRate": 12345.10
+              },
+              {
+                  "commRateConditions": 10000,
+                  "commRate": 12345.10
+              },
+              {
+                  "commRateConditions": 10000,
+                  "commRate": 12345.10
+              },
+              {
+                  "commRateConditions": 10000,
+                  "commRate": 12345.10
+              }
+          ],
+          "switchingFavorableTreatmentRate": "12345.50",
+          "handlerIndividualDataExistence": "",
+          "switchingFavorableTreatmentLimit": {
+              "wholeAccountThisMonth": "100000010000000",
+              "wholeAccountNextMonth": "100000010000000",
+              "jrNisaAccountThisMonth": "100000010000000",
+              "jrNisaAccountNextMonth": "100000010000000"
+          },
+          "buyingPower": {
+              "wholeAccount": "202309282023092",
+              "jrNisaAccount": "202309282023092"
+          },
+          "depositInfo": {
+              "sellAbleLot": "500000050000000",
+              "sellAbleAmount": "50000050000000",
+              "approximateValuation": "635500635500000",
+              "approximateValuationDate": "20240305"
+          },
+          "nisaBuy": "NISA買付可能最大額 --円（--年投資可能枠基準）",
+          "distributionReceiveMethodWord": "再投資",
+          "point": {
+              "pointClass": "1",
+              "pointCount": "100000000",
+              "fixedPeriodPoint": "100000000",
+              "shortestExpirationDate": "20240405",
+              "minUsePointCount": "1",
+              "usePointUnit": "1",
+              "pointShowAreaFlag": "1",
+              "pointNameDisplayFlag": "1",
+              "pointCountDisplayFlag": "1",
+              "fixedPeriodPointDisplayFlag": "1",
+              "shortestExpirationDateDisplayFlag": "1",
+              "pointUseAreaFlag": "1"
+          },
+          "tradeCd": "1",
+          "transfersPreferentialQuotaApplication": "項目表示",
+          "shortTermSaleConfirm": "900日以内",
+          "preRedemptionSellConfirmSelect": "20ヶ月以内"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/01 16:31:41",
+  "title": null,
+  "returnCode": "0"
+}

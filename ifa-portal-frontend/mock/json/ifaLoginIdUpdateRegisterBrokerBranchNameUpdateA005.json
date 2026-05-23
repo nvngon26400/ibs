@@ -1,0 +1,19 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "chargeNameList": [
+      { "key": "1", "value": "デモ山 デモ太郎_A" },
+      { "key": "2", "value": "デモ山 デモ太郎_B" },
+      { "key": "3", "value": "デモ山 デモ太郎_C" },
+      { "key": "4", "value": "デモ山 デモ太郎_D" },
+      { "key": "5", "value": "デモ山 デモ太郎_E" }
+    ]
+  }]
+}

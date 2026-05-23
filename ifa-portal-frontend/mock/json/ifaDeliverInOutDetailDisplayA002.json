@@ -1,0 +1,56 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/02/07 20:30:27",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[
+    {
+      "deliverInOutDetail": [
+        {
+          "brokerName": "株式会社ゲイン・コンサルティング",
+          "empCode": "0258",
+          "brokerChargeName": "担当 一郎",
+          "buten": "Z56",
+          "accountNumber": "596799",
+          "course": "A",
+          "customerNameKanji": "岸村眞治",
+          "customerNameKana": "キシムラ シンジ",
+          "brandName": "オリエンタルエンド",
+          "securityType": "K0",
+          "deliverInOutClassification": "0",
+          "quantity": "1000",
+          "checkInOutPrice": "1000",
+          "totalAmount": "1000",
+          "checkInOutDay": "20160803",
+          "brokerCode": "0258",
+          "branchCode": "999",
+          "branchName": "株式会社セフネット"
+        },
+        {
+          "brokerName": "株式会社ゲイン・コンサルティング",
+          "empCode": "0258",
+          "brokerChargeName": "担当 一郎",
+          "buten": "Z56",
+          "accountNumber": "596800",
+          "course": "B",
+          "customerNameKanji": "目黒則男",
+          "customerNameKana": "メグロ ノリオ",
+          "brandName": "オリエンタルエンド",
+          "securityType": "S0",
+          "deliverInOutClassification": "1",
+          "quantity": "1000",
+          "checkInOutPrice": "2000",
+          "totalAmount": "",
+          "checkInOutDay": "20160803",
+          "brokerCode": "0258",
+          "branchCode": "999",
+          "branchName": "株式会社セフネット"
+        }
+      ]
+    }
+  ]
+}

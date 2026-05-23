@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+        "pdfFileName": "DLファイル"
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/06/24 15:51:13",
+  "title": null,
+  "returnCode": "正常終了"
+}

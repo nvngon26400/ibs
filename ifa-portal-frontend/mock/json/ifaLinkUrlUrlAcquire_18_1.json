@@ -1,0 +1,6 @@
+{
+  "dispName": "本日の注意銘柄",
+  "extLinkFlag": "1",
+  "postRequest": {},
+  "linkUrl": "https://search.sbisec.co.jp/v2/popwin/attention/stock/{0}.html"
+}

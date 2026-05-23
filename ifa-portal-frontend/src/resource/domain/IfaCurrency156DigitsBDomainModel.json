@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY15_6_DIGITS_B",
+  "domainName": "価格15_6_B",
+  "dataType": "金額",
+  "precision": 15,
+  "digit": 6,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 18,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

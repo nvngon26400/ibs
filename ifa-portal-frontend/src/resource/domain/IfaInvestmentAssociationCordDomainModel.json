@@ -1,0 +1,17 @@
+{
+  "domainId": "INVESTMENT_ASSOCIATION_CORD",
+  "domainName": "投信協会コード",
+  "dataType": "文字列",
+  "precision": 8,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 8,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

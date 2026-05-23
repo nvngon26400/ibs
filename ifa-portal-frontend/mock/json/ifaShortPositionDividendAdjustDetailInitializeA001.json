@@ -1,0 +1,67 @@
+{
+	"totalSize": 0,
+	"maxRownum": 0,
+	"overMaxRownum": false,
+	"dataList": [
+		{
+			"butenCode": "315",
+			"accountNumber": "315002",
+			"detailList": [
+				{
+					"brandCode": "123456789012345678901",
+					"brandName": "壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾",
+					"expectedDividend": "12345678901234567890",
+					"stockQuantity": "1234567890123456",
+					"restraintAmount": "1234567890123456",
+					"rightLastDate": "20240624"
+				},
+				{
+					"brandCode": "123456789012345678901",
+					"brandName": "壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾",
+					"expectedDividend": "12345678901234567890",
+					"stockQuantity": "1234567890123456",
+					"restraintAmount": "1234567890123456",
+					"rightLastDate": "20240624"
+				},
+				{
+					"brandCode": "123456789012345678901",
+					"brandName": "壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾",
+					"expectedDividend": "12345678901234567890",
+					"stockQuantity": "1234567890123456",
+					"restraintAmount": "1234567890123456",
+					"rightLastDate": "20240624"
+				},
+				{
+					"brandCode": "123456789012345678901",
+					"brandName": "壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾",
+					"expectedDividend": "12345678901234567890",
+					"stockQuantity": "1234567890123456",
+					"restraintAmount": "1234567890123456",
+					"rightLastDate": "20240624"
+				},
+				{
+					"brandCode": "123456789012345678901",
+					"brandName": "壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾",
+					"expectedDividend": "12345678901234567890",
+					"stockQuantity": "1234567890123456",
+					"restraintAmount": "1234567890123456",
+					"rightLastDate": "20240624"
+				},
+				{
+					"brandCode": "123456789012345678901",
+					"brandName": "壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾壱弐参肆伍陸漆捌玖拾",
+					"expectedDividend": "12345678901234567890",
+					"stockQuantity": "1234567890123456",
+					"restraintAmount": "1234567890123456",
+					"rightLastDate": "20240624"
+				}
+			],
+			"searchResultCount": "12345678901234567890123456789012345678901234567890"
+		}
+	],
+	"message": "",
+	"errorLevel": 0,
+	"requestedTime": "2023/10/31 17:30:05",
+	"title": null,
+	"returnCode": null
+}

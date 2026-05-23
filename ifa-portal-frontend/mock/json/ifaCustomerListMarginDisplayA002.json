@@ -1,0 +1,38 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+   { "customerListList":[ 
+    {
+        
+         "totalRow": "5000",
+          "tcCompRank": "E",
+          "customerNameKana": "０２７３?３１５００１カナ",
+          "customerNameKanji": "０２７３?３１５００１漢字",
+          "accountNumber": "1774",
+          "branchCode": "001",
+          "brokerCode": "0273",
+          "brokerChargeCode": "1000",
+          "butenCode": "Z52",
+          "chargeName": "273球",
+          "branchName": "株式会社アイ・パートナーズフィナンシャル 本店1",
+          "brokerName": "株式会社アイ・パートナーズフィナンシャル 本店1",
+          "customerListProfitAndLossOfMarginPosition": "6",
+          "marginStatus": "1",
+          "chargeFlag": "1",
+          "acceptanceDeposit": "1",
+          "maintenanceRate": "6",
+          "customerAttributeName": "インターネットコース",
+          "tengun": "1"
+      }
+    ]
+  }
+  ],
+
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/01/31 14:53:03",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

@@ -1,0 +1,25 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "menuList":[
+    {
+      "menuId": "1",
+      "menuTitle": "手数料データ"
+    },
+    {
+      "menuId": "2",
+      "menuTitle": "取引データ"
+    },
+    {
+      "menuId": "3",
+      "menuTitle": "ダイレクトメニュー"
+    }]
+  }]
+}

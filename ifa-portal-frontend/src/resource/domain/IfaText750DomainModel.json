@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT750",
+  "domainName": "テキスト750",
+  "dataType": "文字列",
+  "precision": 750,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 750,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

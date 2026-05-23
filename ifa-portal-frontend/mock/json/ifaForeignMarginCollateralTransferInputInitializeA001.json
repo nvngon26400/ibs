@@ -1,0 +1,75 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "returnCode": "SUCCESS",
+    "message": null,
+    "errorLevel": 0,
+    "requestedTime": "2023/10/11 10:00:00",
+    "title": null,
+    "dataList": [
+        {
+            "ableWithdrawal": "123456",
+            "protection": [
+                {
+                    "collateralDepositListBrandCode": "AON",
+                    "collateralDepositListBrandName": "エーオン",
+                    "collateralAssessment": "70",
+                    "specificAccountCode": "1",
+                    "transferQuantity": "1",
+                    "notReceivedQuantity": "0",
+                    "valuatePrice": "319.01",
+                    "collateralValuation": "223.3",
+                    "depositType": "PROTECTION_KEEPING"
+                },
+                {
+                    "collateralDepositListBrandCode": "MMC",
+                    "collateralDepositListBrandName": "マーシュ アンド マクレナン",
+                    "collateralAssessment": "70",
+                    "specificAccountCode": "2",
+                    "transferQuantity": "4",
+                    "notReceivedQuantity": "0",
+                    "valuatePrice": "188.73",
+                    "collateralValuation": "528.44",
+                    "depositType": "PROTECTION_KEEPING"
+                },
+                {
+                    "collateralDepositListBrandCode": "TEAM",
+                    "collateralDepositListBrandName": "アトラシアン",
+                    "collateralAssessment": "70",
+                    "specificAccountCode": "2",
+                    "transferQuantity": "1",
+                    "notReceivedQuantity": "0",
+                    "valuatePrice": "190.62",
+                    "collateralValuation": "133.43",
+                    "depositType": "PROTECTION_KEEPING"
+                }
+            ],
+            "substitution": [
+                {
+                    "collateralDepositListBrandCode": "ADI",
+                    "collateralDepositListBrandName": "アナログ デバイセズ",
+                    "collateralAssessment": "70",
+                    "specificAccountCode": "2",
+                    "transferQuantity": "1",
+                    "notReceivedQuantity": "0",
+                    "valuatePrice": "147.27",
+                    "collateralValuation": "103.08",
+                    "depositType": "COLLATERAL_SECURITIES"
+                },
+                {
+                    "collateralDepositListBrandCode": "WM",
+                    "collateralDepositListBrandName": "ウエイスト マネジメント",
+                    "collateralAssessment": "70",
+                    "specificAccountCode": "1",
+                    "transferQuantity": "1500",
+                    "notReceivedQuantity": "1000",
+                    "valuatePrice": "152.56",
+                    "collateralValuation": "106.79",
+                    "depositType": "COLLATERAL_SECURITIES"
+                }
+            ],
+            "subscribed": false
+        }
+    ]
+}

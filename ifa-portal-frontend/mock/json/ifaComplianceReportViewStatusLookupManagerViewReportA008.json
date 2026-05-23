@@ -1,0 +1,15 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "viewReportFlag": "1"
+        }
+    ],
+    "message": "コンプライアンス通信の閲覧報告分を更新しました。",
+    "errorLevel": 1,
+    "requestedTime": "2025/06/06 16:07:55",
+    "title": null,
+    "returnCode": "info.COR_COMPLIANCE_CONFIRMATION.COR_CONFIRMATION_REPORT"
+}

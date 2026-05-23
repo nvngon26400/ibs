@@ -1,0 +1,43 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "butenCode": "123",
+      "accountNumber": "1234",
+      "sendCorrectLogicJudgeFlag": "BROKERUPDATE",
+      "brandCode": "210987654321",
+      "kanyuKbn": "1",
+      "jutyuKbn": "3",
+      "invitationCheck": "1",
+      "complianceCheckMsg": "（△・◇）ワーニング申請・承認が必要です。",
+      "bbRemark": "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890",
+      "bbRemark2": "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890",
+      "bbPeriodTo": "20241231",
+      "customerCode": "",
+      "mokuromiKoufuKbn": "3",
+      "importantMatterType": "0",
+      "bookBuildingPresentationFrom": "20240101",
+      "detailNumber": "1",
+      "updateTimeForOrderExclusivity": "",
+      "lotteryResult": "1",
+      "bbQuantityAlloc": "1234567890",
+      "sellBuyUnitType": "株",
+      "orderStatus": "0",
+      "quantity": "1234567890",
+      "contractAmount": "152415787517139777762.6",
+      "depositType": "H",
+      "solicitTypeName": "1",
+      "receiveOrderTypeName": "3",
+      "prospectusIssueMethodWord": "2",
+      "importantMatterType2": "0",
+      "orderFlag": "3"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/02 12:34:56",
+  "title": null,
+  "returnCode": null
+}

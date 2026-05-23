@@ -1,0 +1,19 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "complianceReportListList": [
+              {
+                  "corBrowseFlag": null
+              }
+          ]
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/01/25 11:26:41",
+  "title": null,
+  "returnCode": "0"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "BRAND_CODE13",
+  "domainName": "銘柄コード13",
+  "dataType": "文字列",
+  "precision": 13,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 13,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

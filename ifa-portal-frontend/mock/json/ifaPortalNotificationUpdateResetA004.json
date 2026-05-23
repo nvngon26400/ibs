@@ -1,0 +1,19 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "displayPeriodFrom": "2023-11-01 00:00:00",
+      "displayPeriodTo": "2023-11-01 00:00:00",
+      "notificationContent": "0000000006",
+      "importantNotification": "6",
+      "nonDisplay": "6"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/07/10 17:23:05",
+  "title": null,
+  "returnCode": "0"
+}

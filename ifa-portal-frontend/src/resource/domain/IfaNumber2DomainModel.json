@@ -1,0 +1,17 @@
+{
+  "domainId": "NUMBER2",
+  "domainName": "数値2",
+  "dataType": "数値",
+  "precision": 2,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 2,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-quantity"
+}

@@ -1,0 +1,37 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "contactAcceptDetailInfoList": [
+        {
+          "bigClass": "注文受付",
+          "midClass": "",
+          "recordDate": "2024-11-30 17:23:54",
+          "status": "",
+          "contents": "2024/11/30-1"
+        },
+        {
+          "bigClass": "注文",
+          "midClass": "新規売却6ヶ月",
+          "recordDate": "2024/11/30 17:54:00",
+          "status": "",
+          "contents": "6501　日立製作所　東証　価格／OCO1:指値/57,000円　条件／OCO2:現在値が56,900円以下になった時点でOCO1(指値)を56,900円に訂正　\n数量:200　"
+        },
+        {
+          "bigClass": "注文",
+          "midClass": "新規買付6ヶ月",
+          "recordDate": "2024/11/30 17:23:54",
+          "status": "",
+          "contents": "岩隈　政則　7201　日産自動車　SOR　指値　価格:610円　数量:300"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

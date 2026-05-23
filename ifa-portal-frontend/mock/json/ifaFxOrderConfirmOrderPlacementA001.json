@@ -1,0 +1,34 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/07/05 12:00:00",
+  "title": null,
+  "returnCode": "SUCCESS",
+  "dataList": [
+    {
+      "tradeKbn": "1",
+      "orderDate": "20231010 110000",
+      "orderNumber": "12345",
+      "exchangeOrderAmount": "5000",
+      "currencyCode": "USD",
+      "currencyName": "米ドル",
+      "tradeTiming": "2023-12-03T10:15:30+09:00",
+      "exchangeRate": "115.81",
+      "exchangeRateDateTime": "20231010 100000",
+      "additionalRateType": "ADJUST_AMOUNT",
+      "additionalAmount": "5000000",
+      "additionalPercentage": "50",
+      "deliveryAmount": "500000",
+      "exchangeTrade": "2",
+      "settlementDate": "20231010",
+      "accountType": "2",
+      "warningThresholdOverMessage": "注文ワーニングしきい値超過メッセージ",
+      "warningThreshold": "1",
+      "decimalLength": "3",
+      "denominator": "2"
+    }
+  ]
+}

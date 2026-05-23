@@ -1,0 +1,46 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "brokerCode": "NH18",
+          "brokerName": "テスト18",
+          "brokerageBranchCode": "001",
+          "brokerBranchName": "株式会社TEST18",
+          "empCode": "0001",
+          "brokerChargeName": "営業太朗",
+          "butenCode": "001",
+          "accountNumber": "798118",
+          "courseName": "コース８",
+          "customerName": "テスト１８",
+          "customerNameKana": "テストタロウ",
+          "brandCode": "0000000NH008",
+          "brandName": "テスト銘柄１７",
+          "contractStandardDeposit": "100",
+          "lastTradeDate": "20210101"
+      },
+      {
+          "brokerCode": "NH38",
+          "brokerName": "テスト38",
+          "brokerageBranchCode": "001",
+          "brokerBranchName": "株式会社TEST38",
+          "empCode": "0001",
+          "brokerChargeName": "営業太朗",
+          "butenCode": "001",
+          "accountNumber": "798138",
+          "courseName": "コース８",
+          "customerName": "テスト３８",
+          "customerNameKana": "テストタロウ",
+          "brandCode": "0000000NH008",
+          "brandName": "テスト銘柄２７",
+          "contractStandardDeposit": "100000000",
+          "lastTradeDate": "20210101"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/20 15:00:23",
+  "title": null,
+  "returnCode": null
+}

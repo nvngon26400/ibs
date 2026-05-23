@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "pdfFileName": "C:/temp/sample.png"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/03/18 18:41:02",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

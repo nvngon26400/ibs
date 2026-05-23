@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "comment":  "ここには通知がある場合に通知内容が表示されます｡"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/09/14 23:02:26",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

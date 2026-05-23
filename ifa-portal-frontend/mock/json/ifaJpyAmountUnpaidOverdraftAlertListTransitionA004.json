@@ -1,0 +1,17 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "creditAccountKbn": "1",
+          "butenCode": "315",
+          "accountNumber": "315001"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/11/21 09:00:00",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

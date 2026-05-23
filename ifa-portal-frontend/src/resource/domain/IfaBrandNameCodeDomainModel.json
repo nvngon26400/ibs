@@ -1,0 +1,17 @@
+{
+  "domainId": "BRAND_NAME_CODE",
+  "domainName": "銘柄名/銘柄コード",
+  "dataType": "文字列",
+  "precision": 128,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 128,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

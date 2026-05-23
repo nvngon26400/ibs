@@ -1,0 +1,116 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "customerNameKanji": "漢字",
+      "customerNameKana": "カタカナ",
+      "butenCode": "Z56",
+      "accountNumber": "6799",
+      "entrustOrderTradeinfoList": [
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "4",
+          "tradePrice": "500",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "",
+          "tradeQuantity": "",
+          "tradePrice": "",
+          "tradePriceCurrencyCode": ""
+        },
+        {
+          "tradeDateTime": null,
+          "tradeQuantity": null,
+          "tradePrice": null,
+          "tradePriceCurrencyCode": null
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        },
+        {
+          "tradeDateTime": "2023-02-17T10:11:12.396+09:00",
+          "tradeQuantity": "2300000000",
+          "tradePrice": "1000000000000",
+          "tradePriceCurrencyCode": "USD"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/03/05 16:32:56",
+  "title": null,
+  "returnCode": null
+}

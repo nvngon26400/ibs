@@ -1,0 +1,21 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "contentList": [
+        { "lineNo": "1", "menuNameErrorMessage": "", "screenNameErrorMessage": "画面名は[①]を入力できません。ご確認ください。", "contentErrorMessage": "内容は[①]を入力できません。ご確認ください。"},
+        { "lineNo": "2", "menuNameErrorMessage": "", "screenNameErrorMessage": "", "contentErrorMessage": ""},
+        { "lineNo": "3", "menuNameErrorMessage": "メニュー名は[③]を入力できません。ご確認ください。", "screenNameErrorMessage": "", "contentErrorMessage": ""},
+        { "lineNo": "4", "menuNameErrorMessage": "", "screenNameErrorMessage": "画面名は[④]を入力できません。ご確認ください。", "contentErrorMessage": ""},
+        { "lineNo": "5", "menuNameErrorMessage": "", "screenNameErrorMessage": "", "contentErrorMessage": "内容は[⑤]を入力できません。ご確認ください。"}
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/08/29 19:29:16",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

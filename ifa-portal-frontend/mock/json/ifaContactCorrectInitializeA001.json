@@ -1,0 +1,49 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "ifaToiawaseNo": "ifaToiawaseNo01",
+      "toiawaseNo": "toiawaseNo01",
+      "ifaKaitouNo": "ifaKaitouNo01",
+      "kaitouNo": "kaitouNo01",
+      "tourokuGroup": "0",
+      "naiyou": "内容1\n内容2",
+      "answerList": [
+        {
+          "ifaToiawaseNo": "toiawaseNo1",
+          "toiawaseNo": "toiawaseNo1",
+          "ifaKaitouNo": "kaitouNo1",
+          "kaitouNo": "kaitouNo1",
+          "userNm": "NRI高橋俊1",
+          "kaitouNaiyou": "回答内容1　回答内容1　回答内容1",
+          "tourokuNichiji": "2024/03/21 17:54:37"
+        },
+        {
+          "ifaToiawaseNo": "toiawaseNo1",
+          "toiawaseNo": "toiawaseNo1",
+          "ifaKaitouNo": "kaitouNo2",
+          "kaitouNo": "kaitouNo2",
+          "userNm": "NRI高橋俊2",
+          "kaitouNaiyou": "回答内容21\n回答内容22\n回答内容23\n回答内容24\n回答内容25\n回答内容26\n回答内容27\n回答内容28\n回答内容29",
+          "tourokuNichiji": "2024/03/22 17:54:37"
+        },
+        {
+          "ifaToiawaseNo": "toiawaseNo1",
+          "toiawaseNo": "toiawaseNo1",
+          "ifaKaitouNo": "kaitouNo3",
+          "kaitouNo": "kaitouNo3",
+          "userNm": "NRI高橋俊3",
+          "kaitouNaiyou": "回答内容3　回答内容3　回答内容3",
+          "tourokuNichiji": "2024/03/23 17:54:37"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

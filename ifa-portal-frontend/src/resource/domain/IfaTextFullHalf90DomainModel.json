@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT_FULL_HALF90",
+  "domainName": "テキスト（全角半角）90",
+  "dataType": "文字列",
+  "precision": 90,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 90,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

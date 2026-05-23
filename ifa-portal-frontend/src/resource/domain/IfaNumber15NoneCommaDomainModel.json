@@ -1,0 +1,17 @@
+{
+  "domainId": "NUMBER15_NONE_COMMA",
+  "domainName": "数値80（カンマ無し）",
+  "dataType": "数値",
+  "precision": 80,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "noneWithCommaNoneZeroPadding",
+  "formattedDigit": 80,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

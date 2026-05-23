@@ -1,0 +1,38 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {  
+    "loginId": "dev001",
+    "privId": "6",
+    "branchNameList": [
+      {
+        "mainBranchName": "秋葉原支店",
+        "sbiSecurityCode": "106"
+      },
+      {
+        "mainBranchName": "浜松支店",
+        "sbiSecurityCode": "107"
+      },
+      {
+        "mainBranchName": "宇都宮中央支店１",
+        "sbiSecurityCode": "108"
+      },
+      {
+        "mainBranchName": "宇都宮中央支店２",
+        "sbiSecurityCode": "109"
+      },
+      {
+        "mainBranchName": "宇都宮中央支店３",
+        "sbiSecurityCode": "110"
+      }
+    ]
+    }
+  ],
+  "message": "",
+  "errorLevel": "0",
+  "requestedTime": "2023/10/16 16:55:05",
+  "title": null,
+  "returnCode": null
+}

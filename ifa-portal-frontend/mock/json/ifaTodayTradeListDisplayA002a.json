@@ -1,0 +1,34 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2000-10-10 12:12:12",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[
+      {
+        "customerAccountInfoList": [
+          {
+          "totalCount": "1",
+          "butenCode": "Z56",
+          "accountNumber": "596799",
+          "customerNameKanji": "A",
+          "customerNameKana": "B",
+          "course": "B",
+          "customerAttribute": "",
+          "profileValue": "",
+          "empCode": "1005",
+          "brokerChargeName": "222",
+          "brokerCode": "333",
+          "brokerName": "444",
+          "branchCode": "5358",
+          "branchName": "666",
+          "marginProfile": "MARGIN",
+          "brandCode": "111"
+        }
+      ]
+    }
+  ]
+}

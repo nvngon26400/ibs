@@ -1,0 +1,24 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+        "selfAssessmentItemList" : [
+          {
+            "selfCheckItemId": "1",
+            "registerDate": "202407",
+            "sortNumber": "1",
+            "selfAssessmentItemName": "金融商品仲介業登録票は営業所ごとに掲示している",
+            "answer": "0",
+            "reasonRequiredFlag": "0"
+          }
+        ]
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/01/26 14:28:04",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

@@ -1,0 +1,44 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "dateYmd": "20240110",
+          "brokerCode": "CA13",
+          "brokerName": "テスト1",
+          "brokerageBranchCode": "113",
+          "brokerBranchName": "顧客アラートテストCA13本店",
+          "empCode": "0001",
+          "brokerChargeName": "営業太朗",
+          "buten": "001",
+          "accountNumber": "798101",
+          "courseName": "コース１",
+          "customerName": "テスト１",
+          "customerNameKana": null,
+          "currency": "JPY",
+          "foreignValuation": "-99999999"
+      },
+      {
+        "dateYmd": "20240110",
+        "brokerCode": "CA13",
+        "brokerName": "テスト1",
+        "brokerageBranchCode": "113",
+        "brokerBranchName": "顧客アラートテストCA13本店",
+        "empCode": "0001",
+        "brokerChargeName": "営業太朗",
+        "buten": "001",
+        "accountNumber": "798101",
+        "courseName": "コース１",
+        "customerName": "テスト１",
+        "customerNameKana": null,
+        "currency": "JPY",
+        "foreignValuation": "-99999999"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/14 11:26:56",
+  "title": null,
+  "returnCode": null
+}

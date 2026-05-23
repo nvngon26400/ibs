@@ -1,0 +1,40 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "tradeHistoryList": [
+                {
+                    "tradeDate": "2025/05/01",
+                    "deliveryDate": "2025/06/01",
+                    "securityType": "投",
+                    "brandCode": "12345.1234.123",
+                    "brandName": "取引履歴（顧客別）銘柄名テスト",
+                    "detailsTrade": "現買",
+                    "detailsType": "端株",
+                    "depositTax": "一般",
+                    "tradeMarketReason": "東証１部",
+                    "price": "100",
+                    "openPrice": "200",
+                    "acquireDate": " ",
+                    "currency": "円",
+                    "fx": "300",
+                    "quantity": "400",
+                    "fee": "500",
+                    "consumptionTax": "600",
+                    "accruedInterest": "700",
+                    "realProfitAndLoss": "800",
+                    "capitalGainTax": "900",
+                    "accurateAmount": "1,000",
+                    "cancelFlg": "0"
+                }
+            ]
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2025/07/29 15:01:11",
+    "title": null,
+    "returnCode": "SUCCESS"
+}

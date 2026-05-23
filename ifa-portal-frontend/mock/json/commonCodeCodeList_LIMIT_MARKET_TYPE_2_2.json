@@ -1,0 +1,9 @@
+{
+  "dataList": [
+    { "key": " ", "value": "条件なし" },
+    { "key": "Z", "value": "寄指(Y)" },
+    { "key": "I", "value": "引指(H)" },
+    { "key": "F", "value": "不成(F)" },
+    { "key": "P", "value": "IOC指(I)" }
+  ]
+}

@@ -1,0 +1,212 @@
+.devGrey {
+  background-color: rgb(238, 238, 238);
+  padding: 10px 0;
+}
+.boldLabel {
+  font-weight: bold;
+  color: #606266;
+}
+
+.m-left-5 {
+  margin-left: 5px;
+  color: #606266;
+}
+
+// .checkbox-bkcolor {
+//   background-color: #fff;
+// }
+.ifa-input__text-long {
+  width: 775px;
+}
+.how-to-use {
+  cursor: pointer;
+  margin-left: auto;
+  display: block;
+  float: right;
+  right: 0px;
+  top: 0px;
+  margin-right: 20px;
+}
+.right-btn {
+  margin-left: auto;
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  text-align: right;
+}
+.el-icon-question {
+  color: #f39800;
+  font-size: 15px;
+}
+:deep(.el-form-item__label) {
+  width: 200px;
+  padding-right: 3rem;
+}
+:deep(.broker_name_label) .el-form-item__label {
+  width: 140px;
+}
+.form-area__section {
+  border-bottom: 1px solid #eee;
+  margin: 0.5rem 0 0 0;
+}
+:deep(.upper-readonly) .el-input__inner {
+  background-color: rgb(238, 238, 238);
+  border: unset;
+}
+:deep(.el-form-item__error) {
+  width: max-content;
+}
+.col1-w-31 {
+  width: 31em;
+}
+:deep(.readonly_text) .el-input__inner {
+  background-color: #f5f7fa;
+}
+:deep(.accountNumber_label) .el-form-item__label {
+  width: 82px;
+}
+:deep(.tradePriceGen-label) .el-form-item__label {
+  width: 8.25em;
+  margin-left: 0px;
+}
+.how-to-use :hover {
+  color: #409eff;
+}
+
+:deep(.el-dialog__body) {
+  padding-bottom: 0px;
+  font-weight: bold;
+}
+:deep(.el-dialog__title) {
+  font-size: 18px;
+  font-weight: bold;
+}
+:deep(.el-dialog__header) {
+  text-align: center;
+}
+
+:deep(.el-divider--horizontal) {
+  margin-bottom: 0px;
+}
+:deep(.tradePriceGen_readonly) .el-input__inner {
+  background-color: #f5f7fa;
+  text-align: right;
+}
+
+.form-upper__section {
+  border-bottom: 1px solid #eee;
+  margin: 0.5rem 0 0 0;
+  height: 4em;
+}
+.form-w {
+  width: auto;
+}
+.form-button__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: -70px 0 0 auto;
+}
+:deep(.el-dialog__footer) {
+  text-align: left;
+}
+
+:deep(.customerName_label) .el-form-item__label {
+  width: 5em;
+}
+
+:deep(.brandName_label) .el-form-item__label {
+  width: 178px;
+}
+.buy-background-color {
+  &.el-dialog {
+    background: #fef0f0;
+    padding: 20px 20px 20px 20px;
+    // max-height: none;
+    max-height: 90%;
+    margin-top: 3%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .el-dialog__header {
+    font-weight: 700;
+  }
+  .el-dialog__body {
+    margin-top: -2rem;
+  }
+  .el-dialog__footer {
+    display: flex;
+    justify-content: left;
+    padding: 0 0 1rem 7rem;
+  }
+  .el-card__body {
+    padding-bottom: 0.5rem;
+  }
+}
+.sell-background-color {
+  &.el-dialog {
+    background: #ecf5ff;
+    padding: 20px 20px 20px 20px;
+    // max-height: none;
+    max-height: 90%;
+    margin-top: 3%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .el-dialog__header {
+    font-weight: 700;
+  }
+  .el-dialog__body {
+    margin-top: -2rem;
+  }
+  .el-dialog__footer {
+    display: flex;
+    justify-content: left;
+    padding: 0 0 1rem 7rem;
+  }
+  .el-card__body {
+    padding-bottom: 0.5rem;
+  }
+}
+.buy-font {
+  color: red;
+  font-weight: bold;
+}
+.sell-font {
+  color: blue;
+  font-weight: bold;
+}
+.header-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 2rem 0.2rem 1rem;
+}
+.footer-button {
+  padding: 0.8rem 0 0.2rem 2rem;
+}
+
+:deep(.el-tag.el-tag--danger) {
+  color: white;
+  background-color: #e5004c;
+  width: 10em;
+  font-weight: bold;
+}
+:deep(.el-tag) {
+  color: white;
+  background-color: #00847f;
+  width: 10em;
+  font-weight: bold;
+}
+.el-form-item__multi-line-label :deep(.el-form-item__label) {
+  line-height: unset;
+  white-space: nowrap;
+}
+.el-form-item__multi-line-content :deep(.el-form-item__content) {
+  line-height: unset;
+  white-space: nowrap;
+}
+#commonTable,
+#warningPart,
+#summaryAnyPart {
+  margin: 0px 15px;
+}

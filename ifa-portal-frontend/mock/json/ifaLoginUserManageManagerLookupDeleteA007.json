@@ -1,0 +1,11 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "ユーザー情報を削除しました。",
+  "errorLevel": 0,
+  "requestedTime": "20230705 120000",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": [{}]
+}

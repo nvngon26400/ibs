@@ -1,0 +1,48 @@
+{
+  "errorLevel": 0,
+  "message": "",
+  "dataList": [
+    {
+      "brandCode": "2811",
+      "market": "A",
+      "currentPrice": "1501000",
+      "tick": "2",
+      "currentFlag": "C",
+      "start": "1492",
+      "startTime": "0900",
+      "high": "1511",
+      "highTime": "1230",
+      "low": "1464",
+      "lowTime": "0901",
+      "diff": "-13",
+      "ratio": "-0.87",
+      "updateDate": "210914",
+      "updateTime4": "1500",
+      "last": "1488000",
+      "lastDate": "210913",
+      "buySellPrice": "279840",
+      "volume": "1865000000",
+      "updateTime41": "1500",
+      "unit": "100",
+      "sellStopHigh": "4100.0",
+      "sellStopLow": "3500.0",
+      "buyStopHigh": "4500.0",
+      "buyStopLow": "3100.0",
+      "baseDate": "210914",
+      "orderPriceUnit": [
+        { "over": "0", "within": "0.25", "orderPriceUnit": "0.001" },
+        { "over": "0.25", "within": "0.5", "orderPriceUnit": "0.005" },
+        { "over": "0.5", "within": "10", "orderPriceUnit": "0.01" },
+        { "over": "10", "within": "30", "orderPriceUnit": "0.02" },
+        { "over": "30", "within": "100", "orderPriceUnit": "0.05" },
+        { "over": "100", "within": "200", "orderPriceUnit": "0.1" },
+        { "over": "200", "within": "500", "orderPriceUnit": "0.2" },
+        { "over": "500", "within": "1000", "orderPriceUnit": "0.5" },
+        { "over": "1000", "within": "2000", "orderPriceUnit": "1" },
+        { "over": "2000", "within": "5000", "orderPriceUnit": "2" },
+        { "over": "5000", "within": "100000", "orderPriceUnit": "5" }
+      ],
+      "basePrice": "123456789012345.1"
+    }
+  ]
+}

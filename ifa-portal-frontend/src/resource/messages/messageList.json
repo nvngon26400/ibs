@@ -1,0 +1,2504 @@
+[
+  {
+    "id": 1,
+    "key": "errors.required",
+    "message": "{0}を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 2,
+    "key": "errors.accurately",
+    "message": "{0}を正しく入力して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 3,
+    "key": "errors.size",
+    "message": "{0}は{1}～{2}文字で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 4,
+    "key": "errors.selected",
+    "message": "{0}を選択してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 5,
+    "key": "errors.date.specifyFormat",
+    "message": "{0}を\"{1}\"の形式で正しい日付で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 6,
+    "key": "errors.date.specifyBeforeYesterday",
+    "message": "{0}には前日以前の日付を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 7,
+    "key": "errors.date.specifyFromTo",
+    "message": "{0}ToにはFromと同日以降の日付を指定して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 8,
+    "key": "errors.date.specifyBeforeToday",
+    "message": "{0}には当日以前の日付を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 9,
+    "key": "errors.brokerCodeNotExist",
+    "message": "入力した仲介業者コードは存在しません。<br>仲介業者コード: [{0}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 10,
+    "key": "errors.brokerCodeNotLength",
+    "message": "仲介業者コードを4桁で入力してください。<br>仲介業者コード: [{0}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 11,
+    "key": "errors.brokerCodeDuplicate",
+    "message": "入力した仲介業者コードが重複しています。<br>仲介業者コード: [{0}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 12,
+    "key": "errors.notLength",
+    "message": "{0}を{1}桁で入力してください。{2}: [{3}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 13,
+    "key": "errors.codeDuplicate",
+    "message": "入力した{0}が重複しています。{1}: [{2}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 14,
+    "key": "errors.session.lost",
+    "message": "セッションがタイムアウトしました。再度ログインして下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 15,
+    "key": "errors.login.unmatch",
+    "message": "ログインIDまたはパスワードが違います。",
+    "errorLevel": -1
+  },
+  {
+    "id": 16,
+    "key": "errors.dataList.notfound",
+    "message": "検索結果が0件です。\n条件を設定して再度検索して下さい。",
+    "errorLevel": 1
+  },
+  {
+    "id": 17,
+    "key": "warnings.dataList.overMaxRownum",
+    "message": "検索結果が{0}件を超過しています（{1}件ヒット）。\n条件を詳細に設定して再度検索して下さい。",
+    "errorLevel": 2
+  },
+  {
+    "id": 18,
+    "key": "warnings.dataList.csv.overMaxRownum",
+    "message": "検索結果が{0}件を超過しています（{1}件ヒット）。\n{2}件のcsv出力を行います。",
+    "errorLevel": 2
+  },
+  {
+    "id": 19,
+    "key": "warnings.dataList.csv.output",
+    "message": "{0}件のcsv出力を行います。",
+    "errorLevel": 2
+  },
+  {
+    "id": 20,
+    "key": "warnings.dataList.csv.header.overMaxRownum",
+    "message": "※ 最大出力可能件数を超過しているため、{0}件中の{1}件を出力しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 21,
+    "key": "warnings.dataList.csv.header.output",
+    "message": "※ {0}件を出力しています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 22,
+    "key": "errors.COR_COMPLIANCE_CONFIRMATION.COR_CONFIRMATION_FLG",
+    "message": "コンプライアンス通信閲覧状況の状態変更ができませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 23,
+    "key": "info.COR_COMPLIANCE_CONFIRMATION.COR_CONFIRMATION_FLG",
+    "message": "コンプライアンス通信閲覧状況の状態を変更しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 24,
+    "key": "errors.COR_SELF_CHECK.CHANGE_SELF_CHECK",
+    "message": "自己点検記録簿を修正できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 25,
+    "key": "info.COR_SELF_CHECK.CHANGE_SELF_CHECK",
+    "message": "自己点検記録簿を修正しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 26,
+    "key": "warnings.listService.getOrderList",
+    "message": "当日注文情報の取得ができませんでした。<br>部店コード:[{0}] 口座番号:[{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 27,
+    "key": "warnings.listService.getExecutionList",
+    "message": "当日約定情報の取得ができませんでした。<br>部店コード:[{0}] 口座番号:[{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 28,
+    "key": "warnings.listService.getHoldMarginList",
+    "message": "信用建玉情報の取得ができませんでした。<br>部店コード:[{0}] 口座番号:[{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 29,
+    "key": "W0001",
+    "message": "アクセスが集中しているため口座情報が取得できませんでした。<br>部店コード:[{0}] 口座番号:[{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 30,
+    "key": "W0002",
+    "message": "{0}情報の取得ができませんでした。<br>部店コード:[{1}] 口座番号:[{2}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 31,
+    "key": "W0003",
+    "message": "アクセスが集中しているため口座維持率情報が取得できませんでした。<br>部店コード:[{0}] 口座番号:[{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 32,
+    "key": "W0004",
+    "message": "口座維持率情報が取得できませんでした。<br>部店コード:[{0}] 口座番号:[{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 33,
+    "key": "W0005",
+    "message": "対象口座はECで開設されていないため口座情報が取得できませんでした。<br>部店コード:[{0}] 口座番号:[{1}]",
+    "errorLevel": 2
+  },
+  {
+    "id": 34,
+    "key": "warnings.JointTrustFee.notfound",
+    "message": "当該支店には共同募集の契約がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 35,
+    "key": "errors.brandCodeNotExist",
+    "message": "{0}入力した銘柄コードは存在しません。<br>銘柄コード: [{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 36,
+    "key": "errors.brokerBrandNotExist",
+    "message": "この仲介業者は当該銘柄の取扱対象外です。ご確認ください。<br>仲介業者コード: [{0}]、銘柄コード: [{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 37,
+    "key": "errors.butenAccountNotExist",
+    "message": "入力した部店口座は存在しません。<br>部店: [{0}]、口座: [{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 38,
+    "key": "errors.CSVTemplate",
+    "message": "正しいファイルを入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 39,
+    "key": "errors.date.specifyAfterToday",
+    "message": "{0}には当日以降の日付を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 40,
+    "key": "errors.date.specifyToday",
+    "message": "{0}が本日の日付を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 41,
+    "key": "errors.dateRange",
+    "message": "{0}は{1}以内を正しく入力して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 42,
+    "key": "errors.deleteDataExist",
+    "message": "他のユーザーは当該{0}を削除しました。ご確認ください。",
+    "errorLevel": 1
+  },
+  {
+    "id": 43,
+    "key": "errors.duplicateKey",
+    "message": "CSVファイル内に重複キーが存在します。",
+    "errorLevel": -1
+  },
+  {
+    "id": 44,
+    "key": "errors.exclusive",
+    "message": "他のユーザーは当該{0}を操作しました。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 45,
+    "key": "errors.handlingDateExclude",
+    "message": "{0}取扱区間外の銘柄は販売枠を設定できません。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 46,
+    "key": "errors.insertDataExist",
+    "message": "入力した{0}は既に登録済みです。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 47,
+    "key": "errors.numberRange",
+    "message": "{0}は{1}より少ないため、{2}できません。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 48,
+    "key": "errors.oneMoreData",
+    "message": "CSVファイルは1行以上にしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 49,
+    "key": "errors.orderedDelete",
+    "message": "注文がある{0}は削除できません。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 50,
+    "key": "errors.overLimit",
+    "message": "{0}は{1}を超えます。ご確認ください。<br>銘柄コード: [{2}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 51,
+    "key": "errors.status",
+    "message": "{0}の注文のみは{1}できます。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 52,
+    "key": "errors.time.specifyFormat",
+    "message": "{0}を\"{1}\"の形式で正しい時間で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 53,
+    "key": "errors.tradePriceChange",
+    "message": "取引価格が変更しました、この商品は取引に参与できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 54,
+    "key": "errors.tradeRange",
+    "message": "{0}は{1}より少ない値を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 55,
+    "key": "errors.tradeStop",
+    "message": "取引が停止しました、この商品は取引に参与できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 56,
+    "key": "errors.timeFromToDown",
+    "message": "{0}は{1}以降の時間を指定して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 57,
+    "key": "errors.timeFromToUp",
+    "message": "{0}は{1}以上の時間を指定して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 58,
+    "key": "errors.tradeTime",
+    "message": "取引時間外となったため約定できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 59,
+    "key": "errors.maxSize",
+    "message": "{0}は{1}桁以下で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 60,
+    "key": "errors.neqSize",
+    "message": "{0}は{1}桁を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 61,
+    "key": "errors.type",
+    "message": "{0}は{1}を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 62,
+    "key": "errors.mixCheck",
+    "message": "CSVファイルに{1}があるので、「初回」を選択{2}。ご確認ください。<br>銘柄コード: [{0}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 63,
+    "key": "errors.minValue",
+    "message": "{0}は{1}より大きい値を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 64,
+    "key": "errors.serverError",
+    "message": "サーバ側でエラーが発生しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 65,
+    "key": "errors.tickerNotExist",
+    "message": "{0}入力したティッカーは存在しません。<br>ティッカー: [{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 66,
+    "key": "errors.numberFormat",
+    "message": "{0}を\"{1}\"の形式で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 67,
+    "key": "errors.lessOrEqual",
+    "message": "{0}は{1}以下であるため、{2}できません。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 68,
+    "key": "errors.belowLimit",
+    "message": "{0}は{1}より少ないです。ご確認ください。<br>仲介業者コード: [{2}]、銘柄コード: [{3}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 69,
+    "key": "errors.invitationCheck",
+    "message": "乗換え勧誘(ETF)が{0}のため、{1}を選択してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 70,
+    "key": "errors.numberOverRange",
+    "message": "{0}は{1}より大きいため、{2}できません。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 71,
+    "key": "errors.orderPrivilege",
+    "message": "当該仲介業者の注文権限を持っていないです。<br>仲介業者コード: [{0}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 72,
+    "key": "errors.specialWords",
+    "message": "{0}は[{1}]を入力できません。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 73,
+    "key": "errors.emptyRecord",
+    "message": "{0}有効データが存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 74,
+    "key": "errors.informationCheck",
+    "message": "未確認の「重要なお知らせ」があります。",
+    "errorLevel": -1
+  },
+  {
+    "id": 75,
+    "key": "errors.noticeErrorCheck",
+    "message": "外国株式取引に関わる重要な注意情報があるため処理を進めることができません。注意情報欄をご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 76,
+    "key": "errors.foreignStockAccountCheck",
+    "message": "外国株式口座が未開設です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 77,
+    "key": "errors.specificAccountCheck",
+    "message": "特定口座が未開設です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 78,
+    "key": "errors.nisaAccountCheck",
+    "message": "NISA口座が未開設です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 79,
+    "key": "errors.nisaAccountBuyCheck",
+    "message": "NISA口座が買付不可です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 80,
+    "key": "errors.foreignStockCodeChange",
+    "message": "交付された外国証券情報は最新のものではありません。最新の外国証券情報を交付し、再度注文を受注してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 81,
+    "key": "errors.date.specifyToToday",
+    "message": "{0}には本日までの日付を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 82,
+    "key": "errors.date.specifyAfterAppointedDay",
+    "message": "外国証券情報交付日には外国証券情報版番以降の日付を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 83,
+    "key": "errors.engPubBrand.choose",
+    "message": "本銘柄は英文開示銘柄のため、『該当あり』を押下し、（これまでに説明していない場合は今回の発注前に説明を行った上で）説明日を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 84,
+    "key": "warnings.noticeWarningCheck",
+    "message": "外国株式取引に関わる注意情報があります。注意情報欄をご確認の上、問題がなければ処理を進めてください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 85,
+    "key": "info.corretCompleted",
+    "message": "{0}を訂正しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 86,
+    "key": "info.deleteCompleted",
+    "message": "{0}を削除しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 87,
+    "key": "info.endCompleted",
+    "message": "{0}を完了しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 88,
+    "key": "info.insertCompleted",
+    "message": "{0}を登録しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 89,
+    "key": "info.receptCompleted",
+    "message": "{0}を受付ました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 90,
+    "key": "info.updateCompleted",
+    "message": "{0}を更新しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 91,
+    "key": "info.cancleCompleted",
+    "message": "{0}を取消しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 92,
+    "key": "info.uploadCompleted",
+    "message": "{0}をCSV取込ました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 93,
+    "key": "info.uploadUpdateCompleted",
+    "message": "{0}件のデータが更新されました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 94,
+    "key": "info.uploadInsertCompleted",
+    "message": "{0}件のデータが登録されました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 95,
+    "key": "info.orderCompleted",
+    "message": "{0}を発注しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 96,
+    "key": "W0006",
+    "message": "ご選択されたサービスは現在ご利用いただけません。",
+    "errorLevel": 2
+  },
+  {
+    "id": 97,
+    "key": "errors.notAvailableTag",
+    "message": "{0}に使用できないタグが含まれています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 98,
+    "key": "errors.notPairTag",
+    "message": "{0}に対になっていないタグが含まれています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 99,
+    "key": "warnings.correctedTag",
+    "message": "タグ補正が行われました。補正後の{0}を確認してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 100,
+    "key": "errors.numberInsertCheck",
+    "message": "{0}に0は登録できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 101,
+    "key": "errors.notInsertReason",
+    "message": "裁量申込以外時は裁量選定理由が入力できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 102,
+    "key": "errors.srReasonCheck",
+    "message": "裁量選定理由は\"1、2、3\"中の値を入力してください。<br/>1:取引拡大のため、2:取引拡大、資産拡大のため、3:新規開拓、資産拡大のため",
+    "errorLevel": -1
+  },
+  {
+    "id": 103,
+    "key": "errors.applyTime",
+    "message": "申込期間外のため{0}できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 104,
+    "key": "errors.orderTimeNoInsert",
+    "message": "BB募集期間を登録されていないのため申込できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 105,
+    "key": "errors.unitCheck",
+    "message": "{0}は{1}{2}単位で指定してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 106,
+    "key": "errors.applicationPriceInsert",
+    "message": "該当銘柄が成行に指定できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 107,
+    "key": "errors.applicationPriceRange",
+    "message": "申込価格は\"{0}～{1}\"の{2}を指定してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 108,
+    "key": "errors.applicationPriceUnit",
+    "message": "申込価格は{0}刻みで指定してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 109,
+    "key": "errors.urgentStopCheck",
+    "message": "緊急入力停止のため{0}できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 110,
+    "key": "errors.investorCheck",
+    "message": "投資家属性は\"{0}\"中の属性を入力してください。<br/>{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 111,
+    "key": "errors.financialAssetsCheck",
+    "message": "金融資産が3,000万円未満での裁量申込です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 112,
+    "key": "errors.orderTime",
+    "message": "募集期間外のため{0}できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 113,
+    "key": "errors.orderLastTime",
+    "message": "募集最終日は{0}以降登録できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 114,
+    "key": "errors.lotteryResultCheck",
+    "message": "抽選結果が「当選／当選(繰上)／裁量」以外なので、登録できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 115,
+    "key": "errors.notLotteryCheck",
+    "message": "「未抽選」のレコード登録できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 116,
+    "key": "errors.bbQuantityAllocCheck",
+    "message": "当選株数が入力されています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 117,
+    "key": "errors.bbQuantityAllocCheckInput",
+    "message": "抽選結果が当選／当選(繰上)／裁量であるため、当選株数を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 118,
+    "key": "errors.dateOverRange",
+    "message": "{0}の大小関係に誤りがあります。",
+    "errorLevel": -1
+  },
+  {
+    "id": 119,
+    "key": "errors.orderedCheck",
+    "message": "募集入力済みのため{0}できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 120,
+    "key": "errors.periodCheck",
+    "message": "募集期間外のため入力できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 121,
+    "key": "errors.discountUnitCheck",
+    "message": "申込価格は{0}刻みまたは\"成行\"を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 122,
+    "key": "errors.discountRangeCheck",
+    "message": "申込価格は\"{0}～{1}\"の数字または\"成行\"を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 123,
+    "key": "errors.numberFormatForNariYuKi",
+    "message": "{0}を\"{1}\"の形式でまたは\"成行\"を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 124,
+    "key": "errors.buyLimitCheck",
+    "message": "買付余力が足りません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 125,
+    "key": "errors.countUnitCheck",
+    "message": "数量が当選株数を超えています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 126,
+    "key": "errors.processingFailed",
+    "message": "{0}が失敗しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 127,
+    "key": "errors.warningApplyUnchecked",
+    "message": "ワーニング申請が未チェックです。",
+    "errorLevel": -1
+  },
+  {
+    "id": 128,
+    "key": "errors.periodInputCheck",
+    "message": "{0}が未登録のため{1}できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 129,
+    "key": "errors.noticeWarningCheckIpoPo",
+    "message": "IPO/PO取引に関わる重要な注意情報があるため処理を進めることができません。注意情報欄をご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 130,
+    "key": "errors.ipoOverLimit",
+    "message": "{0}は{1}を超えます。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 131,
+    "key": "errors.sectionId",
+    "message": "{0}を登録してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 132,
+    "key": "errors.exceededMaximum",
+    "message": "{0}を超えています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 133,
+    "key": "errors.maxUpload",
+    "message": "最大可能件数を超過している。<br/>最大可能件数:{0}",
+    "errorLevel": -1
+  },
+  {
+    "id": 134,
+    "key": "errors.nriQueryAccountBalance",
+    "message": "買付余力情報の取得ができませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 135,
+    "key": "errors.ipoTradeRange",
+    "message": "{0}は{1}より少ない値を入力してください。<br/>{2}: [{3}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 136,
+    "key": "errors.beforeDate",
+    "message": "{0}は{1}以前を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 137,
+    "key": "errors.CSVTemplateCount",
+    "message": "{0}の取り込み項目に過不足がありますので、項目の追加または削除をお願いします。",
+    "errorLevel": -1
+  },
+  {
+    "id": 138,
+    "key": "errors.brandCodeNotExistOrOverTime",
+    "message": "入力した銘柄コードはBB申込期間外もしくは存在しない銘柄コードです。BB申込が可能な銘柄コードを入力してください。<br>銘柄コード: [{0}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 139,
+    "key": "errors.keyExist",
+    "message": "ファイル内に重複キーが存在します。",
+    "errorLevel": -1
+  },
+  {
+    "id": 140,
+    "key": "errors.excelOneMoreData",
+    "message": "ファイルは1行以上にしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 141,
+    "key": "errors.aboveLimit",
+    "message": "{0}は{1}以上です。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 142,
+    "key": "errors.operatePermitionCheck",
+    "message": "{0}のため、{1}できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 143,
+    "key": "warnings.orderInsertWithApiError",
+    "message": "注文を登録しましたが、余力拘束は以下エラーが発生しました。<br/> エラーは:{0}",
+    "errorLevel": -1
+  },
+  {
+    "id": 144,
+    "key": "warnings.csv.overMaxRownum",
+    "message": "検索結果が{0}件を超過しています（{1}件ヒット）。\n 先頭{0}件のcsv出力を行います。残り分をこの画面で再度出力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 145,
+    "key": "errors.provisionalConditions",
+    "message": "{0}の設定が不正です。{1}をご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 146,
+    "key": "errors.staruploadDuplicate",
+    "message": "他のユーザーの操作より、データが更新されています。<br/>当画面を再度開き最新情報を取得してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 147,
+    "key": "errors.hasPassword",
+    "message": "Excelファイルを取込むことができません（パスワード付き）。ご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 148,
+    "key": "errors.sheetNotExist",
+    "message": "該当ファイルに{0}シートが存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 149,
+    "key": "errors.bbAcceptInfoNotExist",
+    "message": "ブックビルディング受付のデータが存在しません。<br/>銘柄コード: [{0}]、ブックビルディング申込期間（開始）: [{1}]、部店: [{2}]、口座番号: [{3}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 150,
+    "key": "info.orderedDataNotExist",
+    "message": "{0}のデータが存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 151,
+    "key": "info.applyCompleted",
+    "message": "{0}を申し込みました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 152,
+    "key": "errors.exclusive.counter.allmessage",
+    "message": "他のユーザーが当該{0}を操作しました。更新を行う場合は、ポップアップを閉じて再度開きなおしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 153,
+    "key": "errors.frs.selectedAccountCourse.unavailable",
+    "message": "外株取引ができないコースです。",
+    "errorLevel": -1
+  },
+  {
+    "id": 154,
+    "key": "errors.frs.complianceError.occurs",
+    "message": "コンプラランクチェックがエラーのため処理を進めることができません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 155,
+    "key": "errors.frs.selectedAccount.outOfService",
+    "message": "取引停止口座のため処理を進めることができません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 156,
+    "key": "errors.frs.orderableShortPosition.notFound",
+    "message": "信用売建可能銘柄ではありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 157,
+    "key": "errors.frs.foreignStockAccount.notOpen#1",
+    "message": "米株信用口座が未開設です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 158,
+    "key": "errors.frs.foreignStockAccount.notOpen#2",
+    "message": "外国株式口座が未開設です。<br>部店: [{0}]、口座: [{1}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 159,
+    "key": "errors.frs.foreignStockTrade.restriction",
+    "message": "外国株式取引が制限されています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 160,
+    "key": "errors.frs.orderExecution.insufficientPrivilege",
+    "message": "外国取引の利用者権限がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 161,
+    "key": "errors.frs.preOrderExecution.failed",
+    "message": "注文発注前の注文データが登録できないため、注文しませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 162,
+    "key": "errors.frs.orderTerms.outOfRange",
+    "message": "期間指定が注文可能期間を超過しています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 163,
+    "key": "errors.frs.maxValue.exceeded",
+    "message": "{0}は{1}以下で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 164,
+    "key": "errors.frs.orderingCondition.inconsistent",
+    "message": "{0}が{1}ではありません。[{2}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 165,
+    "key": "errors.frs.orderValue.outOfRange",
+    "message": "{0}が下限、上限の範囲にありません。[{1}～{2}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 166,
+    "key": "errors.frs.orderablePosition.notFound",
+    "message": "指定された建玉がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 167,
+    "key": "errors.frs.transferCondition.inconsistent",
+    "message": "代用振替と保護振替は同時に指定できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 168,
+    "key": "errors.frs.preTransferOrder.failed",
+    "message": "振替指示前の指示データが登録できないため、振替指示しませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 169,
+    "key": "warnings.frs.complianceWarning.exist",
+    "message": "ワーニング受注申請を行い、承認後、申請済みを選択してください。<br>また、非勧誘でコンプラランクが{0}の場合も申請済みを選択してください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 170,
+    "key": "warnings.frs.contractPriceUpperLimit.exceeded",
+    "message": "約定代金が誤発注防止措置の制限を超えています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 171,
+    "key": "warnings.frs.inquiryUpperLimit.exceeded",
+    "message": "検索する口座件数が{0}件を超過しています（{1}件ヒット）。直近の注文を含む口座が取得できていない可能性があります。\n条件を詳細に設定して再度検索して下さい。",
+    "errorLevel": 2
+  },
+  {
+    "id": 172,
+    "key": "warnings.frs.orderContract.nextBusinessDay",
+    "message": "海外休場日のため、翌営業日の注文となります。",
+    "errorLevel": 2
+  },
+  {
+    "id": 173,
+    "key": "warnings.frs.postOrderExecution.completed",
+    "message": "注文発注後の注文データが更新できませんでした。注文は完了しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 174,
+    "key": "warnings.frs.stopPriceCondition.confirm",
+    "message": "逆指値注文が予め指定した参照価格に達した状態です。",
+    "errorLevel": 2
+  },
+  {
+    "id": 175,
+    "key": "warnings.frs.postOrderTransfer.completed",
+    "message": "振替指示後の指示データが更新できませんでした。振替指示は完了しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 176,
+    "key": "info.frs.etfOrder.confirm",
+    "message": "投資信託やETFを売却した資金でETFを購入する場合は「乗換勧誘(ETF)」として確認書の受け入れが必要となります。乗換勧誘ではないことを確認しましたか？",
+    "errorLevel": 1
+  },
+  {
+    "id": 177,
+    "key": "errors.frs.serviceHours.outOfRange",
+    "message": "ただいまの時間は取引時間外のため注文できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 178,
+    "key": "errors.frs.transferServiceHours.outOfRange",
+    "message": "ただいまの時間は取引時間外のため振替できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 179,
+    "key": "errors.StockAccountList.notfound",
+    "message": "顧客口座が0件です。\n条件を設定して再度検索して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 180,
+    "key": "errors.frs.buyLimit.overflow",
+    "message": "買付余力が不足しているため、注文できません。<br>・概算受渡金額={0}[USD]<br>・リアルタイム余力={1}[USD]<br>・当日店頭買付約定金額={2}[USD]<br>・外国債券の当日約定金額（買付）={3}[USD]",
+    "errorLevel": -1
+  },
+  {
+    "id": 181,
+    "key": "errors.frs.countUnit.overflow",
+    "message": "残株数が不足しているため、注文できません。<br>・売却数量={0}[株]<br>・リアルタイム残株数={1}[株]<br>・店頭取引の当日売却数量={2}[株]",
+    "errorLevel": -1
+  },
+  {
+    "id": 182,
+    "key": "errors.frs.transferLimit.overflow",
+    "message": "振替指示可能額が不足しているため、振替できません。<br>・指示金額={0}[USD]<br>・現在の振替指示可能額={1}[USD]<br>・当日店頭買付約定金額={2}[USD]<br>・外国債券の当日約定金額（買付）={3}[USD]",
+    "errorLevel": -1
+  },
+  {
+    "id": 183,
+    "key": "errors.frs.listedSecuritiesStatus.buyStop",
+    "message": "買付可能銘柄ではありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 184,
+    "key": "errors.frs.listedSecuritiesStatus.sellStop",
+    "message": "売却可能銘柄ではありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 185,
+    "key": "errors.frs.listedSecuritiesStatus.buySellStop",
+    "message": "売買可能銘柄ではありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 186,
+    "key": "errors.frs.listedSecuritiesStatus.delisting",
+    "message": "上場廃止銘柄です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 187,
+    "key": "errors.frs.listedSecuritiesStatus.openBuyRestrict",
+    "message": "信用新規買建規制銘柄です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 188,
+    "key": "errors.frs.listedSecuritiesStatus.openSellRestrict",
+    "message": "信用新規売建規制銘柄です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 189,
+    "key": "errors.frs.instructableAmount.nothing",
+    "message": "指示可能金額がゼロのため保証金振替入力はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 190,
+    "key": "errors.onlyEdelivAgreementCheck",
+    "message": "本銘柄の目論見書交付は電子のみです。電子交付未同意のお客様は申込いただけません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 191,
+    "key": "warnings.noticeWarningCheckIpoPo",
+    "message": "IPO/PO取引に関わる注意情報があります。注意情報欄をご確認の上、問題がなければ処理を進めてください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 192,
+    "key": "errors.explainImportantInformation",
+    "message": "最重要事項の説明が必要な顧客であるため、重要事項の説明を説明済にしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 193,
+    "key": "warnings.dmt.distributionsReceipt.delay",
+    "message": "翌営業日向けの申込となりますがよろしいですか。",
+    "errorLevel": 2
+  },
+  {
+    "id": 194,
+    "key": "errors.nriQueryFund",
+    "message": "投信購入可能一覧を取得でエラーが発生しました。<br>エラーコード：{0}<br>エラーメッセージ：{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 195,
+    "key": "errors.ext.orderExecution.insufficientPrivilege",
+    "message": "IFAリアルタイム為替取引の利用者権限がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 196,
+    "key": "errors.cmn.foreignSecuritiesAccount.notOpen",
+    "message": "外貨建商品取引口座が未開設です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 197,
+    "key": "errors.ext.selectedAccountCourse.unavailable",
+    "message": "為替取引ができないコースです。",
+    "errorLevel": -1
+  },
+  {
+    "id": 198,
+    "key": "errors.ext.orderExecution.unavailable",
+    "message": "選択した通貨は現在お取引できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 199,
+    "key": "errors.ext.reverseTrade.exist",
+    "message": "定時為替取引では、同一約定タイミング内の「買付→売却」、「売却→買付」は制限されています。<br>前の注文を取り消すことで新しい注文を行えるようになります。",
+    "errorLevel": -1
+  },
+  {
+    "id": 200,
+    "key": "errors.ext.countUnit.overflow",
+    "message": "売却可能数量が不足しているため、注文できません。<br>・売却数量={0}[{4}]<br>・リアルタイム余力={1}[{4}]<br>・当日店頭買付約定金額={2}[{4}]<br>・外国債券の当日約定金額（買付）={3}[{4}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 201,
+    "key": "errors.dmt.securities.notExist",
+    "message": "該当の投資信託銘柄が存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 202,
+    "key": "warnings.dmt.distributionsReceipt.delay",
+    "message": "翌営業日向けの申込となりますがよろしいですか。",
+    "errorLevel": 2
+  },
+  {
+    "id": 203,
+    "key": "errors.dmt.distributionsReceipt.failed",
+    "message": "分配金受取方法を変更できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 204,
+    "key": "errors.emp.category.exceeded",
+    "message": "カテゴリの選択数が9個を超えています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 205,
+    "key": "errors.dms.accountCourse.insufficient",
+    "message": "取引コースを選択してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 206,
+    "key": "errors.dms.ifaAgentCodes.unavailable",
+    "message": "仲介業者コード／営業員コードを正しく入力して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 207,
+    "key": "errors.dms.domesticMarginAccount.notOpen",
+    "message": "信用口座が未開設です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 208,
+    "key": "errors.ext.order.outOfService",
+    "message": "現在の時間に該当するサイクルのアクティビティが注文受付ではありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 209,
+    "key": "errors.cmn.information.notfound",
+    "message": "該当する情報は存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 210,
+    "key": "info.cmn.contract.notFound",
+    "message": "約定件数が0件です。\n条件を設定して再度検索して下さい。",
+    "errorLevel": 1
+  },
+  {
+    "id": 211,
+    "key": "errors.cmn.ifaAgentCodes.notExist",
+    "message": "参照可能な仲介業者コード／営業員コードが存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 212,
+    "key": "errors.emp.loginUsers.registered",
+    "message": "担当者情報が他に登録されているため削除できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 213,
+    "key": "errors.COR_BROWSE_CONTROL.COR_INDI_BROWSE_FLAG",
+    "message": "コンプライアンス通信閲覧状況の閲覧要否変更ができませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 214,
+    "key": "info.COR_BROWSE_CONTROL.COR_INDI_BROWSE_FLAG",
+    "message": "コンプライアンス通信閲覧状況の閲覧要否を変更しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 215,
+    "key": "errors.COR_BROWSE_CONTROL.COR_BULK_BROWSE_FLAG",
+    "message": "コンプライアンス通信一括閲覧設定の閲覧要否変更ができませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 216,
+    "key": "info.COR_BROWSE_CONTROL.COR_BULK_BROWSE_FLAG",
+    "message": "コンプライアンス通信一括閲覧設定の閲覧要否を変更しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 217,
+    "key": "errors.emp.loginUsers.exist",
+    "message": "担当者情報は既に登録されているため追加できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 218,
+    "key": "info.ita.BrokerAuxiliaryBookDirectory.notfound",
+    "message": "仲介業補助簿取得ダウンロードファイルがDBに登録されていません。システム管理者にご連絡ください。",
+    "errorLevel": 1
+  },
+  {
+    "id": 219,
+    "key": "info.ita.StatutoryBookDirectory.notfound",
+    "message": "法定帳簿ロードファイルがDBに登録されていません。システム管理者にご連絡ください。",
+    "errorLevel": 1
+  },
+  {
+    "id": 220,
+    "key": "errors.dmt.distributionsReceipt.notExist",
+    "message": "分配金受取方法を取得できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 221,
+    "key": "info.ita.PersonalyLedgerFile.notfound",
+    "message": "ファイルが存在しません。管理者に連絡してください。",
+    "errorLevel": 1
+  },
+  {
+    "id": 222,
+    "key": "warnings.frs.contractPrice.exceeded",
+    "message": "{0}を超えています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 223,
+    "key": "warnings.frs.buyLimit.overflow",
+    "message": "『余力不足』の可能性があります。このまま注文してよろしいですか？・約定金額 ＝ {0}[USD]・リアルタイム余力 ＝ {1}[USD]・当日店頭買付約定金額 ＝ {2}[USD]・外国債券の当日約定金額（買付） ＝ {3}[USD]",
+    "errorLevel": 2
+  },
+  {
+    "id": 224,
+    "key": "errors.frs.orderValue.isCollateralSecurities",
+    "message": "当該預りは代用預りとなっているため、注文できません。お手数ですが、保護預りへ振替後、再度注文願います。",
+    "errorLevel": -1
+  },
+  {
+    "id": 225,
+    "key": "warnings.frs.countUnit.overflow",
+    "message": "『残株数不足』の可能性があります。このまま注文してよろしいですか？・売却数量 ＝ {0}[株]・リアルタイム残株数 ＝ {1}[株]・店頭取引の当日売却数量 ＝ {2}[株]",
+    "errorLevel": 2
+  },
+  {
+    "id": 226,
+    "key": "errors.corSelfCheck.brokerDivision.unselected",
+    "message": "業者区分がいずれの仲介業者にも割り当たっていません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 227,
+    "key": "errors.corSelfCheck.brokerQuestion.duplicate",
+    "message": "1つの仲介業者に複数の設問が割り当たっています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 228,
+    "key": "errors.corSelfCheck.corEnforceDate.nextMonth",
+    "message": "登録年月には翌月を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 229,
+    "key": "errors.corSelfCheck.answer.reasonUnnecessary",
+    "message": "理由不要のため回答を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 230,
+    "key": "errors.corSelfCheck.answer.reasonNecessary",
+    "message": "理由必須のため回答は入力できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 231,
+    "key": "warnings.informationCheck",
+    "message": "「重要なお知らせ」が未確認です。重要なお知らせ取引制限欄や注意情報欄を確認してください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 232,
+    "key": "errors.cmn.selectedAccount.outOfService",
+    "message": "取引停止口座のため処理を進めることができません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 233,
+    "key": "errors.csm.ifaExclusive.insufficientPrivilege",
+    "message": "メモ(IFA)の更新権限がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 234,
+    "key": "errors.cmn.selectedAccountCourse.unavailable",
+    "message": "{0}ができないコースです。",
+    "errorLevel": -1
+  },
+  {
+    "id": 235,
+    "key": "errors.dms.orderablePosition.notFound",
+    "message": "指定された建玉残高明細がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 236,
+    "key": "errors.dms.orderablePosition.exceeded",
+    "message": "注文可能数量より多い数量が指定されています。数量を変更してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 237,
+    "key": "warnings.cmn.noticeWarningCheck",
+    "message": "当該顧客の{0}に関わる注意情報があります。注意情報欄を確認してください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 238,
+    "key": "warning.dms.insider.exist",
+    "message": "本売買は、インサイダー情報に基づく売買ではないことの確認が必要です。",
+    "errorLevel": 2
+  },
+  {
+    "id": 239,
+    "key": "errors.cmn.noticeErrorCheck",
+    "message": "当該顧客の{0}に関わる重要な注意情報があるため処理を進めることができません。注意情報欄をご確認ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 240,
+    "key": "errors.cmn.information.occurs",
+    "message": "確認が必要なアラートが新たに発生しました。注文入力画面に戻り再度注文確認を行ってください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 241,
+    "key": "errors.cmn.orderExecution.failed",
+    "message": "注文処理でエラーが発生しました。<br>エラーコード：{0}<br>エラーメッセージ：{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 242,
+    "key": "warnings.cmm.informationCheck",
+    "message": "「重要なお知らせ」が未確認です。重要なお知らせ取引制限欄や注意情報欄を確認してください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 243,
+    "key": "warnings.dms.informationCheck",
+    "message": "注文銘柄に対する取引注意情報があります。取引注意情報の内容を顧客へ説明後に注文を執行してください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 244,
+    "key": "info.ita.PersonalyLedgerDirectory.notfound",
+    "message": "個人情報管理台帳作成ディレクトリがDBに登録されていません。システム管理者にご連絡ください。",
+    "errorLevel": 1
+  },
+  {
+    "id": 245,
+    "key": "errors.cmn.information.occurs#2",
+    "message": "確認が必要なアラートが新たに発生しました。申込入力画面に戻り再度注文確認を行ってください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 246,
+    "key": "errors.notExcelFile",
+    "message": "xlsまたはxlsxファイル以外が選択されています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 247,
+    "key": "warnings.frs.etfOrder.confirm",
+    "message": "投資信託やETFを売却した資金でETFを購入する場合は「乗換え勧誘(ETF)」として確認書の受け入れが必要となります。乗換え勧誘ではないことを確認してください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 248,
+    "key": "errors.cmm.orderStatus.notFound",
+    "message": "該当の注文の状況は確認できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 249,
+    "key": "errors.cmn.foreignSecuritiesAccount.notOpen#2",
+    "message": "本画面は、外貨建商品の取引口座をお持ちのお客様向けのサービスとなっております。",
+    "errorLevel": -1
+  },
+  {
+    "id": 250,
+    "key": "errors.cmn.orderExecutionCancel.failed",
+    "message": "注文取消処理でエラーが発生しました。<br>エラーコード：{0}<br>エラーメッセージ：{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 251,
+    "key": "warnings.cmn.postOrderExecutionCancel.completed",
+    "message": "注文取消後の注文データが更新できませんでした。注文取消は完了しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 252,
+    "key": "errors.cmn.orderExecutionModify.failed",
+    "message": "注文訂正処理でエラーが発生しました。<br>エラーコード：{0}<br>エラーメッセージ：{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 253,
+    "key": "errors.cmn.order.notFound",
+    "message": "指定した注文が見つかりません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 254,
+    "key": "errors.cmn.orderModify.outOfService",
+    "message": "指定した注文は訂正できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 255,
+    "key": "errors.cmn.orderModify.noModify",
+    "message": "注文内容に変更がないため、注文訂正を行いません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 256,
+    "key": "errors.dms.orderablePosition.tooMany",
+    "message": "返済建玉が多すぎます。999件以内になるよう注文してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 257,
+    "key": "errors.dms.orderablePosition.nothing",
+    "message": "建玉が存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 258,
+    "key": "errors.fnd.selectedBrand.outOfService",
+    "message": "指定した銘柄は買付不可のため取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 259,
+    "key": "errors.fnd.selectedBrand.currencySelectionType",
+    "message": "通貨選択型投信のため、IFAポータルからの取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 260,
+    "key": "errors.fnd.selectedBrand.complexType",
+    "message": "複雑型投信のため、IFAポータルからの取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 261,
+    "key": "errors.fnd.selectedBrand.noIssuanceRecord",
+    "message": "目論見書の交付記録がないため取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 262,
+    "key": "errors.fnd.selectedBrand.noInformation",
+    "message": "国内投信の情報が取得できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 263,
+    "key": "errors.fnd.selectedBrand.noPriceAndCommission",
+    "message": "国内投信の基準価額、手数料の情報が取得できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 264,
+    "key": "errors.fnd.selectedBrand.noBuyingInformation",
+    "message": "指定した銘柄の買付可能情報が取得できないため取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 265,
+    "key": "errors.fnd.selectedBrand.orderStopped",
+    "message": "指定した銘柄は注文停止中のため取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 266,
+    "key": "errors.fnd.selectedBrand.notTradeable",
+    "message": "指定した銘柄は取引不可が設定されているため取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 267,
+    "key": "errors.fnd.selectedBrand.outOfIfaTrade",
+    "message": "指定した銘柄は仲介業者が扱えないため取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 268,
+    "key": "warnings.fnd.selectedBrand.needShortTermSaleApproval",
+    "message": "短期売却申請承認が必要です。",
+    "errorLevel": 2
+  },
+  {
+    "id": 269,
+    "key": "warnings.fnd.selectedBrand.saleBeforeRedemption",
+    "message": "償還前売却について、償還乗換優遇制度を顧客説明後に注文を行ってください。<br>また、償還日1ヶ月前からの売却勧誘及び乗換勧誘取引に該当しないことを確認してください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 270,
+    "key": "errors.fnd.selectedBrand.sameDayTrade",
+    "message": "国内投信の同一日同一銘柄同一売買の注文があるため取引はできません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 271,
+    "key": "errors.cmn.orderCancel.outOfService",
+    "message": "指定した注文は取消できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 272,
+    "key": "errors.cmn.selectedBrand.noBrandName",
+    "message": "指定した銘柄の銘柄名が取得できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 273,
+    "key": "errors.cmn.selectedBrand.noAttribute",
+    "message": "指定した銘柄の銘柄属性が取得できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 274,
+    "key": "errors.cmn.selectedBrand.noPrice",
+    "message": "指定した銘柄の時価情報が取得できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 275,
+    "key": "warnings.cmn.complianceRank.needsApproval",
+    "message": "（△・◇）ワーニング申請・承認が必要です。",
+    "errorLevel": 2
+  },
+  {
+    "id": 276,
+    "key": "warnings.cmn.complianceRank.checkInvite",
+    "message": "再度、勧誘区分を確認してください。勧誘ありの場合は（△・◇）ワーニング申請・承認が必要です。",
+    "errorLevel": 2
+  },
+  {
+    "id": 277,
+    "key": "errors.cmn.complianceRank.notConformTrade",
+    "message": "取引適合性にそぐわない取引です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 278,
+    "key": "errors.cmn.complianceRank.notConformTrade#2",
+    "message": "勧誘ありの場合は取引適合性にそぐわない取引です。勧誘なしであることを再度確認し、委託注文書兼取引確認書を受領のうえ、SBI証券にご連絡ください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 279,
+    "key": "warnings.cmn.complianceRank.checkInvite#2",
+    "message": "再度、勧誘区分を確認してください。勧誘ありの場合は取引適合性にそぐわない取引です。",
+    "errorLevel": 2
+  },
+  {
+    "id": 280,
+    "key": "errors.cmn.complianceRank.noEntry",
+    "message": "取引適合性の登録がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 281,
+    "key": "warnings.cmn.complianceRank.fundBrandRank6",
+    "message": "開始基準に適合していることをご確認ください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 282,
+    "key": "errors.cmn.detail.unselected",
+    "message": "操作対象を選択してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 283,
+    "key": "errors.cmn.complianceRank.suspendedAccount",
+    "message": "取引停止口座のため、BB申込できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 284,
+    "key": "errors.cmn.gmapAddress.notFound",
+    "message": "Google maps エラー　｛0｝は見つかりませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 285,
+    "key": "info.General.NotNISA",
+    "message": "NISA口座で買付が可能ですが一般預りを選択しています。",
+    "errorLevel": 1
+  },
+  {
+    "id": 286,
+    "key": "info.Specific.NotNISA",
+    "message": "NISA口座で買付が可能ですが特定預りを選択しています。",
+    "errorLevel": 1
+  },
+  {
+    "id": 287,
+    "key": "info.NISA.NotSpecific",
+    "message": "特定預りではなくNISA預りを選択しています。",
+    "errorLevel": 1
+  },
+  {
+    "id": 288,
+    "key": "info.General.NotSpecific",
+    "message": "特定預りではなく一般預りを選択しています。",
+    "errorLevel": 1
+  },
+  {
+    "id": 289,
+    "key": "errors.frs.orderExecution.insufficientPrivilege.MarginTrading",
+    "message": "米株信用取引の利用者権限がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 290,
+    "key": "errors.frs.counterOrder.exist",
+    "message": "当該預りは店頭取引で売却注文が行われているため、振替できません。{0}",
+    "errorLevel": -1
+  },
+  {
+    "id": 291,
+    "key": "warnings.frs.additionalCollateralTrade.confirm",
+    "message": "指定した銘柄に増し担保規制が設定されています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 292,
+    "key": "errors.futureTimeCheck",
+    "message": "目論見書閲覧日時が未来日時です。ご確認をお願いします。",
+    "errorLevel": -1
+  },
+  {
+    "id": 293,
+    "key": "errors.cmn.loginUsers.insufficientPrivilege",
+    "message": "アクセス権限がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 294,
+    "key": "errors.loginIdExist",
+    "message": "希望ユーザーＩＤはすでに使われています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 295,
+    "key": "info.loginIdInsertCompleted",
+    "message": "ログイン情報の登録ができました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 296,
+    "key": "info.loginIdUpdateCompleted",
+    "message": "ログイン情報の変更ができました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 297,
+    "key": "errors.orderJrNISA",
+    "message": "J-NISA口座は買付できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 298,
+    "key": "errors.orderTsumitateNISA",
+    "message": "つみたて口座は買付できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 299,
+    "key": "errors.frs.orderValue.isMarginBuyingPowerShortfallSecurities",
+    "message": "自動振替が設定されているため、店頭取引はできません。「信用新規建(新規買・新規売)の注文時の自動振替設定」の「米国株式(保護預り)」のチェックを外してから注文してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 300,
+    "key": "errors.cmn.information.insufficient",
+    "message": "検索条件がありません｡1つ以上の検索条件を設定してください｡",
+    "errorLevel": -1
+  },
+  {
+    "id": 301,
+    "key": "errors.cmn.parameters.notExist",
+    "message": "{0}が取得できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 302,
+    "key": "errors.cmn.notification.unselected",
+    "message": "{0}は選択されていません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 303,
+    "key": "errors.cmn.notification.notExist",
+    "message": "{0}未入力です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 304,
+    "key": "errors.cmn.increments.outOfRange",
+    "message": "{0}刻みで指定してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 305,
+    "key": "errors.login.notExistPassword",
+    "message": "現在のパスワードはデータベースに保存されていません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 306,
+    "key": "errors.login.notMatchVerifyPassword",
+    "message": "新パスワードは確認パスワードと違います。",
+    "errorLevel": -1
+  },
+  {
+    "id": 307,
+    "key": "errors.login.notAllowedSameOldPassword",
+    "message": "旧パスワードと同じ新パスワードは使えません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 308,
+    "key": "errors.login.notAllowedSameUserId",
+    "message": "ユーザーIDと同じパスワードは使えません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 309,
+    "key": "errors.login.badLogin",
+    "message": "ログインIDまたはパスワードが違います。",
+    "errorLevel": -1
+  },
+  {
+    "id": 310,
+    "key": "errors.login.mailError",
+    "message": "メール形式が正しくありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 311,
+    "key": "errors.login.updateFail",
+    "message": "システムエラーが発生しました。再度ログインしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 312,
+    "key": "errors.login.verifyCodeError",
+    "message": "認証コードが正しくありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 313,
+    "key": "errors.login.codeExpired",
+    "message": "制限時間を過ぎました。画面を閉じて再度ログインしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 314,
+    "key": "errors.login.notMatch",
+    "message": "認証コードが間違っています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 315,
+    "key": "errors.login.verifyError",
+    "message": "認証できませんでした。再度ログインしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 316,
+    "key": "errors.login.expired",
+    "message": "パスワードの有効期限が切れています。新しいパスワードに変更してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 317,
+    "key": "errors.login.authError",
+    "message": "利用可能な画面がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 318,
+    "key": "errors.login.passwordChangeError",
+    "message": "システムエラーが発生しました。再度ログインしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 319,
+    "key": "errors.login.systemError",
+    "message": "システムエラーが発生しました。再度ログインしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 320,
+    "key": "errors.targetCallFailure",
+    "message": "{0}の呼び出しに失敗しました。： {1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 321,
+    "key": "errors.targetNotFound",
+    "message": "指定された{0}が見つかりませんでした。： {1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 322,
+    "key": "errors.targetPickUpFailure",
+    "message": "{0}の取得に失敗しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 323,
+    "key": "errors.sendRequestFailure",
+    "message": "リクエストの送信に失敗しました。： {0}",
+    "errorLevel": -1
+  },
+  {
+    "id": 324,
+    "key": "errors.systemError",
+    "message": "システムエラーが発生しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 325,
+    "key": "errors.beanValidationError",
+    "message": "サーバ側項目チェックでエラーが発生しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 326,
+    "key": "errors.authTokenCheckError",
+    "message": "認証トークンチェックでエラーが発生しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 327,
+    "key": "errors.codeNotFound",
+    "message": "区分値の取得結果が0件です。パラメータ：{0}",
+    "errorLevel": -1
+  },
+  {
+    "id": 328,
+    "key": "errors.requiredParam",
+    "message": "{0}は必須項目です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 329,
+    "key": "errors.notNumeric",
+    "message": "{0}は数値で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 330,
+    "key": "NotEmpty",
+    "message": "{0}を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 331,
+    "key": "Size",
+    "message": "{0}は{2}～{1}文字で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 332,
+    "key": "Pattern",
+    "message": "{0}を正しく入力して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 333,
+    "key": "Digits",
+    "message": "{0}を正しく入力して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 334,
+    "key": "errors.papyApiConnection",
+    "message": "PAPYに接続できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 335,
+    "key": "errors.frs.transferOrder.exceeded",
+    "message": "振替選択の可能件数は30件までです。",
+    "errorLevel": -1
+  },
+  {
+    "id": 336,
+    "key": "errors.date.specifyAfterReferenceDate",
+    "message": "{0}には{1}より後の日付を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 337,
+    "key": "errors.date.specifySameDateOrAfterDate",
+    "message": "{0}には{1}と同一か後の日付を入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 338,
+    "key": "errors.frs.counterOrForeignBondOrderToday.exist",
+    "message": "{0}があるため、「信用新規建(新規買・新規売)の注文時の自動振替設定」の「{1}」自動振替設定をチェックできません。設定変更は、{0}がない翌営業日以降に実施してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 339,
+    "key": "errors.frs.preAutoTransferSetting.failed",
+    "message": "設定指示前の指示データが登録できないため、設定指示しませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 340,
+    "key": "warnings.frs.postAutoTransferSetting.completed",
+    "message": "設定指示後の指示データが更新できませんでした。設定指示は完了しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 341,
+    "key": "errors.emp.loginUsers.exist#2",
+    "message": "{0}が重複しています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 342,
+    "key": "errors.emp.loginUsers.inconsistent",
+    "message": "{0}は形式が正しくありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 343,
+    "key": "errors.contextDependentWords",
+    "message": "{0}では{1}環境依存文字があるため[{2}]、登録できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 344,
+    "key": "errors.stringBytes",
+    "message": "{0}は全角{1}文字以内で入力してください。",
+    "errorLevel": 2
+  },
+  {
+    "id": 345,
+    "key": "errors.verifyComplianceFileExists",
+    "message": "コンプライアンスファイルをサーバー側で見つけることができません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 346,
+    "key": "errors.orderedDataNotExist",
+    "message": "{0}のデータが存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 347,
+    "key": "errors.emp.notification.notFound",
+    "message": "選択されたエントリーを見つけることができませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 348,
+    "key": "errors.corSelfCheck.brokerDivision.registered",
+    "message": "登録済みの業者区分があるため、全ての業者区分に設問を登録することができません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 349,
+    "key": "info.dms.offering.downLoaded",
+    "message": "募集入力済み{0}件をダウンロードしました。<br/>この画面を閉じてください。",
+    "errorLevel": 1
+  },
+  {
+    "id": 350,
+    "key": "errors.corSelfCheck.detail.unregistered",
+    "message": "未更新の変更があるため、更新してから削除してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 351,
+    "key": "errors.contentFile.notset",
+    "message": "コンテンツファイルを設定してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 352,
+    "key": "errors.TimeStampDuplicate",
+    "message": "設定された通信年月のコンプライアンス通信はすでに登録されています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 353,
+    "key": "errors.Confirm.exist",
+    "message": "開封できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 354,
+    "key": "info.ita.Confirmation",
+    "message": "コンプライアンス通信の確認、お疲れ様でした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 355,
+    "key": "errors.dms.selectedBrand.marketNotFound",
+    "message": "指定した銘柄の取扱市場を取得できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 356,
+    "key": "errors.cmn.apiError",
+    "message": "{0}({1})",
+    "errorLevel": -1
+  },
+  {
+    "id": 357,
+    "key": "warnings.cmn.apiWarning",
+    "message": "{0}({1})",
+    "errorLevel": -1
+  },
+  {
+    "id": 358,
+    "key": "errors.prospectusCheck",
+    "message": "目論見書閲覧がされていません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 359,
+    "key": "errors.edelivAgreementCheck",
+    "message": "電子交付同意・目論見書閲覧が不整合です。ご確認をお願いします。",
+    "errorLevel": -1
+  },
+  {
+    "id": 360,
+    "key": "info.holdMarginList.notfound",
+    "message": "信用建玉件数が0件です。\n条件を設定して再度検索して下さい。",
+    "errorLevel": 1
+  },
+  {
+    "id": 361,
+    "key": "errors.extApi.connection.failed",
+    "message": "API接続エラー発生（キー名：{0}、キー値：{1}）",
+    "errorLevel": -1
+  },
+  {
+    "id": 362,
+    "key": "errors.extapi.access.denied",
+    "message": "URL不正（システムID：{0}、URL：{1}）",
+    "errorLevel": -1
+  },
+  {
+    "id": 363,
+    "key": "errors.cmn.notHalfWidthNumber",
+    "message": "{0}は半角数字で入力してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 364,
+    "key": "errors.inputItemNotExist",
+    "message": "入力した業者区分は存在しません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 365,
+    "key": "errors.unrequired",
+    "message": "{0}は入力不要です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 366,
+    "key": "errors.paymentNotice.storage.notFound",
+    "message": "支払通知書の格納先が取得できないため、当画面は利用できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 367,
+    "key": "errors.cmn.information.unregistered",
+    "message": "{0}が未登録です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 368,
+    "key": "errors.frs.orderValue.isMarginBuyingPowerShortfallCash",
+    "message": "自動振替が設定されているため、店頭取引はできません。「信用新規建(新規買・新規売)の注文時の自動振替設定」の「米ドル預り金」のチェックを外してから注文してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 369,
+    "key": "warnings.cmn.sendMail.failed",
+    "message": "{0}を登録できましたが、\nメール送信が失敗しました。\n{1}",
+    "errorLevel": 2
+  },
+  {
+    "id": 370,
+    "key": "warnings.cmn.mailAdress.unregistered",
+    "message": "送信元メールアドレスが未設定のため、メール送信できません。",
+    "errorLevel": 2
+  },
+  {
+    "id": 371,
+    "key": "errors.joint.data.selection.required",
+    "message": "データを{0}選択して下さい。",
+    "errorLevel": -1
+  },
+  {
+    "id": 372,
+    "key": "errors.joint.data.selection.approved",
+    "message": "手続状況が承認のものが選択されています。",
+    "errorLevel": -1
+  },
+  {
+    "id": 373,
+    "key": "errors.cmn.ccsid.unregistered",
+    "message": "CCSIDが未登録のためご利用できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 374,
+    "key": "errors.openAccountLink.notFound",
+    "message": "所属仲介業者に該当する口座開設URLが設定されていません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 375,
+    "key": "errors.openAccountLink.countCheck",
+    "message": "仲介業者毎の遷移先が複数設定されているため、表示できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 376,
+    "key": "errors.fndReserve.depositnotExit",
+    "message": "追加設定が可能な預り区分がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 377,
+    "key": "errors.cmn.settingExecutionChange",
+    "message": "当該銘柄は積立変更できません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 378,
+    "key": "errors.cmn.settingExecutionChange.failed",
+    "message": "設定変更処理でエラーが発生しました。<br>エラーコード：{0}<br>エラーメッセージ：{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 379,
+    "key": "warnings.fnd.ReserveSettingExecutionChange.completed",
+    "message": "積立設定変更後の受付データを登録できませんでした。積立設定変更は完了しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 380,
+    "key": "errors.cmn.settingExecution.failed",
+    "message": "設定処理でエラーが発生しました。<br>エラーコード：{0}<br>エラーメッセージ：{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 381,
+    "key": "warnings.fnd.ReserveSettingExecution.completed",
+    "message": "積立設定後の受付データを登録できませんでした。積立設定は完了しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 382,
+    "key": "warnings.fndReserve.confirmationCheck",
+    "message": "受付方法が店頭または訪問になっているため、確認書の受け入れが必要です。",
+    "errorLevel": 2
+  },
+  {
+    "id": 383,
+    "key": "errors.cmn.settingExecutionCancel.failed",
+    "message": "設定解除処理でエラーが発生しました。<br>エラーコード：{0}<br>エラーメッセージ：{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 384,
+    "key": "warnings.fnd.ReserveSettingExecutionCancel.completed",
+    "message": "積立設定解除後の受付データを登録できませんでした。積立設定解除は完了しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 385,
+    "key": "errors.safe.apiError",
+    "message": "エラーコード：{0}、エラーメッセージ：{1}",
+    "errorLevel": -1
+  },
+  {
+    "id": 386,
+    "key": "warnings.safe.apiWarning",
+    "message": "コード：{0}、メッセージ：{1}",
+    "errorLevel": 2
+  },
+  {
+    "id": 387,
+    "key": "errors.safe.apiErrorMessageRetrievalFailed",
+    "message": "APIエラーが発生しました。{0}",
+    "errorLevel": -1
+  },
+  {
+    "id": 388,
+    "key": "warnings.safe.apiWarningMessageRetrievalFailed",
+    "message": "ワーニングが発生しました。{0}",
+    "errorLevel": 2
+  },
+  {
+    "id": 389,
+    "key": "errors.safe.APIConnectionFailed",
+    "message": "APIの接続に失敗しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 390,
+    "key": "errors.safe.APIServiceUnavailable",
+    "message": "ご選択されたサービスは現在ご利用いただけません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 391,
+    "key": "errors.safe.APIInternetTrafficLimit",
+    "message": "アクセスが集中しております。しばらく時間をおいてからお試しください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 392,
+    "key": "errors.cmn.settingExecutionCanceled",
+    "message": "当該ファンドは既に解除されました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 393,
+    "key": "errors.fndReserveCancel.overSelect",
+    "message": "一度に解除する件数は、20件以下にしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 394,
+    "key": "errors.cmn.question.noModify",
+    "message": "入力内容に変更がないため、接触履歴修正を行いません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 395,
+    "key": "info.COR_COMPLIANCE_CONFIRMATION.COR_CONFIRMATION_REPORT",
+    "message": "コンプライアンス通信の閲覧報告分を更新しました。",
+    "errorLevel": 1
+  },
+  {
+    "id": 396,
+    "key": "errors.COR_COMPLIANCE_CONFIRMATION.COR_CONFIRMATION_REPORT",
+    "message": "コンプライアンス通信の閲覧報告分を更新できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 397,
+    "key": "errors.safe.APIServiceUnavailable",
+    "message": "ご選択されたサービスは現在ご利用いただけません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 398,
+    "key": "errors.safe.apiErrorMessageRetrievalFailed",
+    "message": "APIエラーが発生しました。{0}",
+    "errorLevel": -1
+  },
+  {
+    "id": 399,
+    "key": "errors.closingMonth.notExist",
+    "message": "決算月が未設定です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 400,
+    "key": "errors.emp.sugBox.noModify",
+    "message": "入力内容に変更がないため、登録を行いません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 401,
+    "key": "errors.emp.sugBoxStatus.outOfRange",
+    "message": "回答を登録する場合はステータスを「回答待ち」以外に更新してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 402,
+    "key": "errors.cmn.SugBoxDirectory.notfound",
+    "message": "添付ファイルの格納先が取得できないため、処理を中止しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 403,
+    "key": "errors.cmn.SugBoxFile.notfound",
+    "message": "選択されたファイルを取得できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 404,
+    "key": "errors.cmn.orderModify.marketOnlyModify",
+    "message": "市場訂正以外の注文内容に変更がないため、注文訂正を行いません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 405,
+    "key": "errors.cmn.sorModify.noModify",
+    "message": "SOR注文として受け付けられません。市場訂正をやり直してください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 406,
+    "key": "warnings.frs.outOfSOROrder.completed",
+    "message": "SOR対象外で発注されました。注文は完了しています。",
+    "errorLevel": 2
+  },
+  {
+    "id": 407,
+    "key": "errors.fndReserveChange.overSelect",
+    "message": "一度に変更する件数は、20件以下にしてください。",
+    "errorLevel": -1
+  },
+  {
+    "id": 408,
+    "key": "errors.cmn.notSettingFund",
+    "message": "対象の積立設定がありません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 409,
+    "key": "errors.fndReserveChecks.notChange",
+    "message": "設定変更が出来ない銘柄です。",
+    "errorLevel": -1
+  },
+  {
+    "id": 410,
+    "key": "warnings.cmn.referPoint.systemError",
+    "message": "ポイント情報を取得できませんでした。",
+    "errorLevel": 2
+  },
+  {
+    "id": 411,
+    "key": "warnings.cmn.referPoint.apiError",
+    "message": "ポイント情報を取得できませんでした。Pom-API ResultCode:[{0}]",
+    "errorLevel": 2
+  },
+  {
+    "id": 412,
+    "key": "errors.staruploadNone",
+    "message": "ダウンロードに失敗しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 413,
+    "key": "errors.cmn.directory.notfound",
+    "message": "ファイルの格納先が取得できないため、処理を中止しました。",
+    "errorLevel": -1
+  },
+  {
+    "id": 414,
+    "key": "errors.cmn.update.noModify",
+    "message": "入力内容に変更がないため、更新を行いません。",
+    "errorLevel": -1
+  },
+  {
+    "id": 415,
+    "key": "errors.cmn.file.notfound",
+    "message": "ファイルを取得できませんでした。",
+    "errorLevel": -1
+  },
+  {
+    "id": 416,
+    "key": "errors.cmn.file.invalidExtension",
+    "message": "ファイルを選択できません、以下の拡張子のファイルを選択して下さい。\n[{0}]",
+    "errorLevel": -1
+  },
+  {
+    "id": 417,
+    "key": "errors.frs.accountAutoTransferSetting.on.failed",
+    "message": "自動振替が設定されているため、外債買付代金は入力できません。「信用新規建(新規買・新規売)の注文時の自動振替設定」の「米ドル預り金」のチェックを外すようIFA業者に連絡し、設定変更後に入力してください。",
+    "errorLevel": -1
+  }
+]

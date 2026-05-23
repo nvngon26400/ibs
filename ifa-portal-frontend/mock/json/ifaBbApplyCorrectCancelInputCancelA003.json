@@ -1,0 +1,33 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "butenCode": "315",
+          "accountNumber": "315002",
+          "brandCode": "A001",
+          "bookBuildingPresentationFrom": "20210705",
+          "quantity": "100",
+          "marketOrder": "1",
+          "price": "1000",
+          "discountRate": null,
+          "investorAttributeValue": "1",
+          "investorAttributeName": "個人",
+          "bbRemark": "1111",
+          "discretionQuantity": "100",
+          "selectReason": "1",
+          "brandName": "２３４１",
+          "sellBuyUnitType": "株",
+          "issuePriceType": "1",
+          "customerNameKanji": "漢字",
+          "customerNameKana": "カナ",
+          "noticeInfoLevel": "1"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/16 17:57:31",
+  "title": null,
+  "returnCode": null
+}

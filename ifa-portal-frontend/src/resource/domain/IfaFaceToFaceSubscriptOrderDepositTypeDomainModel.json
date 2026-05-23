@@ -1,0 +1,17 @@
+{
+  "domainId": "FACE_TO_FACE_SUBSCRIPT_ORDER_DEPOSIT_TYPE",
+  "domainName": "対面募集注文預り区分",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-radio"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE10_2_DIGITS_B",
+  "domainName": "レート10_2_B",
+  "dataType": "レート",
+  "precision": 10,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 13,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-rate"
+}

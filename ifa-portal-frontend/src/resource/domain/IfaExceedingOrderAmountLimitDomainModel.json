@@ -1,0 +1,17 @@
+{
+  "domainId": "EXCEEDING_ORDER_AMOUNT_LIMIT",
+  "domainName": "注文金額の上限超過",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-check"
+}

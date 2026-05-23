@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT200",
+  "domainName": "テキスト200",
+  "dataType": "文字列",
+  "precision": 200,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 200,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "BROKER_NAME100",
+  "domainName": "仲介業者名100",
+  "dataType": "文字列",
+  "precision": 100,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 100,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

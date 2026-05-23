@@ -1,0 +1,17 @@
+{
+  "domainId": "MARGIN_BUYING_POWER_SHORTFALL_SECURITIES",
+  "domainName": "建余力不足 自動振替設定(米国株式)",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-check"
+}

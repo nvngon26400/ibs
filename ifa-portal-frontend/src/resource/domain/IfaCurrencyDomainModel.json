@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY",
+  "domainName": "通貨コード",
+  "dataType": "文字列",
+  "precision": 3,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 3,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

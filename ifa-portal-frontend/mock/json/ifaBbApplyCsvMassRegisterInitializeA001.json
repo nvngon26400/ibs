@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "txaComment": "投資家属性 1:個人、2:事業法人、3:地域金融機関、4:その他法人（学校法人等）<br> 裁量選定理由 1:取引拡大のため、2:取引拡大、資産拡大のため、3:新規開拓、資産拡大のため"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/01/31 14:53:03",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

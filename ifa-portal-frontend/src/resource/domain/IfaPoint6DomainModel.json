@@ -1,0 +1,17 @@
+{
+  "domainId": "POINT6",
+  "domainName": "ポイント6",
+  "dataType": "数値",
+  "precision": 6,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 7,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "pt",
+  "htmlTag": null
+}

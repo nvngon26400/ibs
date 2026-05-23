@@ -1,0 +1,29 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "complianceReportListList": [
+                {
+                    "lectureId": "8101",
+                    "userId": "complianceUser",
+                    "confirmDateTime": null,
+                    "brokerCode": "9001",
+                    "branchNameOfBranch": "支店名",
+                    "employeeId": "1001",
+                    "employeeName": "コンプラユーザ",
+                    "title": "コンプラテスト0606",
+                    "codeName": null,
+                    "corBrowseFlag": "0",
+                    "viewReportFlag": "1"
+                }
+            ]
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2025/06/06 16:37:48",
+    "title": null,
+    "returnCode": "0"
+}

@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+  build:
+    commands:
+      - echo "Building Vue.js application..."
+      - npm run build:integration3
+      
+  post_build:
+    commands:
+      - echo "Copying files to deployment directory..."
+      - mv ./appspecIntegration3.yml ./appspec.yml
+      - aws deploy push --application-name SBI-ifap-CodeDeploy-Cnt-Integration3 --s3-location s3://sbi-ifap-s3-cntartifact-integration3-202404/artifact.zip
+           
+artifacts:
+  type: zip
+  files:
+    - 'dist/**/*'
+    - appspec.yml
+  name: artifact
+  discard-paths: no

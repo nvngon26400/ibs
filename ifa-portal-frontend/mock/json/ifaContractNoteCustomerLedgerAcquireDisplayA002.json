@@ -1,0 +1,32 @@
+{
+  "totalSize": 2,
+  "maxRownum": 2,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "createDateA": "20200414",
+          "createDateB": "20230103",
+          "brokerCode": "0275",
+          "brokerName": "株式会社 Ｆａｎ",
+          "docClass": "02",
+          "targetDoc": "公社債　取引日記帳",
+          "downloadFileName": "STATUTORY_BOOKS_BOND_0275_20200414.pdf",
+          "dl": "DL"
+      },
+      {
+          "createDateA": "20200414",
+          "createDateB": "20240208",
+          "brokerCode": "0509",
+          "brokerName": "SBIマネープラザ株式会社",
+          "docClass": "01",
+          "targetDoc": "受益証券　取引日記帳",
+          "downloadFileName": "STATUTORY_BOOKS_TRST_0001_20240207.pdf",
+          "dl": "DL"
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/05/16 12:41:32",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

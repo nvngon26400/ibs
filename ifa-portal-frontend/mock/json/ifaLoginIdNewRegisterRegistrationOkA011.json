@@ -1,0 +1,11 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [],
+  "message": "ログイン情報の登録ができました。",
+  "errorLevel": 0,
+  "requestedTime": "2024/03/14 10:09:21",
+  "title": null,
+  "returnCode": "info.loginIdInsertCompleted"
+}

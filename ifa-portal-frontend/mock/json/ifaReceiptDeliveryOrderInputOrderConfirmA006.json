@@ -1,0 +1,53 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "req": {
+        "brandCode": "101",
+        "tradeCd": "8",
+        "quantity": "50",
+        "marginTradeTypeText": "6",
+        "accountType": "0",
+        "builtMarket": "0",
+        "constructionDate": "20230406",
+        "parentStockTradeDate": "20230406",
+        "newOpenInterestNumber": "1",
+        "newPrice": "83540",
+        "kanyuKbn": "1",
+        "receiveOrderType": "1",
+        "openPrice": "83540",
+        "checkCustomerAttribute": "1",
+        "paymentDeadlineDate": "10",
+        "dateKbn": "Y",
+        "paymentDeadlineCalculation": "10年"
+      },
+      "contPosition": "100",
+      "unactualQuantity": "0",
+      "tokuteiContractId": "1",
+      "contractAmount": "         120000",
+      "charge": "            200",
+      "consumptionTax": "            300",
+      "yieldTax": "            400",
+      "settlementAmount": "         120882",
+      "contractDate": "20231018",
+      "deliveryDate": "20231020",
+      "orderDate": "20231017",
+      "orderTime": "163728",
+      "shubetu": "APL  ",
+      "code": "W05001",
+      "errMessage": "翌営業日の発注となります",
+      "noticeInfoAlert": "当該顧客の国内信用取引に関わる注意情報があります。注意情報欄を確認してください。",
+      "noticeAlert": "「重要なお知らせ」が未確認です。重要なお知らせ取引制限欄や注意情報欄を確認してください。",
+      "insiderConfirmMsg": "本売買は、インサイダー情報に基づく売買ではないことの確認が必要です。",
+      "tradeNoticeInfoBrandMsg": "注文銘柄に対する取引注意情報があります。取引注意情報の内容を顧客へ説明後に注文を執行してください。",
+      "brandName": "寿スピリッツ"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/04/12 12:29:30",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

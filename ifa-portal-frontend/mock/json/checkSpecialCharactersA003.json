@@ -1,0 +1,33 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "corCommunicationDate": "2024/08",
+      "corTitle": "aaaa",
+      "corBrief": "1gnhnfbsfvc",
+      "corFileName1": "%E6%B3%A8%E6%96%87%E4%B8%80%E8%A6%A7_20240612.csv",
+      "corFileDesc1": "cvavdsbfhjm",
+      "corFileName2": "response.html",
+      "corFileDesc2": "asfdsghjuewretfad",
+      "corFileName3": "コンプライアンス通信閲覧状況照会(内部管理責任者用)_20240627.csv",
+      "corFileDesc3": "agkloiyutrhfvcc",
+      "corContentsFileName": "信用_20240619.csv",
+      "corContents": "zvxbncmvh,jlkoytjirugsdf",
+      "corFileName1BeforeChange": "response.html",
+      "corFileName1Delete": "response.html　削除",
+      "corFileName2BeforeChange": "信用_20240619.csv",
+      "corFileName2Delete": "信用_20240619.csv　削除",
+      "corFileName3BeforeChange": "1.xlsx",
+      "corFileName3Delete": "1.xlsx　削除",
+      "corContentsFileNameBeforeChange": "%E6%B3%A8%E6%96%87%E4%B8%80%E8%A6%A7_20240612.csv",
+      "corContentsFileNameDelete": "%E6%B3%A8%E6%96%87%E4%B8%80%E8%A6%A7_20240612.csv　削除"
+  }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/09/19 18:42:05",
+  "title": null,
+  "returnCode": null
+}

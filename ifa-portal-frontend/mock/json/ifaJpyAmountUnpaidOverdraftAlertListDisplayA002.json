@@ -1,0 +1,44 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "stlDate0": "20240516",
+          "brokerCode": "CA11",
+          "brokerBranchName": "顧客アラートテストCA11本店",
+          "subBrokerId": "111",
+          "brokerChargeCode": "C111",
+          "employeeName": "顧客アラートテストCA11営業員",
+          "butenCode": "315",
+          "accountNumber": "315001",
+          "customerAttributeName": "コールセンターコース",
+          "customerNameKanji": "０２７３?３１５００２漢字",
+          "customerNameKana": "０２７３?３１５００２カナ",
+          "chargeAmount0": "-10",
+          "targetFlag": "10",
+          "totalAssets": "1000"
+      },
+      {
+        "stlDate0": "20240517",
+        "brokerCode": "CA12",
+        "brokerBranchName": "顧客アラートテストCA12本店",
+        "subBrokerId": "222",
+        "brokerChargeCode": "C112",
+        "employeeName": "顧客アラートテストCA12営業員",
+        "butenCode": "315",
+        "accountNumber": "315002",
+        "customerAttributeName": "コールセンターコース",
+        "customerNameKanji": "０２７３?３１５００２漢字",
+        "customerNameKana": "０２７３?３１５００２カナ",
+        "chargeAmount0": "10",
+        "targetFlag": "10",
+        "totalAssets": "1000"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/05/31 19:38:36",
+  "title": null,
+  "returnCode": null
+}

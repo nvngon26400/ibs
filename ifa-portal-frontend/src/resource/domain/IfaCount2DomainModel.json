@@ -1,0 +1,17 @@
+{
+  "domainId": "COUNT2",
+  "domainName": "回数2",
+  "dataType": "数値",
+  "precision": 2,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": "withCommaInteger",
+  "formattedDigit": 2,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "回",
+  "htmlTag": null
+}

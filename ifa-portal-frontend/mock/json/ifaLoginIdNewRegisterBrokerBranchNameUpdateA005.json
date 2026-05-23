@@ -1,0 +1,56 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "chargeNameList": [
+        {
+          "value": "509参の１",
+          "key": "5093"
+        },
+        {
+          "value": "509四の１",
+          "key": "5094"
+        },
+        {
+          "value": "509五の１",
+          "key": "5095"
+        },
+        {
+          "value": "509参の２",
+          "key": "509A"
+        },
+        {
+          "value": "509四の２",
+          "key": "509B"
+        },
+        {
+          "value": "509五の２",
+          "key": "509C"
+        },
+        {
+          "value": "509参の３",
+          "key": "509G"
+        },
+        {
+          "value": "509四の３",
+          "key": "509H"
+        },
+        {
+          "value": "509五の３",
+          "key": "509J"
+        },
+        {
+          "value": "0509の0000",
+          "key": "0000"
+        }
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/02/22 15:46:13",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

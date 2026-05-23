@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT173",
+  "domainName": "テキスト173",
+  "dataType": "文字列",
+  "precision": 173,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 173,
+  "verticalAlign": "T",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

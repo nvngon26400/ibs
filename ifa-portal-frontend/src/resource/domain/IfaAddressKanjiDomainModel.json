@@ -1,0 +1,17 @@
+{
+  "domainId": "ADDRESS_KANJI",
+  "domainName": "住所（漢字）",
+  "dataType": "文字列",
+  "precision": 172,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 172,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

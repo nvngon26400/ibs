@@ -1,0 +1,19 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": [
+    {
+      "destinationAbleAmount": "123456789012345.12",
+      "marginPositionPowerBefore": "123456789012345.12",
+      "marginPositionPowerAfter": "123456789012345.12",
+      "marginDepositRateBefore": "12345678901234567.12",
+      "marginDepositRateAfter": "12345678901234567.12"
+    }
+  ]
+}

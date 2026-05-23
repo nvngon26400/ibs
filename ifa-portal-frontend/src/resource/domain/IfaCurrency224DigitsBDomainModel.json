@@ -1,0 +1,17 @@
+{
+  "domainId": "CURRENCY22_4_DIGITS_B",
+  "domainName": "価格22_4_B",
+  "dataType": "金額",
+  "precision": 22,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 28,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-input-amount"
+}

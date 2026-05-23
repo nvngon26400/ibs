@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT1500_TEXT_ARIA",
+  "domainName": "テキスト1500_テキストエリア",
+  "dataType": "文字列",
+  "precision": 1500,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 1500,
+  "verticalAlign": "T",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

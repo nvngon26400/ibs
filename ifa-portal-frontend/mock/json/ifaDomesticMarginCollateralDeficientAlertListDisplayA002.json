@@ -1,0 +1,44 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "standardDate": "20240516",
+          "brokerCode": "CA12",
+          "brokerBranchName": "顧客アラートテストCA12本店",
+          "subBrokerId": "12",
+          "brokerChargeCode": "C112",
+          "employeeName": "顧客アラートテストCA12営業員",
+          "butenCode": "112",
+          "accountNumber": "111112",
+          "customerAttributeName": "コールセンターコース",
+          "customerNameKanji": "顧客アラートテスト顧客名11112",
+          "customerNameKana": "コキャクアラート",
+          "acceptDeposit": "400000",
+          "maintenanceRate": "70",
+          "marginDemandAmount": "0"
+      },
+      {
+        "standardDate": "20240516",
+        "brokerCode": "CA12",
+        "brokerBranchName": "顧客アラートテストCA12本店",
+        "subBrokerId": "12",
+        "brokerChargeCode": "C112",
+        "employeeName": "顧客アラートテストCA12営業員",
+        "butenCode": "112",
+        "accountNumber": "111112",
+        "customerAttributeName": "コールセンターコース",
+        "customerNameKanji": "顧客アラートテスト顧客名11112",
+        "customerNameKana": "コキャクアラート",
+        "acceptDeposit": "200000",
+        "maintenanceRate": "30.99",
+        "marginDemandAmount": "1"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/12 15:50:56",
+  "title": null,
+  "returnCode": null
+}

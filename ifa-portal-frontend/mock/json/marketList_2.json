@@ -1,0 +1,16 @@
+{
+  "brandCode": "2002",
+  "brandName": "XX食品",
+  "market": {
+    "A": null, 
+    "0": null,
+    "2": 3,
+    "6": null,
+    "7": null,
+    "8": null,
+    "H": null
+  },
+  "topix": true,
+  "regulated": true,
+  "prime": true
+}

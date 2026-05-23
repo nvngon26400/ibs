@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT66",
+  "domainName": "テキスト66",
+  "dataType": "文字列",
+  "precision": 66,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 66,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

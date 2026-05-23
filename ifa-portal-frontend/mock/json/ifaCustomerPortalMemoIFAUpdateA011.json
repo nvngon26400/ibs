@@ -1,0 +1,13 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [{
+      "ifaMemoContent": "更新後メモ。\nレスポンス結果を表示するため、現時点では実際に入力した値と一致しない。",
+      "ifaMemoUpdateDateTIme": "2023/11/28 12:12:12"
+}],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

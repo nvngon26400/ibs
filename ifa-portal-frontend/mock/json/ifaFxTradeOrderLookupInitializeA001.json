@@ -1,0 +1,82 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "tradeSuspendFlag": "0",
+            "fxOrderInfoList": [
+                {
+                    "orderDate": "2023-09-03 10:00",
+                    "fxOrderStatus": "ORDERING",
+                    "tradeDateTime": "2023-09-20 10:00",
+                    "deadlineDate": "2023-09-30 10:00",
+                    "currencyCode": "HKD",
+                    "tradeCd": "0",
+                    "quantity": "11",
+                    "deliveryAmount": "11111980",
+                    "contractRate": "99.88",
+                    "tradeKbn": "1",
+                    "fxTradeStatus": "",
+                    "orderStatus": "注文中",
+                    "accountType": "",
+                    "orderNumber": "00000001",
+                    "cycleNumber": "787878",
+                    "orderEventId": "13579"
+                },
+                {
+                    "orderDate": "2023-09-01 10:00",
+                    "fxOrderStatus": "ORDERING",
+                    "tradeDateTime": "2023-09-20 10:00",
+                    "deadlineDate": "2023-09-30 10:00",
+                    "currencyCode": "IDR",
+                    "tradeCd": "1",
+                    "quantity": "22",
+                    "deliveryAmount": "22221980",
+                    "contractRate": "100",
+                    "tradeKbn": "2",
+                    "fxTradeStatus": "CANCEL_FAILED",
+                    "orderStatus": "注文中",
+                    "accountType": "",
+                    "orderNumber": "00000002",
+                    "cycleNumber": "656565",
+                    "orderEventId": "24680"
+                }
+            ],
+            "currencyList": [
+                {
+                    "currencyCode": "HKD",
+                    "currency": "香港ドル",
+                    "decimalLength": "2"
+                },
+                {
+                    "currencyCode": "IDR",
+                    "currency": "インドネシアルピア",
+                    "decimalLength": "4"
+                },
+                {
+                    "currencyCode": "USD",
+                    "currency": "米ドル",
+                    "decimalLength": "5"
+                }
+            ],
+            "fxTradeMediateProprietyList": [
+            {
+                "tradeCd": "1",
+                "currencyCode": "HKD",
+                "mediatePropriety": "1"
+            },
+            {
+                "tradeCd": "2",
+                "currencyCode": "IDR",
+                "mediatePropriety": "1"
+            }
+            ]
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "2023/09/25 10:00:00",
+    "title": null,
+    "returnCode": "0"
+}

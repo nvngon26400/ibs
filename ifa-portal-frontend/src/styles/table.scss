@@ -1,0 +1,26 @@
+:deep(th) {
+  font-weight: normal;
+}
+:deep(.el-table .el-scrollbar__bar) {
+    /* スクロールバーのサイズと色を調整 */
+    &.is-horizontal {
+      height: 7px !important; /* 水平スクロールバーを太くする */
+      > .el-scrollbar__thumb {
+        opacity: 0.8;
+        background-color: rgba(144, 147, 153, 0.9) !important;
+        &:hover {
+          background-color: rgba(51, 57, 70, 0.7) !important;
+        }
+      }
+    }
+    &.is-vertical {
+      width: 7px !important; /* 垂直スクロールバーを太くする */
+      > .el-scrollbar__thumb {
+        opacity: 0.8;
+        background-color:  rgba(144, 147, 153, 0.9)!important;
+        &:hover {
+          background-color: rgba(51, 57, 70, 0.7) !important;
+        }
+      }
+    }
+}

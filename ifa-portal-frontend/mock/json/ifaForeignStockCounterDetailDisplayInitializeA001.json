@@ -1,0 +1,39 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "brandCode": "APL",
+          "brandName": "アップル",
+          "tradePrice": "1100",
+          "manageNumber": "2021050700212",
+          "orderDate": "2023-11-20 12:12:12",
+          "tradeDateTime": "2023-11-20 00:00:00",
+          "tradeKbn": "3",
+          "quantity": "1111111111111",
+          "contractAmount": "1200.5",
+          "depositType": "1",
+          "settlementType": "1",
+          "kanyuKbn": "1",
+          "orderMethod": "1",
+          "warningApplyTrade": "1",
+          "importantMatterTypeText": "1",
+          "foreignStockYmd": "20240827",
+          "documentDeliveryDate": "20240321",
+          "informationDeliveredText": "1",
+          "solicitationEtfText": "1",
+          "engPubText": "0",
+          "engPubYmd": "20240216",
+          "summaryAny": "あいうえお",
+          "status": "10",
+          "cancelReason": "1",
+          "comment": "かきくけこ"
+      }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/03/21 14:35:17",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

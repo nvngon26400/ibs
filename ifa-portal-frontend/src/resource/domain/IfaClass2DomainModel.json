@@ -1,0 +1,17 @@
+{
+  "domainId": "CLASS2",
+  "domainName": "区分値2",
+  "dataType": "文字列",
+  "precision": 2,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 2,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT20",
+  "domainName": "テキスト20",
+  "dataType": "文字列",
+  "precision": 20,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 20,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-text"
+}

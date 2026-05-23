@@ -1,0 +1,24 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "infoCategoryList": [
+        {
+          "t9nInfoCat": "35",
+          "t9nName": "1"
+        },
+        {
+          "t9nInfoCat": "34",
+          "t9nName": "1"
+        }
+      ]
+    }
+  ],
+  "message": "1の登録を完了しました。",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/12 13:02:40",
+  "title": null,
+  "returnCode": "info.endCompleted"
+}

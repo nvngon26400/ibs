@@ -1,0 +1,17 @@
+{
+  "domainId": "COUNT5",
+  "domainName": "件数5",
+  "dataType": "数値",
+  "precision": 5,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "numberInteger",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaInteger",
+  "formattedDigit": 6,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,213 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 1,
+  "requestedTime": "23/07/05 12:00",
+  "returnCode": "I9999",
+  "dataList":[{
+    "addDeposit": [{
+      "markToMarketType": "確定",
+      "cancellationDeadline": "2022-08-16",
+      "initialMarginAmount": "700.00",
+      "marginCallDate": "2022-08-15",
+      "addDepositPaymentInterest": "1000.00",
+      "substituteInterest": "500.00", 
+      "settlementOpenInterestForeignCurrency": "0.00",
+      "openInterestCostForeignCurrency": "0.00"
+    },
+    {
+      "markToMarketType": "概算",
+      "cancellationDeadline": "2022-12-14",
+      "initialMarginAmount": "700.00",
+      "marginCallDate": "2022-12-13",
+      "addDepositPaymentInterest": "1000.00",
+      "substituteInterest": "500.00", 
+      "settlementOpenInterestForeignCurrency": "0.00",
+      "openInterestCostForeignCurrency": "0.00"
+    }],
+    "depositDeficient": [{
+      "cancellationDeadline": "2022-12-10",
+      "status": "未解消",
+      "depositShortage": "700.00", 
+      "depositAmount": "0.00" 
+    },
+    {
+      "cancellationDeadline": "2022-12-11",
+      "status": "未解消",
+      "depositShortage": "700.00", 
+      "depositAmount": "0.00" 
+    }],
+    "newPositionDeficient": [{
+      "cancellationDeadline": "2022-12-10",
+      "constructionShortage": "700.00",
+      "accuralDate": "2022-12-09",
+      "paymentInterest": "300.00", 
+      "substituteInterest": "0.00",
+      "settlementOpenInterestForeignCurrency": "0.00", 
+      "openInterestCostForeignCurrency": "0.00"
+    },
+    {
+      "cancellationDeadline": "2022-12-11",
+      "constructionShortage": "700.00",
+      "accuralDate": "2022-12-13",
+      "paymentInterest": "300.00", 
+      "substituteInterest": "0.00",
+      "settlementOpenInterestForeignCurrency": "0.00", 
+      "openInterestCostForeignCurrency": "0.00"
+    }],
+    "marginTrade": [{
+      "domesticSettlementDate": "2022-12-09",
+      "settlementDateAfterBusinessDay": "（当日）",
+      "margin": "11512829.39", 
+      "payment": "0.00",
+      "uncontractedCreditSettlementLoss": "0.00",
+      "amountReceived": "0.00",
+      "plannedTransferAmount": "0.00", 
+      "balanceDeposit": "11512829.39",
+      "requiredSettlementAmountForeignCurrency": "277845.48"
+    },
+    {
+      "domesticSettlementDate": "2022-12-10",
+      "settlementDateAfterBusinessDay": "（1営業日後）",
+      "margin": "11512829.39", 
+      "payment": "0.00",
+      "uncontractedCreditSettlementLoss": "0.00",
+      "amountReceived": "0.00",
+      "plannedTransferAmount": "0.00", 
+      "balanceDeposit": "11512829.39",
+      "requiredSettlementAmountForeignCurrency": "277845.48"
+    },
+    {
+      "domesticSettlementDate": "2022-12-11",
+      "settlementDateAfterBusinessDay": "（2営業日後）",
+      "margin": "11512829.39", 
+      "payment": "0.00",
+      "uncontractedCreditSettlementLoss": "0.00",
+      "amountReceived": "0.00",
+      "plannedTransferAmount": "0.00", 
+      "balanceDeposit": "11512829.39",
+      "requiredSettlementAmountForeignCurrency": "277845.48"
+    },
+    {
+      "domesticSettlementDate": "2022-12-12",
+      "settlementDateAfterBusinessDay": "（3営業日後）",
+      "margin": "11512829.39", 
+      "payment": "0.00",
+      "uncontractedCreditSettlementLoss": "0.00",
+      "amountReceived": "0.00",
+      "plannedTransferAmount": "0.00", 
+      "balanceDeposit": "11512829.39",
+      "requiredSettlementAmountForeignCurrency": "277845.48"
+    },
+    {
+      "domesticSettlementDate": "2022-12-13",
+      "settlementDateAfterBusinessDay": "（4営業日後）",
+      "margin": "11512829.39", 
+      "payment": "0.00",
+      "uncontractedCreditSettlementLoss": "0.00",
+      "amountReceived": "0.00",
+      "plannedTransferAmount": "0.00", 
+      "balanceDeposit": "11512829.39",
+      "requiredSettlementAmountForeignCurrency": "277845.48"
+    },
+    {
+      "domesticSettlementDate": "2022-12-14",
+      "settlementDateAfterBusinessDay": "（5営業日後）",
+      "margin": "11512829.39", 
+      "payment": "0.00",
+      "uncontractedCreditSettlementLoss": "0.00",
+      "amountReceived": "0.00",
+      "plannedTransferAmount": "0.00", 
+      "balanceDeposit": "11512829.39",
+      "requiredSettlementAmountForeignCurrency": "277845.48"
+    }],
+    "foreignNewBuildingCapacity": "14588402.73",
+    "marginDepositRate8": "999.99",
+    "realTimeMarginDepositRate": "999.99",
+    "usdSecurityDeposit": "11234983.91",
+    "substituteSecurities": "0.00",
+    "entrustDepositTransition": [{
+      "domesticSettlementDate": "2022-12-09", 
+      "settlementDateAfterBusinessDay": "（当日）", 
+      "marginDepositTotalCache": "512829.39", 
+      "alternativeSecuritiesTotal": "0.00", 
+      "marginDepositRateSettlementProfitLossCost": "-7930.87",
+      "foreignCurrencyactualDeposit": "504898.52",
+      "constructionPriceTotal": "1597.27",
+      "marginDepositRate8": "999.99", 
+      "foreignCurrencydeposit": "70001.76", 
+      "totalAppraisalValueOfSecuritiesInCustody": "0.00", 
+      "foreignReferenceMarginDeposit": "999.99"
+    },
+    {
+      "domesticSettlementDate": "2022-12-10", 
+      "settlementDateAfterBusinessDay": "（1営業日後）", 
+      "marginDepositTotalCache": "512829.39", 
+      "alternativeSecuritiesTotal": "0.00", 
+      "marginDepositRateSettlementProfitLossCost": "-7930.87",
+      "foreignCurrencyactualDeposit": "504898.52",
+      "constructionPriceTotal": "1597.27",
+      "marginDepositRate8": "999.99", 
+      "foreignCurrencydeposit": "0.00", 
+      "totalAppraisalValueOfSecuritiesInCustody": "0.00", 
+      "foreignReferenceMarginDeposit": "999.99"
+    },
+    {
+      "domesticSettlementDate": "2022-12-11", 
+      "settlementDateAfterBusinessDay": "（2営業日後）", 
+      "marginDepositTotalCache": "512829.39", 
+      "alternativeSecuritiesTotal": "0.00", 
+      "marginDepositRateSettlementProfitLossCost": "-7930.87",
+      "foreignCurrencyactualDeposit": "504898.52",
+      "constructionPriceTotal": "1597.27",
+      "marginDepositRate8": "999.99", 
+      "foreignCurrencydeposit": "0.00", 
+      "totalAppraisalValueOfSecuritiesInCustody": "0.00", 
+      "foreignReferenceMarginDeposit": "999.99"
+    },
+    {
+      "domesticSettlementDate": "2022-12-12", 
+      "settlementDateAfterBusinessDay": "（3営業日後）", 
+      "marginDepositTotalCache": "512829.39", 
+      "alternativeSecuritiesTotal": "0.00", 
+      "marginDepositRateSettlementProfitLossCost": "-7930.87",
+      "foreignCurrencyactualDeposit": "504898.52",
+      "constructionPriceTotal": "1597.27",
+      "marginDepositRate8": "999.99", 
+      "foreignCurrencydeposit": "0.00", 
+      "totalAppraisalValueOfSecuritiesInCustody": "0.00", 
+      "foreignReferenceMarginDeposit": "999.99"
+    },
+    {
+      "domesticSettlementDate": "2022-12-13", 
+      "settlementDateAfterBusinessDay": "（4営業日後）", 
+      "marginDepositTotalCache": "512829.39", 
+      "alternativeSecuritiesTotal": "0.00", 
+      "marginDepositRateSettlementProfitLossCost": "-7930.87",
+      "foreignCurrencyactualDeposit": "504898.52",
+      "constructionPriceTotal": "1597.27",
+      "marginDepositRate8": "999.99", 
+      "foreignCurrencydeposit": "0.00", 
+      "totalAppraisalValueOfSecuritiesInCustody": "0.00", 
+      "foreignReferenceMarginDeposit": "999.99"
+    },
+    {
+      "domesticSettlementDate": "2022-12-14", 
+      "settlementDateAfterBusinessDay": "（5営業日後）", 
+      "marginDepositTotalCache": "512829.39", 
+      "alternativeSecuritiesTotal": "0.00", 
+      "marginDepositRateSettlementProfitLossCost": "+7930.87",
+      "foreignCurrencyactualDeposit": "504898.52",
+      "constructionPriceTotal": "1597.27",
+      "marginDepositRate8": "999.99", 
+      "foreignCurrencydeposit": "0.00", 
+      "totalAppraisalValueOfSecuritiesInCustody": "0.00", 
+      "foreignReferenceMarginDeposit": "999.99"
+    }],
+      "marginCallFlag": "1",
+      "depositDeficientFlag": "1",
+      "newPositionDeficientFlag": "1"
+  }]
+}

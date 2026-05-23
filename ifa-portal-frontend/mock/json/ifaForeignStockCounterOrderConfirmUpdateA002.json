@@ -1,0 +1,13 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [{
+    "maxSellLimitQuantity": "100",
+    "maxBuyLimitQuantity": "90"
+  }],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

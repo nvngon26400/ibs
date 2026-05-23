@@ -1,0 +1,30 @@
+{
+  "totalSize":1,
+  "maxRownum":1,
+  "overMaxRownum":false,
+  "dataList":[{
+    "currencyCode": "USD",
+    "currency": "米ドル",
+    "saleMethod": "3",
+    "tradeKbn": "1",
+    "orderAmount": "100000",
+    "tradeDateTime": "20231010 10:10:10",
+    "settlementDate": "20231010 10:10:10",
+    "fxRate": "5.1",
+    "exchangeRateDateTime": "20231010 10:10:10",
+    "yenDeliveryAmount": "1000",
+    "warningThreshold": "100000",
+    "orderWarningexceedingThreshold": "注文ワーニングしきい値超過メッセージ",
+    "selectedCurrencyInfo": "1000",
+    "fxRateAdditionalType": "1000",
+    "adjustAmount": "123456789",
+    "adjustPercent": "123456789",
+    "quantityDesignationMethod": "1",
+    "decimalLength": "1"
+  }],
+  "message":"正常終了",
+  "errorLevel":0,
+  "requestedTime":"2023/09/19 19:35:20",
+  "title":null,
+  "returnCode":"0"
+}

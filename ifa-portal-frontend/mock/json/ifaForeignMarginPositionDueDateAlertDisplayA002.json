@@ -1,0 +1,46 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "brokerCode": "CA17",
+          "brokerName": "テスト",
+          "brokerageBranchCode": "117",
+          "brokerBranchName": "顧客アラートテストCA17本店",
+          "empCode": "C117",
+          "brokerChargeName": "営業太郎",
+          "butenCode": "117",
+          "accountNumber": "100017",
+          "courseName": "コース",
+          "customerName": "漢字",
+          "customerNameKana": "コキャクメイSQL001_17",
+          "brandCode": "2222",
+          "brandName": "テスト銘柄",
+          "contractStandardDeposit": "100",
+          "recentRepayDeadline": "20220101"
+      },
+      {
+          "brokerCode": "CA18",
+          "brokerName": null,
+          "brokerageBranchCode": "118",
+          "brokerBranchName": null,
+          "empCode": "C118",
+          "brokerChargeName": null,
+          "butenCode": "118",
+          "accountNumber": "100018",
+          "courseName": null,
+          "customerName": null,
+          "customerNameKana": "コキャクメイSQL001_18",
+          "brandCode": "2222",
+          "brandName": null,
+          "contractStandardDeposit": null,
+          "recentRepayDeadline": "20220101"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/22 13:22:20",
+  "title": null,
+  "returnCode": null
+}

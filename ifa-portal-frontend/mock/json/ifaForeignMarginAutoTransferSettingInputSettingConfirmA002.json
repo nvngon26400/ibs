@@ -1,0 +1,10 @@
+{
+  "message": "",
+  "dataList":[{
+    "marginBuyingPowerShortfallSecurities": "1",
+    "marginBuyingPowerShortfallCash": "1",
+    "marginShortfallSecurities": "1",
+    "marginShortfallCash": "1",
+    "depositType": "PROTECTION_KEEPING"
+    }]
+}

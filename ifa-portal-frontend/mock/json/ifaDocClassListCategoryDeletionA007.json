@@ -1,0 +1,20 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+"dataList": [
+    {
+      "infoCategoryList": [
+        {
+          "t9nInfoCat": "34",
+          "t9nName": "1"
+        }
+      ]
+    }
+  ],
+  "message": "削除を完了しました。",
+  "errorLevel": 0,
+  "requestedTime": "2024/06/11 21:59:01",
+  "title": null,
+  "returnCode": "info.endCompleted"
+}

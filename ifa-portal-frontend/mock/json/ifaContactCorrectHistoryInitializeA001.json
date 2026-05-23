@@ -1,0 +1,49 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "contactCorrectHistoryList": [
+        {
+          "nyuuryokuDate": "2025/08/06 14:01:01",
+          "nyuuryokusyaName": "佐々木　003",
+          "syuuseiDate": "2025/08/07 14:01:01",
+          "syuuseisyaName": "吉田佳子1",
+          "naiyou1": "0",
+          "naiyou2": null,
+          "naiyou3": null,
+          "naiyou4": null,
+          "naiyou5": null
+        },
+        {
+          "nyuuryokuDate": "2025/08/06 15:01:01",
+          "nyuuryokusyaName": "佐々木　002",
+          "syuuseiDate": "2025/08/07 15:01:01",
+          "syuuseisyaName": "吉田佳子2",
+          "naiyou1": "最大桁数チェックと特殊文字チェック～",
+          "naiyou2": "内容２",
+          "naiyou3": "内容３",
+          "naiyou4": "内容４",
+          "naiyou5": "内容５"
+        },
+        {
+          "nyuuryokuDate": "2025/08/06 16:01:01",
+          "nyuuryokusyaName": "佐々木　001",
+          "syuuseiDate": "2025/08/07 16:01:01",
+          "syuuseisyaName": "吉田佳子3",
+          "naiyou1": "最大桁数チェックと特殊文字チェック～",
+          "naiyou2": "その寮は都内の見晴しの良い高台にあった。",
+          "naiyou3": "一階には食堂と大きな浴場、",
+          "naiyou4": "その裏のことは例によって曖昧模糊としている。",
+          "naiyou5": "そのクラブに入っている限り就職の心配はないということであった。"
+        }
+      ]
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025\u002F02\u002F25 17:35:47",
+  "title": null,
+  "returnCode": ""
+}

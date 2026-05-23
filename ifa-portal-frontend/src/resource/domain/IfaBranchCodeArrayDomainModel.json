@@ -1,0 +1,17 @@
+{
+  "domainId": "BRANCH_CODE_ARRAY",
+  "domainName": "支店コード（複数）",
+  "dataType": "文字列",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "threeDigitsNumberWithComma",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": "threeDigitsNumberWithComma",
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "FOREIGN_MARGIN_ACCOUNT_TYPE",
+  "domainName": "信用口座区分(外国)",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

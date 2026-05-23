@@ -1,0 +1,17 @@
+{
+  "domainId": "YEARS",
+  "domainName": "年数",
+  "dataType": "数値",
+  "precision": 2,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 2,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "年",
+  "htmlTag": null
+}

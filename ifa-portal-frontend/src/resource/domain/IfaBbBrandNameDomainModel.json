@@ -1,0 +1,17 @@
+{
+  "domainId": "BB_BRAND_NAME",
+  "domainName": "銘柄名（募集）",
+  "dataType": "文字列",
+  "precision": 60,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 60,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

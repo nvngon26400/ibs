@@ -1,0 +1,17 @@
+{
+  "domainId": "RATE_9_4_DIGITS_B",
+  "domainName": "レート9_4_B",
+  "dataType": "レート",
+  "precision": 9,
+  "digit": 4,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "withCommaNoneZeroPadding",
+  "formattedDigit": 11,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": "ifa-input-rate"
+}

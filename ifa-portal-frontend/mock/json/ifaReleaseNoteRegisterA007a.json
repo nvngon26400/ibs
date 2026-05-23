@@ -1,0 +1,16 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "detailedFileName": "000002_皆様からの要望データA再登録.pdf",
+      "releaseNoteNo": "100001"
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/08/29 19:29:16",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

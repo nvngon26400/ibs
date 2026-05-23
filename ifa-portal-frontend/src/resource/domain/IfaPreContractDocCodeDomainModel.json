@@ -1,0 +1,17 @@
+{
+  "domainId": "PRE_CONTRACT_DOC_CODE",
+  "domainName": "契約締結前交付書面コード",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

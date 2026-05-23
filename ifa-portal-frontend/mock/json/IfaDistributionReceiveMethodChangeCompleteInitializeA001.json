@@ -1,0 +1,20 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "infoMsg": "分配金受取方法を変更しました。",
+      "fundName": "SCSKインデックスファンド",
+      "unitVolume": "1111111111111111",
+      "sellingVolume": "22222222222222222222",
+      "method": "受取",
+      "afterChangeDistributionReceiveMethod": "受取"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2023/09/14 23:02:26",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

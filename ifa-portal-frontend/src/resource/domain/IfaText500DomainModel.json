@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT500",
+  "domainName": "テキスト500",
+  "dataType": "文字列",
+  "precision": 500,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 500,
+  "verticalAlign": "T",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

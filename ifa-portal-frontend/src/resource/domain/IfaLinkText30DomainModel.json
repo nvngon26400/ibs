@@ -1,0 +1,17 @@
+{
+  "domainId": "LINK_TEXT30",
+  "domainName": "リンク30",
+  "dataType": "文字列",
+  "precision": 30,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR4",
+  "format": null,
+  "formattedDigit": 30,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": "ifa-link"
+}

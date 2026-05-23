@@ -1,0 +1,11 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [],
+  "message": "検索結果が0件です。条件を設定して再度検索して下さい。",
+  "errorLevel": 1,
+  "requestedTime": "2023/09/19 18:42:05",
+  "title": null,
+  "returnCode": "ERRORS_DATALIST_NOTFOUND"
+}

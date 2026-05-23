@@ -1,0 +1,705 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/05/21 13:30:00",
+  "title": null,
+  "returnCode": "SUCCESS",
+  "dataList": [
+    {
+      "portfolioSummaryList": [
+        {
+          "securityClass": "国内株式",
+          "valuation": "23456789012345678",
+          "profitAndLoss": "2345678901234567890",
+          "byProductAssetsRatio": "10"
+        },
+        {
+          "securityClass": "国内債券",
+          "valuation": "5760105",
+          "profitAndLoss": "-1945741",
+          "byProductAssetsRatio": "15"
+        },
+        {
+          "securityClass": "投資信託",
+          "valuation": "5760105",
+          "profitAndLoss": "-1945741",
+          "byProductAssetsRatio": "15"
+        },
+        {
+          "securityClass": "外国債券(円建)",
+          "valuation": "-3490236",
+          "profitAndLoss": "",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "外国株式",
+          "valuation": "295708",
+          "profitAndLoss": "-1657",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "外貨建MMF",
+          "valuation": "295708",
+          "profitAndLoss": "-1657",
+          "byProductAssetsRatio": "10"
+        },
+        {
+          "securityClass": "外国債券(外貨建)",
+          "valuation": "295708",
+          "profitAndLoss": "1657",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "外国債券(外貨建仕組債)",
+          "valuation": "295708",
+          "profitAndLoss": "1657",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "現金",
+          "valuation": "295708",
+          "profitAndLoss": "-1657",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "SBIラップ口座現金",
+          "valuation": "295708",
+          "profitAndLoss": "-1657",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "外貨預金",
+          "valuation": "295708",
+          "profitAndLoss": "1657",
+          "byProductAssetsRatio": "10"
+        },
+        {
+          "securityClass": "STリスト(セキュリティ・トークン)",
+          "valuation": "295708",
+          "profitAndLoss": "-1657",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "信用建玉",
+          "valuation": "295708",
+          "profitAndLoss": "-1657",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "米株信用建玉",
+          "valuation": "295708",
+          "profitAndLoss": "-1657",
+          "byProductAssetsRatio": "5"
+        },
+        {
+          "securityClass": "投資信託トータルリターン",
+          "valuation": "441105",
+          "profitAndLoss": "1250",
+          "byProductAssetsRatio": "5"
+        }
+      ],
+      "portfolioSummaryValuationTotal": "23456789012345678",
+      "portfolioSummaryProfitAndLossTotal": "2345678901234567890",
+      "holdingSecurityDomesticStock": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "depositType": "1",
+          "contractStandardDeposit": "3003003003003036",
+          "openPrice": "2234567890123.4565467",
+          "price": "2234567890123.1234567",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "4589",
+          "brandName": "アキュセラ・インク",
+          "depositType": "6",
+          "contractStandardDeposit": "300",
+          "openPrice": "1234567890123456",
+          "price": "1234567890.1234567",
+          "valuation": "12345678.1234567",
+          "profitAndLoss": "123456"
+        }
+      ],
+      "domesticStockProfitAndLossTotal": "2345678901234567890",
+      "holdingSecurityListDomesticClaim": [
+        {
+          "brandCode": "12345.1234",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "depositType": "5",
+          "compoundInterest": "345343437.12345678",
+          "currency": "USD",
+          "fxRate": "123456789012.1342",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "年1回：05/01",
+          "openPrice": "123456789012.1234567",
+          "acquireRate": "12345678901234567.12",
+          "price": "1234567890123456",
+          "contractStandardDeposit": "1234567890123456",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "12345.1234",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "depositType": "5",
+          "compoundInterest": "345343437.12345678",
+          "currency": "USD",
+          "fxRate": "123456789012.1342",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "年1回：05/01,05/02",
+          "openPrice": "123456789012.1234567",
+          "acquireRate": "12345678901234567.12",
+          "price": "1234567890123456",
+          "contractStandardDeposit": "1234567890123456",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "1234.123.12",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "depositType": "5",
+          "compoundInterest": "345343437.12345678",
+          "currency": "USD",
+          "fxRate": "123456789012.1342",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "年1回：05/01,05/02,05/03",
+          "openPrice": "123456789012.1234567",
+          "acquireRate": "12345678901234567.12",
+          "price": "1234567890123456",
+          "contractStandardDeposit": "1234567890123456",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "1234.123.12",
+          "brandName": "第２回ソフトバンクグループ株式会社無担保社債",
+          "depositType": "5",
+          "compoundInterest": "2.500",
+          "currency": "USD",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "年1回：05/01,05/02,05/03,05/04",
+          "openPrice": "12789012.1267",
+          "acquireRate": "123234567.12",
+          "price": "123456456",
+          "contractStandardDeposit": "123456",
+          "valuation": "1234567",
+          "profitAndLoss": "-100000"
+        },
+        {
+          "brandCode": "1234.123.12",
+          "brandName": "第２回ソフトバンクグループ株式会社無担保社債",
+          "depositType": "5",
+          "compoundInterest": "2.500",
+          "currency": "USD",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "年2回：05/01,05/02,05/03,05/04",
+          "openPrice": "12789012.1267",
+          "acquireRate": "123234567.12",
+          "price": "123456456",
+          "contractStandardDeposit": "123456",
+          "valuation": "1234567",
+          "profitAndLoss": "-100000"
+        },
+        {
+          "brandCode": "1234.123.12",
+          "brandName": "第２回ソフトバンクグループ株式会社無担保社債",
+          "depositType": "5",
+          "compoundInterest": "2.500",
+          "currency": "USD",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "年4回(四半期1回)：05/01,05/02,05/03,05/04",
+          "openPrice": "12789012.1267",
+          "acquireRate": "123234567.12",
+          "price": "123456456",
+          "contractStandardDeposit": "123456",
+          "valuation": "1234567",
+          "profitAndLoss": "-100000"
+        },
+        {
+          "brandCode": "1234.123.12",
+          "brandName": "第２回ソフトバンクグループ株式会社無担保社債",
+          "depositType": "5",
+          "compoundInterest": "2.500",
+          "currency": "USD",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "年6回(奇数月)：30日",
+          "openPrice": "12789012.1267",
+          "acquireRate": "123234567.12",
+          "price": "123456456",
+          "contractStandardDeposit": "123456",
+          "valuation": "1234567",
+          "profitAndLoss": "-100000"
+        },
+        {
+          "brandCode": "1234.123.12",
+          "brandName": "第２回ソフトバンクグループ株式会社無担保社債",
+          "depositType": "5",
+          "compoundInterest": "2.500",
+          "currency": "USD",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "05/01,05/02,05/03,05/04",
+          "openPrice": "12789012.1267",
+          "acquireRate": "123234567.12",
+          "price": "123456456",
+          "contractStandardDeposit": "123456",
+          "valuation": "1234567",
+          "profitAndLoss": "-100000"
+        },
+        {
+          "brandCode": "1234.123.12",
+          "brandName": "第２回ソフトバンクグループ株式会社無担保社債",
+          "depositType": "5",
+          "compoundInterest": "2.500",
+          "currency": "USD",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2022/02/09",
+          "interestPaymentDate": "",
+          "openPrice": "12789012.1267",
+          "acquireRate": "123234567.12",
+          "price": "123456456",
+          "contractStandardDeposit": "123456",
+          "valuation": "1234567",
+          "profitAndLoss": "-100000"
+        }
+      ],
+      "domesticClaimProfitAndLossTotal": "2345678902123456786", 
+      "holdingSecurityListMutualFund": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "depositType": "3",
+          "contractStandardDeposit": "1234567890123456",
+          "openPrice": "123456789012.1234567",
+          "price": "1234567890123456",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "68311003",
+          "brandName": "朝日－朝日Ｎｖｅｓｔグローバル　バリュー株オープン ",
+          "depositType": "2",
+          "contractStandardDeposit": "123456",
+          "openPrice": "123489012.1567",
+          "price": "123456",
+          "valuation": "12345012.1",
+          "profitAndLoss": "-1234567"
+        }
+      ],
+      "mutualFundProfitAndLossTotal": "3000",
+      "holdingSecurityListForeignClaimYenBase": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "depositType": "3",
+          "compoundInterest": "12345678.12345678",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "年1回：05/01",
+          "openPrice": "123456789012.1234567",
+          "contractStandardDeposit": "1234567890123456",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "年1回：05/01,05/02",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "年1回：05/01,05/02,05/03",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "年1回：05/01,05/02,05/03,05/04",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "年2回：05/01,05/02,05/03,05/04",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "年4回(四半期1回)：05/01,05/02,05/03,05/04",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "年6回(奇数月)：30日",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "年3回(4ヶ月毎)：05/01,05/02,05/03,05/04",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "05/01,05/02,05/03,05/04",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        },
+        {
+          "brandCode": "0300",
+          "brandName": "欧州復興開発銀行　０．５％　２０１６１１２１償還（円決済型）",
+          "depositType": "1",
+          "compoundInterest": "0.500",
+          "currency": "BRL",
+          "fxRate": "123456789012.1234567",
+          "redemptionDate": "2016/11/21",
+          "interestPaymentDate": "",
+          "openPrice": "1234012.567",
+          "contractStandardDeposit": "0123456",
+          "valuation": "1234567",
+          "profitAndLoss": "123456789012.1234567"
+        }
+      ],
+      "foreignClaimYenBaseProfitAndLossTotal": "3001",
+      "holdingSecurityListForeignStock": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "depositType": "2",
+          "contractStandardDeposit": "1234567890123456",
+          "currency": "USD",
+          "fxRate": "123456789012.1234567",
+          "openPrice": "123456789012.1234567",
+          "marketValueForeign": "16.01",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "AEO",
+          "brandName": "アメリカン イーグル アウトフィッターズ",
+          "depositType": "5",
+          "contractStandardDeposit": "1234567",
+          "currency": "USD",
+          "fxRate": "123456789012.1234567",
+          "openPrice": "123456789012.1234567",
+          "marketValueForeign": "16.01",
+          "valuation": "123467",
+          "profitAndLoss": "1234567890123"
+        }
+      ],
+      "foreignStockProfitAndLossTotal": "3002",
+      "holdingSecurityListForeignMmf": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "contractStandardDeposit": "1234567890123456",
+          "currency": "AUD",
+          "fxRate": "93.19",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "X0997000",
+          "brandName": "ニッコウ・マネー・マーケット・ファンド（豪ドル）",
+          "contractStandardDeposit": "108874",
+          "currency": "AUD",
+          "fxRate": "93.19",
+          "valuation": "86968",
+          "profitAndLoss": "120"
+        }
+      ],
+      "foreignMmfProfitAndLossTotal": "3003",
+      "holdingSecurityListForeignClaimForeign": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "contractStandardDeposit": "1234567890123456",
+          "openPrice": "123456789012.1234567",
+          "currency": "TRY",
+          "fxRate": "43.44",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+
+        },
+        {
+          "brandCode": "7012",
+          "brandName": "バークレイズバンク2017/09/27満期トルコリラ建ディスカウント債",
+          "contractStandardDeposit": "10000",
+          "openPrice": "64.3",
+          "currency": "TRY",
+          "fxRate": "43.44",
+          "valuation": "237845",
+          "profitAndLoss": ""
+        }
+      ],
+      "foreignClaimForeignProfitAndLossTotal": "3004",
+      "holdingSecurityListForeignClaimForeignStructuredBond": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "contractStandardDeposit": "1234567890123456",
+          "openPrice": "123456789012.1234567",
+          "currency": "TRY",
+          "fxRate": "43.44",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+
+        },
+        {
+          "brandCode": "7012",
+          "brandName": "バークレイズバンク2017/09/27満期トルコリラ建ディスカウント債",
+          "contractStandardDeposit": "10000",
+          "openPrice": "64.3",
+          "currency": "TRY",
+          "fxRate": "43.44",
+          "valuation": "237845",
+          "profitAndLoss": ""
+        }
+      ],
+      "foreignClaimForeignStructuredBondProfitAndLossTotal": "3005",
+      "holdingSecurityListCash": [
+        {
+          "name": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえお",
+          "valuationTotal": "",
+          "fxRate": "",
+          "foreignValuation": "1350000",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "name": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえお",
+          "valuationTotal": "100",
+          "fxRate": "200",
+          "foreignValuation": "1350000",
+          "profitAndLoss": "300"
+        }
+      ],
+      "holdingSecurityListSbiRapAccountCash": [
+        {
+          "securityClassCode": "ABCDEFGHIJKL",
+          "valuation": "7234567890123.4567",
+          "fxRate": "4315",
+          "foreignValuation": "5300",
+          "profitAndLoss": "-2345678901234567890"
+        },
+        {
+          "securityClassCode": "ABCDEFGHIJKL",
+          "valuation": "500",
+          "fxRate": "4315",
+          "foreignValuation": "5300",
+          "profitAndLoss": "457654"
+        }
+      ],
+      "holdingSecurityListForeignDeposit": [
+        {
+          "currency": "USD", 
+          "fxRate": "100",
+          "foreignValuation": "4315",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "currency": "AUD", 
+          "fxRate": "100",
+          "foreignValuation": "4300",
+          "valuation": "5300",
+          "profitAndLoss": "457654"
+        }
+      ],
+      "cashProfitAndLossTotal": "3006",
+      "holdingSecurityListSecurityToken": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "depositType": "1",
+          "contractStandardDeposit": "1234567890123456",
+          "openPrice": "123456789012.1234567",
+          "price": "1234567890123456",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "2015",
+          "brandName": "ロイズ・バンク・ピーエルシー 2019/3/19満期 トルコリラ建社債",
+          "depositType": "5",
+          "contractStandardDeposit": "2000",
+          "openPrice": "100",
+          "price": "50",
+          "valuation": "73980",
+          "profitAndLoss": "1250"
+        }
+      ],
+      "securityTokenProfitAndLossTotal": "3004",
+      "domesticMarginActualGrntRate": "3007",
+      "holdingSecurityListMarginPosition": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "tradeTypeName": "買建",
+          "designationDealtClassification": "9",
+          "lastTradeDate": "20240202",
+          "contractStandardDeposit": "1234567890123456",
+          "openPrice": "123456789012.1234567",
+          "price": "1234567890123456",
+          "valuation": "2345678901234567890",
+          "profitAndLoss": "233.45"
+        },
+        {
+          "brandCode": "68311003",
+          "brandName": "朝日－朝日Ｎｖｅｓｔグローバル　バリュー株オープン ",
+          "tradeTypeName": "売建",
+          "designationDealtClassification": "5",
+          "lastTradeDate": "20240202",
+          "contractStandardDeposit": "200000",
+          "openPrice": "10000",
+          "price": "100000",
+          "valuation": "233456",
+          "profitAndLoss": "233.45"
+        }
+      ],
+      "marginPositionProfitAndLossTotal": "3008",
+      "americaMarginActualGrntRate": "3009",
+      "holdingSecurityListUsStockMarginPositionList": [
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "tradeTypeName": "買建",
+          "designationDealtClassification": "A",
+          "lastTradeDate": "20240202",
+          "contractStandardDeposit": "1234567890123456",
+          "currency": "USD",
+          "fxRate": "100",
+          "openPrice": "123456789012.1234567",
+          "price": "1234567890123456",
+          "valuation": "7234567890123.4567",
+          "profitAndLoss": "2345678901234567890"
+        },
+        {
+          "brandCode": "ABCDEFGHIJKL",
+          "brandName": "あいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねのあいうえおかきくけこさしすせとたちつてとなにぬねの",
+          "tradeTypeName": "買建",
+          "designationDealtClassification": "3",
+          "lastTradeDate": "20240202",
+          "contractStandardDeposit": "200000",
+          "currency": "USD",
+          "fxRate": "100",
+          "openPrice": "10000",
+          "price": "100000",
+          "valuation": "233456",
+          "profitAndLoss": "233.45"
+        }
+      ],
+      "usStockMarginPositionProfitAndLossTotal": "3009",
+      "holdingSecurityListMutualFundTotalReturnList": [
+        {
+          "holdingStatus": "0",
+          "nriCd": "cd123",
+          "fundName": "バークレイズバンク",
+          "nonSpecificDepositCategory": "0",
+          "depositTransferMarketValueToday": "92345678902345678",
+          "amountSellRedemptionDeliverOutTotal": "92345678902345678",
+          "couponRevenueTotal": "92345678902345678",
+          "amountBuyReinvestSubscriptDeliverInTotal": "92345678902345678",
+          "totalReturnYen": "92345678902345678",
+          "totalReturnRate": "34240.45"
+        },
+        {
+          "holdingStatus": "1",
+          "nriCd": "cd123",
+          "fundName": "バークレイズバンク",
+          "nonSpecificDepositCategory": "4",
+          "depositTransferMarketValueToday": "20240202",
+          "amountSellRedemptionDeliverOutTotal": "23243",
+          "couponRevenueTotal": "100",
+          "amountBuyReinvestSubscriptDeliverInTotal": "10000",
+          "totalReturnYen": "-100000",
+          "totalReturnRate": "34240.45"
+        }
+      ],
+      "mutualFundTotalReturnValuationTotal": "48593456432345678",
+      "sellPriceTotal": "48593456432345678",
+      "dividendTotal": "48593456432345678",
+      "buyPriceTotal": "48593456432345678",
+      "totalReturnYenTotal": "48593456432345678",
+      "totalReturnRateTotal": "34240.45",
+      "jobStatus": "0"
+    }
+  ]
+}

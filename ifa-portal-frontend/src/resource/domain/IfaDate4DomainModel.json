@@ -1,0 +1,17 @@
+{
+  "domainId": "DATE4",
+  "domainName": "月日4",
+  "dataType": "日付",
+  "precision": 5,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": "DATE",
+  "format": "date2",
+  "formattedDigit": 5,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

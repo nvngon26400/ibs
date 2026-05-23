@@ -1,0 +1,788 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "24/05/24 19:57:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": [
+    {
+      "contentsNo": "",
+      "contentsList": [
+        {
+          "primaryItem": "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345",
+          "tertiaryItem": "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345",
+          "heading": "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345",
+          "contentsNo": "0"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "「セッションの接続に失敗しました」と表示される",
+          "contentsNo": "1"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "「このページは表示できません」と表示される",
+          "contentsNo": "2"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "サーバーの選択エラー",
+          "contentsNo": "3"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "「証明書をチェックしています」で止まる",
+          "contentsNo": "4"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "「初期化中」で止まる",
+          "contentsNo": "5"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "「サーバーに接続するのを待っています」",
+          "contentsNo": "6"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "「アンチウイルスソフトウェアをチェックしています」で止まる",
+          "contentsNo": "7"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "BIGIPEdgeClientがない",
+          "contentsNo": "8"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動前」のエラー",
+          "heading": "「アンチウイルスソフトウェアをチェックしています」⇒「証明書をチェックしています」⇒「初期化中」がループ接続ボタン押下後すぐ切断となってしまう",
+          "contentsNo": "9"
+        },
+
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル⇒コールセンターシステム」遷移時のエラー",
+          "heading": "毎回CCSログインを求められる",
+          "contentsNo": "10"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル⇒コールセンターシステム」遷移時のエラー",
+          "heading": "「取扱者IDが違います。(WWBEOin003)」と表示される",
+          "contentsNo": "11"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル⇒コールセンターシステム」遷移時のエラー",
+          "heading": "「該当のデータはみつかりません。(WWBEOin004)」と表示される",
+          "contentsNo": "12"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル⇒コールセンターシステム」遷移時のエラー",
+          "heading": "「Exception=どのスコープにもBean account_noがありません」と表示される",
+          "contentsNo": "13"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル⇒コールセンターシステム」遷移時のエラー",
+          "heading": "ボタンを押すと「ポップアップブロックが・・・」が表示される。",
+          "contentsNo": "14"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル⇒コールセンターシステム」遷移時のエラー",
+          "heading": "CCSが一瞬出てすぐ消えてしまう",
+          "contentsNo": "15"
+        },
+
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「コールセンターシステム操作時」のエラー",
+          "heading": "ボタンを押しているのに反応しない",
+          "contentsNo": "16"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「コールセンターシステム操作時」のエラー",
+          "heading": "表示が崩れる",
+          "contentsNo": "17"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「コールセンターシステム操作時」のエラー",
+          "heading": "登録情報一覧で「該当データがありません」と表示される",
+          "contentsNo": "18"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「コールセンターシステム操作時」のエラー",
+          "heading": "CCSが複数別ウィンドウで立ち上がる",
+          "contentsNo": "19"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「コールセンターシステム操作時」のエラー",
+          "heading": "取引履歴を押下後、検索ボタン押しても何も反応しない。左側に小さいグレーの四角が出ている。そこクリックすると取引履歴が出てくる。",
+          "contentsNo": "20"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「コールセンターシステム操作時」のエラー",
+          "heading": "「404エラー」と表示される。",
+          "contentsNo": "21"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「コールセンターシステム操作時」のエラー",
+          "heading": "CCSのPWを変更して変更後のPWを入力しても進まない。",
+          "contentsNo": "22"
+        },
+
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動時」のエラー",
+          "heading": "「このページのスクリプトでエラーが発生しました」と出てくる",
+          "contentsNo": "23"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「IFAポータル起動時」のエラー",
+          "heading": "設定データが破損しています。デフォルト設定に戻しますか？「はい」「いいえ」の選択を求められる",
+          "contentsNo": "24"
+        },
+
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "FAポータルのPWは何回か間違えると利用できなくなるのか？",
+          "contentsNo": "25"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "CCSのPWは何回か間違えると利用できなくなるのか？",
+          "contentsNo": "26"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "IFAポータルやCCSのPW変更後、失念してしまった場合の手続き方法は？",
+          "contentsNo": "27"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "IFAポータルの証明書有効期限は？",
+          "contentsNo": "28"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "IFAポータルの証明書有効期限の確認方法は？",
+          "contentsNo": "29"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "PCを新しくしたので導入手続きを行ったが、以前のPWを利用できるか？",
+          "contentsNo": "30"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "証明書を1台のPCへ導入した場合、複数の人が使用できるのか",
+          "contentsNo": "31"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "MacでIFAポータルは使えますか？",
+          "contentsNo": "32"
+        },
+        {
+          "primaryItem": "IFAポータル・CCSエラー編",
+          "tertiaryItem": "「その他」のエラー",
+          "heading": "IFAポータルを立ち上げると毎回「セキュリティアラート」というメッセージが表示され、「ローカルアプリの起動を要求しています」と表示される",
+          "contentsNo": "33"
+        },
+
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "HYPER SBI2 で必要なパソコン環境は？",
+          "contentsNo": "34"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "HYPER SBI2にログインできない場合の対応方法は?",
+          "contentsNo": "35"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "「データの取得に失敗しました。システムメンテナンス中はご利用いただけません。システムメンテナンスの情報はログイン画面よりご確認ください。」というエラーメッセージが表示される。",
+          "contentsNo": "36"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "文字色や騰落色は変更できますか？",
+          "contentsNo": "37"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "歩み値の色の違いを教えてください。",
+          "contentsNo": "38"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "HYPER SBI2で単元未満株（S株）の注文はできますか？",
+          "contentsNo": "39"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "HYPER SBI2で決算日や配当金は見られますか？",
+          "contentsNo": "40"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "個別銘柄の横に表示される記号の意味を教えてください。",
+          "contentsNo": "41"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "HYPERSBIについて",
+          "heading": "HYPER SBI2にある「スピード注文」とは何ですか？",
+          "contentsNo": "42"
+        },
+
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "スマートフォンサイトについて",
+          "heading": "対応している取引は？",
+          "contentsNo": "43"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "スマートフォンサイトについて",
+          "heading": "投資信託の情報を確認する方法はありますか？",
+          "contentsNo": "44"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "スマートフォンサイトについて",
+          "heading": "即時入金サービスを利用することができますか？",
+          "contentsNo": "45"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "スマートフォンサイトについて",
+          "heading": "株価の確認方法は?",
+          "contentsNo": "46"
+        },
+
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "SBI株アプリについて",
+          "heading": "「SBI証券 株」アプリにある「板注文」とは何ですか？",
+          "contentsNo": "47"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "SBI株アプリについて",
+          "heading": "「SBI証券 株」アプリの登録銘柄への登録方法は？",
+          "contentsNo": "48"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "SBI株アプリについて",
+          "heading": "対応している取引は？",
+          "contentsNo": "49"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "SBI株アプリについて",
+          "heading": "株価の確認方法は?",
+          "contentsNo": "50"
+        },
+        {
+          "primaryItem": "取引ツール編",
+          "tertiaryItem": "SBI株アプリについて",
+          "heading": "SBI証券 株アプリのスピード注文で、注文ボタンが押せないのですがどうすればいいですか？",
+          "contentsNo": "51"
+        },
+
+        {
+          "primaryItem": "登録事項変更編",
+          "tertiaryItem": "",
+          "heading": "登録情報を変更するにはどのような手続きが必要ですか？",
+          "contentsNo": "52"
+        },
+        {
+          "primaryItem": "登録事項変更編",
+          "tertiaryItem": "",
+          "heading": "登録事項を変更するにはどのような確認書類が必要ですか？",
+          "contentsNo": "53"
+        },
+        {
+          "primaryItem": "登録事項変更編",
+          "tertiaryItem": "",
+          "heading": "顔写真ありの本人確認書類にはどのような種類がありますか？",
+          "contentsNo": "54"
+        },
+        {
+          "primaryItem": "登録事項変更編",
+          "tertiaryItem": "",
+          "heading": "マイナンバー記載書面が必要なケースで、個人番号カードも通知カードも無い場合、どうすればいいですか？",
+          "contentsNo": "55"
+        },
+
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "お客様に送られる主な報告書は何ですか？",
+          "contentsNo": "56"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "年間取引報告書の発送日と発送対象者は？",
+          "contentsNo": "57"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "年間取引報告書の再発行は可能ですか？再発行にあたり手数料はかかりますか？ ",
+          "contentsNo": "58"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "確定申告時に年間取引報告書の添付は必要ですか？",
+          "contentsNo": "59"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "年間取引報告書が郵送されないのはなぜですか？",
+          "contentsNo": "60"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "法人の残高証明書はどのように発行可能でしょうか？",
+          "contentsNo": "61"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "電子交付サービスとは何ですか？",
+          "contentsNo": "62"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "重要書類郵送サービスとは何ですか？",
+          "contentsNo": "63"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "特定口座年間取引報告書はいつ届きますか？",
+          "contentsNo": "64"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "年間取引報告書に記載されない商品は？",
+          "contentsNo": "65"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "取引報告書はどのように届くのですか？",
+          "contentsNo": "66"
+        },
+        {
+          "primaryItem": "報告書・電子交付編",
+          "tertiaryItem": "",
+          "heading": "各種報告書の発行タイミングについて。",
+          "contentsNo": "67"
+        },
+
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "新NISAの年間投資枠は?",
+          "contentsNo": "68"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "非課税保有限度額は?",
+          "contentsNo": "69"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "新NISAの対象商品は?",
+          "contentsNo": "70"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "一括での買付は可能か？",
+          "contentsNo": "71"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "クレカ積立金額の上限は?",
+          "contentsNo": "72"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "ロールオーバーは可能か？",
+          "contentsNo": "73"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "ジュニアNISAの口座開設は可能か？",
+          "contentsNo": "74"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "ジュニアNISAの今後の動きについて",
+          "contentsNo": "75"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "未成年は新NISAを利用可能か？",
+          "contentsNo": "76"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "新NISAでの損益通算の対象か？",
+          "contentsNo": "77"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "特定口座や一般口座で保有している金融商品を、NISA口座の預りに変更することは可能？",
+          "contentsNo": "78"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "同一銘柄の投資信託をNISA預り・特定預り・一般預りで保有した場合は、個別元本はどのように計算されるか？",
+          "contentsNo": "79"
+        },
+        {
+          "primaryItem": "新NISA編",
+          "tertiaryItem": "",
+          "heading": "NISA口座内での損益を確認方法は？",
+          "contentsNo": "80"
+        },
+
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "投資信託の分配金はいつまでに買付をすれば受け取ることができるのですか？",
+          "contentsNo": "81"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "分配落ちした基準価格で購入する場合はいつ注文したらいいですか？",
+          "contentsNo": "82"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "分配金を受取って売却するには、いつに注文したらいいですか？",
+          "contentsNo": "83"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "同じ投資信託を「一般預り」と「特定預り」に分けて保有することは可能ですか？",
+          "contentsNo": "84"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "金額指定の投資信託を売却する際、概算受渡金額が評価額より少なくなっているのはどうしてですか？",
+          "contentsNo": "85"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "投資信託の分配金（受取設定にしている場合）が出たら自動で銀行へ振り込む方法はありますか？",
+          "contentsNo": "86"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "目論見書発送からどのくらいで投資信託の受注が可能ですか？",
+          "contentsNo": "87"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "トータルリターンの数字とＣＣＳ＞口座管理の評価損益の数字が異なっているのはなぜですか？",
+          "contentsNo": "88"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "スマートフォンサイトで投資信託の注文はできますか？",
+          "contentsNo": "89"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "普通分配金と元本払戻金（特別分配金）は、どのように違うのですか？",
+          "contentsNo": "90"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "「償還優遇」とはどういうものですか？",
+          "contentsNo": "91"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "個別元本を確認する方法はありますか？",
+          "contentsNo": "92"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "投資信託の「解約」と「買取請求」の違いは何ですか？（法人口座のみ）",
+          "contentsNo": "93"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "投資信託を10万円の資金で口数買付する場合、買付可能口数はどのように計算したらよいですか？",
+          "contentsNo": "94"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "お客様が本日WEBで目論見書を閲覧しました。閲覧できたかを確認する方法はありますか？",
+          "contentsNo": "95"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "「口数買付」「積立買付」の申込時に分配金の受取方法は選択できないのでしょうか。",
+          "contentsNo": "96"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "投信積立設定はIFAでも設定可能ですか？",
+          "contentsNo": "97"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "積立買付の設定をしたいのですが、銀行口座から自動的に買付の金額を引き落とすことはできますか？",
+          "contentsNo": "98"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "投資信託の積立買付設定状況の確認はどこで確認できますか？",
+          "contentsNo": "99"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "「NISA枠ぎりぎり注文」、「課税枠シフト注文」とは何ですか？",
+          "contentsNo": "100"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "NISAによる投信積立設定方法は？",
+          "contentsNo": "101"
+        },
+        {
+          "primaryItem": "投信・積立編",
+          "tertiaryItem": "",
+          "heading": "投信償還乗換優遇制度とは何ですか？",
+          "contentsNo": "10002"
+        },
+
+        {
+          "primaryItem": "入出庫編",
+          "tertiaryItem": "書類について",
+          "heading": "移管書類には1枚につき何銘柄記入できますか？",
+          "contentsNo": "102"
+        },
+        {
+          "primaryItem": "入出庫編",
+          "tertiaryItem": "書類について",
+          "heading": "書類に記入する内容を教えてください。",
+          "contentsNo": "103"
+        },
+        {
+          "primaryItem": "入出庫編",
+          "tertiaryItem": "書類について",
+          "heading": "出庫書類の請求方法は？",
+          "contentsNo": "104"
+        },
+        {
+          "primaryItem": "入出庫編",
+          "tertiaryItem": "書類について",
+          "heading": "加入者口座コード等の情報はどこから確認できますか？",
+          "contentsNo": "105"
+        },
+        {
+          "primaryItem": "入出庫編",
+          "tertiaryItem": "書類について",
+          "heading": "入庫できる商品は何ですか？",
+          "contentsNo": "106"
+        },
+        {
+          "primaryItem": "入出庫編",
+          "tertiaryItem": "書類について",
+          "heading": "出庫できる商品は何ですか。",
+          "contentsNo": "107"
+        },
+
+        {
+          "primaryItem": "入出庫編",
+          "tertiaryItem": "国内株式の入出庫について",
+          "heading": "入庫・出庫の手数料はかかりますか?",
+          "contentsNo": "108"
+        },
+        {
+          "primaryItem": "入出庫編",
+          "tertiaryItem": "国内株式の入出庫について",
+          "heading": "移管手続きはどのくらいかかりますか？",
+          "contentsNo": "109"
+        },
+        {
+          "primaryItem": "入出金編",
+          "tertiaryItem": "国内株式の入出庫について",
+          "heading": "入庫完了時の連絡はありますか?",
+          "contentsNo": "110"
+        },
+        {
+          "primaryItem": "入出金編",
+          "tertiaryItem": "国内株式の入出庫について",
+          "heading": "移管が完了後どこから確認できますか？",
+          "contentsNo": "111"
+        },
+        {
+          "primaryItem": "入出金編",
+          "tertiaryItem": "国内株式の入出庫について",
+          "heading": "他社から入庫した場合、取得単価は引き継がれますか？",
+          "contentsNo": "112"
+        },
+        {
+          "primaryItem": "入出金編",
+          "tertiaryItem": "国内株式の入出庫について",
+          "heading": "特別口座に保有している株式の入庫は可能ですか?",
+          "contentsNo": "113"
+        },
+        {
+          "primaryItem": "入出金編",
+          "tertiaryItem": "国内株式の入出庫について",
+          "heading": "SBI証券に入庫する場合の注意点はありますか？",
+          "contentsNo": "114"
+        },
+
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "投資信託の入出庫について",
+          "heading": "入庫・出庫の手数料はかかりますか？",
+          "contentsNo": "115"
+        },
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "投資信託の入出庫について",
+          "heading": "入庫にかかる期間はどれくらいですか？",
+          "contentsNo": "116"
+        },
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "投資信託の入出庫について",
+          "heading": "入庫完了後どこから確認できますか？",
+          "contentsNo": "117"
+        },
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "投資信託の入出庫について",
+          "heading": "投資信託を出庫する際の注意点はありますか？",
+          "contentsNo": "118"
+        },
+
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "外国株式の入出庫について投資信託の入出庫について",
+          "heading": "外国株式の出庫手数料は発生しますか。",
+          "contentsNo": "119"
+        },
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "外国株式の入出庫について投資信託の入出庫について",
+          "heading": "入庫できる商品は何ですか？",
+          "contentsNo": "120"
+        },
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "外国株式の入出庫について投資信託の入出庫について",
+          "heading": "外国株式を入庫する前に事前に必要な手続きはありますか?",
+          "contentsNo": "121"
+        },
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "外国株式の入出庫について投資信託の入出庫について",
+          "heading": "WEBからの口座開設方法を教えてください。",
+          "contentsNo": "122"
+        },
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "外国株式の入出庫について投資信託の入出庫について",
+          "heading": "入庫した外国株式の買付単価を編集する方法は?",
+          "contentsNo": "123"
+        },
+        {
+          "primaryItem": "特定・税金編",
+          "tertiaryItem": "外国株式の入出庫について投資信託の入出庫について",
+          "heading": "入出庫数量の確認方法は?",
+          "contentsNo": "124"
+        }
+      ]
+    }
+  ]
+}

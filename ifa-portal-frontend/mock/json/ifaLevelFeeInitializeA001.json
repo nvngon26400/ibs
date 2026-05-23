@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "levelFeeComment": "レベルフィーコメント"
+    }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2025/06/05 15:00:09",
+  "title": null,
+  "returnCode": ""
+}

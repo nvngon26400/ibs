@@ -1,0 +1,1517 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "searchResultCount": 150,
+      "searchResultDetail": [
+        {
+          "brandCode": "8888",
+          "brandName": "テスト銘柄888",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "7777",
+          "brandName": "テスト銘柄777",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "6666",
+          "brandName": "テスト銘柄666",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "5555",
+          "brandName": "テスト銘柄555",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "4444",
+          "brandName": "テスト銘柄444",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "3333",
+          "brandName": "テスト銘柄333",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "2222",
+          "brandName": "テスト銘柄222",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "1111",
+          "brandName": "テスト銘柄111",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": "0",
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": "0",
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": "0",
+          "mktPts": null,
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": "0",
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": "0",
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": "0",
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": ""
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "8888",
+          "brandName": "テスト銘柄888",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "7777",
+          "brandName": "テスト銘柄777",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "6666",
+          "brandName": "テスト銘柄666",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "5555",
+          "brandName": "テスト銘柄555",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "4444",
+          "brandName": "テスト銘柄444",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "3333",
+          "brandName": "テスト銘柄333",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "2222",
+          "brandName": "テスト銘柄222",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "1111",
+          "brandName": "テスト銘柄111",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": "0",
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": "0",
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": "0",
+          "mktPts": null,
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": "0",
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": "0",
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": "0",
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": ""
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "8888",
+          "brandName": "テスト銘柄888",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "7777",
+          "brandName": "テスト銘柄777",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "6666",
+          "brandName": "テスト銘柄666",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "5555",
+          "brandName": "テスト銘柄555",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "4444",
+          "brandName": "テスト銘柄444",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "3333",
+          "brandName": "テスト銘柄333",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "2222",
+          "brandName": "テスト銘柄222",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "1111",
+          "brandName": "テスト銘柄111",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": "0",
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": "0",
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": "0",
+          "mktPts": null,
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": "0",
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": "0",
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": "0",
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": null,
+          "mktNgy": null,
+          "mktFko": null,
+          "mktSpr": null,
+          "mktPts": null,
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": ""
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "PTS"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": null
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "TKY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "NGY"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "FKO"
+        },
+        {
+          "brandCode": "9999",
+          "brandName": "テスト銘柄006",
+          "mktTky": "0",
+          "mktNgy": "0",
+          "mktFko": "0",
+          "mktSpr": "0",
+          "mktPts": "1",
+          "upperRankMkt": "SPR"
+        }
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2023/09/14 23:03:56",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

@@ -1,0 +1,42 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "butenCode": "Z56",
+            "accountNumber": "596799",
+            "customerNameKanji": "漢字",
+            "customerNameKana": "カナ",
+            "course": "1",
+            "customerAttribute": "1",
+            "empCode": "1",
+            "brokerChargeName": "1111",
+            "brokerCode": "1",
+            "brokerName": "1",
+            "branchCode": "111",
+            "branchName": "1",
+            "apiProfile": "1"
+        },
+        {
+            "butenCode": "111",
+            "accountNumber": "111111",
+            "customerNameKanji": "漢字",
+            "customerNameKana": "カナ",
+            "course": "1",
+            "customerAttribute": "1",
+            "empCode": "1",
+            "brokerChargeName": "1111",
+            "brokerCode": "1",
+            "brokerName": "1",
+            "branchCode": "111",
+            "branchName": "1",
+            "apiProfile": "1"
+        }
+    ],
+    "message": "",
+    "errorLevel": 0,
+    "requestedTime": "23/07/05 12:00",
+    "title": null,
+    "returnCode": "SUCCESS"
+}

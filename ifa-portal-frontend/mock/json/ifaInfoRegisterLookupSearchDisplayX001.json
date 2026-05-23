@@ -1,0 +1,57 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [{
+    "notificationList": [
+      {
+        "t9nName": "商品",
+        "updateTime": "20240526144300",
+        "notificationId": "0002",
+        "title": "お知らせ2",
+        "createBy": "とうろく秋子（登録者）",
+        "updateUser": "こうしん三郎（更新者）",
+        "registerDayTime": "20240519130012",
+        "contents": "naiyou2",
+        "attachFile1": "添付ファイル11",
+        "attachFile2": "添付ファイル22",
+        "attachFile3": "添付ファイル33",
+        "attachFileComment1": "添付ファイルcomment11",
+        "attachFileComment2": "添付ファイルcomment22",
+        "attachFileComment3": "添付ファイルcomment33",
+        "url": "https://www.sbisec.co.jp/contents/",
+        "urlComment": "urlコメント2",
+        "corReferenceCondition": " ",
+        "disclaimer": " ",
+        "corReadFlg": "",
+        "userName": "てすと名前"
+      },
+      {
+        "t9nName": "商品",
+        "updateTime": "20240527144312",
+        "notificationId": "0001",
+        "title": "お知らせ1",
+        "createBy": "とうろく花子（登録者）",
+        "updateUser": "こうしん太郎（更新者）",
+        "registerDayTime": "20240520001204",
+        "contents": "naiyou",
+        "attachFile1": "添付ファイル1",
+        "attachFile2": "添付ファイル2",
+        "attachFile3": "添付ファイル3",
+        "attachFileComment1": "添付ファイルcomment1",
+        "attachFileComment2": "添付ファイルcomment2",
+        "attachFileComment3": "添付ファイルcomment3",
+        "url": "https://www.sbisec.co.jp/contents/",
+        "urlComment": "urlコメント",
+        "corReferenceCondition": " ",
+        "disclaimer": " ",
+        "corReadFlg": "1",
+        "userName": "てすと名前"
+      }
+    ]
+  }],
+  "returnCode": "",
+  "message": "",
+  "errorLevel": "",
+  "title": ""
+}

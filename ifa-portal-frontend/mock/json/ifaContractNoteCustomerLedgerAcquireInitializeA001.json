@@ -1,0 +1,29 @@
+{
+    "totalSize": 1,
+    "maxRownum": 1,
+    "overMaxRownum": false,
+    "dataList": [
+        {
+            "ledgerClassList": [
+                {
+                    "codeId": "01",
+                    "codeName": "受益証券　取引日記帳"
+                },
+                {
+                    "codeId": "02",
+                    "codeName": "公社債　取引日記帳"
+                },
+                {
+                    "codeId": "03",
+                    "codeName": "顧客勘定元帳"
+                }
+            ],
+            "fileDirectory": "/opt/download/management/statutorybooks/"
+        }
+    ],
+    "message": null,
+    "errorLevel": 0,
+    "requestedTime": "2024/05/15 15:50:51",
+    "title": null,
+    "returnCode": "SUCCESS"
+}

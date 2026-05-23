@@ -1,0 +1,15 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/02/07 20:30:27",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[
+      {
+        "ifaCustomerListComment": "住所、年齢、電話番号、口座開設日、閲覧可能部店、最終約定日、職業、金融資産を出力する場合、検索条件にチェックしてください。"
+      }
+  ]
+}

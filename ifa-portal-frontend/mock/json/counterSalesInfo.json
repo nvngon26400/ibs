@@ -1,0 +1,17 @@
+{
+  "length": 1,
+  "dataList": [
+    {
+      "brokerCode": "1234",
+      "brokerName": "仲介業者1",
+      "brandCode": "AAFL",
+      "brandName": "アップル",
+      "salePrice": "0.5",
+      "basePrice": "1",
+      "buyPrice": "1.5",
+      "lastPrice": "1",
+      "lastRatio": "10",
+      "reason": "取引禁止理由または、価格変更理由"
+    }
+  ]
+}

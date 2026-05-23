@@ -1,0 +1,17 @@
+{
+  "dispName": "\u7A4D\u7ACB",
+  "extLinkFlag": "1",
+  "postRequest": {
+      "AccountID": "315-0315190",
+      "Param6": "2xxxxxxxx",
+      "Param5": "reserveCreate",
+      "Param4": "setting",
+      "Param3": "tNisaReserve",
+      "Param2": "fund",
+      "OperatorID": null,
+      "UserKind": "1",
+      "Param1": "trade",
+      "CcsAuth": "5555555555"
+  },
+  "linkUrl": "https:\u002F\u002Fsite0adm.sbisec.co.jp\u002Fmarble\u002Fadmin\u002FAdminSsoLogin.do"
+}

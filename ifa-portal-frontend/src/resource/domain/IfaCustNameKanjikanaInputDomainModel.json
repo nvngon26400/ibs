@@ -1,0 +1,17 @@
+{
+  "domainId": "CUST_NAME_KANJIKANA_INPUT",
+  "domainName": "顧客名(漢字/カナ)",
+  "dataType": "文字列",
+  "precision": 72,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 72,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

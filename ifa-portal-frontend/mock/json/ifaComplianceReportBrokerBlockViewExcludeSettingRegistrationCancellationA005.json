@@ -1,0 +1,11 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "dataList": [],
+  "message": "コンプライアンス通信一括閲覧設定の閲覧要否を変更しました。",
+  "errorLevel": 1,
+  "requestedTime": "2023/09/19 18:42:05",
+  "title": null,
+  "returnCode": "info.COR_BROWSE_CONTROL.COR_INDI_BROWSE_FLAG"
+}

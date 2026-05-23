@@ -1,0 +1,11 @@
+{
+  "totalSize": 0,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "該当の投資信託銘柄が存在しません。",
+  "errorLevel": -1,
+  "requestedTime": "2023/12/06 12:34:56",
+  "title": "",
+  "returnCode": "errors.dmt.securities.notExist",
+  "dataList": []
+}

@@ -1,0 +1,19 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList":[{
+    "brandCode": "2435",
+    "regKbn": "1",
+    "businessDayList": ["20231124","20231128"],
+    "mktIppanLoanKbnTky": "1",
+    "mktIppanLoanKbnNgy": "1",
+    "mktIppanLoanKbnFko": "1",
+    "mktIppanLoanKbnSpr": "1"
+  }]
+}

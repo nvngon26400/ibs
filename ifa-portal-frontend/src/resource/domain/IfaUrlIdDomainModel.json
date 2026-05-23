@@ -1,0 +1,17 @@
+{
+  "domainId": "URL_ID",
+  "domainName": "URL_ID",
+  "dataType": "数値",
+  "precision": 3,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 3,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "TEXT400",
+  "domainName": "テキスト400",
+  "dataType": "文字列",
+  "precision": 400,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 400,
+  "verticalAlign": "T",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": "ifa-input-text"
+}

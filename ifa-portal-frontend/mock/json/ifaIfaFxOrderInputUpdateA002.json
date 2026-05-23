@@ -1,0 +1,24 @@
+{
+  "totalSize":1,
+  "maxRownum":1,
+  "overMaxRownum":false,
+  "dataList":[{
+    "referenceRate": "23456789.7654321",
+    "computeExchangeRate": "1",
+    "denominator": "2",
+    "adjustPrice": "98765432",
+    "maxOrderableQuantity": "100000",
+    "approximatePurchaseAmount": "12345",
+    "foreignDesignationMaxValue": "23456",
+    "yenDesignationMinValue": "2",
+    "yenDesignationMaxValue": "1999999",
+    "approximateDeliveryAmount": "1234567.98",
+    "approximateForeignCount": "19999999",
+    "updateTime": "2023-09-01 10:10:10"
+  }],
+  "message":"正常終了",
+  "errorLevel":0,
+  "requestedTime":"2023/09/19 19:35:20",
+  "title":null,
+  "returnCode":"0"
+}

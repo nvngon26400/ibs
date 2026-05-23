@@ -1,0 +1,16 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+      {
+          "comment": "共同募集　取引検索コメント",
+          "count": "1"
+      }
+  ],
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "2024/12/10 10:27:27",
+  "title": null,
+  "returnCode": ""
+}

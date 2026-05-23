@@ -1,0 +1,17 @@
+{
+  "domainId": "BRAND_NAME30",
+  "domainName": "銘柄名30",
+  "dataType": "文字列",
+  "precision": 30,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": "fullWidthHalfWidth",
+  "javaType": "String",
+  "oracleType": "VARCHAR2",
+  "format": null,
+  "formattedDigit": 30,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": null
+}

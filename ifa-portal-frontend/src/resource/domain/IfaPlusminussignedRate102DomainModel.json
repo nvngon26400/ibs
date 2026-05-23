@@ -1,0 +1,17 @@
+{
+  "domainId": "PLUSMINUSSIGNED_RATE10_2",
+  "domainName": "符号付レート10_2（+-）",
+  "dataType": "レート",
+  "precision": 10,
+  "digit": 2,
+  "lengthFixed": false,
+  "validate": "numberFloat",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": "signedWithCommaZeroPadding",
+  "formattedDigit": 13,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": "%",
+  "htmlTag": "ifa-input-quantity"
+}

@@ -1,0 +1,17 @@
+{
+  "domainId": "COUPON_DETERMINATION_DATE",
+  "domainName": "クーポン判定日",
+  "dataType": "日付",
+  "precision": 10,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": "DATE",
+  "format": "date8",
+  "formattedDigit": 10,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": null
+}

@@ -1,0 +1,21 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "contentList": [
+        { "lineNo": "1", "menuNameErrorMessage": "", "screenNameErrorMessage": "", "contentErrorMessage": ""},
+        { "lineNo": "2", "menuNameErrorMessage": "", "screenNameErrorMessage": "", "contentErrorMessage": ""},
+        { "lineNo": "3", "menuNameErrorMessage": "", "screenNameErrorMessage": "", "contentErrorMessage": ""},
+        { "lineNo": "4", "menuNameErrorMessage": "", "screenNameErrorMessage": "", "contentErrorMessage": ""},
+        { "lineNo": "5", "menuNameErrorMessage": "", "screenNameErrorMessage": "", "contentErrorMessage": ""}
+      ]
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2025/08/29 19:29:16",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

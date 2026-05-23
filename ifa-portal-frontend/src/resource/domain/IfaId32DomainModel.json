@@ -1,0 +1,17 @@
+{
+  "domainId": "ID32",
+  "domainName": "ID",
+  "dataType": "数値",
+  "precision": 32,
+  "digit": 0,
+  "lengthFixed": false,
+  "validate": "number",
+  "javaType": "String",
+  "oracleType": "NUMBER",
+  "format": null,
+  "formattedDigit": 32,
+  "verticalAlign": "M",
+  "horizontalAlign": "R",
+  "unit": null,
+  "htmlTag": null
+}

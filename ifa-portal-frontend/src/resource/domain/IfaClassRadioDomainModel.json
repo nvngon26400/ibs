@@ -1,0 +1,17 @@
+{
+  "domainId": "CLASS_RADIO",
+  "domainName": "区分値_ラジオ",
+  "dataType": "文字列",
+  "precision": 1,
+  "digit": null,
+  "lengthFixed": true,
+  "validate": "alphaNumber",
+  "javaType": "String",
+  "oracleType": "CHAR",
+  "format": null,
+  "formattedDigit": 1,
+  "verticalAlign": "M",
+  "horizontalAlign": "C",
+  "unit": null,
+  "htmlTag": "ifa-input-radio"
+}

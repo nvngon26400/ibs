@@ -1,0 +1,17 @@
+{
+  "domainId": "COMPLIANCE_REPORT_STATE",
+  "domainName": "コンプライアンス通信状態",
+  "dataType": "リスト",
+  "precision": null,
+  "digit": null,
+  "lengthFixed": false,
+  "validate": null,
+  "javaType": "String",
+  "oracleType": null,
+  "format": null,
+  "formattedDigit": null,
+  "verticalAlign": "M",
+  "horizontalAlign": "L",
+  "unit": null,
+  "htmlTag": null
+}

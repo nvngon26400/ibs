@@ -1,0 +1,15 @@
+{
+  "totalSize": 1,
+  "maxRownum": 1,
+  "overMaxRownum": false,
+  "dataList": [
+    {
+      "result": "SUCCESS"
+    }
+  ],
+  "message": null,
+  "errorLevel": 0,
+  "requestedTime": "2024/05/29 14:45:06",
+  "title": null,
+  "returnCode": "SUCCESS"
+}

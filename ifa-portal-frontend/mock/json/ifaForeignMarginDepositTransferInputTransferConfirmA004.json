@@ -1,0 +1,23 @@
+{
+  "totalSize": 10,
+  "maxRownum": 0,
+  "overMaxRownum": false,
+  "message": "",
+  "errorLevel": 0,
+  "requestedTime": "23/07/05 12:00",
+  "title": "",
+  "returnCode": "I9999",
+  "dataList": [
+    {
+      "transferDate": "2024-02-20",
+      "afterTransferDestinationAbleAmount": "12345",
+      "currentTransferDestinationAbleAmount": "543231",
+      "marginPositionPowerBefore": "5346",
+      "marginPositionPowerAfter": "6324",
+      "marginDepositRateBefore": "62357",
+      "marginDepositRateAfter": "34564",
+      "accountSelect": "0",
+      "destinationAmount": "67452346"
+    }
+  ]
+}
