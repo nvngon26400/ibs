@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0202_0302-01
+    画面名：単価表照会（外国株式銘柄一覧）
+-->
+<mapper
+    namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaPriceViewLookupForeignStockBrandListMapper">
+    <!--
+    全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!--
+    住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap
+        id="ResultMapIfaPriceViewLookupForeignStockBrandListSql001"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaPriceViewLookupForeignStockBrandListSql001ResponseModel"
+    >
+        <result property="notice" column="NOTICE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="notice2" column="NOTICE2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="notice3" column="NOTICE3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="notice4" column="NOTICE4" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="notice5" column="NOTICE5" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="notice6" column="NOTICE6" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attention" column="ATTENTION" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attention2" column="ATTENTION2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attention3" column="ATTENTION3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attention4" column="ATTENTION4" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attention5" column="ATTENTION5" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attention6" column="ATTENTION6" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaPriceViewLookupForeignStockBrandListSql002"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaPriceViewLookupForeignStockBrandListSql002ResponseModel"
+    >
+        <result property="brandName" column="BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="message" column="MESSAGE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaPriceViewLookupForeignStockBrandListSql003"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaPriceViewLookupForeignStockBrandListSql003ResponseModel"
+    >
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：全体メッセージ取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaPriceViewLookupForeignStockBrandListSql001"
+        resultMap="ResultMapIfaPriceViewLookupForeignStockBrandListSql001"
+        statementType="PREPARED"
+    >
+    SELECT /* @SQLID=SUB0202_0302-01#Sql001 */
+        NOTICE,
+        NOTICE2,
+        NOTICE3,
+        NOTICE4,
+        NOTICE5,
+        NOTICE6,
+        ATTENTION,
+        ATTENTION2,
+        ATTENTION3,
+        ATTENTION4,
+        ATTENTION5,
+        ATTENTION6,
+        TO_CHAR(UPDATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS UPDATE_TIME,
+        UPDATE_USER
+        FROM
+        CORDYS.T_COUNTER_ALL_MESSAGE
+    WHERE
+        ID = 1
+    </select>
+
+    <!--
+        SQLID：Sql002
+        SQL名：単価表照会情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaPriceViewLookupForeignStockBrandListSql002"
+        resultMap="ResultMapIfaPriceViewLookupForeignStockBrandListSql002"
+        statementType="PREPARED"
+    >
+    SELECT /* @SQLID=SUB0202_0302-01#Sql002 */
+        A.BRAND_CODE,
+        B.BRAND_NAME,
+        C.BRAND_UPDATE_TIME AS UPDATE_TIME,
+        C.BASE_PRICE * (100 - A.SELL_TRADE_SPREAD) / 100 AS SELLING_PRICE,
+        C.BASE_PRICE,
+        C.BASE_PRICE * (100 + A.BUY_TRADE_SPREAD) / 100 AS BUYING_PRICE,
+        C.LAST_PRICE AS PREV_DAY_CLOSING_PRICE,
+        C.LAST_PRICE_RATIO AS PREV_DAY_RATIO,
+        C.MESSAGE,
+        CASE
+        WHEN C.TRADE_STATUS = '0' AND A.TRADE_STATUS = '0' THEN '0'
+        ELSE '1'
+        END AS TRADE_STATE,
+        NVL(A.BUY_TRADE_COUNT - D.BUY_TRADE_COUNT, 0) AS
+        BUY_TRADE_QUOTA_REMAINING,
+        NVL(A.SELL_TRADE_COUNT - D.SELL_TRADE_COUNT, 0) AS
+        SELL_TRADE_QUOTA_REMAINING,
+        A.TRADE_START_TIME,
+        A.TRADE_END_TIME
+        FROM
+        CORDYS.T_COUNTER_BROKER_SALE A
+        INNER JOIN CORDYS.M_COUNTER_BRAND B ON A.BRAND_CODE = B.BRAND_CODE
+        INNER JOIN CORDYS.T_COUNTER_BRAND_SALE C ON A.BRAND_CODE = C.BRAND_CODE
+        LEFT JOIN CORDYS.T_COUNTER_SALE_MANAGE D ON
+        A.BRAND_CODE = D.BRAND_CODE AND
+        A.BROKER_CODE = D.BROKER_CODE
+    <where>
+        1 = 1 AND
+        A.BROKER_CODE = #{req.brokerCode}
+        <if test='"0".equals(req.tickerSelectFlag) and req.tickerKey != null and req.tickerKey != ""'>
+            AND B.BRAND_CODE = UPPER(#{req.tickerKey})
+        </if>
+        <if test='"1".equals(req.tickerSelectFlag) and req.brandNameKey != null and req.brandNameKey != ""'>
+            AND B.BRAND_NAME LIKE #{req.brandNameKey} ESCAPE '!'
+        </if>
+    </where>
+    ORDER BY
+        A.BRAND_CODE
+    </select>
+
+    <!--
+        SQLID：Sql003
+        SQL名：外部リンクURL取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaPriceViewLookupForeignStockBrandListSql003"
+        resultMap="ResultMapIfaPriceViewLookupForeignStockBrandListSql003"
+        statementType="PREPARED"
+    >
+    SELECT /* @SQLID=SUB0202_0302-01#Sql003 */
+        VAR_NAME,
+        VAR_VALUE
+        FROM
+        CORDYS.TB_MED_SYSTEM_VARIABLE
+    WHERE
+        VAR_NAME = #{req.brandNameKey}
+    </select>
+</mapper>

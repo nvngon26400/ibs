@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.broker.dao.mapper.TBalancePrevMapper">
+
+	<select id="getCurrenctPriceTotal" resultType ="String" statementType="PREPARED">
+		SELECT
+			TO_CHAR(
+				TRUNC(SUM(
+					NVL(CURRENCT_PRICE, 0)
+				), -4) / 10000, 'FM9,999,999,999'
+			)
+			 || '万円' AS CURRENCT_PRICE_TOTAL_STR
+		FROM
+			(
+				SELECT
+					SUM(
+						NVL(CURRENCT_PRICE, 0)
+					) AS CURRENCT_PRICE
+				FROM
+					T_BALANCE_PREV
+				WHERE
+					DATE_YMD = (SELECT MAX(DATE_YMD) FROM T_BALANCE_PREV)
+				AND
+					BUTEN_CODE = #{butenCode}
+				AND
+					ACCOUNT_NUMBER = TO_NUMBER(#{accountNumber})
+				AND
+					PRODUT_CD IN (
+						'01','51','52','25','12','04','13','15','16','14','99','100','50','98','97'
+					)
+				GROUP BY
+					BUTEN_CODE,
+					ACCOUNT_NUMBER
+				UNION ALL
+				SELECT
+					SUM(CURRENCT_PRICE) AS CURRENCT_PRICE
+				FROM
+					(
+						SELECT
+							TRUNC(SUM(
+								NVL(CURRENCT_PRICE, 0)
+							), 0) AS CURRENCT_PRICE,
+							BRAND_CODE,
+							DEPOSIT_TYPE,
+							PRODUT_CD
+						FROM
+							T_BALANCE_PREV
+						WHERE
+							DATE_YMD = (SELECT MAX(DATE_YMD) FROM T_BALANCE_PREV)
+						AND
+							BUTEN_CODE = #{butenCode}
+						AND
+							ACCOUNT_NUMBER = TO_NUMBER(#{accountNumber})
+						AND
+							PRODUT_CD = '06'
+						GROUP BY
+							BRAND_CODE,
+							DEPOSIT_TYPE,
+							PRODUT_CD
+					)
+			)
+	</select>
+
+</mapper>

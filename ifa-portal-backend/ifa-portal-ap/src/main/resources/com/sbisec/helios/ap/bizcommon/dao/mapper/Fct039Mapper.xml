@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct039Mapper">
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct039Sql001ResponseModel" id="Fct039Sql001ResponseModel">
+    </resultMap>
+
+    <!-- FCT039.SQL001 ポイント関連項目表示可否取得 -->
+    <select id="getPointDisplayPermission" resultMap="Fct039Sql001ResponseModel" statementType="PREPARED">
+    SELECT /* @SQLID=FCT039#SQL001 */
+        NAME
+    FROM
+        M_CODE
+    WHERE
+        START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND END_DATE >= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND CODE_TYPE = '56'
+        AND CODE_1 = (
+            SELECT
+                DECODE(COUNT(*), 0, 'OTHERS', #{fct039Sql001RequestModel.brokerCode})
+            FROM
+                M_CODE
+            WHERE
+                START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+                AND END_DATE >= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+                AND CODE_TYPE = '56'
+                and CODE_1 = #{fct039Sql001RequestModel.brokerCode}
+        )
+        AND CODE_2 = #{fct039Sql001RequestModel.pointType}
+    </select>
+</mapper>

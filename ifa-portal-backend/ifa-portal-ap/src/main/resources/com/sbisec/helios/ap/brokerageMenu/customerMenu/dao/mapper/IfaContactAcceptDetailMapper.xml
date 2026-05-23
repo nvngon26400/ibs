@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0106-02
+    画面名：接触履歴受付詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaContactAcceptDetailMapper">
+    <resultMap id="ResultMapIfaContactAcceptDetailSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql002ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql003ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql004ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql005" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql005ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql006" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql006ResponseModel" >
+        <result property="brandName" column="BRAND_NAME" typeHandler="StringTypeHandler" />
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql007" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql007ResponseModel" >
+        <result property="currencyName" column="CURRENCY_NAME" typeHandler="StringTypeHandler" />
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql008" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql008ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql009" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql009ResponseModel" >
+        <result property="currencyName" column="CURRENCY_NAME" typeHandler="StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql010" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql010ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql011" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql011ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaContactAcceptDetailSql012" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactAcceptDetailSql012ResponseModel" >
+    </resultMap>
+
+   <!-- 
+        SQLID：Sql002
+        SQL名：国内注文履歴詳細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql002" resultMap="ResultMapIfaContactAcceptDetailSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql002 */
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_OCO_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_OCO_SASHINE,
+            A.DONE_OCO_SASINARI_KBN AS DONE_OCO_SASINARI_KBN,
+            A.DONE_RBE_ORDER_KIND AS DONE_RBE_ORDER_KIND,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_TRIGGER_NEDAN,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_TRIGGER_NEDAN,
+            A.DONE_TRIGGER_ZONE AS DONE_TRIGGER_ZONE,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_SASHINE,
+            A.DONE_SASINARI_KBN AS DONE_SASINARI_KBN,
+            A.IFA_ORDER_SUB_NO AS IFA_ORDER_SUB_NO,
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.OCO_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS OCO_SASHINE,
+            A.OCO_SASINARI_KBN AS OCO_SASINARI_KBN,
+            A.RBE_ORDER_KIND AS RBE_ORDER_KIND,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.TRIGGER_PRICE,'0'),'999,999,999,999,990.99')),'0'),'.') AS TRIGGER_PRICE,
+            A.TRIGGER_ZONE AS TRIGGER_ZONE,
+            A.DAILY_CREDIT_KBN AS DAILY_CREDIT_KBN,
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+            A.TRADE_KBN AS TRADE_KBN,
+            A.MARKET AS MARKET,
+            A.DATE_KBN AS DATE_KBN,
+            A.PAYMENT_LIMIT AS PAYMENT_LIMIT,
+            DECODE(TRIM(A.PAYMENT_LIMIT_DATE), '', A.PAYMENT_LIMIT_DATE, TO_NUMBER(TRIM(A.PAYMENT_LIMIT_DATE))) AS PAYMENT_LIMIT_DATE,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.PRICE,'0'),'999,999,999,999,990.99')),'0'),'.') AS PRICE,
+            A.SASINARI_KBN AS SASINARI_KBN,
+            TRIM(TO_CHAR(A.QUANTITY,'999,999,999,999,990')) AS QUANTITY,
+            A.ORDER_STATUS AS ORDER_STATUS,
+            A.ORDER_SYUBETSU AS ORDER_SYUBETSU,
+            A.SPECIFIC_KBN AS SPECIFIC_KBN,
+            A.BRAND_CD AS BRAND_CD,
+            A.AZUKARI_KBN AS AZUKARI_KBN,
+            NVL(B.USER_NM, '-') AS USER_NM,
+            RTRIM(RTRIM(TRIM(TO_CHAR(C.OPEN_PRICE/100,'9,999,999,999,990.99')),'0'),'.') AS OPEN_PRICE,
+            TO_CHAR(TO_DATE(TRIM(C.OPEN_TRADE_DATE),'yyyymmdd'),'YYYY/MM/DD') AS OPEN_TRADE_DATE,
+            C.OPEN_MARKET AS OPEN_MARKET
+        FROM
+            T_JP_ORDER A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        LEFT JOIN
+            J_ORDER_POSITION_LINK C
+        ON
+            A.IFA_ORDER_NO = C.IFA_ORDER_NO
+        WHERE
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD') = #{req.recordDate}
+        AND
+            A.CREATE_USER = #{req.createUser}
+        <if test='req.tradeKbnList != null and req.tradeKbnList.size() &gt; 0'>
+         AND
+             A.TRADE_KBN IN
+            <foreach item="tradeKbn" collection="req.tradeKbnList" index="idx" open="(" separator="," close=")">
+                #{tradeKbn}
+            </foreach>
+        </if>
+        AND
+            A.ORDER_STATUS = '0'
+        AND
+            A.CUSTOMER_ID = #{req.customerId}
+        AND
+            ((TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%'))
+        ORDER BY
+            A.CREATE_TIME DESC
+        FETCH FIRST 99 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：国内投信注文履歴詳細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql003" resultMap="ResultMapIfaContactAcceptDetailSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql003 */
+            A.IFA_ORDER_SUB_NO AS IFA_ORDER_SUB_NO,
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            TRIM(A.FUND_CD_GOU) AS FUND_CD_GOU,
+            A.FUND_CD_KAISU AS FUND_CD_KAISU,
+            A.NORIKAE_YUGU_KBN AS NORIKAE_YUGU_KBN,
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+            A.TRADE_TYPE AS TRADE_TYPE,
+            TRIM(TO_CHAR(A.QUANTITY,'999,999,999,999,990')) AS QUANTITY,
+            A.TRADE_KBN AS TRADE_KBN,
+            A.SPECIFIC_KBN AS SPECIFIC_KBN,
+            A.AZUKARI_KBN AS AZUKARI_KBN,
+            TRIM(TO_CHAR(A.NET_AMOUNT,'999,999,999,999,990')) AS NET_AMOUNT,
+            A.POINT_TYPE AS POINT_TYPE,
+            TRIM(TO_CHAR(A.POINT,'999,999,999,999,990')) AS POINT,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            JP_TOUSHIN_ORDER A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        WHERE
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD') = #{req.recordDate}
+        AND
+            A.CREATE_USER = #{req.createUser}
+        <if test='req.tradeTypeList != null and req.tradeTypeList.size() &gt; 0'>
+        AND
+            TRIM(A.TRADE_TYPE) IN
+            <foreach item="tradeType" collection="req.tradeTypeList" index="idx" open="(" separator="," close=")">
+                #{tradeType}
+            </foreach>
+        </if>
+        AND
+            A.ORDER_STATUS = '0'
+        AND
+            A.CUSTOMER_ID = #{req.customerId}
+        AND
+            ((TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%'))
+        ORDER BY
+            A.CREATE_TIME DESC
+        FETCH FIRST 99 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：その他余力拘束履歴詳細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql004" resultMap="ResultMapIfaContactAcceptDetailSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql004 */
+            A.TORIKESHI_KBN AS TORIKESHI_KBN,
+            A.KOUSOKU_KBN AS KOUSOKU_KBN,
+            A.KOUSOKU_SYUBETU AS KOUSOKU_SYUBETU,
+            TRIM(TO_CHAR(A.NISA_KINGAKU,'999,999,999,999,990')) AS NISA_KINGAKU,
+            A.TOKUTEI_AZUKARI_BAIBAI_KBN AS TOKUTEI_AZUKARI_BAIBAI_KBN,
+            TRIM(A.HATTYU_RIYU) AS HATTYU_RIYU,
+            TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS TOUROKU_NICHIJI,
+            TRIM(TO_CHAR(A.SEISAN_KINGAKU,'999,999,999,999,990')) AS SEISAN_KINGAKU,
+            A.TRAN_ID AS TRAN_ID,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            TB_ADDITIONAL_ORDER_IFA A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.USER_ID = B.USER_ID
+        WHERE
+            TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD') = #{req.recordDate}
+        AND
+            A.USER_ID = #{req.createUser}
+        AND
+            A.HATTYUU_KBN = '3'
+        AND
+            A.EDABAN = '1'
+        AND
+            A.KOKYAKU_ID = #{req.customerId}
+        AND
+            A.STS_CD = '1'
+        ORDER BY
+            A.TOUROKU_NICHIJI DESC
+        FETCH FIRST 99 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：外株委託注文接触履歴受付詳細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql005" resultMap="ResultMapIfaContactAcceptDetailSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql005 */
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            A.IFA_ORDER_SUB_NO AS IFA_ORDER_SUB_NO,
+            A.BRAND_CODE AS BRAND_CODE,
+            A.BRAND_NAME AS BRAND_NAME,
+            A.METHOD_TYPE AS METHOD_TYPE,
+            A.TRADE_TYPE AS TRADE_TYPE,
+            TRIM(TO_CHAR(A.ORDER_QUANTITY,'9,999,999,999,990')) AS ORDER_QUANTITY,
+            A.TRADE_METHOD_TYPE AS TRADE_METHOD_TYPE,
+            TRIM(TRIM(TRAILING '.' FROM TRIM('0' FROM TO_CHAR(NVL(A.LIMIT_PRICE,'0'),'999,999,990.99999999')))) AS LIMIT_PRICE,
+            TRIM(TRIM(TRAILING '.' FROM TRIM('0' FROM TO_CHAR(NVL(A.STOP_PRICE,'0'),'999,999,990.99999999')))) AS STOP_PRICE,
+            A.CURRENCY_CODE AS CURRENCY_CODE,
+            A.SETTLEMENT_TYPE AS SETTLEMENT_TYPE,
+            A.DEPOSIT_TYPE AS DEPOSIT_TYPE,
+            A.ORDER_TYPE AS ORDER_TYPE,
+            A.CREATE_TIME AS CREATE_TIME,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM (
+            SELECT
+                FCO.IFA_ORDER_NO AS IFA_ORDER_NO,
+                FCO.IFA_ORDER_SUB_NO AS IFA_ORDER_SUB_NO,
+                FCO.BRAND_CODE AS BRAND_CODE,
+                FCO.BRAND_NAME AS BRAND_NAME,
+                FCO.METHOD_TYPE AS METHOD_TYPE,
+                FCO.TRADE_TYPE AS TRADE_TYPE,
+                FCO.ORDER_QUANTITY AS ORDER_QUANTITY,
+                FCO.TRADE_METHOD_TYPE AS TRADE_METHOD_TYPE,
+                FCO.LIMIT_PRICE AS LIMIT_PRICE,
+                FCO.STOP_PRICE AS STOP_PRICE,
+                FCO.CURRENCY_CODE AS CURRENCY_CODE,
+                FCO.SETTLEMENT_TYPE AS SETTLEMENT_TYPE,
+                FCO.DEPOSIT_TYPE AS DEPOSIT_TYPE,
+                FCO.ORDER_TYPE AS ORDER_TYPE,
+                TO_CHAR(FCO.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                FCO.CREATE_USER AS CREATE_USER
+            FROM
+                FOREIGN_CONSIGNMENT_ORDER FCO
+            WHERE
+                TO_CHAR(FCO.CREATE_TIME, 'YYYY/MM/DD') = #{req.recordDate}
+            AND
+                FCO.CREATE_USER = #{req.createUser}
+            AND
+                FCO.METHOD_TYPE IN ('0', '10', '11')
+            AND
+                FCO.IFA_ORDER_SUB_NO = '1'
+            AND
+                FCO.BUTEN_CODE = #{req.butenCode}
+            AND
+                FCO.ACCOUNT_NUMBER = #{req.accountNumber}
+            AND
+                FCO.API_STATUS_CODE BETWEEN 200 AND 299
+            UNION ALL
+            SELECT
+                FCOH.IFA_ORDER_NO AS IFA_ORDER_NO,
+                FCOH.IFA_ORDER_SUB_NO AS IFA_ORDER_SUB_NO,
+                FCOH.BRAND_CODE AS BRAND_CODE,
+                FCOH.BRAND_NAME AS BRAND_NAME,
+                FCOH.METHOD_TYPE AS METHOD_TYPE,
+                FCOH.TRADE_TYPE AS TRADE_TYPE,
+                FCOH.ORDER_QUANTITY AS ORDER_QUANTITY,
+                FCOH.TRADE_METHOD_TYPE AS TRADE_METHOD_TYPE,
+                FCOH.LIMIT_PRICE AS LIMIT_PRICE,
+                FCOH.STOP_PRICE AS STOP_PRICE,
+                FCOH.CURRENCY_CODE AS CURRENCY_CODE,
+                FCOH.SETTLEMENT_TYPE AS SETTLEMENT_TYPE,
+                FCOH.DEPOSIT_TYPE AS DEPOSIT_TYPE,
+                FCOH.ORDER_TYPE AS ORDER_TYPE,
+                TO_CHAR(FCOH.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                FCOH.CREATE_USER AS CREATE_USER
+            FROM
+                FOREIGN_CONSIGNMENT_ORDER_HIS FCOH
+            WHERE
+                TO_CHAR(FCOH.CREATE_TIME, 'YYYY/MM/DD') = #{req.recordDate}
+            AND
+                FCOH.CREATE_USER = #{req.createUser}
+            AND
+                FCOH.METHOD_TYPE IN ('0', '10', '11')
+            AND
+                FCOH.IFA_ORDER_SUB_NO = '1'
+            AND
+                FCOH.BUTEN_CODE = #{req.butenCode}
+            AND
+                FCOH.ACCOUNT_NUMBER = #{req.accountNumber}
+            AND
+                FCOH.API_STATUS_CODE BETWEEN 200 AND 299
+                )A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        ORDER BY
+            A.CREATE_TIME DESC
+        FETCH FIRST 99 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：外株店頭注文接触履歴受付詳細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql006" resultMap="ResultMapIfaContactAcceptDetailSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql006 */
+            A.BRAND_CODE AS BRAND_CODE,
+            A.TRADE_TYPE AS TRADE_TYPE,
+            TRIM(TO_CHAR(A.ORDER_COUNT,'9,999,999,999,990')) AS ORDER_COUNT,
+            A.KESSAI_TUKA AS KESSAI_TUKA,
+            A.DEPOSIT_TYPE AS DEPOSIT_TYPE,
+            A.CREATE_TIME AS CREATE_TIME,
+            A.ORDER_STATUS AS ORDER_STATUS,
+            B.BRAND_NAME AS BRAND_NAME,
+            NVL(C.USER_NM, '-') AS USER_NM
+        FROM (
+            SELECT
+                TCO.BRAND_CODE AS BRAND_CODE,
+                TCO.TRADE_TYPE AS TRADE_TYPE,
+                TCO.ORDER_COUNT AS ORDER_COUNT,
+                TCO.KESSAI_TUKA AS KESSAI_TUKA,
+                TCO.DEPOSIT_TYPE AS DEPOSIT_TYPE,
+                TO_CHAR(TCO.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                TCO.CREATE_USER AS CREATE_USER,
+                TCO.ORDER_STATUS AS ORDER_STATUS
+            FROM
+                T_COUNTER_ORDER TCO
+            WHERE
+                TO_CHAR(TCO.CREATE_TIME, 'YYYY/MM/DD') = #{req.recordDate}
+            AND
+                TCO.CREATE_USER = #{req.createUser}
+            AND
+                TCO.BUTEN_CODE = #{req.butenCode}
+            AND
+                TCO.ACCOUNT_NUMBER = #{req.accountNumber}
+            UNION ALL
+            SELECT
+                TCOH.BRAND_CODE AS BRAND_CODE,
+                TCOH.TRADE_TYPE AS TRADE_TYPE,
+                TCOH.ORDER_COUNT AS ORDER_COUNT,
+                TCOH.KESSAI_TUKA AS KESSAI_TUKA,
+                TCOH.DEPOSIT_TYPE AS DEPOSIT_TYPE,
+                TO_CHAR(TCOH.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                TCOH.CREATE_USER AS CREATE_USER,
+                TCOH.ORDER_STATUS AS ORDER_STATUS
+            FROM
+                T_COUNTER_ORDER_HIS TCOH
+            WHERE
+                TO_CHAR(TCOH.CREATE_TIME, 'YYYY/MM/DD') = #{req.recordDate}
+            AND
+                TCOH.CREATE_USER = #{req.createUser}
+            AND
+                TCOH.BUTEN_CODE = #{req.butenCode}
+            AND
+                TCOH.ACCOUNT_NUMBER = #{req.accountNumber}
+                )A
+        LEFT JOIN
+            M_COUNTER_BRAND B
+        ON
+            A.BRAND_CODE = B.BRAND_CODE
+        LEFT JOIN
+            TB_MED_USERS C
+        ON
+            A.CREATE_USER = C.USER_ID
+        ORDER BY
+            A.CREATE_TIME DESC
+        FETCH FIRST 99 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：為替取引接触履歴受付詳細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql007" resultMap="ResultMapIfaContactAcceptDetailSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql007 */
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            A.TRADE_TYPE AS TRADE_TYPE,
+            A.CURRENCY_CODE AS CURRENCY_CODE,
+            A.CURRENCY_NAME AS CURRENCY_NAME,
+            TRIM(TRIM(TRAILING '.' FROM TRIM('0' FROM TO_CHAR(NVL(A.FX_ORDER_AMOUNT,'0'),'999,999,999,999,999,990.9999')))) AS FX_ORDER_AMOUNT,
+            A.FX_TRADE_SERVICE_TYPE AS FX_TRADE_SERVICE_TYPE,
+            A.FX_ORDER_STATUS AS FX_ORDER_STATUS,
+            A.ORDER_NO AS ORDER_NO,
+            TRIM(TRIM(TRAILING '.' FROM TRIM('0' FROM TO_CHAR(NVL(A.EXCHANGE_RATE,'0'),'999,999,999,999,999,990.9999')))) AS EXCHANGE_RATE,
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+            A.FX_SPECIFIC_ACCOUNT_CODE AS FX_SPECIFIC_ACCOUNT_CODE,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            EXCHANGE_ORDER A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        WHERE
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD') = #{req.recordDate}
+        AND
+            A.CREATE_USER = #{req.createUser}
+        AND
+            A.BUTEN_CODE = #{req.butenCode}
+        AND
+            A.ACCOUNT_NUMBER = #{req.accountNumber}
+        AND
+            A.FX_ORDER_STATUS ='0'
+        AND
+            A.API_STATUS_CODE IS NULL
+        ORDER BY
+            A.CREATE_TIME DESC
+        FETCH FIRST 99 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql008
+        SQL名：同一のIFA注文番号内1番目レコードの注文種別区分情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql008" resultMap="ResultMapIfaContactAcceptDetailSql008" statementType="PREPARED" fetchSize="1000">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql008 */
+            B.IFA_ORDER_NO AS IFA_ORDER_NO,
+            B.ORDER_TYPE AS ORDER_TYPE
+        FROM
+            (
+                SELECT
+                    ROW_NUMBER() OVER(PARTITION BY A.IFA_ORDER_NO ORDER BY A.IFA_ORDER_SUB_NO DESC) AS RN,
+                    A.IFA_ORDER_NO,
+                    A.IFA_ORDER_SUB_NO,
+                    A.ORDER_TYPE
+                FROM (
+                    SELECT
+                        FCO.IFA_ORDER_NO AS IFA_ORDER_NO,
+                        FCO.IFA_ORDER_SUB_NO AS IFA_ORDER_SUB_NO,
+                        FCO.ORDER_TYPE AS ORDER_TYPE
+                    FROM
+                        FOREIGN_CONSIGNMENT_ORDER FCO
+                    WHERE
+                        FCO.API_STATUS_CODE BETWEEN 200 AND 299
+                    UNION ALL
+                    SELECT
+                        FCOH.IFA_ORDER_NO AS IFA_ORDER_NO,
+                        FCOH.IFA_ORDER_SUB_NO AS IFA_ORDER_SUB_NO,
+                        FCOH.ORDER_TYPE AS ORDER_TYPE
+                    FROM
+                        FOREIGN_CONSIGNMENT_ORDER_HIS FCOH
+                    WHERE
+                        FCOH.API_STATUS_CODE BETWEEN 200 AND 299
+                 )A
+            ) B
+        WHERE
+            B.RN = 1
+    </select>
+
+    <!-- 
+        SQLID：Sql009
+        SQL名：同一の数据キー内1番目レコードの為替取引注文状況情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql009" resultMap="ResultMapIfaContactAcceptDetailSql009" statementType="PREPARED" fetchSize="1000">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql009 */
+            B.TRADE_TYPE AS TRADE_TYPE,
+            B.CURRENCY_CODE AS CURRENCY_CODE,
+            TRIM(TRIM(TRAILING '.' FROM TRIM('0' FROM TO_CHAR(NVL(B.FX_ORDER_AMOUNT,'0'),'999,999,999,999,999,990.9999')))) AS FX_ORDER_AMOUNT,
+            B.FX_SPECIFIC_ACCOUNT_CODE AS FX_SPECIFIC_ACCOUNT_CODE,
+            B.ORDER_NO AS ORDER_NO,
+            B.FX_ORDER_STATUS AS FX_ORDER_STATUS
+        FROM
+            (
+                SELECT
+                    ROW_NUMBER() OVER(PARTITION BY A.TRADE_TYPE,A.CURRENCY_CODE,A.FX_ORDER_AMOUNT,A.FX_SPECIFIC_ACCOUNT_CODE,A.ORDER_NO ORDER BY A.IFA_ORDER_NO DESC) AS RN,
+                    A.TRADE_TYPE,
+                    A.CURRENCY_CODE,
+                    A.FX_ORDER_AMOUNT,
+                    A.FX_SPECIFIC_ACCOUNT_CODE,
+                    A.ORDER_NO,
+                    A.FX_ORDER_STATUS
+                FROM
+                    EXCHANGE_ORDER A
+                WHERE
+                    A.API_STATUS_CODE IS NULL
+            ) B
+        WHERE
+            B.RN = 1
+    </select>
+
+    <!-- 
+        SQLID：Sql010
+        SQL名：同一のIFA注文番号内1番目レコードの注文状況情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql010" resultMap="ResultMapIfaContactAcceptDetailSql010" statementType="PREPARED" fetchSize="1000">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql010 */
+            B.IFA_ORDER_NO AS IFA_ORDER_NO,
+            B.ORDER_STATUS AS ORDER_STATUS,
+            B.PRE_ORDER_STATUS AS PRE_ORDER_STATUS
+        FROM
+            (
+                SELECT
+                    ROW_NUMBER() OVER(PARTITION BY A.IFA_ORDER_NO ORDER BY A.IFA_ORDER_NO DESC, A.IFA_ORDER_SUB_NO DESC) AS RN,
+                    LEAD(A.ORDER_STATUS,1)OVER(PARTITION BY A.IFA_ORDER_NO ORDER BY A.IFA_ORDER_NO DESC, A.IFA_ORDER_SUB_NO DESC) AS PRE_ORDER_STATUS,
+                    A.IFA_ORDER_NO,
+                    A.IFA_ORDER_SUB_NO,
+                    A.ORDER_STATUS
+                FROM
+                    T_JP_ORDER A
+                WHERE
+                    (TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%')
+            ) B
+        WHERE
+            B.RN = 1
+    </select>
+
+    <!-- 
+        SQLID：Sql011
+        SQL名：同一のIFA注文番号内1番目レコードの注文状況情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql011" resultMap="ResultMapIfaContactAcceptDetailSql011" statementType="PREPARED" fetchSize="1000">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql011 */
+            B.IFA_ORDER_NO AS IFA_ORDER_NO,
+            B.ORDER_STATUS AS ORDER_STATUS
+        FROM
+            (
+                SELECT
+                    ROW_NUMBER() OVER(PARTITION BY A.IFA_ORDER_NO ORDER BY A.IFA_ORDER_NO DESC, A.IFA_ORDER_SUB_NO DESC) AS RN,
+                    A.IFA_ORDER_NO,
+                    A.IFA_ORDER_SUB_NO,
+                    A.ORDER_STATUS
+                FROM
+                    JP_TOUSHIN_ORDER A
+                WHERE
+                    (TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%')
+            ) B
+        WHERE
+            B.RN = 1
+    </select>
+
+    <!-- 
+        SQLID：Sql012
+        SQL名：同一のトランザクションID内1番目レコードの取消区分情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactAcceptDetailSql012" resultMap="ResultMapIfaContactAcceptDetailSql012" statementType="PREPARED" fetchSize="1000">
+        SELECT /* @SQLID=SUB0202_0106-02#Sql012 */
+            B.TRAN_ID AS TRAN_ID,
+            B.TORIKESHI_KBN AS TORIKESHI_KBN
+        FROM
+            (
+                SELECT
+                    ROW_NUMBER() OVER(PARTITION BY A.TRAN_ID ORDER BY A.EDABAN DESC ) AS RN,
+                    A.TRAN_ID,
+                    A.EDABAN,
+                    A.TORIKESHI_KBN AS TORIKESHI_KBN
+                FROM
+                    TB_ADDITIONAL_ORDER_IFA A
+                WHERE
+                    A.STS_CD = '1'
+            ) B
+        WHERE
+            B.RN = 1
+    </select>
+
+</mapper>

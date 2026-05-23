@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0401-01
+    画面名：国内投信購入積立可能一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDomesticMutualFundBuyAbleListMapper">  
+    <resultMap id="ResultMapIfaDomesticMutualFundBuyAbleListSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundBuyAbleListSql001ResponseModel" >
+    	<result property="mFName" column="M_F_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaDomesticMutualFundBuyAbleListSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundBuyAbleListSql002ResponseModel" >
+    	<result property="mFName" column="M_F_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+ 
+    <!-- 
+        SQLID：SQL001
+        SQL名：協会コード と ファンドタイプ取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-01#Sql001 */ 
+    -->
+    <select id="selectIfaDomesticMutualFundBuyAbleListSql001" resultMap="ResultMapIfaDomesticMutualFundBuyAbleListSql001" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0401-01#Sql001 */  
+            M_F_CODE,
+            M_F_TYPE,
+            M_F_NAME
+        FROM 
+            FUND
+        WHERE
+            M_F_NRICODE = #{req.fundCodeTimes}||' '||TRIM(#{req.fundCodeIssues})||' '
+            AND M_F_TYPE ='2'
+            AND M_F_DELFLG = '0'
+            AND M_F_ET_START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+    </select>
+           
+    <!-- 
+        SQLID：SQL002
+        SQL名：銘柄情報取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-01#Sql002 */ 
+    -->
+    <select id="selectIfaDomesticMutualFundBuyAbleListSql002" resultMap="ResultMapIfaDomesticMutualFundBuyAbleListSql002" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0401-01#Sql002 */  
+            M_F_CODE,
+            M_F_TYPE,
+            M_F_NAME
+        FROM 
+            FUND
+        WHERE
+            M_F_NRICODE = #{req.fundCodeTimes}||' '||TRIM(#{req.fundCodeIssues})||' '
+            AND (M_F_TYPE ='1' OR M_F_TYPE ='2' )
+            AND M_F_DELFLG = '0'
+            AND M_F_ET_START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+    </select>
+    
+</mapper>

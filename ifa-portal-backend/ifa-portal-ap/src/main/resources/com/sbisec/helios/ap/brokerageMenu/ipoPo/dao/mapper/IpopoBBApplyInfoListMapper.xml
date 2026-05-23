@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IpopoBBApplyInfoListMapper">
+	
+	<resultMap type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.IpopoBBApplyInfoListModel" id="resultSetGetIpopoBBApplyInfoList">
+		<result property="bbProductName" column="BB_PRODUCT_NAME" typeHandler="StringTypeHandler" />
+		<result property="brokerName" column="BROKER_NAME" typeHandler="StringTypeHandler" />
+		<result property="branchName" column="BRANCH_NAME" typeHandler="StringTypeHandler" />
+		<result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="StringTypeHandler" />
+		<result property="nameKanji" column="NAME_KANJI" typeHandler="StringTypeHandler" />
+		<result property="nameKana" column="NAME_KANA" typeHandler="StringTypeHandler" />
+		<result property="bbInvestorAttName" column="BB_INVESTOR_ATT_NAME" typeHandler="StringTypeHandler" />
+		<result property="bbRemark" column="BB_REMARK" typeHandler="StringTypeHandler" />
+		<result property="bbCreateUserName" column="BB_CREATE_USER_NAME" typeHandler="StringTypeHandler" />
+	</resultMap>
+	
+	<resultMap type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.IpopoStarUploadCsvInfoListModel" id="resultSetIpopoStarUploadInfoList">
+	</resultMap>
+	
+	<select id="getIpopoBBApplyInfoList" resultMap="resultSetGetIpopoBBApplyInfoList" statementType="PREPARED">
+		SELECT /* @SQLID=SUB0204_02-05#SQL001 */ * FROM
+			(
+			SELECT 
+				COUNT(*) OVER() AS totalRow,
+				T.* 
+			FROM(
+				SELECT
+					A.BB_PRODUCT_CODE,
+					B.BB_PRODUCT_NAME,
+					MUAI.BROKER_CODE,
+					E1.BRANCH_NAME AS BROKER_NAME,
+					F.BROKER_BRANCH_CODE AS BRANCH_CODE,
+					E2.BRANCH_NAME ,
+					MUAI.INTERMEDIARY_EMP_CD,
+					CASE F.BROKER_CHARGE_CODE WHEN '0000' THEN '' ELSE F.BROKER_CHARGE_NAME END AS BROKER_CHARGE_NAME,
+					MUAI.BUTEN_CODE,
+					MUAI.ACCOUNT_NUMBER,
+					MUAI.NAME_KANJI,
+					MUAI.NAME_KANA,
+					A.BB_INVESTOR_ATT_NAME,
+					A.BB_QUANTITY,
+					B.BB_GESTURE_VALUE,
+					CASE
+						WHEN D.LOTTERY_RESULT = '4' THEN NVL(D.QUANTITY_ALLOC, 0) 	--4:裁量配分(対面募集注文テーブル)
+						ELSE NVL(G.QUANTITY_SAIRYOU,0)
+					END AS QUANTITY_SAIRYOU,
+					CASE 
+						WHEN A.BB_STRIKE_PRICE = '0' AND B.BB_GESTURE_VALUE = '1' THEN A.BB_PRICE || ''
+						WHEN A.BB_STRIKE_PRICE = '0' AND B.BB_GESTURE_VALUE = '2' THEN RTRIM(TO_CHAR(A.BB_DISCOUNT, 'FM990.9999'), '.')
+						ELSE '成行'
+					END AS BB_PRICE,
+					CASE
+						WHEN D.LOTTERY_RESULT IS NOT NULL THEN D.LOTTERY_RESULT
+						WHEN A.BB_WINNING = '2' AND A.BB_EXCLUSION = '4' THEN '4'					--裁量配分
+						WHEN A.BB_WINNING = '2' AND A.BB_EXCLUSION &lt;&gt; '4' THEN '2'			--落選
+						ELSE A.BB_WINNING
+					END AS LOTTERY_RESULT,
+					CASE 
+						WHEN D.LOTTERY_RESULT IN ('1','3','5') THEN NVL(D.QUANTITY_ALLOC, 0) || ''	--1:当選,3:当選(繰上)(対面募集注文テーブル),5:申込取消
+						WHEN D.LOTTERY_RESULT IN ('2','4') THEN '0'				--2:落選,4:裁量配分(対面募集注文テーブル)
+						WHEN A.BB_WINNING = '0' THEN '-'											--抽選前
+						WHEN A.BB_WINNING = '1' THEN A.BB_QUANTITY_ALLOC || ''						--当選
+						WHEN A.BB_WINNING = '2' AND A.BB_EXCLUSION = '4' THEN '0'	--裁量配分
+						ELSE '0'
+					END AS BB_QUANTITY_ALLOC,
+					CASE 
+						WHEN D.LOTTERY_RESULT IN ('2','5') THEN '-'								--落選,申込取消,
+						WHEN J.ORDER_STATUS IS NULL AND A.BB_WINNING = '0' THEN '-'									--抽選前
+						WHEN J.ORDER_STATUS IS NULL AND A.BB_WINNING = '2' AND A.BB_EXCLUSION &lt;&gt; '4' THEN '-'	--落選
+						WHEN J.ORDER_STATUS IS NULL AND A.BB_WINNING = '2' AND A.BB_EXCLUSION = '4' THEN '0'		--裁量配分、未注文
+						WHEN J.ORDER_STATUS IS NULL AND A.BB_WINNING = '1' THEN '0'									--当選、未注文
+						ELSE J.ORDER_STATUS
+					END AS ORDER_STATUS,
+					CASE 
+						WHEN D.LOTTERY_RESULT IN ('1','3','4') THEN J.ORDER_COUNT || ''	--抽選前、落選、申込取消
+						ELSE '-'
+					END AS ORDER_COUNT,
+					J.DEPOSIT_TYPE,
+					J.INVITATION_TYPE,
+					J.WARNING_APPLY,
+					J.DETAIL_NUMBER,
+					A.BB_CREATE_SECTION_NAME,
+					A.BB_REMARK,
+					A.BB_UPDATE_DATE,
+					NVL(H.PRESENTATION_DATE, B.BB_SETTLE_DATE) AS PRESENTATION_DATE,
+					A.BB_PRESENTATION_FROM,
+					A.BB_CREATE_USER_NAME,
+					TO_CHAR(A.BB_CREATE_DATE,'YYYY/MM/DD HH24:MI') AS BB_CREATE_DATE,
+					TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'yyyymmddhh24miss') AS SYS_DATE,
+					D.BUTEN_CODE || LPAD(D.ACCOUNT_NUMBER, 7, 0) || D.PRODUCT_CODE AS UPLOAD_KEY,
+					DECODE(P.EDELIV_AGREEMENT_KBN, 1, TO_CHAR(P.EDELIV_AGREEMENT_DATE, 'YYYY/MM/DD'), '') AS EDELIV_AGREEMENT_DATE,
+					TO_CHAR(I.READ_TIME,'YYYY/MM/DD HH24:MI')AS READ_TIME
+				FROM
+					ETINTRA.BB_ACCEPT A
+					INNER JOIN ETINTRA.BB_PRODUCT_MASTER B ON
+						A.BB_PRODUCT_CODE = B.BB_PRODUCT_CODE
+					AND
+						A.BB_PRESENTATION_FROM = TO_NUMBER(TO_CHAR(B.BB_PRESENTATION_FROM,'YYYYMMDD'))
+					INNER JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI ON
+						A.BB_BRANCH_CODE = RPAD(MUAI.BUTEN_CODE, 4, ' ')
+					AND
+						TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(MUAI.ACCOUNT_NUMBER)
+				LEFT JOIN 
+					M_IPO_PO_BB_PERIOD H
+				ON
+					A.BB_PRODUCT_CODE =  H.PRODUCT_CODE
+				AND 
+					A.BB_PRESENTATION_FROM = H.PRESENTATION_FROM
+				LEFT JOIN
+					T_IPO_PO_ORDER D
+				ON
+					A.BB_PRODUCT_CODE = D.PRODUCT_CODE
+				AND
+					A.BB_PRESENTATION_FROM = D.PRESENTATION_FROM
+				AND
+					A.BB_BRANCH_CODE = RPAD(D.BUTEN_CODE, 4, ' ')
+				AND
+					TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(D.ACCOUNT_NUMBER)
+				LEFT JOIN
+					MEDIATE_BRANCH E1
+				ON
+					MUAI.BROKER_CODE = E1.BROKER_CODE
+				AND
+					E1.BROKER_BRANCH_CODE = '999'
+				LEFT JOIN
+					MEDIATE_CHARGE_INFO F
+				ON
+					MUAI.BROKER_CODE = F.BROKER_CODE
+				AND
+					MUAI.INTERMEDIARY_EMP_CD = F.BROKER_CHARGE_CODE
+				AND
+					(
+						SELECT
+							COUNT(*)
+						FROM
+							MEDIATE_CHARGE_INFO F2
+						WHERE
+							MUAI.BROKER_CODE = F2.BROKER_CODE
+						AND
+							MUAI.INTERMEDIARY_EMP_CD = F2.BROKER_CHARGE_CODE
+					) = 1
+				LEFT JOIN
+					MEDIATE_BRANCH E2
+				ON
+					MUAI.BROKER_CODE = E2.BROKER_CODE
+				AND
+					F.BROKER_BRANCH_CODE = E2.BROKER_BRANCH_CODE
+				LEFT JOIN
+					ETINTRA.SR_ACCEPT G
+				ON
+					A.BB_PRODUCT_CODE = G.BB_PRODUCT_CODE
+				AND
+					A.BB_PRESENTATION_FROM = G.BB_PRESENTATION_FROM
+				AND
+					A.BB_BRANCH_CODE = G.BB_BRANCH_CODE
+				AND
+					TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(G.BB_ACCOUNT_NUMBER)
+				LEFT JOIN
+					T_IPO_PO_EDELIV_AGRMNT P
+				ON
+					P.BUTEN_CODE = MUAI.BUTEN_CODE
+				AND
+					P.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER	
+				LEFT JOIN T_IPO_PO_DOCUMENT_READ I
+					ON
+						I.BUTEN_CODE = MUAI.BUTEN_CODE
+					AND
+						I.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+					AND
+						B.BB_PRODUCT_CODE = I.PRODUCT_CODE
+					AND
+						A.BB_PRESENTATION_FROM = I.PRESENTATION_FROM
+					AND
+						I.DOCUMENT_ID = '00000'
+					AND
+						I.VERSION_NUMBER = '000000'
+				LEFT JOIN CORDYS.T_IPO_PO_ORDER_DETAIL J
+					ON
+						J.PRODUCT_CODE = D.PRODUCT_CODE
+					AND
+						J.PRESENTATION_FROM = D.PRESENTATION_FROM
+					AND
+						J.BUTEN_CODE = D.BUTEN_CODE
+					AND
+						J.ACCOUNT_NUMBER = D.ACCOUNT_NUMBER
+			) T
+			WHERE
+				T.ORDER_STATUS = '1'
+			ORDER BY
+				T.UPLOAD_KEY
+		)
+		WHERE
+			ROWNUM &lt;= #{querySizeLimit}
+	</select>
+
+	<select id="ipopoStarUploadCsvDownload" resultMap="resultSetIpopoStarUploadInfoList" statementType="PREPARED" >
+		SELECT /* @SQLID=SUB0204_02-05#SQL004 */
+			LPAD(D.BUTEN_CODE,4,' ') AS BUTEN_CODE,									<!-- 部店 -->
+			LPAD(D.ACCOUNT_NUMBER,11,'0') AS ACCOUNT_NUMBER,						<!-- 口座番号 -->
+			CASE WHEN H.ATTACHED_BRAND = '1' THEN D.PRODUCT_CODE || H.ATTACHED_BRAND
+				 ELSE D.PRODUCT_CODE
+			 END AS PRODUCT_CODE,													<!-- 銘柄商品区分 -->
+			LPAD(D.ORDER_COUNT,11,'0') AS ORDER_COUNT,								<!-- 金額 -->
+			CASE WHEN D.DEPOSIT_TYPE = '2' THEN ' '
+				 WHEN D.DEPOSIT_TYPE = '4' THEN '4'
+				 WHEN D.DEPOSIT_TYPE = 'H' THEN '6'
+				 WHEN D.DEPOSIT_TYPE = '1' AND E.UAI_SPECIFIC_KBN = '1' THEN '1'
+				 WHEN D.DEPOSIT_TYPE = '1' AND E.UAI_SPECIFIC_KBN = '2' THEN '1'
+				 ELSE ' '
+			 END AS DEPOSIT_TYPE,													<!-- 預り売買区分 -->
+			SUBSTR(H.PAYMENT_DATE, 5) AS PAYMENT_DATE,								<!-- 入金予定日 -->
+			D.INVITATION_TYPE,														<!-- 勧誘有無 -->
+			D.ORDER_METHOD,															<!-- 受注方法 -->
+			TO_CHAR(D.ORDER_TIME,'MMDD') AS ORDER_DAY,								<!-- 受注日 -->
+			TO_CHAR(D.ORDER_TIME,'HH24MI') AS ORDER_HOUR,							<!-- 受注時刻 -->
+			(SELECT DECODE(COUNT(1), 0, ' ', 1) AS ALERT							<!-- 資金振替チェックアラート(信用口座)-->
+			   FROM SVC_ACCT_PROFILE_IFAP I1
+			  WHERE I1.PROFILE_NAME = 'AccountMode' 
+					AND I1.PROFILE_VALUE = 'MARGIN' 
+					AND I1.ACCT_ID = E.BUTEN_CODE || '-' || SUBSTR('000000' || E.ACCOUNT_NUMBER, -7 )) AS ALERT_FOR_MARGIN,
+			(SELECT DECODE(COUNT(1), 0, ' ', 1) AS ALERT							<!-- 資金振替チェックアラート(未成年口座)-->
+			   FROM SVC_ACCT_PROFILE_IFAP I1
+			  WHERE I1.PROFILE_NAME = 'MinorRelation' 
+					AND I1.PROFILE_VALUE = 'MINOR' 
+					AND I1.ACCT_ID = E.BUTEN_CODE || '-' || SUBSTR('000000' || E.ACCOUNT_NUMBER, -7 )) AS ALERT_FOR_MINOR,
+            (
+                SELECT
+                    DECODE(COUNT(1), 0, ' ', 1) AS ALERT  <!-- 資金振替チェックアラート(ハイブリッド口座) 02：預り金自動ｽｨｰﾌﾟ 且つ 2：申込済 -->
+                FROM
+                    ( 
+                        SELECT
+                            I1.CAU_BUTEN_CODE AS BUTEN_CODE 
+                        FROM
+                            CONTRACT_APPLICATION_USER I1 
+                        WHERE
+                            I1.CAU_BUTEN_CODE = E.BUTEN_CODE 
+                            AND TO_NUMBER(I1.CAU_ACCOUNT_NUMBER) = E.ACCOUNT_NUMBER 
+                            AND I1.CAU_APL_SERVICE_ID = '02' 
+                            AND I1.CAU_APL_STATUS = '2' 
+                        UNION ALL 
+                        SELECT
+                            I2.BUTEN_CODE AS BUTEN_CODE 
+                        FROM
+                            CONTRACT_APL_USER_SHINSEI I2 
+                        WHERE
+                            I2.BUTEN_CODE = E.BUTEN_CODE 
+                            AND I2.ACCOUNT_NUMBER = E.ACCOUNT_NUMBER
+                            AND I2.APL_SERVICE_ID = '02' 
+                            AND I2.APL_STATUS = '2'
+                    )
+            ) AS ALERT_FOR_SSNB,			
+			DECODE(D.DEPOSIT_TYPE, '4', '1', 'H', '1', ' ') AS ALERT_FOR_NISA,		<!-- 資金振替チェックアラート(NISA)-->
+			CASE WHEN D.WARNING_APPLY = '1' THEN D.WARNING_APPLY
+				 ELSE ' '
+			 END AS WARNING_APPLY,													<!-- ワーニング申請 -->
+			J.BB_CREATE_SECTION_NAME												<!-- セクション名 -->
+		  FROM CORDYS.T_IPO_PO_ORDER_DETAIL D													<!-- 【対面募集注文】 -->
+			   INNER JOIN MEDIATE_USER_ATTRIBUTE_INFO E							<!-- 【仲介業者顧客口座属性】 -->
+					   ON D.BUTEN_CODE = E.BUTEN_CODE
+					  AND D.ACCOUNT_NUMBER = E.ACCOUNT_NUMBER
+			   INNER JOIN M_IPO_PO_BB_PERIOD H									<!-- 【対面募集期間マスタ】 -->
+					   ON D.PRODUCT_CODE = H.PRODUCT_CODE
+					  AND D.PRESENTATION_FROM = H.PRESENTATION_FROM
+			   INNER JOIN ETINTRA.BB_ACCEPT J									<!-- 【ブックビルディング受付】 -->
+					   ON D.PRODUCT_CODE = J.BB_PRODUCT_CODE
+					  AND D.PRESENTATION_FROM = J.BB_PRESENTATION_FROM
+					  AND D.BUTEN_CODE = SUBSTR(J.BB_BRANCH_CODE,1,3)
+					  AND D.ACCOUNT_NUMBER = TO_NUMBER(J.BB_ACCOUNT_NUMBER)
+		 WHERE D.ORDER_STATUS = '9'												<!-- 注文状況：募集入力済み -->
+		 ORDER BY
+			D.BUTEN_CODE,
+			D.ACCOUNT_NUMBER,
+			D.PRODUCT_CODE
+	</select>
+
+	<update id="updateIpopoOrderStatus" statementType="PREPARED">
+		UPDATE /* @SQLID=SUB0204_02-05#SQL003#SQL005 */
+		    CORDYS.T_IPO_PO_ORDER_DETAIL
+		SET
+			ORDER_STATUS = #{statusAfter}
+			,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+			,UPDATE_USER = #{userId}
+			,SYS_ID = #{sysId}
+		WHERE
+			ORDER_STATUS = #{statusBefore}
+			<if test="sysDate != null and sysDate != ''">
+			AND NVL(UPDATE_TIME, CREATE_TIME) &lt;= TO_DATE(#{sysDate}, 'yyyyMMddhh24miss')
+			</if>
+			<if test="minKey != null and maxKey != null and minKey != '' and maxKey != ''">
+			AND BUTEN_CODE || LPAD(ACCOUNT_NUMBER, 7, 0) || PRODUCT_CODE BETWEEN #{minKey} AND #{maxKey}
+			</if>
+	</update>
+	
+	<select id="getOrderStatusCount" resultType="Integer" statementType="PREPARED">
+		SELECT /* @SQLID=SUB0204_02-05#SQL002 */
+			COUNT(1)
+		  FROM
+			ETINTRA.BB_ACCEPT A
+			INNER JOIN ETINTRA.BB_PRODUCT_MASTER B
+					ON A.BB_PRODUCT_CODE = B.BB_PRODUCT_CODE
+				   AND A.BB_PRESENTATION_FROM = TO_NUMBER(TO_CHAR(B.BB_PRESENTATION_FROM,'YYYYMMDD'))
+			INNER JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI
+					ON A.BB_BRANCH_CODE = RPAD(MUAI.BUTEN_CODE, 4, ' ')
+				   AND TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(MUAI.ACCOUNT_NUMBER)
+			INNER JOIN CORDYS.T_IPO_PO_ORDER_DETAIL D
+					ON A.BB_PRODUCT_CODE = D.PRODUCT_CODE
+				   AND A.BB_PRESENTATION_FROM = D.PRESENTATION_FROM
+				   AND A.BB_BRANCH_CODE = RPAD(D.BUTEN_CODE, 4, ' ')
+				   AND TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(D.ACCOUNT_NUMBER)
+		 WHERE
+			1 = 1
+			<if test="orderStatus != null and orderStatus != ''">
+			AND D.ORDER_STATUS = #{orderStatus}
+			</if>
+			<if test="sysDate != null and sysDate != ''">
+			AND NVL(D.UPDATE_TIME, D.CREATE_TIME) <![CDATA[<=]]> TO_DATE(#{sysDate}, 'yyyyMMddhh24miss')
+			</if>
+			<if test="minKey != null and maxKey != null and minKey != '' and maxKey != ''">
+			AND D.BUTEN_CODE || LPAD(D.ACCOUNT_NUMBER, 7, 0) || D.PRODUCT_CODE BETWEEN #{minKey} AND #{maxKey}
+			</if>
+	</select>
+</mapper>

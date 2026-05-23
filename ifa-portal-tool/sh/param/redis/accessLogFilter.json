@@ -1,0 +1,7 @@
+{
+    "ignorePathList": [
+        "/dynamicjs",
+        "/procedureWaiting",
+        "/procedureCompletionCheck"
+    ]
+}

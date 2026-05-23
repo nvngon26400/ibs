@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0501-02_1
+    画面名：為替取引注文取消確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaFxTradeOrderCancelConfirmMapper">
+    
+    <resultMap id="ResultMapselectSql003a" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaFxTradeOrderCancelConfirmSql003aResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapselectSql003b" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaFxTradeOrderCancelConfirmSql003bResponseModel" >
+    </resultMap>
+    <!-- 
+         SQLID：Sql001
+         SQL名：発注取消前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaFxTradeOrderCancelConfirmSql001" statementType="PREPARED">
+        INSERT INTO EXCHANGE_ORDER (
+            IFA_ORDER_NO, <!-- IFA注文番号 -->
+            IFA_ORDER_SUB_NO, <!-- IFA注文サブ番号 -->
+            BUTEN_CODE, <!-- 部店コード -->
+            ACCOUNT_NUMBER, <!-- 口座番号 -->
+            TRADE_TYPE, <!-- 取引種別 -->
+            FX_SURYO_METHOD, <!-- 数量の指定方法 -->
+            FX_SELLING_METHOD, <!-- 売却方法 -->
+            CURRENCY_CODE, <!-- 通貨コード -->
+            CURRENCY_NAME, <!-- 通貨名 -->
+            FX_ORDER_AMOUNT, <!-- 為替注文金額 -->
+            FX_TRADING, <!-- 為替取引 -->
+            APPLY_SPREAD, <!-- 適用スプレッド -->
+            FX_SPECIFIC_ACCOUNT_CODE, <!-- 口座分類（為替取引） -->
+            FX_DEPOSIT_TYPE, <!-- 預り区分（為替取引） -->
+            FX_TRADE_SERVICE_TYPE, <!-- 為替取引サービス種別 -->
+            FX_ORDER_STATUS, <!-- 為替取引注文状況 -->
+            FX_CYCLE_NO, <!-- 為替取引サイクル番号 -->
+            FX_EVENT_ID, <!-- 為替取引注文イベントID -->
+            ORDER_NO, <!-- 注文番号 -->
+            EXEC_DATETIME, <!-- 約定日時 -->
+            STL_DATE, <!-- 受渡日 -->
+            EXCHANGE_RATE, <!-- 為替レート -->
+            EXCHANGE_RATE_DATETIME, <!-- 為替レート日時 -->
+            STL_AMOUNT_YEN, <!-- 受渡金額（円貨） -->
+            ORDER_DATETIME, <!-- 注文日時 -->
+            ORDER_SHUBETSU, <!-- 注文種別表示 -->
+            API_ERROR_CODE, <!-- APIエラーコード -->
+            API_STATUS_CODE, <!-- APIステータスコード -->
+            API_MESSAGE, <!-- APIメッセージ -->
+            BROKER_CODE, <!-- 仲介業者コード -->
+            INTERMEDIARY_EMP_CD, <!-- 仲介業者営業員コード -->
+            CREATE_TIME, <!-- 作成日時 -->
+            CREATE_USER, <!-- 作成者 -->
+            UPDATE_TIME, <!-- 更新日時 -->
+            UPDATE_USER <!-- 更新者 -->
+        )
+        VALUES (
+            #{req.ifaOrderNo}, <!-- IFA注文番号 -->
+            #{req.ifaOrderSubNo}, <!-- IFA注文サブ番号 -->
+            #{req.butenCode}, <!-- 部店コード -->
+            #{req.accountNumber}, <!-- 口座番号 -->
+            #{req.tradeCd}, <!-- 取引種別 -->
+            null, <!-- 数量の指定方法 -->
+            null, <!-- 売却方法 -->
+            #{req.currencyCode}, <!-- 通貨コード -->
+            #{req.currency}, <!-- 通貨名 -->
+            #{req.fxOrderAmount}, <!-- 為替注文金額 -->
+            #{req.fxTrade}, <!-- 為替取引 -->
+            null, <!-- 適用スプレッド -->
+            #{req.accountClassFxTrade}, <!-- 口座分類（為替取引） -->
+            null, <!-- 預り区分（為替取引） -->
+            #{req.fxTradeServiceClass}, <!-- 為替取引サービス種別 -->
+            #{req.fxTradeOrderStatus}, <!-- 為替取引注文状況 -->
+            #{req.fxTradeCycleNumber}, <!-- 為替取引サイクル番号 -->
+            #{req.fxTradeOrderEventId}, <!-- 為替取引注文イベントID -->
+            #{req.orderNumber}, <!-- 注文番号 -->
+            null, <!-- 約定日時 -->
+            null, <!-- 受渡日 -->
+            null, <!-- 為替レート -->
+            null, <!-- 為替レート日時 -->
+            null, <!-- 受渡金額（円貨） -->
+            null, <!-- 注文日時 -->
+            null, <!-- 注文種別表示 -->
+            null, <!-- APIエラーコード -->
+            null, <!-- APIステータスコード -->
+            null, <!-- APIメッセージ -->
+            #{req.brokerCode}, <!-- 仲介業者コード -->
+            #{req.brokerChargeCode}, <!-- 仲介業者営業員コード -->
+            IFA_DATE_UTIL.IFA_GET_DATE, <!-- 作成日時 -->
+            #{req.creator}, <!-- 作成者 -->
+            IFA_DATE_UTIL.IFA_GET_DATE, <!-- 更新日時 -->
+            #{req.updateUser}<!-- 更新者 -->
+        )
+    </insert>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注取消後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaFxTradeOrderCancelConfirmSql002" statementType="PREPARED">
+        UPDATE 
+        EXCHANGE_ORDER SET 
+        <if test="!req.orderCancelErrorFlag">
+        FX_DEPOSIT_TYPE = #{req.depositTypeFxTrade}, <!-- 預り区分（為替取引） -->
+        EXEC_DATETIME = null, <!-- 約定日時 -->
+        EXCHANGE_RATE = null, <!-- 為替レート -->
+        STL_AMOUNT_YEN = null, <!-- 受渡金額（円貨） -->
+        ORDER_DATETIME = null, <!-- 注文日時 -->
+        ORDER_SHUBETSU = #{req.orderTypeDisplay}, <!-- 注文種別表示 -->
+        API_ERROR_CODE = #{req.apiErrorCode}, <!-- APIエラーコード -->
+        API_STATUS_CODE = #{req.apiStatusCode}, <!-- APIステータスコード -->
+        API_MESSAGE = SUBSTRB(#{req.apiMsg}, 1, 100), <!-- APIメッセージ -->
+        UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE, <!-- 更新日時 -->
+        UPDATE_USER = #{req.updateUser} <!-- 更新者 -->
+        </if>
+        <if test="req.orderCancelErrorFlag">
+        FX_DEPOSIT_TYPE = null, <!-- 預り区分（為替取引） -->
+        EXEC_DATETIME = null, <!-- 約定日時 -->
+        EXCHANGE_RATE = null, <!-- 為替レート -->
+        STL_AMOUNT_YEN = null, <!-- 受渡金額（円貨） -->
+        ORDER_DATETIME = null, <!-- 注文日時 -->
+        ORDER_SHUBETSU = null, <!-- 注文種別表示 -->
+        API_ERROR_CODE = #{req.apiErrorCode}, <!-- APIエラーコード -->
+        API_STATUS_CODE = #{req.apiStatusCode}, <!-- APIステータスコード -->
+        API_MESSAGE = SUBSTRB(#{req.apiMsg}, 1, 100), <!-- APIメッセージ -->
+        UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE, <!-- 更新日時 -->
+        UPDATE_USER = #{req.updateUser} <!-- 更新者 -->
+        </if>
+        WHERE
+        IFA_ORDER_NO = #{req.ifaOrderNo}
+        AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+    </update>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：クエリ
+        SQLタイプ：select
+    -->
+    <select id="selectIfaFxTradeOrderCancelConfirmSql004" resultType="String" statementType="PREPARED">
+        SELECT IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') || LPAD(SEQ_EXCHANGE_ORDER.NEXTVAL, 10, '0') AS IFA_ORDER_NO FROM DUAL
+    </select>
+    
+</mapper>

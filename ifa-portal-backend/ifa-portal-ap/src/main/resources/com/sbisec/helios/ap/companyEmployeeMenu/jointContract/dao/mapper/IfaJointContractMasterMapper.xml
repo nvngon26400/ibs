@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0513_01-01
+    画面名：共同募集契約マスタ
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.jointContract.dao.mapper.IfaJointContractMasterMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.jointContract.dao.model.IfaJointContractMasterSql001ResponseModel" >
+        <result property="brokerCode"     column="BROKER_CODE"      typeHandler="StringTypeHandler"/>
+        <result property="brokerName"     column="BRANCH_NAME"      typeHandler="StringTypeHandler"/>
+        <result property="contractStatus" column="CONTRACT_STATUS"  typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapSql002" type="java.lang.String" >
+        <result property="contractStatus" column="CONTRACT_STATUS"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：共同募集契約マスタ情報を検索する。
+        SQLタイプ：select
+    -->
+    <select id="selectIfaJointContractMasterSql001" resultMap="ResultMapSql001" statementType="PREPARED">
+        SELECT * FROM (
+            SELECT /* @SQLID=SUB0513_01-01#Sql001 */
+                count(*) over () as TOTAL_COUNT                <!-- 総件数 -->
+                , A.BROKER_CODE                              <!-- 仲介業者コード -->
+                , B.BRANCH_NAME                              <!-- 仲介業者支店名 -->
+                , A.CONTRACT_STATUS                          <!-- 契約状態 -->
+            FROM 
+                CORDYS.M_JOINT_BROKER  A                     <!-- テーブル「共同募集契約先仲介業者」 -->
+            LEFT OUTER JOIN CORDYS.MEDIATE_BRANCH  B         <!-- テーブル「仲介業者支店」 -->
+                ON A.BROKER_CODE = B.BROKER_CODE             <!-- 仲介業者コード -->
+                AND B.BROKER_BRANCH_KIND = '00'              <!-- 仲介業者支店種別 -->
+            WHERE
+                1 = 1
+                <!-- 仲介業者コードが存在する場合 -->
+                <if test='req.brokerCode != null and req.brokerCode != ""'>
+                    AND A.BROKER_CODE = #{req.brokerCode}
+                </if>
+                <!-- 仲介業者名が存在する場合 -->
+                <if test='req.brokerName != null and req.brokerName != ""'>
+                    AND UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(B.BRANCH_NAME)), 'kana_fwkatakana')
+                         LIKE '%' || UTL_I18N.TRANSLITERATE(
+                         UPPER(TO_MULTI_BYTE((#{req.brokerName}))), 'kana_fwkatakana') || '%'
+                </if>
+                <!-- 共募契約が△："全て"以外の場合のみ指定する -->
+                <if test='req.jointContract == "0" or req.jointContract == "1"'>
+                    AND A.CONTRACT_STATUS = #{req.jointContract}
+                </if>
+                <!-- 削除フラグ -->
+                AND A.DELETE_FLG = '0'
+    
+            ORDER BY
+                A.BROKER_CODE ASC                           <!-- 仲介業者コード -->
+            )
+        WHERE ROWNUM &lt;= #{req.maxRowNum}                 <!-- 最大件数 -->
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：共同募集契約先仲介業者取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaJointContractMasterSql002" resultMap="ResultMapSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0513_01-01#Sql002 */
+            CONTRACT_STATUS                          <!-- 契約状態 -->
+        FROM 
+            CORDYS.M_JOINT_BROKER                    <!-- テーブル「共同募集契約先仲介業者」 -->
+        WHERE
+            BROKER_CODE = #{req.brokerCode}          <!-- 仲介業者コード -->
+            AND DELETE_FLG = '0'                     <!-- 削除フラグ -->
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：共同募集契約先仲介業者変更
+        SQLタイプ：update
+    -->
+    <update id="updateIfaJointContractMasterSql003" statementType="PREPARED">
+        UPDATE  /* @SQLID=SUB0513_01-01#Sql003 */
+            CORDYS.M_JOINT_BROKER                        <!-- テーブル「共同募集契約先仲介業者」 -->
+        <set>
+            CONTRACT_STATUS = #{req.contractStatus}      <!-- 契約状態 -->
+        </set>
+        WHERE 
+            BROKER_CODE = #{req.brokerCode}              <!-- 仲介業者コード -->
+    </update>
+    
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：共同募集契約先仲介業者削除
+        SQLタイプ：update
+    -->
+    <update id="updateIfaJointContractMasterSql004" statementType="PREPARED">
+        UPDATE  /* @SQLID=SUB0513_01-01#Sql004 */
+            CORDYS.M_JOINT_BROKER               <!-- テーブル「共同募集契約先仲介業者」 -->
+        <set>
+            DELETE_FLG = '1'                    <!-- 削除フラグ -->
+        </set>
+        WHERE 
+            BROKER_CODE = #{req.brokerCode}     <!-- 仲介業者コード -->
+    </update>
+    
+</mapper>

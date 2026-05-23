@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB020301_02-02
+    画面名：米株信用建玉期日アラート一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaForeignMarginPositionDueDateAlertMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaForeignMarginPositionDueDateAlertSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaForeignMarginPositionDueDateAlertSql001ResponseModel" >
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：決済期日顧客情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginPositionDueDateAlertSql001" resultMap="ResultMapIfaForeignMarginPositionDueDateAlertSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020301_02-02#Sql001 */
+        COUNT(*) OVER() AS totalCount,
+        A.BROKER_CODE AS brokerCode,
+        A.BROKER_BRANCH_CODE AS brokerageBranchCode,
+        A.BROKER_NAME AS brokerName,
+        A.BROKER_CHARGE_CODE AS empCode,
+        A.BROKER_CHARGE_NAME AS brokerChargeName,
+        A.CUSTOMER_ATTRIBUTE_NAME AS courseName,
+        A.BUTEN_CODE AS butenCode,
+        A.ACCOUNT_NUMBER AS accountNumber,
+        A.NAME_KANJI AS customerName,
+        A.BRAND_CODE AS brandCode,
+        A.BRAND_NAME AS brandName,
+        A.EXEC_BASE_BALANCE AS contractStandardDeposit,
+        A.DISPLAY_LAST_TRADE_DATE AS recentRepayDeadline,
+        B.BRANCH_NAME AS brokerBranchName,
+        C.NAME_KANA AS customerNameKana
+        FROM
+        V_BALANCE A
+        LEFT JOIN
+        MEDIATE_BRANCH B
+        ON
+        A.BROKER_CODE = B.BROKER_CODE
+        AND
+        A.BROKER_BRANCH_CODE ＝ B.BROKER_BRANCH_CODE
+        AND
+        B.DELETE_FLG = '0'
+        INNER JOIN
+        MEDIATE_USER_ATTRIBUTE_INFO C
+        ON
+        A.BUTEN_CODE = C.BUTEN_CODE
+        AND
+        A.ACCOUNT_NUMBER = C.ACCOUNT_NUMBER
+        WHERE
+        A.DATE_YMD = #{req.dateYmd}
+        AND A.PRODUT_CD ＝ '29'
+        AND
+        A.DISPLAY_LAST_TRADE_DATE &lt;= #{req.displayLastTradeDate}
+        <if test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+            AND (A.BROKER_CODE IN
+            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                <if test="index % 1000 == 0 and index != 0">
+                    ) OR A.BROKER_CODE IN(
+                </if>
+                <if test="index % 1000 != 0">
+                    ,
+                </if>
+                #{brokerCharge.brokerCode}
+            </foreach>
+            )
+        </if>
+        <if test='req.privId != "1" and req.privId != "3" and req.privId != "4" and req.privId != "5"'>
+            AND ((A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN
+            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                <if test="index % 1000 == 0 and index != 0">
+                    ) OR (A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN(
+                </if>
+                <if test="index % 1000 != 0">
+                    ,
+                </if>
+                (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+            </foreach>
+            )
+        </if>
+       <if test='req.brokerCode != null and req.brokerCode != "" and req.chkBrokerCodeExclude == "false"'>
+            AND
+            A.BROKER_CODE IN
+            <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                #{brokerCode}
+            </foreach>
+        </if>
+        <if test='req.brokerCode != null and req.brokerCode != "" and req.chkBrokerCodeExclude == "true"'>
+            AND
+            A.BROKER_CODE NOT IN
+            <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                #{brokerCode}
+            </foreach>
+        </if>
+        <if test='req.branchCode != null and req.branchCode != ""'>
+            AND
+            A.BROKER_BRANCH_CODE = #{req.branchCode}
+        </if>
+        <if test='req.empCode != null and req.empCode != ""'>
+            AND
+            A.BROKER_CHARGE_CODE = #{req.empCode}
+        </if>
+        <if test='req.butenCode != null and req.butenCode != ""'>
+            AND
+            A.BUTEN_CODE = #{req.butenCode}
+        </if>
+        <if test='req.accountNumber != null and req.accountNumber != ""'>
+            AND
+            A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        </if>
+        <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "0"'>
+            AND
+            (A.NAME_KANJI = #{req.customerNameKanjiKana} OR C.NAME_KANA = #{req.customerNameKanjiKana})
+        </if>
+        <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "1"'>
+            AND
+            (A.NAME_KANJI like CONCAT(#{req.customerNameKanjiKana}, '%') OR C.NAME_KANA like CONCAT(#{req.customerNameKanjiKana}, '%'))
+        </if>
+        <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "2"'>
+            AND
+            (A.NAME_KANJI like CONCAT(CONCAT('%', #{req.customerNameKanjiKana}), '%') OR C.NAME_KANA like CONCAT(CONCAT('%', #{req.customerNameKanjiKana}), '%'))
+        </if>
+        AND
+        A.CUSTOMER_ATTRIBUTE IN
+        <foreach collection="req.course.split(',')" item="course" open="(" close=")" separator=",">
+            #{course}
+        </foreach>
+        ORDER BY
+        A.BROKER_CODE,A.BROKER_CHARGE_CODE,A.BUTEN_CODE,A.ACCOUNT_NUMBER,A.BRAND_CODE
+        FETCH FIRST 5000 ROWS ONLY
+    </select>
+
+    <!--
+        SQLID：Sql005
+        SQL名：IFA顧客アラート(日数)取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginPositionDueDateAlertSql005" resultType="java.lang.Integer">
+        SELECT /* @SQLID=SUB020301_02-02#Sql005 */
+            NAME
+        FROM
+            M_CODE
+        WHERE
+            START_DATE <![CDATA[<=]]> IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        AND
+            END_DATE >= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        AND
+            CODE_TYPE = '67'
+        AND
+            CODE_1 = '01'
+        AND
+            CODE_2 = 'MARGIN_SDATE'
+    </select>
+
+    <!--
+        SQLID：Sql006
+        SQL名：営業日取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginPositionDueDateAlertSql006" resultType="java.lang.String">
+        SELECT /* @SQLID=SUB020301_02-02#Sql006 */
+            MIN(C_TARGET_DATE)
+        FROM
+            M_CALENDAR
+        WHERE
+            C_CALENDAR_ID = 'T003'
+            AND C_ISO_COUNTRY_CODE = 'JP'
+            AND C_TARGET_DATE <![CDATA[>=]]> IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND C_BUS_NONBUS_DIV = '2'
+            AND C_DELETE_FLG = '0'
+    </select>
+
+
+
+</mapper>

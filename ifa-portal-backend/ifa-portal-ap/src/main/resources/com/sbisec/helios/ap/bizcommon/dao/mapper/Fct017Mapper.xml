@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct017Mapper">
+    
+    <resultMap id="fct017Sql001ResponseModel" type="com.sbisec.helios.ap.bizcommon.dao.model.Fct017Sql001ResponseModel"/>
+
+    <!--SQL001:受入書類取得__検索1-->
+    <select id="acceptanceAcquire" resultMap="fct017Sql001ResponseModel" statementType="PREPARED">
+        select /* @SQLID=FCT017#SQL001 */
+            * 
+        from
+            (select
+                A.ACCEPTANCE_CD1 as acceptanceCd1,
+                B.CODE_2 as code2BondingAcceptanceCd1,
+                B.NAME as nameBondingAcceptanceCd1,
+                A.ACCEPTANCE_CD2 as acceptanceCd2,
+                B.CODE_2 as code2BondingAcceptanceCd2,
+                B.NAME as nameBondingAcceptanceCd2,
+                A.ACCEPTANCE_CD3 as acceptanceCd3,
+                B.CODE_2 as code2BondingAcceptanceCd3,
+                B.NAME as nameBondingAcceptanceCd3
+            from INT_TRUST_ATTRIBUTE A
+            left join (
+                <include refid="acceptanceAcquire_2"/>
+                ) B
+            on 
+                A.ACCEPTANCE_CD1 = B.CODE_1
+                or A.ACCEPTANCE_CD2 = B.CODE_1
+                or A.ACCEPTANCE_CD3 = B.CODE_1
+            where 
+                #{nriCd} = substr(A.BR_SER_NO,2,4) || ' ' || substr(A.PECULIAR_CD,4,2)
+            order by A.SET_DATE desc
+            )
+        where rownum=1
+    </select>
+    
+    <!--SQL001:受入書類取得__検索2-->
+    <sql id="acceptanceAcquire_2">
+        select /* @SQLID=FCT017#SQL001_2 */
+            CODE_1,
+            CODE_2,
+            NAME
+        from M_CODE
+        where 
+            CODE_TYPE = '60'
+            and START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            and END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+    </sql>
+    
+    <!--SQL002:銘柄別書類受入状況取得-->
+    <select id="brandDocumentAcceptanceAcquire" resultType="java.lang.Integer" statementType="PREPARED">
+        select /* @SQLID=FCT017#SQL002 */
+            count(1)
+        from 
+            DOCUMENT_ACCEPTANCE_DATA A
+        left join (
+                <include refid="brandDocumentAcceptanceAcquire_2"/>
+                ) B
+        on 
+            A.BUTEN_CD = B.BUTEN_CD
+            and A.KOUZA_NO = B.KOUZA_NO
+        where
+            ((
+                substr(A.BUTEN_CD,2,3) = #{butenCode}
+                and TO_NUMBER(A.KOUZA_NO) = TO_NUMBER(#{accountNumber})
+            )
+            or 
+            (
+                substr(A.BUTEN_CD,2,3) = substr(B.OLD_BRANCH_NO,1,3)
+                and TO_NUMBER(A.KOUZA_NO) = TO_NUMBER(B.OLD_ACCOUNT_NO)
+            ))
+            and A.NRI_CD = CONCAT('${brandCode}',' ')
+            and A.SHORUI_CD = #{shoruiCd}
+            and A.YUKO_KIGEN &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+    </select>
+    
+        <!--SQL002:銘柄別書類受入状況取得__検索2-->
+    <sql id="brandDocumentAcceptanceAcquire_2">
+        select /* @SQLID=FCT017#SQL002_2 */
+            C.BUTEN_CD,
+            C.KOUZA_NO,
+            D.OLD_BRANCH_NO,
+            D.OLD_ACCOUNT_NO
+        from 
+            DOCUMENT_ACCEPTANCE_DATA C
+        inner join 
+            CALLCENTER.CHANGE_ACCOUNT D
+        on 
+            substr(C.BUTEN_CD,2,3) = substr(D.NEW_BRANCH_NO,1,3)
+            and TO_NUMBER(C.KOUZA_NO) = TO_NUMBER(D.NEW_ACCOUNT_NO)
+        where
+            substr(C.BUTEN_CD,2,3) = #{butenCode}
+            and TO_NUMBER(C.KOUZA_NO) = TO_NUMBER(#{accountNumber})
+    </sql>
+    
+    <!--SQL003:共通書類受入状況取得-->
+    <select id="commonDocumentAcceptanceAcquire" resultType="java.lang.Integer" statementType="PREPARED">
+        select /* @SQLID=FCT017#SQL003 */
+            count(1)
+        from
+            DOCUMENT_ACCEPTANCE_DATA A
+        left join (
+                <include refid="commonDocumentAcceptanceAcquire_2"/>
+                ) B
+        on 
+            A.BUTEN_CD = B.BUTEN_CD
+            and TO_NUMBER(A.KOUZA_NO) = TO_NUMBER(B.KOUZA_NO)
+        where
+            ((
+                substr(A.BUTEN_CD,2,3) = #{butenCode}
+                and TO_NUMBER(A.KOUZA_NO) = TO_NUMBER(#{accountNumber})
+            )
+            or 
+            (
+                substr(A.BUTEN_CD,2,3) = substr(B.OLD_BRANCH_NO,1,3)
+                and TO_NUMBER(A.KOUZA_NO) = TO_NUMBER(B.OLD_ACCOUNT_NO)
+            ))
+            and A.SHORUI_CD = #{shoruiCd}
+            and A.YUKO_KIGEN &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+    </select>
+    
+    <!--SQL003:共通書類受入状況取得__検索2-->
+    <sql id="commonDocumentAcceptanceAcquire_2">
+        select /* @SQLID=FCT017#SQL003_2 */
+            C.BUTEN_CD,
+            C.KOUZA_NO,
+            D.OLD_BRANCH_NO,
+            D.OLD_ACCOUNT_NO
+        from 
+            DOCUMENT_ACCEPTANCE_DATA C
+        inner join 
+            CALLCENTER.CHANGE_ACCOUNT D
+        on 
+            substr(C.BUTEN_CD,2,3) = substr(D.NEW_BRANCH_NO,1,3)
+            and TO_NUMBER(C.KOUZA_NO) = TO_NUMBER(D.NEW_ACCOUNT_NO)
+        where
+            substr(C.BUTEN_CD,2,3) = #{butenCode}
+            and TO_NUMBER(C.KOUZA_NO) = TO_NUMBER(#{accountNumber})
+    </sql>
+
+</mapper>

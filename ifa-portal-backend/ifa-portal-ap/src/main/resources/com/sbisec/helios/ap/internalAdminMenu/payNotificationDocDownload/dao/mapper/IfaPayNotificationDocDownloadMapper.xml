@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0405-01
+    画面名：支払通知書ダウンロード
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.payNotificationDocDownload.dao.mapper.IfaPayNotificationDocDownloadMapper">
+    
+    <resultMap id="ResultMapIfaPayNotificationDocDownloadSql001" type="com.sbisec.helios.ap.internalAdminMenu.payNotificationDocDownload.dao.model.IfaPayNotificationDocDownloadSql001ResponseModel" >
+        <result property="functionId" column="FUNC_ID" />
+        <result property="categoryId" column="CAT_ID" />
+        <result property="fileDirectory" column="FILE_DIR" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaPayNotificationDocDownloadSql002" type="com.sbisec.helios.ap.internalAdminMenu.payNotificationDocDownload.dao.model.IfaPayNotificationDocDownloadSql002ResponseModel" >
+        <result property="dateYm" column="SUM_DATE_YM" />
+        <result property="brokerCode" column="BROKER_CODE" />
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="versionNumber" column="VERSION_NUMBER" />
+        <result property="firstConfirmDateTime" column="FIRST_CONFIRM_TIME" />
+        <result property="lastConfirmDateTime" column="LAST_CONFIRM_TIME" />
+        <result property="dl" column="DOWNLOAD" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaPayNotificationDocDownloadSql003" type="com.sbisec.helios.ap.internalAdminMenu.payNotificationDocDownload.dao.model.IfaPayNotificationDocDownloadSql003ResponseModel" >
+        <result property="downloadFileName" column="FILE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：仲介業者支払通知書格納先ディレクトリ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaPayNotificationDocDownloadSql001" resultMap="ResultMapIfaPayNotificationDocDownloadSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0405-01#Sql001 */
+            FUNC_ID
+           ,CAT_ID
+           ,FILE_DIR
+        FROM
+            TB_MED_TEMP_FILE_DIR
+        WHERE
+            FUNC_ID = 'M10'
+            AND CAT_ID = '0'
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：仲介業者支払通知書情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaPayNotificationDocDownloadSql002" resultMap="ResultMapIfaPayNotificationDocDownloadSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0405-01#Sql002 */
+            SUM_DATE_YM
+           ,BROKER_CODE
+           ,BROKER_NAME
+           ,VERSION_NUMBER
+           ,FIRST_CONFIRM_TIME
+           ,LAST_CONFIRM_TIME
+           ,'DL' AS DOWNLOAD
+        FROM
+            T_PAYMENT_NOTICE
+        WHERE
+            DELETE_FLG = '0'
+            AND SUM_DATE_YM &gt;= TO_CHAR(TO_DATE(#{req.targetDateYmFrom}, 'YYYY/MM'), 'YYYYMM')
+            AND SUM_DATE_YM &lt;= TO_CHAR(TO_DATE(#{req.targetDateYmTo}, 'YYYY/MM'), 'YYYYMM')
+
+            <!-- 仲介業者コードに入力値がある かつ 仲介業者除外がfalseの場合 -->
+            <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "false"'>
+                AND BROKER_CODE IN
+                <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            
+            <!-- 仲介業者コードに入力値がある かつ 仲介業者除外がtrueの場合 -->
+             <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "true"'>
+                 AND BROKER_CODE NOT IN
+                 <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                     #{brokerCode}
+                 </foreach>
+             </if>
+
+            <!-- ユーザ共通情報.権限コード != SBI証券本店の場合 -->
+            <if test='req.privId != "1"'>
+                AND ((BROKER_CODE IN
+                <foreach item="brokerCharge" collection="req.brokerChargeList" index="index" open="(" separator="" close=")">
+                    <if test="index % 1000 == 0 and index != 0">
+                        ) OR BROKER_CODE IN (
+                    </if>
+                    <if test="index % 1000 != 0">
+                        ,
+                    </if>
+                    #{brokerCharge.brokerCode}
+                </foreach>
+                ))
+            </if>
+            
+            ORDER BY
+                SUM_DATE_YM DESC,
+                BROKER_CODE ASC
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：支払通知書ダウンロードファイル名取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaPayNotificationDocDownloadSql003" resultMap="ResultMapIfaPayNotificationDocDownloadSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0405-01#Sql003 */
+            FILE_NAME
+        FROM
+            T_PAYMENT_NOTICE
+        WHERE
+            DELETE_FLG = '0'
+            AND SUM_DATE_YM = TO_CHAR(TO_DATE(#{req.dateYm}, 'YYYY/MM'), 'YYYYMM')
+            AND BROKER_CODE = #{req.brokerCode}
+            AND VERSION_NUMBER = TO_NUMBER(#{req.versionNumber})
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：仲介業者支払通知書確認日時更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaPayNotificationDocDownloadSql004" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0405-01#Sql004 */ 
+            T_PAYMENT_NOTICE 
+        SET
+            FIRST_CONFIRM_TIME = NVL(FIRST_CONFIRM_TIME,  IFA_DATE_UTIL.IFA_GET_DATE),
+            LAST_CONFIRM_TIME = IFA_DATE_UTIL.IFA_GET_DATE,
+            UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE,
+            UPDATE_USER = #{req.userId} 
+        WHERE
+            DELETE_FLG = '0'
+            AND SUM_DATE_YM = TO_CHAR(TO_DATE(#{req.dateYm}, 'YYYY/MM'), 'YYYYMM')
+            AND BROKER_CODE = #{req.brokerCode}
+            AND VERSION_NUMBER = TO_NUMBER(#{req.versionNumber})
+    </update>
+    
+</mapper>

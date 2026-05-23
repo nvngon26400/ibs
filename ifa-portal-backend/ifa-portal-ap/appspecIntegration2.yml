@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: ap-2.war
+    destination: /opt/tomcat/webapps
+permissions:
+  - object: /opt/tomcat/webapps/ap-2.war
+    owner: tomcat
+    group: tomcat
+file_exists_behavior: OVERWRITE

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct025Mapper">
+
+    <resultMap
+        type="com.sbisec.helios.ap.bizcommon.dao.model.Fct025Sql001ResponseModel"
+        id="sql001Response">
+    </resultMap>
+
+    <resultMap
+        type="com.sbisec.helios.ap.bizcommon.dao.model.Fct025Sql002ResponseModel"
+        id="sql002Response">
+    </resultMap>
+
+    <!-- SQL001.国内投信E*TRADE扱い区分取得 -->
+    <select id="getFct025Sql001" resultMap="sql001Response"
+        statementType="PREPARED"> 
+        SELECT 
+        /* @SQLID=FCT025#Sql001 */ 
+        M_F_NRICODE AS nriCode
+        , M_F_ET_KUBUN AS etType
+        FROM 
+        FUND 
+        WHERE 
+        M_F_TYPE IN ('1','2')
+        AND M_F_DELFLG = '0'
+        AND M_F_ET_START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD') 
+        AND M_F_NRICODE IN
+        <choose>
+            <when test="fct025Sql001RequestModel.nriCodeList.size() > 0">
+                <foreach item="nriCode" index="index" collection="fct025Sql001RequestModel.nriCodeList" open="(" separator="," close=")">
+                   #{nriCode} || ' '
+                </foreach>
+            </when>
+                <otherwise>
+                    ('')
+                </otherwise>
+        </choose>
+    </select>
+
+    <!-- SQL002.国内投信購入可否判定区分、取扱仲介業者取得 -->
+    <select id="getFct025Sql002" resultMap="sql002Response"
+        statementType="PREPARED">
+        SELECT
+        /* @SQLID=FCT025#Sql002 */
+        FUND.M_F_NRICODE AS nriCode
+        , FUND.M_F_MD_BUY_KUBUN AS buyType
+        , FUND_INFORMATION.F_D_MEDIATION_KBN AS mediationType
+        FROM
+        FUND
+        LEFT JOIN 
+        FUND_INFORMATION
+        ON
+        FUND.M_F_CODE = FUND_INFORMATION.F_D_CODE
+        WHERE
+        FUND.M_F_TYPE IN ('1','2')
+        AND FUND.M_F_DELFLG = '0'
+        AND FUND.M_F_ET_START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD') 
+        AND FUND.M_F_NRICODE IN
+        <choose>
+            <when test="fct025Sql002RequestModel.nriCodeList.size() > 0">
+                <foreach item="nriCode" index="index" collection="fct025Sql002RequestModel.nriCodeList" open="(" separator="," close=")">
+                   #{nriCode} || ' '
+                </foreach>
+             </when>
+             <otherwise>
+                ('')
+             </otherwise>
+        </choose>
+    </select>
+
+</mapper>

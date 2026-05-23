@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020302_0104-01
+    画面名：利金・償還金支払予定一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaCouponRedemptionPaymentScheduleListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaCouponRedemptionPaymentScheduleListSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaCouponRedemptionPaymentScheduleListSql001ResponseModel" >
+        <result property="brokerChargeName" column="brokerChargeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="courceName" column="courceName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securiytClassName" column="securiytClassName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brandName" column="brandName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="branchName" column="branchName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="customerNameKanji" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="customerNameKana" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerName" column="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCouponRedemptionPaymentScheduleListSql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaCouponRedemptionPaymentScheduleListSql002ResponseModel" >
+        <result property="oneMonth10PercentDeclineBrandListComment" column="COMMENT" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：利金償還金支払予定一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCouponRedemptionPaymentScheduleListSql001" resultMap="ResultMapIfaCouponRedemptionPaymentScheduleListSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-01#Sql001 */
+        *
+        FROM (
+            SELECT
+                COUNT(*) OVER() AS totalRow
+                ,VP.BROKER_CODE AS brokerCode
+                ,VP.BROKER_CHARGE_CODE AS empCode
+                ,VP.BROKER_CHARGE_NAME AS brokerChargeName
+                ,VP.BUTEN_CODE AS buten
+                ,VP.ACCOUNT_NUMBER AS accountNumber
+                ,VP.DEALER_NUMBER AS dealerNumber
+                ,VP.CUSTOMER_ATTRIBUTE_NAME AS courceName
+                ,VP.CUSTOMER_ATTRIBUTE AS customerAttribute
+                ,VP.PRODUT_NAME AS securiytClassName
+                ,VP.BRAND_CODE AS brandCode
+                ,VP.BRAND_NAME AS brandName
+                ,VP.EXEC_BASE_BALANCE AS contractStandardDeposit
+                ,VP.CURRENCY AS currency
+                ,VP.PAYMENT_NAME AS paymentClass
+                ,VP.PAYMENT_TYPE AS paymentType
+                ,TO_CHAR(TO_DATE(VP.SCHEDULE_DATE,'YYYY/MM/DD'),'YYYY/MM/DD') AS scheduleDate
+                ,VP.NEXT_INTEREST AS nextInterest
+                ,VP.SCHEDULE_PRICE AS schedulePrice
+                ,VP.BROKER_BRANCH_CODE AS branchCode
+                ,MB2.BRANCH_NAME AS branchName
+                ,MUAI.NAME_KANJI AS customerNameKanji
+                ,MUAI.NAME_KANA AS customerNameKana
+                ,MB.BRANCH_NAME AS brokerName
+                ,SBEP.SBEP_EARLY_PAYMENT_JUDGE_DATE AS couponDeterminationDate
+                ,NVL(SBJM.KI_COUNT,0) AS kiCount
+            FROM V_PAYMENT VP
+            INNER JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                ON VP.BUTEN_CODE = MUAI.BUTEN_CODE
+                AND VP.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                AND VP.BROKER_CODE = MUAI.BROKER_CODE
+            LEFT OUTER JOIN MEDIATE_BRANCH MB
+                ON VP.BROKER_CODE = MB.BROKER_CODE
+                AND MB.BROKER_BRANCH_KIND = '00'
+                AND MB.DELETE_FLG = '0'
+            LEFT OUTER JOIN MEDIATE_BRANCH MB2
+                ON VP.BROKER_CODE = MB2.BROKER_CODE
+                AND VP.BROKER_BRANCH_CODE = MB2.BROKER_BRANCH_CODE
+                AND MB2.DELETE_FLG = '0'
+            LEFT OUTER JOIN (
+                SELECT
+                    SBEP.SBEP_BOND_CODE
+                    ,SCHEDULE_DATE
+                    ,MAX(SBEP.SBEP_EARLY_PAYMENT_JUDGE_DATE) AS SBEP_EARLY_PAYMENT_JUDGE_DATE
+                FROM STRUCTURED_BOND_EARLY_PAY SBEP
+                LEFT OUTER JOIN (
+                    SELECT DISTINCT
+                        BRAND_CODE
+                        ,SCHEDULE_DATE
+                    FROM  V_PAYMENT
+                ) VP
+                    ON VP.BRAND_CODE = SBEP.SBEP_BOND_CODE
+                WHERE VP.SCHEDULE_DATE &gt; SBEP.SBEP_EARLY_PAYMENT_JUDGE_DATE
+                GROUP BY SBEP.SBEP_BOND_CODE, SCHEDULE_DATE
+            ) SBEP
+                ON VP.BRAND_CODE = SBEP.SBEP_BOND_CODE
+                AND VP.SCHEDULE_DATE = SBEP.SCHEDULE_DATE
+            LEFT OUTER JOIN (
+                SELECT
+                    SBJM_BOND_CODE
+                    ,SUM(CASE WHEN SBJM_NOCKIN_ONSET_DATE IS NOT NULL THEN 1 ELSE 0 END) AS KI_COUNT
+                FROM STRUCTURED_BOND_JUDGE_MST
+                GROUP BY SBJM_BOND_CODE
+            ) SBJM
+                ON VP.BRAND_CODE = SBJM.SBJM_BOND_CODE
+            WHERE
+                1=1
+                <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                    AND VP.BUTEN_CODE = #{req.butenCode}
+                </if>
+                <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                    AND VP.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                </if>
+                <if test="req.periodYmFrom != null and req.periodYmFrom != ''.toString()">
+                    AND TO_DATE(VP.SCHEDULE_DATE,'yyyymmdd') &gt;= TO_DATE(#{req.periodYmFrom},'yyyy/mm/dd')
+                </if>
+                <if test="req.periodYmTo != null and req.periodYmTo != ''.toString()">
+                    AND TO_DATE(VP.SCHEDULE_DATE,'yyyymmdd') &lt;= TO_DATE(#{req.periodYmTo},'yyyy/mm/dd')
+                </if>
+                <if test="req.securiytClassList != null and !req.securiytClassList.isEmpty()">
+                    AND VP.PRODUT_CD IN 
+                    <foreach item="item" index="index"  collection="req.securiytClassList" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="req.brandCode != null and req.brandCode != ''.toString()">
+                    AND LPAD(VP.BRAND_CODE,12,'0') = LPAD(#{req.brandCode},12,'0')
+                </if>
+                <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                    <choose>
+                        <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                            AND VP.BROKER_CODE NOT IN 
+                        </when>
+                        <otherwise>
+                            AND VP.BROKER_CODE IN 
+                        </otherwise>
+                    </choose>
+                    <foreach item="item" index="index"  collection="req.brokerCodeList" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if> 
+                <if test="req.empCode != null and req.empCode != ''.toString()">
+                    AND VP.BROKER_CHARGE_CODE = #{req.empCode}
+                </if>
+                <choose>
+                    <when test='req.privId == "1"'>
+                        AND 1 = 1
+                    </when>
+                    <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                        AND (
+                        <trim prefixOverrides="OR">
+                            <foreach item="item" collection="req.brokerChargeList" separator="OR">
+                                (VP.BROKER_CODE = #{item.brokerCode})
+                            </foreach>
+                        </trim>
+                        )
+                    </when>
+                    <otherwise>
+                        AND (
+                        <trim prefixOverrides="OR">
+                            <foreach item="item" collection="req.brokerChargeList" separator="OR">
+                                (VP.BROKER_CODE = #{item.brokerCode} AND VP.BROKER_CHARGE_CODE = #{item.empCode})
+                            </foreach>
+                        </trim>
+                        )
+                    </otherwise>
+                </choose>
+                <if test="req.branchCode != null and req.branchCode != ''.toString()">
+                    AND VP.BROKER_BRANCH_CODE = #{req.branchCode}
+                </if>
+                <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != ''.toString()">
+                    <choose>
+                        <when test="req.customerNameKanjiKanaTerms == '1'.toString()">
+                            AND (
+                                MUAI.NAME_KANJI = #{req.customerNameKanjiKana}
+                                OR MUAI.NAME_KANA = #{req.customerNameKanjiKana}
+                            )
+                        </when>
+                        <when test="req.customerNameKanjiKanaTerms == '2'.toString()">
+                            AND (
+                                MUAI.NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%
+                                 OR MUAI.NAME_KANA LIKE #{req.customerNameKanjiKana} || '%'
+                            )
+                        </when>
+                        <when test="req.customerNameKanjiKanaTerms == '3'.toString()">
+                            AND (
+                                MUAI.NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                                OR MUAI.NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                            )
+                        </when>
+                    </choose>
+                </if>
+                AND VP.CUSTOMER_ATTRIBUTE IN 
+                <foreach item="item" index="index"  collection="req.course" open="(" separator="," close=")">
+                    <if test="item.isSelected == true">
+                        #{item.id}
+                    </if>
+                </foreach>
+            <choose>
+                <when test="req.privId == '1'.toString() or req.privId == '2'.toString()">
+                    ORDER BY VP.SCHEDULE_DATE DESC, VP.BROKER_CODE ASC, VP.BUTEN_CODE ASC, VP.ACCOUNT_NUMBER ASC
+                </when>
+                <otherwise>
+                    ORDER BY VP.SCHEDULE_DATE DESC, VP.BUTEN_CODE ASC, VP.ACCOUNT_NUMBER ASC
+                </otherwise>
+            </choose>
+        ) WHERE ROWNUM &lt;= #{req.rownum}
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：利金・償還金支払予定一覧コメント取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCouponRedemptionPaymentScheduleListSql002" resultMap="ResultMapIfaCouponRedemptionPaymentScheduleListSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-01#Sql002 */ 
+        NAME AS "COMMENT"
+        FROM M_CODE
+        WHERE
+        START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND CODE_TYPE = '99'
+        AND CODE_1 = '01'
+        AND CODE_2 = '10'
+    </select>
+
+</mapper>

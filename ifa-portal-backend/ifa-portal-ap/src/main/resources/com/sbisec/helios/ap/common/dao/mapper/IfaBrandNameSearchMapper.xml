@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB07-03_1
+    画面名：投信銘柄検索ポップアップ
+-->
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.IfaBrandNameSearchMapper">
+    <resultMap id="ResultMapbrandNameSearchSql001" type="com.sbisec.helios.ap.common.dao.model.IfaBrandNameSearchResponseModel">
+        <result property="fundName" column="FUND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="familyName" column="FAMILY_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：投信銘柄検索
+        SQLタイプ：select
+    -->
+    <select id="brandNameSearch" resultMap="ResultMapbrandNameSearchSql001" statementType="PREPARED">
+        SELECT /* @SUB07-03_1#Sql001 */
+            A.M_F_CODE AS FUND_CODE                                                                    <!-- 協会コード -->
+            ,A.M_F_TYPE AS FUND_TYPE                                                                   <!-- ファンドタイプ -->
+            ,A.M_F_NAME AS FUND_NAME                                                                   <!-- ファンド正式名 -->
+            ,A.M_F_ITAKU_CMP AS FUND_ITAKU_CMP                                                         <!-- 委託会社コード -->
+            ,A.M_F_KAISU AS FUND_KAISU                                                                 <!-- 回数 -->
+            ,A.M_F_GO AS FUND_GO                                                                       <!-- 号 -->
+            ,A.M_F_MD_BUY_KUBUN AS FUND_MD_BUY_KUBUN                                                   <!-- 購入可否判定区分 -->
+            ,B.FAMILY_NAME AS FAMILY_NAME                                                              <!-- 委託会社名 -->
+        FROM ETRADE.FUND@CORDYS_ET10.WORLD A
+        INNER JOIN ETRADE.ITAKU@CORDYS_ET10.WORLD B
+        ON A.M_F_ITAKU_CMP = B.FAMILY_CD
+        WHERE A.M_F_TYPE IN ('1', '2')                                                                 <!-- ファンドタイプ -->
+        AND A.M_F_DELFLG = '0'                                                                         <!-- 削除フラグ -->
+        AND A.M_F_ET_START_DATE &lt;= TO_CHAR(SYSDATE, 'YYYYMMDD')                                     <!-- ET取扱開始日 -->
+        AND (UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(A.M_F_NAME)), 'KANA_FWKATAKANA')
+            LIKE '%' || UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE((#{req.keyWordSearch}))), 'KANA_FWKATAKANA') || '%'
+            OR UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(B.FAMILY_NAME)), 'KANA_FWKATAKANA')
+            LIKE '%' || UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE((#{req.keyWordSearch}))), 'KANA_FWKATAKANA') || '%'
+        )
+        ORDER BY
+            B.FAMILY_NAME
+            ,A.M_F_NAME
+            ,A.M_F_TYPE
+    </select>
+</mapper>

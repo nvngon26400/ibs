@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct020Mapper">
+
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct020Sql001ResponseModel" id="Fct020Sql001ResponseModel">
+	</resultMap>
+
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct020Sql002ResponseModel" id="Fct020Sql002ResponseModel">
+	</resultMap>
+
+	<!-- FCT020.SQL001 主要取引所コード取得 -->
+	<select id="getPreExCode" resultMap="Fct020Sql001ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT020#SQL001 */
+			preExCode,
+			preExCodeSBI
+
+		FROM
+			stock_master
+		WHERE
+			localCode = TRIM(#{fct020Sql001RequestModel.brandCode})
+	</select>
+
+	<!-- FCT020.SQL002 基準値取得 -->
+	<select id="getBasePrice" resultMap="Fct020Sql002ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT020#SQL002 */
+			baseprice
+
+		FROM
+			base_price
+		WHERE
+			localcode =  TRIM(#{fct020Sql002RequestModel.brandCode})
+		<if test='"0".equals(fct020Sql002RequestModel.selectMarketCode)'>
+		AND exchcode = 'T'
+		</if>
+		<if test='"2".equals(fct020Sql002RequestModel.selectMarketCode)'>
+		AND exchcode = 'M'
+		</if>
+		<if test='"6".equals(fct020Sql002RequestModel.selectMarketCode)'>
+		AND exchcode = 'FK'
+		</if>
+		<if test='"8".equals(fct020Sql002RequestModel.selectMarketCode)'>
+		AND exchcode = 'S'
+		</if>
+	</select>
+
+</mapper>

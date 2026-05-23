@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0502-01
+    画面名：取扱通貨一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaCurrencyDealtListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaCurrencyDealtListSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCurrencyDealtListSql001ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCurrencyDealtListSql001" resultMap="ResultMapIfaCurrencyDealtListSql001" statementType="PREPARED">
+
+        SELECT
+        CODE_1 DISPORDER
+        FROM M_CODE
+        WHERE
+        CODE_TYPE = '55'
+        AND CODE_2 = #{req.currencyCode}
+        AND START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYYMMDD')
+        AND END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYYMMDD')
+        
+    </select>
+    
+    
+    
+    
+</mapper>

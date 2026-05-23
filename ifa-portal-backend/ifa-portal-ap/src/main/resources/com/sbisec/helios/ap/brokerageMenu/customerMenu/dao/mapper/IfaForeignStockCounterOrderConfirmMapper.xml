@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0302-02_2
+    画面名：外国株式店頭注文確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignStockCounterOrderConfirmMapper">
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderConfirmSql001"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderConfirmSql001ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderConfirmSql002"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderConfirmSql002ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderConfirmSql003"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderConfirmSql003ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderConfirmSql004"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderConfirmSql004ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderConfirmSql006"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderConfirmSql006ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderConfirmSql007"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderConfirmSql007ResponseModel"
+    >
+    </resultMap>
+
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：項目チェック情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderConfirmSql001"
+        resultMap="ResultMapIfaForeignStockCounterOrderConfirmSql001"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_2#Sql001 */
+            CASE
+                WHEN
+                    B.TRADE_STATUS = '0'                                            <!-- B.取引状態 = 取引可能 -->
+                    AND A.TRADE_STATUS = '0'                                        <!-- A.販売状態 = 販売 -->
+                THEN '0'                                                            <!-- 取引可能 -->
+                ELSE '1'                                                            <!-- 取引停止 -->
+            END AS TRADE_STATUS,                                                    <!-- 販売状態 -->
+            NVL(A.SELL_TRADE_COUNT - C.SELL_TRADE_COUNT, 0) AS SELL_TRADE_COUNT,    <!-- 売枠（株数） -->
+            NVL(A.BUY_TRADE_COUNT - C.BUY_TRADE_COUNT, 0) AS BUY_TRADE_COUNT,       <!-- 買枠（株数） -->
+            B.BASE_PRICE * (100 - A.SELL_TRADE_SPREAD) / 100 AS SELL_TRADE_PRICE,   <!-- 売取引価格 -->
+            B.BASE_PRICE * (100 + A.BUY_TRADE_SPREAD) / 100 AS BUY_TRADE_PRICE,     <!-- 買取引価格 -->
+            A.TRADE_START_TIME,                                                     <!-- 取引開始時間 -->
+            A.TRADE_END_TIME                                                        <!-- 取引終了時間 -->
+        FROM
+            T_COUNTER_BROKER_SALE A                                                 <!-- 店頭取引販売枠設定(仲介業者毎) -->
+
+        INNER JOIN
+            T_COUNTER_BRAND_SALE B                                                  <!-- 店頭取引販売枠設定(銘柄毎) -->
+        ON
+            A.BRAND_CODE = B.BRAND_CODE                                             <!-- A.銘柄コード = B.銘柄コード -->
+
+        LEFT OUTER JOIN
+            T_COUNTER_SALE_MANAGE C                                                 <!-- 店頭取引販売約定数量管理 -->
+        ON
+            A.BRAND_CODE = C.BRAND_CODE                                             <!-- A.銘柄コード　= C.銘柄コード -->
+            AND A.BROKER_CODE = C.BROKER_CODE                                       <!-- A.仲介業者コード = C.仲介業者コード -->
+
+        WHERE
+            A.BRAND_CODE = UPPER(#{req.brandCode})                                  <!-- A.銘柄コード = リクエスト.銘柄コード -->
+            AND A.BROKER_CODE = #{req.brokerCode}                                   <!-- A.仲介業者コード = リクエスト.仲介業者コード -->
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：店頭取引販売上限数量取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderConfirmSql002"
+        resultMap="ResultMapIfaForeignStockCounterOrderConfirmSql002"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_2#Sql002 */
+            NVL(A.SELL_TRADE_COUNT - B.SELL_TRADE_COUNT, 0)
+                AS MAX_SELL_LIMIT_QUANTITY,                                         <!-- 最大売枠（株数） -->
+            NVL(A.BUY_TRADE_COUNT - B.BUY_TRADE_COUNT, 0)
+                AS MAX_BUY_LIMIT_QUANTITY                                           <!-- 最大買枠（株数） -->
+        FROM
+            T_COUNTER_BROKER_SALE A                                                 <!-- 店頭取引販売枠設定(仲介業者毎) -->
+
+        INNER JOIN
+            T_COUNTER_SALE_MANAGE B                                                 <!-- 店頭取引販売約定数量管理 -->
+        ON
+            A.BRAND_CODE = B.BRAND_CODE                                             <!-- A.銘柄コード = B.銘柄コード -->
+            AND A.BROKER_CODE = B.BROKER_CODE                                       <!-- A.仲介業者コード = B.仲介業者コード -->
+
+        WHERE
+            A.BRAND_CODE = UPPER(#{req.brandCode})                                  <!-- A.銘柄コード = リクエスト.銘柄コード -->
+            AND A.BROKER_CODE = #{req.brokerCode}                                   <!-- A.仲介業者コード = リクエスト.仲介業者コード -->
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：ワーニング約定金額取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderConfirmSql003"
+        resultMap="ResultMapIfaForeignStockCounterOrderConfirmSql003"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_2#Sql003 */
+            NAME AS WARNING_THRESHOLD_CONTRACT_AMOUNT                               <!-- 名称 -->
+        FROM
+            M_CODE                                                                  <!-- コードマスタ -->
+        WHERE
+            CODE_TYPE = '33'                                                        <!-- 種別 = 店頭と委託上限 -->
+            AND CODE_1 = '1'                                                        <!-- コード1 = 店頭 -->
+            AND CODE_2 = 'WARN_AMOUNT'                                              <!-- コード2 = ワーニング約定金額 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：上限約定金額取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderConfirmSql004"
+        resultMap="ResultMapIfaForeignStockCounterOrderConfirmSql004"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_2#Sql004 */
+            NAME AS UPPER_LIMIT_CONTRACT_AMOUNT                                     <!-- 名称 -->
+        FROM
+            M_CODE                                                                  <!-- コードマスタ -->
+        WHERE
+            CODE_TYPE = '33'                                                        <!-- 種別 = 店頭と委託上限 -->
+            AND CODE_1 = '1'                                                        <!-- コード1 = 店頭 -->
+            AND CODE_2 = 'LIMIT_AMOUNT'                                             <!-- コード2 = 上限金額 -->
+    </select>
+
+    <!-- 
+         SQLID：Sql005
+         SQL名：店頭取引注文登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertIfaForeignStockCounterOrderConfirmSql005"
+        statementType="PREPARED"
+    >
+        INSERT /* @SQLID=SUB0202_0302-02_2#Sql005 */
+        INTO
+            T_COUNTER_ORDER (
+                ORDER_NO,                                                           <!-- 管理番号 -->
+                BROKER_CODE,                                                        <!-- 仲介業者コード -->
+                BRAND_CODE,                                                         <!-- 銘柄コード -->
+                BUTEN_CODE,                                                         <!-- 部店 -->
+                ACCOUNT_NUMBER,                                                     <!-- 口座番号 -->
+                ORDER_COUNT,                                                        <!-- 注文数量 -->
+                KESSAI_TUKA,                                                        <!-- 決済通貨 -->
+                DEPOSIT_TYPE,                                                       <!-- 預り区分 -->
+                INVITATION_TYPE,                                                    <!-- 勧誘区分 -->
+                ORDER_METHOD,                                                       <!-- 受注方法 -->
+                WARNING_APPLY,                                                      <!-- ワーニング申請取引 -->
+                EXPLANATION_INFO,                                                   <!-- 重要事項の説明 -->
+                TRANSFER_INVITATION,                                                <!-- 乗換え勧誘(ETF) -->
+                FOREIGN_STOCK_YMD,                                                  <!-- 外国証券情報版番 -->
+                FS_DELIVERY_YMD,                                                    <!-- 外国証券情報交付日 -->
+                FS_DELIVERY_METHOD,                                                 <!-- 外国証券情報交付方法 -->
+                ENG_PUB_BRAND,                                                      <!-- 英文開示銘柄 -->
+                ENG_PUB_YMD,                                                        <!-- 英文開示銘柄説明日 -->
+                ORDER_TIME,                                                         <!-- 注文時間 -->
+                ORDER_DAY,                                                          <!-- 注文日 -->
+                APPOINT_TIME,                                                       <!-- 約定時間 -->
+                ORDER_STATUS,                                                       <!-- ステータス -->
+                TRADE_TYPE,                                                         <!-- 売買区分 -->
+                TRADE_PRICE,                                                        <!-- 取引価格 -->
+                APPOINT_PRICE,                                                      <!-- 約定金額 -->
+                COMMENT_INFO,                                                       <!-- コメント -->
+                SUMMARY_ANY,                                                        <!-- 摘要(任意) -->
+                FLARE_FLAG,                                                         <!-- FLARE連携フラッグ -->
+                RECALL_REASON,                                                      <!-- 取消理由 -->
+                INTERMEDIARY_EMP_CD,                                                <!-- 仲介業者営業員コード -->
+                EXCHANGE_CODE,                                                      <!-- 市場コード -->
+                CREATE_TIME,                                                        <!-- 作成日 -->
+                CREATE_USER,                                                        <!-- 作成者 -->
+                UPDATE_TIME,                                                        <!-- 更新日 -->
+                UPDATE_USER,                                                        <!-- 更新者 -->
+                SYS_ID                                                              <!-- 機能ID -->
+            )
+            VALUES (
+                IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+                    || LPAD(CORDYS.SEQ_COUNTER_ORDER.NEXTVAL, 5, '0'),              <!-- 管理番号 -->
+                #{req.brokerCode},                                                  <!-- 仲介業者コード -->
+                #{req.brandCode},                                                   <!-- 銘柄コード -->
+                #{req.butenCode},                                                   <!-- 部店 -->
+                #{req.accountNumber},                                               <!-- 口座番号 -->
+                #{req.quantity},                                                    <!-- 注文数量 -->
+                #{req.settlementType},                                              <!-- 決済通貨 -->
+                #{req.depositType},                                                 <!-- 預り区分 -->
+                #{req.kanyuKbn},                                                    <!-- 勧誘区分 -->
+                #{req.orderMethod},                                                 <!-- 受注方法 -->
+                <choose>
+                    <when test="req.tradeKbn == '3'.toString()"> <!-- 買付の場合 -->
+                        DECODE(
+                            #{req.chkBoxLabel},
+                            '1', '1', <!-- ワーニング申請・承認済 -->
+                            '2', '2', <!-- 勧誘なし -->
+                            '0'       <!-- ワーニングなし -->
+                        ),
+                    </when>
+                    <otherwise> <!-- 売却の場合 -->
+                        NULL,
+                    </otherwise>
+                </choose>                                                           <!-- ワーニング申請取引 -->
+                DECODE(
+                    #{req.importantMatter},
+                    '', NULL,
+                    #{req.importantMatter}
+                ),                                                                  <!-- 重要事項の説明 -->
+                DECODE(
+                    #{req.switchingSolicitationEtf},
+                    '', NULL,
+                    #{req.switchingSolicitationEtf}
+                ),                                                                  <!-- 乗換え勧誘(ETF) -->
+                DECODE(
+                    #{req.foreignStockYmd},
+                    '', NULL,
+                    TO_CHAR(TO_DATE(#{req.foreignStockYmd}, 'YYYY/MM/DD'), 'YYYYMMDD')
+                ),                                                                  <!-- 外国証券情報版番 -->
+                DECODE(
+                    #{req.documentDeliveryDate},
+                    '', NULL,
+                    TO_CHAR(TO_DATE(#{req.documentDeliveryDate}, 'YYYY/MM/DD'), 'YYYYMMDD')
+                ),                                                                  <!-- 外国証券情報交付日 -->
+                DECODE(
+                    #{req.issuedMethod},
+                    '', NULL,
+                    #{req.issuedMethod}
+                ),                                                                  <!-- 外国証券情報交付方法 -->
+                DECODE(
+                    #{req.engPubBrand},
+                    '', NULL,
+                    #{req.engPubBrand}
+                ),                                                                  <!-- 英文開示銘柄 -->
+                DECODE(
+                    #{req.engPubYmd},
+                    '', NULL,
+                    TO_CHAR(TO_DATE(#{req.engPubYmd}, 'YYYY/MM/DD'), 'YYYYMMDD')
+                ),                                                                  <!-- 英文開示銘柄説明日 -->
+                IFA_DATE_UTIL.IFA_GET_DATE(),                                       <!-- 注文時間 -->
+                IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD'),                            <!-- 注文日 -->
+                NULL,                                                               <!-- 約定時間 -->
+                '10',                                                               <!-- ステータス -->
+                #{req.tradeKbn},                                                    <!-- 売買区分 -->
+                #{req.tradePrice},                                                  <!-- 取引価格 -->
+                #{req.contractAmount},                                              <!-- 約定金額 -->
+                NULL,                                                               <!-- コメント -->
+                #{req.summaryAny},                                                  <!-- 摘要(任意) -->
+                '0',                                                                <!-- FLARE連携フラッグ -->
+                NULL,                                                               <!-- 取消理由 -->
+                #{req.brokerChargeCode},                                            <!-- 仲介業者営業員コード -->
+                #{req.marketCode},                                                  <!-- 市場コード -->
+                IFA_DATE_UTIL.IFA_GET_DATE(),                                       <!-- 作成日 -->
+                #{req.userId},                                                      <!-- 作成者 -->
+                IFA_DATE_UTIL.IFA_GET_DATE(),                                       <!-- 更新日 -->
+                #{req.userId},                                                      <!-- 更新者 -->
+                'SUB0202_0302-02_2'                                                 <!-- 機能ID -->
+            )
+    </insert>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：上限注文数量取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderConfirmSql006"
+        resultMap="ResultMapIfaForeignStockCounterOrderConfirmSql006"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_2#Sql006 */
+            NAME As UPPER_LIMIT_ORDER_AMOUNT                                        <!-- 名称 -->
+        FROM
+            M_CODE                                                                  <!-- コードマスタ -->
+        WHERE
+            CODE_TYPE = '33'                                                        <!-- 種別 = 店頭と委託上限 -->
+            AND CODE_1 = '1'                                                        <!-- コード1 = 店頭 -->
+            AND CODE_2 = 'LIMIT_QUANTITY'                                           <!-- コード2 = 上限数量 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：営業日チェック情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderConfirmSql007"
+        resultMap="ResultMapIfaForeignStockCounterOrderConfirmSql007"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_2#Sql007 */
+            COUNT(*) AS COUNT                                                       <!-- 件数 -->
+        FROM
+            M_CALENDAR                                                              <!-- カレンダーマスタ -->
+        WHERE
+            C_DELETE_FLG = '0'                                                      <!-- 削除フラグ = 有効 -->
+            AND C_BUS_NONBUS_DIV = '0'                                              <!-- 営業日・非営業日区分 = 非営業日 -->
+            AND C_ISO_COUNTRY_CODE IN('JP')                                         <!-- 国コード IN JP' -->
+            AND C_TARGET_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')             <!-- 対象日付 = システム日付 -->
+            AND C_CALENDAR_ID ='T003'                                               <!-- カレンダーID = T003 -->
+    </select>
+
+</mapper>

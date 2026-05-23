@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+   画面ID：SUB00_01-06_1
+   画面名：あなたの要望
+-->
+<mapper namespace="com.sbisec.helios.ap.suggestionBox.dao.mapper.IfaSuggestionBoxPersonalMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaSuggestionBoxPersonalSql001" type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxPersonalSql001ResponseModel" >
+        <result column="SCREEN_COMMENT" property="screenComment" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />	
+    </resultMap>
+
+    <resultMap id="ResultMapIfaSuggestionBoxPersonalSql002" type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxPersonalSql002_3ResponseModel" >
+        <result column="TITLE" property="title" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />	
+    </resultMap>
+
+    <resultMap id="ResultMapIfaSuggestionBoxPersonalSql003" type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxPersonalSql002_3ResponseModel" >
+        <result column="TITLE" property="title" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="BROKER_NAME" property="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="EMP_NAME" property="empName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="SUGGESTION" property="suggestion" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />	
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：画面コメント取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalSql001" resultMap="ResultMapIfaSuggestionBoxPersonalSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00_01-06_1#Sql001 */
+            NAME AS SCREEN_COMMENT		<!-- 画面コメント -->
+        FROM 
+            CORDYS.M_CODE
+        WHERE 
+            START_DATE &lt; TO_CHAR(SYSDATE,'YYYYMMDD')
+            AND END_DATE &gt; TO_CHAR(SYSDATE,'YYYYMMDD')
+            AND CODE_TYPE = '99'
+            AND CODE_1 = '01'
+            AND CODE_2 = '28'
+    </select>
+
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：仲介業者自身の要望一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalSql002" resultMap="ResultMapIfaSuggestionBoxPersonalSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00_01-06_1#Sql002 */
+            SBP.*
+        FROM (
+            SELECT
+                COUNT(*) OVER() AS TOTAL_ROW,
+                LPAD(A.SBP_NO, 6, '0') AS SBP_NO,
+                NVL (A.ANS_UPDATE_TIME, A.UPDATE_TIME) AS ANS_UPDATE_TIME,
+                A.CREATE_TIME AS REGISTER_DATE,
+                A.TITLE AS TITLE,
+                A.CATEGORY AS CATEGORY,
+                A.STATUS AS STATUS
+            FROM
+                CORDYS.SUG_BOX_PERSONAL A
+            <where>
+                A.CREATE_USER = #{req.userId}
+                AND TO_DATE(TO_CHAR(A.CREATE_TIME, 'yyyy/mm/dd'), 'yyyy/mm/dd')
+                BETWEEN TO_DATE(#{req.registerDateFrom}, 'yyyy/mm/dd') AND TO_DATE(#{req.registerDateTo}, 'yyyy/mm/dd')
+            <if test='req.status != null'>
+                AND A.STATUS = #{req.status}
+            </if>
+            <if test='req.title != null'>
+                AND A.TITLE LIKE '%' || #{req.title} || '%'
+            </if>
+            </where>
+            ORDER BY A.SBP_NO
+        ) SBP
+        WHERE
+           ROWNUM &lt;= #{req.maxRow}
+    </select>
+
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：証券社員参照範囲の要望一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalSql003" resultMap="ResultMapIfaSuggestionBoxPersonalSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00_01-06_1#Sql003 */
+            SBP.*
+        FROM (
+            SELECT
+                COUNT(*) OVER() AS TOTAL_ROW,
+                LPAD(A.SBP_NO, 6, '0') AS SBP_NO,
+                NVL (A.ANS_UPDATE_TIME, A.UPDATE_TIME) AS ANS_UPDATE_TIME,
+                A.CREATE_TIME AS REGISTER_DATE,
+                A.BROKER_CODE AS BROKER_CODE,
+                B.BRANCH_NAME AS BROKER_NAME,
+                A.INTERMEDIARY_EMP_CD AS EMP_CODE,
+                C.USER_NM AS EMP_NAME,
+                A.TITLE AS TITLE,
+                A.CATEGORY AS CATEGORY,
+                A.STATUS AS STATUS,
+                A.SUGGESTION AS SUGGESTION
+            FROM
+                CORDYS.SUG_BOX_PERSONAL A
+                LEFT JOIN CORDYS.MEDIATE_BRANCH B
+                    ON A.BROKER_CODE = B.BROKER_CODE
+                    AND B.BROKER_BRANCH_KIND = '00'
+                LEFT JOIN CORDYS.TB_MED_USERS C
+                    ON A.CREATE_USER = C.USER_ID
+            <where>
+                TO_DATE(TO_CHAR(A.CREATE_TIME, 'yyyy/mm/dd'), 'yyyy/mm/dd')
+                BETWEEN TO_DATE(#{req.registerDateFrom}, 'yyyy/mm/dd') AND TO_DATE(#{req.registerDateTo}, 'yyyy/mm/dd')
+            <if test='req.status != null'>
+                AND A.STATUS = #{req.status}
+            </if>
+            <if test='req.title != null'>
+                AND A.TITLE LIKE '%' || #{req.title} || '%'
+            </if>
+            <if test='req.brokerName != null'>
+                AND B.BRANCH_NAME LIKE '%' || #{req.brokerName} || '%'
+            </if>
+            <if test='req.brokerCode != null'>
+                AND B.BROKER_CODE = #{req.brokerCode}
+            </if>
+            </where>
+            ORDER BY A.SBP_NO
+        ) SBP
+        WHERE
+           ROWNUM &lt;= #{req.maxRow}
+    </select>
+
+</mapper>

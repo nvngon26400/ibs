@@ -1,0 +1,42 @@
+package com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao;
+
+import com.sbibits.earth.model.DataList;
+import com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaDomesticMarginPositionDueDateAlertSql001RequestModel;
+import com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaDomesticMarginPositionDueDateAlertSql001ResponseModel;
+
+/**
+ * 画面ID：SUB020301_02-01
+ * 画面名：国内信用建玉期日アラート一覧
+ *
+ * @author BASE李
+ 2024/06/19 新規作成
+ *
+ */
+public interface IfaDomesticMarginPositionDueDateAlertDao {
+    
+    /**
+     * SQLID：Sql001
+     * SQL名：決済期日顧客情報取得
+     * SQLタイプ：select
+     * リクエストクラス：IfaDomesticMarginPositionDueDateAlertSql001RequestModel
+     * レスポンスクラス：IfaDomesticMarginPositionDueDateAlertSql001ResponseModel
+     *
+     * @param req リクエスト
+     * @return res レスポンス
+     * @exception exception システムエラー
+     */
+    public DataList<IfaDomesticMarginPositionDueDateAlertSql001ResponseModel> selectIfaDomesticMarginPositionDueDateAlertSql001(
+            IfaDomesticMarginPositionDueDateAlertSql001RequestModel req) throws Exception;
+    
+    public Integer selectIfaDomesticMarginPositionDueDateAlertSql005() throws Exception;
+    
+    /**
+     * SQLID：Sql006
+     * SQL名：営業日取得
+     * SQLタイプ：select
+     *
+     * @return res 営業日
+     * @exception exception システムエラー
+     */
+    public String selectIfaDomesticMarginPositionDueDateAlertSql006() throws Exception;
+}

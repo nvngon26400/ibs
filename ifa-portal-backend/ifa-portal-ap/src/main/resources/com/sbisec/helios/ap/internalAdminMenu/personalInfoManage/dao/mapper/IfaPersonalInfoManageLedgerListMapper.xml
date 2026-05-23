@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0403-01
+    画面名：個人情報管理台帳一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.personalInfoManage.dao.mapper.IfaPersonalInfoManageLedgerListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaPersonalInfoManageLedgerListSql001" type="com.sbisec.helios.ap.internalAdminMenu.personalInfoManage.dao.model.IfaPersonalInfoManageLedgerListSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaPersonalInfoManageLedgerListSql003" type="com.sbisec.helios.ap.internalAdminMenu.personalInfoManage.dao.model.IfaPersonalInfoManageLedgerListSql003ResponseModel" >
+        <result property="chargeName" column="CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="docNameFileName" column="DOC_NAME_FILE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="processContent" column="PROCESS_CONTENT" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="preservePeriod" column="PRESERVE_PERIOD" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="corDepositOutline" column="COR_DEPOSIT_OUTLINE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="corDonationOutline" column="COR_DONATION_OUTLINE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="corDepositoryOutline" column="COR_DEPOSITORY_OUTLINE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="personalInfoAcquire" column="PERSONAL_INFO_ACQUIRE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaPersonalInfoManageLedgerListSql005" type="com.sbisec.helios.ap.internalAdminMenu.personalInfoManage.dao.model.IfaPersonalInfoManageLedgerListSql005ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：個人情報管理台帳作成ディレクトリ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaPersonalInfoManageLedgerListSql001" resultMap="ResultMapIfaPersonalInfoManageLedgerListSql001" statementType="PREPARED">
+        
+        SELECT  /* @SQLID=SUB0403-01#Sql001 */ 
+            FUNC_ID AS FUNCTION_ID,
+            CAT_ID AS T9N_INFO_CAT,
+            FILE_DIR AS FILE_DIRECTORY
+        FROM CORDYS.TB_MED_TEMP_FILE_DIR 
+        <where>
+            FUNC_ID = 'M3' AND
+            CAT_ID = 0
+        </where>
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：個人情報管理台帳一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaPersonalInfoManageLedgerListSql003" resultMap="ResultMapIfaPersonalInfoManageLedgerListSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0403-01#Sql003 */
+             K.*
+            ,L.USER_NM AS CHARGE_NAME
+        FROM
+            (
+                SELECT
+                        C.CODE_NAME AS DOC_NAME_FILE_NAME
+                        ,D.CODE_NAME AS PROCESS_CONTENT
+                        ,A.COR_USER_ID AS LOGIN_ID
+                        ,TO_CHAR ( COR_TS, 'YYYY/MM/DD HH24:MI:SS') AS PROCESS_DAY_TIME
+                        ,DECODE(A.COR_NAME_FLG,'1','Ｏ','') NAME
+                        ,DECODE(A.COR_ADDRESS_FLG,'1','Ｏ','') ADRESS
+                        ,DECODE(A.COR_TELNO_FLG,'1','Ｏ','') TEL
+                        ,DECODE(A.COR_OFFICE_FLG,'1','Ｏ','') OFFICE
+                        ,DECODE(A.COR_BIRTH_FLG,'1','Ｏ','') COR_BIRTH_FLG
+                        ,DECODE(A.COR_SEX_FLG,'1','Ｏ','') GENDER
+                        ,DECODE(A.COR_EMPLOYMENT_FLG,'1','Ｏ','') ASSETS
+                        ,DECODE(A.COR_OCCUPATION_FLG,'1','Ｏ','') PROFESSION
+                        ,DECODE(A.COR_BUTEN_ACCOUNT_FLG,'1','Ｏ','') BUTEN_ACCOUNT
+                        ,DECODE(A.COR_EMAIL_FLG,'1','Ｏ','') EMAIL
+                        ,DECODE(A.COR_DRAWERSACCOUNT_FLG,'1','Ｏ','') WITHDRAW_ACCOUNT
+                        ,A.COR_DATA_COUNT AS ACQUIRE_DATA_CUSTOMER_COUNT
+                        ,TRIM(A.COR_TRANSFER_CODE) AS STORAGE_SENDING_MEDIUM
+                        ,TRIM(A.COR_DEPOSIT) AS DEPOSIT_DESTINATIONS
+                        ,TRIM(A.COR_DONATION) AS DESTINATION
+                        ,TRIM(A.COR_DEPOSITORY) AS STORAGE_SPACE
+                        ,A.COR_DEPOSITORY_TERM AS PRESERVE_PERIOD
+                        ,TRIM(A.COR_DIPOSAL_METHOD) AS DISPOSE_METHOD
+                        ,TRIM(A.COR_DIPOSAL_FLG) AS NOT_DISPOSE 
+                        ,TRIM(A.COR_DIPOSAL_DATE) AS DISPOSE_DATE_YMD
+                        ,A.COR_DEPOSIT_OUTLINE AS COR_DEPOSIT_OUTLINE
+                        ,A.COR_DONATION_OUTLINE AS COR_DONATION_OUTLINE
+                        ,A.COR_DEPOSITORY_OUTLINE AS COR_DEPOSITORY_OUTLINE
+                        ,A.COR_ID AS PERSONAL_INFO_MANAGE_ID
+                        ,A.INITIAL_GET_INFO_USER_NAME AS PERSONAL_INFO_ACQUIRE
+                    FROM
+                        COR_USER_ATTRBUTE_INFO A
+                            LEFT JOIN (
+                                SELECT
+                                        *
+                                    FROM
+                                        CORDYS_CODE_MASTER
+                                    WHERE
+                                        FUNCTION_ID = '015'
+                            ) C
+                                ON TRIM(A.COR_DOCUMENT) = C.CODE_ID
+                            LEFT JOIN (
+                                SELECT
+                                        *
+                                    FROM
+                                        CORDYS_CODE_MASTER
+                                    WHERE
+                                        FUNCTION_ID = '016'
+                            ) D
+                                ON TRIM(A.COR_TRANSACTION_DESC) = D.CODE_ID
+        <where>               
+            <if test="req.processTargetPeriodFrom != null and req.processTargetPeriodFrom != ''">
+                            TO_DATE(TO_CHAR (A.COR_TS, 'yyyy-mm-dd'), 'yyyy-mm-dd') &gt;= TO_DATE(#{req.processTargetPeriodFrom}, 'yyyy-mm-dd')
+            </if>
+            <if test="req.processTargetPeriodTo != null and req.processTargetPeriodTo != ''">
+                            AND TO_DATE(TO_CHAR (A.COR_TS, 'yyyy-mm-dd'), 'yyyy-mm-dd') &lt;= TO_DATE(#{req.processTargetPeriodTo}, 'yyyy-mm-dd')
+            </if>
+            <if test="req.privId != '1'.toString()">
+                AND (A.BROKER_CODE IN
+                <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                    <if test="index % 1000 == 0 and index != 0">
+                        ) OR A.BROKER_CODE IN(
+                    </if>
+                    <if test="index % 1000 != 0">
+                        ,
+                    </if>
+                    #{brokerCharge.brokerCode}
+                </foreach>
+                )
+            </if>
+        </where>
+        
+            ) K
+        LEFT JOIN TB_MED_USERS L
+        ON
+            K.LOGIN_ID = L.USER_ID
+        WHERE
+            ROWNUM &lt;= #{req.maxRow}
+        ORDER BY
+            K.PROCESS_DAY_TIME DESC
+            
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：個人情報管理台帳更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaPersonalInfoManageLedgerListSql004" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0403-01#Sql004 */
+            COR_USER_ATTRBUTE_INFO SET
+                COR_TRANSFER_CODE = #{req.storageSendingMedium},
+                COR_DEPOSIT = #{req.depositDestinations},
+                COR_DONATION = #{req.destination},
+                COR_DEPOSITORY = #{req.storageSpace},
+                COR_DEPOSITORY_TERM = #{req.preservePeriod},
+                COR_DIPOSAL_METHOD = #{req.disposeMethod},
+                COR_DIPOSAL_FLG = #{req.notDispose},
+                COR_DIPOSAL_DATE = #{req.disposeDateYmd},
+                COR_DEPOSIT_OUTLINE = #{req.corDepositOutline},
+                COR_DONATION_OUTLINE = #{req.corDonationOutline},
+                COR_DEPOSITORY_OUTLINE = #{req.corDepositoryOutline},
+                COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE,
+                COR_UPDATE_BY = #{req.loginId}
+        WHERE COR_ID = TO_NUMBER(#{req.personalInfoManageId})
+    </update>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：個人情報管理台帳一覧件数取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaPersonalInfoManageLedgerListSql005" resultMap="ResultMapIfaPersonalInfoManageLedgerListSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0403-01#Sql005 */
+           COUNT(1) as row_count
+        FROM
+            (
+            SELECT
+               K.COR_ID
+            FROM
+                (
+                SELECT
+                        A.COR_ID
+                        ,C.CODE_NAME AS COR_DOCUMENT
+                        ,D.CODE_NAME AS COR_TRANSACTION_DESC
+                        ,A.COR_USER_ID
+                        ,COR_TS
+                        ,A.COR_NAME_FLG
+                        ,A.COR_ADDRESS_FLG
+                        ,A.COR_TELNO_FLG
+                        ,A.COR_OFFICE_FLG
+                        ,A.COR_BIRTH_FLG
+                        ,A.COR_SEX_FLG
+                        ,A.COR_EMPLOYMENT_FLG
+                        ,A.COR_OCCUPATION_FLG
+                        ,A.COR_BUTEN_ACCOUNT_FLG
+                        ,A.COR_EMAIL_FLG
+                        ,A.COR_DRAWERSACCOUNT_FLG
+                        ,A.COR_DATA_COUNT
+                        ,A.COR_TRANSFER_CODE
+                        ,A.COR_DEPOSIT
+                        ,A.COR_DONATION
+                        ,A.COR_DEPOSITORY
+                        ,A.COR_DEPOSITORY_TERM
+                        ,A.COR_DIPOSAL_METHOD
+                        ,A.COR_DIPOSAL_FLG
+                        ,A.COR_DIPOSAL_DATE
+                        ,A.COR_DEPOSIT_OUTLINE
+                        ,A.COR_DONATION_OUTLINE
+                        ,A.COR_DEPOSITORY_OUTLINE
+                    FROM
+                        COR_USER_ATTRBUTE_INFO A
+                            LEFT JOIN (
+                                SELECT
+                                        *
+                                    FROM
+                                        CORDYS_CODE_MASTER
+                                    WHERE
+                                        FUNCTION_ID = '015'
+                            ) C
+                                ON TRIM(A.COR_DOCUMENT) = C.CODE_ID
+                            LEFT JOIN (
+                                SELECT
+                                        *
+                                    FROM
+                                        CORDYS_CODE_MASTER
+                                    WHERE
+                                        FUNCTION_ID = '016'
+                            ) D
+                                ON TRIM(A.COR_TRANSACTION_DESC) = D.CODE_ID
+        <where>               
+            <if test="req.processTargetPeriodFrom != null and req.processTargetPeriodFrom != ''.toString() ">
+                            TO_DATE(TO_CHAR (A.COR_TS, 'yyyy-mm-dd'), 'yyyy-mm-dd') &gt;= TO_DATE(#{req.processTargetPeriodFrom}, 'yyyy-mm-dd')
+            </if>
+            <if test="req.processTargetPeriodTo != null and req.processTargetPeriodFrom != ''.toString()">
+                            AND TO_DATE(TO_CHAR (A.COR_TS, 'yyyy-mm-dd'), 'yyyy-mm-dd') &lt;= TO_DATE(#{req.processTargetPeriodTo}, 'yyyy-mm-dd')
+            </if>
+            <if test="req.privId != '1'.toString()">
+                AND (A.BROKER_CODE IN
+                <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                    <if test="index % 1000 == 0 and index != 0">
+                        ) OR A.BROKER_CODE IN(
+                    </if>
+                    <if test="index % 1000 != 0">
+                        ,
+                    </if>
+                    #{brokerCharge.brokerCode}
+                </foreach>
+                )
+            </if>
+        </where>
+            ) K
+        LEFT JOIN TB_MED_USERS L
+        ON
+            K.COR_USER_ID = L.USER_ID
+            )  
+    </select>
+    
+</mapper>

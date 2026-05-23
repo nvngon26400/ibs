@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0401_02-02
+    画面名：自己点検記録簿登録確認
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.mapper.IfaSelfInspectBlotterRegisterConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaSelfInspectBlotterRegisterConfirmSql001" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaSelfInspectBlotterRegisterConfirmSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaSelfInspectBlotterRegisterConfirmSql005" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaSelfInspectBlotterRegisterConfirmSql005ResponseModel" >
+        <result property="varValue" column="VAR_VALUE" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaSelfInspectBlotterRegisterConfirmSql006" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaSelfInspectBlotterRegisterConfirmSql006ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：シーケンス取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterRegisterConfirmSql001" resultMap="ResultMapIfaSelfInspectBlotterRegisterConfirmSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_02-02#Sql001 */ SEQ_SELF_CHECK.nextval AS NEXT_SELF_CHECK_ID FROM DUAL
+    </select>
+    
+    <!-- 
+         SQLID：Sql002
+         SQL名：自己点検テーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaSelfInspectBlotterRegisterConfirmSql002" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0401_02-02#Sql002 */ INTO COR_SELF_CHECK (
+            COR_SELF_CHECK_ID,
+            COR_ENFORCE_DATE,
+            COR_BROKER_CODE,
+            COR_MEMO,
+            COR_CONFIRMATION_DATE,
+            COR_CREATE_DATE,
+            COR_CREATE_BY,
+            COR_UPDATE_DATE,
+            COR_UPDATE_BY
+        ) VALUES (
+            #{req.nextSelfCheckId},
+            #{req.registerDate},
+            #{req.brokerCode},
+            NULL,
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.userId},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.userId}
+        )
+    </insert>
+    
+    <!-- 
+         SQLID：Sql003
+         SQL名：自己点検確認テーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaSelfInspectBlotterRegisterConfirmSql003" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0401_02-02#Sql003 */ INTO COR_SELF_CHECK_CONFIRMATION (
+            COR_SELF_CHECK_ID,
+            COR_SELF_CHECK_ITEM_ID,
+            COR_CONFIRMATION_FLG,
+            COR_CREATE_DATE,
+            COR_CREATE_BY,
+            COR_UPDATE_DATE,
+            COR_UPDATE_BY,
+            COR_ANSWER_REASON,
+            COR_ANSWER_COUNT,
+            COR_ANSWER_RESULT
+        ) VALUES (
+            #{req.nextSelfCheckId},
+            #{req.selfCheckItemId},  <!-- A003.自己点検リスト.自己点検項目ID -->
+            #{req.confirmation},     <!-- A003.自己点検リスト.確認 -->
+            IFA_DATE_UTIL.IFA_GET_DATE,  <!-- システム日時 -->
+            #{req.userId},           <!-- ユーザ共通情報.ユーザID -->
+            IFA_DATE_UTIL.IFA_GET_DATE,  <!-- システム日時 -->
+            #{req.userId},           <!-- ユーザ共通情報.ユーザID -->
+            #{req.answerReason},     <!-- A003.自己点検リスト.回答理由 -->
+            #{req.answerCount},      <!-- A003.自己点検リスト.回答回数 -->
+            #{req.answerResult}      <!-- A003.自己点検リスト.回答結果 -->
+        )
+    </insert>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：自己点検確認テーブル更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaSelfInspectBlotterRegisterConfirmSql004" statementType="PREPARED">
+        MERGE /* @SQLID=SUB0401_02-02#Sql004 */ INTO COR_SELF_CHECK_CONFIRMATION B
+        USING (
+            SELECT 
+                A.COR_SELF_CHECK_ID,
+                #{req.answerReason} AS COR_ANSWER_REASON,
+                #{req.answerCount} AS COR_ANSWER_COUNT,
+                #{req.userId} AS COR_UPDATE_BY
+            FROM 
+                COR_SELF_CHECK A
+            WHERE 
+                A.COR_ENFORCE_DATE = #{req.registerDate} <!-- A003.登録年月と一致 -->
+                AND A.COR_BROKER_CODE = #{req.brokerCode} <!-- 仲介業者コードが一致 -->
+        ) data
+        ON (
+            B.COR_SELF_CHECK_ID = data.COR_SELF_CHECK_ID 
+            AND B.COR_SELF_CHECK_ITEM_ID = #{req.selfCheckItemId}
+        )
+        WHEN MATCHED THEN
+            UPDATE SET
+                B.COR_ANSWER_REASON = data.COR_ANSWER_REASON,
+                B.COR_ANSWER_COUNT = data.COR_ANSWER_COUNT,
+                B.COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE, <!-- システム日時 -->
+                B.COR_UPDATE_BY = data.COR_UPDATE_BY
+    </update>
+        
+    <!-- 
+        SQLID：Sql005
+        SQL名：仲介業システム値情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterRegisterConfirmSql005" resultMap="ResultMapIfaSelfInspectBlotterRegisterConfirmSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_02-02#Sql005 */ VAR_VALUE FROM TB_MED_SYSTEM_VARIABLE WHERE VAR_NAME = #{req.varName}
+    </select>
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：自己点検記録簿今月未読件数取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterRegisterConfirmSql006" resultMap="ResultMapIfaSelfInspectBlotterRegisterConfirmSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_02-02#Sql006 */ 
+            (A.ITEMS - B.READS) AS row_count 
+        FROM
+            ( 
+                SELECT
+                    CASE COUNT(1) 
+                       WHEN 0 THEN 0 
+                        ELSE 1 
+                    END AS ITEMS 
+                FROM
+                    COR_SELF_CHECK_ITEM A 
+                    INNER JOIN COR_SELF_CHECK_BROKER_ANS B 
+                        ON A.BROKER_DIVISION = B.BROKER_DIVISION
+                WHERE
+                    B.BROKER_CODE = #{req.brokerCode}        <!-- ユーザ共通情報.仲介業者コード -->
+                    AND A.COR_INDICATION_FLG = '1' 
+                    AND A.COR_ENFORCE_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMM')
+            ) A, 
+            ( 
+                SELECT
+                    COUNT(1) AS READS 
+                FROM
+                    COR_SELF_CHECK 
+                WHERE
+                    COR_BROKER_CODE = #{req.brokerCode}           <!-- ユーザ共通情報.仲介業者コード -->
+                    AND COR_ENFORCE_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMM')
+            ) B
+    </select>
+    
+</mapper>

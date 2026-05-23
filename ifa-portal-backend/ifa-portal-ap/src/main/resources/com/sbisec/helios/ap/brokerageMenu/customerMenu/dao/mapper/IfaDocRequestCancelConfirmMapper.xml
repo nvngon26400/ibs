@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0704-03_1
+    画面名：書類請求取消
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDocRequestCancelConfirmMapper">
+    <!-- 
+        SQLID：Sql001
+        SQL名：書類請求取消
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDocRequestCancelConfirSql001" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0704-03_1#Sql001 */
+            TB_REQUEST_PAPERS_IFA 
+        SET
+            TORIKESHI_KBN = #{req.torikeshiKbn}                                             <!-- 取消区分 -->
+            ,TORIKESHI_USER_ID = #{req.userId}                                              <!-- 取消ユーザーID -->
+            ,HENKOU_NICHIJI = SYSDATE                                                       <!-- 変更日時 -->
+            ,CCS_SEND_DATE = null                                                           <!-- CCS送付日 -->
+        WHERE
+            SHORUI_SEIKYUU_NO = #{req.shoruiSeikyuuNo}                                      <!-- 書類請求NO -->
+        AND
+            EDABAN = #{req.edaban}                                                          <!-- 枝番 -->
+        AND
+            TORIKESHI_KBN = '0'                                                             <!-- 取消区分 -->
+    </update>
+    <!-- 
+        SQLID：Sql002
+        SQL名：BM交付取消
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDocRequestCancelConfirSql002" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0704-03_1#Sql002 */
+            TB_BM_DELIVERY_IFA 
+        SET
+            BM_DELIVERY_TIME_SCHEDULE = null                                                <!-- BM配信予定日時 -->
+            ,TORIKESHI_USER_ID = #{req.userId}                                              <!-- 取消ユーザーID -->
+            ,STATUS = '1'                                                                   <!-- ステータス -->
+            ,UPDATE_TIME = SYSDATE                                                          <!-- 更新日時 -->
+            ,UPDATE_USER = #{req.userId}                                                    <!-- 更新者 -->
+        WHERE
+            BM_DELIVERY_NO = #{req.bmDeliveryNo}                                            <!-- BM交付番号 -->
+        AND
+            STATUS = '0'                                                                    <!-- ステータス -->
+    </update>
+</mapper>

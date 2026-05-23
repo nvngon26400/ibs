@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IpopoBBApplyNewMapper">
+
+    <resultMap type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.IpopoBBCustomerInfoModel" id="resultSetGetIpopoBBCustomerInfo">
+        <result property="uaiExpStockStr" column="UAI_EXP_STOCK_STR" typeHandler="StringTypeHandler" />
+        <result property="uaiOfficeName" column="UAI_OFFICE_NAME" typeHandler="StringTypeHandler" />
+        <result property="uaiFamilyNameKanji" column="UAI_FAMILY_NAME_KANJI" typeHandler="StringTypeHandler" />
+        <result property="uaiNameKanji" column="UAI_NAME_KANJI" typeHandler="StringTypeHandler" />
+        <result property="uaiFamilyNameKana" column="UAI_FAMILY_NAME_KANA" typeHandler="StringTypeHandler" />
+        <result property="uaiNameKana" column="UAI_NAME_KANA" typeHandler="StringTypeHandler" />
+        <result property="nameKanji" column="NAME_KANJI" typeHandler="StringTypeHandler" />
+    </resultMap>
+
+    <select id="getIpopoBBCustomerInfo" resultMap="resultSetGetIpopoBBCustomerInfo" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-03_1#SQL002 */ 
+            MUAI.BUTEN_CODE AS UAI_BUTEN_CODE,
+            MUAI.ACCOUNT_NUMBER AS UAI_ACCOUNT_NUMBER,
+            TRIM(MUAI.UAI_QA_INVESTMENT_PLAN) AS UAI_QA_INVESTMENT_PLAN,
+            TRIM(MUAI.UAI_OCCUPATION) AS UAI_OCCUPATION,
+            TO_NUMBER(NVL(MUAI.UAI_EXP_STOCK, 0)) || '年' AS UAI_EXP_STOCK_STR,
+            MUAI.UAI_OFFICE_NAME,
+            MUAI.UAI_QA_FINANCIAL_ASSETS,
+            MUAI.CORPORATION_KBN AS UAI_CORPORATION_KBN,
+            MUAI.UAI_FAMILY_NAME_KANJI,
+            MUAI.UAI_NAME_KANJI,
+            MUAI.UAI_FAMILY_NAME_KANA,
+            MUAI.UAI_NAME_KANA,
+            MUAI.DEALER_NUMBER,
+            MUAI.NAME_KANJI,
+            TO_CHAR(TO_DATE(MUAI.OPEN_ACCT_DATE, 'YYYYMMDD'), 'YYYY/MM/DD') AS OPEN_ACCT_DATE,
+            MUAI.TC_COMP_RANK,
+            B.EDELIV_AGREEMENT_KBN,
+            DECODE(B.EDELIV_AGREEMENT_KBN, 1, TO_CHAR(B.EDELIV_AGREEMENT_DATE, 'YYYY/MM/DD'), '') AS EDELIV_AGREEMENT_DATE
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO MUAI
+        LEFT OUTER JOIN
+            T_IPO_PO_EDELIV_AGRMNT B
+        ON
+            MUAI.BUTEN_CODE = B.BUTEN_CODE
+        AND
+            MUAI.ACCOUNT_NUMBER = B.ACCOUNT_NUMBER
+        WHERE
+            MUAI.BUTEN_CODE = #{butenCode}
+        AND
+            MUAI.ACCOUNT_NUMBER = TO_NUMBER(#{accountNumber})
+        AND
+            MUAI.UAI_ACCT_DEL_FLG = '0'
+    </select>
+</mapper>

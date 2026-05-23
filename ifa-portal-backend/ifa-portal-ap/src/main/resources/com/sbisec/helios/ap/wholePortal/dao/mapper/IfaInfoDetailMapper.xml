@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    画面ID：SUB01-03
+    画面名：Information詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.wholePortal.dao.mapper.IfaInfoDetailMapper">
+    <resultMap
+        id="ResultMapIfaInfoDetailSql002"
+        type="com.sbisec.helios.ap.wholePortal.dao.model.IfaInfoDetailSql002ResponseModel"
+    >
+        <result column="title" property="title" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="contents" property="contents" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <!--
+        SQLID：SQL001
+        SQL名：お知らせ既読テーブル更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaInfoDetailSql001" statementType="PREPARED">
+        MERGE /* @SQLID=SUB01-03#Sql001 */
+        INTO PSITE_T5N_INFO_READ A
+        USING (
+            SELECT
+                #{req.notificationId} T5N_INFO_ID,
+                #{req.userId} T5N_LOGIN
+            FROM DUAL
+        ) B
+        ON (
+            A.T5N_INFO_ID = TO_NUMBER(B.T5N_INFO_ID)
+            AND A.T5N_LOGIN = B.T5N_LOGIN
+        )
+        WHEN MATCHED THEN UPDATE SET
+            A.T5N_READ_FLG = 1,
+            A.T5N_READ_AT = IFA_DATE_UTIL.IFA_GET_DATE
+        WHEN NOT MATCHED THEN INSERT (
+            T5N_ID,
+            T5N_INFO_ID,
+            T5N_READ_FLG,
+            T5N_READ_AT,
+            T5N_LOGIN
+        )
+        VALUES (
+            SEQ_PSITE_T5_INFO_READ.NEXTVAL,
+            #{req.notificationId},
+            1,
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.userId}
+        )
+    </update>
+
+    <!--
+        SQLID：SQL002
+        SQL名：お知らせ情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoDetailSql002" resultMap="ResultMapIfaInfoDetailSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB01-03#SQL002 */
+            A.T4N_ID notificationId,
+            A.T4N_TITLE title,
+            A.T4N_CONTENT contents,
+            A.T4N_FILE1 attachDocument1,
+            A.T4N_FILE2 attachDocument2,
+            A.T4N_FILE3 attachDocument3,
+            A.T4N_FILE_COM1 attachDocumentComment1,
+            A.T4N_FILE_COM2 attachDocumentComment2,
+            A.T4N_FILE_COM3 attachDocumentComment3,
+            A.T4N_URL url,
+            A.COR_URL_COM urlComment,
+            A.COR_DISCLAIMER disclaimer
+        FROM
+            PSITE_T4N_INFO A
+        WHERE
+            A.T4N_ID = TO_NUMBER(#{req.notificationId})
+    </select>
+
+</mapper>

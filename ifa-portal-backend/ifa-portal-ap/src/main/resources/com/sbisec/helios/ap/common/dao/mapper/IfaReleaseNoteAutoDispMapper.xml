@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    リリースノート表示条件
+-->
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.IfaReleaseNoteAutoDispMapper">
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：リリースノート一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectReleaseNoteViewInfoSql005" resultType="com.sbisec.helios.ap.common.model.ReleaseNoteViewInfo" statementType="PREPARED">
+        SELECT
+            CASE
+                WHEN RN.DISPLAYED_DATE &gt; RN.UPDATE_TIME
+                THEN RN.DISPLAYED_DATE
+                ELSE RN.UPDATE_TIME
+            END AS RELEASE_NOTE_LATEST_TIME,
+            RNR.LAST_READ_TIME AS LAST_READ_TIME,
+            RNR.NEXT_DISP_FLG AS NEXT_DISP_FLG
+        FROM
+            (
+                SELECT
+                    MAX(DISPLAYED_DATE) AS DISPLAYED_DATE,
+                    MAX(UPDATE_TIME) AS UPDATE_TIME
+                FROM CORDYS.RELEASE_NOTE
+                <where>
+                    DISPLAYED_DATE &lt;= SYSDATE
+                </where>
+            ) RN
+        LEFT OUTER JOIN
+            RELEASE_NOTE_READ RNR
+            ON RNR.USER_ID = #{userId}
+    </select>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：リリースノート閲覧状況更新
+        SQLタイプ：update
+    -->
+    <update id="updateReleaseNoteNextDispFlgSql006" statementType="PREPARED">
+        UPDATE
+            CORDYS.RELEASE_NOTE_READ
+        SET
+            NEXT_DISP_FLG = '1',
+            UPDATE_TIME = SYSDATE,
+            UPDATE_USER = #{userId}
+        <where>
+            USER_ID = #{userId}
+        </where>
+    </update>
+
+</mapper>

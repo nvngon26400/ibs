@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0208-01_3
+    画面名：国内株式注文確認
+-->
+<mapper
+    namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDomesticStockOrderConfirmMapper">
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：発注前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaDomesticStockOrderConfirmSql001" useGeneratedKeys="true" keyColumn="IFA_ORDER_NO" 
+    keyProperty="req.ifaOrderNo" statementType="PREPARED">
+        INSERT INTO
+        T_JP_ORDER(
+        IFA_ORDER_NO
+        ,IFA_ORDER_SUB_NO
+        ,BUTEN_CODE
+        ,ACCOUNT_NUMBER
+        ,CUSTOMER_ID
+        ,SPECIFIC_KBN
+        ,BRAND_CD
+        ,MARKET
+        ,ORDER_STATUS
+        ,TRADE_KBN
+        ,QUANTITY
+        ,LIMIT
+        ,AZUKARI_KBN
+        ,PAYMENT_LIMIT
+        ,REPAYMENT_METHOD_TYPE
+        ,REQUEST_TYPE
+        ,ORDER_SYUBETSU
+        ,ORDER_SYUBETSU_LIST
+        ,KANYU_KBN
+        ,JUTYU_KBN
+        ,CHECK_INSIDER
+        ,CHECK_SOR
+        ,CHECK_COMP_WRN_ALERT
+        ,SHIKIN_SEIKAKU_KBN
+        ,USER_ID
+        ,CANCEL_USER_ID
+        ,TESUURYOU_KBN
+        ,ALTER_FLG
+        ,AUTO_ORDER_KIND
+        ,RBE_ORDER_KIND
+        ,SASINARI_KBN
+        ,PRICE
+        ,TRIGGER_ZONE
+        ,TRIGGER_PRICE
+        ,OCO_SASINARI_KBN
+        ,OCO_SASHINE
+        ,DONE_SASINARI_KBN
+        ,DONE_SASHINE
+        ,DONE_RBE_ORDER_KIND
+        ,DONE_TRIGGER_ZONE
+        ,DONE_TRIGGER_NEDAN
+        ,DONE_OCO_SASINARI_KBN
+        ,DONE_OCO_SASHINE
+        ,DONE_LIMIT
+        ,JO_ZEI_KBN
+        ,ALTER_ORDER_NUM
+        ,RBE_ORDER_STATUS
+        ,ORDER_TYPE
+        ,ORDER_NUM
+        ,ACCEPT_DATE
+        ,ACCEPT_TIME
+        ,SHUBETU
+        ,CODE
+        ,MESSAGE
+        ,ESTIMATE_PRICE
+        ,AMOUNT
+        ,COMMISSION
+        ,CONSUMPTION_TAX
+        ,CAPITAL_GAIN_TAX
+        ,NET_AMOUNT
+        ,COST
+        ,TRADE_DATE
+        ,SETTLEMENT_DATE
+        ,ACCEPT_LIMIT
+        ,DONE_ACCEPT_LIMIT
+        ,COM_ID_R
+        ,AC_POSITION
+        ,AC_POSITION_AFTER
+        ,AC_BALANCE
+        ,AC_BALANCE_AFTER
+        ,ORDERED_MARKET
+        ,TRADE_DEFICIT_AMOUNT
+        ,ISA_BUY_LIMIT
+        ,JRNISA_TRANSFER_AMOUNT
+        ,SOR_LINK_KBN
+        ,UNCLOSED_QUANTITY
+        ,UNCLOSED_QUANTITY_AFTER
+        ,MARGIN_CAPABILITY
+        ,MARGIN_CAPABILITY_AFTER
+        ,ACTUAL_GRNT_RATE
+        ,ACTUAL_GRNT_RATE_AFTER
+        ,APP_INTEREST_RATES
+        ,APP_LENDING_STOCK
+        ,PREMIUM
+        ,TPOINT
+        ,TPOINT_AFTER
+        ,DAILY_CREDIT_KBN
+        ,PAYMENT_LIMIT_DATE
+        ,DATE_KBN
+        ,BROKER_CODE
+        ,INTERMEDIARY_EMP_CD
+        ,CREATE_TIME
+        ,CREATE_USER
+        ,UPDATE_TIME
+        ,UPDATE_USER
+        ,CCS_SEND_DATE
+        ) VALUES(
+        TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD') ||
+        LPAD(SEQ_T_JP_ORDER.NEXTVAL, 10, '0')
+        ,1
+        ,#{req.butenCode}
+        ,#{req.accountNumber}
+        ,#{req.kokyakuId}
+        ,#{req.tokuteiKouzaKbn}
+        ,#{req.brandCode}
+        ,#{req.market}
+        ,'0'
+        ,#{req.tradeCd}
+        ,#{req.quantity}
+        ,#{req.yukoKigen}
+        ,#{req.depositType}
+        ,null
+        ,null
+        ,null
+        ,#{req.orderKind}
+        ,#{req.orderClassification}
+        ,#{req.kanyuKbn}
+        ,#{req.ordersHouhou}
+        ,#{req.insiderCheck}
+        ,#{req.sorCheck}
+        ,#{req.complaCheckWarning}
+        ,#{req.uaiQaFundCharacter}
+        ,#{req.userId}
+        ,null
+        ,#{req.tesuuryouKbn}
+        ,null
+        ,#{req.automaticOrderClassification}
+        ,#{req.rbeChumonShubetsu}
+        ,#{req.sashinariKbn}
+        ,#{req.sashine}
+        ,#{req.triggerZone}
+        ,#{req.triggerNedan}
+        ,#{req.ocoSasinariKbn}
+        ,#{req.ocoSashine}
+        ,#{req.doneSasinariKbn}
+        ,#{req.doneSashine}
+        ,#{req.doneRbeOrderKind}
+        ,#{req.doneTriggerZone}
+        ,#{req.doneTriggerNedan}
+        ,#{req.doneOcoSasinariKbn}
+        ,#{req.doneOcoSashine}
+        ,#{req.doneYuukouKigen}
+        ,#{req.joutoekizeiKbn}
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,null
+        ,#{req.brokerCode}
+        ,#{req.brokerChargeCode}
+        ,IFA_DATE_UTIL.IFA_GET_DATE
+        ,#{req.createUser}
+        ,IFA_DATE_UTIL.IFA_GET_DATE
+        ,#{req.updatedBy}
+        ,null
+        )
+    </insert>
+
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDomesticStockOrderConfirmSql002" statementType="PREPARED">
+        <if test=' "".equals(req.apiError) '>
+        UPDATE T_JP_ORDER
+        SET
+            ORDER_TYPE = #{req.securityType}
+            , ORDER_NUM = #{req.ecOrderNo}
+            , ACCEPT_DATE = #{req.orderDate}
+            , ACCEPT_TIME = #{req.orderTime}
+            , SHUBETU = #{req.shubetu}
+            , CODE =  #{req.code}
+            , MESSAGE =  #{req.errMessage}
+            , ESTIMATE_PRICE =  #{req.estimatePrice}
+            , AMOUNT =  #{req.amount}
+            , COMMISSION =  #{req.commission}
+            , CONSUMPTION_TAX =  #{req.consumptionTax}
+            , CAPITAL_GAIN_TAX =  #{req.capitalGainTax}
+            , NET_AMOUNT =  #{req.netAmount}
+            , COST = #{req.cost}
+            , TRADE_DATE =  #{req.contractDate}
+            , SETTLEMENT_DATE =  #{req.deliveryDate}
+            , ACCEPT_LIMIT =  #{req.acceptLimit}
+            , DONE_ACCEPT_LIMIT =  #{req.doneAcceptLimit}
+            , COM_ID_R =  #{req.comIdR}
+            , AC_POSITION =  #{req.acPosition}
+            , AC_POSITION_AFTER =  #{req.acPositionAfter}
+            , AC_BALANCE =  #{req.acBalance}
+            , AC_BALANCE_AFTER =  #{req.acBalanceAfter}
+            , ORDERED_MARKET =  #{req.orderedMarket}
+            , TRADE_DEFICIT_AMOUNT =  #{req.tradeDeficitAmount}
+            , ISA_BUY_LIMIT =  #{req.isaBuyLimit}
+            , JRNISA_TRANSFER_AMOUNT =  #{req.jrnisaTransferAmount}
+            , SOR_LINK_KBN =  #{req.sorLinkKbn}
+            , UNCLOSED_QUANTITY =  #{req.unclosedQuantity}
+            , UNCLOSED_QUANTITY_AFTER =  #{req.unclosedQuantityAfter}
+            , MARGIN_CAPABILITY =  #{req.marginCapability}
+            , MARGIN_CAPABILITY_AFTER =  #{req.marginCapabilityAfter}
+            , ACTUAL_GRNT_RATE =  #{req.retentionRate}
+            , ACTUAL_GRNT_RATE_AFTER =  #{req.actualGrntRateAfter}
+            , APP_INTEREST_RATES =  #{req.applicableInterestRate}
+            , APP_LENDING_STOCK =  #{req.applicableStockLendingFees}
+            , PREMIUM =  #{req.premium}
+            , UPDATE_TIME =  IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER =  #{req.updatedBy}
+         WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = '1'
+        </if>
+        <if test=' "1".equals(req.apiError) '>
+        UPDATE T_JP_ORDER
+        SET
+            SHUBETU = #{req.shubetu}
+            , CODE =  #{req.code}
+            , MESSAGE =  #{req.errMessage}
+            , UPDATE_TIME =  IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER =  #{req.updatedBy}
+			, ACCEPT_DATE = #{req.orderDate}
+         WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = '1'
+        </if>
+    </update>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新(発注がエラーの場合(API応答なし))
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDomesticStockOrderConfirmSql002b" statementType="PREPARED">
+        UPDATE T_JP_ORDER
+        SET
+            ACCEPT_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            , UPDATE_TIME =  IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER =  #{req.updatedBy}
+         WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = '1'
+    </update>
+
+</mapper>

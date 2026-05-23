@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0201_02-01
+    画面名：顧客一覧・信用
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerList.dao.mapper.IfaCustomerListMarginMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaCustomerListMarginSql001" type="com.sbisec.helios.ap.brokerageMenu.customerList.dao.model.IfaCustomerListMarginSql001ResponseModel" >
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：顧客検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerListMarginSql001" resultMap="ResultMapIfaCustomerListMarginSql001" statementType="PREPARED">
+        SELECT * FROM (
+        SELECT /* @SQLID=SUB0201_02-01#Sql001 */
+        COUNT(1) OVER() AS totalRow
+        , A.TC_COMP_RANK AS tcCompRank <!-- コンプラランク -->
+        , A.NAME_KANA AS customerNameKana <!-- 顧客名_姓名(カナ)-->
+        , A.NAME_KANJI AS customerNameKanji <!-- 顧客名_姓名(漢字)-->
+        , A.ACCOUNT_NUMBER AS accountNumber <!-- 口座番号-->
+        , E.BROKER_BRANCH_CODE AS branchCode <!--支店コード-->
+        , A.BROKER_CODE AS brokerCode <!-- 仲介業者コード-->
+        , A.INTERMEDIARY_EMP_CD AS brokerChargeCode <!-- 仲介業者営業員コード-->
+        , A.BUTEN_CODE AS butenCode  <!-- 部店コード-->
+        , E.BROKER_CHARGE_NAME AS chargeName <!-- 仲介業者担当者名 -->
+        , E.BRANCH_NAME AS branchName <!--仲介業者支店名（支店名用） -->
+        , C.BRANCH_NAME AS brokerName <!--仲介業者支店名（仲介業者名用） -->
+        , G.PROF_LOSS_TRUST_STOCK AS customerListProfitAndLossOfMarginPosition <!--評価損益－信用建玉 -->
+        , I.DEFICIT_STATUS AS marginStatus <!--追証ステータス -->
+        , I.CHARGE_FLG AS chargeFlag <!--不足金発生フラグ -->
+        , J.ACCEPTANCE_DEPOSIT AS acceptanceDeposit <!--受入保証金 -->
+        , J.MAINTAIN_RATE AS maintenanceRate <!--維持率 -->
+        , H.CUSTOMER_ATTRIBUTE_NAME AS customerAttributeName <!--契約締結前交付書面コード名 -->
+        , K.TENGUN AS tengun <!--店群 -->
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO A
+        LEFT JOIN
+            MEDIATE_BRANCH C
+        ON
+            A.BROKER_CODE = C.BROKER_CODE
+            AND C.BROKER_BRANCH_KIND = '00'
+        LEFT JOIN
+            V_MEDIATE_CHARGE_INFO E
+        ON
+            A.BROKER_CODE = E.BROKER_CODE
+            AND A.INTERMEDIARY_EMP_CD = E.BROKER_CHARGE_CODE
+        LEFT JOIN
+            USER_ATTRIBUTE G
+        ON
+            A.CUSTOMER_ID = G.CUSTOMER_ID
+        LEFT JOIN
+            CUSTOMER_ATTRIBUTE_MASTER H
+        ON
+            A.CUSTOMER_ATTRIBUTE = H.CUSTOMER_ATTRIBUTE
+        LEFT JOIN
+            USER_DEFICIT_INFO I
+        ON
+            A.BUTEN_CODE = I.BUTEN_CODE
+            AND A.ACCOUNT_NUMBER = I.ACCOUNT_NUMBER
+        LEFT JOIN
+            T_MARGIN_CALL J
+        ON
+            A.BUTEN_CODE = J.BUTEN_CODE
+            AND A.ACCOUNT_NUMBER = TO_NUMBER(J.ACCOUNT_NUMBER)
+        LEFT JOIN
+            BRANCH_MASTER K
+        ON
+            A.BUTEN_CODE = K.BRANCH_CODE
+        WHERE
+            A.UAI_ACCT_CLASS_FLG1 = '1'
+            <if test='req.chkBrokerCodeExclude == "1" and req.brokerCode != ""'>
+                <if
+                    test="req.brokerCodeList != null ">
+                    AND A.BROKER_CODE NOT IN
+                    <foreach item="chargeCode" index="index"
+                        collection="req.brokerCodeList" open="(" close=")" separator=",">
+                        #{chargeCode}
+                    </foreach>
+                </if>
+            </if>
+            <if test='req.chkBrokerCodeExclude == "0" and req.brokerCode != ""'>
+                <if
+                    test="req.brokerCodeList != null">
+                    AND A.BROKER_CODE IN
+                    <foreach item="chargeCode" index="index"
+                        collection="req.brokerCodeList" open="(" close=")" separator=",">
+                        #{chargeCode}
+                    </foreach>
+                </if>
+            </if>
+            <if test='req.branchCode != null and req.branchCode != ""'>
+                AND E.BROKER_BRANCH_CODE = #{req.branchCode}
+            </if>
+            <if test='req.empCode != null and req.empCode != ""'>
+                AND A.INTERMEDIARY_EMP_CD = #{req.empCode}
+            </if>
+            <if test="req.fct030Code != null">
+                <choose>
+                    <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                        AND(A.BROKER_CODE IN
+                        <foreach item="brokerChargeList" index="index" collection="req.fct030Code" open="(" close=")">
+                            <if test="index%1000 == 0 and index!=0">
+                                ) OR A.BROKER_CODE IN(
+                            </if>
+                            <if test="index%1000 != 0">
+                                ,
+                            </if>
+                            #{brokerChargeList.brokerCode}
+                        </foreach>
+                        )
+                    </when>
+                    <otherwise>
+                        AND((A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN
+                        <foreach item="brokerChargeList" index="index" collection="req.fct030Code" open="(" close=")">
+                            <if test="index%1000 == 0 and index!=0">
+                                ) OR (A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN(
+                            </if>
+                            <if test="index%1000 != 0">
+                                ,
+                            </if>
+                            (#{brokerChargeList.brokerCode},#{brokerChargeList.empCode})
+                        </foreach>
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+            <if test='req.butenCode != null and req.butenCode != ""'>
+                AND A.BUTEN_CODE = #{req.butenCode}
+            </if>
+            <if test='req.accountNumber != null and req.accountNumber != ""'>
+                AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            </if>
+            <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != ""'>
+                AND(
+                     REGEXP_LIKE(A.NAME_KANJI, #{req.customerNameKanjiKana})
+                 OR  REGEXP_LIKE(A.NAME_KANA, #{req.customerNameKanjiKana})
+                    )
+            </if>
+            <if test='req.course != null' >
+                AND H.CUSTOMER_ATTRIBUTE IN
+                <foreach collection="req.course.split(',')" item="course" open="(" close=")" separator=",">
+                    #{course}
+                </foreach>
+            </if>
+            <if test='req.beforeProfitAndLossFrom != null and req.beforeProfitAndLossFrom != ""'>
+                AND G.PROF_LOSS_TRUST_STOCK &gt;= #{req.beforeProfitAndLossFrom}
+            </if>
+            <if test='req.beforeProfitAndLossTo != null and req.beforeProfitAndLossTo != ""'>
+                AND G.PROF_LOSS_TRUST_STOCK &lt;= #{req.beforeProfitAndLossTo}
+            </if>
+            <if test='req.beforeDepositBalanceFrom != null and req.beforeDepositBalanceFrom != ""'>
+                AND J.ACCEPTANCE_DEPOSIT &gt;= #{req.beforeDepositBalanceFrom}
+            </if>
+            <if test='req.beforeDepositBalanceTo != null and req.beforeDepositBalanceTo != ""'>
+                AND J.ACCEPTANCE_DEPOSIT &lt;= #{req.beforeDepositBalanceTo}
+            </if>
+            <if test='req.beforeEntrustDepositRateFrom != null and req.beforeEntrustDepositRateFrom != ""'>
+                AND J.MAINTAIN_RATE &gt;= #{req.beforeEntrustDepositRateFrom}
+            </if>
+            <if test='req.beforeEntrustDepositRateTo != null and req.beforeEntrustDepositRateTo != ""'>
+                AND J.MAINTAIN_RATE &lt;= #{req.beforeEntrustDepositRateTo}
+            </if>
+            <if test='req.marginCallCheck != null and req.marginCallCheck == "1"'>
+                AND I.DEFICIT_STATUS &lt;&gt; '0'
+            </if>
+            <if test='req.withdrawalDeficientCheck != null and req.withdrawalDeficientCheck == "1"'>
+                AND I.CHARGE_FLG = #{req.withdrawalDeficientCheck}
+            </if>
+            ORDER BY brokerCode, butenCode, accountNumber ASC
+            )
+            WHERE
+            ROWNUM &lt;= #{req.rowNum}
+    </select>
+
+</mapper>

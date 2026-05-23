@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0204_02-04_1
+    画面名：募集入力
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IfaSubscriptInputMapper">
+    <resultMap
+        id="ResultMapIfaSubscriptInputSql001"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputSql001ResponseModel"
+    >
+        <result property="brandName" column="BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="customerNameKanji" column="CUSTOMER_NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="officeName" column="OFFICE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptInputSql002"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputSql002ResponseModel"
+    ></resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptInputSql003"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputSql003ResponseModel"
+    ></resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptInputSql004"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputSql004ResponseModel"
+    ></resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptInputSql005"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputSql005ResponseModel"
+    ></resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptInputSql006"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputSql006ResponseModel"
+    ></resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptInputSql007"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputSql007ResponseModel"
+    ></resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptInputSql008"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputSql008ResponseModel"
+    ></resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：画面情報の取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputSql001" resultMap="ResultMapIfaSubscriptInputSql001" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0204_02-04_1#Sql001 */
+            B.BB_PRODUCT_CODE AS BRAND_CODE, 
+            B.BB_PRODUCT_NAME AS BRAND_NAME, 
+            G.CIGARETTE_SHOW_FLAG AS SMOKING_CIGARETTE, 
+            G.EDELIV_ONLY_FLAG AS ONLY_ELECTRONIC_DELIVERY, 
+            CASE 
+                WHEN B.BB_GESTURE_VALUE = '1' 
+                    THEN B.BB_LOT_ISSUE_PRICE 
+                WHEN B.BB_GESTURE_VALUE = '2' 
+                    THEN G.PRICE 
+                END AS ISSUE_BB_PRICE, 
+            B.BB_STOCK AS UNIT, 
+            DECODE( 
+                B.BB_UNIT_KBN, 
+                '1', 
+                '株', 
+                '2', 
+                '円', 
+                '3', 
+                '口', 
+                '株'
+            ) AS SELL_BUY_UNIT_TYPE, 
+            NVL( 
+                TO_CHAR( 
+                    TO_DATE(G.BB_PERIOD_FROM, 'YYYYMMDD'), 
+                    'YYYY/MM/DD'
+                ) , 
+                ' '
+            ) AS BB_PERIOD_FROM, 
+            TO_CHAR( 
+                TO_DATE(G.BB_PERIOD_TO, 'YYYYMMDD'), 
+                'YYYY/MM/DD'
+            ) AS BB_PERIOD_TO, 
+            TO_CHAR( 
+                TO_DATE(G.PAYMENT_DATE, 'YYYYMMDD'), 
+                'YYYY/MM/DD'
+            ) AS PAYMENT_DATE, 
+            G.COM AS SUBSCRIPT_COMM, 
+            B.BB_SETTLE_DATE AS DELIVERY_DUE_DATE, 
+            C.BUTEN_CODE, 
+            C.ACCOUNT_NUMBER, 
+            C.NAME_KANJI AS CUSTOMER_NAME_KANJI, 
+            TO_CHAR( 
+                TO_DATE(C.OPEN_ACCT_DATE, 'YYYYMMDD'), 
+                'YYYY/MM/DD'
+            ) AS OPEN_ACCT_DATE, 
+            TRIM(C.UAI_OCCUPATION) AS PROFESSION, 
+            CASE 
+                WHEN C.CORPORATION_KBN = '0' 
+                    THEN C.UAI_OFFICE_NAME 
+                WHEN C.CORPORATION_KBN = '1' 
+                    THEN '-' 
+                END AS OFFICE_NAME, 
+            C.TC_COMP_RANK AS COMPLIANCE_RANK, 
+            TRIM(C.UAI_QA_INVESTMENT_PLAN) AS INVESTMENT_POLICY_TYPE, 
+            TO_NUMBER(NVL(C.UAI_EXP_STOCK, 0)) AS STOCK_SPOT_INVEST_EXPERIENCE_YEARS, 
+            CASE 
+                WHEN C.CORPORATION_KBN = '0' 
+                    THEN C.UAI_QA_FINANCIAL_ASSETS 
+                WHEN C.CORPORATION_KBN = '1' 
+                    THEN '-' 
+                END AS FINANCIAL_ASSETS_TYPE, 
+            NVL(E.SAIRYOU_ALLO_COUNT, 0) AS DISCRETION_ALLO_COUNT, 
+            NVL(E.MAX_SAIRYOU_ALLO, 10) AS DISCRETION_ALLOCATE_ABLE_TIMES, 
+            DECODE( 
+                K.EDELIV_AGREEMENT_KBN, 
+                1, 
+                TO_CHAR(K.EDELIV_AGREEMENT_DATE, 'YYYY/MM/DD'), 
+                ''
+            ) AS EDELIV_AGREEMENT_DATE, 
+            TO_CHAR(L.READ_TIME, 'YYYY/MM/DD HH24:MI') AS READ_TIME, 
+            CASE 
+                WHEN F.LOTTERY_RESULT IS NOT NULL 
+                    THEN F.LOTTERY_RESULT 
+                WHEN A.BB_WINNING = '2' 
+                AND A.BB_EXCLUSION = '4' 
+                    THEN '4' 
+                WHEN A.BB_WINNING = '2' 
+                AND A.BB_EXCLUSION &lt;&gt; '4' 
+                    THEN '2' 
+                ELSE A.BB_WINNING 
+                END AS LOTTERY_RESULT, 
+            CASE 
+                WHEN F.LOTTERY_RESULT IN ('1', '3', '4', '5') 
+                    THEN TO_CHAR(NVL(F.QUANTITY_ALLOC, 0)) 
+                WHEN F.LOTTERY_RESULT = '2' 
+                    THEN '0' 
+                WHEN A.BB_WINNING = '0' 
+                    THEN '-' 
+                WHEN A.BB_WINNING = '1' 
+                    THEN TO_CHAR(A.BB_QUANTITY_ALLOC) 
+                WHEN A.BB_WINNING = '2' 
+                AND A.BB_EXCLUSION = '4' 
+                    THEN TO_CHAR(NVL(H.QUANTITY_SAIRYOU, 0)) 
+                ELSE '0' 
+                END AS BB_QUANTITY_ALLOC, 
+            A.BB_QUANTITY AS BB_QUANTITY, 
+            NVL(M.ORDER_STATUS, '0') AS ORDER_STATUS, 
+            TO_CHAR(M.ORDER_TIME, 'yyyy/MM/dd hh24:mi:ss') AS RECRUITMENT_ORDER_DATE, 
+            M.ORDER_COUNT AS QUANTITY, 
+            M.APPOINT_PRICE AS CONTRACT_AMOUNT, 
+            M.CANCEL_TIME AS SUBSCRIPT_CANCEL_DAY_TIME, 
+            F.PRODUCT_CODE AS BRAND_CODE12, 
+            M.DEPOSIT_TYPE, 
+            M.INVITATION_TYPE AS KANYU_KBN, 
+            M.ORDER_METHOD AS JUTYU_KBN, 
+            M.PROSPECTUS, 
+            M.EXPLANATION_INFO AS IMPORTANT_MATTER_TYPE, 
+            M.WARNING_APPLY, 
+            A.BB_REMARK AS BB_REMARK, 
+            C.CUSTOMER_ID AS CUSTOMER_CODE, 
+            A.BB_PRESENTATION_FROM BOOK_BUILDING_PRESENTATION_FROM, 
+            M.DETAIL_NUMBER, 
+            C.BROKER_CODE, 
+            C.INTERMEDIARY_EMP_CD AS BROKER_CHARGE_CODE, 
+            C.DEALER_NUMBER, 
+            G.PRESENTATION_DATE, 
+            G.MAX_ALLOCATION, 
+            G.ATTACHED_BRAND AS BRAND_CODE_WITH1, 
+            C.UAI_SPECIFIC_KBN AS TOKUTEI_KOUZA_KBN, 
+            C.UAI_ISA_CONTRACT_KBN AS ISA_CONTRACT_TYPE, 
+            C.UAI_ISA_BUY_CURRENT_YEAR_KBN AS ISA_BUY_ABLE_JUDGE_CLASSIFICATION_YEAR, 
+            TO_CHAR(M.UPDATE_TIME, 'yyyy/MM/dd hh24:mi:ss') AS UPDATE_TIME_FOR_ORDER_EXCLUSIVITY, 
+            NVL2(J.ACCT_ID, '1', '0') AS ACCUMULATE_NISA_FLAG 
+        FROM
+            BB_ACCEPT A 
+            LEFT OUTER JOIN BB_PRODUCT_MASTER B 
+                ON A.BB_PRODUCT_CODE = B.BB_PRODUCT_CODE 
+                AND A.BB_PRESENTATION_FROM = TO_CHAR(B.BB_PRESENTATION_FROM, 'YYYYMMDD') 
+            LEFT OUTER JOIN MEDIATE_USER_ATTRIBUTE_INFO C 
+                ON C.BUTEN_CODE = SUBSTR(A.BB_BRANCH_CODE, 1, 3) 
+                AND C.ACCOUNT_NUMBER = TO_NUMBER(A.BB_ACCOUNT_NUMBER) 
+            LEFT OUTER JOIN IPO_COUNT_MASTER E 
+                ON TO_CHAR(E.ANNUAL, 'YYYY') = IFA_DATE_UTIL.IFA_GET_SDATE('YYYY') - CASE WHEN IFA_DATE_UTIL.IFA_GET_SDATE('MM') &lt; '04' THEN 1 ELSE 0 END
+                AND A.BB_BRANCH_CODE = E.BRANCH_NO 
+                AND TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(E.ACCOUNT_NO) 
+            LEFT OUTER JOIN T_IPO_PO_ORDER F 
+                ON A.BB_PRODUCT_CODE = F.PRODUCT_CODE 
+                AND A.BB_PRESENTATION_FROM = F.PRESENTATION_FROM 
+                AND SUBSTR(A.BB_BRANCH_CODE, 1, 3) = F.BUTEN_CODE 
+                AND TO_NUMBER(A.BB_ACCOUNT_NUMBER) = F.ACCOUNT_NUMBER 
+            LEFT OUTER JOIN M_IPO_PO_BB_PERIOD G 
+                ON A.BB_PRODUCT_CODE = G.PRODUCT_CODE 
+                AND A.BB_PRESENTATION_FROM = G.PRESENTATION_FROM 
+            LEFT OUTER JOIN SR_ACCEPT H 
+                ON A.BB_PRODUCT_CODE = H.BB_PRODUCT_CODE 
+                AND A.BB_PRESENTATION_FROM = H.BB_PRESENTATION_FROM 
+                AND A.BB_BRANCH_CODE = H.BB_BRANCH_CODE 
+                AND TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(H.BB_ACCOUNT_NUMBER) 
+            LEFT OUTER JOIN SVC_ACCT_PROFILE_IFAP J 
+                ON J.ACCT_ID = C.BUTEN_CODE || '-' || LPAD(C.ACCOUNT_NUMBER, 7, '0') 
+                AND J.PROFILE_NAME = 'IsaOpenSelect_s_stage' 
+                AND J.PROFILE_VALUE = 'OpenTUMINISA' 
+            LEFT OUTER JOIN T_IPO_PO_EDELIV_AGRMNT K 
+                ON K.BUTEN_CODE = C.BUTEN_CODE 
+                AND K.ACCOUNT_NUMBER = C.ACCOUNT_NUMBER 
+            LEFT OUTER JOIN T_IPO_PO_DOCUMENT_READ L 
+                ON L.PRODUCT_CODE = A.BB_PRODUCT_CODE 
+                AND L.PRESENTATION_FROM = A.BB_PRESENTATION_FROM 
+                AND L.BUTEN_CODE = C.BUTEN_CODE 
+                AND L.ACCOUNT_NUMBER = C.ACCOUNT_NUMBER 
+                AND L.DOCUMENT_ID = '00000' 
+                AND L.VERSION_NUMBER = '000000' 
+            LEFT OUTER JOIN T_IPO_PO_ORDER_DETAIL M 
+                ON F.PRODUCT_CODE = M.PRODUCT_CODE 
+                AND F.PRESENTATION_FROM = M.PRESENTATION_FROM 
+                AND F.BUTEN_CODE = M.BUTEN_CODE 
+                AND F.ACCOUNT_NUMBER = M.ACCOUNT_NUMBER 
+        WHERE
+            A.BB_PRODUCT_CODE = #{req.brandCode}
+            AND A.BB_PRESENTATION_FROM = #{req.bookBuildingPresentationFrom}
+            AND A.BB_BRANCH_CODE = RPAD(#{req.butenCode}, 4, ' ')
+            AND TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(LPAD(#{req.accountNumber}, 7, '0'))
+            <if test="req.detailNumber != null and req.detailNumber != ''">
+            AND M.DETAIL_NUMBER = #{req.detailNumber}
+            </if>
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：年間裁量配分割当回数情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputSql002" resultMap="ResultMapIfaSubscriptInputSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_1#Sql002 */
+            NVL(A.MAX_SAIRYOU_ALLO, 10) - NVL(A.SAIRYOU_ALLO_COUNT, 0)
+                - NVL(G.OLD_SAIRYOU_ALLO_COUNT, 0) AS MAYBE_SAIRYOU_COUNT,
+            NVL(A.SAIRYOU_ALLO_COUNT, 0) AS SAIRYOU_ALLO_COUNT,
+            NVL(G.OLD_SAIRYOU_ALLO_COUNT, 0) AS OLD_SAIRYOU_ALLO_COUNT,
+            G.OLD_BRANCH_NO AS oldButenNumber,
+            G.OLD_ACCOUNT_NO AS oldAccountNumber,
+            NVL(A.MAX_SAIRYOU_ALLO, 10) AS MAX_SAIRYOU_ALLO
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO MUAI
+        LEFT JOIN
+            ETINTRA.IPO_COUNT_MASTER A
+        ON
+            MUAI.BUTEN_CODE = SUBSTR(A.BRANCH_NO, 1, 3)
+            AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(A.ACCOUNT_NO)
+            AND TO_CHAR(A.ANNUAL, 'YYYY') = IFA_DATE_UTIL.IFA_GET_SDATE('YYYY') - CASE WHEN IFA_DATE_UTIL.IFA_GET_SDATE('MM') &lt; '04' THEN 1 ELSE 0 END
+        LEFT JOIN (
+            SELECT
+                E.BUTEN_CODE AS BUTEN_CODE,
+                E.ACCOUNT_NUMBER AS ACCOUNT_NUMBER,
+                NVL(F.SAIRYOU_ALLO_COUNT, 0) AS OLD_SAIRYOU_ALLO_COUNT,
+                E.OLD_BRANCH_NO,
+                E.OLD_ACCOUNT_NO
+            FROM ( 
+                SELECT
+                    C.BUTEN_CODE,
+                    C.ACCOUNT_NUMBER,
+                    D.OLD_BRANCH_NO,
+                    D.OLD_ACCOUNT_NO
+                FROM
+                    MEDIATE_USER_ATTRIBUTE_INFO C
+                    INNER JOIN CALLCENTER.CHANGE_ACCOUNT D 
+                    ON C.BUTEN_CODE = SUBSTR(D.NEW_BRANCH_NO, 1, 3) 
+                    AND C.ACCOUNT_NUMBER = TO_NUMBER(D.NEW_ACCOUNT_NO) 
+                WHERE
+                    C.BUTEN_CODE = #{req.butenCode}
+                    AND C.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            ) E 
+            LEFT JOIN
+                ETINTRA.IPO_COUNT_MASTER F
+            ON
+                E.OLD_BRANCH_NO = F.BRANCH_NO
+                AND TO_NUMBER(E.OLD_ACCOUNT_NO) = TO_NUMBER(F.ACCOUNT_NO)
+                AND TO_CHAR(F.ANNUAL, 'YYYY') = IFA_DATE_UTIL.IFA_GET_SDATE('YYYY') - CASE WHEN IFA_DATE_UTIL.IFA_GET_SDATE('MM') &lt; '04' THEN 1 ELSE 0 END
+        ) G
+        ON
+            MUAI.BUTEN_CODE = G.BUTEN_CODE
+            AND MUAI.ACCOUNT_NUMBER = G.ACCOUNT_NUMBER
+        WHERE
+            MUAI.BUTEN_CODE = #{req.butenCode}
+            AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：裁量配分割当回数(未抽選)取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputSql003" resultMap="ResultMapIfaSubscriptInputSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_1#Sql003 */
+            COUNT(*) AS ROW_COUNT
+        FROM
+            ETINTRA.BB_PRODUCT_MASTER A
+        INNER JOIN
+            ETINTRA.SR_ACCEPT B
+        ON
+            A.BB_PRODUCT_CODE = B.BB_PRODUCT_CODE
+            AND TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYYMMDD') = TO_CHAR(B.BB_PRESENTATION_FROM)
+            AND B.BB_BRANCH_CODE = RPAD(#{req.butenCode}, 4, ' ')
+            AND TO_NUMBER(B.BB_ACCOUNT_NUMBER) = TO_NUMBER(LPAD(#{req.accountNumber}, 7, 0))
+        WHERE
+            A.BB_LOT = '0'
+            AND A.BB_IPO_PO_KBN = '1'
+            AND A.BB_PRODUCT_CODE &lt;&gt; #{req.brandCode}
+
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：対面募集注文情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputSql004" resultMap="ResultMapIfaSubscriptInputSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_1#Sql004 */
+            ORDER_COUNT AS QUANTITY
+        FROM
+            T_IPO_PO_ORDER_DETAIL
+        WHERE
+            PRODUCT_CODE = #{req.brandCode}
+            AND PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom})
+            AND BUTEN_CODE = #{req.butenCode}
+            AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            AND ORDER_STATUS &lt;&gt; '6'
+    </select>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：利用時間チェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputSql005" resultMap="ResultMapIfaSubscriptInputSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_1#Sql005 */
+            NAME
+        FROM
+            M_CODE
+        WHERE
+            CODE_TYPE = '38'
+            AND CODE_1 = '01'
+            AND CODE_2 = 'END_TIME'
+    </select>
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：口座種別チェック情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputSql006" resultMap="ResultMapIfaSubscriptInputSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_1#Sql006 */
+            UAI_SPECIFIC_KBN AS TOKUTEI_KOUZA_KBN,
+            UAI_ISA_CONTRACT_KBN AS ISA_CONTRACT_TYPE,
+            UAI_ISA_BUY_CURRENT_YEAR_KBN as ISA_BUY_ABLE_JUDGE_CLASSIFICATION_YEAR,
+            CUSTOMER_ID AS CUSTOMER_ID
+        FROM
+            CORDYS.MEDIATE_USER_ATTRIBUTE_INFO
+        WHERE
+            CUSTOMER_ID = TO_NUMBER(#{req.customerCode})
+    </select>
+    
+    <!-- 
+        SQLID：Sql007
+        SQL名：重要事項の説明確認
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputSql007" resultMap="ResultMapIfaSubscriptInputSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_1#Sql007 */
+            COUNT(*) AS ROW_COUNT
+        FROM
+            CALLCENTER.ATTENTION_INFO
+        WHERE
+            CUSTOMER_ID = TO_NUMBER(#{req.customerCode})
+            AND ON_OFF_FLG = '有効'
+            AND DELETE_TIME IS NULL
+            AND ATTENTION = '株式'
+            AND CATEGORY = 'リスク説明未1'
+    </select>
+    
+    <!-- 
+        SQLID：Sql008
+        SQL名：セクション関連情報の取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputSql008" resultMap="ResultMapIfaSubscriptInputSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_1#Sql008 */
+            T_IPO_PO_SECTION_REF.SECTION_ID,
+            T_IPO_PO_SECTION_REF.SECTION_NAME AS BRANCH_NAME
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO
+        LEFT OUTER JOIN
+            MEDIATE_CHARGE_INFO
+        ON
+            MEDIATE_USER_ATTRIBUTE_INFO.BROKER_CODE = MEDIATE_CHARGE_INFO.BROKER_CODE
+            AND MEDIATE_USER_ATTRIBUTE_INFO.INTERMEDIARY_EMP_CD = MEDIATE_CHARGE_INFO.BROKER_CHARGE_CODE
+        LEFT OUTER JOIN
+            T_IPO_PO_SECTION_REF
+        ON
+            MEDIATE_USER_ATTRIBUTE_INFO.BROKER_CODE = T_IPO_PO_SECTION_REF.BROKER_CODE
+            AND MEDIATE_CHARGE_INFO.BROKER_BRANCH_CODE = T_IPO_PO_SECTION_REF.BROKER_BRANCH_CODE
+        WHERE
+            MEDIATE_USER_ATTRIBUTE_INFO.BUTEN_CODE = #{req.butenCode}
+            AND MEDIATE_USER_ATTRIBUTE_INFO.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            AND ROWNUM = 1
+    </select>
+
+</mapper>

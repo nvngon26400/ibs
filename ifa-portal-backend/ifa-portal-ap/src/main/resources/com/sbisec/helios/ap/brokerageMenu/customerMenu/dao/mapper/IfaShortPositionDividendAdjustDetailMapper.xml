@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_010302-02
+    画面名：売建配当調整金明細
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaShortPositionDividendAdjustDetailMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="Sql001SubResult" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaShortPositionDividendAdjustDetailSqlModel">
+    </resultMap>
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：売建配当調整金明細取得
+         SQLタイプ：select
+    -->
+    <select id="selectIfaShortPositionDividendAdjustDetailSql00101" resultMap="Sql001SubResult" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010302-02#Sql001 */ 
+            NVL(A.BRAND_CD,'') BRAND_CD,
+            (
+                SELECT
+                    I.BRAND_NAME
+                FROM
+                    ETINTRA.STAR_BRAND_MASTER I
+                WHERE
+                    I.PRODUCT_CLASSIFY = 'K' AND
+                    I.DOMESTIC_FOREIGN_CLASSIFY = '0' AND
+                    I.COMPANY_CD = LPAD(SUBSTR(A.BRAND_CD,1,4),5,'0') AND
+                    I.RIGHT_CLASSIFY = ' ' AND
+                    I.NEW_OLD_CLASSIFY = NVL(SUBSTR(A.BRAND_CD,5),' ')
+            ) BRAND_NAME,
+            NVL(A.UNIT_AMOUNT,0) UNIT_AMOUNT,
+            NVL(A.QUANTITY,0) QUANTITY,
+            NVL(A.LOCK_AMOUNT,0) LOCK_AMOUNT,
+            TO_CHAR(A.LOST_RIGHT_DATE, 'YYYYMMDD') AS LOST_RIGHT_DATE
+        FROM
+            CALLCENTER.TRUST_UNPAID_POSITION A
+        WHERE
+            A.CUSTOMER_ID =  #{customerCode} AND 
+            A.LOCK_FLG = 1
+        ORDER BY
+            1 ASC
+    </select>
+</mapper>

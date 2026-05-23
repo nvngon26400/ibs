@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0104-03
+    画面名：外国株式店頭詳細表示
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignStockCounterDetailDisplayMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaForeignStockCounterDetailDisplaySql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterDetailDisplaySql001ResponseModel" >
+                <result property="brandName" column="BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+                <result property="summaryAny" column="SUMMARY_ANY" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+                <result property="cancelReason" column="CANCEL_REASON" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+                <result property="comment" column="COMMENT" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/> 
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：外国株式店頭注文詳細表示情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignStockCounterDetailDisplaySql001" resultMap="ResultMapIfaForeignStockCounterDetailDisplaySql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0104-03#Sql001 */ 
+            A.BRAND_CODE,
+            B.BRAND_NAME,
+            A.TRADE_PRICE,
+            A.ORDER_NO AS MANAGE_NUMBER,
+            A.ORDER_TIME AS ORDER_DATE,
+            A.APPOINT_TIME AS TRADE_DATE_TIME,
+            A.TRADE_TYPE AS TRADE_KBN,
+            A.ORDER_COUNT AS QUANTITY,
+            A.APPOINT_PRICE AS CONTRACT_AMOUNT,
+            A.DEPOSIT_TYPE,
+            A.KESSAI_TUKA AS SETTLEMENT_TYPE,
+            A.INVITATION_TYPE AS KANYU_KBN,
+            A.ORDER_METHOD,
+            A.WARNING_APPLY AS WARNING_APPLY_TRADE,
+            A.EXPLANATION_INFO AS IMPORTANT_MATTER_TYPE_TEXT,
+            A.FOREIGN_STOCK_YMD,
+            A.FS_DELIVERY_YMD AS DOCUMENT_DELIVERY_DATE,
+            A.FS_DELIVERY_METHOD AS INFORMATION_DELIVERED_TEXT,
+            A.TRANSFER_INVITATION AS SOLICITATION_ETF_TEXT,
+            A.ENG_PUB_BRAND AS ENG_PUB_TEXT,
+            A.ENG_PUB_YMD,
+            A.SUMMARY_ANY,
+            A.ORDER_STATUS AS STATUS,
+            A.RECALL_REASON AS CANCEL_REASON,
+            A.COMMENT_INFO AS "COMMENT"
+        FROM
+            T_COUNTER_ORDER A
+        	LEFT OUTER JOIN
+            	M_COUNTER_BRAND B
+       		ON
+            	A.BRAND_CODE = B.BRAND_CODE
+        <where>
+            A.ORDER_NO = #{req.manageNumber}
+            AND A.TRADE_TYPE = #{req.tradeKbn}
+        </where>
+    </select>
+</mapper>

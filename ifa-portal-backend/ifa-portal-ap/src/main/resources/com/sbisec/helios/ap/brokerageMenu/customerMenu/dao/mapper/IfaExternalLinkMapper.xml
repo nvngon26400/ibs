@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_08-01
+    画面名：外部リンク
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaExternalLinkMapper">
+    <!-- 
+        SQLID：Sql001
+        SQL名：店群情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaExternalLinkSql001" resultType="String" statementType="PREPARED">
+        SELECT
+          TENGUN_ID
+        FROM
+          CORDYS.BUTEN_TENGUN_INFO
+        WHERE
+          BUTEN_CODE = #{req.butenCode}
+    </select>
+</mapper>

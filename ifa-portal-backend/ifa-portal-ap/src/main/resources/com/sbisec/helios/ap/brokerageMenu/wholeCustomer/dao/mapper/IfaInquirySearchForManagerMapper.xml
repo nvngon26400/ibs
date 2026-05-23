@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+    画面ID:SUB020304-01
+    画面名:接触履歴（入力）検索
+ -->
+ 
+ <mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaInquirySearchForManagerMapper">
+    
+    <resultMap id="ResultMapIfaInquirySearchForManagerSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaInquirySearchForManagerSql001ResponseModel">
+        <result property="IfaInquirySearchForManagerComment" column="NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaInquirySearchForManagerSql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaInquirySearchForManagerSql002ResponseModel" >
+        <result property="toiawaseMei" column="TOIAWASE_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaInquirySearchForManagerSql003" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaInquirySearchForManagerSql003ResponseModel" >
+        <result property="toiawaseMei" column="TOIAWASE_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaInquirySearchForManagerSql004" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaInquirySearchForManagerSql004ResponseModel" >
+        <result property="toiawaseMei" column="TOIAWASE_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaInquirySearchForManagerSql005" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaInquirySearchForManagerSql005ResponseModel" >
+        <result property="nameKanji" column="nameKanji" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="nameKana" column="nameKana" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="toiawaseDMei" column="toiawaseDMei" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="toiawaseMei" column="toiawaseMei" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="toiawaseSMei" column="toiawaseSMei" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="toiawaseNaiyou" column="toiawaseNaiyou" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="kaitouNaiyou" column="kaitouNaiyou" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="toiawaseUserName" column="toiawaseUserName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="kaitouUserName" column="kaitouUserName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerName" column="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="branchName" column="branchName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="brokerChargeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaInquirySearchForManagerSql006" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaInquirySearchForManagerSql006ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaInquirySearchForManagerSql007" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaInquirySearchForManagerSql007ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID:Sql001
+        SQL名：メッセージ取得
+        SQLタイプ：select
+     -->
+     <select id="selectIfaInquirySearchForManagerSql001" resultMap="ResultMapIfaInquirySearchForManagerSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020304-01#Sql001 */ 
+            NAME
+        FROM
+            M_CODE
+        WHERE
+            START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+            AND END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+            AND CODE_TYPE = '99'                                                                    <!-- '99':画面コメント -->
+            AND CODE_1 = '01'
+            AND CODE_2 = '30'                                                                       <!-- '27':接触履歴（入力）検索画面のコメント  -->
+     </select>
+     
+     <!-- 
+        SQLID:Sql002
+        SQL名：カテゴリ（大）リスト取得
+        SQLタイプ：select
+     -->
+     <select id="selectIfaInquirySearchForManagerSql002" resultMap="ResultMapIfaInquirySearchForManagerSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020304-01#Sql002 */
+             TOIAWASE_CD                                                            <!-- 問合せカテゴリコード -->
+            ,TOIAWASE_MEI                                                           <!-- カテゴリー名称 -->
+        FROM
+            CORDYS.TB_QUESTION_MASTER_IFA                                           <!-- 【IFA問合せマスタ】 -->
+        WHERE
+            TOIAWASE_KBN = '1'                                                      <!-- 問合せ区分 -->
+            AND SAKUJO_FLG = 0                                                      <!-- 削除フラグ 0:有効 1:削除 -->
+        ORDER BY
+            SORT_NO                                                                 
+     </select>
+     
+     <!-- 
+         SQLID:Sql003
+         SQL名:問合せカテゴリリスト（中）取得
+         SQLタイプ:select
+    -->
+    <select id="selectIfaInquirySearchForManagerSql003" resultMap="ResultMapIfaInquirySearchForManagerSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020304-01#Sql003 */
+             TOIAWASE_CD                                                            <!-- 問合せカテゴリコード -->
+            ,TOIAWASE_MEI                                                           <!-- カテゴリー名称 -->
+        FROM
+            CORDYS.TB_QUESTION_MASTER_IFA                                           <!-- 【IFA問合せマスタ】 -->
+        WHERE
+            TOIAWASE_KBN = '2'                                                      <!-- 問合せ区分 -->
+            AND TOIAWASE_D = #{req.toiawaseDCd}                                       <!-- 問合せカテゴリ(大分類) -->
+            AND SAKUJO_FLG = 0                                                      <!-- 削除フラグ 0:有効 1:削除 -->
+        ORDER BY
+            SORT_NO
+    </select>
+
+    <!-- 
+         SQLID:Sql004
+         SQL名:問合せカテゴリリスト（小）取得
+         SQLタイプ:select
+    -->
+    <select id="selectIfaInquirySearchForManagerSql004" resultMap="ResultMapIfaInquirySearchForManagerSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020304-01#SQL004 */
+             TOIAWASE_CD                                                            <!-- 問合せカテゴリコード -->
+            ,TOIAWASE_MEI                                                           <!-- カテゴリー名称 -->
+        FROM
+            CORDYS.TB_QUESTION_MASTER_IFA                                           <!-- 【IFA問合せマスタ】 -->
+        WHERE
+            TOIAWASE_KBN = '3'                                                      <!-- 問合せ区分 -->
+            AND TOIAWASE_D = #{req.toiawaseDCd}                                       <!-- 問合せカテゴリ(大分類) -->
+            AND TOIAWASE_T = #{req.toiawaseCd}                                       <!-- 問合せカテゴリ(中分類) -->
+            AND SAKUJO_FLG = 0                                                      <!-- 削除フラグ 0:有効 1:削除 -->
+            
+        ORDER BY
+            SORT_NO
+    </select>
+    
+    <!-- 
+         SQLID:Sql005
+         SQL名:接触履歴（入力）リスト取得
+         SQLタイプ:select
+    -->
+    <select id="selectIfaInquirySearchForManagerSql005" resultMap="ResultMapIfaInquirySearchForManagerSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020304-01#SQL005 */
+                 TQA.totalRow                                                       <!-- 総件数 -->
+                ,TQA.BUTEN_CODE AS butenCode                                          <!-- 部店コード -->
+                ,TQA.ACCOUNT_NUMBER AS accountNumber                                  <!-- 口座番号 -->
+                ,TQA.NAME_KANJI AS nameKanji                                          <!-- 顧客名_姓名(漢字) -->
+                ,TQA.NAME_KANA AS nameKana                                            <!-- 顧客名_姓名(カナ) -->
+                ,TQA.TOIAWASE_D_MEI AS toiawaseDMei                                   <!-- カテゴリー名称（大） -->
+                ,TQA.TOIAWASE_MEI AS toiawaseMei                                      <!-- カテゴリー名称（中） -->
+                ,TQA.TOIAWASE_S_MEI AS toiawaseSMei                                   <!-- カテゴリー名称（小） -->
+                ,TQA.CREAM as cream                                                   <!-- クレーム -->
+                ,TQA.REQUEST AS request                                               <!-- リクエスト -->
+                ,TQA.JUUYOUDO AS juuyoudo                                             <!-- 重要度 -->
+                ,TQA.HOUKOU AS houkou                                                 <!-- 方向 -->
+                ,TQA.TAIOU_STS AS taiouSts                                            <!-- 対応ステータス -->
+                ,TQA.TOIAWASE_NICHIJI AS toiawaseNichiji                              <!-- 問合せ日時 -->
+                ,B.KAITOU_NICHIJI AS kaitouNichiji                                    <!-- 回答日時 -->
+                ,TQA.TOIAWASE_NAIYOU AS toiawaseNaiyou                                <!-- 問合せ内容 -->
+                ,B.KAITOU_NAIYOU AS kaitouNaiyou                                      <!-- 回答内容 -->
+                ,TQA.USER_NAME AS toiawaseUserName                                    <!-- 問合せユーザ名 -->
+                ,B.USER_NAME AS kaitouUserName                                        <!-- 回答ユーザ名 -->
+                ,TQA.BROKER_CODE AS brokerCode                                        <!-- 仲介業者コード -->
+                ,C.BRANCH_NAME AS brokerName                                          <!-- 仲介業者名 -->
+                ,D.BROKER_BRANCH_CODE AS branchCode                                   <!-- 支店コード -->
+                ,D.BRANCH_NAME AS branchName                                          <!-- 支店名 -->
+                ,TQA.INTERMEDIARY_EMP_CD AS brokerChargeCode                          <!-- 営業員コード -->
+                ,D.BROKER_CHARGE_NAME AS brokerChargeName                             <!-- 営業員名 -->
+                ,TQA.IFA_TOIAWASE_NO AS ifaToiawaseNo                                 <!-- IFA問合せNO -->
+                ,B.IFA_KAITOU_NO AS ifaKaitouNo                                       <!-- IFA回答NO -->
+                ,B.TOUROKU_GROUP AS tourokuGroup                                      <!-- 登録グループ -->
+            FROM (
+                SELECT
+                    COUNT(*) OVER() AS totalRow,
+                    A.BUTEN_CODE,
+                    A.ACCOUNT_NUMBER,
+                    A.NAME_KANJI,
+                    A.NAME_KANA,
+                    A.TOIAWASE_D_MEI,
+                    A.TOIAWASE_MEI,
+                    A.TOIAWASE_S_MEI,
+                    A.CREAM,
+                    A.REQUEST,
+                    A.JUUYOUDO,
+                    A.HOUKOU,
+                    A.TAIOU_STS,
+                    A.TOIAWASE_NICHIJI,
+                    A.TOIAWASE_NAIYOU,
+                    A.USER_ID,
+                    A.USER_NAME,
+                    A.BROKER_CODE,
+                    A.INTERMEDIARY_EMP_CD,
+                    A.IFA_TOIAWASE_NO
+                FROM 
+                    CORDYS.TB_QUESTION_IFA A                                        <!-- IFA問合せ(CORDYS.TB_QUESTION_IFA) -->
+                <where>
+                    1=1
+                    <choose>
+                        <when test="req.privId == '1'.toString()">
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                <choose>
+                                    <!-- A.仲介業者コード  NOT IN (リクエスト.仲介業者コード,リクエスト.仲介業者コード,・・・・) -->
+                                    <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                        AND A.BROKER_CODE NOT IN
+                                    </when>
+                                    <!-- A.仲介業者コード  IN (リクエスト.仲介業者コード,リクエスト.仲介業者コード,・・・・) -->
+                                    <otherwise>
+                                        AND A.BROKER_CODE IN
+                                    </otherwise>
+                                </choose>
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </when>
+                        <!-- ユーザ共通情報.権限コード が '3'、’４’、'5'いずれかの場合のみ条件に追加 -->
+                        <when test="req.privId == '3'.toString() or req.privId == '4'.toString() or req.privId == '5'.toString()">
+                            AND (A.BROKER_CODE IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR A.BROKER_CODE IN (
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                    #{brokerCharge.brokerCode}
+                            </foreach>
+                            )
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                AND A.BROKER_CODE IN
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </when>
+                        <!-- ユーザ共通情報.権限コード が '1'、'3'、'4'、'5'いずれでもない場合のみ条件に追加 -->
+                        <otherwise>
+                            AND ((A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR (A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN (
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                    (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                            </foreach>
+                            )
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                AND A.BROKER_CODE IN
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </otherwise>
+                    </choose>
+                    
+                    <!-- A.仲介業者営業員コード IN (リクエスト.営業員コード,リクエスト.営業員コード,・・・) -->
+                    <if test="req.empCodeList != null and !req.empCodeList.isEmpty()">
+                        AND A.INTERMEDIARY_EMP_CD IN
+                        <foreach item="item" index="index" collection="req.empCodeList" open="(" separator="," close=")">
+                                    #{item}
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.部店コード　＝　リクエスト.部店コード -->
+                    <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                        AND A.BUTEN_CODE = #{req.butenCode}
+                    </if>
+    
+                    <!-- A.口座番号　＝　リクエスト.口座番号 -->
+                    <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                        AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '1'（と等しい）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "1"'>
+                        AND
+                        (A.NAME_KANJI = #{req.customerName} OR A.NAME_KANA = #{req.customerName})
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '2'（で始まる）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "2"'>
+                        AND
+                        (A.NAME_KANJI like CONCAT(#{req.customerName}, '%') OR A.NAME_KANA like CONCAT(#{req.customerName}, '%'))
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '3'（を含む）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "3"'>
+                        AND
+                        (A.NAME_KANJI like CONCAT(CONCAT('%', #{req.customerName}), '%') OR A.NAME_KANA like CONCAT(CONCAT('%', #{req.customerName}), '%'))
+                    </if>
+    
+                    <!-- リクエスト.問合せ日From≦A.問合せ日時（YYYY/MM/DD）≦リクエスト.問合せ日To -->
+                    <if test="req.inquiryDateYmFrom != null and req.inquiryDateYmFrom != ''.toString()">
+                        AND A.TOIAWASE_NICHIJI &gt;= TO_DATE(#{req.inquiryDateYmFrom}, 'YYYY-MM-DD HH24:mi:ss')
+                    </if>
+                    <if test="req.inquiryDateYmTo != null and req.inquiryDateYmTo != ''.toString()">
+                        AND A.TOIAWASE_NICHIJI &lt;= TO_DATE(#{req.inquiryDateYmTo}, 'YYYY-MM-DD') + INTERVAL '23:59:59' HOUR TO SECOND
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（大） =　リクエスト.問合せカテゴリコード（大） -->
+                    <if test="req.toiawaseDCd != null and req.toiawaseDCd != ''.toString()">
+                        AND A.TOIAWASE_D_CD = #{req.toiawaseDCd}
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（中） =　リクエスト.問合せカテゴリコード（中） -->
+                    <if test="req.toiawaseCd != null and req.toiawaseCd != ''.toString()">
+                        AND A.TOIAWASE_CD = #{req.toiawaseCd}
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（小） =　リクエスト.問合せカテゴリコード（小） -->
+                    <if test="req.toiawaseSCd != null and req.toiawaseSCd != ''.toString()">
+                        AND A.TOIAWASE_S_CD = #{req.toiawaseSCd}
+                    </if>
+                    
+                    <!-- A.クレーム　＝　リクエスト.クレーム -->
+                    <if test="req.cream != null and req.cream != ''.toString()">
+                        AND A.CREAM = #{req.cream}
+                    </if>
+                    
+                    <!-- A.リクエスト　＝　リクエスト.リクエスト -->
+                    <if test="req.request != null and req.request != ''.toString()">
+                        AND A.REQUEST = #{req.request}
+                    </if>
+                    
+                    <!-- A.重要度　IN　リクエスト.重要度 -->
+                    <if test="req.juuyoudo != null and !req.juuyoudo.isEmpty()">
+                        AND A.JUUYOUDO IN
+                        <foreach item="item" index="index" collection="req.juuyoudo" open="(" separator="," close=")">
+                            <if test="item.isSelected == true">
+                                #{item.id}
+                            </if>
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.対応ステータス　IN　リクエスト.対応ステータス -->
+                    <if test="req.taiouSts != null and !req.taiouSts.isEmpty()">
+                        AND A.TAIOU_STS IN
+                        <foreach item="item" index="index" collection="req.taiouSts" open="(" separator="," close=")">
+                            <if test="item.isSelected == true">
+                                #{item.id}
+                            </if>
+                        </foreach>
+                    </if>
+                    
+                    AND A.SAKUJO_FLG = 0                                                <!-- A.削除フラグ＝0 (有効) -->
+                    AND A.TOIAWASE_NO IS NOT NULL                                       <!-- A.問合せNO != NULL -->
+                </where>    
+                ORDER BY
+                    A.TOIAWASE_NICHIJI DESC
+                FETCH FIRST #{req.rownum} ROWS ONLY             
+            ) TQA
+            LEFT JOIN
+                CORDYS.TB_ANSWER_IFA B                                              <!-- IFA回答(CORDYS.TB_ANSWER_IFA) -->
+            ON
+                TQA.IFA_TOIAWASE_NO = B.IFA_TOIAWASE_NO AND                         <!-- A.IFA問合せNO＝B.IFA問合せNO -->
+                B.SAKUJO_FLG = 0                                                    <!-- B.削除フラグ＝0 (未削除) -->
+            LEFT JOIN
+                CORDYS.MEDIATE_BRANCH C                                             <!-- 仲介業者支店(CORDYS.MEDIATE_BRANCH) -->
+            ON
+                TQA.BROKER_CODE = C.BROKER_CODE AND                                 <!-- A.仲介業者コード＝C.仲介業者コード -->
+                C.BROKER_BRANCH_KIND = '00' AND                                     <!-- C.仲介業者支店種別＝'00'(本店) -->
+                C.DELETE_FLG = '0'                                                  <!-- C.削除フラグ＝'0' (有効) -->
+            LEFT JOIN
+                CORDYS.V_MEDIATE_CHARGE_INFO D                                      <!-- 仲介業者営業員情報ビュー(CORDYS.V_MEDIATE_CHARGE_INFO) -->
+            ON
+                TQA.BROKER_CODE = D.BROKER_CODE AND                                 <!-- A.仲介業者コード＝D.仲介業者コード -->
+                TQA.INTERMEDIARY_EMP_CD = D.BROKER_CHARGE_CODE                      <!-- A.仲介業者営業員コード＝D.仲介業者営業員コード -->
+            <where>
+                <!-- D.仲介業者支店コード IN (リクエスト.支店コード,リクエスト.支店コード,・・・) -->
+                <if test="req.branchCodeList != null and !req.branchCodeList.isEmpty()">
+                    AND D.BROKER_BRANCH_CODE IN
+                    <foreach item="item" index="index" collection="req.branchCodeList" open="(" separator="," close=")">
+                                #{item}
+                    </foreach>
+                </if>
+                
+                <!-- A.ユーザーID　＝　リクエスト.入力者(ID) -->
+                <if test="req.nyuuryokuShaId != null and req.nyuuryokuShaId != ''.toString()">
+                    AND (TQA.USER_ID = #{req.nyuuryokuShaId} or B.USER_ID = #{req.nyuuryokuShaId})
+                </if>
+                
+                <!-- A.ユーザ名がリクエスト.入力者(氏名)と部分一致 -->
+                <if test="req.nyuuryokuShaName != null and req.nyuuryokuShaName != ''.toString()">
+                    AND (TQA.USER_NAME like CONCAT(CONCAT('%', #{req.nyuuryokuShaName}), '%') or B.USER_NAME like CONCAT(CONCAT('%', #{req.nyuuryokuShaName}), '%'))
+                </if>
+            </where>
+            ORDER BY
+                 TQA.TOIAWASE_NICHIJI DESC                                          <!-- A.問合せ日時（降順）-->
+                ,TQA.IFA_TOIAWASE_NO                                                <!-- A.IFA問合せNO（降順） -->
+                ,B.TOUROKU_GROUP DESC                                               <!-- B.登録グループ（降順）-->
+                ,B.KAITOU_NICHIJI DESC                                              <!-- B.回答日時（降順）-->
+    </select>
+    
+    <!-- 
+         SQLID:Sql006
+         SQL名:明細件数取得
+         SQLタイプ:select
+    -->
+    <select id="selectIfaInquirySearchForManagerSql006" resultMap="ResultMapIfaInquirySearchForManagerSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020304-01#SQL006 */
+            COUNT(*) AS totalRow                                                    <!-- 総件数 -->
+        FROM (
+            SELECT
+                A.IFA_TOIAWASE_NO AS ifaToiawaseNo                                  <!-- IFA問合せNO -->
+            FROM
+                CORDYS.TB_QUESTION_IFA A                                            <!-- IFA問合せ(CORDYS.TB_QUESTION_IFA) -->
+            LEFT JOIN
+                CORDYS.TB_ANSWER_IFA B                                              <!-- IFA回答(CORDYS.TB_ANSWER_IFA) -->
+            ON
+                A.IFA_TOIAWASE_NO = B.IFA_TOIAWASE_NO AND                           <!-- A.IFA問合せNO＝B.IFA問合せNO -->
+                B.SAKUJO_FLG = 0                                                    <!-- B.削除フラグ＝0 (未削除) -->
+            LEFT JOIN
+                CORDYS.MEDIATE_BRANCH C                                             <!-- 仲介業者支店(CORDYS.MEDIATE_BRANCH) -->
+            ON
+                A.BROKER_CODE = C.BROKER_CODE AND                                   <!-- A.仲介業者コード＝C.仲介業者コード -->
+                C.BROKER_BRANCH_KIND = '00' AND                                     <!-- C.仲介業者支店種別＝'00'(本店) -->
+                C.DELETE_FLG = '0'                                                  <!-- C.削除フラグ＝'0' (有効) -->
+            LEFT JOIN
+                CORDYS.V_MEDIATE_CHARGE_INFO D                                      <!-- 仲介業者営業員情報ビュー(CORDYS.V_MEDIATE_CHARGE_INFO) -->
+            ON
+                A.BROKER_CODE = D.BROKER_CODE AND                                   <!-- A.仲介業者コード＝D.仲介業者コード -->
+                A.INTERMEDIARY_EMP_CD = D.BROKER_CHARGE_CODE                        <!-- A.仲介業者営業員コード＝D.仲介業者営業員コード -->
+            <where>
+                <choose>
+                    <when test="req.privId == '1'.toString()">
+                        <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                            <choose>
+                                <!-- A.仲介業者コード  NOT IN (リクエスト.仲介業者コード,リクエスト.仲介業者コード,・・・・) -->
+                                <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                    AND A.BROKER_CODE NOT IN
+                                </when>
+                                <!-- A.仲介業者コード  IN (リクエスト.仲介業者コード,リクエスト.仲介業者コード,・・・・) -->
+                                <otherwise>
+                                    AND A.BROKER_CODE IN
+                                </otherwise>
+                            </choose>
+                            <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                #{item}
+                            </foreach>
+                        </if>
+                    </when>
+                    <!-- ユーザ共通情報.権限コード が '3'、’４’、'5'いずれかの場合のみ条件に追加 -->
+                    <when test="req.privId == '3'.toString() or req.privId == '4'.toString() or req.privId == '5'.toString()">
+                        AND (A.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR A.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                        <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                            AND A.BROKER_CODE IN
+                            <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                #{item}
+                            </foreach>
+                        </if>
+                    </when>
+                    <!-- ユーザ共通情報.権限コード が '1'、'3'、'4'、'5'いずれでもない場合のみ条件に追加 -->
+                    <otherwise>
+                        AND ((A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR (A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                        </foreach>
+                        )
+                        <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                            AND A.BROKER_CODE IN
+                            <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                #{item}
+                            </foreach>
+                        </if>
+                    </otherwise>
+                </choose>
+                
+                <!-- D.仲介業者支店コード IN (リクエスト.支店コード,リクエスト.支店コード,・・・) -->
+                <if test="req.branchCodeList != null and !req.branchCodeList.isEmpty()">
+                    AND D.BROKER_BRANCH_CODE IN
+                    <foreach item="item" index="index" collection="req.branchCodeList" open="(" separator="," close=")">
+                                #{item}
+                    </foreach>
+                </if>
+                
+                <!-- A.仲介業者営業員コード IN (リクエスト.営業員コード,リクエスト.営業員コード,・・・) -->
+                <if test="req.empCodeList != null and !req.empCodeList.isEmpty()">
+                    AND A.INTERMEDIARY_EMP_CD IN
+                    <foreach item="item" index="index" collection="req.empCodeList" open="(" separator="," close=")">
+                                #{item}
+                    </foreach>
+                </if>
+                
+                <!-- A.部店コード　＝　リクエスト.部店コード -->
+                <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                    AND A.BUTEN_CODE = #{req.butenCode}
+                </if>
+
+                <!-- A.口座番号　＝　リクエスト.口座番号 -->
+                <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                    AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                </if>
+                
+                <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '1'（と等しい）の場合の条件 -->
+                <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "1"'>
+                    AND
+                    (A.NAME_KANJI = #{req.customerName} OR A.NAME_KANA = #{req.customerName})
+                </if>
+                
+                <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '2'（で始まる）の場合の条件 -->
+                <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "2"'>
+                    AND
+                    (A.NAME_KANJI like CONCAT(#{req.customerName}, '%') OR A.NAME_KANA like CONCAT(#{req.customerName}, '%'))
+                </if>
+                
+                <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '3'（を含む）の場合の条件 -->
+                <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "3"'>
+                    AND
+                    (A.NAME_KANJI like CONCAT(CONCAT('%', #{req.customerName}), '%') OR A.NAME_KANA like CONCAT(CONCAT('%', #{req.customerName}), '%'))
+                </if>
+
+                <!-- リクエスト.問合せ日From≦A.問合せ日時（YYYY/MM/DD）≦リクエスト.問合せ日To -->
+                <if test="req.inquiryDateYmFrom != null and req.inquiryDateYmFrom != ''.toString()">
+                    AND A.TOIAWASE_NICHIJI &gt;= TO_DATE(#{req.inquiryDateYmFrom}, 'YYYY-MM-DD HH24:mi:ss')
+                </if>
+                <if test="req.inquiryDateYmTo != null and req.inquiryDateYmTo != ''.toString()">
+                    AND A.TOIAWASE_NICHIJI &lt;= TO_DATE(#{req.inquiryDateYmTo}, 'YYYY-MM-DD') + INTERVAL '23:59:59' HOUR TO SECOND
+                </if>
+                
+                <!-- A.問合せカテゴリコード（大） =　リクエスト.問合せ -->
+                <if test="req.toiawaseDCd != null and req.toiawaseDCd != ''.toString()">
+                    AND A.TOIAWASE_D_CD = #{req.toiawaseDCd}
+                </if>
+                
+                <!-- A.問合せカテゴリコード（中） =　リクエスト.問合せカテゴリコード（中） -->
+                <if test="req.toiawaseCd != null and req.toiawaseCd != ''.toString()">
+                    AND A.TOIAWASE_CD = #{req.toiawaseCd}
+                </if>
+                
+                <!-- A.問合せカテゴリコード（小） =　リクエスト.問合せカテゴリコード（小） -->
+                <if test="req.toiawaseSCd != null and req.toiawaseSCd != ''.toString()">
+                    AND A.TOIAWASE_S_CD = #{req.toiawaseSCd}
+                </if>
+                
+                <!-- A.クレーム　＝　リクエスト.クレーム -->
+                <if test="req.cream != null and req.cream != ''.toString()">
+                    AND A.CREAM = #{req.cream}
+                </if>
+                
+                <!-- A.リクエスト　＝　リクエスト.リクエスト -->
+                <if test="req.request != null and req.request != ''.toString()">
+                    AND A.REQUEST = #{req.request}
+                </if>
+                
+                <!-- A.重要度　IN　リクエスト.重要度 -->
+                <if test="req.juuyoudo != null and !req.juuyoudo.isEmpty()">
+                    AND A.JUUYOUDO IN
+                    <foreach item="item" index="index" collection="req.juuyoudo" open="(" separator="," close=")">
+                        <if test="item.isSelected == true">
+                            #{item.id}
+                        </if>
+                    </foreach>
+                </if>
+                
+                <!-- A.対応ステータス　IN　リクエスト.対応ステータス -->
+                <if test="req.taiouSts != null and !req.taiouSts.isEmpty()">
+                    AND A.TAIOU_STS IN
+                    <foreach item="item" index="index" collection="req.taiouSts" open="(" separator="," close=")">
+                        <if test="item.isSelected == true">
+                            #{item.id}
+                        </if>
+                    </foreach>
+                </if>
+                
+                <!-- A.ユーザーID　＝　リクエスト.入力者(ID) -->
+                <if test="req.nyuuryokuShaId != null and req.nyuuryokuShaId != ''.toString()">
+                    AND (A.USER_ID = #{req.nyuuryokuShaId} or B.USER_ID = #{req.nyuuryokuShaId})
+                </if>
+                
+                <!-- A.ユーザ名がリクエスト.入力者(氏名)と部分一致 -->
+                <if test="req.nyuuryokuShaName != null and req.nyuuryokuShaName != ''.toString()">
+                    AND (A.USER_NAME like CONCAT(CONCAT('%', #{req.nyuuryokuShaName}), '%') or B.USER_NAME like CONCAT(CONCAT('%', #{req.nyuuryokuShaName}), '%'))
+                </if>
+                
+                AND A.SAKUJO_FLG = 0                                                <!-- A.削除フラグ＝0 (有効) -->
+                AND A.TOIAWASE_NO IS NOT NULL                                       <!-- A.問合せNO != NULL -->
+            </where>
+            GROUP BY
+                A.IFA_TOIAWASE_NO                                                   <!-- A.IFA問合せNO -->
+        )
+    </select>
+    
+    <!-- 
+         SQLID:Sql007
+         SQL名:明細件数取得
+         SQLタイプ:select
+    -->
+    <select id="selectIfaInquirySearchForManagerSql007" resultMap="ResultMapIfaInquirySearchForManagerSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020304-01#SQL007 */
+            SUM(TOTAL) AS totalRow                                                  <!-- 総件数 -->
+        FROM (
+            <!-- 検索SUB① -->
+            SELECT
+                COUNT(*) AS TOTAL
+            FROM (
+                SELECT
+                    BROKER_CODE,
+                    INTERMEDIARY_EMP_CD
+                FROM
+                    TB_QUESTION_IFA TQA
+                <where>
+                    <choose>
+                        <when test="req.privId == '1'.toString()">
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                <choose>
+                                    <!-- A.仲介業者コード  NOT IN (リクエスト.仲介業者コード,リクエスト.仲介業者コード,・・・・) -->
+                                    <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                        AND TQA.BROKER_CODE NOT IN
+                                    </when>
+                                    <!-- A.仲介業者コード  IN (リクエスト.仲介業者コード,リクエスト.仲介業者コード,・・・・) -->
+                                    <otherwise>
+                                        AND TQA.BROKER_CODE IN
+                                    </otherwise>
+                                </choose>
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </when>
+                        <!-- ユーザ共通情報.権限コード が '3'、’４’、'5'いずれかの場合のみ条件に追加 -->
+                        <when test="req.privId == '3'.toString() or req.privId == '4'.toString() or req.privId == '5'.toString()">
+                            AND (TQA.BROKER_CODE IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR TQA.BROKER_CODE IN (
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                    #{brokerCharge.brokerCode}
+                            </foreach>
+                            )
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                AND TQA.BROKER_CODE IN
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </when>
+                        <!-- ユーザ共通情報.権限コード が '1'、'3'、'4'、'5'いずれでもない場合のみ条件に追加 -->
+                        <otherwise>
+                            AND ((TQA.BROKER_CODE, TQA.INTERMEDIARY_EMP_CD) IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR (TQA.BROKER_CODE, TQA.INTERMEDIARY_EMP_CD) IN (
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                    (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                            </foreach>
+                            )
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                AND TQA.BROKER_CODE IN
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </otherwise>
+                    </choose>
+                    
+                    <!-- A.仲介業者営業員コード IN (リクエスト.営業員コード,リクエスト.営業員コード,・・・) -->
+                    <if test="req.empCodeList != null and !req.empCodeList.isEmpty()">
+                        AND TQA.INTERMEDIARY_EMP_CD IN
+                        <foreach item="item" index="index" collection="req.empCodeList" open="(" separator="," close=")">
+                                    #{item}
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.部店コード　＝　リクエスト.部店コード -->
+                    <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                        AND TQA.BUTEN_CODE = #{req.butenCode}
+                    </if>
+    
+                    <!-- A.口座番号　＝　リクエスト.口座番号 -->
+                    <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                        AND TQA.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '1'（と等しい）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "1"'>
+                        AND
+                        (TQA.NAME_KANJI = #{req.customerName} OR TQA.NAME_KANA = #{req.customerName})
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '2'（で始まる）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "2"'>
+                        AND
+                        (TQA.NAME_KANJI like CONCAT(#{req.customerName}, '%') OR TQA.NAME_KANA like CONCAT(#{req.customerName}, '%'))
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '3'（を含む）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "3"'>
+                        AND
+                        (TQA.NAME_KANJI like CONCAT(CONCAT('%', #{req.customerName}), '%') OR TQA.NAME_KANA like CONCAT(CONCAT('%', #{req.customerName}), '%'))
+                    </if>
+    
+                    <!-- リクエスト.問合せ日From≦A.問合せ日時（YYYY/MM/DD）≦リクエスト.問合せ日To -->
+                    <if test="req.inquiryDateYmFrom != null and req.inquiryDateYmFrom != ''.toString()">
+                        AND TQA.TOIAWASE_NICHIJI &gt;= TO_DATE(#{req.inquiryDateYmFrom}, 'YYYY-MM-DD HH24:mi:ss')
+                    </if>
+                    <if test="req.inquiryDateYmTo != null and req.inquiryDateYmTo != ''.toString()">
+                        AND TQA.TOIAWASE_NICHIJI &lt;= TO_DATE(#{req.inquiryDateYmTo}, 'YYYY-MM-DD') + INTERVAL '23:59:59' HOUR TO SECOND
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（大） =　リクエスト.問合せカテゴリコード（大） -->
+                    <if test="req.toiawaseDCd != null and req.toiawaseDCd != ''.toString()">
+                        AND TQA.TOIAWASE_D_CD = #{req.toiawaseDCd}
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（中） =　リクエスト.問合せカテゴリコード（中） -->
+                    <if test="req.toiawaseCd != null and req.toiawaseCd != ''.toString()">
+                        AND TQA.TOIAWASE_CD = #{req.toiawaseCd}
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（小） =　リクエスト.問合せカテゴリコード（小） -->
+                    <if test="req.toiawaseSCd != null and req.toiawaseSCd != ''.toString()">
+                        AND TQA.TOIAWASE_S_CD = #{req.toiawaseSCd}
+                    </if>
+                    
+                    <!-- A.クレーム　＝　リクエスト.クレーム -->
+                    <if test="req.cream != null and req.cream != ''.toString()">
+                        AND TQA.CREAM = #{req.cream}
+                    </if>
+                    
+                    <!-- A.リクエスト　＝　リクエスト.リクエスト -->
+                    <if test="req.request != null and req.request != ''.toString()">
+                        AND TQA.REQUEST = #{req.request}
+                    </if>
+                    
+                    <!-- A.重要度　IN　リクエスト.重要度 -->
+                    <if test="req.juuyoudo != null and !req.juuyoudo.isEmpty()">
+                        AND TQA.JUUYOUDO IN
+                        <foreach item="item" index="index" collection="req.juuyoudo" open="(" separator="," close=")">
+                            <if test="item.isSelected == true">
+                                #{item.id}
+                            </if>
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.対応ステータス　IN　リクエスト.対応ステータス -->
+                    <if test="req.taiouSts != null and !req.taiouSts.isEmpty()">
+                        AND TQA.TAIOU_STS IN
+                        <foreach item="item" index="index" collection="req.taiouSts" open="(" separator="," close=")">
+                            <if test="item.isSelected == true">
+                                #{item.id}
+                            </if>
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.ユーザーID　＝　リクエスト.入力者(ID) -->
+                    <if test="req.nyuuryokuShaId != null and req.nyuuryokuShaId != ''.toString()">
+                        AND TQA.USER_ID = #{req.nyuuryokuShaId}
+                    </if>
+                    
+                    <!-- A.ユーザ名がリクエスト.入力者(氏名)と部分一致 -->
+                    <if test="req.nyuuryokuShaName != null and req.nyuuryokuShaName != ''.toString()">
+                        AND TQA.USER_NAME like CONCAT(CONCAT('%', #{req.nyuuryokuShaName}), '%')
+                    </if>
+                    
+                    AND TQA.SAKUJO_FLG = 0                                                <!-- A.削除フラグ＝0 (有効) -->
+                    AND TQA.TOIAWASE_NO IS NOT NULL                                       <!-- A.問合せNO != NULL -->
+                </where>
+            ) A
+            LEFT JOIN
+                CORDYS.V_MEDIATE_CHARGE_INFO D                                          <!-- 仲介業者営業員情報ビュー(CORDYS.V_MEDIATE_CHARGE_INFO) -->
+            ON
+                A.BROKER_CODE = D.BROKER_CODE AND                                       <!-- A.仲介業者コード＝D.仲介業者コード -->
+                A.INTERMEDIARY_EMP_CD = D.BROKER_CHARGE_CODE                            <!-- A.仲介業者営業員コード＝D.仲介業者営業員コード -->
+            <where>
+                <!-- D.仲介業者支店コード IN (リクエスト.支店コード,リクエスト.支店コード,・・・) -->
+                <if test="req.branchCodeList != null and !req.branchCodeList.isEmpty()">
+                    AND D.BROKER_BRANCH_CODE IN
+                    <foreach item="item" index="index" collection="req.branchCodeList" open="(" separator="," close=")">
+                                #{item}
+                    </foreach>
+                </if>
+            </where>
+            UNION ALL
+            <!-- 検索SUB③ -->
+            SELECT 
+                COUNT(*) AS TOTAL
+            FROM (
+                SELECT
+                    A.IFA_TOIAWASE_NO,
+                    B.TOUROKU_GROUP
+                FROM (
+                    SELECT
+                        *
+                    FROM
+                        TB_QUESTION_IFA TQA
+                ) A
+                INNER JOIN
+                    TB_ANSWER_IFA B
+                ON
+                    A.IFA_TOIAWASE_NO = B.IFA_TOIAWASE_NO AND
+                    B.TOUROKU_GROUP &lt;&gt; 0 AND
+                    B.SAKUJO_FLG = '0'
+                LEFT JOIN
+                    V_MEDIATE_CHARGE_INFO D
+                ON
+                    A.BROKER_CODE = D.BROKER_CODE AND
+                    A.INTERMEDIARY_EMP_CD = D.BROKER_CHARGE_CODE
+                <where>
+                    <choose>
+                        <when test="req.privId == '1'.toString()">
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                <choose>
+                                    <!-- A.仲介業者コード  NOT IN (リクエスト.仲介業者コード,リクエスト.仲介業者コード,・・・・) -->
+                                    <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                        AND A.BROKER_CODE NOT IN
+                                    </when>
+                                    <!-- A.仲介業者コード  IN (リクエスト.仲介業者コード,リクエスト.仲介業者コード,・・・・) -->
+                                    <otherwise>
+                                        AND A.BROKER_CODE IN
+                                    </otherwise>
+                                </choose>
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </when>
+                        <!-- ユーザ共通情報.権限コード が '3'、’４’、'5'いずれかの場合のみ条件に追加 -->
+                        <when test="req.privId == '3'.toString() or req.privId == '4'.toString() or req.privId == '5'.toString()">
+                            AND (A.BROKER_CODE IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR A.BROKER_CODE IN (
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                    #{brokerCharge.brokerCode}
+                            </foreach>
+                            )
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                AND A.BROKER_CODE IN
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </when>
+                        <!-- ユーザ共通情報.権限コード が '1'、'3'、'4'、'5'いずれでもない場合のみ条件に追加 -->
+                        <otherwise>
+                            AND ((A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR (A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN (
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                    (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                            </foreach>
+                            )
+                            <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                                AND A.BROKER_CODE IN
+                                <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                    #{item}
+                                </foreach>
+                            </if>
+                        </otherwise>
+                    </choose>
+                    
+                    <!-- D.仲介業者支店コード IN (リクエスト.支店コード,リクエスト.支店コード,・・・) -->
+                    <if test="req.branchCodeList != null and !req.branchCodeList.isEmpty()">
+                        AND D.BROKER_BRANCH_CODE IN
+                        <foreach item="item" index="index" collection="req.branchCodeList" open="(" separator="," close=")">
+                                    #{item}
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.仲介業者営業員コード IN (リクエスト.営業員コード,リクエスト.営業員コード,・・・) -->
+                    <if test="req.empCodeList != null and !req.empCodeList.isEmpty()">
+                        AND A.INTERMEDIARY_EMP_CD IN
+                        <foreach item="item" index="index" collection="req.empCodeList" open="(" separator="," close=")">
+                                    #{item}
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.部店コード　＝　リクエスト.部店コード -->
+                    <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                        AND A.BUTEN_CODE = #{req.butenCode}
+                    </if>
+    
+                    <!-- A.口座番号　＝　リクエスト.口座番号 -->
+                    <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                        AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '1'（と等しい）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "1"'>
+                        AND
+                        (A.NAME_KANJI = #{req.customerName} OR A.NAME_KANA = #{req.customerName})
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '2'（で始まる）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "2"'>
+                        AND
+                        (A.NAME_KANJI like CONCAT(#{req.customerName}, '%') OR A.NAME_KANA like CONCAT(#{req.customerName}, '%'))
+                    </if>
+                    
+                    <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '3'（を含む）の場合の条件 -->
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "3"'>
+                        AND
+                        (A.NAME_KANJI like CONCAT(CONCAT('%', #{req.customerName}), '%') OR A.NAME_KANA like CONCAT(CONCAT('%', #{req.customerName}), '%'))
+                    </if>
+    
+                    <!-- リクエスト.問合せ日From≦A.問合せ日時（YYYY/MM/DD）≦リクエスト.問合せ日To -->
+                    <if test="req.inquiryDateYmFrom != null and req.inquiryDateYmFrom != ''.toString()">
+                        AND A.TOIAWASE_NICHIJI &gt;= TO_DATE(#{req.inquiryDateYmFrom}, 'YYYY-MM-DD HH24:mi:ss')
+                    </if>
+                    <if test="req.inquiryDateYmTo != null and req.inquiryDateYmTo != ''.toString()">
+                        AND A.TOIAWASE_NICHIJI &lt;= TO_DATE(#{req.inquiryDateYmTo}, 'YYYY-MM-DD') + INTERVAL '23:59:59' HOUR TO SECOND
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（大） =　リクエスト.問合せ -->
+                    <if test="req.toiawaseDCd != null and req.toiawaseDCd != ''.toString()">
+                        AND A.TOIAWASE_D_CD = #{req.toiawaseDCd}
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（中） =　リクエスト.問合せカテゴリコード（中） -->
+                    <if test="req.toiawaseCd != null and req.toiawaseCd != ''.toString()">
+                        AND A.TOIAWASE_CD = #{req.toiawaseCd}
+                    </if>
+                    
+                    <!-- A.問合せカテゴリコード（小） =　リクエスト.問合せカテゴリコード（小） -->
+                    <if test="req.toiawaseSCd != null and req.toiawaseSCd != ''.toString()">
+                        AND A.TOIAWASE_S_CD = #{req.toiawaseSCd}
+                    </if>
+                    
+                    <!-- A.クレーム　＝　リクエスト.クレーム -->
+                    <if test="req.cream != null and req.cream != ''.toString()">
+                        AND A.CREAM = #{req.cream}
+                    </if>
+                    
+                    <!-- A.リクエスト　＝　リクエスト.リクエスト -->
+                    <if test="req.request != null and req.request != ''.toString()">
+                        AND A.REQUEST = #{req.request}
+                    </if>
+                    
+                    <!-- A.重要度　IN　リクエスト.重要度 -->
+                    <if test="req.juuyoudo != null and !req.juuyoudo.isEmpty()">
+                        AND A.JUUYOUDO IN
+                        <foreach item="item" index="index" collection="req.juuyoudo" open="(" separator="," close=")">
+                            <if test="item.isSelected == true">
+                                #{item.id}
+                            </if>
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.対応ステータス　IN　リクエスト.対応ステータス -->
+                    <if test="req.taiouSts != null and !req.taiouSts.isEmpty()">
+                        AND A.TAIOU_STS IN
+                        <foreach item="item" index="index" collection="req.taiouSts" open="(" separator="," close=")">
+                            <if test="item.isSelected == true">
+                                #{item.id}
+                            </if>
+                        </foreach>
+                    </if>
+                    
+                    <!-- A.ユーザーID　＝　リクエスト.入力者(ID) -->
+                    <if test="req.nyuuryokuShaId != null and req.nyuuryokuShaId != ''.toString()">
+                        AND (A.USER_ID = #{req.nyuuryokuShaId} or B.USER_ID = #{req.nyuuryokuShaId})
+                    </if>
+                    
+                    <!-- A.ユーザ名がリクエスト.入力者(氏名)と部分一致 -->
+                    <if test="req.nyuuryokuShaName != null and req.nyuuryokuShaName != ''.toString()">
+                        AND (A.USER_NAME like CONCAT(CONCAT('%', #{req.nyuuryokuShaName}), '%') or B.USER_NAME like CONCAT(CONCAT('%', #{req.nyuuryokuShaName}), '%'))
+                    </if>
+                    
+                    AND A.SAKUJO_FLG = 0                                                <!-- A.削除フラグ＝0 (有効) -->
+                    AND A.TOIAWASE_NO IS NOT NULL                                       <!-- A.問合せNO != NULL -->
+                </where>
+                GROUP BY
+                    A.IFA_TOIAWASE_NO,
+                    B.TOUROKU_GROUP
+            )    
+        )
+    </select>
+    
+ </mapper>

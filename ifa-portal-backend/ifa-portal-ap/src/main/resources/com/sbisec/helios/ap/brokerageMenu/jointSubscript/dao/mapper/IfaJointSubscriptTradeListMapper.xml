@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0206_02-01
+    画面名：共同募集　取引検索
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.mapper.IfaJointSubscriptTradeListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaJointSubscriptTradeListSql001" type="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.model.IfaJointSubscriptTradeListSql001ResponseModel" >
+        <result property="brokerName" column="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="brokerChargeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerAttributeName" column="customerAttributeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="customerNameKanji" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="customerNameKana" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="tradeTypeName" column="tradeTypeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="branchName" column="branchName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="securityClass" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="bondIntermediary" column="bondIntermediary" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="usStockStoreEntrust" column="usStockStoreEntrust" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="depositName" column="depositName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="jointBranchName" column="jointBranchName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brandName" column="brandName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：共同募集　取引検索情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaJointSubscriptTradeListSql001" resultMap="ResultMapIfaJointSubscriptTradeListSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_02-01#Sql001 */
+        <if test="req.brokerCodeList == null or req.brokerCodeList.isEmpty()">
+          /*+ FULL(@"SEL$4C92C31B" "MB"@"SEL$3")
+              LEADING(@"SEL$4C92C31B" "M_JOINT_USER"@"SEL$4" "T_REWARD_COMMISSION"@"SEL$6" "MUAI"@"SEL$2" "MCI"@"SEL$7" "MB"@"SEL$3")
+              USE_HASH(@"SEL$4C92C31B" "T_REWARD_COMMISSION"@"SEL$6")
+              USE_NL(@"SEL$4C92C31B" "MUAI"@"SEL$2")
+              USE_HASH(@"SEL$4C92C31B" "MCI"@"SEL$7")
+              USE_HASH(@"SEL$4C92C31B" "MB"@"SEL$3")
+              SWAP_JOIN_INPUTS(@"SEL$4C92C31B" "MCI"@"SEL$7")
+              SWAP_JOIN_INPUTS(@"SEL$4C92C31B" "MB"@"SEL$3")
+              FULL(@"SEL$8" "MEDIATE_CHARGE_INFO"@"SEL$8")
+          */
+        </if>
+          *
+        FROM
+        (
+            SELECT
+                count(*) over() as totalRow,                                              <!-- 総件数 -->
+                TB.BROKER_CODE as brokerCode,                                             <!-- 仲介業者コード -->
+                TB.BROKER_NAME as brokerName,                                             <!-- 仲介業者名 -->
+                TB.BUTEN_CODE as butenCode,                                               <!-- 部店コード -->
+                TB.ACCOUNT_NUMBER as accountNumber,                                       <!-- 口座番号 -->
+                TB.CUSTOMER_ATTRIBUTE as customerAttribute,                               <!-- 取引コース -->
+                TB.CUSTOMER_ATTRIBUTE_NAME as customerAttributeName,                      <!-- 取引コース名 -->
+                MUAI.NAME_KANJI as customerNameKanji,                                     <!-- 顧客名_姓名(漢字) -->
+                MUAI.NAME_KANA as customerNameKana,                                       <!-- 顧客名_姓名(カナ) -->
+                TB.JOINT_BRANCH_CODE as jointBranchCode,                                  <!-- 共募支店コード -->
+                TB.JOINT_BRANCH_NAME as jointBranchName,                                  <!-- 共募支店名 -->
+                TB.PRODUT_NAME as securityClass,                                          <!-- 証券種別名 -->
+                TB.BRAND_CODE as brandCode ,                                              <!-- 銘柄コード -->
+                TB.BRAND_NAME as brandName,                                               <!-- 銘柄名 -->
+                TB.PRODUCT_RANK as productRank,                                           <!-- 商品ランク -->
+                TB.TRADE_NAME as tradeTypeName,                                           <!-- 取引種別名 -->
+                TB.DEPOSIT_NAME as depositName,                                           <!-- 預り区分 -->
+                TO_CHAR(TO_DATE(TB.TRADE_DATE,'YYYYMMDD'),'YYYY/MM/DD') as tradeDate,     <!-- 約定日 -->
+                TO_CHAR(TO_DATE(TB.GET_DATE,'YYYYMMDD'),'YYYY/MM/DD') as settlementDate,  <!-- 受渡日 -->
+                TB.PRICE as price,                                                        <!-- 単価 -->
+                TB.QUANTITY as quantity,                                                  <!-- 数量 -->
+                TB.GROSS_AMOUNT_YEN as contractAmountJpyAmount,                           <!-- 約定金額(円貨) -->
+                TB.FEE as yenFee,                                                         <!-- 手数料(円貨) -->
+                TB.ACCURATE_AMOUNT as yenDeliveryAmount,                                  <!-- 受渡金額(円貨) -->
+                TB.CURRENCY as currency,                                                  <!-- 通貨 -->
+                TB.EXCHANGE_RATE as fxRate,                                               <!-- 為替レート -->
+                TB.FOREIGN_GROSSAMOUNT as contractAmountForeign,                          <!-- 約定金額(外貨) -->
+                TB.FOREIGN_NETAMOUNT as foreignDeliveryAmount,                            <!-- 受渡金額(外貨) -->
+                TB.FEE_BALANCE as feeBalance,                                             <!-- 残手数料 -->
+                TB.JOINT_REWARD_PRICE jointRewardPrice,                                   <!-- 支払額 -->
+                MUAI.INTERMEDIARY_EMP_CD AS empCode,                                      <!-- 営業員コード -->
+                MCI.BROKER_CHARGE_NAME brokerChargeName,                                  <!-- 営業員名 -->
+                CASE  TB.PRODUT_CD
+                    WHEN '12' THEN TB.KBN_NM
+                    WHEN '13' THEN TB.KBN_NM
+                    WHEN '14' THEN TB.KBN_NM
+                    WHEN '25' THEN TB.KBN_NM
+                END AS bondIntermediary,                                                  <!-- 債券 媒介/非媒介 -->
+                CASE  TB.PRODUT_CD
+                    WHEN '15' THEN TB.KBN_NM
+                END AS usStockStoreEntrust                                                <!-- 米国株 店頭/委託 -->
+            FROM V_JOINT_TRADE TB
+            <!-- 権限が(1,2)以外の場合 -->
+            <if test="req.privId != '1'.toString() and req.privId != '2'.toString()">
+                INNER JOIN (SELECT START_DATE,
+                                   END_DATE,
+                                   BUTEN_CODE,
+                                   ACCOUNT_NUMBER
+                              FROM M_JOINT_USER
+                             WHERE EDIT_NUMBER = 0
+                               AND EDIT_STATUS != 3) MJU
+                ON MJU.BUTEN_CODE = TB.BUTEN_CODE
+                AND MJU.ACCOUNT_NUMBER = TB.ACCOUNT_NUMBER
+                AND MJU.START_DATE &lt;= TO_CHAR(SYSDATE, 'YYYYMMDD')
+                AND MJU.END_DATE &gt; TO_CHAR(SYSDATE, 'YYYYMMDD')
+            </if>
+            LEFT JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI
+            ON TB.BUTEN_CODE = MUAI.BUTEN_CODE
+            AND TB.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+            LEFT JOIN (SELECT DISTINCT
+                              BROKER_CODE,
+                              BROKER_CHARGE_CODE,
+                              CASE BROKER_CHARGE_CODE
+                                WHEN '0000' THEN ''
+                                ELSE BROKER_CHARGE_NAME
+                              END AS BROKER_CHARGE_NAME
+                         FROM MEDIATE_CHARGE_INFO
+                        WHERE DELETE_FLG='0') MCI
+            ON MUAI.BROKER_CODE = MCI.BROKER_CODE
+            AND MUAI.INTERMEDIARY_EMP_CD = MCI.BROKER_CHARGE_CODE
+            <where>
+              <choose>
+                <when test="req.privId == '1'.toString() or req.privId == '2'.toString()">
+                  1 = 1
+                </when>
+                <otherwise>
+                  MJU.BUTEN_CODE = TB.BUTEN_CODE
+                  AND MJU.ACCOUNT_NUMBER = TB.ACCOUNT_NUMBER
+                  AND MJU.START_DATE &lt;= TO_CHAR(SYSDATE, 'YYYYMMDD')
+                  AND MJU.END_DATE &gt; TO_CHAR(SYSDATE, 'YYYYMMDD')
+                </otherwise>
+              </choose>
+              <!-- 仲介業者コードの指定がある場合 -->
+              <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                <choose>
+                   <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                     AND TB.BROKER_CODE NOT IN
+                   </when>
+                   <otherwise>
+                     AND TB.BROKER_CODE IN
+                   </otherwise>
+                </choose>
+                <foreach item="item" index="index"  collection="req.brokerCodeList" open="(" separator="," close=")">
+                   #{item}
+                </foreach>
+              
+              </if> 
+              <!-- 共同募集支店コードの指定がある場合 -->
+              <if test="req.jointBranchCode != null and req.jointBranchCode != ''.toString()">
+                 AND TB.JOINT_BRANCH_CODE =#{req.jointBranchCode}
+              </if>
+              <if test='req.privId == "6".toString() or req.privId == "7".toString() or req.privId == "8".toString() or req.privId == "9".toString()'>
+                 AND TB.JOINT_BRANCH_CODE IN (
+                     SELECT SUB_BROKER_ID
+                     FROM TB_MED_USERS
+                     WHERE USER_ID = #{req.userId}
+                     UNION
+                     SELECT SUB_BROKER_ID
+                     FROM TB_MED_USERS_PRIV
+                     WHERE USER_ID = #{req.userId} AND BROKER_ID ='0509'
+                 )
+              </if>
+              <!-- 営業員コードの指定がある場合 -->
+              <if test="req.empCode != null and req.empCode != ''.toString()">
+                 AND MUAI.INTERMEDIARY_EMP_CD = #{req.empCode}
+              </if>
+              <!-- 部店コードの指定がある場合 -->
+              <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                 AND TB.BUTEN_CODE =#{req.butenCode}
+              </if>
+              <!-- 口座番号の指定がある場合 -->
+              <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                 AND TB.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+              </if>
+              <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '1'（と等しい）の場合の条件 -->
+              <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "1"'>
+                 AND (MUAI.NAME_KANJI = #{req.customerName} OR MUAI.NAME_KANA = #{req.customerName})
+              </if>
+              <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '2'（で始まる）の場合の条件 -->
+              <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "2"'>
+                 AND (MUAI.NAME_KANJI like CONCAT(#{req.customerName}, '%') OR MUAI.NAME_KANA like CONCAT(#{req.customerName}, '%'))
+              </if>
+              <!-- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '3'（を含む）の場合の条件 -->
+              <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "3"'>
+                 AND (MUAI.NAME_KANJI like CONCAT(CONCAT('%', #{req.customerName}), '%') OR MUAI.NAME_KANA like CONCAT(CONCAT('%', #{req.customerName}), '%'))
+              </if>
+              <!--取引コースの指定がある場合 -->
+              AND TB.CUSTOMER_ATTRIBUTE IN
+              <foreach item="item" index="index" collection="req.course" open="(" separator="," close=")">
+                <if test="item.isSelected == true">
+                   #{item.id}
+                </if>
+              </foreach>
+              <!-- 期間指定fromの指定がある場合 -->
+              <if test="req.periodDateFrom != null and req.periodDateFrom != ''.toString()">
+                 AND TB.TRADE_DATE &gt;= #{req.periodDateFrom}
+              </if>
+              <!-- 期間指定toの指定がある場合 -->
+              <if test="req.periodDateTo != null and req.periodDateTo != ''.toString()"> 
+                 AND TB.TRADE_DATE &lt;= #{req.periodDateTo}
+              </if>
+              <!-- 証券種別の指定がある場合 -->
+              <if test="req.isSecurityClassSelected == true">
+                 AND TB.PRODUT_CD IN 
+                 <foreach item="item" index="index" collection="req.securityClass" open="(" separator="," close=")">
+                    <if test="item.isSelected == true">
+                       #{item.id}
+                    </if>
+                 </foreach>
+              </if>
+              <!-- 銘柄コードの指定がある場合 -->
+              <if test="req.brandCode12 != null and req.brandCode12 != ''.toString()">
+                 AND LTRIM(TB.BRAND_CODE, '0') = LTRIM(#{req.brandCode12}, '0')
+              </if>
+            </where>
+            ORDER BY
+                TB.TRADE_DATE DESC
+                ,TB.BROKER_CODE ASC
+                ,TB.BUTEN_CODE ASC
+                ,TB.ACCOUNT_NUMBER ASC
+        )
+        WHERE
+          ROWNUM &lt;= #{req.rownum}
+    </select>
+</mapper>

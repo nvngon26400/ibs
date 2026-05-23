@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0305-01_1
+    画面名：米株信用代用振替入力
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignMarginCollateralTransferInputMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaForeignMarginCollateralTransferInputSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginCollateralTransferInputSql001ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：店頭取引で売却注文されている預り情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginCollateralTransferInputSql001" resultMap="ResultMapIfaForeignMarginCollateralTransferInputSql001" statementType="PREPARED">
+		SELECT /* @SQLID=SUB0202_0305-01_1#Sql001 */
+			BRAND_CODE
+			,DEPOSIT_TYPE
+		FROM
+			T_COUNTER_ORDER
+		WHERE
+			BUTEN_CODE = #{req.butenCode}
+			AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+			AND ORDER_DAY = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+			AND TRADE_TYPE = '1'
+			AND ORDER_STATUS IN ('10', '30')
+    </select>
+
+</mapper>

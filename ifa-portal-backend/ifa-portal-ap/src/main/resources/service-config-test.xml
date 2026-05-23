@@ -1,0 +1,276 @@
+<services>
+	<service url="" name="daoTestDriverService"
+	    methodName="doDaoTest">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.DaoTestServiceRequest" />
+	    </params>
+	</service>
+
+	<service url="" name="functionTestService"
+		methodName="doFct001">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct001Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+
+	<service url="" name="functionTestService"
+		methodName="doFct004">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct004Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct020">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct020Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct024">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct024Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+
+	<service url="" name="functionTestService"
+		methodName="doFct027">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct027Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+
+	<service url="" name="functionTestService"
+		methodName="doFct030">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct030Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct032">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct032Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct031">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct031Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct033">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct033Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct037">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct037Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct038">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct038Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+	    methodName="doFct028">
+	    <params>
+	        <param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct028Dto" popertyName="arg[0]" />
+	    </params>
+	</service>
+	
+		<service url="" name="functionTestService"
+		methodName="doFct035">
+		<params>
+			<param index="1"
+				type="com.sbisec.helios.ap.bizcommon.model.InputFct035Dto"
+				popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct034">
+		<params>
+			<param index="1"
+				type="com.sbisec.helios.ap.bizcommon.model.InputFct034Dto"
+				popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="functionTestService"
+		methodName="doFct039">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct039Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+
+	<service url="" name="functionTestService"
+		methodName="doFct006">
+		<params>
+			<param index="1" type="com.sbisec.helios.ap.bizcommon.model.InputFct006Dto" popertyName="arg[0]" />
+		</params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql002Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql002Input" />
+	    </params>
+	</service>
+
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql003Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql003Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql004Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql004Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql005Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql005Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql006Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql006Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql009Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql009Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql011Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql011Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql012Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql012Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql013Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql013Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaBbApplyCsvMassRegisterSql014Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaBbApplyCsvMassRegisterSql014Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql001Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql001Input" />
+	    </params>
+	</service>
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql002Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql002Input" />
+	    </params>
+	</service>
+
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql003Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql003Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql004Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql004Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql005Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql005Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql006Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql006Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql007Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql007Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql008Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql008Input" />
+	    </params>
+	</service>
+	
+	<service url="" name="daoTestDriverService"
+	    methodName="doIfaComplianceReportSql009Test">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool.service.dto.IfaComplianceReportSql009Input" />
+	    </params>
+	</service>
+</services>

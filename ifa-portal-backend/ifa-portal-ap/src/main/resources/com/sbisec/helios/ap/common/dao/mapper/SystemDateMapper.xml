@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sbisec.helios.ap.common.dao.mapper.SystemDateMapper">
+	
+    <!-- FCT014.SQL011 システム日付取得 -->	
+	<select id="getSystemDate" statementType="PREPARED" resultType="Date">
+		SELECT
+		/* @SQLID=FCT014#Sql011 */
+		IFA_DATE_UTIL.IFA_GET_DATE AS systemDate
+		FROM
+		DUAL
+	</select>
+</mapper>

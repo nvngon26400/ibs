@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0402_01-01
+    画面名：仲介業補助簿取得
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.formAcquire.dao.mapper.IfaBrokerageSubLedgerAcquireMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaBrokerageSubLedgerAcquireSql001" type="com.sbisec.helios.ap.internalAdminMenu.formAcquire.dao.model.IfaBrokerageSubLedgerAcquireSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBrokerageSubLedgerAcquireSql002" type="com.sbisec.helios.ap.internalAdminMenu.formAcquire.dao.model.IfaBrokerageSubLedgerAcquireSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBrokerageSubLedgerAcquireSql003" type="com.sbisec.helios.ap.internalAdminMenu.formAcquire.dao.model.IfaBrokerageSubLedgerAcquireSql003ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：仲介業補助簿ファイルディレクトリ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrokerageSubLedgerAcquireSql001" resultMap="ResultMapIfaBrokerageSubLedgerAcquireSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0402_01-01#Sql001 */ 
+            FUNC_ID AS functionId,
+            CAT_ID AS t9nInfoCat,
+            FILE_DIR AS fileDirectory 
+        FROM 
+            TB_MED_TEMP_FILE_DIR
+        <where>
+			FUNC_ID = 'M4'
+			AND
+			CAT_ID = '0'
+		</where>
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：仲介業補助簿情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrokerageSubLedgerAcquireSql002" resultMap="ResultMapIfaBrokerageSubLedgerAcquireSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0402_01-01#Sql002 */ 
+            A.createTime,
+            A.fileName,
+            A.brokerCode,
+            A.productCode,
+            B.CODE_NAME AS codeName,
+            C.BRANCH_NAME AS brokerName,
+            'DL' AS dl
+        FROM 
+            (
+                SELECT
+                    #{req.createTime} AS createTime,
+                    #{req.fileName} AS fileName,
+                    #{req.brokerCode} AS brokerCode,
+                    #{req.productCode} AS productCode
+                FROM
+                     DUAL
+            ) A 
+        LEFT JOIN 
+           CORDYS_CODE_MASTER B
+        ON
+           A.productCode = B.CODE_ID
+           AND
+           B.FUNCTION_ID = '025'
+        LEFT JOIN 
+           MEDIATE_BRANCH C 
+        ON
+           A.brokerCode = C.BROKER_CODE
+           AND
+           C.BROKER_BRANCH_KIND = '00'          
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：仲介業補助簿一時テーブル取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrokerageSubLedgerAcquireSql003" resultMap="ResultMapIfaBrokerageSubLedgerAcquireSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0402_01-01#Sql003 */ 
+            COUNT(*) OVER() AS totalCount,
+            USERID AS userId,
+            CREATEDATE AS createDate,
+            BROKERCODE AS brokerCode,
+            BROKERNAME AS brokerName,
+            PRODUCT AS targetSecurity,
+            DL AS dl,
+            FILENAME AS fileName  
+        FROM 
+            TMP_AUXILIARY
+        WHERE
+            #{req.userId} = USERID
+            FETCH FIRST 5000 ROWS ONLY
+    </select>
+    
+    
+    <!-- 
+         SQLID：Sql005
+         SQL名：仲介業補助簿一時テーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaBrokerageSubLedgerAcquireSql005" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0402_01-01#Sql005 */ INTO TMP_AUXILIARY
+            (
+                USERID,
+                CREATEDATE,
+                BROKERCODE,
+                BROKERNAME,
+                PRODUCT,
+                DL,
+                FILENAME
+             ) VALUES(
+                #{req.userId},
+                #{req.createDate},
+                #{req.brokerCode},
+                #{req.brokerName},
+                #{req.codeName},
+                #{req.dl},
+                #{req.downloadFileName}
+             )
+    </insert>
+    
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：仲介業補助簿一時テーブル削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaBrokerageSubLedgerAcquireSql004" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0402_01-01#Sql004 */ FROM TMP_AUXILIARY 
+        WHERE
+            #{req.userId} = USERID
+    </delete>
+    
+    
+</mapper>

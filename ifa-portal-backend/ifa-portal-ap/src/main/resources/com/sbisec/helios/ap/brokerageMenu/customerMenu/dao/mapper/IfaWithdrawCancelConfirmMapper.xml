@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0601-03_1
+    画面名：取消確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaWithdrawCancelConfirmMapper">
+        <!-- 
+        SQLID：Sql002
+        SQL名：IFA入出金履歴テーブルに出金取消履歴を登録する。
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaWithdrawCancelConfirmSql002" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0601-03_1#Sql002 */ INTO TB_CASH_PAY_REC_JOURNAL_IFA
+            (
+                TRAN_ID
+                ,EDABAN
+                ,KOKYAKU_ID
+                ,BUTEN_CD
+                ,KOUZA_NO
+                ,HACCHUU_KBN
+                ,TORIKESHI_STS_CD
+                ,TORIKESHI_USER_ID
+                ,EC_NYUSHUKKIN_NO
+                ,FURIKAE_KBN
+                ,SHIWAKE_NO
+                ,SHIKINN
+                ,SOUKINNRYOU
+                ,UKEWATASHISHA
+                ,IKKATSU
+                ,UKETSUKE_KEIRO_KBN
+                ,SHOUHINN_KBN
+                ,YORYOKU_CHECK_KBN
+                ,TOUROKU_NICHIJI
+                ,SAKUJO_FLG
+                ,SOKUJI_NYUUKIN_KBN
+                ,JRNISA_ACCOUNT_KBN
+                ,CREATE_TIME
+                ,CREATE_USER
+                ,UPDATE_TIME
+                ,UPDATE_USER
+            )
+            VALUES
+            (
+                #{req.tranId}                         <!-- トランザクションID -->
+                ,#{req.edaban}                        <!-- 枝番 -->
+                ,#{req.kokyakuId}                     <!-- 顧客ID -->
+                ,#{req.butenCd}                       <!-- 部店CD -->
+                ,#{req.kouzaNo}                       <!-- 口座番号 -->
+                ,#{req.hacchuuKbn}                    <!-- 発注区分 -->
+                ,#{req.torikeshiStsCd}                <!-- 取消ステータスコード -->
+                ,#{req.torikeshiUserId}               <!-- 取消ユーザーID -->
+                ,#{req.ecNyushukkinNo}                <!-- EC入出金番号 -->
+                ,#{req.furikaeKbn}                    <!-- 振替区分 -->
+                ,#{req.shiwakeNo}                     <!-- 仕訳ＮＯ -->
+                ,#{req.shikinn}                       <!-- 資金  -->
+                ,#{req.soukinnryou}                   <!-- 送金料 -->
+                ,#{req.ukewatashisha}                 <!-- 受渡者  -->
+                ,#{req.ikkatsu}                       <!-- 一括 -->
+                ,#{req.uketsukeKeiroKbn}              <!-- 受付経路区分 -->
+                ,#{req.shouhinnKbn}                   <!-- 商品区分 -->
+                ,#{req.yoryokuCheckKbn}               <!-- 余力チェック区分 -->
+                ,#{req.tourokuNichiji}                <!-- 登録日時 -->
+                ,#{req.sakujoFlg}                     <!-- 削除フラグ -->
+                ,#{req.sokujiNyuukinKbn}              <!-- 即時入金区分  -->
+                ,#{req.jrnisaAccountKbn}              <!-- ジュニアNISA口座区分 -->
+                ,SYSDATE                              <!-- 作成日時 -->
+                ,#{req.createUser}                    <!-- 作成者 -->
+                ,SYSDATE                              <!-- 更新日時 -->
+                ,#{req.updateUser}                    <!-- 更新者 -->
+            )
+    </insert>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：発注が正常の場合、出金履歴テーブルの出金取消履歴データを更新する。
+        SQLタイプ：update
+    -->
+    <update id="updateIfaWithdrawCancelConfirmSql003" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0601-03_1#Sql003 */
+            TB_CASH_PAY_REC_JOURNAL_IFA TC
+        SET
+            TC.TORIKESHI_STS_CD = #{req.torikeshiStsCd}                              <!-- 取消ステータスコード -->
+            ,TC.ERROR_CD = #{req.errorCd}                                            <!-- エラーコード -->
+            ,TC.ERROR_MESSAGE = #{req.errorMessage}                                  <!-- エラーメッセージ -->
+            ,TC.KINGAKU = #{req.kingaku}                                             <!-- 金額 -->
+            ,TC.KEIJOUBI = #{req.keijoubi}                                           <!-- 計上日 -->
+            ,TC.SHUBETSU = #{req.shubetsu}                                           <!-- 種別 -->
+            ,TC.TORIKESHI_UKETSUKE_KEIRO_KBN = #{req.torikeshiUketsukeKeiroKbn}      <!-- 取消受付経路区分 -->
+            ,TC.TORIKESHI_KINGAKU = #{req.torikeshiKingaku}                          <!-- 取消出金可能金額 -->
+            ,TC.TORIKESHI_GO_KINGAKU = #{req.torikeshiGoKingaku}                     <!-- 取消受付後出金可能金額 -->
+            ,TC.SHUKKIN_YOTEIBI = TO_DATE(#{req.shukkinYoteibi}, 'YYYYMMDD')         <!-- 出金予定日 -->
+            ,TC.HENKOU_NICHIJI = SYSDATE                                             <!-- 変更日時 -->
+            ,TC.SAKUJO_NICHIJI = SYSDATE                                             <!-- 削除日時 -->
+            ,TC.SAKUJO_FLG = #{req.sakujoFlg}                                        <!-- 削除フラグ -->
+            ,TC.UPDATE_TIME = SYSDATE                                                <!-- 更新日時 -->
+            ,TC.UPDATE_USER = #{req.updateUser}                                      <!-- 更新者 -->
+        WHERE
+            TC.TRAN_ID = #{req.tranId}                                              <!-- トランザクションID -->
+        AND
+            TC.EDABAN = #{req.edaban}                                               <!-- 枝番 -->
+    </update>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：発注がエラーの場合(API応答あり)、出金履歴テーブルの出金取消履歴データを再度更新する。
+        SQLタイプ：update
+    -->
+    <update id="updateIfaWithdrawCancelConfirmSql004" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0601-03_1#Sql004 */
+            TB_CASH_PAY_REC_JOURNAL_IFA TC
+        SET
+            TC.TORIKESHI_STS_CD = #{req.torikeshiStsCd}                              <!-- 取消ステータスコード -->
+            ,TC.ERROR_CD = #{req.errorCd}                                            <!-- エラーコード -->
+            ,TC.ERROR_MESSAGE = #{req.errorMessage}                                  <!-- エラーメッセージ -->
+            ,TC.KEIJOUBI = #{req.keijoubi}                                           <!-- 計上日 -->
+            ,TC.SHUBETSU = #{req.shubetsu}                                           <!-- 種別 -->
+            ,TC.HENKOU_NICHIJI = SYSDATE                                             <!-- 変更日時 -->
+            ,TC.UPDATE_TIME = SYSDATE                                                <!-- 更新日時 -->
+            ,TC.UPDATE_USER = #{req.updateUser}                                      <!-- 更新者 -->
+        WHERE
+            TC.TRAN_ID = #{req.tranId}                                              <!-- トランザクションID -->
+        AND
+            TC.EDABAN = #{req.edaban}                                               <!-- 枝番 -->
+    </update>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：発注がエラーの場合(API応答なし)、出金履歴テーブルの出金取消履歴データを再度更新する。
+        SQLタイプ：update
+    -->
+    <update id="updateIfaWithdrawCancelConfirmSql005" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0601-03_1#Sql005 */
+            TB_CASH_PAY_REC_JOURNAL_IFA TC
+        SET
+            TC.KEIJOUBI = #{req.keijoubi}                                           <!-- 計上日 -->
+            ,TC.HENKOU_NICHIJI = SYSDATE                                            <!-- 変更日時 -->
+            ,TC.UPDATE_TIME = SYSDATE                                               <!-- 更新日時 -->
+            ,TC.UPDATE_USER = #{req.updateUser}                                     <!-- 更新者 -->
+        WHERE
+            TC.TRAN_ID = #{req.tranId}                                              <!-- トランザクションID -->
+        AND
+            TC.EDABAN = #{req.edaban}                                               <!-- 枝番 -->
+    </update>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：既存の出金履歴トランザクションID、枝番を取得する
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapExistingTranIdAndEdaban" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaWithdrawCancelConfirmTrandIdAndEdabanResponseModel"/>
+    <select id="getIfaWithdrawCancelConfirmSql006" resultMap="ResultMapExistingTranIdAndEdaban" statementType="PREPARED">
+        SELECT
+            TRAN_ID AS TRAN_ID
+            ,EDABAN + 1 AS EDABAN
+        FROM TB_CASH_PAY_REC_JOURNAL_IFA
+        WHERE
+            TRIM(BUTEN_CD) = TRIM(#{req.butenCd})
+        AND
+            TRIM(KOUZA_NO) = TRIM(#{req.accountNumber})
+        AND
+            HACCHUU_KBN = #{req.hacchuuKbn}
+        AND
+            TRIM(EC_NYUSHUKKIN_NO) = TRIM(#{req.ecNyushukkinNo})
+        ORDER BY EDABAN DESC
+        FETCH FIRST 1 ROWS ONLY
+    </select>
+</mapper>

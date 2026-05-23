@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MediateUserAttributeInfoMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.MediateUserAttributeInfo" id="MediateUserAttributeInfo"></resultMap>
+
+	<select id="getMediateUserAttributeInfo" resultMap="MediateUserAttributeInfo" statementType="PREPARED">
+		SELECT
+			MUAI.CUSTOMER_ID,
+			MUAI.CORPORATION_KBN ,
+			MUAI.TC_COMP_RANK ,
+			MUAI.AGE 
+		FROM
+			MEDIATE_USER_ATTRIBUTE_INFO MUAI 
+		WHERE
+			1 = 1
+		<if test="butenCode != null">
+			AND MUAI.BUTEN_CODE = #{butenCode}
+		</if>
+		<if test="accountNumber != null">
+			AND MUAI.ACCOUNT_NUMBER = #{accountNumber}
+		</if>
+	</select>
+
+</mapper>

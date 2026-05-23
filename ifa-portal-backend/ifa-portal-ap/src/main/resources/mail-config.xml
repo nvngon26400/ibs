@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+	<config>
+		<property name="mail.smtp.host" value="xxx"/>
+		<property name="mail.smtp.auth" value="false"/>
+		<property name="mail.smtp.user" value="xxx"/>
+		<property name="mail.smtp.password" value="xxxxxxx"/>
+		<property name="mail.smtp.port" value="25"/>
+	</config>
+</root>

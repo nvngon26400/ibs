@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct004Mapper">
+
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct004Sql001ResponseModel" id="Fct004Sql001ResponseModel">
+	</resultMap>
+	
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct004Sql002ResponseModel" id="Fct004Sql002ResponseModel">
+	</resultMap>
+	
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct004Sql003ResponseModel" id="Fct004Sql003ResponseModel">
+	</resultMap>
+
+	<!-- FCT004.SQL001 遡る時間の取得 -->
+	<select id="getTime" resultMap="Fct004Sql001ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT004#SQL001 */
+			NAME
+		FROM
+			M_CODE
+		WHERE
+			CODE_TYPE = '46'
+			AND CODE_1 = '0'
+			AND CODE_2 = 'LIMIT_TIME'
+			AND START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+			AND END_DATE >= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+	</select>
+	
+	<!-- FCT004.SQL002 外債買付代金合計の算出 -->
+	<select id="getForeignBondBuyAmount" resultMap="Fct004Sql002ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT004#SQL002 */
+			NVL(SUM(AMOUNT),0) AS TOTAL_AMOUNT
+		FROM
+			T_BOND_F_SALES_PRICE
+		WHERE
+			BUTEN_CODE = #{fct004Sql002RequestModel.butenCode}
+			AND ACCOUNT_NUMBER = TO_NUMBER(#{fct004Sql002RequestModel.accountNumber})
+			AND ORDER_TIME BETWEEN IFA_DATE_UTIL.IFA_GET_DATE + 
+				NUMTODSINTERVAL(-1 * #{fct004Sql002RequestModel.name}, 'MINUTE') AND IFA_DATE_UTIL.IFA_GET_DATE
+	</select>
+	
+	<!-- FCT004.SQL003 店頭取引注文情報の取得 -->
+	<select id="getShopTransactionOrder" resultMap="Fct004Sql003ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT004#SQL003 */
+			ORDER_NO
+			, BROKER_CODE
+			, BRAND_CODE
+			, BUTEN_CODE
+			, DEPOSIT_TYPE
+			, ACCOUNT_NUMBER
+			, ORDER_COUNT
+			, ORDER_STATUS
+			, TRADE_TYPE
+			, APPOINT_PRICE
+		FROM
+			T_COUNTER_ORDER
+		WHERE
+			BUTEN_CODE = #{fct004Sql003RequestModel.butenCode}
+			AND ACCOUNT_NUMBER = TO_NUMBER(#{fct004Sql003RequestModel.accountNumber})
+			AND ORDER_STATUS IN ('10', '30')
+			AND ORDER_DAY = TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+	</select>
+</mapper>

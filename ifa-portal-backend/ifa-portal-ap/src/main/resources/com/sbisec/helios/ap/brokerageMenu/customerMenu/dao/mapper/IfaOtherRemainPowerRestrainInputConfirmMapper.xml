@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0110-01_2
+    画面名：その他余力拘束注文確認
+-->
+<mapper
+    namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaOtherRemainPowerRestrainInputConfirmMapper">
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：発注前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaOtherRemainPowerRestrainInputConfirmSql001" useGeneratedKeys="true" keyColumn="TRAN_ID" keyProperty="req.tranId" statementType="PREPARED">
+        INSERT 
+          INTO CORDYS.TB_ADDITIONAL_ORDER_IFA( 
+             TRAN_ID
+            ,EDABAN
+            ,KOKYAKU_ID
+            ,BUTEN_CD
+            ,KOUZA_NO
+            ,HATTYUU_KBN
+            ,TOKUTEI_AZUKARI_BAIBAI_KBN
+            ,TOKUTEI_KOUZA_KBN
+            ,JUCHUBI
+            ,EC_JUCHUU_NO
+            ,KEITOU_KBN
+            ,KAISHA_CD
+            ,SHINKYU_KBN
+            ,KAISUU
+            ,GOU
+            ,SHOUHINMEI
+            ,SHOUHIN_KBN
+            ,STS_CD
+            ,USER_ID
+            ,ERROR_CD
+            ,ERROR_MESSAGE
+            ,EC_JUCHUU_NICHIJI
+            ,BAIBAI_KBN
+            ,SEISAN_KINGAKU
+            ,KAKUTEI_SEISAN_KINGAKU
+            ,CHUMON_DEKI_KBN
+            ,TORIKESHI_KBN
+            ,UKEWATASHI_HOUHO
+            ,SIHARAI_HOUHO
+            ,SURYOU
+            ,DEKI_SURYOU
+            ,SASHINARI_KBN
+            ,TANKA
+            ,KEIKA_RISI
+            ,JOUTOEKIZEI_KBN
+            ,TSUUKA
+            ,KAWASE_RATE
+            ,KAWASE_TESUURYOU
+            ,COUPON_RATE
+            ,COUPON_KASU
+            ,UKETSUKE_KEIRO_KBN
+            ,YORYOKU_CHECK_KBN
+            ,SHUBETSU
+            ,KAITSUKEKANOU_KINGAKU
+            ,CHUMON_KAITSUKEKANOU_KINGAKU
+            ,SHIKKOU_KBN
+            ,SHIJOU
+            ,SHORI_FLG
+            ,KAIYAKU_SHITEI_KBN
+            ,YAKUJOU_YOTEIBI
+            ,UKEWATASHI_YOTEIBI
+            ,NYUURYOKU_JUCHUU_NICHIJI
+            ,DEKI_HICHIJI
+            ,KOKUNAI_YAKUJOUBI
+            ,KOKUNAI_UKEWATASHIBI
+            ,GENCHI_UKEWATASHIBI
+            ,HATTYU_RIYU
+            ,INSATSU_FLG
+            ,TOUROKU_NICHIJI
+            ,HENKOU_NICHIJI
+            ,SAKUJO_NICHIJI
+            ,SAKUJO_FLG
+            ,KANNYUU_KBN
+            ,JYUUCHUU_HOUHOU
+            ,SHIKIN_SEIKAKU
+            ,MARUYU_KOUZA_KBN
+            ,KOUSOKU_KBN
+            ,NISA_KINGAKU
+            ,KOUSOKU_SYUBETU
+            ,CCS_SEND_DATE
+          )
+          VALUES (
+             SEQ_TB_ADDITIONAL_ORDER_IFA.NEXTVAL                                            <!-- トランザクションＩＤ -->
+            ,#{req.edaban}                                                                  <!-- 枝番 -->
+            ,#{req.kokyakuId}                                                               <!-- 顧客ID -->
+            ,#{req.butenCd}                                                                 <!-- 部店CD -->
+            ,#{req.kouzaNo}                                                                 <!-- 口座番号 -->
+            ,#{req.hattyuuKbn}                                                              <!-- 発注区分 -->
+            ,#{req.tokuteiAzukariBaibaiKbn}                                                 <!-- 特定預り売買区分 -->
+            ,#{req.tokuteiKouzaKbn}                                                         <!-- 特定口座区分 -->
+            ,#{req.juchubi}                                                                 <!-- 受注日 -->
+            ,#{req.ecJuchuuNo}                                                              <!-- EC受注番号（その他商品） -->
+            ,#{req.keitouKbn}                                                               <!-- 継投区分 -->
+            ,#{req.kaishaCd}                                                                <!-- 会社コード -->
+            ,#{req.shinkyuKbn}                                                              <!-- 新旧区分 -->
+            ,#{req.kaisuu}                                                                  <!-- 回数 -->
+            ,#{req.gou}                                                                     <!-- 号 -->
+            ,#{req.shouhinmei}                                                              <!-- 商品名 -->
+            ,#{req.shouhinKbn}                                                              <!-- 商品区分 -->
+            ,#{req.stsCd}                                                                   <!-- ステータスコード -->
+            ,#{req.userId}                                                                  <!-- ユーザーＩＤ -->
+            ,#{req.errorCd}                                                                 <!-- エラーコード -->
+            ,#{req.errorMessage}                                                            <!-- エラーメッセージ -->
+            ,#{req.ecJuchuuNichiji}                                                         <!-- EC受注日時 -->
+            ,#{req.baibaiKbn}                                                               <!-- 売買区分 -->
+            ,NVL(#{req.seisanKingaku}, 0)                                                   <!-- 精算金額 -->
+            ,#{req.kakuteiSeisanKingaku}                                                    <!-- 確定精算金額 -->
+            ,#{req.chumonDekiKbn}                                                           <!-- 注文・出来区分 -->
+            ,#{req.torikeshiKbn}                                                            <!-- 取消区分 -->
+            ,#{req.ukewatashiHouho}                                                         <!-- 受渡方法 -->
+            ,#{req.siharaiHouho}                                                            <!-- 支払い方法 -->
+            ,#{req.suryou}                                                                  <!-- 数量 -->
+            ,#{req.dekiSuryou}                                                              <!-- 出来数量 -->
+            ,#{req.sashinariKbn}                                                            <!-- 指成区分 -->
+            ,#{req.tanka}                                                                   <!-- 単価 -->
+            ,#{req.keikaRisi}                                                               <!-- 経過利子 -->
+            ,#{req.joutoekizeiKbn}                                                          <!-- 譲渡益税区分 -->
+            ,#{req.tsuuka}                                                                  <!-- 通貨 -->
+            ,#{req.kawaseRate}                                                              <!-- 為替レート -->
+            ,#{req.kawaseTesuuryou}                                                         <!-- 為替手数料 -->
+            ,#{req.couponRate}                                                              <!-- クーポンレート -->
+            ,#{req.couponKasu}                                                              <!-- クーポン回数（年） -->
+            ,#{req.uketsukeKeiroKbn}                                                        <!-- 受付経路区分 -->
+            ,#{req.yoryokuCheckKbn}                                                         <!-- 余力チェック区分 -->
+            ,#{req.shubetsu}                                                                <!-- 種別 -->
+            ,#{req.kaitsukekanouKingaku}                                                    <!-- 買付可能金額 -->
+            ,#{req.chumonKaitsukekanouKingaku}                                              <!-- 注文後の買付可能金額 -->
+            ,#{req.shikkouKbn}                                                              <!-- 失効区分 -->
+            ,#{req.shijou}                                                                  <!-- 市場 -->
+            ,#{req.shoriFlg}                                                                <!-- 処理フラグ -->
+            ,#{req.kaiyakuShitei_kbn}                                                       <!-- 解約指定区分 -->
+            ,TO_DATE(#{req.yakujouYoteibi},'YYYY/MM/DD')                                    <!-- 約定予定日 -->
+            ,TO_DATE(#{req.ukewatashiYoteibi},'YYYY/MM/DD')                                 <!-- 受渡予定日 -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE                                                     <!-- 入力受注日時 -->
+            ,#{req.dekiHichiji}                                                             <!-- 出来日時 -->
+            ,#{req.kokunaiYakujoubi}                                                        <!-- 国内約定日 -->
+            ,#{req.kokunaiUkewatashibi}                                                     <!-- 国内受渡日 -->
+            ,#{req.genchiUkewatashibi}                                                      <!-- 現地受渡日 -->
+            ,#{req.hattyuRiyu}                                                              <!-- 発注理由 -->
+            ,#{req.insatsuFlg}                                                              <!-- 印刷フラグ -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE                                                     <!-- 登録日時 -->
+            ,#{req.henkouNichiji}                                                           <!-- 変更日時 -->
+            ,#{req.sakujo_nichiji}                                                          <!-- 削除日時 -->
+            ,#{req.sakujoFlg}                                                               <!-- 削除フラグ -->
+            ,#{req.kannyuuKbn}                                                              <!-- 勧誘区分 -->
+            ,#{req.jyuuchuuHouhou}                                                          <!-- 受注方法 -->
+            ,#{req.shikinSeikaku}                                                           <!-- 資金性格 -->
+            ,#{req.maruyuKouzaKbn}                                                          <!-- マル優口座区分 -->
+            ,#{req.kousokuKbn}                                                              <!-- 拘束区分 -->
+            ,#{req.nisaKingaku}                                                             <!-- 拘束金額（NISA） -->
+            ,#{req.kousokuSyubetu}                                                          <!-- 拘束種別 -->
+            ,#{req.ccsSendDate}                                                             <!-- CCS送付日 -->
+          )
+    </insert>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaOtherRemainPowerRestrainInputConfirmSql002" statementType="PREPARED">
+        UPDATE CORDYS.TB_ADDITIONAL_ORDER_IFA
+        <set>
+          HENKOU_NICHIJI = IFA_DATE_UTIL.IFA_GET_DATE                                       <!-- 変更日時 -->
+          <!-- 発注が正常の場合 -->
+          <if test='"API_RESP_OK".equals(req.apiError)'>
+            ,JUCHUBI = #{req.juchubi}                                                        <!-- 受注日 -->
+            ,EC_JUCHUU_NO = #{req.ecJuchuuNo}                                               <!-- EC受注番号（その他商品） -->
+            ,EC_JUCHUU_NICHIJI = TO_DATE(#{req.ecJuchuuNichiji}, 'yyyy/MM/dd hh24:mi:ss')   <!-- EC受注日時 -->
+            ,STS_CD = #{req.stsCd}                                                          <!-- ステータスコード -->
+            ,ERROR_CD = #{req.errorCd}                                                      <!-- エラーコード -->
+            ,ERROR_MESSAGE = #{req.errorMessage}                                            <!-- エラーメッセージ -->
+            ,SHUBETSU = #{req.shubetsu}                                                     <!-- 種別 -->
+            ,KAITSUKEKANOU_KINGAKU = #{req.kaitsukekanouKingaku}                            <!-- 買付可能金額 -->
+            ,CHUMON_KAITSUKEKANOU_KINGAKU = #{req.chumonKaitsukekanouKingaku}               <!-- 注文後の買付可能金額 -->
+            ,NYUURYOKU_JUCHUU_NICHIJI = 
+                TO_DATE(#{req.nyuuryokuJuchuuNichiji}, 'yyyy/MM/dd hh24:mi:ss')             <!-- 入力受注日時 -->
+          </if>
+          <!-- 発注がエラーの場合(API応答あり) -->
+          <if test='"API_RESP_NG_ON".equals(req.apiError)'>
+            ,JUCHUBI = #{req.juchubi}                                                        <!-- 受注日 -->
+            ,ERROR_CD = #{req.errorCd}                                                      <!-- エラーコード -->
+            ,ERROR_MESSAGE = #{req.errorMessage}                                            <!-- エラーメッセージ -->
+            ,SHUBETSU = #{req.shubetsu}                                                     <!-- 種別 -->
+          </if>
+          <!-- 発注がエラーの場合(API応答なし) -->
+          <if test='"API_RESP_NG_OFF".equals(req.apiError)'>
+            ,JUCHUBI = IFA_DATE_UTIL.IFA_GET_SDATE('yyyyMMdd')                              <!-- 受注日 -->
+          </if>
+        </set>
+        WHERE 
+          TRAN_ID = #{req.tranId}
+          AND EDABAN = #{req.edaban}
+    </update>
+</mapper>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0501_01-05
+    画面名：お知らせ閲覧状況照会
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.mapper.IfaNotificationViewStatusLookupMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaNotificationViewStatusLookupSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaNotificationViewStatusLookupSql001ResponseModel" >
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="subBrokerId" column="SUB_BROKER_ID"/>
+		<!-- TB_MED_USERS.EMPLOYEE_NAMEはNULLの可能性があるため、代わりにUSER_NMを使用する -->
+        <result property="employeeName" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="employeeId" column="EMPLOYEE_ID"/>
+        <result property="t5nReadFlg" column="T5N_READ_FLG"/>
+        <result property="readDate" column="T5N_READ_AT"/>
+        <result property="loginId" column="USER_ID"/>
+    </resultMap>
+
+    <resultMap id="ResultMapIfaNotificationViewStatusLookupSql002" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaNotificationViewStatusLookupSql002ResponseModel" >
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="subBrokerId" column="SUB_BROKER_ID"/>
+		<!-- TB_MED_USERS.EMPLOYEE_NAMEはNULLの可能性があるため、代わりにUSER_NMを使用する -->
+        <result property="employeeName" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="employeeId" column="EMPLOYEE_ID"/>
+        <result property="t5nReadFlg" column="T5N_READ_FLG"/>
+        <result property="readDate" column="T5N_READ_AT"/>
+        <result property="loginId" column="USER_ID"/>
+    </resultMap>
+
+    <resultMap id="ResultMapIfaNotificationViewStatusLookupSql003" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaNotificationViewStatusLookupSql003ResponseModel" >
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="subBrokerId" column="SUB_BROKER_ID"/>
+		<!-- TB_MED_USERS.EMPLOYEE_NAMEはNULLの可能性があるため、代わりにUSER_NMを使用する -->
+        <result property="employeeName" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="employeeId" column="EMPLOYEE_ID"/>
+        <result property="t5nReadFlg" column="T5N_READ_FLG"/>
+        <result property="readDate" column="T5N_READ_AT"/>
+        <result property="loginId" column="USER_ID"/>
+    </resultMap>
+
+    <resultMap id="ResultMapIfaNotificationViewStatusLookupSql004" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaNotificationViewStatusLookupSql004ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapIfaNotificationViewStatusLookupSql005" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaNotificationViewStatusLookupSql005ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapIfaNotificationViewStatusLookupSql006" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaNotificationViewStatusLookupSql006ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapIfaNotificationViewStatusLookupSql007" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaNotificationViewStatusLookupSql007ResponseModel" >
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：お知らせ閲覧状況の情報取得（全担当者）
+        SQLタイプ：select
+    -->
+    <select id="selectIfaNotificationViewStatusLookupSql001" resultMap="ResultMapIfaNotificationViewStatusLookupSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-05#Sql001 */
+            A.*
+            , B.*
+            , A.T5N_READ_FLG AS UNOPENED
+            , 'REMOVE' AS REMOVE
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    TB_MED_USERS
+                    LEFT JOIN PSITE_T5N_INFO_READ
+                        ON TB_MED_USERS.USER_ID = PSITE_T5N_INFO_READ.T5N_LOGIN
+                        <if test="req.t5nInfoId != null and req.t5nInfoId != ''">
+                            AND T5N_INFO_ID = TO_NUMBER(#{req.t5nInfoId})
+                        </if>
+            ) A
+            LEFT JOIN MEDIATE_BRANCH B
+                ON A.BROKER_ID = B.BROKER_CODE
+                AND B.BROKER_BRANCH_KIND = '00'
+        WHERE
+            A.PRIV_ID != '1'
+            AND A.PRIV_ID != '2'
+    </select>
+
+
+    <!--
+        SQLID：Sql002
+        SQL名：お知らせ閲覧状況の情報取得（権限担当者）
+        SQLタイプ：select
+    -->
+    <select id="selectIfaNotificationViewStatusLookupSql002" resultMap="ResultMapIfaNotificationViewStatusLookupSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-05#Sql002 */
+            A.*
+            , B.*
+            , A.T5N_READ_FLG AS UNOPENED
+            , 'REMOVE' AS REMOVE
+           FROM
+            (
+                SELECT
+                    *
+                FROM
+                    TB_MED_USERS
+                    LEFT JOIN PSITE_T5N_INFO_READ
+                        ON TB_MED_USERS.USER_ID = PSITE_T5N_INFO_READ.T5N_LOGIN
+                        <if test="req.t5nInfoId != null and req.t5nInfoId != ''">
+                            AND T5N_INFO_ID = TO_NUMBER(#{req.t5nInfoId})
+                        </if>
+            ) A
+            LEFT JOIN MEDIATE_BRANCH B
+                ON A.BROKER_ID = B.BROKER_CODE
+                AND B.BROKER_BRANCH_KIND = '00'
+           WHERE
+            A.PRIV_ID IN (
+                SELECT
+                    PRIV_ID
+                FROM
+                    PSITE_T4N_INFO_PRIV
+                WHERE
+                    1 = 1
+                    <if test="req.t5nInfoId != null and req.t5nInfoId != ''">
+                        AND T4N_ID = TO_NUMBER(#{req.t5nInfoId})
+                    </if>
+            )
+    </select>
+
+
+    <!--
+        SQLID：Sql003
+        SQL名：お知らせ閲覧状況の情報取得（個別担当者）
+        SQLタイプ：select
+    -->
+    <select id="selectIfaNotificationViewStatusLookupSql003" resultMap="ResultMapIfaNotificationViewStatusLookupSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-05#Sql003 */
+            A.*
+            , B.*
+            , A.T5N_READ_FLG AS UNOPENED
+            , 'REMOVE' AS REMOVE
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    PSITE_T5N_INFO_READ
+                    , TB_MED_USERS
+                WHERE
+                    1 = 1
+                    <if test="req.t5nInfoId != null and req.t5nInfoId != ''">
+                        AND T5N_INFO_ID = TO_NUMBER(#{req.t5nInfoId})
+                    </if>
+                    AND TB_MED_USERS.USER_ID = PSITE_T5N_INFO_READ.T5N_LOGIN
+            ) A
+            LEFT JOIN MEDIATE_BRANCH B
+                ON A.BROKER_ID = B.BROKER_CODE
+                AND B.BROKER_BRANCH_KIND = '00'
+    </select>
+
+
+    <!--
+        SQLID：Sql004
+        SQL名：ログイン者に紐づく既読情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaNotificationViewStatusLookupSql004" resultMap="ResultMapIfaNotificationViewStatusLookupSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-05#Sql004 */
+            COUNT(1) AS COUNT
+        FROM
+            PSITE_T5N_INFO_READ
+        WHERE
+            1 = 1
+            AND T5N_INFO_ID = TO_NUMBER(#{req.t5nInfoId})
+            AND T5N_LOGIN = #{req.loginId}
+    </select>
+
+
+    <!--
+         SQLID：Sql005
+         SQL名：既読情報の追加
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaNotificationViewStatusLookupSql005" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0501_01-05#Sql005 */
+        INTO PSITE_T5N_INFO_READ(
+            T5N_ID
+            , T5N_INFO_ID
+            , T5N_READ_FLG
+            , T5N_READ_AT
+            , T5N_LOGIN
+        )
+        VALUES (
+            SEQ_PSITE_T5_INFO_READ.nextval
+            , TO_NUMBER(#{req.t5nInfoId})
+            , '1'
+            , SYSDATE
+            , #{req.loginId}
+        )
+    </insert>
+
+
+    <!--
+        SQLID：Sql006
+        SQL名：既読情報の更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaNotificationViewStatusLookupSql006" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0501_01-05#Sql006 */
+            PSITE_T5N_INFO_READ
+        SET
+            T5N_READ_FLG = '1'
+            , T5N_READ_AT = SYSDATE
+        WHERE
+            1 = 1
+            AND T5N_INFO_ID = TO_NUMBER(#{req.t5nInfoId})
+            AND T5N_LOGIN = #{req.loginId}
+    </update>
+
+
+   <!--
+        SQLID：Sql007
+        SQL名：既読情報の削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaNotificationViewStatusLookupSql007" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0501_01-05#Sql007 */
+        FROM
+            PSITE_T5N_INFO_READ
+        WHERE
+            1 = 1
+            AND T5N_INFO_ID = TO_NUMBER(#{req.t5nInfoId})
+            AND T5N_LOGIN = #{req.loginId}
+    </delete>
+
+</mapper>

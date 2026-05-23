@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0512-03
+    画面名：リリースノート更新
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.releaseNote.dao.mapper.IfaReleaseNoteUpdateMapper">
+    
+    <resultMap id="ResultMapIfaReleaseNoteUpdateSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.releaseNote.dao.model.IfaReleaseNoteUpdateSql001ResponseModel">
+        <result property="title" column="title" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="detailedFile" column="detailedFile" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="menuName" column="menuName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="screenName" column="screenName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="content" column="content" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaReleaseNoteUpdateSql002" type="com.sbisec.helios.ap.companyEmployeeMenu.releaseNote.dao.model.IfaReleaseNoteUpdateSql002ResponseModel">
+    </resultMap>
+    
+    <!--
+        SQLID:Sql001
+        SQL名：リリースノート詳細取得
+        SQLタイプ：select 
+    -->
+    <select id="selectIfaReleaseNoteUpdateSql001" resultMap="ResultMapIfaReleaseNoteUpdateSql001" statementType="PREPARED">
+        SELECT /* SQLID=SUB0512-03#Sql001 */
+            RN.RELEASE_NOTE_NO AS releaseNoteNo,
+            RN.TITLE AS title,
+            TO_CHAR(RN.DISPLAYED_DATE, 'YYYY/MM/DD') AS displayedDate,
+            RN.FILE_TYPE AS fileType,
+            RN.PDF_SIZE AS pdfSize,
+            RN.PDF_DIRECTION AS pdfDirection,
+            RN.DETAILED_FILE AS detailedFile,
+            RNC.RELEASE_NOTE_CO_NO AS releaseNoteContentNo,
+            RNC.MENU_NAME AS menuName,
+            RNC.SCREEN_NAME AS screenName,
+            RNC.CONTENT AS content
+        FROM
+            CORDYS.RELEASE_NOTE RN
+        LEFT OUTER JOIN
+            CORDYS.RELEASE_NOTE_CONTENTS RNC
+        ON
+            RN.RELEASE_NOTE_NO = RNC.RELEASE_NOTE_NO
+        WHERE
+            RN.RELEASE_NOTE_NO = #{req.releaseNoteNo}
+        ORDER BY
+            RNC.RELEASE_NOTE_CO_NO ASC
+    </select>
+    
+    <!--
+        SQLID:Sql002
+        SQL名：リリースノートファイルディレクトリ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaReleaseNoteUpdateSql002" resultMap="ResultMapIfaReleaseNoteUpdateSql002" statementType="PREPARED">
+        SELECT /* SQLID=SUB0512-03#Sql002 */
+            FILE_DIR AS fileDirectory                                                           <!-- ファイルディレクトリ -->
+        FROM
+            CORDYS.TB_MED_TEMP_FILE_DIR                                                         <!-- 詳細ファイルディレクトリ -->
+        WHERE
+            FUNC_ID = #{req.functionId} AND                                                     <!-- 機能ID -->
+            CAT_ID = #{req.categoryId}                                                          <!-- カテゴリID -->
+    </select>
+    
+    <!--
+        SQLID:Sql003
+        SQL名：リリースノート内容削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaReleaseNoteUpdateSql003" statementType="PREPARED">
+        DELETE /* SQLID=SUB0512-03#Sql003 */ FROM
+            CORDYS.RELEASE_NOTE_CONTENTS
+        WHERE
+            RELEASE_NOTE_NO = #{req.releaseNoteNo}
+    </delete>
+    
+    <!--
+        SQLID:SQL004
+        SQL名：リリースノート内容登録
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaReleaseNoteUpdateSql004" statementType="PREPARED">
+        
+        INSERT ALL /* SQLID=SUB0512-03#Sql004 */
+        <foreach collection="req" item="item">
+            INTO CORDYS.RELEASE_NOTE_CONTENTS(                                                  <!-- リリースノート内容 -->
+                RELEASE_NOTE_NO,                                                                <!-- リリースノートNo -->
+                RELEASE_NOTE_CO_NO,                                                             <!-- リリースノート内容No -->
+                MENU_NAME,                                                                      <!-- メニュー名 -->
+                SCREEN_NAME,                                                                    <!-- 画面名 -->
+                CONTENT,                                                                        <!-- 内容 -->
+                CREATE_TIME,                                                                    <!-- 作成日時 -->
+                CREATE_USER,                                                                    <!-- 作成者 -->
+                UPDATE_TIME,                                                                    <!-- 更新日時 -->
+                UPDATE_USER                                                                     <!-- 更新者 -->
+            )
+            VALUES (
+                TO_NUMBER(#{item.releaseNoteNo}),                                               <!-- SQL001.リリースノートNo -->
+                TO_NUMBER(#{item.releaseNoteContentNo}),                                        <!-- リクエスト.内容.リリース内容No -->
+                #{item.menuName},                                                               <!-- リクエスト.内容.メニュー名 -->
+                #{item.screenName},                                                             <!-- リクエスト.内容.画面名 -->
+                #{item.content},                                                                <!-- リクエスト.内容.内容 -->
+                TO_DATE(#{item.createTime},'YYYYMMDDHH24MISS'),                                 <!-- システム日時 -->
+                #{item.createUser},                                                             <!-- ユーザ共通情報.ユーザーID -->
+                TO_DATE(#{item.updateTime},'YYYYMMDDHH24MISS'),                                 <!-- システム日時 -->
+                #{item.updateUser}                                                              <!-- ユーザ共通情報.ユーザーID -->
+            )
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
+    
+    <!--
+        SQLID:SQL005
+        SQL名：リリースノート更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaReleaseNoteUpdateSql005" statementType="PREPARED">
+        UPDATE /* SQLID=SUB0512-03#Sql005 */
+            CORDYS.RELEASE_NOTE
+        SET
+            TITLE = #{req.title},                                                               <!-- タイトル -->
+            DISPLAYED_DATE = TO_DATE(#{req.displayedDate},'YYYY/MM/DD'),                        <!-- 画面表示開始日 -->
+            FILE_TYPE = #{req.fileType},                                                        <!-- ファイルタイプ -->
+            PDF_SIZE = #{req.pdfSize},                                                          <!-- PDFサイズ -->
+            PDF_DIRECTION = #{req.pdfDirection},                                                <!-- PDF向き -->
+            DETAILED_FILE = #{req.detailedFile},                                                <!-- 詳細ファイル -->
+            UPDATE_TIME = TO_DATE(#{req.updateTime},'YYYYMMDDHH24MISS'),                        <!-- 更新日時 -->
+            UPDATE_USER = #{req.updateUser}                                                     <!-- 更新者 -->
+        WHERE
+            RELEASE_NOTE_NO = #{req.releaseNoteNo}
+    </update>
+    
+</mapper>

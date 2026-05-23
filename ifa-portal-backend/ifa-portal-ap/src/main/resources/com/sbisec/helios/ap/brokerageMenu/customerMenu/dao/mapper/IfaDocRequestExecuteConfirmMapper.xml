@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0704-02_1
+    画面名：書類請求確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDocRequestExecuteConfirmMapper">
+     <resultMap id="ResultMapDocRequestExecuteConfirmSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestExecuteConfirmSql002ResponseModel"/>
+     <resultMap id="ResultMapDocRequestExecuteConfirmSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestExecuteConfirmSql003ResponseModel"/>
+     <resultMap id="ResultMapDocRequestExecuteConfirmSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestExecuteConfirmSql004ResponseModel"/>
+    <!-- 
+        SQLID：Sql001
+        SQL名：書類請求確認
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaDocRequestExecuteConfirmSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0704-02_1#Sql001 */ INTO TB_REQUEST_PAPERS_IFA
+            (
+                SHORUI_SEIKYUU_NO
+                ,EDABAN
+                ,BUTEN_CODE
+                ,ACCOUNT_NUMBER
+                ,KOKYAKU_ID
+                ,SHORUI_CD
+                ,SHORUIMEI
+                ,SHORUI_BUNRUI_CD
+                ,SHORUI_BUNRUI_MEI
+                ,RIYUU_CD
+                ,HASSOU_STS
+                ,USER_ID
+                ,TORIKESHI_KBN
+                ,TORIKESHI_USER_ID
+                ,BUSUU
+                ,OPTION_1
+                ,SENTAKU_MEI1
+                ,OPTION_2
+                ,SENTAKU_MEI2
+                ,OPTION_3
+                ,SENTAKU_MEI3
+                ,TXT_1
+                ,TXT_NAIYOU_1
+                ,TXT_2
+                ,TXT_NAIYOU_2
+                ,TXT_3
+                ,TXT_NAIYOU_3
+                ,TXT_4
+                ,TXT_NAIYOU_4
+                ,TXT_5
+                ,TXT_NAIYOU_5
+                ,NAIYOU_CAPTION
+                ,NAIYOU
+                ,BIKOU_CAPTION
+                ,BIKOU
+                ,LOGIN_PW
+                ,TORIHIKI_PW
+                ,YUUSOU_SHUBETSU
+                ,SHORUI_HASSOU_NO
+                ,SHORI_KAISUU
+                ,MOKURONMISHO_NO
+                ,SHORUI_SEIKYUU_NICHIJI
+                ,STS_SENI_NICHIJI
+                ,TOUROKU_NICHIJI
+                ,HENKOU_NICHIJI
+                ,SAKUJO_NICHIJI
+                ,SAKUJO_FLG
+                ,SOKUJI_KBN
+                ,ZENKAI_TYOUKANTAN_FLG
+                ,CCS_SEND_DATE
+            )
+            VALUES
+            (
+                #{req.shoruiSeikyuuNo}                              <!-- トランザクションID -->
+                ,#{req.edaban}                             <!-- 枝番 -->
+                ,#{req.butenCode}                          <!-- 部店CD -->
+                ,#{req.accountNumber}                      <!-- 口座番号 -->
+                ,#{req.kokyakuId}                          <!-- 顧客ID -->
+                ,#{req.shoruiCd}                           <!-- 書類コード -->
+                ,#{req.shoruimei}                          <!-- 書類名 -->
+                ,#{req.shoruiBunruiCd}                     <!-- 書類分類コード -->
+                ,#{req.shoruiBunruiMei}                    <!-- 書類分類名 -->
+                ,null                                      <!-- 理由コード -->
+                ,#{req.hassouSts}                          <!-- 発送ステータス -->
+                ,#{req.userId}                             <!-- ユーザーID -->
+                ,#{req.torikeshiKbn}                       <!-- 取消区分 -->
+                ,null                                      <!-- 取消ユーザーID -->
+                ,#{req.busuu}                              <!-- 部数 -->
+                ,#{req.option1}                            <!-- オプション1(名前) -->
+                ,#{req.sentakuMei1}                        <!-- オプション1(選択) -->
+                ,#{req.option2}                            <!-- オプション2(名前) -->
+                ,#{req.sentakuMei2}                        <!-- オプション2(選択) -->
+                ,#{req.option3}                            <!-- オプション3(名前) -->
+                ,#{req.sentakuMei3}                        <!-- オプション3(選択) -->
+                ,#{req.txt1}                               <!-- テキスト1(名前) -->
+                ,#{req.txtNaiyou1}                         <!-- テキスト1(入力) -->
+                ,#{req.txt2}                               <!-- テキスト2(名前) -->
+                ,#{req.txtNaiyou2}                         <!-- テキスト2(入力) -->
+                ,#{req.txt3}                               <!-- テキスト3(名前) -->
+                ,#{req.txtNaiyou3}                         <!-- テキスト3(入力) -->
+                ,#{req.txt4}                               <!-- テキスト4(名前) -->
+                ,#{req.txtNaiyou4}                         <!-- テキスト4(入力) -->
+                ,#{req.txt5}                               <!-- テキスト5(名前) -->
+                ,#{req.txtNaiyou5}                         <!-- テキスト5(入力) -->
+                ,#{req.naiyouCaption}                      <!-- 内容キャプション -->
+                ,#{req.naiyou}                             <!-- 内容(入力) -->
+                ,#{req.bikouCaption}                       <!-- 備考キャプション -->
+                ,#{req.bikou}                              <!-- 備考(入力) -->
+                ,null                                      <!-- 更新後ログインPW -->
+                ,null                                      <!-- 更新後取引PW -->
+                ,null                                      <!-- 郵送種別 -->
+                ,null                                      <!-- 書類発送NO -->
+                ,#{req.shoriKaisuu}                        <!-- 処理回数 -->
+                ,null                                      <!-- 目論見書No -->
+                ,SYSDATE                                   <!-- 書類請求日時 -->
+                ,SYSDATE                                   <!-- ステータス遷移日時 -->
+                ,SYSDATE                                   <!-- 登録日時 -->
+                ,SYSDATE                                   <!-- 変更日時 -->
+                ,null                                      <!-- 削除日時 -->
+                ,#{req.sakujoFlg}                          <!-- 削除フラグ -->
+                ,null                                      <!-- 即時区分 -->
+                ,#{req.zenkaiTyoukantanFlg}                <!-- 前回超かんたんフラグ -->
+                ,null                                      <!-- CCS送付日 -->
+            )
+    </insert>
+
+    <!-- 
+        SQLID：selectSeqTbRequestPapersIfa
+        SQL名：SEQUENCE(トランザクションID)を取得する
+        SQLタイプ：select
+    -->
+    <select id="selectSeqTbRequestPapersIfa" resultType="String" statementType="PREPARED">
+        SELECT SEQ_TB_REQUEST_PAPERS_IFA.NEXTVAL        <!-- トランザクションID -->
+        FROM DUAL
+    </select>
+
+        <!-- 
+        SQLID：Sql002
+        SQL名：未閲読目論見書件数取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestExecuteConfirmSql002" resultMap="ResultMapDocRequestExecuteConfirmSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-02_1#Sql002 */
+            COUNT(*) AS DATA_NUM                                                                      <!-- データ件数 -->
+        FROM 
+        (
+            SELECT
+                A.DM_DOCUMENT_ID
+                ,A.DM_VERSION_NUMBER
+                ,A.DM_MEIGARA_CODE
+            FROM ETRADE.DOCUMENT_MANAGEMENT@CORDYS_ET10.WORLD A
+            INNER JOIN ETRADE.DOCUMENT_PROFILE@CORDYS_ET10.WORLD B
+            ON B.DP_PRODUCT_ID = A.DM_PRODUCT_ID
+            AND B.DP_MEIGARA_CODE = A.DM_MEIGARA_CODE
+            AND B.DP_DOCUMENT_ID = A.DM_DOCUMENT_ID
+            AND B.DP_VERSION_NUMBER = A.DM_VERSION_NUMBER
+            AND B.DP_ITEM_NAME = 'DOCUMENT_FOR_COMPANY'
+            WHERE A.DM_PRODUCT_ID = '51'
+            AND A.DM_MEIGARA_CODE = #{req.fundCode}                                                <!-- 銘柄コード -->
+            AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.DM_ACTIVE_TERM_FROM AND A.DM_ACTIVE_TERM_TO
+            AND A.DM_SERVICE_LIMIT &gt;= TO_CHAR(SYSDATE, 'YYYYMMDD')
+            <if test='req.corporationType != "1"'>
+                AND B.DP_ITEM_VALUE = '0'
+            </if>
+        ) D
+        LEFT JOIN ETRADE.MMF_EDELIV_AGREEMENT@CORDYS_ET10.WORLD C
+        ON D.DM_MEIGARA_CODE = C.MEA_PRODUCT_CODE
+        AND D.DM_DOCUMENT_ID = C.MEA_DOCUMENT_ID
+        AND D.DM_VERSION_NUMBER = C.MEA_VERSION_NUMBER
+        AND C.MEA_BUTEN_CODE = #{req.butenCode}
+        AND C.MEA_ACCOUNT_NUMBER = #{req.accountNumber}
+        WHERE (C.MEA_EDELIV_AGREEMENT IS NULL OR C.MEA_EDELIV_AGREEMENT &lt;&gt; '1')
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：IFA用BMスケジュール情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestExecuteConfirmSql003" resultMap="ResultMapDocRequestExecuteConfirmSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-02_1#Sql003 */
+            A.DELIVERY_SCHEDULE_TIME AS DELIVERY_SCHEDULE_TIME                                            <!-- 配信予定時刻 -->
+            ,A.NEXT_DAY_FLG AS NEXT_DAY_FLG                                                               <!-- 翌日フラグ -->
+        FROM TB_BM_SCHEDULE_IFA A
+        WHERE A.ACCEPT_TIME_FROM &lt;= #{req.sysTimeHHmm}                                                    <!-- 時刻 -->
+        AND A.ACCEPT_TIME_TO &gt;= #{req.sysTimeHHmm}                                                        <!-- 時刻 -->
+    </select>
+
+        <!-- 
+        SQLID：Sql004
+        SQL名：1回目配信予定時刻取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestExecuteConfirmSql004" resultMap="ResultMapDocRequestExecuteConfirmSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-02_1#Sql004 */
+            A.DELIVERY_SCHEDULE_TIME AS DELIVERY_SCHEDULE_TIME                                            <!-- 配信予定時刻 -->
+        FROM TB_BM_SCHEDULE_IFA A
+        WHERE A.SCHEDULE_NO = '1'                                                                         <!-- スケジュール番号 -->
+    </select>
+
+    <!--
+        SQLID：Sql005
+        SQL名：BM交付登録
+        SQLタイプ：select
+    -->
+    <insert id="insertIfaDocRequestExecuteConfirmSql005" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0704-02_1#Sql005 */ INTO TB_BM_DELIVERY_IFA
+            (
+                BM_DELIVERY_NO
+                ,SHUBETSU
+                ,BUTEN_CODE
+                ,ACCOUNT_NUMBER
+                ,KOKYAKU_ID
+                ,SHORUI_CD
+                ,SHORUIMEI
+                ,SHORUI_BUNRUI_CD
+                ,SHORUI_BUNRUI_MEI
+                ,MEIGARA_CD
+                ,MEIGARA_MEI
+                ,KYOKAI_CD
+                ,BM_DELIVERY_TIME
+                ,BM_DELIVERY_TIME_SCHEDULE
+                ,USER_ID
+                ,CCS_USER_ID
+                ,BROKER_CODE
+                ,INTERMEDIARY_EMP_CD
+                ,STATUS
+                ,CREATE_TIME
+                ,CREATE_USER
+                ,UPDATE_TIME
+                ,UPDATE_USER
+            )
+            VALUES
+            (
+                #{req.bmDeliveryNo}                        <!-- BM交付番号 -->
+                ,#{req.shubetsu}                           <!-- 種別 -->
+                ,#{req.butenCode}                          <!-- 部店コード -->
+                ,#{req.accountNumber}                      <!-- 口座番号 -->
+                ,#{req.kokyakuId}                          <!-- 顧客ID -->
+                ,#{req.shoruiCd}                           <!-- 書類コード -->
+                ,#{req.shoruimei}                          <!-- 書類名 -->
+                ,#{req.shoruiBunruiCd}                     <!-- 書類分類コード -->
+                ,#{req.shoruiBunruiMei}                    <!-- 書類分類名 -->
+                ,#{req.meigaraCd}                          <!-- 銘柄コード -->
+                ,#{req.meigaraMei}                         <!-- 銘柄名 -->
+                ,#{req.kyokaiCd}                           <!-- 協会コード -->
+                ,#{req.bmDeliveryTime}                      <!-- BM交付日時 -->
+                ,#{req.bmDeliveryTimeSchedule}             <!-- BM配信予定日時 -->
+                ,#{req.userId}                             <!-- ユーザーID -->
+                ,#{req.ccsUserId}                          <!-- CCSログイン用ID -->
+                ,#{req.brokerCode}                         <!-- 仲介業者コード -->
+                ,#{req.intermediaryEmpCd}                  <!-- 仲介業者営業員コード -->
+                ,#{req.status}                             <!-- ステータス -->
+                ,SYSDATE                                   <!-- 作成日時 -->
+                ,#{req.userId}                             <!-- 作成者 -->
+                ,SYSDATE                                   <!-- 更新日時 -->
+                ,#{req.userId}                             <!-- 更新者 -->
+            )
+    </insert>
+
+    <!-- 
+        SQLID：selectSeqTbBmDeliveryIfa
+        SQL名：SEQUENCE(トランザクションID)を取得する
+        SQLタイプ：select
+    -->
+    <select id="selectSeqTbBmDeliveryIfa" resultType="String" statementType="PREPARED">
+        SELECT LPAD(SEQ_TB_BM_DELIVERY_IFA.NEXTVAL, 10, '0')        <!-- トランザクションID -->
+        FROM DUAL
+    </select>
+</mapper>

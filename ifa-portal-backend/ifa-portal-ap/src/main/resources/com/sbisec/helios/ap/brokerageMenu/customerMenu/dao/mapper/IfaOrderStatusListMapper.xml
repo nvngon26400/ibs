@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0104-01
+    画面名：注文状況一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaOrderStatusListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaOrderStatusListSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaOrderStatusListSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaOrderStatusListSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaOrderStatusListSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaOrderStatusListSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaOrderStatusListSql003ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaOrderStatusListSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaOrderStatusListSql004ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：募集注文一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaOrderStatusListSql001" resultMap="ResultMapIfaOrderStatusListSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0104-01#Sql001 */ 
+            A.PRODUCT_CODE BRAND_CODE
+            , B.ORDER_TIME RECRUITMENT_ORDER_DATE
+            , C.BB_PRODUCT_NAME BRAND_NAME
+            , B.ORDER_STATUS
+            , B.ORDER_COUNT QUANTITY
+            , B.DEPOSIT_TYPE
+        FROM
+            T_IPO_PO_ORDER A 
+            INNER JOIN ( 
+                select
+                    AA.PRODUCT_CODE
+                    , AA.PRESENTATION_FROM
+                    , AA.BUTEN_CODE
+                    , AA.ACCOUNT_NUMBER
+                    , AA.ORDER_STATUS
+                    , AA.ORDER_COUNT
+                    , AA.DEPOSIT_TYPE
+                    , AA.ORDER_TIME 
+                FROM
+                    T_IPO_PO_ORDER_DETAIL AA 
+                    INNER JOIN ( 
+                        SELECT
+                            PRODUCT_CODE
+                            , PRESENTATION_FROM
+                            , BUTEN_CODE
+                            , ACCOUNT_NUMBER
+                            , MAX(DETAIL_NUMBER) AS DETAIL_NUMBER 
+                        FROM
+                            T_IPO_PO_ORDER_DETAIL 
+                        WHERE
+                            ORDER_STATUS &lt;&gt; '0' 
+                        GROUP BY
+                            PRODUCT_CODE
+                            , PRESENTATION_FROM
+                            , BUTEN_CODE
+                            , ACCOUNT_NUMBER
+                    ) BB 
+                        on AA.PRODUCT_CODE = BB.PRODUCT_CODE 
+                        AND AA.PRESENTATION_FROM = BB.PRESENTATION_FROM 
+                        AND AA.BUTEN_CODE = BB.BUTEN_CODE 
+                        AND AA.ACCOUNT_NUMBER = BB.ACCOUNT_NUMBER 
+                        AND AA.DETAIL_NUMBER = BB.DETAIL_NUMBER
+            ) B 
+                ON A.PRODUCT_CODE = B.PRODUCT_CODE 
+                AND A.PRESENTATION_FROM = B.PRESENTATION_FROM 
+                AND A.BUTEN_CODE = B.BUTEN_CODE 
+                AND A.ACCOUNT_NUMBER = B.ACCOUNT_NUMBER 
+            INNER JOIN ETINTRA.BB_PRODUCT_MASTER C 
+                on A.PRODUCT_CODE = C.BB_PRODUCT_CODE 
+                AND TO_DATE(A.PRESENTATION_FROM, 'YYYYMMDD') = TRUNC(C.BB_PRESENTATION_FROM, 'DD') 
+        WHERE
+            A.BUTEN_CODE = #{req.butenCode}
+            AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            AND TRUNC(B.ORDER_TIME, 'DD') = TRUNC(IFA_DATE_UTIL.IFA_GET_DATE, 'DD')
+            <if test="req.brandCode != null and req.brandCode != ''">
+                AND A.PRODUCT_CODE = #{req.brandCode}
+            </if>
+            <if test="req.depositType != null and req.depositType != ''">
+                AND B.DEPOSIT_TYPE = #{req.depositType}
+            </if>
+        ORDER BY
+            B.ORDER_TIME DESC
+            ,A.PRODUCT_CODE ASC
+            ,A.PRESENTATION_FROM ASC
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：外株店頭注文取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaOrderStatusListSql002" resultMap="ResultMapIfaOrderStatusListSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0104-01#Sql002 */ 
+            A.ORDER_NO MANAGE_NUMBER,
+            A.ORDER_STATUS STATUS,
+            A.TRADE_TYPE TRADE_KBN,
+            A.BRAND_CODE BRAND_CODE,
+            B.BRAND_NAME BRAND_NAME,
+            A.DEPOSIT_TYPE DEPOSIT_TYPE,
+            A.ORDER_TIME ORDER_TIME,
+            A.APPOINT_TIME APPOINT_TIME,
+            A.ORDER_COUNT ORDER_COUNT,
+            A.TRADE_PRICE TRADE_PRICE,
+            A.WARNING_APPLY WARNING_APPLY_TRADE,
+            A.RECALL_REASON CANCEL_REASON
+        FROM 
+            T_COUNTER_ORDER A 
+        LEFT OUTER JOIN 
+            M_COUNTER_BRAND B
+        ON
+            A.BRAND_CODE = B.BRAND_CODE
+        WHERE
+            TRUNC(TO_DATE(A.ORDER_DAY, 'YYYYMMDD' ), 'DD') = TRUNC(IFA_DATE_UTIL.IFA_GET_DATE, 'DD')
+            <if test="req.manageNumber == null or req.manageNumber == ''">
+        AND A.BUTEN_CODE = #{req.butenCode}
+        AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            </if>
+            <if test="req.manageNumber != null and req.manageNumber != ''">
+        AND A.ORDER_NO = #{req.manageNumber}
+            </if>
+        ORDER BY A.ORDER_TIME DESC,A.BRAND_CODE ASC
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：外株店頭注文存在チェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaOrderStatusListSql003" resultMap="ResultMapIfaOrderStatusListSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0104-01#Sql003 */ 
+            COUNT(*) count
+        FROM 
+            T_COUNTER_ORDER A
+        WHERE 
+            A.ORDER_NO = #{req.manageNumber}
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：CCS認証ID取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaOrderStatusListSql004" resultMap="ResultMapIfaOrderStatusListSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0104-01#Sql004 */
+            CCS_AUTH_ID
+        FROM 
+            ZERO_SERVICE_STATUS A
+        WHERE 
+            A.SYSTEM_ID = 'BONDFX'
+        AND A.SERVICE_ID = 'FCMMF_REFER_CANCEL'
+    </select>
+    
+    
+    
+    
+</mapper>

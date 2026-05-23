@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sbisec.helios.ap.common.dao.mapper.OrderCheckMapper">
+	<select id="getDepositTypeCount" statementType="PREPARED" resultType="Integer" >
+		SELECT
+			COUNT(CUSTOMER_ID)
+		FROM
+			CORDYS.MEDIATE_USER_ATTRIBUTE_INFO
+		WHERE
+			CUSTOMER_ID = #{customerId}
+		<if test="depositType == '2'.toString()">
+		AND
+			UAI_SPECIFIC_KBN IN('1','2')
+		</if>
+		<if test="depositType == '4'.toString()">
+		AND
+			UAI_ISA_CONTRACT_KBN = '1'
+		</if>
+	</select>
+
+	<select id="getNisaCanBuyCount" statementType="PREPARED" resultType="Integer" >
+		SELECT
+			COUNT(CUSTOMER_ID)
+		FROM
+			CORDYS.MEDIATE_USER_ATTRIBUTE_INFO
+		WHERE
+			CUSTOMER_ID = #{customerId}
+		AND
+			UAI_ISA_BUY_CURRENT_YEAR_KBN IN('1','2')
+	</select>
+<!-- 
+	<select id="getUnreadMsgCnt" resultType ="Integer" statementType="PREPARED">
+		SELECT
+			COUNT(1)
+		FROM
+			JMSG_USER_STATUS
+		WHERE
+			JUS_BUTEN_CODE = #{butenCode}
+		AND
+			JUS_ACCOUNT_NUMBER = #{accountNumber}
+		AND
+			JUS_CONFIRM_KBN = '0'
+		AND (
+				SUBSTR(JUS_RESTRAINT,35,1) = '1'
+			OR
+				SUBSTR(JUS_RESTRAINT,36,1) = '1'
+			OR
+				SUBSTR(JUS_RESTRAINT,39,1) = '1'
+			OR
+				SUBSTR(JUS_RESTRAINT,40,1) = '1'
+		)
+	</select>
+	
+	<select id="getFsAcctCountByAcctId" resultType="java.lang.Integer" statementType="PREPARED">
+		SELECT
+			COUNT(*)
+		FROM
+			SVC_ACCT_PROFILE
+		WHERE
+			ACCT_ID = #{acctId}
+		AND
+			PROFILE_NAME = 'TradeFStockUSPermission'
+		AND
+			PROFILE_VALUE = 'Yes'
+	</select>
+ -->
+	<select id="getCategoryCdByCustomerId" resultType="String" statementType="PREPARED">
+		SELECT /*+ INDEX(A PKATTENTION_INFO) INDEX(B IND_ATTENTION_CATEGORY_MAST_1) */
+			B.CATEGORY_CD
+		FROM 
+			CALLCENTER.ATTENTION_INFO A
+			,CALLCENTER.ATTENTION_CATEGORY_MASTER B
+		WHERE 
+			A.CUSTOMER_ID = #{customerId}
+			AND A.CATEGORY = B.CATEGORY_NAME(+)
+			AND A.ON_OFF_FLG = '有効'
+	</select>
+</mapper>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTRC Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0208_01-01
+    画面名：共同店舗取引検索
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.jointMarket.dao.mapper.IfaJointMarketTradeSearchMapper">
+
+    <resultMap id="ResultMapIfaJointMarketTradeSearchSql001" type="com.sbisec.helios.ap.brokerageMenu.jointMarket.dao.model.IfaJointMarketTradeSearchSql001ResponseModel">
+        <result property="brokerName" column="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="brokerChargeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="courceName" column="courceName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="customerNameKanji" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="customerNameKana" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="branchName" column="branchName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClasass" column="securityClasass" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brandName" column="brandName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="productRank" column="productRank" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="tradeTypeName" column="tradeTypeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="depositName" column="depositName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="currency" column="currency" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="bondIntermediary" column="bondIntermediary" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="usStockStoreEntrust" column="usStockStoreEntrust" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：共同店舗取引検索情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaJointMarketTradeSearchSql001" resultMap="ResultMapIfaJointMarketTradeSearchSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0208_01-01#Sql001 */
+            *
+        FROM (
+            SELECT
+                count(*) over() AS totalRow,
+                TRC.SUM_DATE AS sumDateYmd,
+                TRC.BROKER_CODE AS brokercode,
+                TRC.BROKER_NAME AS brokerName,
+                TRC.BUTEN_CODE AS buten,
+                TRC.ACCOUNT_NUMBER AS accountNumber,
+                TRC.CUSTOMER_ATTRIBUTE AS customerAttribute,
+                TRC.CUSTOMER_ATTRIBUTE_NAME AS courseName,
+                MUAI.NAME_KANJI as customerNameKanji,
+                MUAI.NAME_KANA as customerNameKana,
+                TRC.BROKER_BRANCH_CODE AS branchCode,
+                MB.BRANCH_NAME AS branchName,
+                TRC.PRODUT_NAME AS securityClass,
+                TRC.BRAND_CODE AS brandCode,
+                TRC.BRAND_NAME AS brandName,
+                TRC.PRODUCT_RANK AS productRank,
+                TRC.TRADE_CD AS tradeCd,
+                TRC.TRADE_NAME AS tradeTypeName,
+                TO_CHAR(TO_DATE(TRC.TRADE_DATE,'YYYYMMDD'),'YYYY/MM/DD') AS tradeDate,
+                TO_CHAR(TO_DATE(TRC.GET_DATE,'YYYYMMDD'),'YYYY/MM/DD') AS settlementDate,
+                TRC.PRICE AS price,
+                TRC.QUANTITY AS quantity,
+                TRC.GROSS_AMOUNT_YEN AS contractAmountJpyAmount,
+                TRC.FEE AS yenFee,
+                TRC.ACCURATE_AMOUNT AS yenDeliveryAmount,
+                TRC.CURRENCY AS currency,
+                TRC.EXCHANGE_RATE AS fxRate,
+                TRC.FOREIGN_GROSSAMOUNT AS contractAmountForeign,
+                TRC.FOREIGN_NETAMOUNT AS foreignDeliveryAmount,
+                MJM.JOINT_RATE AS jointRate,
+                ROUND(NVL(TRC.FEE,0) * MJM.JOINT_RATE * 0.01) AS jointRewardPrice,
+                TRC.BROKER_CHARGE_CODE AS empCode,
+                TRC.BROKER_CHARGE_NAME AS brokerChargeName,
+                CASE WHEN TRC.PRODUT_CD IN ('12','13','14','25')
+                THEN TRC.KBN_NM
+                END AS bondIntermediary,
+                CASE WHEN TRC.PRODUT_CD = '15'
+                THEN TRC.KBN_NM
+                END AS usStockStoreEntrust,
+                TRC.DEPOSIT_NAME AS depositName
+            FROM
+                T_REWARD_COMMISSION TRC
+                INNER JOIN M_JOINT_MANAGEMENT MJM
+                    ON TRC.BROKER_CODE = MJM.TARGET_JOINT_BROKER_CODE
+                    AND TRC.DEALER_NUMBER = MJM.DEALER_NUMBER
+                    AND NVL(TRC.KBN_CD, TRC.PRODUT_CD) = MJM.PRODUT_CD
+                    AND TRC.SUM_DATE BETWEEN MJM.START_DATE_YM || '01' AND MJM.END_DATE_YM || '31'
+                    AND MJM.JOINT_RATE &lt;&gt; 0
+                LEFT OUTER JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                    ON TRC.BUTEN_CODE = MUAI.BUTEN_CODE
+                    AND TRC.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                    AND TRC.BROKER_CODE = MUAI.BROKER_CODE
+                LEFT JOIN MEDIATE_BRANCH MB
+                    ON TRC.BROKER_CODE = MB.BROKER_CODE
+                    AND TRC.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+            <where>
+                TRC.RECORD_TYPE IN (0,1)
+
+                
+                -- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '1'（と等しい）の場合の条件
+                <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "1"'>
+                    AND
+                    (MUAI.NAME_KANJI = #{req.customerName} OR MUAI.NAME_KANA = #{req.customerName})
+                </if>
+                
+                -- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '2'（で始まる）の場合の条件
+                <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "2"'>
+                    AND
+                    (MUAI.NAME_KANJI like CONCAT(#{req.customerName}, '%') OR MUAI.NAME_KANA like CONCAT(#{req.customerName}, '%'))
+                </if>
+                
+                -- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '3'（を含む）の場合の条件
+                <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "3"'>
+                    AND
+                    (MUAI.NAME_KANJI like CONCAT(CONCAT('%', #{req.customerName}), '%') OR MUAI.NAME_KANA like CONCAT(CONCAT('%', #{req.customerName}), '%'))
+                </if>
+
+                <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                    AND TRC.BUTEN_CODE = #{req.butenCode}
+                </if>
+
+                <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                    AND TRC.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                </if>
+
+                <if test="req.isSecurityClassSelected == true">
+                    AND TRC.PRODUT_CD IN 
+                    <foreach item="item" index="index" collection="req.securityClass" open="(" separator="," close=")">
+                         <if test="item.isSelected == true">
+                             #{item.id}
+                         </if>
+                    </foreach>
+                </if>
+
+                <if test="req.brandCode12 != null and req.brandCode12 != ''.toString()">
+                    AND LTRIM(TRC.BRAND_CODE, '0') = LTRIM(#{req.brandCode12}, '0')
+                </if>
+
+                <if test="req.periodDateFrom != null and req.periodDateFrom != ''.toString()">
+                    AND TRC.TRADE_DATE &gt;= #{req.periodDateFrom}
+                </if>
+
+                <if test="req.periodDateTo != null and req.periodDateTo != ''.toString()">
+                    AND TRC.TRADE_DATE &lt;= #{req.periodDateTo}
+                </if>
+
+                AND TRC.CUSTOMER_ATTRIBUTE IN
+                <foreach item="item" index="index" collection="req.course" open="(" separator="," close=")">
+                    <if test="item.isSelected == true">
+                        #{item.id}
+                    </if>
+                </foreach>
+
+                <if test="req.branchCode != null and req.branchCode != ''.toString()">
+                    AND TRC.BROKER_BRANCH_CODE = #{req.branchCode}
+                </if>
+
+                <choose>
+                    <when test="req.privId == '1'.toString()">
+                        <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                            <choose>
+                                <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                    AND TRC.BROKER_CODE NOT IN
+                                </when>
+                                <otherwise>
+                                    AND TRC.BROKER_CODE IN
+                                </otherwise>
+                            </choose>
+                            <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                #{item}
+                            </foreach>
+                        </if>
+                        <if test="req.empCode != null and req.empCode != ''.toString()">
+                            AND TRC.BROKER_CHARGE_CODE = #{req.empCode}
+                        </if>
+                    </when>
+                    <when test="req.privId == '3'.toString() or req.privId == '4'.toString() or req.privId == '5'.toString()">
+                        AND (TRC.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR TRC.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                        <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                            AND TRC.BROKER_CODE IN
+                            <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                #{item}
+                            </foreach>
+                        </if>
+                        <if test="req.empCode != null and req.empCode != ''.toString()">
+                            AND TRC.BROKER_CHARGE_CODE = #{req.empCode}
+                        </if>
+                    </when>
+                    <otherwise>
+                        AND ((TRC.BROKER_CODE, TRC.BROKER_CHARGE_CODE) IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR (TRC.BROKER_CODE, TRC.BROKER_CHARGE_CODE) IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                        </foreach>
+                        )
+                        <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                            AND TRC.BROKER_CODE IN
+                            <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                #{item}
+                            </foreach>
+                        </if>
+                        <if test="req.empCode != null and req.empCode != ''.toString()">
+                            AND TRC.BROKER_CHARGE_CODE = #{req.empCode}
+                        </if>
+                    </otherwise>
+                </choose>
+            </where>
+            <!-- ソートキー-->
+            ORDER BY 
+                TRC.TRADE_DATE DESC,
+                TRC.BROKER_CODE ASC,
+                TRC.BUTEN_CODE ASC,
+                TRC.ACCOUNT_NUMBER ASC
+        )
+        WHERE
+            ROWNUM &lt;= #{req.rownum}
+    </select>
+
+</mapper>

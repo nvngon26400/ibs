@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0212-09_1
+    画面名：現引現渡注文取消確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaReceiptDeliveryOrderCancelConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaReceiptDeliveryOrderCancelConfirmSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaReceiptDeliveryOrderCancelConfirmSql003ResponseModel">
+    </resultMap>
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：発注前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaReceiptDeliveryOrderCancelConfirmSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0212-09_1#Sql001 */ 
+        INTO T_JP_ORDER (
+            IFA_ORDER_NO
+            ,IFA_ORDER_SUB_NO
+            ,BUTEN_CODE
+            ,ACCOUNT_NUMBER
+            ,CUSTOMER_ID
+            ,SPECIFIC_KBN
+            ,BRAND_CD
+            ,MARKET
+            ,ORDER_STATUS
+            ,TRADE_KBN
+            ,QUANTITY
+            ,AZUKARI_KBN
+            ,PAYMENT_LIMIT
+            ,REPAYMENT_METHOD_TYPE
+            ,ORDER_SYUBETSU
+            ,ORDER_SYUBETSU_LIST
+            ,KANYU_KBN
+            ,JUTYU_KBN
+            ,CHECK_INSIDER
+            ,USER_ID
+            ,CANCEL_USER_ID
+            ,JO_ZEI_KBN
+            ,ALTER_ORDER_NUM
+            ,ORDER_TYPE
+            ,ORDER_NUM
+            ,COM_ID_R
+            ,DAILY_CREDIT_KBN
+            ,PAYMENT_LIMIT_DATE
+            ,DATE_KBN
+            ,BROKER_CODE
+            ,INTERMEDIARY_EMP_CD
+            ,CREATE_TIME
+            ,CREATE_USER
+            ,UPDATE_TIME
+            ,UPDATE_USER
+        ) VALUES(
+             #{req.ifaOrderNo}                   <!-- IFA注文番号 -->
+            ,#{req.ifaOrderSubNo}                <!-- IFA注文サブ番号 -->
+            ,#{req.butenCode}                    <!-- 部店コード -->
+            ,#{req.accountNumber}                <!-- 口座番号 -->
+            ,#{req.kokyakuId}                    <!--顧客ID-->
+            ,#{req.tokuteiKouzaKbn}              <!--特定口座区分-->
+            ,#{req.brandCode}                    <!-- 銘柄コード -->
+            ,#{req.market}                       <!-- 市場 -->
+            ,'2'                                 <!-- 注文状況 -->
+            ,#{req.tradeCd}                      <!-- 取引種別 -->
+            ,#{req.unTradeQuantity}              <!-- 数量 -->
+            ,#{req.depositType}                  <!-- 預り区分 -->
+            ,#{req.paymentDeadline}              <!-- 弁済期限 -->
+            ,#{req.repayMethod}                  <!-- 返済方法 -->
+            ,#{req.orderKind}                    <!-- 注文種別 -->
+            ,#{req.orderStatusListOrderClass}    <!-- 注文種別（一覧） -->
+            ,#{req.kanyuKbn}                     <!--勧誘区分 -->
+            ,#{req.receiveOrder}                 <!-- 受注方法 -->
+            ,#{req.checkInsider}                 <!-- 確認項目.インサイダー確認 -->
+            ,#{req.userId}                       <!-- ユーザーＩＤ（全角半角） -->
+            ,#{req.torikeshiUserId}              <!--取消ユーザーID（全角半角）-->
+            ,#{req.joutoekizeiKbn}               <!-- 譲渡益税区分（全角半角） -->
+            ,#{req.ec}                           <!-- EC受注番号訂正時） -->
+            ,'S'                                 <!-- 商品区分（全角半角） -->
+            ,#{req.ecOrderNo}                    <!-- EC受注番号（半角英数字） -->
+            ,#{req.comIdR}                       <!-- 手数料区分（採用） -->
+            ,#{req.dailyCreditKbn}               <!-- 一日信用区分 -->
+            ,#{req.paymentDeadlineDate}          <!-- 弁済期限年月日数 -->
+            ,#{req.dateKbn}                      <!-- 年月日区分 -->
+            ,#{req.brokerCode}                   <!-- 仲介業者コード（数字） -->
+            ,#{req.brokerChargeCode}             <!-- 仲介業者営業員コード（半角英数字） -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE          <!-- 作成日時 -->
+            ,#{req.createUser}                   <!-- 作成者 -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE          <!-- 更新日時 -->
+            ,#{req.updateUser}                   <!-- 更新者 -->
+        )
+    </insert>
+    
+    
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaReceiptDeliveryOrderCancelConfirmSql002" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0212-09_1#Sql002 */ T_JP_ORDER 
+        SET 
+            SHUBETU = #{req.shubetu}
+            ,CODE = #{req.code}
+            ,MESSAGE = #{req.errMessage}
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.updateUser}
+            ,ACCEPT_DATE = #{req.orderDate}
+            <if test="req.code.trim() == '' or req.code.indexOf('W') == 0">
+                ,ACCEPT_TIME = #{req.orderTime}
+            </if>
+        WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+    </update>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaReceiptDeliveryOrderCancelConfirmSql002b" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0212-09_1#Sql002 */ T_JP_ORDER 
+        SET 
+            UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.updateUser}
+            ,ACCEPT_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+    </update>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：既存レコードのチェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaReceiptDeliveryOrderCancelConfirmSql003" resultMap="ResultMapIfaReceiptDeliveryOrderCancelConfirmSql003" statementType="PREPARED">
+        WITH temp AS ( 
+            SELECT
+                TO_CHAR(IFA_ORDER_NO) IFA_ORDER_NO
+                , TO_CHAR(IFA_ORDER_SUB_NO) IFA_ORDER_SUB_NO
+                , TO_CHAR(BUTEN_CODE) BUTEN_CODE
+                , TO_CHAR(ACCOUNT_NUMBER) ACCOUNT_NUMBER
+                , TO_CHAR(CUSTOMER_ID) CUSTOMER_ID
+                , TO_CHAR(SPECIFIC_KBN) SPECIFIC_KBN
+                , TO_CHAR(REPAYMENT_METHOD_TYPE) REPAYMENT_METHOD_TYPE
+                , TO_CHAR(ORDER_SYUBETSU) ORDER_SYUBETSU
+                , TO_CHAR(ORDER_SYUBETSU_LIST) ORDER_SYUBETSU_LIST
+                , TO_CHAR(KANYU_KBN) KANYU_KBN
+                , TO_CHAR(JUTYU_KBN) JUTYU_KBN
+                , TO_CHAR(CHECK_INSIDER) CHECK_INSIDER
+                , TO_CHAR(USER_ID) USER_ID
+                , TO_CHAR(JO_ZEI_KBN) JO_ZEI_KBN
+                , TO_CHAR(ALTER_ORDER_NUM) ALTER_ORDER_NUM
+            FROM
+                T_JP_ORDER 
+            WHERE
+                ORDER_NUM = #{req.ecOrderNo}
+                AND BUTEN_CODE = #{req.butenCode}
+                AND ACCEPT_DATE &gt;= SUBSTR(#{req.orderDayTime}, 1, 8)
+                AND IFA_ORDER_SUB_NO = ( 
+                    SELECT
+                        MAX(IFA_ORDER_SUB_NO) 
+                    FROM
+                        T_JP_ORDER 
+                    WHERE
+                        ORDER_NUM = #{req.ecOrderNo}
+                        AND BUTEN_CODE = #{req.butenCode}
+                        AND ACCEPT_DATE &gt;= SUBSTR(#{req.orderDayTime}, 1, 8)
+                )
+        )
+        SELECT
+            NVL(IFA_ORDER_NO, IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') || LPAD(SEQ_T_JP_ORDER.NEXTVAL, 10, '0')
+            ) IFA_ORDER_NO
+            , IFA_ORDER_SUB_NO + 1 IFA_ORDER_SUB_NO
+            , BUTEN_CODE BUTEN_CODE
+            , ACCOUNT_NUMBER ACCOUNT_NUMBER
+            , CUSTOMER_ID KOKYAKU_ID
+            , SPECIFIC_KBN TOKUTEI_KOUZA_KBN
+            , REPAYMENT_METHOD_TYPE REPAY_METHOD
+            , ORDER_SYUBETSU ORDER_KIND
+            , ORDER_SYUBETSU_LIST ORDER_STATUS_LIST_ORDER_CLASS
+            , KANYU_KBN KANYU_KBN
+            , JUTYU_KBN RECEIVE_ORDER
+            , CHECK_INSIDER CHECK_INSIDER
+            , USER_ID USER_ID
+            , JO_ZEI_KBN JOUTOEKIZEI_KBN
+            , ALTER_ORDER_NUM EC
+        FROM
+            ( 
+                SELECT
+                    * 
+                FROM
+                    temp  
+                UNION ALL 
+                SELECT
+                    NULL IFA_ORDER_NO
+                    , '0' IFA_ORDER_SUB_NO
+                    , #{req.butenCode} BUTEN_CODE
+                    , #{req.accountNumber} ACCOUNT_NUMBER
+                    , #{req.kokyakuId} CUSTOMER_ID
+                    , #{req.tokuteiKouzaKbn} SPECIFIC_KBN
+                    , NULL REPAYMENT_METHOD_TYPE
+                    , '1' ORDER_SYUBETSU
+                    , '0' ORDER_SYUBETSU_LIST
+                    , NULL KANYU_KBN
+                    , NULL JUTYU_KBN
+                    , NULL CHECK_INSIDER
+                    , #{req.userId} USER_ID
+                    , NULL JO_ZEI_KBN
+                    , NULL ALTER_ORDER_NUM                     
+                FROM
+                    dual 
+                WHERE
+                    (SELECT count(*) FROM temp) = 0
+            )
+    </select>
+    
+</mapper>

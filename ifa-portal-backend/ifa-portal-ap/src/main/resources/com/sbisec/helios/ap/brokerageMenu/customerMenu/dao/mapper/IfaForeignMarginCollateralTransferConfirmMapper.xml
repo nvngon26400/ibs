@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0305-01_2
+    画面名：米株信用代用振替確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignMarginCollateralTransferConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaForeignMarginCollateralTransferConfirmSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginCollateralTransferConfirmSql001ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：店頭取引で売却注文されている預り情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginCollateralTransferConfirmSql001" resultMap="ResultMapIfaForeignMarginCollateralTransferConfirmSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0305-01_2#Sql001 */
+            BRAND_CODE
+            ,DEPOSIT_TYPE
+        FROM
+            T_COUNTER_ORDER
+        WHERE
+            BUTEN_CODE = #{req.butenCode}
+            AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            AND ORDER_DAY = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND TRADE_TYPE = '1'
+            AND ORDER_STATUS IN ('10', '30')
+    </select>
+    
+    <!-- 
+         SQLID：Sql002
+         SQL名：振替指示前の指示登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaForeignMarginCollateralTransferConfirmSql002" statementType="PREPARED">
+        INSERT INTO STOCK_TRANSFER /* @SQLID=SUB0202_0305-01_2#Sql002 */
+        (
+            STOCK_TRANSFER_NO
+            ,STOCK_TRANSFER_SUB_NO
+            ,BUTEN_CODE
+            ,ACCOUNT_NUMBER
+            ,COUNTRY_CODE
+            ,BRAND_CODE
+            ,DEPOSIT_TYPE
+            ,TRANSFER_DATE
+            ,STOCK_TRANSFER_TYPE
+            ,TRANSFER_QUANTITY
+            ,API_ERROR_CODE
+            ,API_STATUS_CODE
+            ,API_MESSAGE
+            ,CREATE_TIME
+            ,CREATE_USER
+            ,UPDATE_TIME
+            ,UPDATE_USER
+        )
+        VALUES
+        (
+             #{req.stockTransferNo}           <!-- IFA 代用振替指示番号 -->
+            ,#{req.stockTransferSubNo}        <!-- IFA代用振替指示サブ番号 -->
+            ,#{req.butenCode}                 <!-- 部店コード -->
+            ,#{req.accountNumber}             <!-- 口座番号 -->
+            ,#{req.countryCode}               <!-- 国コード -->
+            ,#{req.brandCode}                 <!-- ティッカーコード -->
+            ,#{req.depositType}               <!-- 預り区分  -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE       <!-- 振替指示日 -->
+            ,#{req.stockTransferType}         <!-- 代用振替区分 -->
+            ,#{req.transferQuantity}          <!-- 振替数量 -->
+            ,null                             <!-- APIエラーコード -->
+            ,null                             <!-- APIステータスコード -->
+            ,null                             <!-- APIメッセージ -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE       <!-- 作成日時 -->
+            ,#{req.createUser}                <!-- 作成者 -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE       <!-- 更新日時 -->
+            ,#{req.updateUser}                <!-- 更新者 -->
+        )
+    </insert>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：振替指示後の指示更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaForeignMarginCollateralTransferConfirmSql003" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0305-01_2#Sql003 */
+            STOCK_TRANSFER
+        SET
+            API_ERROR_CODE = #{req.apiErrorCode},                   <!-- APIエラーコード -->
+            API_STATUS_CODE = #{req.apiStatusCode},                 <!-- APIステータスコード -->
+            API_MESSAGE = SUBSTRB(#{req.apiMessage}, 1, 100),       <!-- APIメッセージ -->
+            UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE,               <!-- 更新日時 -->
+            UPDATE_USER = #{req.updateUser}                         <!-- 更新者 -->
+        <where>
+            STOCK_TRANSFER_NO = #{req.stockTransferNo}    
+        </where>
+    </update>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：シーケンスオブジェクトの取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginCollateralTransferConfirmSql004" resultType="String" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0305-01_2#Sql004 */
+            IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') || LPAD(SEQ_STOCK_TRANSFER.NEXTVAL, 5, '0') AS IFA_STOCK_TRANSFER_NO
+        FROM
+            DUAL
+    </select>
+    
+</mapper>

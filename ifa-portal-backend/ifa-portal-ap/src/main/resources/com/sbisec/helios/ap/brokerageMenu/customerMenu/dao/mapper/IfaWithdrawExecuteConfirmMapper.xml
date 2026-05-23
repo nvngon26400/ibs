@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0601-02_1
+    画面名：出金確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaWithdrawExecuteConfirmMapper">
+    <!-- 
+        SQLID：Sql001
+        SQL名：IFA入出金履歴テーブルに出金履歴を登録する
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaWithdrawExecuteConfirmSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0601-02_1#Sql001 */ INTO TB_CASH_PAY_REC_JOURNAL_IFA
+            (
+                TRAN_ID
+                ,EDABAN
+                ,KOKYAKU_ID
+                ,BUTEN_CD
+                ,KOUZA_NO
+                ,HACCHUU_KBN
+                ,USER_ID
+                ,TORIKESHI_STS_CD
+                ,KINGAKU
+                ,FURIKAE_KBN
+                ,SHIWAKE_NO
+                ,SHIKINN
+                ,SOUKINNRYOU
+                ,UKEWATASHISHA
+                ,IKKATSU
+                ,UKETSUKE_KEIRO_KBN
+                ,SHOUHINN_KBN
+                ,YORYOKU_CHECK_KBN
+                ,HENKOU_NICHIJI
+                ,SAKUJO_FLG
+                ,SOKUJI_NYUUKIN_KBN
+                ,JRNISA_ACCOUNT_KBN
+                ,CREATE_TIME
+                ,CREATE_USER
+                ,UPDATE_TIME
+                ,UPDATE_USER
+            )
+            VALUES
+            (
+                #{req.tranId}                        <!-- トランザクションID -->
+                ,#{req.edaban}                       <!-- 枝番 -->
+                ,#{req.kokyakuId}                    <!-- 顧客ID -->
+                ,#{req.butenCd}                      <!-- 部店CD -->
+                ,#{req.kouzaNo}                      <!-- 口座番号 -->
+                ,#{req.hacchuuKbn}                   <!-- 発注区分 -->
+                ,#{req.userId}                       <!-- ユーザーID -->
+                ,#{req.torikeshiStsCd}               <!-- 取消ステータスコード -->
+                ,#{req.kingaku}                      <!-- 金額 -->
+                ,#{req.furikaeKbn}                   <!-- 振替区分 -->
+                ,#{req.shiwakeNo}                    <!-- 仕訳ＮＯ -->
+                ,#{req.shikinn}                      <!-- 資金  -->
+                ,#{req.soukinnryou}                  <!-- 送金料 -->
+                ,#{req.ukewatashisha}                <!-- 受渡者  -->
+                ,#{req.ikkatsu}                      <!-- 一括 -->
+                ,#{req.uketsukeKeiroKbn}             <!-- 受付経路区分 -->
+                ,#{req.shouhinnKbn}                  <!-- 商品区分 -->
+                ,#{req.yoryokuCheckKbn}              <!-- 余力チェック区分 -->
+                ,SYSDATE                             <!-- 変更日時 -->
+                ,#{req.sakujoFlg}                    <!-- 削除フラグ -->
+                ,#{req.sokujiNyuukinKbn}             <!-- 即時入金区分  -->
+                ,#{req.jrnisaAccountKbn}             <!-- ジュニアNISA口座区分 -->
+                ,SYSDATE                             <!-- 作成日時 -->
+                ,#{req.createUser}                   <!-- 作成者 -->
+                ,SYSDATE                             <!-- 更新日時 -->
+                ,#{req.updateUser}                   <!-- 更新者 -->
+            )
+    </insert>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注が正常の場合、IFA入出金履歴テーブルに登録した出金履歴を更新する。
+        SQLタイプ：update
+    -->
+    <update id="updateIfaWithdrawExecuteConfirmSql002" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0601-02_1#Sql002 */
+            TB_CASH_PAY_REC_JOURNAL_IFA TC
+        SET
+            TC.JUCHUU_NICHIJI = TO_DATE(#{req.juchuuNichiji}, 'YYYYMMDD')           <!-- 受注日時 -->
+            ,TC.STS_CD = #{req.stsCd}                                               <!-- ステータスコード -->
+            ,TC.ERROR_CD = #{req.errorCd}                                           <!-- エラーコード -->
+            ,TC.ERROR_MESSAGE = #{req.errorMessage}                                 <!-- エラーメッセージ -->
+            ,TC.EC_NYUSHUKKIN_NO = #{req.ecNyushukkinNo}                            <!-- EC入出金番号 -->
+            ,TC.KEIJOUBI = #{req.keijoubi}                                          <!-- 計上日 -->
+            ,TC.SHUBETSU = #{req.shubetsu}                                          <!-- 種別 -->
+            ,TC.SHUKKINKANOU_KINGAKU = #{req.shukkinkanouKingaku}                   <!-- 出金可能金額 -->
+            ,TC.UKETSUKE_SHUKKINKANOU_KINGAKU = #{req.uketsukeShukkinkanouKingaku}  <!-- 受付後の出金可能金額 -->
+            ,TC.SHUKKIN_YOTEIBI = TO_DATE(#{req.shukkinYoteibi}, 'YYYYMMDD')        <!-- 出金予定日 -->
+            ,TC.TOUROKU_NICHIJI = SYSDATE                                           <!-- 登録日時 -->
+            ,TC.HENKOU_NICHIJI = SYSDATE                                            <!-- 変更日時 -->
+            ,TC.UPDATE_TIME = SYSDATE                                               <!-- 更新日時 -->
+            ,TC.UPDATE_USER = #{req.updateUser}                                     <!-- 更新者 -->
+        WHERE
+            TC.TRAN_ID = #{req.tranId}                                              <!-- トランザクションID -->
+        AND
+            TC.EDABAN = #{req.edaban}                                               <!-- 枝番 -->
+    </update>
+
+        <!-- 
+        SQLID：Sql003
+        SQL名：発注がエラーの場合(API応答あり)、IFA入出金履歴テーブルに登録した出金履歴を更新する。
+        SQLタイプ：update
+    -->
+    <update id="updateIfaWithdrawExecuteConfirmSql003" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0601-02_1#Sql003 */
+            TB_CASH_PAY_REC_JOURNAL_IFA TC
+        SET
+            TC.JUCHUU_NICHIJI = TO_DATE(#{req.juchuuNichiji}, 'YYYYMMDD')           <!-- 受注日時 -->
+            ,TC.STS_CD = #{req.stsCd}                                               <!-- ステータスコード -->
+            ,TC.ERROR_CD = #{req.errorCd}                                           <!-- エラーコード -->
+            ,TC.ERROR_MESSAGE = #{req.errorMessage}                                 <!-- エラーメッセージ -->
+            ,TC.SHUBETSU = #{req.shubetsu}                                          <!-- 種別 -->
+            ,TC.HENKOU_NICHIJI = SYSDATE                                            <!-- 変更日時 -->
+            ,TC.UPDATE_TIME = SYSDATE                                               <!-- 更新日時 -->
+            ,TC.UPDATE_USER = #{req.updateUser}                                     <!-- 更新者 -->
+        WHERE
+            TC.TRAN_ID = #{req.tranId}                                              <!-- トランザクションID -->
+        AND
+            TC.EDABAN = #{req.edaban}                                               <!-- 枝番 -->
+    </update>
+
+        <!-- 
+        SQLID：Sql004
+        SQL名：発注がエラーの場合(API応答なし)、IFA入出金履歴テーブルに登録した出金履歴を更新する。
+        SQLタイプ：update
+    -->
+    <update id="updateIfaWithdrawExecuteConfirmSql004" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0601-02_1#Sql004 */
+            TB_CASH_PAY_REC_JOURNAL_IFA TC
+        SET
+            TC.JUCHUU_NICHIJI = SYSDATE                                             <!-- 受注日時 -->
+            ,TC.HENKOU_NICHIJI = SYSDATE                                            <!-- 変更日時 -->
+            ,TC.UPDATE_TIME = SYSDATE                                               <!-- 更新日時 -->
+            ,TC.UPDATE_USER = #{req.updateUser}                                     <!-- 更新者 -->
+        WHERE
+            TC.TRAN_ID = #{req.tranId}                                              <!-- トランザクションID -->
+        AND
+            TC.EDABAN = #{req.edaban}                                               <!-- 枝番 -->
+    </update>
+
+        <!-- 
+        SQLID：selectSeqTbCashPayRecJournalIfa
+        SQL名：SEQUENCE(トランザクションID)を取得する
+        SQLタイプ：select
+    -->
+    <select id="selectSeqTbCashPayRecJournalIfa" resultType="String" statementType="PREPARED">
+        SELECT SEQ_TB_CASH_PAY_REC_JOURNAL_IFA.NEXTVAL        <!-- トランザクションID -->
+        FROM DUAL
+    </select>
+</mapper>

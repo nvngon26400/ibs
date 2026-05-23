@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MedUsersMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.MedUsers" id="MedUsers">
+		<result property="userNm"          column="USER_NM"          typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+		<result property="password"        column="PASSWORD"         typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+		<result property="employeeName"    column="EMPLOYEE_NAME"    typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+		<result property="partnerUserPw"   column="PARTNER_USER_PW"  typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+		<result property="ccsUserPw"       column="CCS_USER_PW"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+		<result property="createUser"      column="CREATE_USER"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+		<result property="uptimestampUser" column="UPTIMESTAMP_USER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+	</resultMap>
+
+	<select id="getMedUsers" resultMap="MedUsers" statementType="PREPARED">
+		SELECT
+			USER_ID,
+			USER_NM,
+			PASSWORD,
+			LASTPWUPTIME,
+			PRIV_ID,
+			BRANCH_ID,
+			BROKER_ID,
+			SUB_BROKER_ID,
+			EMPLOYEE_ID,
+			EMPLOYEE_NAME,
+			GOVERNOR_FLAG,
+			LOGIN_STATUS,
+			PARTNER_USER_ID,
+			PARTNER_USER_PW,
+			CCS_USER_ID,
+			CCS_USER_PW,
+			CREATE_USER,
+			CREATE_TIME,
+			UPTIMESTAMP_USER,
+			UPTIMESTAMP_TIME,
+			MAIL_ADDRESS
+		FROM
+		    TB_MED_USERS
+		WHERE
+			USER_ID = #{userId}
+	</select>
+<!-- 
+	<select id="getMedUsersList" resultMap="MedUsers" statementType="PREPARED">
+		SELECT
+			USER_ID,
+			USER_NM,
+			PASSWORD,
+			LASTPWUPTIME,
+			PRIV_ID,
+			BRANCH_ID,
+			BROKER_ID,
+			SUB_BROKER_ID,
+			EMPLOYEE_ID,
+			EMPLOYEE_NAME,
+			GOVERNOR_FLAG,
+			LOGIN_STATUS,
+			PARTNER_USER_ID,
+			PARTNER_USER_PW,
+			CCS_USER_ID,
+			CCS_USER_PW,
+			CREATE_USER,
+			CREATE_TIME,
+			UPTIMESTAMP_USER,
+			UPTIMESTAMP_TIME,
+			MAIL_ADDRESS
+		FROM
+			TB_MED_USERS
+		ORDER BY USER_ID
+	</select>
+
+	<select id="getMedUsersListByCondition" resultMap="MedUsers" statementType="PREPARED">
+		SELECT
+			USER_ID,
+			USER_NM,
+			PASSWORD,
+			LASTPWUPTIME,
+			PRIV_ID,
+			BRANCH_ID,
+			BROKER_ID,
+			SUB_BROKER_ID,
+			EMPLOYEE_ID,
+			EMPLOYEE_NAME,
+			GOVERNOR_FLAG,
+			LOGIN_STATUS,
+			PARTNER_USER_ID,
+			PARTNER_USER_PW,
+			CCS_USER_ID,
+			CCS_USER_PW,
+			CREATE_USER,
+			CREATE_TIME,
+			UPTIMESTAMP_USER,
+			UPTIMESTAMP_TIME,
+			MAIL_ADDRESS
+		FROM
+		    TB_MED_USERS
+		<where>
+			<if test="userId != null">
+				( USER_ID = #{userId} )
+			</if>
+			<if test="bbName != null">
+				( EMPLOYEE_NAME LIKE #{bbName} )
+			</if>
+			<if test="enName != null">
+				( USER_NM LIKE #{enName} )
+			</if>
+		</where>
+		ORDER BY USER_ID
+	</select>
+
+	<insert id="insertMedUsers" statementType="PREPARED">
+		INSER INTO TB_MED_USERS
+			VALUES (
+			USER_ID = #{medUsers.userId},
+			USER_NM = #{medUsers.userNm},
+			PASSWORD = #{medUsers.password},
+			PRIV_ID = #{medUsers.privId},
+			BRANCH_ID = #{medUsers.branchId},
+			BROKER_ID = #{medUsers.brokerId},
+			SUB_BROKER_ID = #{medUsers.subBrokerId},
+			EMPLOYEE_ID = #{medUsers.employeeId},
+			EMPLOYEE_NAME = #{medUsers.employeeName},
+			GOVERNOR_FLAG = #{medUsers.governorFlag},
+			CREATE_USER = #{medUsers.createUser},
+			CREATE_TIME = SYSDATE,
+			UPTIMESTAMP_USER = #{medUsers.uptimestampUser},
+			MAIL_ADDRESS = #{medUsers.mailAddress}
+			)
+	</insert>
+
+	<update id="updateMedUsers" statementType="PREPARED">
+		UPDATE TB_MED_USERS SET
+			USER_ID = #{medUsers.userId},
+			USER_NM = #{medUsers.userNm},
+			PASSWORD = #{medUsers.password},
+			PRIV_ID = #{medUsers.privId},
+			BRANCH_ID = #{medUsers.branchId},
+			BROKER_ID = #{medUsers.brokerId},
+			SUB_BROKER_ID = #{medUsers.subBrokerId},
+			EMPLOYEE_ID = #{medUsers.employeeId},
+			EMPLOYEE_NAME = #{medUsers.employeeName},
+			GOVERNOR_FLAG = #{medUsers.governorFlag},
+			LOGIN_STATUS = #{medUsers.loginStatus},
+			PARTNER_USER_ID = #{medUsers.partnerUserId},
+			PARTNER_USER_PW = #{medUsers.partnerUserPw},
+			CCS_USER_ID = #{medUsers.ccsUserId},
+			CCS_USER_PW = #{medUsers.ccsUserPw},
+			UPTIMESTAMP_USER = #{medUsers.uptimestampUser},
+			UPTIMESTAMP_TIME = SYSDATE
+			MAIL_ADDRESS = #{medUsers.mailAddress}
+		<where>
+			USER_ID = #{USER_ID}
+		</where>
+	</update>
+
+	<delete id="deleteMedUsers" statementType="PREPARED">
+		DELETE FROM TB_MED_USERS
+		<where>
+			USER_ID = #{medUsers.userId}
+		</where>
+	</delete>
+
+ -->
+	<update id="updateMedUsersPassword" statementType="PREPARED">
+		UPDATE TB_MED_USERS SET
+			PASSWORD = #{password},
+			LASTPWUPTIME = IFA_DATE_UTIL.IFA_GET_DATE
+		WHERE
+			USER_ID = #{userId}
+	</update>
+</mapper>

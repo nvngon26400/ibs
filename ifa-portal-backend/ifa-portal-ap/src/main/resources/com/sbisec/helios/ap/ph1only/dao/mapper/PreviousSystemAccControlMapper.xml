@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+    前システムのメニュー情報取得のためのMapper、下記のMapperをコピーして作成
+    AccControlMapper
+-->
+<mapper namespace="com.sbisec.helios.ap.ph1only.dao.mapper.PreviousSystemAccControlMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.AccControl" id="AccControl">
+	</resultMap>
+
+	<select id="getAccControl" resultMap="AccControl" statementType="PREPARED">
+		SELECT
+			MENU_ID
+			, ITEM_ID
+			, USER_ID
+			, ACC_CONTROL
+		FROM
+			V_MED_ACC_CONTROL
+		WHERE
+			USER_ID = #{userId}
+	</select>
+
+</mapper>

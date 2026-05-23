@@ -1,0 +1,10 @@
+
+<services>
+	<service url="" name="apiTestDriverService"
+	    methodName="doApiTest">
+	    <params>
+	        <param index="1"
+	            type="com.sbisec.helios.ap.testtool2.service.dto.ApiTestServiceRequest" />
+	    </params>
+	</service>
+</services>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct038Mapper">
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct038Sql001ResponseModel" id="Fct038Sql001ResponseModel">
+    </resultMap>
+
+    <!-- FCT038.SQL001 CSVダウンロードMAX件数取得 -->
+    <select id="getCsvMax" resultMap="Fct038Sql001ResponseModel" statementType="PREPARED">
+    SELECT /* @SQLID=FCT038#SQL001 */
+        NAME
+    FROM
+        M_CODE
+    WHERE
+        START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND END_DATE >= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND CODE_TYPE = '45'
+        AND CODE_1 = #{fct038Sql001RequestModel.screenId}
+        AND CODE_2 = #{fct038Sql001RequestModel.userPriv}
+    </select>
+</mapper>

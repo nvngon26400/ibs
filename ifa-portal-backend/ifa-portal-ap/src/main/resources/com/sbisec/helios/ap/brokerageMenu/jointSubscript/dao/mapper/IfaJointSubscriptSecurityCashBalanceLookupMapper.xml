@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0206_04-01
+    画面名：共同募集　証券・金銭・残高照会
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.mapper.IfaJointSubscriptSecurityCashBalanceLookupMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaJointSubscriptSecurityCashBalanceLookupSql001" type="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.model.IfaJointSubscriptSecurityCashBalanceLookupSql001ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：証券・金銭・残高情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaJointSubscriptSecurityCashBalanceLookupSql001" resultMap="ResultMapIfaJointSubscriptSecurityCashBalanceLookupSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_04-01#Sql001 */
+        * 
+        FROM (
+            SELECT
+            count(*) over() as totalRow
+            , DATE_YMD  AS DATE_YMD
+            , BROKER_CODE  AS BROKER_CODE
+            , BROKER_NAME  AS BROKER_NAME
+            , DEALER_NUMBER  AS DEALER_NUMBER
+            , BROKER_BRANCH_CODE  AS BROKER_BRANCH_CODE
+            , BROKER_CHARGE_CODE  AS EMP_CODE
+            , BROKER_CHARGE_NAME  AS BROKER_CHARGE_NAME
+            , CUSTOMER_ATTRIBUTE  AS CUSTOMER_ATTRIBUTE
+            , CUSTOMER_ATTRIBUTE_NAME  AS COURCE_NAME
+            , BUTEN_CODE  AS BUTEN
+            , ACCOUNT_NUMBER  AS ACCOUNT_NUMBER
+            , NAME_KANJI  AS CUSTOMER_NAME_KANJI
+            , NAME_KANA   AS CUSTOMER_NAME_KANA
+            , JOINT_BRANCH_CODE  AS JOINT_BRANCH_CODE
+            , JOINT_BRANCH_NAME  AS JOINT_BRANCH_NAME
+            , PRODUT_CD  AS PRODUT_CD
+            , PRODUT_NAME  AS SECURIYT_CLASS
+            , BRAND_CODE  AS BRAND_CODE_CURRENCY
+            , BRAND_NAME  AS BRAND_NAME
+            , TRADE_CD  AS TRADE_CD
+            , TRADE_NAME AS TRADE_TYPE_NAME
+            , BALANCE_TYPE  AS BALANCE_TYPE
+            , DEPOSIT_NAME  AS DEPOSIT_NAME
+            , DEPOSIT_TYPE AS DEPOSIT_TYPE
+            , COUNTRY_CODE AS COUNTRY_CODE
+            <choose>
+                 <when test="req.aggregatorDetailsCountingUnit == '1'.toString()">
+                        , ACQUIRE_PRICE  AS ACQUIRE_PRICE
+                        , APPRAISE_MARKET_PRICE  AS APPRAISE_MARKET_PRICE
+                        , APPRAISE_PROFIT_LOSS_PRICE  AS APPRAISE_PROFIT_LOSS_PRICE
+                        , EXEC_BASE_BALANCE  AS CONTRACT_STANDARD_DEPOSIT
+                        , CURRENCT_PRICE  AS CURRENT_PRICE
+                        , CURRENCY  AS CURRENCY
+                        , FOREIGN_CURRENCT_PRICE  AS FOREIGN_VALUATION
+                        , EXCHANGE_RATE  AS FX_RATE
+                        , CASE DISPLAY_LAST_TRADE_DATE
+                              WHEN '99991231' THEN '----/--/--'
+                            ELSE TO_CHAR(TO_DATE(DISPLAY_LAST_TRADE_DATE,'YYYY/MM/DD'),'YYYY/MM/DD')
+                          END AS LAST_TRADE_DATE
+                        <if test="req.securityTypeSecuritiesMoney != null and !req.securityTypeSecuritiesMoney.isEmpty()">
+                            <foreach item="item" index="index" collection="req.securityTypeSecuritiesMoney" open="" separator="" close="">
+                                  <if test="item.id == '14'.toString() and item.isSelected == true">
+                                    , FOREIGN_BOND_EVALUATE_DATE AS FOREIGN_STANDARD_DATE
+                                    , SHIKUMI_SAI_KBN AS STRUCTURED_BOND_CLASSIFICATION
+                                 </if>
+                            </foreach>
+                          </if>
+                </when>
+                <otherwise>
+                       , MAX(ACQUIRE_PRICE)  AS ACQUIRE_PRICE
+                       , MAX(APPRAISE_MARKET_PRICE)  AS APPRAISE_MARKET_PRICE
+                       , SUM(APPRAISE_PROFIT_LOSS_PRICE)  AS APPRAISE_PROFIT_LOSS_PRICE
+                       , SUM(EXEC_BASE_BALANCE)  AS CONTRACT_STANDARD_DEPOSIT
+                       , SUM(CURRENCT_PRICE)  AS CURRENT_PRICE
+                       , MAX(CURRENCY)  AS CURRENCY
+                       , SUM(FOREIGN_CURRENCT_PRICE)  AS FOREIGN_VALUATION
+                       , MAX(EXCHANGE_RATE)  AS FX_RATE
+                       , CASE MIN(DISPLAY_LAST_TRADE_DATE)
+                         WHEN '99991231' THEN '----/--/--'
+                         ELSE TO_CHAR(TO_DATE(MIN(DISPLAY_LAST_TRADE_DATE),'YYYY/MM/DD'),'YYYY/MM/DD')
+                           END AS LAST_TRADE_DATE
+                      <if test="req.securityTypeSecuritiesMoney != null and !req.securityTypeSecuritiesMoney.isEmpty()">
+                        <foreach item="item" index="index" collection="req.securityTypeSecuritiesMoney" open="" separator="" close="">
+                              <if test="item.id == '14'.toString() and item.isSelected == true">
+                                , MIN(FOREIGN_BOND_EVALUATE_DATE) AS FOREIGN_STANDARD_DATE
+                                , MIN(SHIKUMI_SAI_KBN) AS STRUCTURED_BOND_CLASSIFICATION
+                             </if>
+                        </foreach>
+                      </if>
+               </otherwise>
+            </choose>
+          , VISIBLE_BUTEN_CODE AS BUTEN_CODE_VIEW_ABLE
+         FROM (
+             SELECT
+               VBB.*,
+               SDCR.VISIBLE_BUTEN_CODE
+             FROM
+             (
+               SELECT
+                      VBJ.DATE_YMD  AS DATE_YMD 
+                    , VBJ.BROKER_CODE  AS BROKER_CODE 
+                    , VBJ.BROKER_NAME  AS BROKER_NAME 
+                    , VBJ.DEALER_NUMBER  AS DEALER_NUMBER 
+                    , VBJ.BROKER_BRANCH_CODE  AS BROKER_BRANCH_CODE 
+                    , VBJ.JOINT_BRANCH_CODE   AS JOINT_BRANCH_CODE 
+                    , VBJ.JOINT_BRANCH_NAME   AS JOINT_BRANCH_NAME
+                    , VBJ.BROKER_CHARGE_CODE  AS BROKER_CHARGE_CODE 
+                    , VBJ.BROKER_CHARGE_NAME  AS BROKER_CHARGE_NAME 
+                    , VBJ.CUSTOMER_ATTRIBUTE  AS CUSTOMER_ATTRIBUTE 
+                    , VBJ.CUSTOMER_ATTRIBUTE_NAME  AS CUSTOMER_ATTRIBUTE_NAME 
+                    , VBJ.BUTEN_CODE  AS BUTEN_CODE 
+                    , VBJ.ACCOUNT_NUMBER  AS ACCOUNT_NUMBER 
+                    , MUAI.NAME_KANJI  AS NAME_KANJI 
+                    , MUAI.NAME_KANA  AS NAME_KANA 
+                    , VBJ.PRODUT_CD  AS PRODUT_CD 
+                    , VBJ.PRODUT_NAME  AS PRODUT_NAME 
+                    , VBJ.BRAND_CODE  AS BRAND_CODE 
+                    , VBJ.BRAND_NAME  AS BRAND_NAME 
+                    , VBJ.TRADE_CD  AS TRADE_CD 
+                    , VBJ.TRADE_NAME AS TRADE_NAME 
+                    , VBJ.BALANCE_TYPE  AS BALANCE_TYPE 
+                    , VBJ.DEPOSIT_NAME AS DEPOSIT_NAME 
+                    , VBJ.DEPOSIT_TYPE AS DEPOSIT_TYPE 
+                    , VBJ.COUNTRY_CODE AS COUNTRY_CODE 
+                    , VBJ.ACQUIRE_PRICE  AS ACQUIRE_PRICE 
+                    , VBJ.APPRAISE_MARKET_PRICE  AS APPRAISE_MARKET_PRICE 
+                    , VBJ.APPRAISE_PROFIT_LOSS_PRICE  AS APPRAISE_PROFIT_LOSS_PRICE 
+                    , VBJ.EXEC_BASE_BALANCE  AS EXEC_BASE_BALANCE 
+                    , VBJ.CURRENCT_PRICE  AS CURRENCT_PRICE 
+                    , VBJ.CURRENCY  AS CURRENCY 
+                    , VBJ.FOREIGN_CURRENCT_PRICE  AS FOREIGN_CURRENCT_PRICE 
+                    , VBJ.EXCHANGE_RATE  AS EXCHANGE_RATE
+                    , VBJ.DISPLAY_LAST_TRADE_DATE AS DISPLAY_LAST_TRADE_DATE
+                    <if test="req.securityTypeSecuritiesMoney != null and !req.securityTypeSecuritiesMoney.isEmpty()">
+                        <foreach item="item" index="index" collection="req.securityTypeSecuritiesMoney" open="" separator="" close="">
+                            <if test="item.id == '14'.toString() and item.isSelected == true">
+                                , VBJ.FOREIGN_BOND_EVALUATE_DATE AS FOREIGN_BOND_EVALUATE_DATE
+                                , ZSFM.SHIKUMI_SAI_KBN AS SHIKUMI_SAI_KBN
+                            </if>
+                        </foreach>
+                    </if> 
+               FROM
+                 V_BALANCE_JOINT VBJ
+               LEFT OUTER JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI
+               ON VBJ.BUTEN_CODE = MUAI.BUTEN_CODE
+               AND VBJ.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+               AND VBJ.BROKER_CODE = MUAI.BROKER_CODE
+               LEFT OUTER JOIN ZERO_STAR_F_MASTER ZSFM
+               ON VBJ.BRAND_CODE = ZSFM.KOYU_CD
+             WHERE
+             1=1
+             <if test="req.butenCode != null and req.butenCode != ''.toString()">
+               AND VBJ.BUTEN_CODE = #{req.butenCode}
+             </if>
+             <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+               AND VBJ.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+             </if>
+               AND VBJ.DATE_YMD between TO_CHAR(TO_DATE(#{req.periodYm}, 'YYYYMM'), 'YYYYMMDD') and TO_CHAR(LAST_DAY(TO_DATE(#{req.periodYm}, 'YYYYMM')), 'YYYYMMDD')
+             <if test="req.brandCode != null and req.brandCode != ''.toString()"> 
+               AND LPAD(VBJ.BRAND_CODE,12,'0') = LPAD(#{req.brandCode},12,'0')
+             </if>
+             <if test="req.jointBranchCode != null and req.jointBranchCode != ''">
+               AND VBJ.JOINT_BRANCH_CODE = #{req.jointBranchCode}
+             </if>
+             <if test="req.privId == '6'.toString() or req.privId == '7'.toString() or req.privId == '8'.toString() or req.privId == '9'.toString()">
+               AND VBJ.JOINT_BRANCH_CODE IN (
+                                             SELECT
+                                                 SUB_BROKER_ID
+                                             FROM
+                                                 TB_MED_USERS
+                                             WHERE
+                                                 USER_ID = #{req.userId}
+                                             UNION
+                                             SELECT
+                                                 SUB_BROKER_ID
+                                             FROM
+                                                 TB_MED_USERS_PRIV
+                                             WHERE
+                                                 USER_ID = #{req.userId}
+                                                 AND BROKER_ID = '0509'
+                                            )
+             </if>
+             <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                <choose>
+                   <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                         AND VBJ.BROKER_CODE NOT IN
+                   </when>
+                   <otherwise>
+                         AND VBJ.BROKER_CODE IN
+                   </otherwise>
+                </choose>
+                <foreach item="item" index="index"  collection="req.brokerCodeList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+             </if>
+             <if test="req.empCode != null and req.empCode != ''.toString()">
+                    AND VBJ.BROKER_CHARGE_CODE = #{req.empCode}
+             </if>
+             <if test="req.customerName != null and req.customerName != ''.toString()">
+                 <choose>
+                     <when test="req.customerNameSearchType == '1'.toString()">
+                         AND (
+                                 MUAI.NAME_KANJI = #{req.customerName}
+                                 OR MUAI.NAME_KANA = #{req.customerName}
+                             )
+                     </when>
+                     <when test="req.customerNameSearchType == '2'.toString()">
+                         AND (
+                                 MUAI.NAME_KANJI LIKE #{req.customerName} || '%'
+                                 OR MUAI.NAME_KANA LIKE #{req.customerName} || '%'
+                             )
+                     </when>
+                     <when test="req.customerNameSearchType == '3'.toString()">
+                             AND (
+                                 MUAI.NAME_KANJI LIKE '%' || #{req.customerName} || '%'
+                                 OR MUAI.NAME_KANA LIKE '%' || #{req.customerName} || '%'
+                             )
+                     </when>
+                 </choose>
+             </if>
+             AND VBJ.CUSTOMER_ATTRIBUTE IN
+             <foreach item="item" index="index"  collection="req.course" open="(" separator="," close=")">
+                 <if test="item.isSelected == true">
+                     #{item.id}
+                 </if>
+             </foreach>
+             AND ( 
+             <if test="req.securityTypeSecuritiesMoneySelected == true and req.securityTypeSecuritiesMoney != null and !req.securityTypeSecuritiesMoney.isEmpty()">
+                   VBJ.PRODUT_CD IN 
+                   <foreach item="item" index="index"  collection="req.securityTypeSecuritiesMoney" open="(" separator="," close=")">
+                       <if test="item.isSelected == true">
+                           #{item.id}
+                       </if>
+                   </foreach>
+                   <if test="req.securityTypeCreditFuturesOpSelected == true and req.securityTypeCreditFuturesOp != null and !req.securityTypeCreditFuturesOp.isEmpty()">
+                       OR
+                   </if>
+               </if>
+               <if test="req.securityTypeCreditFuturesOpSelected == true and req.securityTypeCreditFuturesOp != null and !req.securityTypeCreditFuturesOp.isEmpty()">
+                   VBJ.PRODUT_CD IN
+                   <foreach item="item" index="index"  collection="req.securityTypeCreditFuturesOp" open="(" separator="," close=")">
+                       <if test="item.isSelected == true">
+                           #{item.id}
+                       </if>
+                   </foreach>
+               </if>
+                        )
+                ) VBB
+                LEFT OUTER JOIN SUB_DEALER_CODE_RELATION_IFAP SDCR
+                ON VBB.ACCOUNT_NUMBER=SDCR.ACCOUNT_NUMBER
+                AND VBB.BUTEN_CODE=SDCR.BUTEN_CODE
+                 WHERE
+                 1=1
+                 <if test="req.visibleButenCodeList != null and !req.visibleButenCodeList.isEmpty()">
+                     AND SDCR.VISIBLE_BUTEN_CODE IN
+                     <foreach item="item" index="index" collection="req.visibleButenCodeList" open="(" separator="," close=")">
+                         #{item}
+                     </foreach>
+                 </if>
+                )
+              -- 集計
+             <if test="req.aggregatorDetailsCountingUnit == '0'.toString()"> 
+                GROUP BY
+                  DATE_YMD,
+                  BROKER_CODE,
+                  BROKER_NAME,
+                  DEALER_NUMBER,
+                  BROKER_BRANCH_CODE,
+                  BROKER_CHARGE_CODE,
+                  BROKER_CHARGE_NAME,
+                  CUSTOMER_ATTRIBUTE,
+                  CUSTOMER_ATTRIBUTE_NAME,
+                  BUTEN_CODE,
+                  ACCOUNT_NUMBER,
+                  NAME_KANJI,
+                  NAME_KANA,
+                  JOINT_BRANCH_CODE,
+                  JOINT_BRANCH_NAME,
+                  PRODUT_CD,
+                  PRODUT_NAME,
+                  BRAND_CODE,
+                  BRAND_NAME,
+                  TRADE_CD,
+                  TRADE_NAME,
+                  BALANCE_TYPE,
+                  DEPOSIT_NAME,
+                  DEPOSIT_TYPE,
+                  COUNTRY_CODE,
+                  VISIBLE_BUTEN_CODE
+               </if>
+                <choose>
+                    <when test="req.privId == '1'.toString() or req.privId == '2'.toString()">
+                        ORDER BY BROKER_CODE ASC, BUTEN_CODE ASC, ACCOUNT_NUMBER ASC
+                    </when>
+                    <otherwise>
+                        ORDER BY BUTEN_CODE ASC, ACCOUNT_NUMBER ASC
+                    </otherwise>
+                </choose>
+            ) WHERE ROWNUM &lt;= #{req.rownum}
+    </select>
+    
+</mapper>

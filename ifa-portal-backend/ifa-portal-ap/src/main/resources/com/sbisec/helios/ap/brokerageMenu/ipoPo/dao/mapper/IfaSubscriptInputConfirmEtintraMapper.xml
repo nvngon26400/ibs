@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0204_02-04_2
+    画面名：募集入力確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IfaSubscriptInputConfirmEtintraMapper">
+    
+    <!-- 
+        SQLID：Sql011
+        SQL名：ブックビルディング受付テーブルの更新
+        SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptInputConfirmSql011"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_02-04_2#Sql011 */ ETINTRA.BB_ACCEPT
+            SET
+            BB_REMARK = #{req.bbRemark}
+            ,BB_UPDATE_DATE = CORDYS.IFA_DATE_UTIL.IFA_GET_DATE
+            ,BB_UPDATE_USER_ID = #{req.userId}
+            ,BB_UPDATE_USER_NAME = #{req.userNm}
+            ,BB_UPDATE_SECTION_ID = #{req.sectionId}
+            ,BB_UPDATE_SECTION_NAME = #{req.branchName}
+        WHERE BB_PRODUCT_CODE = #{req.brandCode}
+        AND TRIM(BB_BRANCH_CODE) = #{req.butenCode}
+        AND TO_NUMBER(BB_ACCOUNT_NUMBER) = TO_NUMBER(LPAD(#{req.accountNumber}, 7, 0))
+        AND BB_PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom})
+    </update>
+
+</mapper>

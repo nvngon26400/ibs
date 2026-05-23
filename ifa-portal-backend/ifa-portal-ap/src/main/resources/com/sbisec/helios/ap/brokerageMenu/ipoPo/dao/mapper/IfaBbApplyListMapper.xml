@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0204_02-01
+    画面名：BB申込一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IfaBbApplyListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaBbApplyListSql001" type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaBbApplyListSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBbApplyListSql002" type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaBbApplyListSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBbApplyListSql003" type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaBbApplyListSql003ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBbApplyListSql004" type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaBbApplyListSql004ResponseModel" >
+    </resultMap>
+    <!-- 
+        SQLID：Sql001
+        SQL名：BB申込一覧情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBbApplyListSql001" resultMap="ResultMapIfaBbApplyListSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-01#Sql001 */ 
+        * 
+        FROM 
+            (
+        SELECT
+            COUNT(*) OVER() AS totalCount,
+            T.*
+            FROM(
+            SELECT
+                A.BB_PRODUCT_CODE AS brandCode,
+                B.BB_PRODUCT_NAME AS brandName,
+                C.BROKER_CODE AS brokerCode,
+                E1.BRANCH_NAME AS brokerName,
+                F.BROKER_BRANCH_CODE AS brokerBranchCode,
+                E2.BRANCH_NAME AS brokerBranchName,
+                C.INTERMEDIARY_EMP_CD AS brokerChargeCode,
+                CASE F.BROKER_CHARGE_CODE WHEN '0000' THEN '' ELSE F.BROKER_CHARGE_NAME END AS employeeName,
+                C.BUTEN_CODE AS butenCode,
+                C.ACCOUNT_NUMBER AS accountNumber,
+                C.NAME_KANJI AS customerNameKanji,
+                C.NAME_KANA AS customerNameKana,
+                C.CUSTOMER_ATTRIBUTE AS course,
+                A.BB_INVESTOR_ATT_NAME AS investorAttributeName,
+                A.BB_QUANTITY AS bbQuantity,
+                B.BB_GESTURE_VALUE AS issuePriceType,
+                CASE
+                    WHEN D.LOTTERY_RESULT = '4' THEN NVL(D.QUANTITY_ALLOC, 0)
+                    ELSE NVL(G.QUANTITY_SAIRYOU,0)
+                END AS quantitySairyou,
+                CASE
+                    WHEN A.BB_STRIKE_PRICE = '0' AND B.BB_GESTURE_VALUE = '1' THEN A.BB_PRICE || '円'
+                    WHEN A.BB_STRIKE_PRICE = '0' AND B.BB_GESTURE_VALUE = '2' THEN RTRIM(TO_CHAR(A.BB_DISCOUNT, 'FM990.9999'), '.') || '%'
+                    ELSE '成行'
+                END AS bbPrice,
+                CASE
+                    WHEN D.LOTTERY_RESULT IS NOT NULL THEN D.LOTTERY_RESULT
+                    WHEN A.BB_WINNING = '2' AND A.BB_EXCLUSION = '4' THEN '4'
+                    WHEN A.BB_WINNING = '2' AND A.BB_EXCLUSION &lt;> '4' THEN '2'
+                    ELSE A.BB_WINNING
+                END AS lotteryResult,
+                CASE
+                    WHEN D.LOTTERY_RESULT IN ('1','3','5') THEN NVL(D.QUANTITY_ALLOC, 0) || ''
+                    WHEN D.LOTTERY_RESULT IN ('2','4') THEN '0'
+                    WHEN A.BB_WINNING = '0' THEN '-'
+                    WHEN A.BB_WINNING = '1' THEN A.BB_QUANTITY_ALLOC || ''
+                    WHEN A.BB_WINNING = '2' AND A.BB_EXCLUSION = '4' THEN '0'
+                    ELSE '0'
+                END AS bbQuantityAlloc,
+                CASE
+                    WHEN D.LOTTERY_RESULT IN ('2','5') THEN '-'
+                    WHEN J.ORDER_STATUS IS NULL AND A.BB_WINNING = '0' THEN '-'
+                    WHEN J.ORDER_STATUS IS NULL AND A.BB_WINNING = '2' AND A.BB_EXCLUSION &lt;> '4' THEN '-'
+                    WHEN J.ORDER_STATUS IS NULL AND A.BB_WINNING = '2' AND A.BB_EXCLUSION = '4' THEN '0'
+                    WHEN J.ORDER_STATUS IS NULL AND A.BB_WINNING = '1' THEN '0'
+                    ELSE J.ORDER_STATUS
+                END AS orderStatus,
+                CASE
+                    WHEN D.LOTTERY_RESULT IN ('1','3','4') THEN J.ORDER_COUNT || ''
+                    ELSE '-'
+                END AS orderQuantity,
+                J.DEPOSIT_TYPE AS depositType,
+                J.INVITATION_TYPE AS kanyuKbn,
+                J.WARNING_APPLY AS warningApplyArranged,
+                J.DETAIL_NUMBER AS detailNumber,
+                A.BB_CREATE_SECTION_NAME AS sectionName,
+                A.BB_REMARK AS bbRemark,
+                A.BB_UPDATE_DATE AS updateDate,
+                NVL(H.PRESENTATION_DATE, B.BB_SETTLE_DATE) AS presentationDate,
+                A.BB_PRESENTATION_FROM AS bookBuildingPresentationFrom,
+                A.BB_CREATE_USER_NAME AS bbCreateUserName,
+                TO_CHAR(A.BB_CREATE_DATE,'YYYY/MM/DD HH24:MI') AS bbCreateDate,
+                TO_CHAR(SYSDATE,'yyyymmddhh24miss') AS "sysDate",
+                D.BUTEN_CODE || LPAD(D.ACCOUNT_NUMBER, 7, 0) || D.PRODUCT_CODE AS uploadKey,
+                DECODE(P.EDELIV_AGREEMENT_KBN, 1, TO_CHAR(P.EDELIV_AGREEMENT_DATE, 'YYYY/MM/DD'), '') AS edelivAgreementDate,
+                TO_CHAR(I.READ_TIME,'YYYY/MM/DD HH24:MI') AS readTime
+            FROM
+                ETINTRA.BB_ACCEPT A
+                INNER JOIN ETINTRA.BB_PRODUCT_MASTER B ON
+                    A.BB_PRODUCT_CODE = B.BB_PRODUCT_CODE
+                AND
+                    A.BB_PRESENTATION_FROM = TO_NUMBER(TO_CHAR(B.BB_PRESENTATION_FROM,'YYYYMMDD'))
+                INNER JOIN MEDIATE_USER_ATTRIBUTE_INFO C ON
+                    A.BB_BRANCH_CODE = RPAD(C.BUTEN_CODE, 4, ' ')
+                AND
+                    TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(C.ACCOUNT_NUMBER)
+            LEFT JOIN
+                M_IPO_PO_BB_PERIOD H
+            ON
+                A.BB_PRODUCT_CODE =  H.PRODUCT_CODE
+            AND
+                A.BB_PRESENTATION_FROM = H.PRESENTATION_FROM
+            LEFT JOIN
+                T_IPO_PO_ORDER D
+            ON
+                A.BB_PRODUCT_CODE = D.PRODUCT_CODE
+            AND
+                A.BB_PRESENTATION_FROM = D.PRESENTATION_FROM
+            AND
+                A.BB_BRANCH_CODE = RPAD(D.BUTEN_CODE, 4, ' ')
+            AND
+                TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(D.ACCOUNT_NUMBER)
+            LEFT JOIN
+                MEDIATE_BRANCH E1
+            ON
+                C.BROKER_CODE = E1.BROKER_CODE
+            AND
+                E1.BROKER_BRANCH_CODE = '999'
+            LEFT JOIN
+                MEDIATE_CHARGE_INFO F
+            ON
+                C.BROKER_CODE = F.BROKER_CODE
+            AND
+                C.INTERMEDIARY_EMP_CD = F.BROKER_CHARGE_CODE
+            AND
+                (
+                    SELECT
+                        COUNT(*)
+                    FROM
+                        MEDIATE_CHARGE_INFO F2
+                    WHERE
+                        C.BROKER_CODE = F2.BROKER_CODE
+                    AND
+                        C.INTERMEDIARY_EMP_CD = F2.BROKER_CHARGE_CODE
+                ) = 1
+            LEFT JOIN
+                MEDIATE_BRANCH E2
+            ON
+                C.BROKER_CODE = E2.BROKER_CODE
+            AND
+                F.BROKER_BRANCH_CODE = E2.BROKER_BRANCH_CODE
+            LEFT JOIN
+                ETINTRA.SR_ACCEPT G
+            ON
+                A.BB_PRODUCT_CODE = G.BB_PRODUCT_CODE
+            AND
+                A.BB_PRESENTATION_FROM = G.BB_PRESENTATION_FROM
+            AND
+                A.BB_BRANCH_CODE = G.BB_BRANCH_CODE
+            AND
+                TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(G.BB_ACCOUNT_NUMBER)
+            LEFT JOIN
+                T_IPO_PO_EDELIV_AGRMNT P
+            ON
+                P.BUTEN_CODE = C.BUTEN_CODE
+            AND
+                P.ACCOUNT_NUMBER = C.ACCOUNT_NUMBER
+            LEFT JOIN T_IPO_PO_DOCUMENT_READ I
+                ON
+                    I.BUTEN_CODE = C.BUTEN_CODE
+                AND
+                    I.ACCOUNT_NUMBER = C.ACCOUNT_NUMBER
+                AND
+                    B.BB_PRODUCT_CODE = I.PRODUCT_CODE
+                AND
+                    A.BB_PRESENTATION_FROM = I.PRESENTATION_FROM
+                AND
+                    I.DOCUMENT_ID = '00000'
+                AND
+                    I.VERSION_NUMBER = '000000'
+            LEFT JOIN T_IPO_PO_ORDER_DETAIL J
+                ON
+                    J.PRODUCT_CODE = D.PRODUCT_CODE
+                AND
+                    J.PRESENTATION_FROM = D.PRESENTATION_FROM
+                AND
+                    J.BUTEN_CODE = D.BUTEN_CODE
+                AND
+                    J.ACCOUNT_NUMBER = D.ACCOUNT_NUMBER
+            WHERE
+                1 = 1
+                <if test='req.brandCode != null and req.brandCode != ""'>
+                    AND A.BB_PRODUCT_CODE = #{req.brandCode}
+                </if>
+                <if test='req.butenCode != null and req.butenCode != ""'>
+                    AND C.BUTEN_CODE = #{req.butenCode}
+                </if>
+                <if test='req.accountNumber != null and req.accountNumber != ""'>
+                    AND C.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                </if>
+                <if test='req.branchCode != null and req.branchCode != ""'>
+                    AND F.BROKER_BRANCH_CODE = #{req.branchCode}
+                </if>
+                <if test='req.historyInclude == "0"'>
+                    AND NVL(H.PRESENTATION_DATE, B.BB_SETTLE_DATE) >= TO_CHAR(SYSDATE,'YYYYMMDD')
+                </if>
+                <if test='req.brokerCode != null and req.brokerCode != "" and req.chkBrokerCodeExclude == "false"'>
+                    AND C.BROKER_CODE IN
+                    <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                         #{brokerCode}
+                    </foreach>
+                </if>
+                <if test='req.brokerCode != null and req.brokerCode != "" and req.chkBrokerCodeExclude == "true"'>
+                    AND C.BROKER_CODE NOT IN
+                    <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                         #{brokerCode}
+                    </foreach>
+                </if>
+                <if test='req.empCode != null and req.empCode != ""'>
+                    AND C.INTERMEDIARY_EMP_CD = #{req.empCode}
+                </if>
+                <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "0"'>
+                    AND (C.NAME_KANJI = #{req.customerNameKanjiKana} OR C.NAME_KANA = #{req.customerNameKanjiKana})
+                </if>
+                <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "1"'>
+                    AND (C.NAME_KANJI LIKE CONCAT(#{req.customerNameKanjiKana},'%') OR C.NAME_KANA like CONCAT(#{req.customerNameKanjiKana},'%'))
+                </if>
+                <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "2"'>
+                    AND (C.NAME_KANJI LIKE CONCAT(CONCAT('%',#{req.customerNameKanjiKana}),'%') OR C.NAME_KANA like CONCAT(CONCAT('%',#{req.customerNameKanjiKana}),'%'))
+                </if>
+                AND C.CUSTOMER_ATTRIBUTE IN 
+                <foreach collection="req.course.split(',')" item="course" open="(" close=")" separator=",">
+                    #{course}
+                </foreach>
+                <if test='req.privId != "1" and req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0'>
+                    <choose>
+                        <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                            AND (C.BROKER_CODE IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR C.BROKER_CODE IN(
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                #{brokerCharge.brokerCode}
+                            </foreach>
+                            )
+                        </when>
+                        <otherwise>
+                            AND ((C.BROKER_CODE, C.INTERMEDIARY_EMP_CD) IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR (C.BROKER_CODE, C.INTERMEDIARY_EMP_CD) IN(
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                            </foreach>
+                            )
+                        </otherwise>
+                    </choose>
+                </if>
+            ) T
+            WHERE
+                1=1
+                <if test='req.lotteryResult != null and req.lotteryResult != ""'>
+                    AND T.lotteryResult = #{req.lotteryResult}
+                </if>
+                <if test='req.orderStatus != null and req.orderStatus != ""'>
+                    AND T.orderStatus = #{req.orderStatus}
+                </if>
+            ORDER BY
+                T.bbCreateDate DESC,
+                T.brandCode,
+                T.brokerCode,
+                T.brokerBranchCode,
+                T.brokerChargeCode,
+                T.butenCode,
+                T.accountNumber,
+                T.bookBuildingPresentationFrom,
+                T.detailNumber DESC
+            )
+        WHERE
+            1=1
+            AND ROWNUM &lt;= #{req.querySizeLimit}
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：存在チェック（BB申込訂正・取消入力）
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBbApplyListSql002" resultMap="ResultMapIfaBbApplyListSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-01#Sql002 */ 
+        D.BB_PRESENTATION_FROM AS presentationFrom,
+        D.BB_PRESENTATION_TO AS presentationTo,
+        B.BB_URGENT_STOP AS urgentStop
+        FROM
+        BB_ACCEPT A
+        INNER JOIN
+        BB_PRODUCT_MASTER B
+        ON
+        A.BB_PRODUCT_CODE = B.BB_PRODUCT_CODE
+        AND
+        A.BB_PRESENTATION_FROM = TO_CHAR(B.BB_PRESENTATION_FROM, 'YYYYMMDD')
+        INNER JOIN
+        MEDIATE_USER_ATTRIBUTE_INFO C
+        ON
+        A.BB_BRANCH_CODE = RPAD(C.BUTEN_CODE, 4, ' ')
+        AND
+        TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(C.ACCOUNT_NUMBER)
+        LEFT JOIN
+        M_IPO_PO_BB_PERIOD D
+        ON
+        A.BB_PRODUCT_CODE = D.PRODUCT_CODE
+        AND
+        A.BB_PRESENTATION_FROM = D.PRESENTATION_FROM
+        WHERE
+        A.BB_PRODUCT_CODE = #{req.brandCode}
+        AND
+        A.BB_PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom})
+        AND
+        C.BUTEN_CODE = #{req.butenCode}
+        AND
+        C.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：存在チェック（募集入力）
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBbApplyListSql003" resultMap="ResultMapIfaBbApplyListSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-01#Sql003 */
+        NVL(H.BB_PERIOD_FROM, '00000000') AS periodFrom,
+        NVL(H.BB_PERIOD_TO, '99999999') AS periodTo,
+        H.PAYMENT_DATE AS paymentDate,
+        H.PRESENTATION_DATE AS presentationDate,
+        H.PRICE AS issueBbPrice,
+        H.EDELIV_ONLY_FLAG AS edelivOnlyFlag,
+        B.BB_GESTURE_VALUE AS issuePriceType,
+        CASE
+            WHEN D.LOTTERY_RESULT IS NOT NULL THEN D.LOTTERY_RESULT
+            WHEN A.BB_WINNING = '2'AND A.BB_EXCLUSION = '4' THEN '4'
+            WHEN A.BB_WINNING = '2'AND A.BB_EXCLUSION &lt;> '4' THEN '2'
+            ELSE A.BB_WINNING
+        END AS lotteryResult,
+        J.ORDER_COUNT AS quantity,
+        DECODE(P.EDELIV_AGREEMENT_KBN, 1, TO_CHAR(P.EDELIV_AGREEMENT_DATE, 'YYYY/MM/DD'), '') AS edelivAgreementDate,
+        TO_CHAR(I.READ_TIME,'YYYY/MM/DD HH24:MI') AS readTime
+        FROM
+        BB_ACCEPT A
+        INNER JOIN
+        BB_PRODUCT_MASTER B
+        ON 
+        A.BB_PRODUCT_CODE = B.BB_PRODUCT_CODE
+        AND
+        A.BB_PRESENTATION_FROM = TO_NUMBER(TO_CHAR(B.BB_PRESENTATION_FROM,'YYYYMMDD'))
+        INNER JOIN
+        MEDIATE_USER_ATTRIBUTE_INFO C
+        ON
+        A.BB_BRANCH_CODE = RPAD(C.BUTEN_CODE, 4, ' ')
+        AND
+        TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(C.ACCOUNT_NUMBER)
+        INNER JOIN
+        M_IPO_PO_BB_PERIOD H
+        ON
+        A.BB_PRODUCT_CODE = H.PRODUCT_CODE AND
+        A.BB_PRESENTATION_FROM = H.PRESENTATION_FROM
+        LEFT JOIN
+        T_IPO_PO_ORDER D
+        ON
+        A.BB_PRODUCT_CODE = D.PRODUCT_CODE
+        AND
+        A.BB_PRESENTATION_FROM = D.PRESENTATION_FROM
+        AND
+        A.BB_BRANCH_CODE = RPAD(D.BUTEN_CODE, 4, ' ')
+        AND
+        TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(D.ACCOUNT_NUMBER)
+        LEFT JOIN
+        T_IPO_PO_DOCUMENT_READ I
+        ON
+        C.BUTEN_CODE = I.BUTEN_CODE
+        AND
+        C.ACCOUNT_NUMBER = I.ACCOUNT_NUMBER
+        AND
+        A.BB_PRODUCT_CODE = I.PRODUCT_CODE
+        AND
+        A.BB_PRESENTATION_FROM = I.PRESENTATION_FROM
+        AND
+        I.DOCUMENT_ID = '00000'
+        AND
+        I.VERSION_NUMBER = '000000'
+        LEFT JOIN
+        T_IPO_PO_EDELIV_AGRMNT P
+        ON
+        C.BUTEN_CODE = P.BUTEN_CODE
+        AND
+        C.ACCOUNT_NUMBER  = P.ACCOUNT_NUMBER
+        LEFT JOIN
+        T_IPO_PO_ORDER_DETAIL J
+        ON
+        J.PRODUCT_CODE = D.PRODUCT_CODE
+        AND
+        J.PRESENTATION_FROM = D.PRESENTATION_FROM
+        AND
+        J.BUTEN_CODE = D.BUTEN_CODE
+        AND
+        J.ACCOUNT_NUMBER = D.ACCOUNT_NUMBER
+        WHERE
+        CASE
+            WHEN H.BB_PERIOD_FROM IS NULL AND H.BB_PERIOD_TO IS NULL THEN 0
+            ELSE 1
+        END = 1
+        AND
+        A.BB_PRODUCT_CODE = #{req.brandCode}
+        AND
+        A.BB_PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom})
+        AND
+        A.BB_BRANCH_CODE = RPAD(#{req.butenCode}, 4, ' ')
+        AND
+        TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(#{req.accountNumber})
+        <if test='req.detailNumber != null and req.detailNumber != ""'>
+            AND
+            J.DETAIL_NUMBER = TO_NUMBER(#{req.detailNumber})
+        </if>
+    </select>
+    
+    <select id="selectIfaBbApplyListSql004" resultMap="ResultMapIfaBbApplyListSql004" statementType="PREPARED">
+        SELECT
+        NAME AS name
+        FROM
+        M_CODE
+        WHERE
+        CODE_TYPE ='38'
+        AND
+        CODE_1 ='01'
+        AND
+        CODE_2 ='END_TIME'
+    </select>
+    
+    
+</mapper>

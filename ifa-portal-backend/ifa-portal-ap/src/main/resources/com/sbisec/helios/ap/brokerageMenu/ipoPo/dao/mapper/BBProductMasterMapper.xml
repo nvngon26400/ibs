@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.BBProductMasterMapper">
+
+    <resultMap type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.BBProductMasterModel" id="resultSetGetBbProductMaster">
+        <result property="bbStockStr" column="BB_STOCK_STR" typeHandler="StringTypeHandler" />
+        <result property="bbProductName" column="BB_PRODUCT_NAME" typeHandler="StringTypeHandler" />
+        <result property="bbProduct" column="BB_PRODUCT" typeHandler="StringTypeHandler" />
+    </resultMap>
+
+    <select id="getBBProductMasterInfo" resultMap="resultSetGetBbProductMaster" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-01#SQL002 */
+            A.BB_PRODUCT_CODE,
+            A.BB_PRODUCT_NAME,
+            A.BB_PRODUCT_NAME || '（' || A.BB_PRODUCT_CODE || '）' AS BB_PRODUCT,
+            A.BB_STOCK,
+            CASE
+                WHEN A.BB_UNIT_KBN = '1' THEN
+                    DECODE(A.BB_STOCK, null, null, TO_CHAR(A.BB_STOCK, 'FM9,999,999,999') || '株')
+                WHEN A.BB_UNIT_KBN = '2' THEN
+                    DECODE(A.BB_STOCK, null, null, TO_CHAR(A.BB_STOCK, 'FM9,999,999,999') || '円')
+                WHEN A.BB_UNIT_KBN = '3' THEN
+                    DECODE(A.BB_STOCK, null, null, TO_CHAR(A.BB_STOCK, 'FM9,999,999,999') || '口')
+            END AS BB_STOCK_STR,
+            A.BB_LOT_DATE,
+            A.BB_GESTURE_VALUE,
+            A.BB_PRICE_FROM,
+            A.BB_PRICE_TO,
+            A.BB_PRICE_CUT,
+            A.BB_DISCOUNT_FROM,
+            A.BB_DISCOUNT_TO,
+            A.BB_DISCOUNT_CUT,
+            A.BB_STRIKE_PRICE,
+            NVL(B.BB_PRESENTATION_FROM, A.BB_PRESENTATION_FROM) AS BB_PRESENTATION_FROM,
+            B.BB_PRESENTATION_TO AS BB_PRESENTATION_TO,
+            TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYYMMDD') AS BB_PRESENTATION_FROM_STR,
+            TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYY/MM/DD HH24:MI')
+            || '～'
+            || TO_CHAR(A.BB_PRESENTATION_TO, 'YYYY/MM/DD HH24:MI') AS BB_PRESENTATION,
+            A.BB_SETTLE_DATE,
+            A.BB_URGENT_STOP,
+            DECODE(A.BB_UNIT_KBN, '1', '株', '2', '円', '3', '口', '株') AS BB_UNIT_KBN,
+            A.BB_IPO_PO_KBN,
+            CASE
+                WHEN A.BB_STRIKE_PRICE = '0'
+                     AND A.BB_GESTURE_VALUE = '1' THEN
+                    TO_CHAR(A.BB_PRICE_FROM, 'FM9,999,999,999')
+                    || '円'
+                    || '～'
+                    || TO_CHAR(A.BB_PRICE_TO, 'FM9,999,999,999')
+                    || '円'
+                WHEN A.BB_STRIKE_PRICE = '0'
+                     AND A.BB_GESTURE_VALUE = '2' THEN
+                    'ディスカウント率・'
+                    || RTRIM(TO_CHAR(A.BB_DISCOUNT_FROM, 'FM990.9999'), '.')
+                    || '%'
+                    || '～'
+                    || RTRIM(TO_CHAR(A.BB_DISCOUNT_TO, 'FM990.9999'), '.')
+                    || '%'
+                WHEN A.BB_STRIKE_PRICE = '1'
+                     AND A.BB_GESTURE_VALUE = '1' THEN
+                    'ストライクプライス・'
+                    || TO_CHAR(A.BB_PRICE_FROM, 'FM9,999,999,999')
+                    || '円'
+                    || '～'
+                    || TO_CHAR(A.BB_PRICE_TO, 'FM9,999,999,999')
+                    || '円'
+                WHEN A.BB_STRIKE_PRICE = '1'
+                     AND A.BB_GESTURE_VALUE = '2' THEN
+                    'ディスカウント率・ストライクプライス・'
+                    || RTRIM(TO_CHAR(A.BB_DISCOUNT_FROM, 'FM990.9999'), '.')
+                    || '%'
+                    || '～'
+                    || RTRIM(TO_CHAR(A.BB_DISCOUNT_TO, 'FM990.9999'), '.')
+                    || '%'
+            END AS ASSUME_CONDITION
+        FROM
+            ETINTRA.BB_PRODUCT_MASTER A
+        LEFT JOIN
+            M_IPO_PO_BB_PERIOD B
+        ON
+            A.BB_PRODUCT_CODE = B.PRODUCT_CODE
+        AND
+            TO_CHAR(A.BB_PRESENTATION_FROM,'YYYYMMDD') = B.PRESENTATION_FROM
+        WHERE
+            A.BB_PRODUCT_CODE = #{bbProductCode}
+        AND
+            TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYYMMDD') = #{bbPresentationFrom}
+    </select>
+</mapper>

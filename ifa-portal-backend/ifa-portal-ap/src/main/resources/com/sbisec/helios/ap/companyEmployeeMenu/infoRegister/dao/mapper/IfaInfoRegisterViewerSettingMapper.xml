@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0501_01-04
+    画面名：情報登録閲覧者設定
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.mapper.IfaInfoRegisterViewerSettingMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaInfoRegisterViewerSettingSql002" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterViewerSettingSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaInfoRegisterViewerSettingSql003" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterViewerSettingSql003ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaInfoRegisterViewerSettingSql004" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterViewerSettingSql004ResponseModel" >
+        <result property="userName" column="USER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="employeeName" column="EMPLOYEE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaInfoRegisterViewerSettingSql005" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterViewerSettingSql005ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaInfoRegisterViewerSettingSql006" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterViewerSettingSql006ResponseModel" >
+        <result property="userName" column="USER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="employeeName" column="EMPLOYEE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：お知らせ情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoRegisterViewerSettingSql002" resultMap="ResultMapIfaInfoRegisterViewerSettingSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-04#Sql002 */
+            COR_REFERENCE_CONDITION
+        FROM 
+            PSITE_T4N_INFO 
+        WHERE
+            T4N_ID = TO_NUMBER(#{req.notificationId})
+
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：お知らせ参照権限取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoRegisterViewerSettingSql003" resultMap="ResultMapIfaInfoRegisterViewerSettingSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-04#Sql003 */
+            T4N_ID AS NOTIFICATION_ID
+            , PRIV_ID
+            , COR_CREATE_DATE AS REGISTER_DAY_TIME
+            , COR_CREATE_BY AS CREATE_BY
+            , COR_UPDATE_DATE AS UPDATE_TIME
+            , COR_UPDATE_BY AS UPDATE_USER
+        FROM
+            PSITE_T4N_INFO_PRIV
+        WHERE
+            T4N_ID = TO_NUMBER(#{req.notificationId})
+
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：個別担当者設定閲覧者情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoRegisterViewerSettingSql004" resultMap="ResultMapIfaInfoRegisterViewerSettingSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-04#Sql004 */
+            USER_ID
+            , USER_NM AS USER_NAME
+            , PASSWORD
+            , LASTPWUPTIME
+            , PRIV_ID
+            , BRANCH_ID AS SBI_SECURITY_CODE
+            , BROKER_ID AS BROKER_CODE
+            , SUB_BROKER_ID
+            , EMPLOYEE_ID
+            , EMPLOYEE_NAME
+            , GOVERNOR_FLAG
+            , LOGIN_STATUS
+            , PARTNER_USER_ID
+            , PARTNER_USER_PW
+            , CCS_USER_ID
+            , CCS_USER_PW
+            , CREATE_USER
+            , CREATE_TIME
+            , UPTIMESTAMP_USER AS UPDATE_USER
+            , UPTIMESTAMP_TIME AS UPDATE_TIME
+            , MAIL_ADDRESS
+        FROM
+            TB_MED_USERS
+        WHERE
+            USER_ID IN (
+                SELECT
+                    T5N_LOGIN
+                FROM 
+                    PSITE_T5N_INFO_READ
+                WHERE
+                    T5N_INFO_ID =  TO_NUMBER(#{req.notificationId})            
+            )
+
+    </select>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：仲介業者リスト検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoRegisterViewerSettingSql005" resultMap="ResultMapIfaInfoRegisterViewerSettingSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-04#Sql005 */
+            BROKER_CODE
+            , BRANCH_NAME AS BROKER_NAME
+        FROM 
+            MEDIATE_BRANCH
+        WHERE
+            BROKER_BRANCH_KIND = '00'
+            <if test="req.brokerCodeFuzzySearch != null and req.brokerCodeFuzzySearch != ''">
+                AND BRANCH_NAME LIKE #{req.brokerCodeFuzzySearch} ESCAPE '!'
+            </if>
+    </select>
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：担当者リスト検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoRegisterViewerSettingSql006" resultMap="ResultMapIfaInfoRegisterViewerSettingSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-04#Sql006 */
+            USER_ID
+            , USER_NM AS USER_NAME
+            , PASSWORD
+            , LASTPWUPTIME
+            , PRIV_ID
+            , BRANCH_ID
+            , BROKER_ID
+            , SUB_BROKER_ID
+            , EMPLOYEE_ID
+            , EMPLOYEE_NAME
+            , GOVERNOR_FLAG
+            , LOGIN_STATUS
+            , PARTNER_USER_ID
+            , PARTNER_USER_PW
+            , CCS_USER_ID
+            , CCS_USER_PW
+            , CREATE_USER
+            , CREATE_TIME
+            , UPTIMESTAMP_USER
+            , UPTIMESTAMP_TIME
+            , MAIL_ADDRESS
+        FROM 
+            TB_MED_USERS
+        WHERE
+            PRIV_ID &lt;> '1'
+            AND PRIV_ID &lt;> '2'
+            <if test="req.brokerSelect != null and req.brokerSelect.size() &gt; 0">
+                AND BROKER_ID IN 
+                <foreach item="brokerSelectItem" index="index" collection="req.brokerSelect" open="(" separator="," close=")">
+                    #{brokerSelectItem}
+                </foreach>
+            </if>
+            <if test="req.repSearch != null and req.repSearch != ''">
+                AND USER_NM LIKE #{req.repSearch} ESCAPE '!'
+            </if>
+
+    </select>
+    
+</mapper>

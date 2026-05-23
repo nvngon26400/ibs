@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020302_0301-01
+    画面名：証券・金銭・残高照会
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaSecurityCashBalanceLookupMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaSecurityCashBalanceLookupSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaSecurityCashBalanceLookupSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaSecurityCashBalanceLookupSql004" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaSecurityCashBalanceLookupSql004ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：証券・金銭・残高情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSecurityCashBalanceLookupSql001" resultMap="ResultMapIfaSecurityCashBalanceLookupSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0301-01#Sql001 */
+        * 
+        FROM (
+            SELECT
+            count(*) over() AS totalRow
+            , DATE_YMD AS dateYmd
+            , BROKER_CODE AS brokerCode
+            , BROKER_NAME AS brokerName
+            , DEALER_NUMBER AS dealerNumber
+            , BROKER_CHARGE_CODE AS empCode
+            , BROKER_CHARGE_NAME AS brokerChargeName
+            , CUSTOMER_ATTRIBUTE AS customerAttribute
+            , CUSTOMER_ATTRIBUTE_NAME AS courceName
+            , BUTEN_CODE AS buten
+            , ACCOUNT_NUMBER AS accountNumber
+            , NAME_KANJI AS customerNameKanji
+            , NAME_KANA AS customerNameKana
+            , PRODUT_CD AS productCd
+            , PRODUT_NAME AS securiytClass
+            , BRAND_CODE AS brandCodeCurrency
+            , BRAND_NAME AS brandName
+            , TRADE_CD AS tradeCd
+            , TRADE_NAME AS tradeTypeName
+            , BALANCE_TYPE AS balanceType
+            , DEPOSIT_NAME AS depositName
+            , DEPOSIT_TYPE AS depositType
+            , COUNTRY_CODE AS countryCode
+            , BROKER_BRANCH_CODE AS branchCode
+            , BROKER_BRANCH_NAME AS branchName
+            , ACQUIRE_PRICE AS acquirePrice
+            , APPRAISE_MARKET_PRICE AS appraiseMarketPrice
+            , APPRAISE_PROFIT_LOSS_PRICE AS appraiseProfitLossPrice
+            , EXEC_BASE_BALANCE AS contractStandardDeposit
+            , CURRENCT_PRICE AS currentPrice
+            , CURRENCY AS currency
+            , FOREIGN_CURRENCT_PRICE AS foreignValuation
+            , EXCHANGE_RATE AS fxRate
+            , CASE DISPLAY_LAST_TRADE_DATE
+                WHEN '99991231' THEN '----/--/--'
+                ELSE TO_CHAR(TO_DATE(DISPLAY_LAST_TRADE_DATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')
+            END AS lastTradeDate
+            , CASE
+                WHEN SBI_LAST_TRADE_DATE IS NULL THEN NULL
+                WHEN DISPLAY_LAST_TRADE_DATE &lt;= SBI_LAST_TRADE_DATE THEN '-'
+                ELSE TO_CHAR(TO_DATE(SBI_LAST_TRADE_DATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')
+            END AS sbiSecurityLastTradeDate
+            , VISIBLE_BUTEN_CODE AS butenCodeViewAble
+            <if test="req.securityTypeSecuritiesMoney != null and !req.securityTypeSecuritiesMoney.isEmpty()">
+                <foreach item="item" index="index" collection="req.securityTypeSecuritiesMoney" open="" separator="" close="">
+                    <if test="item.id == '14' and item.isSelected == true">
+                        , FOREIGN_BOND_EVALUATE_DATE AS foreignStandardDate
+                        , SHIKUMI_SAI_KBN AS structuredBondClassification
+                    </if>
+                </foreach>
+            </if>
+            FROM (
+                SELECT
+                VBB.*,
+                SDCR.VISIBLE_BUTEN_CODE
+                FROM
+                (
+                    SELECT
+                    VB.DATE_YMD  AS DATE_YMD 
+                    , VB.BROKER_CODE  AS BROKER_CODE 
+                    , VB.BROKER_NAME  AS BROKER_NAME 
+                    , VB.DEALER_NUMBER  AS DEALER_NUMBER 
+                    , VB.BROKER_BRANCH_CODE  AS BROKER_BRANCH_CODE 
+                    , VB.BROKER_CHARGE_CODE  AS BROKER_CHARGE_CODE 
+                    , VB.BROKER_CHARGE_NAME  AS BROKER_CHARGE_NAME 
+                    , VB.CUSTOMER_ATTRIBUTE  AS CUSTOMER_ATTRIBUTE 
+                    , VB.CUSTOMER_ATTRIBUTE_NAME  AS CUSTOMER_ATTRIBUTE_NAME 
+                    , VB.BUTEN_CODE  AS BUTEN_CODE 
+                    , VB.ACCOUNT_NUMBER  AS ACCOUNT_NUMBER 
+                    , MUAI.NAME_KANJI  AS NAME_KANJI 
+                    , MUAI.NAME_KANA  AS NAME_KANA 
+                    , VB.PRODUT_CD  AS PRODUT_CD 
+                    , VB.PRODUT_NAME  AS PRODUT_NAME 
+                    , VB.BRAND_CODE  AS BRAND_CODE 
+                    , VB.BRAND_NAME  AS BRAND_NAME 
+                    , VB.TRADE_CD  AS TRADE_CD 
+                    , VB.TRADE_NAME AS TRADE_NAME 
+                    , VB.BALANCE_TYPE  AS BALANCE_TYPE 
+                    , VB.DEPOSIT_NAME AS DEPOSIT_NAME 
+                    , VB.DEPOSIT_TYPE AS DEPOSIT_TYPE 
+                    , VB.COUNTRY_CODE AS COUNTRY_CODE 
+                    , MB.BRANCH_NAME AS BROKER_BRANCH_NAME
+                    , VB.ACQUIRE_PRICE  AS ACQUIRE_PRICE 
+                    , VB.APPRAISE_MARKET_PRICE  AS APPRAISE_MARKET_PRICE 
+                    , VB.APPRAISE_PROFIT_LOSS_PRICE  AS APPRAISE_PROFIT_LOSS_PRICE 
+                    , VB.EXEC_BASE_BALANCE  AS EXEC_BASE_BALANCE 
+                    , VB.CURRENCT_PRICE  AS CURRENCT_PRICE 
+                    , VB.CURRENCY  AS CURRENCY 
+                    , VB.FOREIGN_CURRENCT_PRICE  AS FOREIGN_CURRENCT_PRICE 
+                    , VB.EXCHANGE_RATE  AS EXCHANGE_RATE
+                    , VB.DISPLAY_LAST_TRADE_DATE AS DISPLAY_LAST_TRADE_DATE
+                    , VB.SBI_LAST_TRADE_DATE AS SBI_LAST_TRADE_DATE
+                    <if test="req.securityTypeSecuritiesMoney != null and !req.securityTypeSecuritiesMoney.isEmpty()">
+                        <foreach item="item" index="index" collection="req.securityTypeSecuritiesMoney" open="" separator="" close="">
+                            <if test="item.id == '14'.toString() and item.isSelected == true">
+                                , VB.FOREIGN_BOND_EVALUATE_DATE AS FOREIGN_BOND_EVALUATE_DATE
+                                , ZSFM.SHIKUMI_SAI_KBN AS SHIKUMI_SAI_KBN
+                            </if>
+                        </foreach>
+                    </if>
+                    FROM (
+                        V_BALANCE VB
+                        LEFT OUTER JOIN MEDIATE_BRANCH MB
+                        ON VB.BROKER_CODE = MB.BROKER_CODE
+                        AND VB.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                        LEFT OUTER JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                        ON VB.BUTEN_CODE = MUAI.BUTEN_CODE
+                        AND VB.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                        AND VB.BROKER_CODE = MUAI.BROKER_CODE
+                        LEFT OUTER JOIN ZERO_STAR_F_MASTER ZSFM
+                        ON VB.BRAND_CODE = ZSFM.KOYU_CD
+                    )
+                    WHERE
+                    1=1
+                    <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                        AND VB.BUTEN_CODE = #{req.butenCode}
+                    </if>
+                    <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                        AND VB.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                    </if>
+                    AND VB.DATE_YMD between TO_CHAR(TO_DATE(#{req.periodYm}, 'YYYYMM'), 'YYYYMMDD') and TO_CHAR(LAST_DAY(TO_DATE(#{req.periodYm}, 'YYYYMM')), 'YYYYMMDD')
+                    <if test="req.brandCode != null and req.brandCode != ''.toString()">
+                        AND LPAD(VB.BRAND_CODE,12,'0') = LPAD(#{req.brandCode},12,'0')
+                    </if>
+                    <if test="req.branchCode != null and req.branchCode != ''">
+                        AND VB.BROKER_BRANCH_CODE = #{req.branchCode}
+                    </if>
+                    <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                        <choose>
+                            <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                AND VB.BROKER_CODE NOT IN
+                            </when>
+                            <otherwise>
+                                AND VB.BROKER_CODE IN
+                            </otherwise>
+                        </choose>
+                        <foreach item="item" index="index"  collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if> 
+                    <if test="req.empCode != null and req.empCode != ''.toString()">
+                        AND VB.BROKER_CHARGE_CODE = #{req.empCode}
+                    </if>
+                    <if test="req.brokerChargeList != null and !req.brokerChargeList.isEmpty()">
+                        <if test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                            AND (VB.BROKER_CODE IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR VB.BROKER_CODE IN(
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                #{brokerCharge.brokerCode}
+                            </foreach>
+                            )
+                        </if>
+                        <if test='req.privId != "1" and req.privId != "3" and req.privId != "4" and req.privId != "5"'>
+                            AND ((VB.BROKER_CODE, VB.BROKER_CHARGE_CODE) IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR (VB.BROKER_CODE, VB.BROKER_CHARGE_CODE) IN(
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                            </foreach>
+                            )
+                        </if>
+                    </if>
+                    <if test="req.customerName != null and req.customerName != ''.toString()">
+                        <choose>
+                            <when test="req.customerNameSearchType == '1'.toString()">
+                                AND (
+                                        MUAI.NAME_KANJI = #{req.customerName}
+                                        OR MUAI.NAME_KANA = #{req.customerName}
+                                    )
+                            </when>
+                            <when test="req.customerNameSearchType == '2'.toString()">
+                                AND (
+                                        MUAI.NAME_KANJI LIKE #{req.customerName} || '%'
+                                        OR MUAI.NAME_KANA LIKE #{req.customerName} || '%'
+                                    )
+                            </when>
+                            <when test="req.customerNameSearchType == '3'.toString()">
+                                    AND (
+                                        MUAI.NAME_KANJI LIKE '%' || #{req.customerName} || '%'
+                                        OR MUAI.NAME_KANA LIKE '%' || #{req.customerName} || '%'
+                                    )
+                            </when>
+                        </choose>
+                    </if>
+                    AND VB.CUSTOMER_ATTRIBUTE IN
+                    <foreach item="item" index="index"  collection="req.course" open="(" separator="," close=")">
+                        <if test="item.isSelected == true">
+                            #{item.id}
+                        </if>
+                    </foreach>
+                    AND ( 
+                    <if test="req.securityTypeSecuritiesMoneySelected == true and req.securityTypeSecuritiesMoney != null and !req.securityTypeSecuritiesMoney.isEmpty()">
+                        VB.PRODUT_CD IN 
+                        <foreach item="item" index="index"  collection="req.securityTypeSecuritiesMoney" open="(" separator="," close=")">
+                            <if test="item.isSelected == true">
+                                #{item.id}
+                            </if>
+                        </foreach>
+                        <if test="req.securityTypeCreditFuturesOpSelected == true and req.securityTypeCreditFuturesOp != null and !req.securityTypeCreditFuturesOp.isEmpty()">
+                            OR
+                        </if>
+                    </if>
+                    <if test="req.securityTypeCreditFuturesOpSelected == true and req.securityTypeCreditFuturesOp != null and !req.securityTypeCreditFuturesOp.isEmpty()">
+                        VB.PRODUT_CD IN
+                        <foreach item="item" index="index"  collection="req.securityTypeCreditFuturesOp" open="(" separator="," close=")">
+                            <if test="item.isSelected == true">
+                                #{item.id}
+                            </if>
+                        </foreach>
+                    </if>
+                    )
+                ) VBB
+                LEFT OUTER JOIN SUB_DEALER_CODE_RELATION_IFAP SDCR
+                ON VBB.ACCOUNT_NUMBER=SDCR.ACCOUNT_NUMBER
+                AND VBB.BUTEN_CODE=SDCR.BUTEN_CODE
+                WHERE
+                1=1
+                <if test="req.visibleButenCodeList != null and !req.visibleButenCodeList.isEmpty()">
+                    AND SDCR.VISIBLE_BUTEN_CODE IN 
+                    <foreach item="item" index="index" collection="req.visibleButenCodeList" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+            )
+            <choose>
+                <when test="req.privId == '1'.toString() or req.privId == '2'.toString()">
+                    ORDER BY BROKER_CODE ASC, BUTEN_CODE ASC, ACCOUNT_NUMBER ASC
+                </when>
+                <otherwise>
+                    ORDER BY BUTEN_CODE ASC, ACCOUNT_NUMBER ASC
+                </otherwise>
+            </choose>
+        ) WHERE ROWNUM &lt;= #{req.rownum}
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：証券・金銭・残高照会画面コメント取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSecurityCashBalanceLookupSql004" resultMap="ResultMapIfaSecurityCashBalanceLookupSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0301-01#Sql004 */
+        NAME AS "comment"
+        FROM M_CODE
+        WHERE
+        CODE_TYPE = '99'
+        AND CODE_1 = '01'
+        AND CODE_2 = '09'
+    </select>
+    
+</mapper>

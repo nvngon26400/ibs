@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020301_03-02,SUB020301_03-03
+    画面名：ノックイン銘柄保有一覧,ノックアウト銘柄保有一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaKnockInKnockOutBrandHoldingListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaKnockInKnockOutBrandHoldingListSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaKnockInKnockOutBrandHoldingListSql001ResponseModel" >
+        <result property="customerNameKanji" column="CUSTOMER_NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="CUSTOMER_NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerBranchName" column="BROKER_BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brandName" column="BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="judgmentBrandName" column="JUDGMENT_BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <resultMap id="ResultMapIfaKnockInKnockOutBrandHoldingListSql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaKnockInKnockOutBrandHoldingListSql002ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：ノックイン銘柄保有一覧取得,ノックアウト銘柄保有一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaKnockInKnockOutBrandHoldingListSql001" resultMap="ResultMapIfaKnockInKnockOutBrandHoldingListSql001" statementType="PREPARED">
+        WITH FilteredData AS (
+            SELECT
+                <choose>
+                    <when test="req.isKnockIn == true">
+                        /* @SQLID=SUB020301_03-02#Sql001 */ 
+                    </when>
+                    <otherwise>
+                        /* @SQLID=SUB020301_03-03#Sql001 */ 
+                    </otherwise>
+                </choose>
+                COUNT(*) OVER() AS TOTAL_ROW,
+                KKBH.BOND_CODE AS SBM_BOND_CODE,
+                KKBH.BROKER_CODE,
+                MB2.BROKER_BRANCH_CODE AS BROKERAGE_BRANCH_CODE,
+                KKBH.BROKER_CHARGE_CODE,
+                KKBH.BUTEN_CODE,
+                KKBH.ACCOUNT_NUMBER,
+                MUAI.CUSTOMER_ATTRIBUTE,
+                MUAI.NAME_KANJI AS CUSTOMER_NAME_KANJI,
+                MUAI.NAME_KANA AS CUSTOMER_NAME_KANA,
+                MUAI.DEALER_NUMBER,
+                MB1.BRANCH_NAME AS BROKER_NAME,
+                MB2.BRANCH_NAME AS BROKER_BRANCH_NAME,
+                MB2.BROKER_CHARGE_NAME,
+                KKBH.BRAND_NAME,
+                KKBH.QUANTITY AS HOLDING_QUANTITY,
+                SBPI.SBPI_PDF_URL AS PDF_NOTICE_URL,
+                LISTAGG(NVL(A1.SBJM_BRAND_NAME, ' '), ',') WITHIN GROUP (ORDER BY A1.SBJM_BRAND_NAME ASC) AS JUDGMENT_BRAND_NAME,
+                LISTAGG(NVL(A1.SBJM_CURRENT_PRICE, -1), ',') WITHIN GROUP (ORDER BY A1.SBJM_BRAND_NAME ASC) AS PRICE,
+                <choose>
+                    <when test="req.isKnockIn == true">
+                        LISTAGG(NVL(A1.SBJM_NOCKIN_PRICE, -1), ',') WITHIN GROUP (ORDER BY A1.SBJM_BRAND_NAME ASC) AS KNOCK_IN_LEVEL_PRICE,
+                        LISTAGG(NVL(A1.SBJD_NOCKIN_ONSET_DATE, ' '), ',') WITHIN GROUP (ORDER BY A1.SBJM_BRAND_NAME ASC) AS KNOCKIN_DATE
+                    </when>
+                    <otherwise>
+                        LISTAGG(NVL(A1.SBJM_EARLY_PAYMENT_PRICE, -1), ',') WITHIN GROUP (ORDER BY A1.SBJM_BRAND_NAME ASC) AS EARLY_REDEMPTION_LEVEL_PRICE,
+                        LISTAGG(NVL(A1.SBJD_EARLY_PAYMENT_JUDGE_DATE, ' '), ',') WITHIN GROUP (ORDER BY A1.SBJM_BRAND_NAME ASC) AS EARLY_REDEMPTION_DETERMINATION_DATE
+                    </otherwise>
+                </choose>
+            FROM
+                KNOCKIN_KNOCKOUT_BRAND_HOLD KKBH
+            INNER JOIN <!-- 内部結合① -->
+                (
+                    <!-- 検索A-1 -->
+                    SELECT
+                        SBJM.SBJM_BOND_CODE,
+                        SBJM.SBJM_BRAND_NAME,
+                        SBJM.SBJM_CURRENT_PRICE,
+                        <choose>
+                            <when test="req.isKnockIn == true">
+                                SBJM.SBJM_NOCKIN_PRICE,
+                                A2.SBJD_NOCKIN_ONSET_DATE
+                            </when>
+                            <otherwise>
+                                SBJM_EARLY_PAYMENT_PRICE,
+                                A2.SBJD_EARLY_PAYMENT_JUDGE_DATE
+                            </otherwise>
+                        </choose>
+                    FROM
+                        STRUCTURED_BOND_JUDGE_MST SBJM
+                    LEFT JOIN (
+                        <!-- 検索A-2 -->
+                        SELECT
+                            SBJRD.SBJD_BOND_CODE,
+                            SBJRD.SBJD_GROUP_CODE,
+                            SBJRD.SBJD_EXCHANGE_CODE,
+                            SBJRD.SBJD_TICKER_CODE,
+                            <choose>
+                                <when test="req.isKnockIn == true">
+                                    SBJRD.SBJD_NOCKIN_ONSET_DATE
+                                </when>
+                                <otherwise>
+                                    SBJRD.SBJD_EARLY_PAYMENT_JUDGE_DATE
+                                </otherwise>
+                            </choose>
+                        FROM
+                            STRUCTURED_BOND_JUG_RSL_DTL SBJRD
+                        INNER JOIN (
+                            <!-- 検索A-3 -->
+                            SELECT
+                                MAX(SBJD_JUDGEMENT_DATE) AS LATEST_SBJD_JUDGEMENT_DATE,
+                                SBJD_BOND_CODE,
+                                SBJD_EVENT_KBN,
+                                SBJD_GROUP_CODE,
+                                SBJD_EXCHANGE_CODE,
+                                SBJD_TICKER_CODE
+                            FROM
+                                STRUCTURED_BOND_JUG_RSL_DTL
+                            WHERE
+                                <choose>
+                                    <when test="req.isKnockIn == true">
+                                        SBJD_EVENT_KBN = '10'
+                                    </when>
+                                    <otherwise>
+                                        SBJD_EVENT_KBN = '20'
+                                    </otherwise>
+                                </choose>
+                            GROUP BY
+                                SBJD_BOND_CODE,
+                                SBJD_EVENT_KBN,
+                                SBJD_GROUP_CODE,
+                                SBJD_EXCHANGE_CODE,
+                                SBJD_TICKER_CODE
+                        ) A3 ON
+                            SBJRD.SBJD_JUDGEMENT_DATE = A3.LATEST_SBJD_JUDGEMENT_DATE AND
+                            SBJRD.SBJD_BOND_CODE = A3.SBJD_BOND_CODE AND
+                            SBJRD.SBJD_EVENT_KBN = A3.SBJD_EVENT_KBN AND
+                            SBJRD.SBJD_GROUP_CODE = A3.SBJD_GROUP_CODE AND
+                            SBJRD.SBJD_EXCHANGE_CODE = A3.SBJD_EXCHANGE_CODE AND
+                            SBJRD.SBJD_TICKER_CODE = A3.SBJD_TICKER_CODE
+                    ) A2 ON
+                        SBJM.SBJM_BOND_CODE = A2.SBJD_BOND_CODE AND
+                        SBJM.SBJM_GROUP_CODE = A2.SBJD_GROUP_CODE AND
+                        SBJM.SBJM_EXCHANGE_CODE = A2.SBJD_EXCHANGE_CODE AND
+                        SBJM.SBJM_TICKER_CODE = A2.SBJD_TICKER_CODE
+                ) A1 ON KKBH.BOND_CODE = A1.SBJM_BOND_CODE
+            INNER JOIN <!-- 内部結合② -->
+                MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                    ON
+                    KKBH.BUTEN_CODE = MUAI.BUTEN_CODE AND
+                    KKBH.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER AND
+                    KKBH.BROKER_CODE = MUAI.BROKER_CODE
+            LEFT JOIN <!-- 外部結合① -->
+                (   <!-- 検索B-1 -->
+                    SELECT
+                        SBIR.SBIR_BOND_CODE,
+                        <choose>
+                            <when test="req.isKnockIn == true">
+                                SBIR.SBIR_KNOCKIN_PDF_ID
+                            </when>
+                            <otherwise>
+                                SBIR.SBIR_EARLY_PDF_ID
+                            </otherwise>
+                        </choose>
+                    FROM
+                        STRUCTURED_BOND_IFA_REF SBIR
+                    INNER JOIN (
+                        <!-- 検索B-2 -->
+                        SELECT
+                            SBIR_BOND_CODE
+                        FROM
+                            STRUCTURED_BOND_IFA_REF
+                        GROUP
+                            BY SBIR_BOND_CODE
+                        HAVING
+                            COUNT(SBIR_BOND_CODE) = 1
+
+                    ) B2 ON SBIR.SBIR_BOND_CODE = B2.SBIR_BOND_CODE
+                ) B1 ON KKBH.BOND_CODE = B1.SBIR_BOND_CODE
+            LEFT JOIN <!-- 外部結合② -->
+                STRUCTURED_BOND_PDF_INF SBPI
+                    ON 
+                    <choose>
+                        <when test="req.isKnockIn == true">
+                            B1.SBIR_KNOCKIN_PDF_ID = SBPI.SBPI_PDF_ID
+                        </when>
+                        <otherwise>
+                            B1.SBIR_EARLY_PDF_ID = SBPI.SBPI_PDF_ID
+                        </otherwise>
+                    </choose>
+            LEFT JOIN <!-- 外部結合③ -->
+                MEDIATE_BRANCH MB1
+                    ON
+                    KKBH.BROKER_CODE = MB1.BROKER_CODE
+                    AND MB1.BROKER_BRANCH_KIND = '00'
+                    AND MB1.DELETE_FLG = '0'
+            LEFT JOIN <!-- 外部結合④ -->
+                V_MEDIATE_CHARGE_INFO MB2
+                    ON
+                    KKBH.BROKER_CODE = MB2.BROKER_CODE
+                    AND KKBH.BROKER_CHARGE_CODE = MB2.BROKER_CHARGE_CODE
+            <where> 
+                <choose>
+                    <when test="req.isKnockIn == true">
+                        KKBH.EVENT_KBN = '10'
+                    </when>
+                    <otherwise>
+                        KKBH.EVENT_KBN = '20'
+                    </otherwise>
+                </choose>
+                <if test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                    AND (KKBH.BROKER_CODE IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR KKBH.BROKER_CODE IN(
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                        #{brokerCharge.brokerCode}
+                    </foreach>
+                    )
+                </if>
+                <if test='req.privId != "1" and req.privId != "3" and req.privId != "4" and req.privId != "5"'>
+                    AND ((KKBH.BROKER_CODE, KKBH.BROKER_CHARGE_CODE) IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR (KKBH.BROKER_CODE, KKBH.BROKER_CHARGE_CODE) IN(
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                        (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                    </foreach>
+                    )
+                </if>
+                <if test="req.brokerCodeList != null and 0 &lt; req.brokerCodeList.size() and req.chkBrokerCodeExclude == '0'.toString()">
+                    AND KKBH.BROKER_CODE IN
+                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{brokerCode}
+                    </foreach>
+                </if>
+                <if test="req.brokerCodeList != null and 0 &lt; req.brokerCodeList.size() and req.chkBrokerCodeExclude == '1'.toString()">
+                    AND KKBH.BROKER_CODE NOT IN
+                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{brokerCode}
+                    </foreach>
+                </if>
+                <if test="req.branchCode != null and req.branchCode != ''.toString()">
+                    AND MB2.BROKER_BRANCH_CODE = #{req.branchCode}
+                </if>
+                <if test="req.empCode != null and req.empCode != ''.toString()">
+                    AND KKBH.BROKER_CHARGE_CODE = #{req.empCode}
+                </if>
+                <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                    AND KKBH.BUTEN_CODE = #{req.butenCode}
+                </if>
+                <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                    AND KKBH.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                </if>
+                <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != ''.toString() and req.customerNameKanjiKanaTerms == '1'.toString()">
+                    AND (MUAI.NAME_KANJI = #{req.customerNameKanjiKana} 
+                    OR MUAI.NAME_KANA = #{req.customerNameKanjiKana})
+                </if>
+                <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != ''.toString() and req.customerNameKanjiKanaTerms == '2'.toString()">
+                    AND (MUAI.NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%' 
+                    OR  MUAI.NAME_KANA LIKE #{req.customerNameKanjiKana} || '%')
+                </if>
+                <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != ''.toString() and req.customerNameKanjiKanaTerms == '3'.toString()">
+                    AND (MUAI.NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%' 
+                    OR  MUAI.NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%')
+                </if>
+                AND MUAI.CUSTOMER_ATTRIBUTE IN
+                <foreach item="course" index="index" collection="req.courseSelected" open="(" separator="," close=")">
+                    <if test="course.isSelected == true">
+                            #{course.id}
+                    </if>
+                </foreach>
+            </where>
+            GROUP BY
+                KKBH.BOND_CODE,
+                KKBH.BROKER_CODE,
+                MB2.BROKER_BRANCH_CODE,
+                KKBH.BROKER_CHARGE_CODE,
+                KKBH.BUTEN_CODE,
+                KKBH.ACCOUNT_NUMBER,
+                MUAI.CUSTOMER_ATTRIBUTE,
+                MUAI.NAME_KANJI,
+                MUAI.NAME_KANA,
+                MUAI.DEALER_NUMBER,
+                MB1.BRANCH_NAME,
+                MB2.BRANCH_NAME,
+                MB2.BROKER_CHARGE_NAME,
+                KKBH.BRAND_NAME,
+                KKBH.QUANTITY,
+                SBPI.SBPI_PDF_URL
+            ORDER BY
+                KKBH.BROKER_CODE  ASC,
+                KKBH.BUTEN_CODE ASC,
+                KKBH.ACCOUNT_NUMBER ASC,
+                KKBH.BOND_CODE ASC
+        )
+        SELECT * FROM FilteredData
+        FETCH FIRST #{req.maxRow} ROWS ONLY
+    </select>
+
+    <!-- 
+    SQLID：Sql008
+    SQL名：登録ファイルディレクトリ取得
+    SQLタイプ：select
+    -->
+    <select id="selectIfaKnockInKnockOutBrandHoldingListSql002" resultMap="ResultMapIfaKnockInKnockOutBrandHoldingListSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020301_03-02/03#Sql002 */ 
+            FILE_DIR AS FILE_DIRECTORY
+        FROM 
+            TB_MED_TEMP_FILE_DIR
+        WHERE 
+            FUNC_ID = #{req.functionId}
+            AND CAT_ID = #{req.t9nInfoCat}
+    </select>
+</mapper>

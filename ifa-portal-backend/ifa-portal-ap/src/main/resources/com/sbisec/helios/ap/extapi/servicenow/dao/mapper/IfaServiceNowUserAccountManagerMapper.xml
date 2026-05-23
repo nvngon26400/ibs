@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    IfaServiceNowUserAccountManagerMapper
+-->
+<mapper namespace="com.sbisec.helios.ap.extapi.servicenow.dao.mapper.IfaServiceNowUserAccountManagerMapper">
+    <resultMap
+        type="com.sbisec.helios.ap.extapi.servicenow.dao.model.IfaTbMedUserModel"
+        id="IfaTbMedUserModel"
+    >
+        <result property="userNm" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap
+        type="com.sbisec.helios.ap.extapi.servicenow.dao.model.IfaA006MedUsersModel"
+        id="IfaA006MedUsersModel"
+    >
+        <result property="userNm" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerBranchName" column="BROKER_BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="employeeName" column="EMPLOYEE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap
+        type="com.sbisec.helios.ap.extapi.servicenow.dto.common.IfaServiceNowUserDto"
+        id="IfaServiceNowUserDto"
+    >
+        <result property="userNm" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerBranchName" column="BROKER_BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="employeeName" column="EMPLOYEE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+        
+    <!-- 
+         SQLID：selectA005UserByUserId
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA005UserByUserId"
+        statementType="PREPARED"
+        resultMap="IfaTbMedUserModel"
+    >
+        SELECT /* @SQLID=EXTAPI_01-005#selectA005UserByUserId */
+            TMU.USER_ID, 
+            TMU.USER_NM, 
+            TMU.PASSWORD, 
+            TMU.PRIV_ID, 
+            TMU.BRANCH_ID, 
+            TMU.BROKER_ID, 
+            TMU.SUB_BROKER_ID, 
+            TMU.EMPLOYEE_ID, 
+            TMU.EMPLOYEE_NAME, 
+            TMU.GOVERNOR_FLAG, 
+            TMU.MAIL_ADDRESS 
+        FROM
+            TB_MED_USERS TMU 
+        WHERE
+             TMU.USER_ID = #{userId}
+        
+    </select>
+   
+    <!-- 
+         SQLID：insertA005MedUsers
+         SQL名：ユーザ登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertA005MedUsers"
+        statementType="PREPARED"
+    >
+        INSERT /* @EXTAPI_01-005#insertA005MedUsers */
+        INTO TB_MED_USERS(
+            USER_ID,
+            USER_NM,
+            PASSWORD,
+            LASTPWUPTIME,
+            PRIV_ID,
+            BRANCH_ID,
+            BROKER_ID,
+            SUB_BROKER_ID,
+            EMPLOYEE_ID,
+            EMPLOYEE_NAME,
+            GOVERNOR_FLAG,
+            LOGIN_STATUS,
+            PARTNER_USER_ID,
+            PARTNER_USER_PW,
+            CCS_USER_ID,
+            CCS_USER_PW,
+            CREATE_USER,
+            CREATE_TIME,
+            UPTIMESTAMP_USER,
+            UPTIMESTAMP_TIME,
+            MAIL_ADDRESS
+        )
+        VALUES (
+            #{req.userId},
+            #{req.userNm},
+            #{req.password},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.privId},
+            #{req.branchId},
+            #{req.brokerId},
+            #{req.subBrokerId},
+            #{req.employeeId},
+            #{req.employeeName},
+            #{req.governorFlag},
+            #{req.loginStatus},
+            #{req.partnerUserId},
+            #{req.partnerUserPw},
+            #{req.ccsUserId},
+            #{req.ccsUserPw},
+            #{req.createUser},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.uptimestampUser},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.mailAddress}
+        )
+        
+    </insert> 
+    
+   <!-- 
+         SQLID：insertA005UserPriv
+         SQL名：ユーザ登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertA005UserPriv"
+        statementType="PREPARED"
+    >
+        INSERT /* @EXTAPI_01-005#insertA005UserPriv */
+        INTO TB_MED_USERS_PRIV(
+            USER_ID,
+            SEQ_NO,
+            BRANCH_ID,
+            BROKER_ID,
+            SUB_BROKER_ID,
+            EMPLOYEE_ID,
+            EMPLOYEE_NAME,
+            DELETE_FLG,
+            CREATE_USER,
+            CREATE_TIME,
+            DELETE_USER,
+            DELETE_TIME
+        )
+        VALUES (
+            #{req.userId},
+            SEQ_TB_MED_USERS_PRIV.NEXTVAL,
+            #{req.branchId},
+            #{req.brokerId},
+            #{req.subBrokerId},
+            #{req.employeeId},
+            #{req.employeeName},
+            #{req.deleteFlg},
+            #{req.createUser},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.deleteUser},
+            #{req.deleteTime}
+        )
+        
+    </insert> 
+    
+    <!-- 
+         SQLID：insertA005VerifyUser
+         SQL名：認証ユーザ登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertA005VerifyUser"
+        statementType="PREPARED"
+    >
+        INSERT /* @EXTAPI_01-005#insertA005VerifyUser */
+        INTO TB_MED_VERIFY_USERS( 
+          USER_ID, 
+          MAIL_ADDRESS, 
+          VERIFY_STATUS, 
+          UPDATE_BY, 
+          UPDATE_DATE
+        ) 
+        SELECT
+          #{req.userId}               As USER_ID, 
+          #{req.mailAddress}          As MAIL_ADDRESS, 
+          #{req.verifyStatus}         As VERIFY_STATUS, 
+          #{req.updateBy}             As UPDATE_BY, 
+          IFA_DATE_UTIL.IFA_GET_DATE  As UPDATE_DATE 
+        FROM
+          DUAL 
+        WHERE
+          NOT EXISTS ( 
+            SELECT
+              * 
+            FROM
+              M_CODE 
+            WHERE
+              CODE_TYPE = '37' 
+              AND CODE_1 = '3' 
+              AND CODE_2 = #{req.privId} 
+              AND (START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')) 
+              AND (END_DATE >= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD') OR END_DATE IS NULL)
+          )
+
+    </insert> 
+    
+   <!-- 
+         SQLID：selectA006Users
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA006User"
+        statementType="PREPARED"
+        resultMap="IfaA006MedUsersModel"
+    >
+
+        SELECT /* @EXTAPI_01-006#selectA006User */
+            * 
+        FROM
+            ( 
+                SELECT
+                    TMU.USER_ID, 
+                    0                  AS SEQ_NO, 
+                    TMU.USER_NM, 
+                    TMU.PASSWORD, 
+                    TMU.PRIV_ID, 
+                    '1'                AS PARENT_USER_FLAG, 
+                    TMU.BRANCH_ID      AS BRANCH_CODE, 
+                    B.BRANCH_NAME, 
+                    TMU.BROKER_ID      AS BROKER_CODE, 
+                    MB2.BRANCH_NAME    AS BROKER_NAME, 
+                    TMU.SUB_BROKER_ID  AS BROKER_BRANCH_CODE, 
+                    MB.BRANCH_NAME     AS BROKER_BRANCH_NAME, 
+                    CASE 
+                        WHEN TMU.EMPLOYEE_ID IS NOT NULL 
+                        AND TMU.EMPLOYEE_ID != '0000' 
+                            THEN TMU.EMPLOYEE_ID 
+                        ELSE '0000' 
+                        END            AS EMPLOYEE_ID, 
+                    CASE 
+                        WHEN TMU.EMPLOYEE_ID IS NOT NULL 
+                        AND TMU.EMPLOYEE_ID != '0000' 
+                            THEN TMU.EMPLOYEE_NAME 
+                        ELSE '仲介業者担当' 
+                        END            AS EMPLOYEE_NAME, 
+                    TMU.GOVERNOR_FLAG, 
+                    TMU.CCS_USER_ID,
+                    TMU.MAIL_ADDRESS 
+                FROM
+                    TB_MED_USERS TMU 
+                    LEFT OUTER JOIN BRANCH B 
+                        ON TMU.BRANCH_ID = B.BRANCH_CODE 
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB 
+                        ON TMU.BROKER_ID = MB.BROKER_CODE 
+                        AND TMU.SUB_BROKER_ID = MB.BROKER_BRANCH_CODE 
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB2 
+                        ON TMU.BROKER_ID = MB2.BROKER_CODE 
+                        AND MB2.BROKER_BRANCH_KIND = '00' 
+                UNION ALL 
+                SELECT
+                    TMUP.USER_ID, 
+                    TMUP.SEQ_NO, 
+                    NULL               AS USER_NM, 
+                    NULL               AS ASSWORD, 
+                    NULL               AS PRIV_ID, 
+                    '0'                AS PARENT_USER_FLAG, 
+                    TMUP.BRANCH_ID     AS BRANCH_CODE, 
+                    B.BRANCH_NAME, 
+                    TMUP.BROKER_ID     AS BROKER_CODE, 
+                    MB2.BRANCH_NAME    AS BROKER_NAME, 
+                    TMUP.SUB_BROKER_ID AS BROKER_BRANCH_CODE, 
+                    MB.BRANCH_NAME     AS BROKER_BRANCH_NAME, 
+                    CASE 
+                        WHEN TMUP.EMPLOYEE_ID IS NOT NULL 
+                        AND TMUP.EMPLOYEE_ID != '0000' 
+                            THEN TMUP.EMPLOYEE_ID 
+                        ELSE '0000' 
+                        END            AS EMPLOYEE_ID, 
+                    CASE 
+                        WHEN TMUP.EMPLOYEE_ID IS NOT NULL 
+                        AND TMUP.EMPLOYEE_ID != '0000' 
+                            THEN TMUP.EMPLOYEE_NAME 
+                        ELSE '仲介業者担当' 
+                        END            AS EMPLOYEE_NAME, 
+                    NULL               AS GOVERNOR_FLAG, 
+                    NULL               AS CCS_USER_ID,
+                    NULL               AS MAIL_ADDRESS 
+                FROM
+                    TB_MED_USERS_PRIV TMUP 
+                    LEFT OUTER JOIN BRANCH B 
+                        ON TMUP.BRANCH_ID = B.BRANCH_CODE 
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB 
+                        ON TMUP.BROKER_ID = MB.BROKER_CODE 
+                        AND TMUP.SUB_BROKER_ID = MB.BROKER_BRANCH_CODE 
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB2 
+                        ON TMUP.BROKER_ID = MB2.BROKER_CODE 
+                        AND MB2.BROKER_BRANCH_KIND = '00'
+            ) 
+        WHERE
+            USER_ID = #{userId}
+        ORDER BY
+            SEQ_NO
+        
+    </select>
+    
+    <!-- 
+         SQLID：updateA007MedUser
+         SQL名：ユーザ更新
+         SQLタイプ：insert
+    -->
+    <update
+        id="updateA007MedUser"
+        statementType="PREPARED"
+    >
+        UPDATE /* @EXTAPI_01-007#updateA007MedUser */
+            TB_MED_USERS
+        SET
+            USER_NM             = #{req.userNm},
+            <if test="req.password != null and req.password != ''">
+            PASSWORD            = #{req.password},
+            </if>
+            PRIV_ID             = #{req.privId},
+            BRANCH_ID           = #{req.branchId},
+            BROKER_ID           = #{req.brokerId},
+            SUB_BROKER_ID       = #{req.subBrokerId},
+            EMPLOYEE_ID         = #{req.employeeId},
+            EMPLOYEE_NAME       = #{req.employeeName},
+            GOVERNOR_FLAG       = #{req.governorFlag},
+            CCS_USER_ID         = #{req.ccsUserId},
+            UPTIMESTAMP_USER    = #{req.uptimestampUser},
+            UPTIMESTAMP_TIME    = IFA_DATE_UTIL.IFA_GET_DATE,
+            MAIL_ADDRESS        = #{req.mailAddress}
+        WHERE
+            USER_ID = #{req.userId}
+        
+    </update> 
+    
+     <!-- 
+         SQLID：deleteA008GovMenu
+         SQL名：削除
+         SQLタイプ：delete
+    -->
+    <delete
+        id="deleteA008GovMenu"
+        statementType="PREPARED"
+    >
+        DELETE /* @EXTAPI_01-008#deleteA008GovMenu */
+        FROM TB_MED_GOV_MENU_NEW
+        WHERE USER_ID = #{userId}
+
+    </delete>
+
+     <!-- 
+         SQLID：deleteA008UserPriv
+         SQL名：削除
+         SQLタイプ：delete
+    -->
+    <delete
+        id="deleteA008UserPriv"
+        statementType="PREPARED"
+    >
+        DELETE /* @EXTAPI_01-008#deleteA008UserPriv */
+        FROM TB_MED_USERS_PRIV
+        WHERE USER_ID = #{userId}
+
+    </delete>
+    
+     <!-- 
+         SQLID：deleteA008MedUsers
+         SQL名：削除
+         SQLタイプ：delete
+    -->
+    <delete
+        id="deleteA008MedUsers"
+        statementType="PREPARED"
+    >
+        DELETE /* @EXTAPI_01-008#deleteA008MedUsers */
+        FROM TB_MED_USERS
+        WHERE USER_ID = #{userId}
+
+    </delete>
+
+     <!-- 
+         SQLID：deleteA008VerifyUsers
+         SQL名：削除
+         SQLタイプ：delete
+    -->
+    <delete
+        id="deleteA008VerifyUsers"
+        statementType="PREPARED"
+    >
+        DELETE /* @EXTAPI_01-008#deleteA008VerifyUsers */
+        FROM TB_MED_VERIFY_USERS
+        WHERE USER_ID = #{userId}
+
+    </delete>
+
+    <!-- 
+         SQLID：selectA014
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA014"
+        statementType="PREPARED"
+        resultMap="IfaServiceNowUserDto"
+    >
+        SELECT
+            A.USER_ID
+            , A.USER_NM
+            , A.PRIV_ID
+            , A.BRANCH_ID AS BRANCH_CODE
+            , C.BRANCH_NAME
+            , A.BROKER_ID AS BROKER_CODE
+            , B.BRANCH_NAME AS BROKER_NAME
+            , A.SUB_BROKER_ID AS BROKER_BRANCH_CODE
+            , E.BRANCH_NAME AS BROKER_BRANCH_NAME
+            , A.EMPLOYEE_ID
+            , A.EMPLOYEE_NAME
+            , A.MAIL_ADDRESS
+        FROM
+            TB_MED_USERS A
+            LEFT OUTER JOIN (
+                SELECT
+                    BROKER_CODE
+                    , BRANCH_NAME
+                FROM
+                    MEDIATE_BRANCH
+                WHERE
+                    BROKER_BRANCH_KIND = '00'
+            ) B
+                ON A.BROKER_ID = B.BROKER_CODE
+            LEFT OUTER JOIN BRANCH C
+                ON A.BRANCH_ID = C.BRANCH_CODE
+            LEFT OUTER JOIN MEDIATE_BRANCH E
+                ON A.BROKER_ID = E.BROKER_CODE
+                AND A.SUB_BROKER_ID = E.BROKER_BRANCH_CODE
+        WHERE
+            1 = 1
+            <if test="req.brokerCode != null and req.brokerCode != ''">
+                AND A.BROKER_ID LIKE '%' || #{req.brokerCode} || '%'
+            </if>
+            <if test="req.brokerOrBranchName != null and req.brokerOrBranchName != ''">
+                AND UTL_I18N.TRANSLITERATE(
+                    UPPER(TO_MULTI_BYTE(B.BRANCH_NAME))
+                    , 'KANA_FWKATAKANA'
+                ) LIKE '%' || UTL_I18N.TRANSLITERATE(
+                    UPPER(TO_MULTI_BYTE(#{req.brokerOrBranchName}))
+                    , 'KANA_FWKATAKANA'
+                ) || '%'
+            </if>
+            <if test="req.employeeName != null and req.employeeName != ''">
+                AND UTL_I18N.TRANSLITERATE(
+                    UPPER(TO_MULTI_BYTE(A.USER_NM))
+                    , 'KANA_FWKATAKANA'
+                ) LIKE '%' || UTL_I18N.TRANSLITERATE(
+                    UPPER(TO_MULTI_BYTE(#{req.employeeName}))
+                    , 'KANA_FWKATAKANA'
+                ) || '%'
+            </if>
+            <if test="req.mailAddress != null and req.mailAddress != ''">
+                AND A.MAIL_ADDRESS LIKE '%' || #{req.mailAddress} || '%'
+            </if>
+    </select>
+</mapper>

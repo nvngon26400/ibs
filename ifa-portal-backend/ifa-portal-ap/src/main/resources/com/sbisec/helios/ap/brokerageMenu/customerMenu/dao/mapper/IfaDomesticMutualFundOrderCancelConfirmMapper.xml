@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0401-04_1
+    画面名：国内投信注文取消確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDomesticMutualFundOrderCancelConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaDomesticMutualFundOrderCancelConfirmSql00101" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundOrderCancelConfirmSql001ResponseModel" >
+        <result property="ifaOrderNo" column="IFA_ORDER_NO" typeHandler="StringTypeHandler"/>
+        <result property="ifaOrderSubNo" column="IFA_ORDER_SUB_NO" typeHandler="StringTypeHandler"/>
+        <result property="butenCode" column="BUTEN_CODE" typeHandler="StringTypeHandler"/>
+        <result property="accountNumber" column="ACCOUNT_NUMBER" typeHandler="StringTypeHandler"/>
+        <result property="customerId" column="CUSTOMER_ID" typeHandler="StringTypeHandler"/>
+        <result property="specificAccount" column="SPECIFIC_KBN" typeHandler="StringTypeHandler"/>
+        <result property="fundType" column="FUND_TYPE" typeHandler="StringTypeHandler"/>
+        <result property="fundCodeTimes" column="FUND_CD_KAISU" typeHandler="StringTypeHandler"/>
+        <result property="fundCodeIssues" column="FUND_CD_GOU" typeHandler="StringTypeHandler"/>
+        <result property="orderStatus" column="ORDER_STATUS" typeHandler="StringTypeHandler"/>
+        <result property="tradeCd" column="TRADE_TYPE" typeHandler="StringTypeHandler"/>
+        <result property="tradeKbn" column="TRADE_KBN" typeHandler="StringTypeHandler"/>
+        <result property="unit" column="QUANTITY" typeHandler="StringTypeHandler"/>
+        <result property="amount" column="ORDER_AMOUNT" typeHandler="StringTypeHandler"/>
+        <result property="norikaeYuguKbn" column="NORIKAE_YUGU_KBN" typeHandler="StringTypeHandler"/>
+        <result property="distributionReceiveMethod" column="REINVEST" typeHandler="StringTypeHandler"/>
+        <result property="depositType" column="AZUKARI_KBN" typeHandler="StringTypeHandler"/>
+        <result property="dispatchId" column="DISPATCH_ID" typeHandler="StringTypeHandler"/>
+        <result property="pointType" column="POINT_TYPE" typeHandler="StringTypeHandler"/>
+        <result property="pointFlg" column="POINT_FLG" typeHandler="StringTypeHandler"/>
+        <result property="pointOrder" column="POINT_ORDER" typeHandler="StringTypeHandler"/>
+        <result property="leverageKbn" column="LEVERAGE_KBN" typeHandler="StringTypeHandler"/>
+        <result property="norikaeKanyuKbn" column="NORIKAE_KANYU_KBN" typeHandler="StringTypeHandler"/>
+        <result property="douitsuTukaKuniKbn" column="DOUITSU_TUKA_KUNI_KBN" typeHandler="StringTypeHandler"/>
+        <result property="tashaNorikaeKbn" column="TASHA_NORIKAE_KBN" typeHandler="StringTypeHandler"/>
+        <result property="tankiSellKbn" column="TANKI_SELL_KBN" typeHandler="StringTypeHandler"/>
+        <result property="shokanMaeKbn" column="SHOKAN_MAE_KBN" typeHandler="StringTypeHandler"/>
+        <result property="kanyuKbn" column="KANYU_KBN" typeHandler="StringTypeHandler"/>
+        <result property="jutyuKbn" column="JUTYU_KBN" typeHandler="StringTypeHandler"/>
+        <result property="mokuromiKoufuKbn" column="MOKUROMI_KOUFU_KBN" typeHandler="StringTypeHandler"/>
+        <result property="conflictOfInterestExplain" column="RIEKISOUHAN" typeHandler="StringTypeHandler"/>
+        <result property="checkMokuromi" column="CHECK_MOKUROMI" typeHandler="StringTypeHandler"/>
+        <result property="checkMadoAki" column="CHECK_MADO_AKI" typeHandler="StringTypeHandler"/>
+        <result property="checkHiyou" column="CHECK_HIYOU" typeHandler="StringTypeHandler"/>
+        <result property="checkFukusu" column="CHECK_FUKUSU" typeHandler="StringTypeHandler"/>
+        <result property="checkCompWrnAlert" column="CHECK_COMP_WRN_ALERT" typeHandler="StringTypeHandler"/>
+        <result property="shikinSeikakuKbn" column="SHIKIN_SEIKAKU_KBN" typeHandler="StringTypeHandler"/>
+        <result property="userId" column="USER_ID" typeHandler="StringTypeHandler"/>
+        <result property="cancelUserId" column="CANCEL_USER_ID" typeHandler="StringTypeHandler"/>
+        <result property="secId" column="ORDER_TYPE" typeHandler="StringTypeHandler"/>
+        <result property="ecOrderNo" column="ORDER_NUM" typeHandler="StringTypeHandler"/>
+        <result property="acceptDay" column="ACCEPT_DATE" typeHandler="StringTypeHandler"/>
+        <result property="acceptTime" column="ACCEPT_TIME" typeHandler="StringTypeHandler"/>
+        <result property="shubetu" column="SHUBETU" typeHandler="StringTypeHandler"/>
+        <result property="errCode" column="CODE" typeHandler="StringTypeHandler"/>
+        <result property="errMessage" column="MESSAGE" typeHandler="StringTypeHandler"/>
+        <result property="estimatePrice" column="ESTIMATE_PRICE" typeHandler="StringTypeHandler"/>
+        <result property="contractAmount" column="AMOUNT" typeHandler="StringTypeHandler"/>
+        <result property="charge" column="COMMISSION" typeHandler="StringTypeHandler"/>
+        <result property="consumptionTax" column="CONSUMPTION_TAX" typeHandler="StringTypeHandler"/>
+        <result property="yieldTax" column="CAPITAL_GAIN_TAX" typeHandler="StringTypeHandler"/>
+        <result property="settlementAmount" column="NET_AMOUNT" typeHandler="StringTypeHandler"/>
+        <result property="quantityY" column="QUANTITY_Y" typeHandler="StringTypeHandler"/>
+        <result property="acPosition" column="AC_POSITION" typeHandler="StringTypeHandler"/>
+        <result property="acPositionAfter" column="AC_POSITION_AFTER" typeHandler="StringTypeHandler"/>
+        <result property="acBalance" column="AC_BALANCE" typeHandler="StringTypeHandler"/>
+        <result property="acBalanceAfter" column="AC_BALANCE_AFTER" typeHandler="StringTypeHandler"/>
+        <result property="contractDate" column="TRADE_DATE" typeHandler="StringTypeHandler"/>
+        <result property="deliveryDate" column="SETTLEMENT_DATE" typeHandler="StringTypeHandler"/>
+        <result property="isaBuyLimitBefore" column="ISA_BUY_LIMIT_BEFORE" typeHandler="StringTypeHandler"/>
+        <result property="isaBuyLimitAfter" column="ISA_BUY_LIMIT_AFTER" typeHandler="StringTypeHandler"/>
+        <result property="orderDate" column="ORDER_DATE" typeHandler="StringTypeHandler"/>
+        <result property="fundCloseTime" column="FUNC_CLOSED_TIME" typeHandler="StringTypeHandler"/>
+        <result property="jrnisaTransferAmount" column="JRNISA_TRANSFER_AMOUNT" typeHandler="StringTypeHandler"/>
+        <result property="point" column="POINT" typeHandler="StringTypeHandler"/>
+        <result property="pointAfter" column="POINT_AFTER" typeHandler="StringTypeHandler"/>
+        <result property="brokerCode" column="BROKER_CODE" typeHandler="StringTypeHandler"/>
+        <result property="brokerChargeCode" column="INTERMEDIARY_EMP_CD" typeHandler="StringTypeHandler"/>
+        <result property="createTime" column="CREATE_TIME" typeHandler="StringTypeHandler"/>
+        <result property="createUser" column="CREATE_USER" typeHandler="StringTypeHandler"/>
+        <result property="updateTime" column="UPDATE_TIME" typeHandler="StringTypeHandler"/>
+        <result property="updateUser" column="UPDATE_USER" typeHandler="StringTypeHandler"/>
+        <result property="ccsSendDate" column="CCS_SEND_DATE" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaDomesticMutualFundOrderCancelConfirmSql00102" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundOrderCancelConfirmSql001ResponseModel" >
+        <result property="ifaOrderNo" column="IFA_ORDER_NO" typeHandler="StringTypeHandler"/>
+    </resultMap>
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：注文取消前の注文登録（MAX IFA注文サブ番号取得）
+         SQLタイプ：select
+    -->
+    <select id="selectIfaDomesticMutualFundOrderCancelConfirmSql00101"
+        parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundOrderCancelConfirmSql001RequestModel"
+        resultMap="ResultMapIfaDomesticMutualFundOrderCancelConfirmSql00101" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0401-04_1#Sql001 */
+            IFA_ORDER_NO
+            , IFA_ORDER_SUB_NO
+            , BUTEN_CODE
+            , ACCOUNT_NUMBER
+            , CUSTOMER_ID
+            , SPECIFIC_KBN
+            , FUND_TYPE
+            , FUND_CD_KAISU
+            , FUND_CD_GOU
+            , ORDER_STATUS
+            , TRADE_TYPE
+            , TRADE_KBN
+            , QUANTITY
+            , ORDER_AMOUNT
+            , NORIKAE_YUGU_KBN
+            , REINVEST
+            , AZUKARI_KBN
+            , DISPATCH_ID
+            , POINT_TYPE
+            , POINT_FLG
+            , POINT_ORDER
+            , LEVERAGE_KBN
+            , NORIKAE_KANYU_KBN
+            , DOUITSU_TUKA_KUNI_KBN
+            , TASHA_NORIKAE_KBN
+            , TANKI_SELL_KBN
+            , SHOKAN_MAE_KBN
+            , KANYU_KBN
+            , JUTYU_KBN
+            , MOKUROMI_KOUFU_KBN
+            , RIEKISOUHAN
+            , CHECK_MOKUROMI
+            , CHECK_MADO_AKI
+            , CHECK_HIYOU
+            , CHECK_FUKUSU
+            , CHECK_COMP_WRN_ALERT
+            , SHIKIN_SEIKAKU_KBN
+            , USER_ID
+            , CANCEL_USER_ID
+            , ORDER_TYPE
+            , ORDER_NUM
+            , ACCEPT_DATE
+            , ACCEPT_TIME
+            , SHUBETU
+            , CODE
+            , MESSAGE
+            , ESTIMATE_PRICE
+            , AMOUNT
+            , COMMISSION
+            , CONSUMPTION_TAX
+            , CAPITAL_GAIN_TAX
+            , NET_AMOUNT
+            , QUANTITY_Y
+            , AC_POSITION
+            , AC_POSITION_AFTER
+            , AC_BALANCE
+            , AC_BALANCE_AFTER
+            , TRADE_DATE
+            , SETTLEMENT_DATE
+            , ISA_BUY_LIMIT_BEFORE
+            , ISA_BUY_LIMIT_AFTER
+            , ORDER_DATE
+            , FUNC_CLOSED_TIME
+            , JRNISA_TRANSFER_AMOUNT
+            , POINT
+            , POINT_AFTER
+            , BROKER_CODE
+            , INTERMEDIARY_EMP_CD
+            , CREATE_TIME
+            , CREATE_USER
+            , UPDATE_TIME
+            , UPDATE_USER
+            , CCS_SEND_DATE
+        FROM 
+            CORDYS.JP_TOUSHIN_ORDER
+        WHERE 
+            ORDER_NUM = #{req.ecOrderNo}
+            AND BUTEN_CODE = #{req.butenCode}
+            AND ACCEPT_DATE &gt;= #{req.orderDate}
+            AND TRIM(TRADE_TYPE) = TRIM(#{req.tradeCd})
+            AND IFA_ORDER_SUB_NO = (
+            SELECT
+                MAX(IFA_ORDER_SUB_NO) AS MAX_IFA_ORDER_SUB_NO
+            FROM CORDYS.JP_TOUSHIN_ORDER
+            WHERE ORDER_NUM = #{req.ecOrderNo}
+                AND BUTEN_CODE = #{req.butenCode}
+                AND ACCEPT_DATE &gt;= #{req.orderDate}
+                AND TRIM(TRADE_TYPE) = TRIM(#{req.tradeCd})
+          )
+    </select>
+    <!-- 
+        SQLID：Sql001
+        SQL名：シーケンスオブジェクトの取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDomesticMutualFundOrderCancelConfirmSql00102"
+        parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundOrderCancelConfirmSql001RequestModel"
+        resultMap="ResultMapIfaDomesticMutualFundOrderCancelConfirmSql00102" statementType="PREPARED">
+        SELECT  /* @SQLID=SUB0202_0401-04_1#Sql001 */
+              CONCAT(TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD'),
+              LPAD(CORDYS.SEQ_JP_TOUSHIN_ORDER.NEXTVAL, 10, '0')) AS IFA_ORDER_NO
+        FROM
+            DUAL
+    </select>
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：注文取消前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaDomesticMutualFundOrderCancelConfirmSql00101" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0401-04_1#Sql001 */
+        INTO CORDYS.JP_TOUSHIN_ORDER (
+            IFA_ORDER_NO
+            , IFA_ORDER_SUB_NO
+            , BUTEN_CODE
+            , ACCOUNT_NUMBER
+            , CUSTOMER_ID
+            , SPECIFIC_KBN
+            , FUND_TYPE
+            , FUND_CD_KAISU
+            , FUND_CD_GOU
+            , ORDER_STATUS
+            , TRADE_TYPE
+            , TRADE_KBN
+            , QUANTITY
+            , ORDER_AMOUNT
+            , NORIKAE_YUGU_KBN
+            , REINVEST
+            , AZUKARI_KBN
+            , DISPATCH_ID
+            , POINT_TYPE
+            , POINT_FLG
+            , POINT_ORDER
+            , LEVERAGE_KBN
+            , NORIKAE_KANYU_KBN
+            , DOUITSU_TUKA_KUNI_KBN
+            , TASHA_NORIKAE_KBN
+            , TANKI_SELL_KBN
+            , SHOKAN_MAE_KBN
+            , KANYU_KBN
+            , JUTYU_KBN
+            , MOKUROMI_KOUFU_KBN
+            , RIEKISOUHAN
+            , CHECK_MOKUROMI
+            , CHECK_MADO_AKI
+            , CHECK_HIYOU
+            , CHECK_FUKUSU
+            , CHECK_COMP_WRN_ALERT
+            , SHIKIN_SEIKAKU_KBN
+            , USER_ID
+            , CANCEL_USER_ID
+            , ORDER_TYPE
+            , ORDER_NUM
+            , ACCEPT_DATE
+            , ACCEPT_TIME
+            , SHUBETU
+            , CODE
+            , MESSAGE
+            , ESTIMATE_PRICE
+            , AMOUNT
+            , COMMISSION
+            , CONSUMPTION_TAX
+            , CAPITAL_GAIN_TAX
+            , NET_AMOUNT
+            , QUANTITY_Y
+            , AC_POSITION
+            , AC_POSITION_AFTER
+            , AC_BALANCE
+            , AC_BALANCE_AFTER
+            , TRADE_DATE
+            , SETTLEMENT_DATE
+            , ISA_BUY_LIMIT_BEFORE
+            , ISA_BUY_LIMIT_AFTER
+            , ORDER_DATE
+            , FUNC_CLOSED_TIME
+            , JRNISA_TRANSFER_AMOUNT
+            , POINT
+            , POINT_AFTER
+            , BROKER_CODE
+            , INTERMEDIARY_EMP_CD
+            , CREATE_TIME
+            , CREATE_USER
+            , UPDATE_TIME
+            , UPDATE_USER
+            , CCS_SEND_DATE
+        )
+        VALUES(
+             #{req.ifaOrderNo}              <!-- IFA注文番号 -->
+            ,'1'        					<!-- IFA注文サブ番号 -->
+            ,#{req.butenCode}               <!-- 部店コード -->
+            ,#{req.accountNumber}           <!-- 口座番号 -->
+            ,#{req.customerId}              <!-- 顧客ID -->
+            <if test='" ".equals(req.depositType) or "0".equals(req.depositType) or "1".equals(req.depositType) or "4".equals(req.depositType) or "8".equals(req.depositType) or "H".equals(req.depositType) or "I".equals(req.depositType)'>
+                ,#{req.specificAccount}     <!-- 特定口座区分 -->
+            </if>
+            <if test='"5".equals(req.depositType) or "6".equals(req.depositType) or "7".equals(req.depositType) or "J".equals(req.depositType)'>
+                ,#{req.jrSpecificAccount}   <!-- 特定口座区分 -->
+            </if>
+            <if test='"T".equals(req.fundType)'>
+            	,'1'               			<!-- ファンドタイプ -->
+            </if>
+            <if test='"Y".equals(req.fundType)'>
+            	,'2'               			<!-- ファンドタイプ -->
+            </if>
+            ,#{req.fundCodeTimes}           <!-- ファンドコード（回数） -->
+            ,#{req.fundCodeIssues}          <!-- ファンドコード（号） -->
+            ,'2'                            <!-- 注文状況 -->
+            ,#{req.tradeCd}                 <!-- 取引種別 -->
+            ,#{req.tradeKbn}                <!-- 売買区分 -->
+            ,#{req.unit}                    <!-- 口数 -->
+            ,#{req.amount}                  <!-- 金額 -->
+            ,#{req.norikaeYuguKbn}          <!-- 乗換優遇区分 -->
+            ,null                           <!-- 分配金受取方法 -->
+            ,#{req.depositType}             <!-- 預り区分 -->
+            ,null                           <!-- 目論見書チェック区分 -->
+            ,#{req.pointType}          		<!-- ポイント種別 -->
+            ,null                           <!-- ポイント利用 -->
+            ,#{req.point}                   <!-- 注文時ポイント -->
+            ,null                           <!-- レバレッジ投資信託 -->
+            ,null                           <!-- 乗換勧誘 -->
+            ,null                           <!-- 同一通貨/同一国の乗換 -->
+            ,null                           <!-- 他社間投信乗換勧誘 -->
+            ,null                           <!-- 短期売却確認 -->
+            ,null                           <!-- 償還前売却確認 -->
+            ,null                           <!-- 勧誘区分 -->
+            ,null                           <!-- 受注方法 -->
+            ,null                           <!-- 目論見書の交付方法 -->
+            ,null                           <!-- 利益相反可能性の説明 -->
+            ,null                           <!-- 確認項目.目論見書補完書面の確認 -->
+            ,null                           <!-- 確認項目.窓空きファンドの注意事項に同意 -->
+            ,null                           <!-- 確認項目.費用について説明済 -->
+            ,null                           <!-- 確認項目.複数取引業者での手数料等明示済 -->
+            ,null                           <!-- アラート内容確認.コンプラチェックワーニング確認 -->
+            ,null                           <!-- 資金性格区分 -->
+            ,#{req.cancelUserId}            <!-- ユーザーＩＤ -->
+            ,#{req.cancelUserId}            <!-- 取消ユーザーID -->
+            <if test='"T".equals(req.fundType)'>
+                ,'T'                        <!-- 商品区分 -->
+            </if>
+            <if test='"Y".equals(req.fundType)'>
+                ,'Y'                        <!-- 商品区分 -->
+            </if>
+            ,#{req.ecOrderNo}               <!-- EC受注番号 -->
+            ,null                           <!-- 受注日 -->
+            ,null                           <!-- 受注時刻 -->
+            ,null                           <!-- 種別 -->
+            ,null                           <!-- エラーコード -->
+            ,null                           <!-- エラーメッセージ -->
+            ,#{req.quoteUnitPrice}          <!-- 与信チェック用時価 -->
+            ,#{req.contractAmount}          <!-- 約定金額（概算） -->
+            ,#{req.charge}                  <!-- 手数料（概算） -->
+            ,#{req.consumptionTax}          <!-- 消費税（概算） -->
+            ,#{req.yieldTax}                <!-- 譲渡益税（概算） -->
+            ,#{req.settlementAmount}        <!-- 精算金額（概算） -->
+            ,null                           <!-- 購入・解約の口数 -->
+            ,null                           <!-- 売却可能数量 -->
+            ,null                           <!-- 注文後の売却可能数量 -->
+            ,null                           <!-- 買付可能金額 -->
+            ,null                           <!-- 注文後の買付可能金額 -->
+            ,#{req.contractDate}            <!-- 約定予定日 -->
+            ,#{req.deliveryDate}            <!-- 受渡予定日 -->
+            ,null                           <!-- 注文前のISA買付可能枠 -->
+            ,null                           <!-- 注文後のISA買付可能枠 -->
+            ,null                           <!-- 発注日 -->
+            ,null                           <!-- ファンド締切時刻 -->
+            ,null                           <!-- ジュニアNISA振替金額 -->
+            ,null                           <!-- ポイント -->
+            ,null                           <!-- 利用後のポイント -->
+            ,#{req.brokerCode}              <!-- 仲介業者コード -->
+            ,#{req.brokerChargeCode}        <!-- 仲介業者営業員コード -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE     <!-- 作成日時 -->
+            ,#{req.creatUserId}                  <!-- 作成者 -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE     <!-- 更新日時 -->
+            ,#{req.updateUserId}                  <!-- 更新者 -->
+            ,null                           <!-- CCS送付日 -->
+        )
+    </insert>
+    
+    <insert id="insertIfaDomesticMutualFundOrderCancelConfirmSql00102" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0401-04_1#Sql001 */ 
+        INTO CORDYS.JP_TOUSHIN_ORDER (
+            IFA_ORDER_NO
+            , IFA_ORDER_SUB_NO
+            , BUTEN_CODE
+            , ACCOUNT_NUMBER
+            , CUSTOMER_ID
+            , SPECIFIC_KBN
+            , FUND_TYPE
+            , FUND_CD_KAISU
+            , FUND_CD_GOU
+            , ORDER_STATUS
+            , TRADE_TYPE
+            , TRADE_KBN
+            , QUANTITY
+            , ORDER_AMOUNT
+            , NORIKAE_YUGU_KBN
+            , REINVEST
+            , AZUKARI_KBN
+            , DISPATCH_ID
+            , POINT_TYPE
+            , POINT_FLG
+            , POINT_ORDER
+            , LEVERAGE_KBN
+            , NORIKAE_KANYU_KBN
+            , DOUITSU_TUKA_KUNI_KBN
+            , TASHA_NORIKAE_KBN
+            , TANKI_SELL_KBN
+            , SHOKAN_MAE_KBN
+            , KANYU_KBN
+            , JUTYU_KBN
+            , MOKUROMI_KOUFU_KBN
+            , RIEKISOUHAN
+            , CHECK_MOKUROMI
+            , CHECK_MADO_AKI
+            , CHECK_HIYOU
+            , CHECK_FUKUSU
+            , CHECK_COMP_WRN_ALERT
+            , SHIKIN_SEIKAKU_KBN
+            , USER_ID
+            , CANCEL_USER_ID
+            , ORDER_TYPE
+            , ORDER_NUM
+            , ACCEPT_DATE
+            , ACCEPT_TIME
+            , SHUBETU
+            , CODE
+            , MESSAGE
+            , ESTIMATE_PRICE
+            , AMOUNT
+            , COMMISSION
+            , CONSUMPTION_TAX
+            , CAPITAL_GAIN_TAX
+            , NET_AMOUNT
+            , QUANTITY_Y
+            , AC_POSITION
+            , AC_POSITION_AFTER
+            , AC_BALANCE
+            , AC_BALANCE_AFTER
+            , TRADE_DATE
+            , SETTLEMENT_DATE
+            , ISA_BUY_LIMIT_BEFORE
+            , ISA_BUY_LIMIT_AFTER
+            , ORDER_DATE
+            , FUNC_CLOSED_TIME
+            , JRNISA_TRANSFER_AMOUNT
+            , POINT
+            , POINT_AFTER
+            , BROKER_CODE
+            , INTERMEDIARY_EMP_CD
+            , CREATE_TIME
+            , CREATE_USER
+            , UPDATE_TIME
+            , UPDATE_USER
+            , CCS_SEND_DATE
+        )
+        VALUES(
+             #{req.ifaOrderNo}                 <!-- IFA注文番号 -->
+            ,#{req.ifaOrderSubNo} + 1          <!-- IFA注文サブ番号 -->
+            ,#{req.butenCode}                  <!-- 部店コード -->
+            ,#{req.accountNumber}              <!-- 口座番号 -->
+            ,#{req.customerId}                 <!-- 顧客ID -->
+            ,#{req.specificAccount}            <!-- 特定口座区分 -->
+            <if test='"T".equals(req.fundType)'>
+            	,'1'               			   <!-- ファンドタイプ -->
+            </if>
+            <if test='"Y".equals(req.fundType)'>
+            	,'2'               			   <!-- ファンドタイプ -->
+            </if>
+            ,#{req.fundCodeTimes}              <!-- ファンドコード（回数） -->
+            ,#{req.fundCodeIssues}             <!-- ファンドコード（号） -->
+            ,'2'                               <!-- 注文状況 -->
+            ,#{req.tradeCd}                    <!-- 取引種別 -->
+            ,#{req.tradeKbn}                   <!-- 売買区分 -->
+            ,#{req.unit}                       <!-- 口数 -->
+            ,#{req.amount}                     <!-- 金額 -->
+            ,#{req.norikaeYuguKbn}             <!-- 乗換優遇区分 -->
+            ,#{req.distributionReceiveMethod}  <!-- 分配金受取方法 -->
+            ,#{req.depositType}                <!-- 預り区分 -->
+            ,#{req.dispatchId}                 <!-- 目論見書チェック区分 -->
+            ,#{req.pointType}                  <!-- ポイント種別 -->
+            ,#{req.pointFlg}                   <!-- ポイント利用 -->
+            ,#{req.point}                      <!-- 注文時ポイント -->
+            ,#{req.leverageKbn}                <!-- レバレッジ投資信託 -->
+            ,#{req.norikaeKanyuKbn}            <!-- 乗換勧誘 -->
+            ,#{req.douitsuTukaKuniKbn}         <!-- 同一通貨/同一国の乗換 -->
+            ,#{req.tashaNorikaeKbn}            <!-- 他社間投信乗換勧誘 -->
+            ,#{req.tankiSellKbn}               <!-- 短期売却確認 -->
+            ,#{req.shokanMaeKbn}               <!-- 償還前売却確認 -->
+            ,#{req.kanyuKbn}                   <!-- 勧誘区分 -->
+            ,#{req.jutyuKbn}                   <!-- 受注方法 -->
+            ,#{req.mokuromiKoufuKbn}           <!-- 目論見書の交付方法 -->
+            ,#{req.conflictOfInterestExplain}  <!-- 利益相反可能性の説明 -->
+            ,#{req.checkMokuromi}              <!-- 確認項目.目論見書補完書面の確認 -->
+            ,#{req.checkMadoAki}               <!-- 確認項目.窓空きファンドの注意事項に同意 -->
+            ,#{req.checkHiyou}                 <!-- 確認項目.費用について説明済 -->
+            ,#{req.checkFukusu}                <!-- 確認項目.複数取引業者での手数料等明示済 -->
+            ,#{req.checkCompWrnAlert}          <!-- アラート内容確認.コンプラチェックワーニング確認 -->
+            ,#{req.shikinSeikakuKbn}           <!-- 資金性格区分 -->
+            ,#{req.userId}                     <!-- ユーザーＩＤ -->
+            ,#{req.cancelUserId}               <!-- 取消ユーザーID -->
+            <if test='"T".equals(req.fundType)'>
+                ,'T'                      <!-- 商品区分 -->
+            </if>
+            <if test='"Y".equals(req.fundType)'>
+                ,'Y'                      <!-- 商品区分 -->
+            </if>
+            ,#{req.ecOrderNo}             <!-- EC受注番号 -->
+            ,null                         <!-- 受注日 -->
+            ,null                         <!-- 受注時刻 -->
+            ,null                         <!-- 種別 -->
+            ,null                         <!-- エラーコード -->
+            ,null                         <!-- エラーメッセージ -->
+            ,#{req.quoteUnitPrice}        <!-- 与信チェック用時価 -->
+            ,#{req.contractAmount}        <!-- 約定金額（概算） -->
+            ,#{req.charge}                <!-- 手数料（概算） -->
+            ,#{req.consumptionTax}        <!-- 消費税（概算） -->
+            ,#{req.yieldTax}              <!-- 譲渡益税（概算） -->
+            ,#{req.settlementAmount}      <!-- 精算金額（概算） -->
+            ,null                         <!-- 購入・解約の口数 -->
+            ,null                         <!-- 売却可能数量 -->
+            ,null                         <!-- 注文後の売却可能数量 -->
+            ,null                         <!-- 買付可能金額 -->
+            ,null                         <!-- 注文後の買付可能金額 -->
+            ,#{req.contractDate}          <!-- 約定予定日 -->
+            ,#{req.deliveryDate}          <!-- 受渡予定日 -->
+            ,null                         <!-- 注文前のISA買付可能枠 -->
+            ,null                         <!-- 注文後のISA買付可能枠 -->
+            ,null                         <!-- 発注日 -->
+            ,null                         <!-- ファンド締切時刻 -->
+            ,null                         <!-- ジュニアNISA振替金額 -->
+            ,null                         <!-- ポイント -->
+            ,null                         <!-- 利用後のポイント -->
+            ,#{req.brokerCode}            <!-- 仲介業者コード -->
+            ,#{req.brokerChargeCode}      <!-- 仲介業者営業員コード -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE   <!-- 作成日時 -->
+            ,#{req.creatUserId}           <!-- 作成者 -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE   <!-- 更新日時 -->
+            ,#{req.updateUserId}          <!-- 更新者 -->
+            ,null                         <!-- CCS送付日 -->
+        )
+    </insert>
+    
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：注文取消後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDomesticMutualFundOrderCancelConfirmSql002" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0401-04_1#Sql002 */
+            CORDYS.JP_TOUSHIN_ORDER
+        <set>
+            <if test='req.successApi002 == true' >
+                , ACCEPT_TIME = #{req.acceptTime}           <!-- EC受付時刻 -->
+            </if>
+            , ACCEPT_DATE = #{req.acceptDate}               <!-- EC受付年月日 -->
+            , SHUBETU     = #{req.shubetu}                  <!-- 種別 -->
+            , CODE        = #{req.errCode}                  <!-- エラーコード -->
+            , MESSAGE     = #{req.errMessage}               <!-- IFA注文番号 -->
+            , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE      <!-- 更新日時 -->
+            , UPDATE_USER = #{req.userId}                   <!-- 更新者 -->
+        </set>
+        <where>
+            IFA_ORDER_NO = #{req.ifaOrderNumber}            <!-- IFA注文番号 -->
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNumber} <!-- IFA注文サブ番号 -->
+        </where>
+    </update>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：注文取消後の注文更新(発注がエラーの場合(API応答なし))
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDomesticMutualFundOrderCancelConfirmSql002b" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0401-04_1#Sql002 */
+            CORDYS.JP_TOUSHIN_ORDER
+        <set>
+            , ACCEPT_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')      <!-- EC受付年月日 -->
+            , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE                   <!-- 更新日時 -->
+            , UPDATE_USER = #{req.userId}                                <!-- 更新者 -->
+        </set>
+        <where>
+            IFA_ORDER_NO = #{req.ifaOrderNumber}            <!-- IFA注文番号 -->
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNumber} <!-- IFA注文サブ番号 -->
+        </where>
+    </update>
+    
+</mapper>

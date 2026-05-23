@@ -1,0 +1,21 @@
+{
+    "systemIds": {
+        "ifap-xapi-sys-service-now": [
+            "/extapi/servicenow/ifaRefBranchListByBranchKind",
+            "/extapi/servicenow/ifaRefBrokerBranchListByBranchCode",
+            "/extapi/servicenow/ifaRefSubBrokerBranchListByBrokerCode",
+            "/extapi/servicenow/ifaRefBrokerChargeListByBrokerAndBrokerBranchCode",
+            "/extapi/servicenow/ifaCreUserAccountAndAcl",
+            "/extapi/servicenow/ifaRefUserAccountAndAclInfoByUserId",
+            "/extapi/servicenow/ifaUpdUserAccountAndAcl",
+            "/extapi/servicenow/ifaDelUserAccountAndAcl",
+            "/extapi/servicenow/ifaRefPrivList",
+            "/extapi/servicenow/ifaRefAclByPrivId",
+            "/extapi/servicenow/ifaDelAvailableMenuListByUserId",
+            "/extapi/servicenow/ifaCreAvailableMenuListByUserId",
+            "/extapi/servicenow/ifaRefAvailableMenuListByUserId",
+            "/extapi/servicenow/ifaRefUserAccountAndAcl",
+            "/error"
+        ]
+    }
+}

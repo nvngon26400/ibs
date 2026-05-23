@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DisclaimerB5H" pageWidth="728" pageHeight="515" orientation="Landscape" columnWidth="698" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" uuid="30d6d2e0-0e8c-44c2-80cc-c2b60ffca6f3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="src\main\jasper\EtcDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="dealerName" class="java.lang.String"/>
+	<field name="registNo" class="java.lang.String"/>
+	<field name="msg1" class="java.lang.String"/>
+	<field name="msg2" class="java.lang.String"/>
+	<field name="instrumentsFirms" class="java.lang.String"/>
+	<field name="registrationNumber" class="java.lang.String"/>
+	<field name="memberAssociations" class="java.lang.String"/>
+	<field name="pageNumber" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="485" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="10" width="700" height="55" uuid="4a9a8931-5f98-415a-905d-ddd91acb12ab"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msg1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="101" width="80" height="12" uuid="4f699f5b-e3f9-47f0-b33d-e91fbf2f3c96"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<text><![CDATA[商号　　：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="101" width="620" height="12" uuid="96bf0715-e01c-44c9-878b-bb84026be957"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dealerName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="121" width="80" height="12" uuid="186f6d7e-f69c-4de9-a4ec-3bb6779303f4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<text><![CDATA[登録番号：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="121" width="620" height="12" uuid="ccfdb362-50de-4657-8568-ff0165f4e4f2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{registNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="141" width="700" height="24" uuid="f6da67ae-c3ad-4f99-b951-32dec933c26a"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msg2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="242" width="140" height="12" uuid="8baf1acc-a667-417d-9597-b1aaeb9c4a66"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<text><![CDATA[所属金融商品取引業者：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="242" width="560" height="12" uuid="7d09fd2c-8418-43f6-98e5-5f8a86b75c21"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{instrumentsFirms}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="262" width="140" height="12" uuid="113fe52f-15fc-4bf5-8e5f-6a08ab2d7469"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<text><![CDATA[登録番号　　　　　　：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="261" width="560" height="12" uuid="784b0a05-c911-42d6-9f69-485477d9cbaf"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{registrationNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="282" width="140" height="12" uuid="d8fd6459-55b9-4968-9c24-3ce605ce6f20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<text><![CDATA[加入協会　　　　　　：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="282" width="500" height="40" uuid="303d2cad-300d-4016-9973-863e0759ff66"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{memberAssociations}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="473" width="121" height="12" uuid="704cb8a2-e094-4f0f-8e37-edc91e083752"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="html">
+					<font fontName="IPAexGothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pageNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

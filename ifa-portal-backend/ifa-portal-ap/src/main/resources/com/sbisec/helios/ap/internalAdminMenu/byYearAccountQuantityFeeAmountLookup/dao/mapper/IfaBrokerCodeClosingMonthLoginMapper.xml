@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0406-01_1
+    画面名：仲介業者決算月設定
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.mapper.IfaBrokerCodeClosingMonthLoginMapper">
+    
+    <resultMap id="ResultMapIfaBrokerCodeClosingMonthLoginSql001" type="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.model.IfaBrokerCodeClosingMonthLoginSql001ResponseModel">   
+        <result property="brokerName" column="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaBrokerCodeClosingMonthLoginSql002" type="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.model.IfaBrokerCodeClosingMonthLoginSql002ResponseModel">   
+    </resultMap>
+    <resultMap id="ResultMapIfaBrokerCodeClosingMonthLoginSql003" type="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.model.IfaBrokerCodeClosingMonthLoginSql003ResponseModel">   
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：仲介業者決算月マスタ登録･更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaBrokerCodeClosingMonthLoginSql004" statementType="PREPARED">
+        MERGE /* @SQLID=SUB0406-01_1#Sql004 */
+        INTO CORDYS.M_MEDIATE_CLOSING_MONTH A
+        USING (
+            SELECT
+                #{req.brokerCode} AS BROKER_CODE,
+                #{req.settingClosingMonth} AS CLOSING_MONTH,
+                #{req.userName} AS USER_NAME,
+                SYSDATE AS CREATE_DATE
+            FROM DUAL
+        ) B
+        ON (
+            A.BROKER_CODE = B.BROKER_CODE
+        )
+        WHEN MATCHED THEN
+            UPDATE SET
+                A.CLOSING_MONTH = B.CLOSING_MONTH,
+                A.UPDATE_BY = B.USER_NAME,
+                A.UPDATE_DATE = B.CREATE_DATE
+        WHEN NOT MATCHED THEN
+            INSERT (
+                BROKER_CODE,
+                CLOSING_MONTH,
+                CREATE_BY,
+                CREATE_DATE
+            ) VALUES (
+                B.BROKER_CODE,
+                B.CLOSING_MONTH,
+                B.USER_NAME,
+                B.CREATE_DATE
+            )     
+    </update>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：仲介業者名取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrokerCodeClosingMonthLoginSql001" resultMap="ResultMapIfaBrokerCodeClosingMonthLoginSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0406-01_1#Sql001 */
+            B.BRANCH_NAME AS brokerName
+        FROM
+            CORDYS.MEDIATE_BRANCH B
+        <where>
+            <if test="req.brokerCode != null and req.brokerCode != '' ">
+               B.BROKER_CODE = #{req.brokerCode} 
+               AND B.BROKER_BRANCH_KIND = '00'
+            </if> 
+            <choose>
+                     <when test="req.brokerChargeList != null and !req.brokerChargeList.isEmpty()">
+                        AND (B.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR B.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                    </when>
+            </choose>
+        </where>
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：仲介業者仲介業者決算月取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrokerCodeClosingMonthLoginSql002" resultMap="ResultMapIfaBrokerCodeClosingMonthLoginSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0406-01_1#Sql002 */
+            A.CLOSING_MONTH AS closingMonth
+        FROM
+            CORDYS.M_MEDIATE_CLOSING_MONTH A
+        <where>
+            <if test="req.brokerCode != null and req.brokerCode != '' ">
+               AND A.BROKER_CODE = #{req.brokerCode} 
+            </if> 
+            <choose>
+                <when test="req.brokerChargeList != null and !req.brokerChargeList.isEmpty()">
+                        AND (A.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR A.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                    </when>
+            </choose>
+        </where>
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：仲介業者期初年月取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrokerCodeClosingMonthLoginSql003" resultMap="ResultMapIfaBrokerCodeClosingMonthLoginSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0406-01_1#Sql003 */
+            C.START_YM AS BeginYearMonth
+        FROM
+            CORDYS.MEDIATE_BUSINESS_REPORT C
+        <where>
+            <if test="req.brokerCode != null and req.brokerCode != '' ">
+               AND C.BROKER_CODE = #{req.brokerCode} 
+            </if> 
+            <choose>
+                <when test="req.brokerChargeList != null and !req.brokerChargeList.isEmpty()">
+                        AND (C.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR C.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                    </when>
+            </choose>
+            AND C.CLOSING_KBN = '0'
+        </where>
+    </select>
+
+</mapper>

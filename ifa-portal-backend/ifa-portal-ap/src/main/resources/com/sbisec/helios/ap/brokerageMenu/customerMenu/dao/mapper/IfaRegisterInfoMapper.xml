@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0701-01
+    画面名：登録情報
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaRegisterInfoMapper">
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：優先表示分類情報取得
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaRegisterInfoListSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaRegisterInfoResponseSql001Model" >
+        <result property="categoryExtensionCd"   column="EXTENSION_CD" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="categoryExtensionName" column="NAME"         typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <select id="selectIfaRegisterInfoSql001" resultMap="ResultMapIfaRegisterInfoListSql001" statementType="PREPARED">
+        
+        SELECT
+          TO_NUMBER(CODE_1)  AS SORT_KEY
+          , CODE_2 AS EXTENSION_CD
+          , NAME 
+        FROM
+          M_CODE     <!-- コードマスタ  -->
+        WHERE
+          START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') 
+          AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') 
+          AND CODE_TYPE = '54' 
+        ORDER BY
+          SORT_KEY
+        
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：優先表示分類ヘッダ取得
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaRegisterInfoListSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaRegisterInfoResponseSql002Model" >
+          <result property="inforExtensionCd"   column="EXTENSION_CD"        typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="extensionDetailCd"  column="EXTENSION_DETAIL_CD" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="inforExtensionName" column="EXTENSION_NAME"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="remarks"            column="REMARKS"             typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="displaySeq"         column="DISPLAY_SEQ"         typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="maxColumn"          column="MAX_COLUMN"          typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailDisplayFlg"   column="HEADER_DISPLAY_FLG"  typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue01"      column="HEADER_VALUE01"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue02"      column="HEADER_VALUE02"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue03"      column="HEADER_VALUE03"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue04"      column="HEADER_VALUE04"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue05"      column="HEADER_VALUE05"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue06"      column="HEADER_VALUE06"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue07"      column="HEADER_VALUE07"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue08"      column="HEADER_VALUE08"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue09"      column="HEADER_VALUE09"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue10"      column="HEADER_VALUE10"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue11"      column="HEADER_VALUE11"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue12"      column="HEADER_VALUE12"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue13"      column="HEADER_VALUE13"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue14"      column="HEADER_VALUE14"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue15"      column="HEADER_VALUE15"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue16"      column="HEADER_VALUE16"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <select id="selectIfaRegisterInfoSql002" resultMap="ResultMapIfaRegisterInfoListSql002" statementType="PREPARED">
+        
+        SELECT
+          EXTENSION_CD
+          , EXTENSION_DETAIL_CD
+          , EXTENSION_NAME
+          , REMARKS
+          , DISPLAY_SEQ
+          , MAX_COLUMN
+          , HEADER_DISPLAY_FLG
+          , HEADER_VALUE01
+          , HEADER_VALUE02
+          , HEADER_VALUE03
+          , HEADER_VALUE04
+          , HEADER_VALUE05
+          , HEADER_VALUE06
+          , HEADER_VALUE07
+          , HEADER_VALUE08
+          , HEADER_VALUE09
+          , HEADER_VALUE10
+          , HEADER_VALUE11
+          , HEADER_VALUE12
+          , HEADER_VALUE13
+          , HEADER_VALUE14
+          , HEADER_VALUE15
+          , HEADER_VALUE16 
+        FROM
+          CALLCENTER.EXTENSION_MASTER    <!-- その他情報マスタ  -->
+        WHERE
+         EXTENSION_CD IN
+         <foreach item="categoryExtensionCd" index="index" collection="req.categoryExtensionCdList" open="(" separator="," close=")">
+             #{categoryExtensionCd}
+         </foreach>
+
+          AND DISPLAY_SEQ &gt; 0
+          AND DELETE_TIME IS NULL
+        ORDER BY
+          EXTENSION_CD
+          , EXTENSION_DETAIL_CD
+        
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：分類情報一覧取得
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaRegisterInfoListSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaRegisterInfoResponseSql003Model" >
+        <result property="categoryExtensionCd"   column="EXTENSION_CD"   typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="categoryExtensionName" column="EXTENSION_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="displaySeq"            column="DISPLAY_SEQ"    typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="remarks"               column="REMARKS"        typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <select id="selectIfaRegisterInfoSql003" resultMap="ResultMapIfaRegisterInfoListSql003" statementType="PREPARED">
+        
+        SELECT DISTINCT
+          A.EXTENSION_CD
+          , A.EXTENSION_NAME
+          , A.DISPLAY_SEQ
+          , A.REMARKS 
+        FROM
+          CALLCENTER.EXTENSION_MASTER A      <!-- その他情報マスタ  -->
+          , CALLCENTER.EXTENSION_DETAIL B    <!-- その他情報詳細  -->
+        WHERE
+          B.CUSTOMER_ID =#{req.customerId}
+          AND A.DISPLAY_SEQ &gt; 0
+          AND A.EXTENSION_DETAIL_CD = 0
+          AND A.DELETE_TIME IS NULL
+          AND B.DELETE_TIME IS NULL
+          AND A.EXTENSION_CD = B.EXTENSION_CD
+        ORDER BY
+          A.DISPLAY_SEQ
+          , A.EXTENSION_CD
+        
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：登録情報取得
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaRegisterInfoListSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaRegisterInfoResponseSql004Model" >
+          <result property="inforExtensionCd"   column="EXTENSION_CD"        typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="extensionDetailCd"  column="EXTENSION_DETAIL_CD" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailSeq"          column="DETAIL_SEQ"          typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="inforExtensionName" column="EXTENSION_NAME"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="remarks"            column="REMARKS"             typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="displaySeq"         column="DISPLAY_SEQ"         typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="maxColumn"          column="MAX_COLUMN"          typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailDisplayFlg"   column="HEADER_DISPLAY_FLG"  typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue01"      column="HEADER_VALUE01"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue02"      column="HEADER_VALUE02"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue03"      column="HEADER_VALUE03"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue04"      column="HEADER_VALUE04"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue05"      column="HEADER_VALUE05"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue06"      column="HEADER_VALUE06"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue07"      column="HEADER_VALUE07"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue08"      column="HEADER_VALUE08"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue09"      column="HEADER_VALUE09"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue10"      column="HEADER_VALUE10"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue11"      column="HEADER_VALUE11"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue12"      column="HEADER_VALUE12"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue13"      column="HEADER_VALUE13"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue14"      column="HEADER_VALUE14"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue15"      column="HEADER_VALUE15"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="headerValue16"      column="HEADER_VALUE16"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue01"      column="DETAIL_VALUE01"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue02"      column="DETAIL_VALUE02"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue03"      column="DETAIL_VALUE03"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue04"      column="DETAIL_VALUE04"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue05"      column="DETAIL_VALUE05"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue06"      column="DETAIL_VALUE06"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue07"      column="DETAIL_VALUE07"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue08"      column="DETAIL_VALUE08"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue09"      column="DETAIL_VALUE09"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue10"      column="DETAIL_VALUE10"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue11"      column="DETAIL_VALUE11"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue12"      column="DETAIL_VALUE12"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue13"      column="DETAIL_VALUE13"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue14"      column="DETAIL_VALUE14"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue15"      column="DETAIL_VALUE15"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+          <result property="detailValue16"      column="DETAIL_VALUE16"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <select id="selectIfaRegisterInfoSql004" resultMap="ResultMapIfaRegisterInfoListSql004" statementType="PREPARED">
+        
+        SELECT
+          A.EXTENSION_CD
+          , A.EXTENSION_DETAIL_CD
+          , B.DETAIL_SEQ
+          , A.EXTENSION_NAME
+          , A.REMARKS
+          , A.DISPLAY_SEQ
+          , A.MAX_COLUMN
+          , A.HEADER_DISPLAY_FLG
+          , A.HEADER_VALUE01
+          , CASE
+              WHEN A.EXTENSION_CD = '1' AND A.EXTENSION_DETAIL_CD = '3'
+                THEN SUBSTR(TO_CHAR(B.DETAIL_VALUE01), -7)
+              ELSE B.DETAIL_VALUE01
+            END AS DETAIL_VALUE01
+          , A.HEADER_VALUE02
+          , B.DETAIL_VALUE02
+          , A.HEADER_VALUE03
+          , CASE 
+              WHEN A.EXTENSION_CD = '1' AND A.EXTENSION_DETAIL_CD = '3' AND B.DETAIL_VALUE03 = '二号支店'
+                THEN 'ハナミズキ支店'
+              ELSE B.DETAIL_VALUE03
+            END AS DETAIL_VALUE03
+          , A.HEADER_VALUE04
+          , B.DETAIL_VALUE04
+          , A.HEADER_VALUE05
+          , B.DETAIL_VALUE05
+          , A.HEADER_VALUE06
+          , B.DETAIL_VALUE06
+          , A.HEADER_VALUE07
+          , B.DETAIL_VALUE07
+          , A.HEADER_VALUE08
+          , B.DETAIL_VALUE08
+          , A.HEADER_VALUE09
+          , B.DETAIL_VALUE09
+          , A.HEADER_VALUE10
+          , B.DETAIL_VALUE10
+          , A.HEADER_VALUE11
+          , B.DETAIL_VALUE11
+          , A.HEADER_VALUE12
+          , B.DETAIL_VALUE12
+          , A.HEADER_VALUE13
+          , B.DETAIL_VALUE13
+          , A.HEADER_VALUE14
+          , B.DETAIL_VALUE14
+          , A.HEADER_VALUE15
+          , B.DETAIL_VALUE15
+          , A.HEADER_VALUE16
+          , B.DETAIL_VALUE16 
+        FROM
+          CALLCENTER.EXTENSION_MASTER A      <!-- その他情報マスタ  -->
+          , CALLCENTER.EXTENSION_DETAIL B    <!-- その他情報詳細  -->
+        WHERE
+          B.CUSTOMER_ID =#{req.customerId}
+          AND A.DISPLAY_SEQ &gt; 0
+          AND A.DELETE_TIME IS NULL
+          AND B.DELETE_TIME IS NULL
+          AND A.DETAIL_DISPLAY_FLG = 1
+          AND B.EXTENSION_DETAIL_CD &gt; 0
+          AND A.EXTENSION_CD = B.EXTENSION_CD
+          AND A.EXTENSION_DETAIL_CD = B.EXTENSION_DETAIL_CD
+        ORDER BY
+          A.EXTENSION_CD
+          , A.DISPLAY_SEQ
+          , A.EXTENSION_DETAIL_CD
+          , B.DETAIL_SEQ
+        
+    </select>    
+        
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MedSystemVariableMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.MedSystemVariable" id="MedSystemVariable">
+		<result property="varName"  column="VAR_NAME"  typeHandler="StringTypeHandler"/>
+		<result property="varValue" column="VAR_VALUE" typeHandler="StringTypeHandler"/>
+	</resultMap>
+
+	<select id="getMedSystemVariableList" resultMap="MedSystemVariable" statementType="PREPARED">
+		SELECT
+			VAR_NAME,
+			VAR_VALUE
+		FROM
+		    TB_MED_SYSTEM_VARIABLE
+	</select>
+
+</mapper>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct024Mapper">
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct024Sql002ResponseModel" id="Fct024Sql002ResponseModel">
+    </resultMap>
+
+    <!-- FCT024 SQL002.国内投信販売手数料取得 -->
+    <select id="getFct024Sql002" resultMap="Fct024Sql002ResponseModel" statementType="PREPARED">
+        SELECT /* @SQLID=FCT024#SQL002 */
+            M_F_H_UPPER1 as salesCommLimit1,
+            M_F_H_UPPER2 as salesCommLimit2,
+            M_F_H_UPPER3 as salesCommLimit3,
+            M_F_H_UPPER4 as salesCommLimit4,
+            M_F_H_UPPER5 as salesCommLimit5,
+            M_F_H_UPPER6 as salesCommLimit6,
+            M_F_H_UPPER7 as salesCommLimit7,
+            M_F_H_RITSU1 as salesCommRate1,
+            M_F_H_RITSU2 as salesCommRate2,
+            M_F_H_RITSU3 as salesCommRate3,
+            M_F_H_RITSU4 as salesCommRate4,
+            M_F_H_RITSU5 as salesCommRate5,
+            M_F_H_RITSU6 as salesCommRate6,
+            M_F_H_RITSU7 as salesCommRate7,
+            M_F_K_RITSU1 as cancelCommRate1,
+            M_F_H_UPPER_TOKU1 as salesCommLimitSpecificGeneral1,
+            M_F_H_UPPER_TOKU2 as salesCommLimitSpecificGeneral2,
+            M_F_H_UPPER_TOKU3 as salesCommLimitSpecificGeneral3,
+            M_F_H_UPPER_TOKU4 as salesCommLimitSpecificGeneral4,
+            M_F_H_UPPER_TOKU5 as salesCommLimitSpecificGeneral5,
+            M_F_H_UPPER_TOKU6 as salesCommLimitSpecificGeneral6,
+            M_F_H_UPPER_TOKU7 as salesCommLimitSpecificGeneral7,
+            M_F_H_RITSU_TOKU1 as salesCommRateSpecificGeneral1,
+            M_F_H_RITSU_TOKU2 as salesCommRateSpecificGeneral2,
+            M_F_H_RITSU_TOKU3 as salesCommRateSpecificGeneral3,
+            M_F_H_RITSU_TOKU4 as salesCommRateSpecificGeneral4,
+            M_F_H_RITSU_TOKU5 as salesCommRateSpecificGeneral5,
+            M_F_H_RITSU_TOKU6 as salesCommRateSpecificGeneral6,
+            M_F_H_RITSU_TOKU7 as salesCommRateSpecificGeneral7,
+            M_F_K_RITSU_TOKU1 as cancelCommRateSpecificGeneral1,
+            M_F_H_UPPER_SEICHOU1 as salesCommLimitSeichou1,
+            M_F_H_UPPER_SEICHOU2 as salesCommLimitSeichou2,
+            M_F_H_UPPER_SEICHOU3 as salesCommLimitSeichou3,
+            M_F_H_UPPER_SEICHOU4 as salesCommLimitSeichou4,
+            M_F_H_UPPER_SEICHOU5 as salesCommLimitSeichou5,
+            M_F_H_UPPER_SEICHOU6 as salesCommLimitSeichou6,
+            M_F_H_UPPER_SEICHOU7 as salesCommLimitSeichou7,
+            M_F_H_RITSU_SEICHOU1 as salesCommRateSeichou1,
+            M_F_H_RITSU_SEICHOU2 as salesCommRateSeichou2,
+            M_F_H_RITSU_SEICHOU3 as salesCommRateSeichou3,
+            M_F_H_RITSU_SEICHOU4 as salesCommRateSeichou4,
+            M_F_H_RITSU_SEICHOU5 as salesCommRateSeichou5,
+            M_F_H_RITSU_SEICHOU6 as salesCommRateSeichou6,
+            M_F_H_RITSU_SEICHOU7 as salesCommRateSeichou7,
+            M_F_K_RITSU_SEICHOU1 as cancelCommRateSeichou1,
+            M_F_K_RITSU_KEIZOKU1 as cancelCommRateKeizoku1,
+            M_F_K_RITSU_ISA1 as cancelCommRateIsa1,
+            M_F_K_RITSU_JNISA1 as cancelCommRateJrNisa1,
+            M_F_H_TANIKUCHI as salesCommTanikuchi,
+            YUGU_RITU_BUNBO as transfersPreferentialRateDenominator,
+            YUGU_RITU_BUNSI as transfersPreferentialRateNumerator,
+            YUGU_RITU_BUNBO_TOKU as transfersPreferentialRateDenominatorToku,
+            YUGU_RITU_BUNSI_TOKU as transfersPreferentialRateNumeratorToku,
+            M_F_TYPE as fundType,
+            M_F_CODE as kyoukaiCd
+        FROM
+            FUND
+        WHERE
+            M_F_TYPE in ('1','2') AND
+            M_F_DELFLG = '0' AND
+            M_F_ET_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') AND
+            M_F_NRICODE IN
+            <choose>
+                <when test="sql002Req.nriCd != null">
+                        #{sql002Req.nriCd} || ' '
+                </when>
+                <otherwise>
+                    ('')
+                </otherwise>
+            </choose>
+        
+    </select>
+    
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct024Sql001ResponseModel" id="Fct024Sql001ResponseModel">
+    </resultMap>
+
+    <!-- FCT024 SQL001.国内投信基準価額取得 -->
+    <select id="getFct024Sql001" resultMap="Fct024Sql001ResponseModel" statementType="PREPARED">
+        SELECT /* @SQLID=FCT024#SQL001 */
+            KYOUKAI_CD as kyoukaiCd,
+            KIJUNKAKAKU as basePrice,
+            KIJUNKAKAKUDATE as basePriceDate,
+            ZENJITSU_HI as diff,
+            ZENJITSU_KIJUNKAKAKU as zenjitsuKijunkakaku,
+            JUNSHISAN as junshisan,
+            W52_TAKANE as w52Takane,
+            W52_TAKANEDATE as w52Takanedate,
+            W52_YASUNE as w52Yasune,
+            W52_YASUNEDATE as w52Yasunedate
+        FROM
+            TOUSHIN_KIJYUN_KAKAKU
+        WHERE
+            KYOUKAI_CD IN
+            <choose>
+                <when test="sql001Req.kyoukaiCd != null">
+                    #{sql001Req.kyoukaiCd}
+                </when>
+                <otherwise>
+                    ('')
+                </otherwise>
+            </choose>
+    </select>
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct024Sql003ResponseModel" id="Fct024Sql003ResponseModel">
+    </resultMap>
+    
+    <!-- FCT024 SQL003.扱者個別国内投信販売手数料取得 -->
+    <select id="getFct024Sql003" resultMap="Fct024Sql003ResponseModel" statementType="PREPARED">
+        SELECT /* @SQLID=FCT024#SQL003 */
+            FCM_UPPER1 as salesCommLimit1,
+            FCM_UPPER2 as salesCommLimit2,
+            FCM_UPPER3 as salesCommLimit3,
+            FCM_UPPER4 as salesCommLimit4,
+            FCM_UPPER5 as salesCommLimit5,
+            FCM_UPPER6 as salesCommLimit6,
+            FCM_UPPER7 as salesCommLimit7,
+            FCM_RITSU1 as salesCommRate1,
+            FCM_RITSU2 as salesCommRate2,
+            FCM_RITSU3 as salesCommRate3,
+            FCM_RITSU4 as salesCommRate4,
+            FCM_RITSU5 as salesCommRate5,
+            FCM_RITSU6 as salesCommRate6,
+            FCM_RITSU7 as salesCommRate7,
+            FCM_K_RITSU1 as cancelCommRate1,
+            FCM_H_UPPER_TOKU1 as salesCommLimitSpecificGeneral1,
+            FCM_H_UPPER_TOKU2 as salesCommLimitSpecificGeneral2,
+            FCM_H_UPPER_TOKU3 as salesCommLimitSpecificGeneral3,
+            FCM_H_UPPER_TOKU4 as salesCommLimitSpecificGeneral4,
+            FCM_H_UPPER_TOKU5 as salesCommLimitSpecificGeneral5,
+            FCM_H_UPPER_TOKU6 as salesCommLimitSpecificGeneral6,
+            FCM_H_UPPER_TOKU7 as salesCommLimitSpecificGeneral7,
+            FCM_H_RITSU_TOKU1 as salesCommRateSpecificGeneral1,
+            FCM_H_RITSU_TOKU2 as salesCommRateSpecificGeneral2,
+            FCM_H_RITSU_TOKU3 as salesCommRateSpecificGeneral3,
+            FCM_H_RITSU_TOKU4 as salesCommRateSpecificGeneral4,
+            FCM_H_RITSU_TOKU5 as salesCommRateSpecificGeneral5,
+            FCM_H_RITSU_TOKU6 as salesCommRateSpecificGeneral6,
+            FCM_H_RITSU_TOKU7 as salesCommRateSpecificGeneral7,
+            FCM_K_RITSU_TOKU1 as cancelCommRateSpecificGeneral1,
+            FCM_H_UPPER_SEICHOU1 as salesCommLimitSeichou1,
+            FCM_H_UPPER_SEICHOU2 as salesCommLimitSeichou2,
+            FCM_H_UPPER_SEICHOU3 as salesCommLimitSeichou3,
+            FCM_H_UPPER_SEICHOU4 as salesCommLimitSeichou4,
+            FCM_H_UPPER_SEICHOU5 as salesCommLimitSeichou5,
+            FCM_H_UPPER_SEICHOU6 as salesCommLimitSeichou6,
+            FCM_H_UPPER_SEICHOU7 as salesCommLimitSeichou7,
+            FCM_H_RITSU_SEICHOU1 as salesCommRateSeichou1,
+            FCM_H_RITSU_SEICHOU2 as salesCommRateSeichou2,
+            FCM_H_RITSU_SEICHOU3 as salesCommRateSeichou3,
+            FCM_H_RITSU_SEICHOU4 as salesCommRateSeichou4,
+            FCM_H_RITSU_SEICHOU5 as salesCommRateSeichou5,
+            FCM_H_RITSU_SEICHOU6 as salesCommRateSeichou6,
+            FCM_H_RITSU_SEICHOU7 as salesCommRateSeichou7,
+            FCM_K_RITSU_SEICHOU1 as cancelCommRateSeichou1,
+            FCM_K_RITSU_KEIZOKU1 as cancelCommRateKeizoku1,
+            FCM_K_RITSU_ISA1 as cancelCommRateIsa1,
+            FCM_K_RITSU_JNISA1 as cancelCommRateJrNisa1
+            
+        FROM 
+            FUND_COMMISSION_MST A 
+        WHERE 
+            A.FCM_DEALER_NUMBER = (
+                SELECT 
+                    B.FCG_CHANEL_ID
+                FROM 
+                    FUND_COMIS_GROUP B 
+                WHERE 
+                    B.FCG_COMIS_CODE = #{sql003Req.dealerNumber}
+                ) 
+                AND A.FCM_TYPE = #{sql003Req.fundType} 
+                AND A.FCM_CODE = #{sql003Req.kyoukaiCd}
+    </select>
+
+    
+    
+</mapper>

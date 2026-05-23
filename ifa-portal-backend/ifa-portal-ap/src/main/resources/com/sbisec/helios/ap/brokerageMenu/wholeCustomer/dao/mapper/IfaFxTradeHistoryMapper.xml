@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020302_0202-01
+    画面名：為替取引履歴
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaFxTradeHistoryMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaFxTradeHistorySql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaFxTradeHistorySql001ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerAttributeName" column="CUSTOMER_ATTRIBUTE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="nameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="nameKana" column="NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="tradeName" column="TRADE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaFxTradeHistorySql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaFxTradeHistorySql002ResponseModel" >
+        <result property="name" column="NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaFxTradeHistorySql003" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaFxTradeHistorySql003ResponseModel" >
+        <result property="fxTradeHistoryComment" column="FX_TRADE_HISTORY_COMMENT" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：為替取引履歴一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaFxTradeHistorySql001" resultMap="ResultMapIfaFxTradeHistorySql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0202-01#Sql001 */ 
+        *
+        FROM
+            (
+            SELECT
+                COUNT(*) OVER() AS TOTAL_COUNT,       -- 総件数
+                T.*
+            FROM
+                (
+                SELECT
+                    A.BROKER_CODE,                    -- 仲介業者コード
+                    A.BROKER_NAME,                    -- 仲介業者名
+                    A.BROKER_CHARGE_CODE,             -- 営業員コード
+                    A.BROKER_CHARGE_NAME,             -- 営業員名
+                    A.BUTEN_CODE,                     -- 部店
+                    A.ACCOUNT_NUMBER,                 -- 口座番号
+                    A.DEALER_NUMBER,                  -- 扱者コード
+                    A.CUSTOMER_ATTRIBUTE_NAME,        -- コース名
+                    B.NAME_KANJI,                     -- 顧客名(漢字)
+                    B.NAME_KANA,                      -- 顧客名(カナ)
+                    A.TRADE_DATE,                     -- 約定日
+                    A.GET_DATE,                       -- 受渡日
+                    A.TRADE_NAME,                     -- 取引種別名
+                    A.CURRENCY,                       -- 通貨
+                    A.EXCHANGE_RATE,                  -- 為替レート
+                    A.EXCHANGE_SPREAD_PRICE,          -- 為替スプレッド
+                    A.YEN_AMOUNT,                     -- 円額
+                    A.FOREIGN_AMOUNT,                 -- 外貨額
+                    A.EXCHANGE_SPREAD,                -- 為替手数料
+                    A.BROKER_BRANCH_CODE,             -- 仲介業支店コード
+                    C.BRANCH_NAME                     -- 仲介業者支店名
+                FROM V_EXCHANGE A
+                LEFT OUTER JOIN MEDIATE_USER_ATTRIBUTE_INFO B
+                    ON A.BUTEN_CODE = B.BUTEN_CODE 
+                    AND A.ACCOUNT_NUMBER = B.ACCOUNT_NUMBER 
+                    AND A.BROKER_CODE = B.BROKER_CODE 
+                LEFT JOIN MEDIATE_BRANCH C
+                    ON A.BROKER_CODE = C.BROKER_CODE 
+                    AND A.BROKER_BRANCH_CODE = C.BROKER_BRANCH_CODE 
+                <where>
+                    <if test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                         (A.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR A.BROKER_CODE IN(
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                            #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                        AND
+                    </if>
+                    <if test='req.privId != "1" and req.privId != "3" and req.privId != "4" and req.privId != "5"'>
+                         ((A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR (A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN(
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                            (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                        </foreach>
+                        )
+                        AND
+                    </if>
+                    <if test="req.brokerCodeList != null and 0 &lt; req.brokerCodeList.size() and req.chkBrokerCodeExclude  == 'false'">
+                        A.BROKER_CODE IN
+                        <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{brokerCode}
+                        </foreach>
+                        AND
+                    </if>
+                    <if test="req.brokerCodeList != null and 0 &lt; req.brokerCodeList.size() and req.chkBrokerCodeExclude  == 'true'">
+                        A.BROKER_CODE NOT IN
+                        <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                        #{brokerCode}
+                        </foreach>
+                        AND
+                    </if>
+                    <if test="req.branchCode != null and req.branchCode != ''">
+                        A.BROKER_BRANCH_CODE = (#{req.branchCode})
+                        AND
+                    </if>
+                    <if test="req.empCode != null and req.empCode != ''">
+                        A.BROKER_CHARGE_CODE = (#{req.empCode})
+                        AND
+                    </if>
+                    <if test="req.butenCode != null and req.butenCode != ''">
+                        A.BUTEN_CODE = (#{req.butenCode})
+                        AND
+                    </if>
+                    <if test="req.accountNumber != null and req.accountNumber != ''">
+                        A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                        AND
+                    </if>
+                    <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != ''">
+                        <if test="req.customerNameKanjiKanaTerms == '1'.toString()" >
+                        (
+                            B.NAME_KANJI = #{req.customerNameKanjiKana}
+                            OR B.NAME_KANA = #{req.customerNameKanjiKana}
+                        )
+                        AND
+                        </if>
+                        <if test="req.customerNameKanjiKanaTerms == '2'.toString()" >
+                        (
+                            B.NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%'
+                            OR B.NAME_KANA LIKE #{req.customerNameKanjiKana} || '%'
+                        )
+                        AND
+                        </if>
+                        <if test="req.customerNameKanjiKanaTerms == '3'.toString()" >
+                        (
+                            B.NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                            OR B.NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                        )
+                        AND
+                        </if>
+                    </if>
+                    <if test="req.currency != null and req.currency != ''">
+                        A.CURRENCY = (#{req.currency})
+                        AND
+                    </if>
+                    TO_DATE(A.TRADE_DATE, 'yyyyMMdd') BETWEEN TO_DATE(#{req.periodYmFrom}, 'yyyy/MM/dd') AND TO_DATE(#{req.periodYmTo}, 'yyyy/MM/dd')
+                    AND A.CUSTOMER_ATTRIBUTE IN
+                    <foreach item="course" index="index" collection="req.course" open="(" separator="," close=")">
+                        <if test="course.isSelected == true">
+                                #{course.id}
+                        </if>
+                    </foreach>
+                </where>
+                ORDER BY
+                    A.TRADE_DATE DESC,
+                    A.BROKER_CODE ASC,
+                    A.BUTEN_CODE ASC,
+                    A.ACCOUNT_NUMBER ASC
+                ) T
+            )
+        WHERE
+        ROWNUM &lt;= #{req.maxRow}
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：通貨リストコード取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaFxTradeHistorySql002" resultMap="ResultMapIfaFxTradeHistorySql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0202-01#Sql002 */ 
+            CODE_2  AS KEY,
+            NAME
+        FROM
+            M_CODE
+        WHERE
+            START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND CODE_TYPE = '4'
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：為替取引履歴コメント取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaFxTradeHistorySql003" resultMap="ResultMapIfaFxTradeHistorySql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0202-01#Sql003 */ 
+            NAME AS FX_TRADE_HISTORY_COMMENT
+        FROM
+            M_CODE
+        WHERE
+            START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND CODE_TYPE = '99'
+            AND CODE_1 = '01'
+            AND CODE_2 = '03'
+    </select>
+
+</mapper>

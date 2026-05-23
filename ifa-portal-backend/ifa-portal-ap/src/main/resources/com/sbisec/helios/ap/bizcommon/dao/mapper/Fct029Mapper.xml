@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct029Mapper">
+
+    <resultMap
+        type="com.sbisec.helios.ap.bizcommon.dao.model.Fct029Sql001ResponseModel"
+        id="sql001Response">
+    </resultMap>
+
+    <!-- SQL001.英文開示銘柄取得 -->
+    <select id="getFct029Sql001" resultMap="sql001Response"
+        statementType="PREPARED">
+        SELECT
+        /* @SQLID=FCT029#Sql001 */
+        COUNT(*) as count
+        FROM
+        T_ENGLISH_PUBLIC_BRAND
+        WHERE
+        COUNTRY_CODE = #{fct029Sql001RequestModel.countryCode}
+        AND BRAND_CODE = #{fct029Sql001RequestModel.brandCode}
+    </select>
+
+</mapper>

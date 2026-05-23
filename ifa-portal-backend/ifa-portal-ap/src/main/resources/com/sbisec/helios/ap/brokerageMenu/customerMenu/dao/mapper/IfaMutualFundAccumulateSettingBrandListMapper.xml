@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0401-03
+    画面名：投信積立設定済銘柄一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaMutualFundAccumulateSettingBrandListMapper">
+
+    <resultMap id="ResultMapIfaMutualFundAccumulateSettingBrandListSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundAccumulateSettingBrandListSql001ResponseModel" >
+    </resultMap>
+
+    <!-- 
+        SQLID：SQL001
+        SQL名：銘柄コード取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0403-01#Sql001 */ 
+    -->
+    <select id="selectIfaMutualFundAccumulateSettingBrandListSql001" resultMap="ResultMapIfaMutualFundAccumulateSettingBrandListSql001" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0403-01#Sql001 */  
+            M_F_CODE,
+            M_F_KAISU,
+            M_F_GO,
+            M_F_NRICODE
+        FROM 
+            FUND
+        WHERE
+            M_F_TYPE = '2'
+            AND M_F_DELFLG = '0'
+            AND M_F_ET_START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+            AND M_F_CODE IN 
+         <foreach item="fundCode" index="index" collection="req.fundCodeList" open="(" separator="," close=")">
+             #{fundCode}
+         </foreach>
+    </select>
+
+</mapper>

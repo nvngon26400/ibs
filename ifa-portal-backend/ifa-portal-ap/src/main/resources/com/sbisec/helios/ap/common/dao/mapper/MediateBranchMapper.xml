@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MediateBranchMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.MediateBranch" id="MediateBranch">
+		<result property="branchName"       column="BRANCH_NAME"        typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+	</resultMap>
+<!-- 
+	<resultMap type="com.sbibits.horus.ap.counter.model.OfferInfoModel" id="GetOfferInfoList"></resultMap>
+ -->
+	<select id="getMediateBranch" resultMap="MediateBranch" statementType="PREPARED">
+		SELECT
+			BROKER_CODE,
+			BROKER_BRANCH_CODE,
+			BROKER_BRANCH_KIND,
+			BRANCH_NAME
+		FROM
+			MEDIATE_BRANCH
+		WHERE
+			BROKER_CODE = #{brokerCode}
+		AND BROKER_BRANCH_CODE = #{brokerBranchCode}
+	</select>
+<!-- 
+	<select id="getOfferInfoList" resultMap="GetOfferInfoList" statementType="PREPARED">
+		SELECT
+			BROKER_CODE,
+			BRANCH_NAME
+		FROM MEDIATE_BRANCH
+		WHERE
+			BROKER_BRANCH_CODE = #{brokerBranchCode}
+		ORDER BY BROKER_CODE
+	</select>
+
+	<select id="getBrokerCount" resultType="java.lang.Integer" statementType="PREPARED">
+		SELECT
+			COUNT(1) AS COUNT
+		FROM
+			MEDIATE_BRANCH
+		WHERE
+			1=1
+		<if test="brokerCode != null">
+			AND BROKER_CODE = #{brokerCode}
+		</if>
+		<if test="brokerBranchCode != null">
+			AND BROKER_BRANCH_CODE = #{brokerBranchCode}
+		</if>
+	</select>
+	 -->
+</mapper>

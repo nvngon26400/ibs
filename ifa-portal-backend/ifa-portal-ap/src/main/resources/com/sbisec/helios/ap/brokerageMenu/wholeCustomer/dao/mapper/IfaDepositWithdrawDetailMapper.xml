@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020302_0203-01
+    画面名：入出金明細
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaDepositWithdrawDetailMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaDepositWithdrawDetailSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaDepositWithdrawDetailSql001ResponseModel" >
+        <result property="total" column="TOTAL"/>
+        <result property="butenCode" column="BUTEN_CODE"/>
+        <result property="accountNumber" column="ACCOUNT_NUMBER"/>
+        <result property="course" column="COURSE"/>
+        <result property="customerNameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="settleDate" column="SETTLE_DATE"/>
+        <result property="dispAbstract" column="DISP_ABSTRACT"/>
+        <result property="depositAmount" column="SETTLE_AMOUNT"/>
+        <result property="targetTbl" column="TARGET_TBL"/>
+        <result property="tradeType" column="TRADE_TYPE"/>
+        <result property="tradeCode3" column="TRADE_CODE_3"/>
+        <result property="tradeCodePare" column="TRADE_CODE_PARE"/>
+        <result property="accountingCode" column="ACCOUNTING_CODE"/>
+        <result property="tradeCode" column="TRADE_CODE"/>
+        <result property="productCode" column="PRODUCT_CODE"/>
+        <result property="reportDate" column="REPORT_DATE"/>
+        <result property="postingNo" column="POSTING_NO"/>
+        <result property="formalKanjiSecName" column="FORMAL_KANJI_SEC_NAME"/>
+        <result property="empCode" column="INTERMEDIARY_EMP_CD"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME"/>
+        <result property="brokerCode" column="BROKER_CODE"/>
+        <result property="brokerName" column="BRANCH_NAME_DEALER"/>
+        <result property="branchCode" column="BRANCH_CODE"/>
+        <result property="branchName" column="BRANCH_NAME"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：入出金明細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDepositWithdrawDetailSql001" resultMap="ResultMapIfaDepositWithdrawDetailSql001" statementType="PREPARED">        
+        SELECT /* @SQLID=SUB020302_0203-01#Sql001 */
+        	TOTAL,
+            BUTEN_CODE,
+            ACCOUNT_NUMBER,
+            COURSE,
+            NAME_KANJI,
+            NAME_KANA,
+            SETTLE_DATE,
+            DISP_ABSTRACT,
+            SETTLE_AMOUNT,
+            TARGET_TBL,
+            TRADE_TYPE,
+            TRADE_CODE_3,
+            TRADE_CODE_PARE,
+            ACCOUNTING_CODE,
+            TRADE_CODE,
+            PRODUCT_CODE,
+            REPORT_DATE,
+            POSTING_NO,
+            FORMAL_KANJI_SEC_NAME,
+            INTERMEDIARY_EMP_CD,
+            BROKER_CHARGE_NAME,
+            BROKER_CODE,
+            BRANCH_NAME_DEALER,
+            BRANCH_CODE,
+            BRANCH_NAME
+        FROM
+        (
+            SELECT
+            	count(*) over () AS TOTAL,
+                row_number() over (ORDER BY SETTLE_DATE DESC, BUTEN_CODE, ACCOUNT_NUMBER) ROWN,
+                C.*
+            FROM
+                (
+                    SELECT /*+
+                            DRIVING_SITE(B)
+                            */
+                        A.NAME_KANJI,
+                        A.NAME_KANA,
+                        'REAL_HDB10' AS TARGET_TBL,
+                        BUTEN_CODE,
+                        ACCOUNT_NUMBER,
+                        TO_CHAR('') AS TRADE_CODE_1,
+                        TO_CHAR('') AS TRADE_CODE_3,
+                        TO_CHAR('     ') AS PRODUCT_CODE,
+                        TO_CHAR('     ') AS TRADE_CODE,
+                        TO_CHAR('     ') AS TRADE_CODE_PARE,
+                        TO_CHAR('') AS FORMAL_KANJI_SEC_NAME,
+                        TRADE_DATE AS SETTLE_DATE,
+                        SETTLE_AMOUNT,
+                        TO_CHAR('') AS REPORT_DATE,
+                        TO_CHAR('') AS ACCOUNTING_CODE,
+                        TO_CHAR('') AS POSTING_NO,
+                        DISP_ABSTRACT,
+                        TRADE_TYPE,
+                        JNISA_ACCOUNT_KBN,
+                        DID,
+                        A.CUSTOMER_ATTRIBUTE AS COURSE,
+                        A.INTERMEDIARY_EMP_CD,
+                        A.BROKER_CODE,
+                        C.BROKER_BRANCH_CODE AS BRANCH_CODE,
+                        C.BROKER_CHARGE_NAME,
+                        E.BRANCH_NAME AS BRANCH_NAME_DEALER,
+                        C.BRANCH_NAME
+                    FROM  MEDIATE_USER_ATTRIBUTE_INFO A
+                    <include refid="WhereCondition4"/>
+                        CROSS JOIN WNS_TB_PAYMENT_IMMEDIATE B
+                    LEFT JOIN
+                        V_MEDIATE_CHARGE_INFO C
+                    ON
+                        A.BROKER_CODE = C.BROKER_CODE 
+                        AND A.INTERMEDIARY_EMP_CD = C.BROKER_CHARGE_CODE 
+                    <include refid="WhereCondition1"/>
+                    UNION ALL
+                    SELECT /*+
+                            DRIVING_SITE(B)
+                            */
+                        A.NAME_KANJI,
+                        A.NAME_KANA,
+                        'HIST_HDB10' AS TARGET_TBL,
+                        BUTEN_CODE,
+                        ACCOUNT_NUMBER,
+                        NVL(TRADE_CODE_1,'') AS TRADE_CODE_1,
+                        NVL(TRADE_CODE_3,'') AS TRADE_CODE_3,
+                        (NVL(PRODUCT_CODE_1,' ') || NVL(PRODUCT_CODE_2,' ') || NVL(PRODUCT_CODE_3,' ') || NVL(PRODUCT_CODE_4,' ') || NVL(PRODUCT_CODE_5,' ')) AS PRODUCT_CODE,
+                        (NVL(TRADE_CODE_1,' ') || NVL(TRADE_CODE_2,' ') || NVL(TRADE_CODE_3,' ') || NVL(TRADE_CODE_4,' ') || NVL(TRADE_CODE_5,' ')) AS TRADE_CODE,
+                        NVL(TRADE_CODE_PARE,'     ') AS TRADE_CODE_PARE,
+                        NVL(FORMAL_KANJI_SEC_NAME,'') AS FORMAL_KANJI_SEC_NAME,
+                        SETTLE_DATE,
+                        SETTLE_AMOUNT,
+                        NVL(REPORT_DATE,''),
+                        NVL(ACCOUNTING_CODE,''),
+                        NVL(POSTING_NO,''),
+                        DISP_ABSTRACT,
+                        TO_CHAR('') AS TRADE_TYPE,
+                        JNISA_ACCOUNT_KBN,
+                        DID,
+                        A.CUSTOMER_ATTRIBUTE AS COURSE,
+                        A.INTERMEDIARY_EMP_CD,
+                        A.BROKER_CODE,
+                        C.BROKER_BRANCH_CODE AS BRANCH_CODE,
+                        C.BROKER_CHARGE_NAME,
+                        E.BRANCH_NAME AS BRANCH_NAME_DEALER,
+                        C.BRANCH_NAME
+                    FROM  MEDIATE_USER_ATTRIBUTE_INFO A
+                    <include refid="WhereCondition4"/>
+                        CROSS JOIN WNS_TB_PAYMENT_DEPOSIT B
+                    LEFT JOIN
+                        V_MEDIATE_CHARGE_INFO C
+                    ON
+                        A.BROKER_CODE = C.BROKER_CODE 
+                        AND A.INTERMEDIARY_EMP_CD = C.BROKER_CHARGE_CODE 
+                    <include refid="WhereCondition2"/>
+            <if test='"0".equals(req.code) or "1".equals(req.code)'>
+                    UNION ALL
+                    SELECT /*+
+                            DRIVING_SITE(B)
+                            */
+                        A.NAME_KANJI,
+                        A.NAME_KANA,
+                        'HIST_HDB23' AS TARGET_TBL,
+                        BUTEN_CODE,
+                        ACCOUNT_NUMBER,
+                        NVL(TRADE_CODE_1,'') AS TRADE_CODE_1,
+                        NVL(TRADE_CODE_3,'') AS TRADE_CODE_3,
+                        (NVL(PRODUCT_CODE_1,' ') || NVL(PRODUCT_CODE_2,' ') || NVL(PRODUCT_CODE_3,' ') || NVL(PRODUCT_CODE_4,' ') || NVL(PRODUCT_CODE_5,' ')) AS PRODUCT_CODE,
+                        (NVL(TRADE_CODE_1,' ') || NVL(TRADE_CODE_2,' ') || NVL(TRADE_CODE_3,' ') || NVL(TRADE_CODE_4,' ') || NVL(TRADE_CODE_5,' ')) AS TRADE_CODE,
+                        TO_CHAR('     ') AS TRADE_CODE_PARE,
+                        TO_CHAR('') AS FORMAL_KANJI_SEC_NAME,
+                        SETTLE_DATE,
+                        SETTLE_AMOUNT,
+                        TO_CHAR('') AS REPORT_DATE,
+                        TO_CHAR('') AS ACCOUNTING_CODE,
+                        TO_CHAR('') AS POSTING_NO,
+                        TO_CHAR('') AS DISP_ABSTRACT,
+                        TO_CHAR('') AS TRADE_TYPE,
+                        TO_CHAR('') AS JNISA_ACCOUNT_KBN,
+                        DID,
+                        A.CUSTOMER_ATTRIBUTE AS COURSE,
+                        A.INTERMEDIARY_EMP_CD,
+                        A.BROKER_CODE,
+                        C.BROKER_BRANCH_CODE AS BRANCH_CODE,
+                        C.BROKER_CHARGE_NAME,
+                        E.BRANCH_NAME AS BRANCH_NAME_DEALER,
+                        C.BRANCH_NAME
+                    FROM
+                        MEDIATE_USER_ATTRIBUTE_INFO A
+                    <include refid="WhereCondition4"/>
+                        CROSS JOIN WNS_TB_MRF_ORDER B
+                    LEFT JOIN
+                        V_MEDIATE_CHARGE_INFO C
+                    ON
+                        A.BROKER_CODE = C.BROKER_CODE 
+                        AND A.INTERMEDIARY_EMP_CD = C.BROKER_CHARGE_CODE 
+                    <include refid="WhereCondition3"/>
+            </if>
+                )C
+            ORDER BY SETTLE_DATE DESC, BUTEN_CODE, ACCOUNT_NUMBER
+        )
+        <choose>
+            <when test="req.rownum == ''">
+                WHERE ROWN &lt;= 5000
+            </when>
+            <otherwise>
+                WHERE ROWN &lt;= ${req.rownum}
+            </otherwise>
+        </choose>
+    </select>
+    
+    <sql id="WhereCondition1">
+        <include refid="WhereCondition"/>
+        AND B.TRADE_DATE &gt;= REPLACE(#{req.periodYmFrom}, '/')
+        AND B.TRADE_DATE &lt;= REPLACE(#{req.periodYmTo}, '/')
+        <choose>
+            <when test='"1".equals(req.code)'>
+                AND TRADE_TYPE IN ('01', '31')
+            </when>
+            <when test='"2".equals(req.code)'>
+                AND TRADE_TYPE IN ('02')
+            </when>
+            <when test='"3".equals(req.code)'>
+                AND TRADE_TYPE IN ('21', '22', '23', '24', '25')
+            </when>
+            <when test='"4".equals(req.code)'>
+                AND TRADE_TYPE IN ('11', '12', '13', '14', '21')
+            </when>
+            <otherwise>
+                AND 1 = 1
+            </otherwise>
+        </choose>
+    </sql>
+    
+    <sql id="WhereCondition2">
+        <include refid="WhereCondition"/>
+            AND B.SETTLE_DATE &gt;= REPLACE(#{req.periodYmFrom}, '/')
+            AND B.SETTLE_DATE &lt;= REPLACE(#{req.periodYmTo}, '/')
+            <choose>
+                <when test='"1".equals(req.code)'>
+                    AND TRADE_CODE_1 = '2'
+                    AND TRADE_CODE_3 = '1'
+                    AND 
+                      (
+                        (
+                          NOT
+                            (
+                              (TRADE_CODE_PARE = '01006'
+                                AND (
+                                  ACCOUNTING_CODE = '389031000'
+                                  OR ACCOUNTING_CODE = '389031001'
+                                  OR ACCOUNTING_CODE = '389032010'
+                                  OR ACCOUNTING_CODE = '389032020'
+                                  OR ACCOUNTING_CODE = '389032030'
+                                  OR ACCOUNTING_CODE = '389032000'
+                                  OR ACCOUNTING_CODE = '320000103'
+                                  OR ACCOUNTING_CODE = '320000105'
+                                )
+                              )
+                              OR (TRADE_CODE_PARE = '01022'
+                                  OR TRADE_CODE_PARE = '01026')
+                            )
+                        )
+                          OR (NVL(TRADE_CODE_PARE,'     ') = '     ')
+                      )
+                </when>
+                <when test='"2".equals(req.code)'>
+                    AND TRADE_CODE_1 = '2'
+                    AND TRADE_CODE_3 = '0'
+                    AND
+                      (
+                        (
+                          NOT
+                            (
+                              (TRADE_CODE_PARE = '01006'
+                                AND (
+                                  ACCOUNTING_CODE = '389031000'
+                                  OR ACCOUNTING_CODE = '389031001'
+                                  OR ACCOUNTING_CODE = '389032010'
+                                  OR ACCOUNTING_CODE = '389032020'
+                                  OR ACCOUNTING_CODE = '389032030'
+                                  OR ACCOUNTING_CODE = '389032000'
+                                  OR ACCOUNTING_CODE = '320000103'
+                                  OR ACCOUNTING_CODE = '320000105'
+                                )
+                              )
+                              OR (TRADE_CODE_PARE = '01022'
+                                  OR TRADE_CODE_PARE = '01026')
+                            )
+                        )
+                          OR (NVL(TRADE_CODE_PARE,'     ') = '     ')
+                      )
+                </when>
+                <when test='"3".equals(req.code)'>
+                    AND TRADE_CODE_1 = '2'
+                    AND TRADE_CODE_3 = '1'
+                    AND
+                      (
+                        (
+                          TRADE_CODE_PARE = '01006'
+                          AND (
+                            ACCOUNTING_CODE = '389031000'
+                            OR ACCOUNTING_CODE = '389031001'
+                            OR ACCOUNTING_CODE = '389032010'
+                            OR ACCOUNTING_CODE = '389032020'
+                            OR ACCOUNTING_CODE = '389032030'
+                            OR ACCOUNTING_CODE = '389032000'
+                            OR ACCOUNTING_CODE = '320000103'
+                            OR ACCOUNTING_CODE = '320000105'
+                          )
+                        )
+                          OR (TRADE_CODE_PARE = '01022'
+                              OR TRADE_CODE_PARE = '01026')
+                      )
+                </when>
+                <when test='"4".equals(req.code)'>
+                    AND TRADE_CODE_1 = '2'
+                    AND TRADE_CODE_3 = '0'
+                    AND
+                      (
+                        (
+                          TRADE_CODE_PARE = '01006'
+                          AND (
+                            ACCOUNTING_CODE = '389031000'
+                            OR ACCOUNTING_CODE = '389031001'
+                            OR ACCOUNTING_CODE = '389032010'
+                            OR ACCOUNTING_CODE = '389032020'
+                            OR ACCOUNTING_CODE = '389032030'
+                            OR ACCOUNTING_CODE = '389032000'
+                            OR ACCOUNTING_CODE = '320000103'
+                            OR ACCOUNTING_CODE = '320000105'
+                          )
+                        )
+                          OR (TRADE_CODE_PARE = '01022'
+                              OR TRADE_CODE_PARE = '01026')
+                      )
+                </when>
+                <otherwise>
+                    AND   1=1
+                </otherwise>
+            </choose>
+    </sql>
+    
+    <sql id="WhereCondition3" >
+        <include refid="WhereCondition"/>
+        AND B.SETTLE_DATE &gt;= REPLACE(#{req.periodYmFrom}, '/')
+        AND B.SETTLE_DATE &lt;= REPLACE(#{req.periodYmTo}, '/')
+        AND B.HIS_BUY_SEL_KBN = 'RIBY '
+    </sql>
+    
+    <sql id="WhereCondition4">
+        CROSS JOIN MEDIATE_BRANCH E
+    </sql>
+    
+    <sql id="WhereCondition">
+        WHERE
+            B.DELETE_FLG='0'
+            AND A.BUTEN_CODE = B.BRANCH_NO
+            AND LPAD(A.ACCOUNT_NUMBER,6,'0') = B.ACCOUNT_NO
+            <if test="req.privId != '1' and req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0">
+                <choose>
+                    <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                        AND(A.BROKER_CODE IN
+                        <foreach item="brokerChargeList" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR A.BROKER_CODE IN(
+                            </if>
+                            <if test="index%1000 != 0">
+                                ,
+                            </if>
+                            #{brokerChargeList.brokerCode}
+                        </foreach>
+                        )
+                    </when>
+                    <otherwise>
+                        AND((A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN
+                        <foreach item="brokerChargeList" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR (A.BROKER_CODE, A.INTERMEDIARY_EMP_CD) IN(
+                            </if>
+                            <if test="index%1000 != 0">
+                                ,
+                            </if>
+                            (#{brokerChargeList.brokerCode},#{brokerChargeList.empCode})
+                        </foreach>
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.chkBrokerCodeExclude == 'false'">
+                AND A.BROKER_CODE IN
+                <foreach item="brokerCode" collection="req.brokerCodeList" index="idx"
+                    open="(" separator="," close=")">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            <if test="req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.chkBrokerCodeExclude == 'true'">
+                AND A.BROKER_CODE NOT IN
+                <foreach item="brokerCode" collection="req.brokerCodeList" index="idx"
+                    open="(" separator="," close=")">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            <if test="req.empCode != null and req.empCode != ''">
+                AND A.INTERMEDIARY_EMP_CD = #{req.empCode}
+            </if>
+            <if test="req.butenCode != null and req.butenCode != ''">
+                AND A.BUTEN_CODE = #{req.butenCode}
+            </if>
+            <if test="req.accountNumber != null and req.accountNumber != ''">
+                AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            </if>
+            <if test="req.customerNameKanjiKana != ''.toString() and req.customerNameKanjiKana != null and req.customerNameKanjiKanaTerms == '1'.toString()">
+                AND ((A.NAME_KANJI = #{req.customerNameKanjiKana})
+                OR (A.NAME_KANA = #{req.customerNameKanjiKana}))
+            </if>
+            <if test="req.customerNameKanjiKana != ''.toString() and req.customerNameKanjiKana != null and req.customerNameKanjiKanaTerms == '2'.toString()">
+                AND ((A.NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%')
+                OR (A.NAME_KANA LIKE #{req.customerNameKanjiKana} || '%'))
+            </if>
+            <if test="req.customerNameKanjiKana != ''.toString() and req.customerNameKanjiKana != null and req.customerNameKanjiKanaTerms == '3'.toString()">
+                AND ((A.NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%' )
+                OR (A.NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%' ))
+            </if>
+            <if test='req.course != null and req.course.size() &gt; 0'>
+                AND A.CUSTOMER_ATTRIBUTE IN
+                <foreach item="tradeCourse" collection="req.course" index="idx"
+                    open="(" separator="," close=")">
+                        #{tradeCourse}
+                </foreach>
+            </if>
+            AND A.BROKER_CODE = E.BROKER_CODE
+            AND E.BROKER_BRANCH_KIND = '00'
+            <if test="req.branchCode != null and req.branchCode != ''">
+                AND C.BROKER_BRANCH_CODE = #{req.branchCode}
+            </if>
+    </sql>
+    
+</mapper>

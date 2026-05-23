@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct031Mapper">
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct031Sql001ResponseModel" id="Fct031Sql001ResponseModel">
+    </resultMap>
+
+    <!-- FCT031.SQL001 顧客情報取得 -->
+    <select id="getCustomerInfo" resultMap="Fct031Sql001ResponseModel" statementType="PREPARED">
+    SELECT /* @SQLID=FCT031#SQL001 */
+        A.CUSTOMER_ID
+        , A.BUTEN_CODE
+        , A.ACCOUNT_NUMBER
+        , A.NAME_KANJI
+        , A.NAME_KANA
+        , A.TC_COMP_RANK
+        , A.CUSTOMER_ATTRIBUTE
+        , A.CUSTOMER_ATTRIBUTE_NAME
+        , A.DEALER_NUMBER
+        , A.BIRTH_DAY
+        , A.AGE
+        , A.BROKER_CODE
+        , A.INTERMEDIARY_EMP_CD
+        , A.CORPORATION_KBN AS UAI_CORPORATION_KBN
+        , A.UAI_PHONE_LONG_DIST
+        , A.UAI_PHONE_CITY_CODE
+        , A.UAI_PHONE_NUMBER
+        , A.UAI_CELLULAR_NUMBER1
+        , A.UAI_CELLULAR_NUMBER2
+        , A.UAI_CELLULAR_NUMBER3
+        , A.UAI_DAIHYO_NAME_KANJI
+        , A.UAI_DAIHYO_NAME_KANA
+        , A.UAI_DAIRI_NAME_KANJI
+        , A.UAI_DAIRI_NAME_KANA
+        , A.UAI_OFFICE_DAIRI_KBN
+        , NVL(A.UAI_SPECIFIC_KBN,' ') AS UAISPECIFICKBN
+        , A.UAI_SPECIFIC_DIVIDEND_START_DT
+        , A.UAI_SPECIFIC_DIVIDEND_END_DT
+        , A.UAI_MARUYU_TEKIKAKUSHA_KBN
+        , NVL(A.UAI_ISA_CONTRACT_KBN,' ') AS UAIISACONTRACTKBN
+        , NVL(A.UAI_JNISA_CONTRACT_KBN,' ') AS UAIJNISACONTRACTKBN
+        , A.UAI_JNISA_KOZA_NO
+        , NVL(A.UAI_JNISA_SPECIFIC_KBN,' ') AS UAIJNISASPECIFICKBN
+        , C.BRANCH_NAME AS BROKERNAME
+        , D.BRANCH_NAME
+        , D.BROKER_CHARGE_NAME
+        , E.NOTEINFOERRORCOUNT
+        , F.NOTEINFOCOUNT
+        , G.UNREADIMPORTANTNOTICETRANSACTIONLIMITERRORNUMBER
+        , H.UNREADIMPORTANTNOTICETRANSACTIONLIMITNUMBER
+    FROM
+        (SELECT
+            *
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO
+        WHERE
+            BUTEN_CODE = #{fct031Sql001RequestModel.butenCode}
+            AND ACCOUNT_NUMBER = TO_NUMBER(#{fct031Sql001RequestModel.accountNumber})
+        ) A
+        LEFT OUTER JOIN
+            MEDIATE_BRANCH C
+        ON
+            A.BROKER_CODE = C.BROKER_CODE
+            AND BROKER_BRANCH_KIND = '00' /* 「本店」 */
+        LEFT OUTER JOIN
+            V_MEDIATE_CHARGE_INFO D
+        ON
+            A.BROKER_CODE = D.BROKER_CODE
+            AND A.INTERMEDIARY_EMP_CD = D.BROKER_CHARGE_CODE
+        LEFT OUTER JOIN
+            (SELECT
+                L.CUSTOMER_ID
+                , COUNT(*) AS NOTEINFOERRORCOUNT
+            FROM
+                CALLCENTER.ATTENTION_INFO L
+                , CALLCENTER.ATTENTION_CATEGORY_MASTER M
+                , (SELECT
+                        DISTINCT(K.RESTRICT_CODE)
+                    FROM
+                        M_MED_TRADE_RESTRICT K
+                    WHERE
+                        K.RESTRICT_TYPE = '1' /* 「1：注意情報」 */
+                        AND K.VALUE = '2' /* 「2：エラー」 */
+                        AND START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE 
+                        AND IFA_DATE_UTIL.IFA_GET_DATE &lt;= END_DATE) TMP
+            WHERE
+                L.CUSTOMER_ID = 
+                    (SELECT
+                        CUSTOMER_ID
+                    FROM
+                        MEDIATE_USER_ATTRIBUTE_INFO
+                    WHERE
+                        BUTEN_CODE = #{fct031Sql001RequestModel.butenCode}
+                        AND ACCOUNT_NUMBER = TO_NUMBER(#{fct031Sql001RequestModel.accountNumber})
+                    )
+                AND L.ON_OFF_FLG = '有効'
+                AND L.DELETE_TIME IS NULL
+                AND L.CATEGORY = M.CATEGORY_NAME
+                AND M.CATEGORY_CD IN TMP.RESTRICT_CODE
+            GROUP BY
+                L.CUSTOMER_ID
+            HAVING COUNT(TMP.RESTRICT_CODE) >= 1) E
+        ON
+            A.CUSTOMER_ID = E.CUSTOMER_ID
+        LEFT OUTER JOIN
+            (SELECT
+                N.CUSTOMER_ID
+                , COUNT(N.CUSTOMER_ID) AS NOTEINFOCOUNT
+            FROM
+                CALLCENTER.ATTENTION_INFO N
+            WHERE
+                N.CUSTOMER_ID = 
+                    (SELECT
+                        CUSTOMER_ID
+                    FROM
+                        MEDIATE_USER_ATTRIBUTE_INFO
+                    WHERE
+                        BUTEN_CODE = #{fct031Sql001RequestModel.butenCode}
+                        AND ACCOUNT_NUMBER = TO_NUMBER(#{fct031Sql001RequestModel.accountNumber})
+                    )
+                AND N.ON_OFF_FLG = '有効'
+                AND N.DELETE_TIME IS NULL
+            GROUP BY
+                N.CUSTOMER_ID) F
+        ON 
+            A.CUSTOMER_ID = F.CUSTOMER_ID
+        LEFT OUTER JOIN
+            (SELECT
+                P.JUS_BUTEN_CODE
+                , P.JUS_ACCOUNT_NUMBER
+                , COUNT(*) AS UNREADIMPORTANTNOTICETRANSACTIONLIMITERRORNUMBER
+            FROM
+                JMSG_USER_STATUS P
+                , (SELECT
+                        O.RESTRICT_CODE
+                    FROM
+                        M_MED_TRADE_RESTRICT O
+                    WHERE
+                        O.RESTRICT_TYPE = '2' /* 「2：未読の重要なお知らせによる取引制限」 */
+                        AND O.VALUE = '2' /* 「2：エラー」 */
+                        AND O.START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE
+                        AND IFA_DATE_UTIL.IFA_GET_DATE &lt;= O.END_DATE) TMP2
+            WHERE
+                P.JUS_BUTEN_CODE = #{fct031Sql001RequestModel.butenCode}
+                AND P.JUS_ACCOUNT_NUMBER = TO_NUMBER(#{fct031Sql001RequestModel.accountNumber})
+                AND P.JUS_CONFIRM_KBN = '0' /* 「0：未確認」 */
+                AND (P.JUS_RESTRAINT_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE OR P.JUS_RESTRAINT_DATE IS NULL)
+                AND SUBSTR(P.JUS_RESTRAINT,TO_NUMBER(TRIM(TMP2.RESTRICT_CODE)),1) = '1'
+            GROUP BY
+                P.JUS_BUTEN_CODE, P.JUS_ACCOUNT_NUMBER
+            HAVING COUNT(TMP2.RESTRICT_CODE) >= 1
+                ) G
+        ON
+            A.BUTEN_CODE = G.JUS_BUTEN_CODE
+            AND A.ACCOUNT_NUMBER = G.JUS_ACCOUNT_NUMBER
+        LEFT OUTER JOIN
+            (SELECT
+                Q.JUS_BUTEN_CODE
+                , Q.JUS_ACCOUNT_NUMBER
+                , COUNT(*) AS UNREADIMPORTANTNOTICETRANSACTIONLIMITNUMBER
+            FROM
+                JMSG_USER_STATUS Q
+            WHERE
+                Q.JUS_BUTEN_CODE = #{fct031Sql001RequestModel.butenCode}
+                AND Q.JUS_ACCOUNT_NUMBER = TO_NUMBER(#{fct031Sql001RequestModel.accountNumber})
+                AND Q.JUS_CONFIRM_KBN = '0' /* 「0：未確認」 */
+                AND (Q.JUS_RESTRAINT_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE OR Q.JUS_RESTRAINT_DATE IS NULL)
+            GROUP BY 
+                Q.JUS_BUTEN_CODE, Q.JUS_ACCOUNT_NUMBER) H
+        ON
+            A.BUTEN_CODE = H.JUS_BUTEN_CODE
+            AND A.ACCOUNT_NUMBER = H.JUS_ACCOUNT_NUMBER
+    </select>
+    
+</mapper>

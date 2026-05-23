@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.safe.dao.mapper.IfaSafeErrorMessageListMapper">
+
+	<resultMap id="ResultMapIfaSafeErrorMessageSql001" type="com.sbisec.helios.ap.safe.dao.model.IfaSafeErrorMessageSql001ResponseModel">
+    </resultMap>
+
+	<select id="selectIfaSafeErrorMessageSql001" resultMap="ResultMapIfaSafeErrorMessageSql001" statementType="PREPARED">
+		SELECT
+			 CODE as errorCode
+			,ERROR_LEVEL as errorLevel
+			,ERROR_TYPE as errorType
+			,SERVICE_TYPE as ServiceType
+			,ERROR_MESSAGE as ErrorMessage
+		FROM
+		    SAFE_ERROR_MESSAGE_MST
+		WHERE 
+			CODE = #{req.errorCode}
+		AND ERROR_LEVEL = #{req.errorLevel}
+		AND SERVICE_TYPE = #{req.serviceType}
+	</select>
+</mapper>

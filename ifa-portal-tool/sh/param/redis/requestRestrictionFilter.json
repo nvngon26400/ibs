@@ -1,0 +1,12 @@
+{
+    "whiteList": [
+        "/error",
+        "/common/ifaLinkUrlUrlAcquire",
+        "/testTool/**"
+    ],
+    "maxRequestableCount": 15,
+    "checkIntervalMillis": 1000,
+    "restrictionWaitTimeMillis": 0,
+    "lockRetryIntervalMillis": 2,
+    "maxLockWaitTimeMillis": 1000
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    画面ID：SUB0207_0201
+    画面名：オンライン口座開設
+-->
+<mapper namespace="com.sbisec.helios.ap.accountOpenMenu.onLineAccountOpen.dao.mapper.IfaOnLineAccountOpenMapper">
+    <resultMap
+        id="ResultMapIfaOnLineAccountOpenSql001"
+        type="com.sbisec.helios.ap.accountOpenMenu.onLineAccountOpen.dao.model.IfaOnLineAccountOpenSql001ResponseModel"
+    >
+    <result column="name" property="url" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <!--
+        SQLID：Sql001
+        SQL名：Kintone口座開設URL取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaOnLineAccountOpenSql001" resultMap="ResultMapIfaOnLineAccountOpenSql001" statementType="PREPARED">
+        <if test='req.privId == "1" or req.privId == "2"'>
+        SELECT /* @SQLID=SUB0207_0201#Sql001 */
+            A.NAME
+        FROM
+            M_CODE A
+        WHERE
+            A.CODE_TYPE = '74'
+        AND A.CODE_1 = '1'
+        AND A.CODE_2 = '9998'
+        AND A.START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND A.END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        </if>
+        <if test='req.privId != "1" and req.privId != "2"'>
+        SELECT /* @SQLID=SUB0207_0201#Sql001 */
+            A.NAME
+        FROM
+            M_CODE A
+        WHERE
+            A.CODE_TYPE = '74'
+        AND A.CODE_1 = '1'
+        AND A.START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND A.END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND (
+             A.CODE_2 = #{req.brokerCode}
+             OR A.CODE_2 IN (
+                SELECT B.BROKER_ID
+                FROM TB_MED_USERS_PRIV B
+                WHERE B.USER_ID = #{req.userId}
+             )
+            )
+        </if>
+    </select>
+
+</mapper>

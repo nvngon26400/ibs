@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+	画面ID：SUB0504_04-01
+	画面名：外債買付代金入力一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.tradeDataManage.dao.mapper.IfaForeignBondBuyAmountInputListMapper">
+	
+	<resultMap type="com.sbisec.helios.ap.companyEmployeeMenu.tradeDataManage.dao.model.IfaForeignBondBuyAmountInputListSql001ResponseModel" id="ResultMapIfaForeignBondBuyAmountInputListSql001">
+		<result property="nameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+	</resultMap>
+
+	<!-- 当日データ取得：外債買付代金入力（T_BOND_F_SALES_PRICE）テーブル -->
+	<select id="selectIfaForeignBondBuyAmountInputListSql001" resultMap="ResultMapIfaForeignBondBuyAmountInputListSql001" statementType="PREPARED">
+		SELECT * /* @SQLID=SUB0504_04-01#Sql001 */
+		FROM (
+			SELECT
+				COUNT(*) OVER () AS TOTAL_COUNT
+				,TBFSP.IFA_ACCOUNT_SEQ_NO
+				,TBFSP.BUTEN_CODE
+				,TBFSP.ACCOUNT_NUMBER
+				,TBFSP.AMOUNT
+				,TBFSP.BASE_DATE
+				,TO_CHAR(TBFSP.ORDER_TIME,
+						 'YYYY/MM/DD HH24:MI:SS') AS ORDER_TIME 
+				,TBFSP.UPDATE_TIME
+				,TBFSP.CREATE_TIME
+				,MUAI.NAME_KANJI
+			FROM
+				T_BOND_F_SALES_PRICE TBFSP
+			LEFT OUTER JOIN
+				MEDIATE_USER_ATTRIBUTE_INFO MUAI
+				ON TBFSP.BUTEN_CODE = MUAI.BUTEN_CODE
+			   AND TBFSP.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+			WHERE
+				TBFSP.BASE_DATE =
+					IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')  
+			ORDER BY
+				TBFSP.IFA_ACCOUNT_SEQ_NO DESC
+		)
+		WHERE ROWNUM &lt;= #{maxRowNum} 
+	</select>
+	
+		<!-- 削除： 外債買付代金入力（T_BOND_F_SALES_PRICE）テーブル -->
+	<delete id="deleteIfaForeignBondBuyAmountInputListSql002" statementType="PREPARED">
+		DELETE /* @SQLID=SUB0504_04-01#Sql002 */
+		FROM
+			T_BOND_F_SALES_PRICE
+		WHERE
+			IFA_ACCOUNT_SEQ_NO = #{req.ifaAccountSeqNo}
+	</delete>
+</mapper>

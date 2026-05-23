@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<!-- configuration file for LogBack (slf4J implementation) See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+<configuration scan="true" scanPeriod="30 seconds">
+  <include file="${catalina.home}/conf/logback-trail.xml" />
+
+  <appender name="FILE_ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>/var/app/log/helios/helios-gw.log</File>
+    <Filter class="com.sbisec.helios.gw.common.logger.LogFileAllFilter" />
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>var/app/log/helios/helios-gw.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+      <maxHistory>60</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>{"time":"%d{yyyy/MM/dd HH:mm:ss.SSS}","level":"%-5level","service":"helios-gw","kind":"%X{kind}","tid":"%X{_tid}","fid":"%X{_fid}","inh_id":"%X{_inhId}","framework_session_id":"%X{framework_session_id}","user_id":"%X{user_id}",%msg}%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE_ERROR" class="ch.qos.logback.core.FileAppender">
+    <File>/var/app/log/helios/helios-gw_err.log</File>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>ERROR</level>
+    </filter>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>{"time":"%d{yyyy/MM/dd HH:mm:ss.SSS}","level":"%-5level","service":"helios-gw","kind":"%X{kind}","tid":"%X{_tid}","fid":"%X{_fid}","inh_id":"%X{_inhId}","framework_session_id":"%X{framework_session_id}","user_id":"%X{user_id}",%msg}%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE_SECURITY" class="ch.qos.logback.core.FileAppender">
+    <File>/var/app/log/helios/helios-gw_security.log</File>
+    <Filter class="com.sbisec.helios.gw.common.logger.LogFileSecurityFilter" />
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>{"time":"%d{yyyy/MM/dd HH:mm:ss.SSS}","level":"%-5level","service":"helios-gw","kind":"%X{kind}","tid":"%X{_tid}","fid":"%X{_fid}","inh_id":"%X{_inhId}","framework_session_id":"%X{framework_session_id}","user_id":"%X{user_id}",%msg}%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE_API" class="ch.qos.logback.core.FileAppender">
+    <File>/var/app/log/helios/helios-gw_api.log</File>
+    <Filter class="com.sbisec.helios.gw.common.logger.LogFileApiFilter" />
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>{"time":"%d{yyyy/MM/dd HH:mm:ss.SSS}","level":"%-5level","service":"helios-gw","kind":"%X{kind}","tid":"%X{_tid}","fid":"%X{_fid}","inh_id":"%X{_inhId}","framework_session_id":"%X{framework_session_id}","user_id":"%X{user_id}",%msg}%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="com.sbisec" level="${level}" additivity="false">
+    <appender-ref ref="FILE_ALL" />
+    <appender-ref ref="FILE_ERROR" />
+    <appender-ref ref="FILE_API" />
+    <appender-ref ref="FILE_SECURITY" />
+  </logger>
+  <logger name="com.sbibits" level="${level}" additivity="false">
+    <appender-ref ref="FILE_ALL" />
+    <appender-ref ref="FILE_ERROR" />
+    <appender-ref ref="FILE_API" />
+    <appender-ref ref="FILE_SECURITY" />
+  </logger>
+
+  <root level="${level}">
+    <appender-ref ref="FILE_ALL" />
+    <appender-ref ref="FILE_ERROR" />
+  </root>
+</configuration>

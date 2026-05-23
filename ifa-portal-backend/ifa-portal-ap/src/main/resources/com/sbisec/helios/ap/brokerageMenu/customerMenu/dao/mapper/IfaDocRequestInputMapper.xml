@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0704-01
+    画面名：書類請求入力
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDocRequestInputMapper">
+    <resultMap id="ResultMapDocRequestInputSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql001ResponseModel">
+        <result property="bunruimei" column="BUNRUIMEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapDocRequestInputSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql002ResponseModel">
+        <result property="shoruiBunruiMei" column="SHORUI_BUNRUI_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="shoruimei" column="SHORUIMEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="userNm" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapDocRequestInputSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql003ResponseModel">
+        <result property="shoruimei" column="SHORUIMEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapDocRequestInputSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql004ResponseModel">
+        <result property="option1" column="OPTION_1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku11" column="SENTAKU_11" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku12" column="SENTAKU_12" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku13" column="SENTAKU_13" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku14" column="SENTAKU_14" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku15" column="SENTAKU_15" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option2" column="OPTION_2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku21" column="SENTAKU_21" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku22" column="SENTAKU_22" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku23" column="SENTAKU_23" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku24" column="SENTAKU_24" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku25" column="SENTAKU_25" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option3" column="OPTION_3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku31" column="SENTAKU_31" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku32" column="SENTAKU_32" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku33" column="SENTAKU_33" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku34" column="SENTAKU_34" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentaku35" column="SENTAKU_35" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt1" column="TXT_1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt2" column="TXT_2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt3" column="TXT_3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt4" column="TXT_4" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt5" column="TXT_5" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="tyuiKaki" column="TYUI_KAKI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="naiyou" column="NAIYOU" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="bikou" column="BIKOU" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapDocRequestInputSql006" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql006ResponseModel">
+        <result property="fundName" column="FUND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapDocRequestInputSql007" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql007ResponseModel">
+        <result property="shoruiBunruiMei" column="SHORUI_BUNRUI_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="shoruimei" column="SHORUIMEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="hassouSts" column="HASSOU_STS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="naiyouCaption" column="NAIYOU_CAPTION" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="naiyou" column="NAIYOU" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="bikouCaption" column="BIKOU_CAPTION" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="bikou" column="BIKOU" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option1" column="OPTION_1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentakuMei1" column="SENTAKU_MEI1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option2" column="OPTION_2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentakuMei2" column="SENTAKU_MEI2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option3" column="OPTION_3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sentakuMei3" column="SENTAKU_MEI3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt1" column="TXT_1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txtNaiyou1" column="TXT_NAIYOU_1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt2" column="TXT_2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txtNaiyou2" column="TXT_NAIYOU_2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt3" column="TXT_3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txtNaiyou3" column="TXT_NAIYOU_3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt4" column="TXT_4" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txtNaiyou4" column="TXT_NAIYOU_4" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txt5" column="TXT_5" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="txtNaiyou5" column="TXT_NAIYOU_5" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="userNm" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+     <resultMap id="ResultMapDocRequestInputSql008" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql008ResponseModel"/>
+     <resultMap id="ResultMapDocRequestInputSql009" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql009ResponseModel"/>
+     <resultMap id="ResultMapDocRequestInputSql010" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql010ResponseModel"/>
+     <resultMap id="ResultMapDocRequestInputSql011" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql011ResponseModel">
+         <result property="fundName" column="MPM_PRODUCT_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+     </resultMap>
+     <resultMap id="ResultMapDocRequestInputSql012" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDocRequestInputSql012ResponseModel">
+         <result property="shoruiBunruiMei" column="SHORUI_BUNRUI_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+         <result property="shoruimei" column="SHORUIMEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+         <result property="meigaraMei" column="MEIGARA_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+         <result property="userNm" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+     </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：書類分類リストを取得する
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql001" resultMap="ResultMapDocRequestInputSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql001 */
+            SHORUI_CD AS BUNRUI_CD                                                                      <!-- 書類コード -->
+            ,SHORUIMEI AS BUNRUIMEI                                                                     <!-- 書類名 -->
+        FROM TB_PAPER_MASTER_IFA
+        WHERE SHORUI_KBN = #{req.shoruiKbn}                                                             <!-- 書類区分 -->
+        AND SAKUJO_FLG = #{req.sakujoFlg}                                                               <!-- 削除フラグ -->
+        ORDER BY SORT_NO
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：書類請求一覧表示対象データを取得する
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql002" resultMap="ResultMapDocRequestInputSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql002 */
+            ABC.SHORUI_SEIKYUU_NO                                                                         <!-- 書類請求NO -->
+            ,ABC.EDABAN                                                                                   <!-- 枝番 -->
+            ,ABC.BM_DELIVERY_NO                                                                           <!-- BM交付番号 -->
+            ,TO_CHAR(ABC.SHORUI_SEIKYUU_NICHIJI,'YYYY/MM/DD HH24:MI') AS SHORUI_SEIKYUU_NICHIJI           <!-- 書類請求日時 -->
+            ,ABC.SHORUI_BUNRUI_MEI                                                                        <!-- 書類分類名 -->
+            ,ABC.SHORUIMEI                                                                                <!-- 書類名 -->
+            ,ABC.BUSUU                                                                                    <!-- 部数 -->
+            ,ABC.TORIKESHI_KBN                                                                            <!-- 取消区分 -->
+            ,ABC.USER_NM                                                                                  <!-- ユーザー名 -->
+        FROM(
+            SELECT
+                A.SHORUI_SEIKYUU_NO AS SHORUI_SEIKYUU_NO
+                ,A.EDABAN AS EDABAN
+                ,NULL AS BM_DELIVERY_NO
+                ,A.SHORUI_SEIKYUU_NICHIJI
+                ,A.SHORUI_BUNRUI_MEI AS SHORUI_BUNRUI_MEI
+                ,A.SHORUIMEI AS SHORUIMEI
+                ,A.BUSUU AS BUSUU
+                ,B.USER_NM AS USER_NM
+                ,TO_CHAR(A.TORIKESHI_KBN) AS TORIKESHI_KBN
+            FROM TB_REQUEST_PAPERS_IFA A
+            INNER JOIN TB_MED_USERS B
+            ON A.USER_ID = B.USER_ID
+            WHERE A.BUTEN_CODE = #{req.butenCode}                                                            <!-- 部店コード -->
+            AND A.ACCOUNT_NUMBER = #{req.accountNumber}                                                      <!-- 口座番号 -->
+            AND A.SHORUI_SEIKYUU_NICHIJI &gt;= TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD'), 'YYYYMMDD') - 7         <!-- 書類請求日時 -->
+            UNION ALL
+            SELECT
+                NULL AS SHORUI_SEIKYUU_NO
+                ,NULL AS EDABAN
+                ,C.BM_DELIVERY_NO AS BM_DELIVERY_NO
+                ,C.BM_DELIVERY_TIME AS SHORUI_SEIKYUU_NICHIJI
+                ,C.SHORUI_BUNRUI_MEI AS SHORUI_BUNRUI_MEI
+                ,C.SHORUIMEI AS SHORUIMEI
+                ,NULL AS BUSUU
+                ,B.USER_NM AS USER_NM
+                ,C.STATUS AS TORIKESHI_KBN
+            FROM CORDYS.TB_BM_DELIVERY_IFA C
+            INNER JOIN TB_MED_USERS B
+            ON C.USER_ID = B.USER_ID
+            WHERE C.BUTEN_CODE = #{req.butenCode}                                                            <!-- 部店コード -->
+            AND C.ACCOUNT_NUMBER = #{req.accountNumber}                                                      <!-- 口座番号 -->
+            AND C.BM_DELIVERY_TIME &gt;= TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD'), 'YYYYMMDD') - 7               <!-- BM交付日時 -->
+        ) ABC
+        ORDER BY ABC.SHORUI_SEIKYUU_NICHIJI DESC
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：書類リストを取得する
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql003" resultMap="ResultMapDocRequestInputSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql003 */
+            SHORUI_CD AS SHORUI_CD                                                                      <!-- 書類コード -->
+            ,SHORUIMEI AS SHORUIMEI                                                                     <!-- 書類名 -->
+        FROM TB_PAPER_MASTER_IFA
+        WHERE SHORUI_KBN = #{req.shoruiKbn}                                                             <!-- 書類区分 -->
+        AND BUNRUI_CD = #{req.bunruiCd}                                                                 <!-- 分類コード -->
+        AND SAKUJO_FLG = #{req.sakujoFlg}                                                               <!-- 削除フラグ -->
+        ORDER BY SORT_NO
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：書類データを取得する
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql004" resultMap="ResultMapDocRequestInputSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql004 */
+            OPTION_1 AS OPTION_1                                                                        <!-- オプション1 -->
+            ,HISSU_O1 AS HISSU_O1                                                                       <!-- 必須入力O1 -->
+            ,SENTAKU_11 AS SENTAKU_11                                                                   <!-- 選択11 -->
+            ,SENTAKU_12 AS SENTAKU_12                                                                   <!-- 選択12 -->
+            ,SENTAKU_13 AS SENTAKU_13                                                                   <!-- 選択13 -->
+            ,SENTAKU_14 AS SENTAKU_14                                                                   <!-- 選択14 -->
+            ,SENTAKU_15 AS SENTAKU_15                                                                   <!-- 選択15 -->
+            ,OPTION_2 AS OPTION_2                                                                       <!-- オプション2 -->
+            ,HISSU_O2 AS HISSU_O2                                                                       <!-- 必須入力O2 -->
+            ,SENTAKU_21 AS SENTAKU_21                                                                   <!-- 選択21 -->
+            ,SENTAKU_22 AS SENTAKU_22                                                                   <!-- 選択22 -->
+            ,SENTAKU_23 AS SENTAKU_23                                                                   <!-- 選択23 -->
+            ,SENTAKU_24 AS SENTAKU_24                                                                   <!-- 選択24 -->
+            ,SENTAKU_25 AS SENTAKU_25                                                                   <!-- 選択25 -->
+            ,OPTION_3 AS OPTION_3                                                                       <!-- オプション3 -->
+            ,HISSU_O3 AS HISSU_O3                                                                       <!-- 必須入力O3 -->
+            ,SENTAKU_31 AS SENTAKU_31                                                                   <!-- 選択31 -->
+            ,SENTAKU_32 AS SENTAKU_32                                                                   <!-- 選択32 -->
+            ,SENTAKU_33 AS SENTAKU_33                                                                   <!-- 選択33 -->
+            ,SENTAKU_34 AS SENTAKU_34                                                                   <!-- 選択34 -->
+            ,SENTAKU_35 AS SENTAKU_35                                                                   <!-- 選択35 -->
+            ,TXT_1 AS TXT_1                                                                             <!-- テキスト1 -->
+            ,ADDRESS_T1 AS ADDRESS_T1                                                                   <!-- 住所T1 -->
+            ,HISSU_T1 AS HISSU_T1                                                                       <!-- 必須入力T1 -->
+            ,SIZE_T1 AS SIZE_T1                                                                         <!-- サイズT1 -->
+            ,SUJI_KOMOKU_T1 AS SUJI_KOMOKU_T1                                                           <!-- 数値項目T1 -->
+            ,TXT_2 AS TXT_2                                                                             <!-- テキスト2 -->
+            ,ADDRESS_T2 AS ADDRESS_T2                                                                   <!-- 住所T2 -->
+            ,HISSU_T2 AS HISSU_T2                                                                       <!-- 必須入力T2 -->
+            ,SIZE_T2 AS SIZE_T2                                                                         <!-- サイズT2 -->
+            ,SUJI_KOMOKU_T2 AS SUJI_KOMOKU_T2                                                           <!-- 数値項目T2 -->
+            ,TXT_3 AS TXT_3                                                                             <!-- テキスト3 -->
+            ,ADDRESS_T3 AS ADDRESS_T3                                                                   <!-- 住所T3 -->
+            ,HISSU_T3 AS HISSU_T3                                                                       <!-- 必須入力T3 -->
+            ,SIZE_T3 AS SIZE_T3                                                                         <!-- サイズT3 -->
+            ,SUJI_KOMOKU_T3 AS SUJI_KOMOKU_T3                                                           <!-- 数値項目T3 -->
+            ,TXT_4 AS TXT_4                                                                             <!-- テキスト4 -->
+            ,ADDRESS_T4 AS ADDRESS_T4                                                                   <!-- 住所T4 -->
+            ,HISSU_T4 AS HISSU_T4                                                                       <!-- 必須入力T4 -->
+            ,SIZE_T4 AS SIZE_T4                                                                         <!-- サイズT4 -->
+            ,SUJI_KOMOKU_T4 AS SUJI_KOMOKU_T4                                                           <!-- 数値項目T4 -->
+            ,TXT_5 AS TXT_5                                                                             <!-- テキスト5 -->
+            ,ADDRESS_T5 AS ADDRESS_T5                                                                   <!-- 住所T5 -->
+            ,HISSU_T5 AS HISSU_T5                                                                       <!-- 必須入力T5 -->
+            ,SIZE_T5 AS SIZE_T5                                                                         <!-- サイズT5 -->
+            ,SUJI_KOMOKU_T5 AS SUJI_KOMOKU_T5                                                           <!-- 数値項目T5 -->
+            ,TYUI_KAKI AS TYUI_KAKI                                                                     <!-- 注意書き -->
+            ,BUSUU_SHITEI_KAHI AS BUSUU_SHITEI_KAHI                                                     <!-- 部数指定可否 -->
+            ,NAIYOU AS NAIYOU                                                                           <!-- 内容 -->
+            ,HISSU_NAIYOU AS HISSU_NAIYOU                                                               <!-- 必須入力(内容) -->
+            ,SIZE_NAIYOU AS SIZE_NAIYOU                                                                 <!-- サイズ(内容) -->
+            ,SUJI_KOMOKU_NAIYOU AS SUJI_KOMOKU_NAIYOU                                                   <!-- 数値項目(内容) -->
+            ,BIKOU AS BIKOU                                                                             <!-- 備考 -->
+            ,HISSU_BIKOU AS HISSU_BIKOU                                                                 <!-- 必須入力(備考) -->
+            ,SIZE_BIKOU AS SIZE_BIKOU                                                                   <!-- サイズ(備考) -->
+            ,SUJI_KOMOKU_BIKOU AS SUJI_KOMOKU_BIKOU                                                     <!-- 数値項目(備考) -->
+            ,BM_KOUFU_SHUBETSU AS BM_KOUFU_SHUBETSU                                                     <!-- BM交付種別 -->
+            ,MEIGARA_CD AS MEIGARA_CD                                                                   <!-- 銘柄コード -->
+        FROM TB_PAPER_MASTER_IFA
+        WHERE SHORUI_KBN = #{req.shoruiKbn}                                                             <!-- 書類区分 -->
+        AND BUNRUI_CD = #{req.bunruiCd}                                                                 <!-- 分類コード -->
+        AND SHORUI_CD = #{req.shoruiCd}                                                                 <!-- 書類コード  -->
+        AND SAKUJO_FLG = #{req.sakujoFlg}                                                               <!-- 削除フラグ -->
+    </select>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：投信銘柄名取得する
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql006" resultMap="ResultMapDocRequestInputSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql006 */
+            M_F_CODE AS FUND_CODE                                                                           <!-- 協会コード -->
+            ,M_F_NAME AS FUND_NAME                                                                          <!-- 投信銘柄名 -->
+            ,M_F_MD_BUY_KUBUN AS FUND_MD_BUY_KUBUN                                                          <!-- 購入可否判定区分 -->
+        FROM ETRADE.FUND@CORDYS_ET10.WORLD
+        WHERE M_F_NRICODE = #{req.fundNricode}                                                             <!-- NRIコード -->
+        AND M_F_TYPE IN ('1', '2')                                                                         <!-- ファンドタイプ -->
+        AND M_F_DELFLG = '0'                                                                               <!-- 削除フラグ -->
+        AND M_F_ET_START_DATE &lt;= TO_CHAR(SYSDATE, 'YYYYMMDD')                                           <!-- ET取扱開始日 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：書類請求データ取得する
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql007" resultMap="ResultMapDocRequestInputSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql007 */
+            SHORUI_SEIKYUU_NO                                                                            <!-- 書類請求NO -->
+            ,EDABAN                                                                                      <!-- 枝番 -->
+            ,A.SHORUI_BUNRUI_MEI                                                                         <!-- 分類 -->
+            ,A.SHORUIMEI                                                                                 <!-- 書類名 -->
+            ,A.BUSUU                                                                                     <!-- 部数 -->
+            ,A.HASSOU_STS                                                                                <!-- 交付区分 -->
+            ,A.NAIYOU_CAPTION                                                                            <!-- 内容(名前) -->
+            ,A.NAIYOU                                                                                    <!-- 内容(入力) -->
+            ,A.BIKOU_CAPTION                                                                             <!-- 備考(名前) -->
+            ,A.BIKOU                                                                                     <!-- 備考(入力) -->
+            ,A.OPTION_1                                                                                  <!-- オプション1(名前) -->
+            ,A.SENTAKU_MEI1                                                                              <!-- オプション1(選択) -->
+            ,A.OPTION_2                                                                                  <!-- オプション2(名前) -->
+            ,A.SENTAKU_MEI2                                                                              <!-- オプション2(選択) -->
+            ,A.OPTION_3                                                                                  <!-- オプション3(名前) -->
+            ,A.SENTAKU_MEI3                                                                              <!-- オプション3(選択) -->
+            ,A.TXT_1                                                                                     <!-- テキスト1(名前) -->
+            ,A.TXT_NAIYOU_1                                                                              <!-- テキスト1(入力) -->
+            ,A.TXT_2                                                                                     <!-- テキスト2(名前) -->
+            ,A.TXT_NAIYOU_2                                                                              <!-- テキスト2(入力) -->
+            ,A.TXT_3                                                                                     <!-- テキスト3(名前) -->
+            ,A.TXT_NAIYOU_3                                                                              <!-- テキスト3(入力) -->
+            ,A.TXT_4                                                                                     <!-- テキスト4(名前) -->
+            ,A.TXT_NAIYOU_4                                                                              <!-- テキスト4(入力) -->
+            ,A.TXT_5                                                                                     <!-- テキスト5(名前) -->
+            ,A.TXT_NAIYOU_5                                                                              <!-- テキスト5(入力) -->
+            ,B.USER_NM                                                                                   <!-- 取扱者 -->
+        FROM TB_REQUEST_PAPERS_IFA A
+        INNER JOIN TB_MED_USERS B
+        ON A.USER_ID = B. USER_ID
+        WHERE A.SHORUI_SEIKYUU_NO = #{req.shoruiSeikyuuNo}                                               <!-- 書類請求NO -->
+        AND A.EDABAN = #{req.edaban}                                                                     <!-- 枝番 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql008
+        SQL名：MP仲介業者判定
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql008" resultMap="ResultMapDocRequestInputSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql008 */
+            COUNT(*) AS BROKER_NUM
+        FROM  M_JOINT_BROKER A
+        WHERE A.BROKER_CODE = #{req.brokerCode}                                                     <!-- 仲介業者コード -->
+        AND A.DELETE_FLG = '0'                                                                      <!-- 削除フラグ -->
+        AND A.CONTRACT_STATUS = '1'                                                                 <!-- 契約状態1:契約-->
+    </select>
+    <!-- 
+        SQLID：Sql009
+        SQL名：交付区分の表示設定を取得する
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql009" resultMap="ResultMapDocRequestInputSql009" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql009 */
+            HASSOU_SHUBETSU AS HASSOU_STS                                                            <!-- 発送ステータス表示種別 -->
+        FROM TB_PAPER_HASSOU_DISP_IFA
+        WHERE BUNRUI_CD = #{req.shoruiBunruiCd}                                                      <!-- 分類コード -->
+        AND SHORUI_CD = #{req.shoruiCd}                                                              <!-- 書類コード -->
+        AND BROKER_SHUBETSU = #{req.brokerShubetsu}                                                  <!-- 仲介業者種別 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql010
+        SQL名：未閲読目論見書件数取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql010" resultMap="ResultMapDocRequestInputSql010" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql010 */
+            COUNT(*) AS DATA_NUM                                                                      <!-- データ件数 -->
+        FROM 
+        (
+            SELECT
+                A.DM_DOCUMENT_ID
+                ,A.DM_VERSION_NUMBER
+                ,A.DM_MEIGARA_CODE
+            FROM ETRADE.DOCUMENT_MANAGEMENT@CORDYS_ET10.WORLD A
+            INNER JOIN ETRADE.DOCUMENT_PROFILE@CORDYS_ET10.WORLD B
+            ON B.DP_PRODUCT_ID = A.DM_PRODUCT_ID
+            AND B.DP_MEIGARA_CODE = A.DM_MEIGARA_CODE
+            AND B.DP_DOCUMENT_ID = A.DM_DOCUMENT_ID
+            AND B.DP_VERSION_NUMBER = A.DM_VERSION_NUMBER
+            AND B.DP_ITEM_NAME = 'DOCUMENT_FOR_COMPANY'
+            WHERE A.DM_PRODUCT_ID = '51'
+            AND A.DM_MEIGARA_CODE = #{req.fundCode}                                                <!-- 銘柄コード -->
+            AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN A.DM_ACTIVE_TERM_FROM AND A.DM_ACTIVE_TERM_TO
+            AND A.DM_SERVICE_LIMIT &gt;= TO_CHAR(SYSDATE, 'YYYYMMDD')
+            <if test='req.corporationType != "1"'>
+                AND B.DP_ITEM_VALUE = '0'
+            </if>
+        ) D
+        LEFT JOIN ETRADE.MMF_EDELIV_AGREEMENT@CORDYS_ET10.WORLD C
+        ON D.DM_MEIGARA_CODE = C.MEA_PRODUCT_CODE
+        AND D.DM_DOCUMENT_ID = C.MEA_DOCUMENT_ID
+        AND D.DM_VERSION_NUMBER = C.MEA_VERSION_NUMBER
+        AND C.MEA_BUTEN_CODE = #{req.butenCode}
+        AND C.MEA_ACCOUNT_NUMBER = #{req.accountNumber}
+        WHERE (C.MEA_EDELIV_AGREEMENT IS NULL OR C.MEA_EDELIV_AGREEMENT &lt;&gt; '1')
+    </select>
+
+        <!-- 
+        SQLID：Sql011
+        SQL名：外貨建MMF銘柄名取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql011" resultMap="ResultMapDocRequestInputSql011" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql011 */
+            MPM_PRODUCT_NAME AS MPM_PRODUCT_NAME                                                     <!-- 銘柄名 -->
+        FROM ETRADE.MMF_PRODUCT_MASTER@CORDYS_ET10.WORLD B
+        WHERE B.MPM_PRODUCT_CODE = #{req.fundCode}                                                   <!-- 銘柄コード -->
+    </select>
+
+        <!-- 
+        SQLID：Sql012
+        SQL名：BM交付データ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocRequestInputSql012" resultMap="ResultMapDocRequestInputSql012" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0704-01#Sql012 */
+            C.SHORUI_BUNRUI_MEI AS SHORUI_BUNRUI_MEI                                                  <!-- 書類分類名 -->
+            ,C.SHORUIMEI AS SHORUIMEI                                                                 <!-- 書類名 -->
+            ,C.MEIGARA_CD AS MEIGARA_CD                                                               <!-- 銘柄コード -->
+            ,C.MEIGARA_MEI AS MEIGARA_MEI                                                             <!-- 銘柄名 -->
+            ,C.BM_DELIVERY_TIME_SCHEDULE AS BM_DELIVERY_TIME_SCHEDULE                                 <!-- BM配信予定日時 -->
+            ,B.USER_NM AS USER_NM                                                                     <!-- ユーザー名 -->
+            ,C.SHUBETSU AS SHUBETSU                                                                   <!-- 種別 -->
+            ,C.BM_DELIVERY_NO AS BM_DELIVERY_NO                                                       <!-- BM交付番号 -->
+        FROM TB_BM_DELIVERY_IFA C
+        INNER JOIN TB_MED_USERS B
+        ON C.USER_ID = B.USER_ID
+        WHERE C.BM_DELIVERY_NO = #{req.bmDeliveryNo}                                                  <!-- BM交付番号 -->
+    </select>
+
+</mapper>

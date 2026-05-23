@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct033Mapper">
+
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct033Sql001ResponseModel" id="Fct033Sql001ResponseModel">
+	</resultMap>
+
+	<!-- FCT033.カレンダー取得 -->
+	<select id="getBusinessDayType" resultMap="Fct033Sql001ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT033#SQL001 */
+			C_BUS_NONBUS_DIV
+
+		FROM
+			M_CALENDAR
+		WHERE
+			C_CALENDAR_ID = 'T003'
+		AND C_ISO_COUNTRY_CODE IN ('JP')
+		AND C_TARGET_DATE = #{fct033Sql001RequestModel.date}
+		AND C_DELETE_FLG  = '0'
+	</select>
+
+</mapper>

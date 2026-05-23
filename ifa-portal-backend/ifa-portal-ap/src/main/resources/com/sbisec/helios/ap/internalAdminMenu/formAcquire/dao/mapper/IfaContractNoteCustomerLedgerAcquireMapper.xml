@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0402_02-01
+    画面名：取引日記帳・顧客勘定元帳取得
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.formAcquire.dao.mapper.IfaContractNoteCustomerLedgerAcquireMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaContractNoteCustomerLedgerAcquireSql001" type="com.sbisec.helios.ap.internalAdminMenu.formAcquire.dao.model.IfaContractNoteCustomerLedgerAcquireSql001ResponseModel" />
+    <resultMap id="ResultMapIfaContractNoteCustomerLedgerAcquireSql002" type="com.sbisec.helios.ap.internalAdminMenu.formAcquire.dao.model.IfaContractNoteCustomerLedgerAcquireSql002ResponseModel" >
+        <result property="brokerName" column="BROKERNAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fileName" column="FILENAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="bookName" column="BOOKNAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaContractNoteCustomerLedgerAcquireSql005" type="com.sbisec.helios.ap.internalAdminMenu.formAcquire.dao.model.IfaContractNoteCustomerLedgerAcquireSql005ResponseModel" >
+        <result property="codeName" column="CODE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <!--
+        SQLID：SQL001
+        SQL名：法定帳簿ファイルディレクトリ取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0402_02-01#Sql001 */
+    -->
+    <select id="selectIfaContractNoteCustomerLedgerAcquireSql001" resultMap="ResultMapIfaContractNoteCustomerLedgerAcquireSql001" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0402_02-01#Sql001 */
+            FILE_DIR
+        from
+            TB_MED_TEMP_FILE_DIR
+        where
+            func_id = 'M8'
+            and cat_id = 0
+    </select>
+    <!--
+        SQLID：SQL005
+        SQL名：帳票種別リスト取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0402_02-01#Sql005 */
+    -->
+    <select id="selectIfaContractNoteCustomerLedgerAcquireSql005" resultMap="ResultMapIfaContractNoteCustomerLedgerAcquireSql005" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0402_02-01#Sql005 */
+            CODE_ID
+            , CODE_NAME
+        from
+            CORDYS_CODE_MASTER
+        where
+            function_Id = '027'
+        ORDER BY
+            CODE_ID NULLS FIRST
+    </select>
+    <!--
+        SQLID：SQL003
+        SQL名：法定帳簿一時テーブル削除
+        SQLタイプ：delete
+                    /* @SQLID=SUB0402_02-01#Sql003 */
+    -->
+       <delete id="deleteIfaContractNoteCustomerLedgerAcquireSql003" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0402_02-01#Sql003 */  FROM TMP_STATUTORY_BOOKS WHERE USERID = #{req.userId}
+    </delete>
+
+    <!--
+        SQLID：SQL004
+        SQL名：法定帳簿一時テーブル登録
+        SQLタイプ：insert
+                    /* @SQLID=SUB0402_02-01#Sql004 */
+    -->
+        <insert id="insertIfaContractNoteCustomerLedgerAcquireSql004">
+        <foreach collection="items" item="item" index="index" open="begin" close=";end;" separator=";">
+            INSERT  /* @SQLID=SUB0402_02-01#Sql004 */ INTO TMP_STATUTORY_BOOKS
+                ( USERID,
+                CREATEDATE,
+                BROKERCODE,
+                BROKERNAME,
+                DL,
+                FILENAME,
+                BOOKTYPE,
+                BOOKNAME )
+                (
+                SELECT
+                    A.USERID AS USERID,
+                    A.CREATEDATE AS CREATEDATE,                 --01作成日
+                    A.BROKERCODE AS BROKERCODE,                 --02仲介業者コード
+                    B.BRANCH_NAME AS BROKERNAME,                --03仲介業者名
+                    'DL' AS DL,                                 --05DL
+                    A.FILENAME AS FILENAME,                     --ファイル名
+                    C.CODE_ID AS BOOKTYPE,                      --帳票タイプ
+                    C.CODE_NAME AS BOOKNAME                     --04帳票名
+                FROM
+                (
+                    ( SELECT 1
+                        ,#{userId} AS USERID
+                        ,#{item.createDate} AS CREATEDATE
+                        ,#{item.fileName} AS FILENAME
+                        ,#{item.brokerCode} AS BROKERCODE
+                        ,#{item.ledgerClass} AS BOOKTYPE           --帳票タイプ
+                    FROM DUAL ) A
+                LEFT OUTER JOIN MEDIATE_BRANCH B
+                ON A.BROKERCODE = B.BROKER_CODE AND B.BROKER_BRANCH_KIND = '00'
+                LEFT OUTER JOIN CORDYS_CODE_MASTER C
+                ON A.BOOKTYPE = C.CODE_ID AND C.FUNCTION_ID = '027'
+                )
+            )
+        </foreach>
+    </insert>
+
+
+
+    <!--
+        SQLID：SQL002
+        SQL名：法定帳簿一時テーブル取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0402_02-01#Sql002 */
+    -->
+       <select id="selectIfaContractNoteCustomerLedgerAcquireSql002" resultMap="ResultMapIfaContractNoteCustomerLedgerAcquireSql002" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0402_02-01#Sql002 */
+            *
+        FROM
+            (
+                SELECT
+                    userid
+                    , createdate
+                    , brokercode
+                    , brokername
+                    , dl
+                    , filename
+                    , booktype
+                    , bookname
+                    , count(*) over () as totalcount
+                FROM
+                    TMP_STATUTORY_BOOKS
+                WHERE
+                    USERID = #{req.userId}
+            )
+        WHERE
+            ROWNUM &lt;= #{req.maxCount}
+    </select>
+
+
+</mapper>

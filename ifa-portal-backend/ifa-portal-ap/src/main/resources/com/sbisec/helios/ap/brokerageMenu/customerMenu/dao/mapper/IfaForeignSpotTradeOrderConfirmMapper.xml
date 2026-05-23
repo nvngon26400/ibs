@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0301-01_2
+    画面名：外国現物取引注文確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignSpotTradeOrderConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：発注前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaForeignSpotTradeOrderConfirmSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0301-01_2#Sql001 */
+        INTO FOREIGN_CONSIGNMENT_ORDER (
+            IFA_ORDER_NO,
+            IFA_ORDER_SUB_NO,
+            ACCEPT_ORDER_NO,
+            ACCEPT_ORDER_SUB_NO,
+            BUTEN_CODE,
+            ACCOUNT_NUMBER,
+            BRAND_CODE,
+            BRAND_NAME,
+            EXCHANGE_CODE,
+            METHOD_TYPE,
+            TRADE_TYPE,
+            ORDER_QUANTITY,
+            TRADE_METHOD_TYPE,
+            LIMIT_PRICE,
+            STOP_PRICE,
+            CURRENCY_CODE,
+            SETTLEMENT_TYPE,
+            DEPOSIT_TYPE,
+            INVITATION_TYPE,
+            ORDER_METHOD_TYPE,
+            WARNING_APPLY_TYPE,
+            EXPLANATION_INFO_TYPE,
+            TRANSFER_INVITATION_TYPE,
+            ENG_PUB_BRAND_EXP_TYPE,
+            CONFIRMATION_TYPE,
+            ORDER_TYPE,
+            ORDER_DATE,
+            ORDER_TIME,
+            TRADE_DATE,
+            TRADE_LIMIT_DATE,
+            BROKER_CODE,
+            INTERMEDIARY_EMP_CD,
+            API_ERROR_CODE,
+            API_STATUS_CODE,
+            API_MESSAGE,
+            CREATE_TIME,
+            CREATE_USER,
+            UPDATE_TIME,
+            UPDATE_USER
+        ) VALUES (
+            #{req.ifaOrderNo},
+            #{req.ifaOrderSubNo},
+            #{req.acceptOrderNo},
+            #{req.acceptOrderSubNo},
+            #{req.butenCode},
+            #{req.accountNumber},
+            #{req.brandCode},
+            #{req.brandName},
+            #{req.exchangeCode},
+            #{req.methodType},
+            #{req.tradeType},
+            #{req.orderQuantity},
+            #{req.tradeMethodType},
+            #{req.limitPrice},
+            #{req.stopPrice},
+            #{req.currencyCode},
+            #{req.settlementType},
+            #{req.depositType},
+            #{req.invitationType},
+            #{req.orderMethodType},
+            #{req.warningApplyType},
+            #{req.explantionInfoType},
+            #{req.transferInvitationType},
+            #{req.engPubBrandExpType},
+            #{req.confirmationType},
+            #{req.orderType},
+            <choose>
+                <when test='"".equals(req.orderDate)'>
+                    '19000101',
+                </when>
+                <otherwise>
+                    #{req.orderDate},
+                </otherwise>
+            </choose>
+            TO_DATE(#{req.orderTime}, 'YYYY-MM-DD HH24:MI:SS'),
+            #{req.tradeDate},
+            #{req.tradeLimitDate},
+            #{req.brokerCode},
+            #{req.intermediaryEmpCd},
+            NULL,
+            NULL,
+            NULL,
+            IFA_DATE_UTIL.IFA_GET_DATE, <!-- 作成日時 -->
+            #{req.createUser}, <!-- 作成者 -->
+            IFA_DATE_UTIL.IFA_GET_DATE, <!-- 更新日時 -->
+            #{req.updateUser}<!-- 更新者 -->
+        )
+    </insert>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新: 発注が正常の場合
+        SQLタイプ：update
+    -->
+    <update id="updateIfaForeignSpotTradeOrderConfirmSql002Success" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0301-01_2#Sql002 */ FOREIGN_CONSIGNMENT_ORDER
+        SET 
+            ACCEPT_ORDER_NO = #{req.acceptOrderNo}
+            ,ACCEPT_ORDER_SUB_NO = #{req.acceptOrderSubNo}
+            ,ORDER_DATE = #{req.orderDate}
+            ,ORDER_TIME = TO_DATE(#{req.orderTime}, 'YYYY-MM-DD HH24:MI:SS')
+            ,TRADE_LIMIT_DATE = #{req.tradeLimitDate}
+            ,API_ERROR_CODE = NULL
+            ,API_STATUS_CODE = #{req.apiStatusCode}
+            ,API_MESSAGE = NULL
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.updateUser}
+        WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+    </update>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新: 発注が異常の場合
+        SQLタイプ：update
+    -->
+    <update id="updateIfaForeignSpotTradeOrderConfirmSql002Error" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0301-01_2#Sql002 */ FOREIGN_CONSIGNMENT_ORDER
+        SET 
+            ,API_ERROR_CODE = #{req.apiErrorCode}
+            ,API_STATUS_CODE = #{req.apiStatusCode}
+            ,API_MESSAGE = #{req.apiMsg}
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.updateUser}
+        WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+    </update>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：連番のシーケンスオブジェクト取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignSpotTradeOrderConfirmSql003" resultType="java.lang.String" statementType="PREPARED">
+        SELECT  /* @SQLID=SUB0202_0301-01_2#Sql003 */
+        TO_CHAR(sysdate,  'YYYYMMDD') || LPAD(SEQ_FOREIGN_CONSIGNMENT_ORDER.NEXTVAL, 5, '0') AS IFA_ORDER_NO
+    FROM    
+        DUAL
+    </select>
+    
+</mapper>

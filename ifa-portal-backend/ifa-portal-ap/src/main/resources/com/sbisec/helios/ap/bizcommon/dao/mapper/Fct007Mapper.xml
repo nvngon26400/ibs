@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct007Mapper">
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct007Sql001ResponseModel" id="designatedDate">
+    </resultMap>
+
+    <!-- FCT007.SQL001 証券営業日付取得 -->
+    <select id="getDesignatedDate" resultMap="designatedDate" statementType="PREPARED">
+        SELECT * 
+        FROM
+            (
+            SELECT
+                ROWNUM as "ROWNUM"
+                , C_TARGET_DATE as businessDay
+            FROM
+                (
+                SELECT
+                C_TARGET_DATE
+                FROM
+                M_CALENDAR
+                WHERE
+                C_CALENDAR_ID = 'T003'
+                AND C_ISO_COUNTRY_CODE = 'JP'
+                AND C_BUS_NONBUS_DIV = '2'
+                AND C_DELETE_FLG = '0'
+            <if test="fct007Sql001RequestModel.numberDay &gt; 0">
+                    AND #{fct007Sql001RequestModel.date} &lt; C_TARGET_DATE ORDER BY C_TARGET_DATE ASC
+            </if>
+            <if test="fct007Sql001RequestModel.numberDay &lt; 0">
+                    AND #{fct007Sql001RequestModel.date} &gt; C_TARGET_DATE ORDER BY C_TARGET_DATE DESC
+            </if>
+                )
+            )
+       WHERE
+            "ROWNUM" = abs(#{fct007Sql001RequestModel.numberDay})
+    </select>
+
+</mapper>

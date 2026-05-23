@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sbisec.helios.ap.common.dao.mapper.fragment">
+
+	<sql id="privilegeCheck">
+		<if test="privId != null and privId != ''">
+			<choose>
+				<when test='"1".equals(privId)'>
+					<if test="brokerCode != null and brokerCode != ''">
+						AND BROKER_CODE = #{brokerCode}
+					</if>
+					<if test="empCode != null and empCode != ''">
+						AND BROKER_CHARGE_CODE = #{empCode}
+					</if>
+				</when>
+				<when test='"2".equals(privId)'>
+					<if test="brokerCode != null and brokerCode != ''">
+						AND BROKER_CODE = #{brokerCode}
+					</if>
+					<if test="empCode != null and empCode != ''">
+						AND BROKER_CHARGE_CODE = #{empCode}
+					</if>
+					<if
+						test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+						AND ( (BROKER_CODE || BROKER_CHARGE_CODE ) IN
+						<foreach item="chargeCode" index="index"
+							collection="chargeCodeList" open="(" close=")">
+							<if test="index%1000 == 0 and index!=0">
+								) OR (BROKER_CODE||BROKER_CHARGE_CODE) IN (
+							</if>
+							<if test="index%1000 != 0">
+								,
+							</if>
+							#{chargeCode}
+						</foreach>
+						)
+					</if>
+				</when>
+				<when
+					test='"3".equals(privId) or "4".equals(privId) or "5".equals(privId)'>
+					<if test="brokerCode != null and brokerCode != ''">
+						AND BROKER_CODE = #{brokerCode}
+					</if>
+					<if test="empCode != null and empCode != ''">
+						AND BROKER_CHARGE_CODE = #{empCode}
+					</if>
+				</when>
+				<when
+					test='"6".equals(privId) or "7".equals(privId) or "8".equals(privId) or "10".equals(privId)'>
+					<if test="empCode != null and empCode != ''">
+						AND BROKER_CHARGE_CODE = #{empCode}
+					</if>
+					<if
+						test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+						AND BROKER_CODE = #{brokerCode} AND (
+						(BROKER_CODE||BROKER_CHARGE_CODE) IN
+						<foreach item="chargeCode" index="index"
+							collection="chargeCodeList" open="(" close=")">
+							<if test="index%1000 == 0 and index!=0">
+								) OR (BROKER_CODE||BROKER_CHARGE_CODE) IN (
+							</if>
+							<if test="index%1000 != 0">
+								,
+							</if>
+							#{chargeCode}
+						</foreach>
+						)
+					</if>
+				</when>
+				<when test='"9".equals(privId)'>
+					AND BROKER_CODE = #{brokerCode} AND BROKER_CHARGE_CODE = #{empCode}
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+
+	<sql id="privilegeCheckForCounter">
+		<if test="privId != null and privId != ''">
+			<choose>
+				<when test='"1".equals(privId)'>
+					<if test="brokerCode != null and brokerCode != ''">
+						AND MUAI.BROKER_CODE = #{brokerCode}
+					</if>
+					<if test="empCode != null and empCode != ''">
+						AND MUAI.INTERMEDIARY_EMP_CD = #{empCode}
+					</if>
+				</when>
+				<when test='"2".equals(privId)'>
+					<if test="brokerCode != null and brokerCode != ''">
+						AND MUAI.BROKER_CODE = #{brokerCode}
+					</if>
+					<if test="empCode != null and empCode != ''">
+						AND MUAI.INTERMEDIARY_EMP_CD = #{empCode}
+					</if>
+					<if
+						test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+						AND ( (MUAI.BROKER_CODE || MUAI.INTERMEDIARY_EMP_CD ) IN
+						<foreach item="chargeCode" index="index"
+							collection="chargeCodeList" open="(" close=")">
+							<if test="index%1000 == 0 and index!=0">
+								) OR (MUAI.BROKER_CODE||MUAI.INTERMEDIARY_EMP_CD) IN (
+							</if>
+							<if test="index%1000 != 0">
+								,
+							</if>
+							#{chargeCode}
+						</foreach>
+						)
+					</if>
+				</when>
+				<when
+					test='"3".equals(privId) or "4".equals(privId) or "5".equals(privId)'>
+					<if test="brokerCode != null and brokerCode != ''">
+						AND MUAI.BROKER_CODE = #{brokerCode}
+					</if>
+					<if test="empCode != null and empCode != ''">
+						AND MUAI.INTERMEDIARY_EMP_CD = #{empCode}
+					</if>
+				</when>
+				<when
+					test='"6".equals(privId) or "7".equals(privId) or "8".equals(privId) or "10".equals(privId)'>
+					<if test="empCode != null and empCode != ''">
+						AND MUAI.INTERMEDIARY_EMP_CD = #{empCode}
+					</if>
+					<if
+						test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+						AND MUAI.BROKER_CODE = #{brokerCode} AND (
+						(MUAI.BROKER_CODE||MUAI.INTERMEDIARY_EMP_CD) IN
+						<foreach item="chargeCode" index="index"
+							collection="chargeCodeList" open="(" close=")">
+							<if test="index%1000 == 0 and index!=0">
+								) OR (MUAI.BROKER_CODE||MUAI.INTERMEDIARY_EMP_CD) IN (
+							</if>
+							<if test="index%1000 != 0">
+								,
+							</if>
+							#{chargeCode}
+						</foreach>
+						)
+					</if>
+				</when>
+				<when test='"9".equals(privId)'>
+					AND MUAI.BROKER_CODE = #{brokerCode} AND MUAI.INTERMEDIARY_EMP_CD =
+					#{empCode}
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+
+	<sql id="privilegeCheckWithIntermEmpCodeDeposits">
+		<choose>
+			<when test='"1".equals(privId)'>
+				<if test="butenCode != null and butenCode != ''">
+					AND B.BUTEN_CODE = #{butenCode}
+				</if>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+			</when>
+			<when test='"2".equals(privId)'>
+				<if test="butenCode != null and butenCode != ''">
+					AND B.BUTEN_CODE = #{butenCode}
+				</if>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+				<if
+					test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+					AND ( (B.BROKER_CODE||B.INTERMEDIARY_EMP_CD) IN
+					<foreach item="chargeCode" index="index"
+						collection="chargeCodeList" open="(" close=")">
+						<if test="index%1000 == 0 and index!=0">
+							) OR (B.BROKER_CODE||B.INTERMEDIARY_EMP_CD) IN (
+						</if>
+						<if test="index%1000 != 0">
+							,
+						</if>
+						#{chargeCode}
+					</foreach>
+					)
+				</if>
+			</when>
+			<when
+				test='"3".equals(privId) or "4".equals(privId) or "5".equals(privId)'>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+			</when>
+			<when
+				test='"6".equals(privId) or "7".equals(privId) or "8".equals(privId) or "10".equals(privId)'>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+				<if
+					test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+					AND ( (B.BROKER_CODE||B.INTERMEDIARY_EMP_CD) IN
+					<foreach item="chargeCode" index="index"
+						collection="chargeCodeList" open="(" close=")">
+						<if test="index%1000 == 0 and index!=0">
+							) OR (B.BROKER_CODE||B.INTERMEDIARY_EMP_CD) IN (
+						</if>
+						<if test="index%1000 != 0">
+							,
+						</if>
+						#{chargeCode}
+					</foreach>
+					)
+				</if>
+			</when>
+			<when test='"9".equals(privId)'>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+			</when>
+		</choose>
+	</sql>
+
+	<sql id="privilegeCheckWithIntermEmpCodeSecurities">
+		<choose>
+			<when test='"1".equals(privId)'>
+				<if test="butenCode != null and butenCode != ''">
+					AND B.BUTEN_CODE = #{butenCode}
+				</if>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+			</when>
+			<when test='"2".equals(privId)'>
+				<if test="butenCode != null and butenCode != ''">
+					AND B.BUTEN_CODE = #{butenCode}
+				</if>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+				<if
+					test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+					AND ( (B.BROKER_CODE||B.INTERMEDIARY_EMP_CD) IN
+					<foreach item="chargeCode" index="index"
+						collection="chargeCodeList" open="(" close=")">
+						<if test="index%1000 == 0 and index!=0">
+							) OR (B.BROKER_CODE||B.INTERMEDIARY_EMP_CD) IN (
+						</if>
+						<if test="index%1000 != 0">
+							,
+						</if>
+						#{chargeCode}
+					</foreach>
+					)
+				</if>
+			</when>
+			<when
+				test='"3".equals(privId) or "4".equals(privId) or "5".equals(privId)'>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND A.BROKER_CODE = #{brokerCode} AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+			</when>
+			<when
+				test='"6".equals(privId) or "7".equals(privId) or "8".equals(privId) or "10".equals(privId)'>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+				<if
+					test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+					AND ( (B.BROKER_CODE||B.INTERMEDIARY_EMP_CD) IN
+					<foreach item="chargeCode" index="index"
+						collection="chargeCodeList" open="(" close=")">
+						<if test="index%1000 == 0 and index!=0">
+							) OR (B.BROKER_CODE||B.INTERMEDIARY_EMP_CD) IN (
+						</if>
+						<if test="index%1000 != 0">
+							,
+						</if>
+						#{chargeCode}
+					</foreach>
+					)
+				</if>
+			</when>
+			<when test='"9".equals(privId)'>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND B.BROKER_CODE = #{brokerCode}
+				</if>
+				<if test="intermediaryEmpCd != null and intermediaryEmpCd != ''">
+					AND B.INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+				</if>
+			</when>
+		</choose>
+	</sql>
+
+	<sql id="privilegeCheckCustomerBasicSearch">
+		<choose>
+			<!-- Honten has no checks -->
+			<when test='"2".equals(privId)'>
+				<if
+					test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+					AND ( (BROKER_CODE||INTERMEDIARY_EMP_CD) IN
+					<foreach item="chargeCode" index="index"
+						collection="chargeCodeList" open="(" close=")">
+						<if test="index%1000 == 0 and index!=0">
+							) OR (BROKER_CODE||INTERMEDIARY_EMP_CD) IN (
+						</if>
+						<if test="index%1000 != 0">
+							,
+						</if>
+						#{chargeCode}
+					</foreach>
+					)
+				</if>
+			</when>
+			<when
+				test='"3".equals(privId) or "4".equals(privId) or "5".equals(privId)'>
+				<if test="brokerCode != null and brokerCode != ''">
+					AND BROKER_CODE = #{brokerCode}
+				</if>
+			</when>
+			<when
+				test='"6".equals(privId) or "7".equals(privId) or "8".equals(privId) or "10".equals(privId)'>
+				<if
+					test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+					AND ( (BROKER_CODE||INTERMEDIARY_EMP_CD) IN
+					<foreach item="chargeCode" index="index"
+						collection="chargeCodeList" open="(" close=")">
+						<if test="index%1000 == 0 and index!=0">
+							) OR (BROKER_CODE||INTERMEDIARY_EMP_CD) IN (
+						</if>
+						<if test="index%1000 != 0">
+							,
+						</if>
+						#{chargeCode}
+					</foreach>
+					)
+				</if>
+			</when>
+			<when test='"9".equals(privId)'>
+				<if
+					test="chargeCodeList != null and 0 &lt; chargeCodeList.size()">
+					AND ( (BROKER_CODE||INTERMEDIARY_EMP_CD) IN
+					<foreach item="chargeCode" index="index"
+						collection="chargeCodeList" open="(" close=")">
+						<if test="index%1000 == 0 and index!=0">
+							) OR (BROKER_CODE||INTERMEDIARY_EMP_CD) IN (
+						</if>
+						<if test="index%1000 != 0">
+							,
+						</if>
+						#{chargeCode}
+					</foreach>
+					)
+				</if>
+			</when>
+		</choose>
+	</sql>
+
+</mapper>

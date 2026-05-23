@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+    namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IpopoBrandInfoListMapper">
+
+    <resultMap type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.IpopoBrandInfoListModel" id="resultSetGetIpopoBrandInfoList">
+        <result property="bbProductName" column="BB_PRODUCT_NAME" typeHandler="StringTypeHandler" />
+        <result property="status" column="STATUS" typeHandler="StringTypeHandler" />
+        <result property="cigaretteShowFlag" column="CIGARETTE_SHOW_FLAG" typeHandler="StringTypeHandler" />
+        <result property="edelivOnlyFlag" column="EDELIV_ONLY_FLAG" typeHandler="StringTypeHandler" />
+    </resultMap>
+
+    <select id="getIpopoBrandInfoList" resultMap="resultSetGetIpopoBrandInfoList" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-01#SQL001 */ * FROM (
+            SELECT
+                count(*) over() as totalRow,
+                T.* FROM (
+                SELECT
+                    A.BB_IPO_PO_KBN,
+                    A.BB_PRODUCT_CODE,
+                    B.ATTACHED_BRAND,
+                    A.BB_PRODUCT_NAME,
+                    NVL(B.PRESENTATION_DATE, TO_CHAR(A.BB_SETTLE_DATE)) AS BB_SETTLE_DATE,
+                    B.MAX_ALLOCATION,
+                    A.BB_STOCK,
+                    TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYYMMDD') AS BB_PRESENTATION_FROM,
+                    NVL(B.BB_PRESENTATION_FROM, A.BB_PRESENTATION_FROM) AS BB_PRESENTATION_FROM_ORDER,
+                    TO_CHAR(NVL(B.BB_PRESENTATION_FROM, A.BB_PRESENTATION_FROM), 'YYYY/MM/DD HH24:MI')
+                    || ' ～ '
+                    || TO_CHAR(B.BB_PRESENTATION_TO, 'YYYY/MM/DD HH24:MI') AS BB_PRESENTATION,
+                    CASE
+                        WHEN TO_CHAR(NVL(B.BB_PRESENTATION_FROM, A.BB_PRESENTATION_FROM), 'YYYY/MM/DD HH24:MI') &gt; TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYY/MM/DD HH24:MI') THEN
+                            '受付前'
+                        WHEN TO_CHAR(NVL(B.BB_PRESENTATION_FROM, A.BB_PRESENTATION_FROM), 'YYYY/MM/DD HH24:MI') &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYY/MM/DD HH24:MI')
+                            AND TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYY/MM/DD HH24:MI') &lt;= TO_CHAR(B.BB_PRESENTATION_TO, 'YYYY/MM/DD HH24:MI')
+                            AND A.BB_URGENT_STOP = '0' THEN
+                            '受付中'
+                        WHEN TO_CHAR(NVL(B.BB_PRESENTATION_FROM, A.BB_PRESENTATION_FROM), 'YYYY/MM/DD HH24:MI') &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYY/MM/DD HH24:MI')
+                            AND TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYY/MM/DD HH24:MI') &lt;= TO_CHAR(B.BB_PRESENTATION_TO, 'YYYY/MM/DD HH24:MI')
+                            AND A.BB_URGENT_STOP = '1' THEN
+                            '受付停止'
+                        WHEN TO_CHAR(B.BB_PRESENTATION_TO, 'YYYY/MM/DD HH24:MI') &lt; TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYY/MM/DD HH24:MI') THEN
+                            '受付終了'
+                        ELSE
+                            ' '
+                    END AS STATUS,
+                    TO_CHAR(TO_DATE(B.BB_PERIOD_FROM, 'YYYYMMDD'), 'YYYY/MM/DD')
+                    || ' ～ '
+                    || TO_CHAR(TO_DATE(B.BB_PERIOD_TO, 'YYYYMMDD'), 'YYYY/MM/DD') AS BB_PERIOD,
+                    TO_CHAR(TO_DATE(B.PAYMENT_DATE, 'YYYYMMDD'), 'YYYY/MM/DD') AS PAYMENT_DATE,
+                    DECODE(A.BB_UNIT_KBN, '1', '株', '2', '円', '3', '口', '株') AS BB_UNIT_KBN,
+                    B.CIGARETTE_SHOW_FLAG,
+                    B.EDELIV_ONLY_FLAG,
+                    B.CHANGE_BB_PERIOD_FLAG,
+                    B.CHANGE_PRICE_FLAG
+                FROM
+                    ETINTRA.BB_PRODUCT_MASTER A
+                    LEFT JOIN M_IPO_PO_BB_PERIOD B 
+                ON A.BB_PRODUCT_CODE = B.PRODUCT_CODE
+                AND TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYYMMDD') = TO_CHAR(B.PRESENTATION_FROM)
+                WHERE
+                    NVL(B.PRESENTATION_DATE, TO_CHAR(A.BB_SETTLE_DATE)) &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+                    AND NOT EXISTS (
+                        SELECT 1
+                          FROM STO_BOSYU_MASTER SBM
+                         WHERE A.BB_PRODUCT_CODE = SBM.SBM_PRODUCT_CODE
+                           AND SBM.SBM_SYOHIN_TYPE = '21'
+                    )
+                ) T
+            ORDER BY
+                T.BB_PRESENTATION_FROM_ORDER DESC,
+                T.BB_PRODUCT_CODE ASC
+         ) WHERE ROWNUM &lt;= #{querySizeLimit}
+    </select>
+</mapper>

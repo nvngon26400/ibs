@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0703-01
+    画面名：受発信状況照会
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaSendReceiveStatusLookupMapper">
+    
+    <resultMap id="ResultMapIfaSendReceiveStatusLookupSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaSendReceiveStatusLookupSql001ResponseModel" >
+         <result property="paperName" column="PAPER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+   
+   
+    <!-- 
+        SQLID：Sql001
+        SQL名：書類一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSendReceiveStatusLookupSql001" resultMap="ResultMapIfaSendReceiveStatusLookupSql001" statementType="PREPARED">
+       SELECT
+            /* @SQLID=SUB0202_0703-01#Sql001 */
+                PM.PAPER_CD                                   AS PAPER_CD,                  <!-- 書類コード -->
+                PM.PAPER_NAME                                 AS PAPER_NAME                 <!-- 書類名 -->
+        FROM
+            CALLCENTER.PAPER_MASTER PM
+        WHERE 
+            PM.DISPLAY_INDEX IS NOT NULL
+        ORDER BY
+            PM.DISPLAY_INDEX ASC
+    </select>
+   
+    <!-- 
+        SQLID：Sql002
+        SQL名：受発信状況一覧取得
+        SQLタイプ：select
+    --> 
+     <resultMap id="ResultMapIfaSendReceiveStatusLookupSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaSendReceiveStatusLookupSql002ResponseModel" >
+        <result property="st" column="ST" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="paperName" column="PAPER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="contents" column="CONTENTS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="remarks" column="REMARKS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="purposeName" column="PURPOSE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="agentName" column="AGENT_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="sendMail" column="SENDMAIL" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap> 
+    <select id="selectIfaSendReceiveStatusLookupSql002" resultMap="ResultMapIfaSendReceiveStatusLookupSql002" statementType="PREPARED">
+       SELECT
+            /* @SQLID=SUB0202_0703-01#Sql002 */ *
+        FROM
+            (
+                SELECT
+                    count(1) over()                                                     AS TOTAL_COUNT,                <!-- 総件数 -->
+                    RDP.REQUEST_NO                                                      AS REQUEST_NO,              <!-- 資料No. -->
+                    TO_CHAR(RDP.CHANGE_STATUS_DATE,'YYYY/MM/DD')                        AS CHANGE_STATUS_DATE,      <!-- 受発送日 -->
+                    CASE 
+                        WHEN TRIM(RDP.DISPATCH_STATUS) = '請求' AND RDP.CANCEL_KBN = 1
+                        THEN '請求取消済' 
+                        ELSE TRIM(RDP.DISPATCH_STATUS)             <!-- 発送ステータス -->
+                    END                                                                 AS ST,                      <!-- ST -->
+                    PM.PAPER_NAME                                                       AS PAPER_NAME,              <!-- 資料名 -->
+                    RDP.PROSPECTUS_NO                                                   AS PROSPECTUS_NO,           <!-- 目論見書番号 -->
+                    RDP.CONTENTS                                                        AS CONTENTS,                <!-- 内容 -->
+                    RDP.REMARKS                                                         AS REMARKS,                 <!-- 備考 -->
+                    TRIM(DPM.PURPOSE_NAME)                                              AS PURPOSE_NAME,            <!-- 理由名称 -->
+                    RDP.COPIES                                                          AS COPIES,                  <!-- 通数 -->
+                    TO_CHAR(RDP.REQUEST_DATE,'YYYY/MM/DD HH24:MI')                      AS REQUEST_DATE,            <!-- 請求日時 -->
+                    NVL(SUBSTR(AM.AGENT_NAME, 1, INSTR(AM.AGENT_NAME, '　') - 1), AM.AGENT_NAME)     AS AGENT_NAME,  <!-- 取扱者 -->
+                    TRIM(RDP.SENDMAIL)                                                              AS SENDMAIL     <!-- 郵便記録 -->
+                FROM
+                    CALLCENTER.REQUEST_DISPATCH_PAPERS RDP
+                LEFT JOIN
+                    CALLCENTER.PAPER_MASTER PM
+                ON  RDP.PAPER_CD = PM.PAPER_CD
+                LEFT JOIN 
+                    CALLCENTER.AGENT_MASTER AM
+                ON  RDP.AGENT_ID = AM.AGENT_ID
+                LEFT JOIN
+                    CALLCENTER.DEMAND_PURPOSE_MASTER DPM
+                ON  TRIM(RDP.PURPOSE_CD) = TRIM(DPM.PURPOSE_CD)
+                WHERE
+                     RDP.CUSTOMER_ID = #{req.customerId}
+                     AND RDP.DELETE_TIME IS NULL
+                    <if test='req.paperCd != null and req.paperCd != "" '>
+                        AND RDP.PAPER_CD = #{req.paperCd}
+                    </if>
+                    <if test='req.keyword != null and req.keyword != "" '>
+                       AND UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(PM.PAPER_NAME)), 'kana_fwkatakana')
+                            LIKE '%' || UTL_I18N.TRANSLITERATE(
+                            UPPER(TO_MULTI_BYTE((#{req.keyword}))), 'kana_fwkatakana') || '%'
+                    </if>
+                ORDER BY
+                    RDP.CHANGE_STATUS_DATE DESC
+            )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：書類請求付加情報詳細取得
+        SQLタイプ：select
+    -->
+     <resultMap id="ResultMapIfaSendReceiveStatusLookupSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaSendReceiveStatusLookupSql003ResponseModel" >
+        <result property="option1q" column="OPTION_1_Q" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option1a" column="OPTION_1_A" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option2q" column="OPTION_2_Q" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option2a" column="OPTION_2_A" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option3q" column="OPTION_3_Q" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="option3a" column="OPTION_3_A" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text1q" column="TEXT_1_Q" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text1a" column="TEXT_1_A" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text2q" column="TEXT_2_Q" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text2a" column="TEXT_2_A" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text3q" column="TEXT_3_Q" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text3a" column="TEXT_3_A" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text4q" column="TEXT_4_Q" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text4a" column="TEXT_4_A" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text5q" column="TEXT_5_Q" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="text5a" column="TEXT_5_A" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <select id="selectIfaSendReceiveStatusLookupSql003" resultMap="ResultMapIfaSendReceiveStatusLookupSql003" statementType="PREPARED">
+       SELECT
+            /* @SQLID=SUB0202_0703-01#Sql003 */ 
+            ADP.OPTION_1_Q                                                  AS OPTION_1_Q,              <!-- オプション1 -->
+            ADP.OPTION_1_A                                                  AS OPTION_1_A,              <!-- 選択名1 -->
+            ADP.OPTION_2_Q                                                  AS OPTION_2_Q,              <!-- オプション2 -->
+            ADP.OPTION_2_A                                                  AS OPTION_2_A,              <!-- 選択名2 -->
+            ADP.OPTION_3_Q                                                  AS OPTION_3_Q,              <!-- オプション3 -->
+            ADP.OPTION_3_A                                                  AS OPTION_3_A,              <!-- 選択名3 -->
+            ADP.TEXT_1_Q                                                    AS TEXT_1_Q,              <!-- テキスト1 -->
+            ADP.TEXT_1_A                                                    AS TEXT_1_A,              <!-- 入力内容1 -->
+            ADP.TEXT_2_Q                                                    AS TEXT_2_Q,              <!-- テキスト2 -->
+            ADP.TEXT_2_A                                                    AS TEXT_2_A,              <!-- 入力内容2 -->
+            ADP.TEXT_3_Q                                                    AS TEXT_3_Q,              <!-- テキスト3 -->
+            ADP.TEXT_3_A                                                    AS TEXT_3_A,              <!-- 入力内容3 -->
+            ADP.TEXT_4_Q                                                    AS TEXT_4_Q,              <!-- テキスト4 -->
+            ADP.TEXT_4_A                                                    AS TEXT_4_A,              <!-- 入力内容4 -->
+            ADP.TEXT_5_Q                                                    AS TEXT_5_Q,              <!-- テキスト5 -->
+            ADP.TEXT_5_A                                                    AS TEXT_5_A               <!-- 入力内容5 -->
+        FROM
+            ETINTRA.ADD_DISPATCH_PAPERS ADP
+        WHERE
+            ADP.REQUEST_NO = #{req.requestNo}
+            AND ADP.REQUEST_DETAIL_NO = '1'
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：書類不備付加情報リス取得
+        SQLタイプ：select
+    -->
+     <resultMap id="ResultMapIfaSendReceiveStatusLookupSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaSendReceiveStatusLookupSql004ResponseModel" >
+        <result property="ddiReason" column="DDI_REASON" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="ddiRemarks" column="DDI_REMARKS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap> 
+    <select id="selectIfaSendReceiveStatusLookupSql004" resultMap="ResultMapIfaSendReceiveStatusLookupSql004" statementType="PREPARED">
+       SELECT
+            /* @SQLID=SUB0202_0703-01#Sql004 */ 
+            DDI.DDI_REQUEST_SUB_NO                      AS DDI_REQUEST_SUB_NO,      <!-- 連番 -->
+            DDI.DDI_REASON                              AS DDI_REASON,              <!-- 不備理由 -->
+            DDI.DDI_REMARKS                             AS DDI_REMARKS              <!-- 備考 -->
+        FROM
+            ETINTRA.DOCUMENT_DEFICIENCY_INFO DDI
+        WHERE
+             DDI.DDI_REQUEST_NO = #{req.requestNo}
+        ORDER BY
+            DDI.DDI_REQUEST_SUB_NO ASC
+    </select>
+</mapper>

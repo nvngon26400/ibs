@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_010202-01
+    画面名：国内建玉一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDomesticPositionListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaDomesticPositionListSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticPositionListSql001ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：銘柄名取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDomesticPositionListSql001" resultMap="ResultMapIfaDomesticPositionListSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010202-01#SQL001 */
+            BRAND_NAME
+        FROM
+            ETINTRA.STAR_BRAND_MASTER
+        WHERE
+            PRODUCT_CLASSIFY = 'K'
+            AND DOMESTIC_FOREIGN_CLASSIFY = '0'
+            AND RIGHT_CLASSIFY = ' '
+            AND SUBSTR(COMPANY_CD, -4) = SUBSTR(#{req.brandCode}, 1, 4)
+            AND NEW_OLD_CLASSIFY = SUBSTR(#{req.brandCode}, -1)
+    </select>
+    
+</mapper>

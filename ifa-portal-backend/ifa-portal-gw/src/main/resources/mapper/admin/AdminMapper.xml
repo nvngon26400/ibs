@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbibits.horus.ap.admin.dao.mapper.AdminMapper">
+
+	<select id="countMediateBranchByBrokerCode" resultType="int" statementType="PREPARED">
+		SELECT
+			COUNT(*) AS RowCount
+		FROM
+		    MEDIATE_BRANCH
+		WHERE
+			DELETE_FLG = '0'
+			<if test="brokerCode != null">
+				AND BROKER_CODE = #{brokerCode}
+			</if>
+	</select>
+</mapper>

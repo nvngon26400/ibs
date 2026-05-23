@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB01-01
+    画面名：総合ポータル_ホーム
+-->
+<mapper
+    namespace="com.sbisec.helios.ap.wholePortal.dao.mapper.IfaWholePortalHomeMapper"
+>
+    <resultMap
+        id="ResultMapIfaWholePortalHomeSql001"
+        type="com.sbisec.helios.ap.wholePortal.dao.model.IfaWholePortalHomeSql001ResponseModel">
+    </resultMap>
+    <resultMap
+        id="ResultMapIfaWholePortalHomeSql002"
+        type="com.sbisec.helios.ap.wholePortal.dao.model.IfaWholePortalHomeSql002ResponseModel">
+        <result
+            column="TITLE"
+            property="title"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+    </resultMap>
+    <resultMap
+        id="ResultMapIfaWholePortalHomeSql003"
+        type="com.sbisec.helios.ap.wholePortal.dao.model.IfaWholePortalHomeSql003ResponseModel">
+    </resultMap>
+    <resultMap
+        id="ResultMapIfaWholePortalHomeSql004"
+        type="com.sbisec.helios.ap.wholePortal.dao.model.IfaWholePortalHomeSql004ResponseModel">
+        <result
+            column="categoryName"
+            property="categoryName"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+    </resultMap>
+    <resultMap
+        id="ResultMapIfaWholePortalHomeSql005"
+        type="com.sbisec.helios.ap.wholePortal.dao.model.IfaWholePortalHomeSql005ResponseModel">
+        <result
+            column="title"
+            property="title"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="categoryName"
+            property="categoryName"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachment1"
+            property="attachment1"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachment2"
+            property="attachment2"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachment3"
+            property="attachment3"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachmentComment1"
+            property="attachmentComment1"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachmentComment2"
+            property="attachmentComment2"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachmentComment3"
+            property="attachmentComment3"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="urlComment"
+            property="urlComment"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+    </resultMap>
+    <resultMap
+        id="ResultMapIfaWholePortalHomeSql006"
+        type="com.sbisec.helios.ap.wholePortal.dao.model.IfaWholePortalHomeSql006ResponseModel">
+        <result
+            column="title"
+            property="title"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="categoryName"
+            property="categoryName"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachment1"
+            property="attachment1"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachment2"
+            property="attachment2"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachment3"
+            property="attachment3"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachmentComment1"
+            property="attachmentComment1"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachmentComment2"
+            property="attachmentComment2"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="attachmentComment3"
+            property="attachmentComment3"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            column="urlComment"
+            property="urlComment"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+    </resultMap>
+    <resultMap
+        id="ResultMapIfaWholePortalHomeSql007"
+        type="com.sbisec.helios.ap.wholePortal.dao.model.IfaWholePortalHomeSql007ResponseModel">
+    </resultMap>
+
+    <!--
+        SQLID：Sql001
+        SQL名：顧客アラート情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaWholePortalHomeSql001"
+        resultMap="ResultMapIfaWholePortalHomeSql001"
+        statementType="PREPARED"
+    >
+        <if test="req.privId == 1">
+            SELECT /* @SQLID=SUB01-01#Sql001 */
+                ALERT_ID AS alertId,
+                TO_CHAR(MAX(ALERT_DATE), 'YYYYMMDD') AS alertDate
+            FROM
+                MEDIATE_USER_ALERT
+            GROUP BY
+                ALERT_ID
+        </if>
+
+        <if test="req.privId != 1">
+            SELECT /* @SQLID=SUB01-01#Sql001 */
+                ALERT_ID AS alertId,
+                TO_CHAR(ALERT_DATE, 'YYYYMMDD') AS alertDate
+            FROM
+                MEDIATE_USER_ALERT
+            WHERE
+                USER_ID = #{req.userId}
+        </if>
+    </select>
+
+
+    <!--
+        SQLID：Sql002
+        SQL名：管理者アラート・コンプライアンス通信未対応情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaWholePortalHomeSql002"
+        resultMap="ResultMapIfaWholePortalHomeSql002"
+        statementType="PREPARED"
+    >
+        <if test="req.privId == 1">
+            SELECT /* @SQLID=SUB01-01#Sql002 */
+                DISTINCT
+                A.COR_COMMUNICATION_DATE AS YEAR_MONTH,
+                A.USER_ID AS USER_ID,
+                A.COR_TITLE AS TITLE
+            FROM (
+                SELECT
+                    MU.USER_ID,
+                    MU.BROKER_ID,
+                    CC.COR_LEC_ID,
+                    CC.COR_COMMUNICATION_DATE,
+                    CC.COR_TITLE
+                FROM
+                    COR_COMPLIANCE_COMMUNICATION CC
+                CROSS JOIN
+                    TB_MED_USERS MU
+                WHERE
+                    MU.PRIV_ID IN ('3','4','5','6','7','8','9')
+                    AND CC.COR_COMMUNICATION_DATE &gt; TO_CHAR(ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, -60), 'YYYYMM')
+                    AND CC.COR_COMMUNICATION_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM')
+                    AND CC.COR_HONBAN_FLG = '1'
+            ) A
+            LEFT JOIN
+                COR_COMPLIANCE_CONFIRMATION B
+            ON
+                A.COR_LEC_ID = B.COR_LEC_ID
+                AND A.USER_ID = B.COR_USER_ID
+            LEFT JOIN
+                COR_BROWSE_CONTROL_INDV C
+            ON
+                A.USER_ID = C.COR_USER_ID
+            LEFT JOIN
+                COR_BROWSE_CONTROL_BULK D
+            ON
+                A.BROKER_ID = D.COR_BROKER_CODE
+            WHERE
+                (
+                    B.COR_CONFIRMATION_FLG IN ('2', '3')
+                    OR B.COR_CONFIRMATION_FLG IS NULL
+                )
+                AND C.COR_BROWSE_FLAG IS NULL
+                AND D.COR_BROWSE_FLAG IS NULL
+        </if>
+        <if test="req.privId == 3">
+            SELECT /* @SQLID=SUB01-01#Sql002 */
+                DISTINCT
+                A.COR_COMMUNICATION_DATE AS YEAR_MONTH
+                , A.USER_ID AS USER_ID
+                , A.COR_TITLE AS TITLE
+            FROM
+                (
+                    SELECT
+                        MU.USER_ID
+                        , MU.BROKER_ID
+                        , CC.COR_LEC_ID
+                        , CC.COR_COMMUNICATION_DATE
+                        , CC.COR_TITLE
+                    FROM
+                        COR_COMPLIANCE_COMMUNICATION CC
+                        CROSS JOIN TB_MED_USERS MU
+                        INNER JOIN (
+                            SELECT
+                                BROKER_ID
+                            FROM
+                                TB_MED_USERS
+                            WHERE
+                                USER_ID = #{req.userId}
+                            UNION
+                            SELECT
+                                BROKER_ID
+                            FROM
+                                TB_MED_USERS_PRIV
+                            WHERE
+                                USER_ID = #{req.userId}
+                        ) E
+                            ON MU.BROKER_ID = E.BROKER_ID
+                    WHERE
+                        MU.PRIV_ID IN ('3', '4', '5', '6', '7', '8', '9')
+                        AND CC.COR_COMMUNICATION_DATE &gt; TO_CHAR(ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, -60), 'YYYYMM')
+                        AND CC.COR_COMMUNICATION_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM')
+                        AND CC.COR_HONBAN_FLG = '1'
+                ) A
+                LEFT JOIN COR_COMPLIANCE_CONFIRMATION B
+                    ON A.COR_LEC_ID = B.COR_LEC_ID
+                    AND A.USER_ID = B.COR_USER_ID
+                LEFT JOIN COR_BROWSE_CONTROL_INDV C
+                    ON A.USER_ID = C.COR_USER_ID
+                LEFT JOIN COR_BROWSE_CONTROL_BULK D
+                    ON A.BROKER_ID = D.COR_BROKER_CODE
+            WHERE
+                (
+                    B.COR_CONFIRMATION_FLG IN ('2', '3')
+                    OR B.COR_CONFIRMATION_FLG IS NULL
+                )
+                AND C.COR_BROWSE_FLAG IS NULL
+                AND D.COR_BROWSE_FLAG IS NULL
+        </if>
+        <if test="req.privId == 6">
+            SELECT /* @SQLID=SUB01-01#Sql002 */
+                DISTINCT
+                A.COR_COMMUNICATION_DATE AS YEAR_MONTH
+                , A.USER_ID AS USER_ID
+                , A.COR_TITLE AS TITLE
+            FROM
+                (
+                    SELECT
+                        MU.USER_ID
+                        , MU.BROKER_ID
+                        , CC.COR_LEC_ID
+                        , CC.COR_COMMUNICATION_DATE
+                        , CC.COR_TITLE
+                    FROM
+                        COR_COMPLIANCE_COMMUNICATION CC
+                        CROSS JOIN TB_MED_USERS MU
+                        INNER JOIN (
+                            SELECT
+                                BROKER_ID,
+                                SUB_BROKER_ID
+                            FROM
+                                TB_MED_USERS
+                            WHERE
+                                USER_ID = #{req.userId}
+                            UNION
+                            SELECT
+                                BROKER_ID,
+                                SUB_BROKER_ID
+                            FROM
+                                TB_MED_USERS_PRIV
+                            WHERE
+                                USER_ID = #{req.userId}
+                        ) F
+                            ON MU.BROKER_ID = F.BROKER_ID
+                            AND MU.SUB_BROKER_ID = F.SUB_BROKER_ID
+                    WHERE
+                        MU.PRIV_ID IN ('3', '4', '5', '6', '7', '8', '9')
+                        AND CC.COR_COMMUNICATION_DATE &gt; TO_CHAR(ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, -60), 'YYYYMM')
+                        AND CC.COR_COMMUNICATION_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM')
+                        AND CC.COR_HONBAN_FLG = '1'
+                ) A
+                LEFT JOIN COR_COMPLIANCE_CONFIRMATION B
+                    ON A.COR_LEC_ID = B.COR_LEC_ID
+                    AND A.USER_ID = B.COR_USER_ID
+                LEFT JOIN COR_BROWSE_CONTROL_INDV C
+                    ON A.USER_ID = C.COR_USER_ID
+                LEFT JOIN COR_BROWSE_CONTROL_BULK D
+                    ON A.BROKER_ID = D.COR_BROKER_CODE
+            WHERE
+                (
+                    B.COR_CONFIRMATION_FLG IN ('2', '3')
+                    OR B.COR_CONFIRMATION_FLG IS NULL
+                )
+                AND C.COR_BROWSE_FLAG IS NULL
+                AND D.COR_BROWSE_FLAG IS NULL
+        </if>
+    </select>
+
+
+    <!--
+        SQLID：Sql003
+        SQL名：管理者アラート・自己点検未対応情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaWholePortalHomeSql003"
+        resultMap="ResultMapIfaWholePortalHomeSql003"
+        statementType="PREPARED"
+    >
+        <if test="req.privId == 3 or req.privId == 6">
+            SELECT /* @SQLID=SUB01-01#Sql003 */
+                DISTINCT
+                M.COR_BROKER_CODE AS BROKER_CODE,
+                SCI.COR_ENFORCE_DATE AS REGISTER_DATE
+            FROM
+                COR_SELF_CHECK_ITEM SCI
+            INNER JOIN
+                COR_SELF_CHECK_BROKER_ANS SCBA
+            ON
+                SCI.BROKER_DIVISION = SCBA.BROKER_DIVISION
+                AND SCBA.BROKER_CODE = #{req.brokerCode}
+            LEFT JOIN (
+                SELECT
+                    SC.COR_ENFORCE_DATE,
+                    SC.COR_BROKER_CODE,
+                    CC.COR_SELF_CHECK_ITEM_ID,
+                    CC.COR_ANSWER_REASON,
+                    CC.COR_ANSWER_RESULT
+                FROM
+                    COR_SELF_CHECK SC
+                INNER JOIN
+                    COR_SELF_CHECK_CONFIRMATION CC
+                ON
+                    SC.COR_SELF_CHECK_ID = CC.COR_SELF_CHECK_ID
+                    AND SC.COR_BROKER_CODE = #{req.brokerCode}
+            ) M
+            ON
+                SCI.COR_SELF_CHECK_ITEM_ID = M.COR_SELF_CHECK_ITEM_ID
+            WHERE
+                (
+                    (SCI.REASON_REQUIRED_FLG = '1' AND M.COR_ANSWER_REASON IS NULL)
+                    OR (M.COR_ANSWER_RESULT = '0' AND M.COR_ANSWER_REASON IS NULL)
+                    OR M.COR_ENFORCE_DATE IS NULL
+                )
+                AND SCI.COR_ENFORCE_DATE &gt; TO_CHAR(ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, - 60), 'YYYYMM')
+                AND SCI.COR_ENFORCE_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM')
+                AND SCI.COR_INDICATION_FLG = '1'
+        </if>
+    </select>
+
+
+    <!--
+        SQLID：Sql004
+        SQL名：カテゴリ一覧
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaWholePortalHomeSql004"
+        resultMap="ResultMapIfaWholePortalHomeSql004"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB01-01#Sql004 */
+            T9N_INFO_CAT categoryId,
+            T9N_NAME categoryName,
+            T9N_REQUIRED_FLG requiredFlag
+        FROM
+            PSITE_T9N_INFO_CAT
+        WHERE
+            T9N_DEL_FLAG = '0'
+        ORDER BY
+            T9N_SORT
+    </select>
+
+
+    <!--
+        SQLID：Sql005
+        SQL名：本店カテゴリ内容取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaWholePortalHomeSql005"
+        resultMap="ResultMapIfaWholePortalHomeSql005"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB01-01#Sql005 */
+            A1.T4N_ID notificationId,
+            A1.T4N_TITLE title,
+            C1.T9N_NAME categoryName,
+            A1.T4N_CONTENT contents,
+            A1.T4N_FILE1 attachment1,
+            A1.T4N_FILE2 attachment2,
+            A1.T4N_FILE3 attachment3,
+            A1.T4N_FILE_COM1 attachmentComment1,
+            A1.T4N_FILE_COM2 attachmentComment2,
+            A1.T4N_FILE_COM3 attachmentComment3,
+            A1.T4N_IMPORTANCE t4nImportance,
+            A1.T4N_URL url,
+            A1.COR_URL_COM urlComment,
+            A1.COR_DISCLAIMER disclaimer,
+        CASE
+            WHEN A1.COR_UPDATE_DATE IS NULL THEN
+                A1.T4N_CREATED_AT
+            ELSE
+                A1.COR_UPDATE_DATE
+        END updateTime,
+        A1.T4N_CREATED_AT registerDayTime,
+        B1.T5N_READ_FLG t5nReadFlg,
+        B1.T5N_READ_AT readDate
+        FROM
+            PSITE_T4N_INFO A1
+        INNER JOIN PSITE_T9N_INFO_CAT
+            C1
+        ON
+            A1.T4N_CAT1 = C1.T9N_INFO_CAT
+        LEFT OUTER JOIN
+            ( SELECT * FROM PSITE_T5N_INFO_READ WHERE T5N_LOGIN = #{req.userId} ) B1
+        ON
+            A1.T4N_ID = B1.T5N_INFO_ID
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <!--・画面入力が必須カテゴリ：指定ありの場合、
+                カテゴリIDが未指定 または 0:すべて 以外の場合 -->
+            <if test='req.categoryIdCat1 != null and req.categoryIdCat1 != ""'>
+            T4N_CAT1 = #{req.categoryIdCat1}
+            </if>
+        </trim>
+        ORDER BY updateTime DESC , A1.T4N_TITLE
+    </select>
+
+
+    <!--
+        SQLID：Sql006
+        SQL名：本店以外カテゴリ内容取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaWholePortalHomeSql006"
+        resultMap="ResultMapIfaWholePortalHomeSql006"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB01-01#Sql006 */
+            A1.T4N_ID notificationId,
+            A1.T4N_TITLE title,
+            C1.T9N_NAME categoryName,
+            A1.T4N_CONTENT contents,
+            A1.T4N_FILE1 attachment1,
+            A1.T4N_FILE2 attachment2,
+            A1.T4N_FILE3 attachment3,
+            A1.T4N_FILE_COM1 attachmentComment1,
+            A1.T4N_FILE_COM2 attachmentComment2,
+            A1.T4N_FILE_COM3 attachmentComment3,
+            A1.T4N_IMPORTANCE t4nImportance,
+            A1.T4N_URL url,
+            A1.COR_URL_COM urlComment,
+            A1.COR_DISCLAIMER disclaimer,
+            CASE
+                WHEN A1.COR_UPDATE_DATE IS NULL THEN
+                    A1.T4N_CREATED_AT
+                ELSE
+                    A1.COR_UPDATE_DATE
+            END updateTime,
+            A1.T4N_CREATED_AT registerDayTime,
+            B1.T5N_READ_FLG t5nReadFlg,
+            B1.T5N_READ_AT readDate
+        FROM
+            PSITE_T4N_INFO A1
+        INNER JOIN
+            PSITE_T9N_INFO_CAT C1
+        ON
+            A1.T4N_CAT1 = C1.T9N_INFO_CAT
+        LEFT OUTER JOIN
+            ( SELECT * FROM PSITE_T5N_INFO_READ WHERE T5N_LOGIN = #{req.userId} ) B1
+        ON
+            A1.T4N_ID = B1.T5N_INFO_ID
+        WHERE
+            A1.COR_REFERENCE_CONDITION = '1'
+            <!--・画面入力が必須カテゴリ：指定ありの場合(カテゴリIDが未指定 または 0:すべて 以外の場合) -->
+            <if test='req.categoryIdCat1 != null and req.categoryIdCat1 != ""'>
+                AND T4N_CAT1 = #{req.categoryIdCat1}
+            </if>
+
+        UNION ALL
+
+        SELECT
+            A2.T4N_ID notificationId,
+            A2.T4N_TITLE title,
+            C1.T9N_NAME categoryName,
+            A2.T4N_CONTENT contents,
+            A2.T4N_FILE1 attachment1,
+            A2.T4N_FILE2 attachment2,
+            A2.T4N_FILE3 attachment3,
+            A2.T4N_FILE_COM1 attachmentComment1,
+            A2.T4N_FILE_COM2 attachmentComment2,
+            A2.T4N_FILE_COM3 attachmentComment3,
+            A2.T4N_IMPORTANCE t4nImportance ,
+            A2.T4N_URL url,
+            A2.COR_URL_COM urlComment,
+            A2.COR_DISCLAIMER disclaimer,
+            CASE
+                WHEN A2.COR_UPDATE_DATE IS NULL THEN
+                    A2.T4N_CREATED_AT
+                ELSE
+                    A2.COR_UPDATE_DATE
+            END updateTime,
+            A2.T4N_CREATED_AT registerDayTime,
+            B2.T5N_READ_FLG t5nReadFlg,
+            B2.T5N_READ_AT readDate
+        FROM
+            PSITE_T4N_INFO A2
+        INNER JOIN
+            PSITE_T9N_INFO_CAT C1
+        ON
+            A2.T4N_CAT1 = C1.T9N_INFO_CAT
+        INNER JOIN
+            PSITE_T4N_INFO_PRIV C2
+        ON
+            A2.T4N_ID =C2.T4N_ID
+        INNER JOIN
+            TB_MED_USERS D2
+        ON
+            C2.PRIV_ID = D2.PRIV_ID
+        LEFT OUTER JOIN
+            ( SELECT * FROM PSITE_T5N_INFO_READ WHERE T5N_LOGIN =#{req.userId} ) B2
+        ON
+            A2.T4N_ID = B2.T5N_INFO_ID
+        WHERE
+            A2.COR_REFERENCE_CONDITION = '2'
+            <!--・画面入力が必須カテゴリ：指定ありの場合(カテゴリIDが未指定 または 0:すべて 以外の場合) -->
+            <if test='req.categoryIdCat1 != null and req.categoryIdCat1 != ""'>
+                AND T4N_CAT1 = #{req.categoryIdCat1}
+            </if>
+            <if test="req.userId != null and req.userId != ''">
+                AND D2.USER_ID = #{req.userId}
+            </if>
+
+        UNION ALL
+
+        SELECT
+            A3.T4N_ID notificationId,
+            A3.T4N_TITLE title,
+            C1.T9N_NAME categoryName,
+            A3.T4N_CONTENT contents,
+            A3.T4N_FILE1 attachment1,
+            A3.T4N_FILE2 attachment2,
+            A3.T4N_FILE3 attachment3,
+            A3.T4N_FILE_COM1 attachmentComment1,
+            A3.T4N_FILE_COM2 attachmentComment2,
+            A3.T4N_FILE_COM3 attachmentComment3,
+            A3.T4N_IMPORTANCE t4nImportance,
+            A3.T4N_URL url,
+            A3.COR_URL_COM urlComment,
+            A3.COR_DISCLAIMER disclaimer,
+            CASE
+                WHEN A3.COR_UPDATE_DATE IS NULL THEN
+                    A3.T4N_CREATED_AT
+                ELSE
+                    A3.COR_UPDATE_DATE
+            END updateTime,
+            A3.T4N_CREATED_AT registerDayTime,
+            B3.T5N_READ_FLG t5nReadFlg,
+            B3.T5N_READ_AT readDate
+        FROM
+            PSITE_T4N_INFO A3
+        INNER JOIN
+            PSITE_T9N_INFO_CAT C1
+        ON
+            A3.T4N_CAT1 = C1.T9N_INFO_CAT
+        INNER JOIN
+            PSITE_T5N_INFO_READ B3
+        ON
+            A3.T4N_ID = B3.T5N_INFO_ID
+        WHERE
+            A3.COR_REFERENCE_CONDITION = '3'
+            <!--・画面入力が必須カテゴリ：指定ありの場合(カテゴリIDが未指定 または 0:すべて 以外の場合) -->
+            <if test='req.categoryIdCat1 != null and req.categoryIdCat1 != ""'>
+                AND T4N_CAT1 = #{req.categoryIdCat1}
+            </if>
+            <if test="req.userId != null and req.userId != ''">
+                AND B3.T5N_LOGIN = #{req.userId}
+            </if>
+        ORDER BY
+            updateTime DESC , title
+    </select>
+
+
+    <!--
+        SQLID：Sql007
+        SQL名：添付資料情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaWholePortalHomeSql007"
+        resultMap="ResultMapIfaWholePortalHomeSql007"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB01-01#Sql007 */
+            FILE_DIR fileDirectory
+        FROM
+            TB_MED_TEMP_FILE_DIR
+        WHERE
+            CAT_ID = #{req.categoryId}
+            AND FUNC_ID = #{req.functionId}
+    </select>
+</mapper>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0407_01
+    画面名：月末口座数
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.monthCustomerNum.dao.mapper.IfaMonthCustomerNumMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbisec.helios.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    <resultMap id="ResultMapIfaMonthCustomerNumSql002" type="com.sbisec.helios.ap.internalAdminMenu.monthCustomerNum.dao.model.IfaMonthCustomerNumSql002ResponseModel" >
+        <result property="dateYm" column="BASEDATE_YM" />
+        <result property="brokerCode" column="BROKER_CODE" />
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="accountNum" column="ACCOUNT_NUM" />
+        <result property="downloadFlg" column="DOWNLOAD_FLG" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaMonthCustomerNumSql003" type="com.sbisec.helios.ap.internalAdminMenu.monthCustomerNum.dao.model.IfaMonthCustomerNumSql003ResponseModel" >
+        <result property="baseDateYm" column="BASE_DATE_YM" />
+        <result property="brokerCode" column="BROKER_CODE" />
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="dealerNumber" column="DEALER_NUMBER" />
+        <result property="intermediaryEmpCd" column="INTERMEDIARY_EMP_CD" />
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="butenCode" column="BUTEN_CODE" />
+        <result property="accountNumber" column="ACCOUNT_NUMBER" />
+        <result property="customerAttributeName" column="CUSTOMER_ATTRIBUTE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="nameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="nameKana" column="NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="age" column="AGE" />
+        <result property="ageGroup" column="AGE_GROUP" />
+        <result property="sexKbn" column="SEX_KBN" />
+        <result property="corporationKbn" column="CORPORATION_KBN" />
+        <result property="tcCompRank" column="TC_COMP_RANK" />
+        <result property="brokerBranchCode" column="BROKER_BRANCH_CODE" />
+        <result property="brokerBranchName" column="BROKER_BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="addressKanji1" column="ADDRESS_KANJI1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="openAcctDate" column="OPEN_ACCT_DATE" />
+        <result property="phoneNumber" column="PHONE_NUMBER" />
+        <result property="qaInvestmentPlan" column="QA_INVESTMENT_PLAN" />
+        <result property="qaFundCharacter" column="QA_FUND_CHARACTER" />
+        <result property="qaIncomeForm" column="QA_INCOME_FORM" />
+        <result property="qaTradingMotive" column="QA_TRADING_MOTIVE" />
+        <result property="qaEmploymentPeriod" column="QA_EMPLOYMENT_PERIOD" />
+        <result property="qaAnnualIncome" column="QA_ANNUAL_INCOME" />
+        <result property="qaFinancialAssets" column="QA_FINANCIAL_ASSETS" />
+        <result property="qaInterestedTrading" column="QA_INTERESTED_TRADING" />
+        <result property="expStock" column="EXP_STOCK" />
+        <result property="expDebenture" column="EXP_DEBENTURE" />
+        <result property="expCb" column="EXP_CB" />
+        <result property="expMargin" column="EXP_MARGIN" />
+        <result property="expWarrant" column="EXP_WARRANT" />
+        <result property="expFutureop" column="EXP_FUTUREOP" />
+        <result property="expSavedtypefund" column="EXP_SAVEDTYPEFUND" />
+        <result property="expOtherfund" column="EXP_OTHERFUND" />
+        <result property="expForeign" column="EXP_FOREIGN" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaMonthCustomerNumSql004" type="java.lang.String" >
+        <result property="baseDateYm" column="BASE_DATE_YM" />
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：月末口座数リスト取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaMonthCustomerNumSql002" resultMap="ResultMapIfaMonthCustomerNumSql002" statementType="PREPARED">
+         SELECT /* @SQLID=SUB0407_01#Sql002 */
+           * 
+         FROM
+            (
+               SELECT
+                    count(*) over () as totalRow                                                <!-- 総件数 -->
+                   ,A.BROKER_CODE                                                               <!-- 仲介業者コード -->
+                   ,TO_CHAR(TO_DATE(A.BASEDATE_YM, 'YYYYMM'), 'YYYY/MM') AS BASEDATE_YM         <!-- 対象年月 -->
+                   ,A.BROKER_NAME                                                               <!-- 仲介業者名 -->
+                   ,TO_CHAR(A.ACCOUNT_NUM, 'FM99,999,999') AS ACCOUNT_NUM                       <!-- 月末口座数 -->
+                   ,A.DOWNLOAD_FLG                                                              <!-- ダウンロード可否区分 -->
+                FROM
+                    CORDYS.MEDIATE_ACCOUNT_MONTH A
+                WHERE
+                    A.BASEDATE_YM &gt;= TO_CHAR(TO_DATE(#{req.targetDateYmFrom}, 'YYYY/MM'), 'YYYYMM')
+                AND A.BASEDATE_YM &lt;= TO_CHAR(TO_DATE(#{req.targetDateYmTo}, 'YYYY/MM'), 'YYYYMM')
+                <!-- 仲介業者コードに入力値がある かつ 仲介業者除外がfalseの場合 -->
+                <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "false"'>
+                    AND A.BROKER_CODE IN
+                    <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                        #{brokerCode}
+                    </foreach>
+                </if>
+                <!-- 仲介業者コードに入力値がある かつ 仲介業者除外がtrueの場合 -->
+                <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "true"'>
+                     AND A.BROKER_CODE NOT IN
+                     <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                         #{brokerCode}
+                     </foreach>
+                 </if>
+                 <if test='req.brokerChargeList != null and !req.brokerChargeList.isEmpty()'>
+                     AND (A.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR A.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                 </if>
+                ORDER BY
+                    A.BASEDATE_YM DESC
+                    ,A.BROKER_CODE
+            ) 
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：仲介業者顧客情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaMonthCustomerNumSql003" resultMap="ResultMapIfaMonthCustomerNumSql003" statementType="PREPARED" fetchSize="1000">
+         SELECT /* @SQLID=SUB0407_01#Sql003 */
+           * 
+         FROM
+            (
+               SELECT
+                    count(*) over () as totalRow                                                      <!-- 総件数 -->
+                   ,TO_CHAR(TO_DATE(A.BASE_DATE_YM, 'YYYYMM'), 'YYYY/MM') AS BASE_DATE_YM             <!-- 基準年月 -->
+                   ,A.BROKER_CODE                                                                     <!-- 仲介業者コード -->
+                   ,A.BROKER_NAME                                                                     <!-- 仲介業者本店名 -->
+                   ,A.DEALER_NUMBER                                                                   <!-- 扱者コード -->
+                   ,A.INTERMEDIARY_EMP_CD                                                             <!-- 仲介業者営業員コード -->
+                   ,A.BROKER_CHARGE_NAME                                                              <!-- 仲介業者担当者名 -->
+                   ,A.BUTEN_CODE                                                                      <!-- 部店コード -->
+                   ,A.ACCOUNT_NUMBER                                                                  <!-- 口座番号 -->
+                   ,A.CUSTOMER_ATTRIBUTE_NAME                                                         <!-- 契約締結前交付書面コード名 -->
+                   ,A.NAME_KANJI                                                                      <!-- 顧客名_姓名(漢字) -->
+                   ,A.NAME_KANA                                                                       <!-- 顧客名_姓名(カナ) -->
+                   ,A.AGE                                                                             <!-- 年齢 -->
+                   ,A.AGE_GROUP                                                                       <!-- 年代 -->
+                   ,A.SEX_KBN                                                                         <!-- 性別区分 -->
+                   ,A.CORPORATION_KBN                                                                 <!-- 法人区分 -->
+                   ,A.TC_COMP_RANK                                                                    <!-- コンプラランク -->
+                   ,A.BROKER_BRANCH_CODE                                                              <!-- 支店コード -->
+                   ,A.BROKER_BRANCH_NAME                                                              <!-- 仲介業者支店名 -->
+                   ,A.ADDRESS_KANJI1                                                                  <!-- 住所(漢字) -->
+                   ,TO_CHAR(TO_DATE(A.OPEN_ACCT_DATE, 'YYYYMMDD'), 'YYYY/MM/DD') AS OPEN_ACCT_DATE    <!-- 口座開設年月日 -->
+                   ,A.PHONE_NUMBER                                                                    <!-- 電話番号 -->
+                   ,A.QA_INVESTMENT_PLAN                                                              <!-- 投資方針区分 -->
+                   ,A.QA_FUND_CHARACTER                                                               <!-- 資金性格区分 -->
+                   ,A.QA_INCOME_FORM                                                                  <!-- 主な収入源区分 -->
+                   ,A.QA_TRADING_MOTIVE                                                               <!-- 取引動機区分 -->
+                   ,A.QA_EMPLOYMENT_PERIOD                                                            <!-- 資産運用期間 -->
+                   ,A.QA_ANNUAL_INCOME                                                                <!-- 推定年収区分 -->
+                   ,A.QA_FINANCIAL_ASSETS                                                             <!-- 金融資産区分 -->
+                   ,A.QA_INTERESTED_TRADING                                                           <!-- ご興味のあるお取引 -->
+                   ,A.EXP_STOCK                                                                       <!-- 投資経験年数(株式現物) -->
+                   ,A.EXP_DEBENTURE                                                                   <!-- 投資経験年数(債券) -->
+                   ,A.EXP_CB                                                                          <!-- 投資経験年数(転換社債) -->
+                   ,A.EXP_MARGIN                                                                      <!-- 投資経験年数(株式信用) -->
+                   ,A.EXP_WARRANT                                                                     <!-- 投資経験年数(ワラント) -->
+                   ,A.EXP_FUTUREOP                                                                    <!-- 投資経験年数(先物・ＯＰ) -->
+                   ,A.EXP_SAVEDTYPEFUND                                                               <!-- 投資経験年数(貯蓄型投信) -->
+                   ,A.EXP_OTHERFUND                                                                   <!-- 投資経験年数(投資信託) -->
+                   ,A.EXP_FOREIGN                                                                     <!-- 投資経験年数(外国証券) -->
+               FROM
+                    CORDYS.LAST_MED_USER_ATTR_INFO A
+               WHERE
+                    A.BROKER_CODE = #{req.brokerCode}
+                AND A.BASE_DATE_YM = #{req.dateYm}
+                <if test='req.brokerChargeList != null and !req.brokerChargeList.isEmpty()'>
+                     AND (A.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR A.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                </if>
+                ORDER BY
+                     A.BROKER_CODE
+                    ,A.BUTEN_CODE
+                    ,A.ACCOUNT_NUMBER
+            ) 
+            WHERE
+                ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：基準年月取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaMonthCustomerNumSql004" resultMap="ResultMapIfaMonthCustomerNumSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0407_01#Sql004 */
+            MAX(BASE_DATE_YM) AS BASE_DATE_YM
+        FROM
+            CORDYS.LAST_MED_USER_ATTR_INFO
+    </select>
+    
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.AccControlMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.AccControl" id="AccControl">
+	</resultMap>
+
+	<select id="getAccControl" resultMap="AccControl" statementType="PREPARED">
+		SELECT
+			MENU_ID
+			, ITEM_ID
+			, USER_ID
+			, ACC_CONTROL
+		FROM
+			V_MED_ACC_CONTROL_NEW
+		WHERE
+			USER_ID = #{userId}
+	</select>
+
+</mapper>

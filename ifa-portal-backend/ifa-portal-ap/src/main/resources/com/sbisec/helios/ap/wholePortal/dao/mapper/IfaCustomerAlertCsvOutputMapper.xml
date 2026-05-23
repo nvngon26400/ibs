@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB01-02
+    画面名：顧客アラートCSV出力
+-->
+<mapper namespace="com.sbisec.helios.ap.wholePortal.dao.mapper.IfaCustomerAlertCsvOutputMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaCustomerAlertCsvOutputSql001" type="com.sbisec.helios.ap.wholePortal.dao.model.IfaCustomerAlertCsvOutputSql001ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapIfaCustomerAlertCsvOutputSql002" type="com.sbisec.helios.ap.wholePortal.dao.model.IfaCustomerAlertCsvOutputSql002ResponseModel" >
+        <result property="alertCategory" column="ALERT_CATEGORY" typeHandler="StringTypeHandler"/>
+        <result property="alertTitle" column="ALERT_TITLE" typeHandler="StringTypeHandler"/>
+        <result property="courseName" column="COURSE_NAME" typeHandler="StringTypeHandler"/>
+        <result property="customerName" column="CUSTOMER_NAME" typeHandler="StringTypeHandler"/>
+        <result property="brokerName" column="BROKER_NAME" typeHandler="StringTypeHandler"/>
+        <result property="branchName" column="BRANCH_NAME" typeHandler="StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+
+    <!--
+        SQLID：Sql001
+        SQL名：顧客アラート情報取得（SBI証券本店）
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerAlertCsvOutputSql001" resultMap="ResultMapIfaCustomerAlertCsvOutputSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB01-02#Sql001 */
+            DISTINCT
+            A.ALERT_ID,
+            A.DATE_YMD
+        FROM
+            MEDIATE_USER_ALERT A
+        <if test='"1".equals(req.privId) == false'>
+            WHERE
+                A.USER_ID = #{req.userId}
+        </if>
+    </select>
+
+    <!--
+        SQLID：Sql002
+        SQL名：顧客アラート情報取得（SBI証券支店）
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerAlertCsvOutputSql002" resultMap="ResultMapIfaCustomerAlertCsvOutputSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB01-02#Sql002 */
+            *
+        FROM
+            (
+                SELECT
+                    COUNT(*) OVER() AS TOTAL_COUNT,
+                    A.ALERT_ID,
+                    B.ALERT_CATEGORY,
+                    B.ALERT_TITLE,
+                    A.BROKER_CODE,
+                    A.BROKER_CHARGE_CODE AS EMP_CODE,
+                    A.BUTEN_CODE,
+                    TO_CHAR(A.ACCOUNT_NUMBER) AS ACCOUNT_NUMBER,
+                    AA.CUSTOMER_ATTRIBUTE_NAME AS COURSE_NAME,
+                    AA.NAME_KANJI AS CUSTOMER_NAME,
+                    N.BRANCH_NAME AS BRANCH_NAME,
+                    O.BROKER_BRANCH_CODE AS BRANCH_CODE,
+                    O.BRANCH_NAME AS BROKER_NAME,
+                    O.BROKER_CHARGE_NAME AS BROKER_CHARGE_NAME
+                FROM
+                    (
+                    <trim prefix="" suffixOverrides="UNION ALL">
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and req.sql001AlertClassIdList.contains(1) and req.requestAlertClassIdList.contains(1)'>
+                            <!-- SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"1"が含まれる場合 -->
+                            SELECT
+                                1 AS ALERT_ID,
+                                P.BUTEN_CODE,
+                                TO_NUMBER(P.ACCOUNT_NUMBER) AS ACCOUNT_NUMBER,
+                                P.BROKER_CODE,
+                                P.BROKER_BRANCH_CODE,
+                                P.BROKER_CHARGE_CODE
+                            FROM
+                                T_DEFICIT_WARNING P
+                            <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                WHERE
+                                    P.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                            </if>
+                            UNION ALL
+                        </if>
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and (
+                                (req.sql001AlertClassIdList.contains(2) and req.requestAlertClassIdList.contains(2))
+                                or
+                                (req.sql001AlertClassIdList.contains(3) and req.requestAlertClassIdList.contains(3))
+                                or
+                                (req.sql001AlertClassIdList.contains(4) and req.requestAlertClassIdList.contains(4))
+                                or
+                                (req.sql001AlertClassIdList.contains(5) and req.requestAlertClassIdList.contains(5))
+                            )'>
+                            <!-- SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"2","3","4","5"のいずれかの同じ値が含まれる場合 -->
+                            SELECT
+                                CASE
+                                    WHEN (Q.ACCEPTANCE_DEPOSIT &lt; 300000 AND Q.UNSETTLED_PRICE_TOTAL &lt;&gt; 0) THEN 2
+                                    WHEN Q.ADDITIONAL_MARGIN &gt; 0 THEN 5
+                                    WHEN (Q.MAINTAIN_RATE &lt; 25 AND Q.UNSETTLED_PRICE_TOTAL &lt;&gt; 0) THEN 4
+                                    WHEN (25 &lt;= Q.MAINTAIN_RATE AND Q.MAINTAIN_RATE &lt; 31 AND Q.UNSETTLED_PRICE_TOTAL &lt;&gt; 0) THEN 3
+                                    ELSE NULL
+                                END AS ALERT_ID,
+                                Q.BUTEN_CODE,
+                                TO_NUMBER(Q.ACCOUNT_NUMBER) AS ACCOUNT_NUMBER,
+                                Q.BROKER_CODE,
+                                Q.BROKER_BRANCH_CODE,
+                                Q.BROKER_CHARGE_CODE
+                            FROM
+                                T_MARGIN_CALL Q
+                            <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                WHERE
+                                    Q.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                            </if>
+                            UNION ALL
+                        </if>
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and (
+                                (req.sql001AlertClassIdList.contains(6) and req.requestAlertClassIdList.contains(6))
+                                or
+                                (req.sql001AlertClassIdList.contains(7) and req.requestAlertClassIdList.contains(7))
+                                or
+                                (req.sql001AlertClassIdList.contains(12) and req.requestAlertClassIdList.contains(12))
+                            )'>
+                            <!-- ※SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"6","7","12"のいずれかの同じ値が含まれる場合 -->
+                            SELECT
+                                CASE
+                                    WHEN R.PRODUT_CD = '98' AND R.FOREIGN_CURRENCT_PRICE &lt; 0 THEN 7
+                                    WHEN R.PRODUT_CD = '02' AND
+                                        (
+                                            (R.SBI_LAST_TRADE_DATE IS NULL AND R.DISPLAY_LAST_TRADE_DATE &lt;= #{req.designatedDate})
+                                            OR
+                                            (
+                                                R.SBI_LAST_TRADE_DATE IS NOT NULL AND
+                                                (
+                                                    (R.DISPLAY_LAST_TRADE_DATE > R.SBI_LAST_TRADE_DATE AND R.SBI_LAST_TRADE_DATE &lt;= #{req.designatedDate})
+                                                    OR
+                                                    (R.DISPLAY_LAST_TRADE_DATE &lt;= R.SBI_LAST_TRADE_DATE AND R.DISPLAY_LAST_TRADE_DATE &lt;= #{req.designatedDate})
+                                                )
+                                            )
+                                        )
+                                        THEN 6
+                                    WHEN R.PRODUT_CD = '29' AND R.DISPLAY_LAST_TRADE_DATE &lt;= #{req.designatedDate}
+                                        THEN 12
+                                    ELSE NULL
+                                END AS ALERT_ID,
+                                R.BUTEN_CODE,
+                                R.ACCOUNT_NUMBER,
+                                R.BROKER_CODE,
+                                R.BROKER_BRANCH_CODE,
+                                R.BROKER_CHARGE_CODE
+                            FROM
+                                V_BALANCE R
+                            WHERE
+                                R.DATE_YMD = #{req.dateYmdMarginDue}
+                                <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                    AND R.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                                </if>
+                            UNION ALL
+                        </if>
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and (
+                                (req.sql001AlertClassIdList.contains(8) and req.requestAlertClassIdList.contains(8))
+                                or
+                                (req.sql001AlertClassIdList.contains(9) and req.requestAlertClassIdList.contains(9))
+                                or
+                                (req.sql001AlertClassIdList.contains(10) and req.requestAlertClassIdList.contains(10))
+                                or
+                                (req.sql001AlertClassIdList.contains(11) and req.requestAlertClassIdList.contains(11))
+                            )'>
+                            <!-- ※SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"8","9","10","11"のいずれかの同じ値が含まれる場合 -->
+                            SELECT
+                                CASE
+                                    WHEN (S.ACCEPTANCE_DEPOSIT &lt; 2500 AND S.UNSETTLED_PRICE_TOTAL &lt;&gt; 0) THEN 8
+                                    WHEN S.ADDITIONAL_MARGIN &gt; 0 THEN 11
+                                    WHEN (S.MAINTAIN_RATE &lt; 35 AND S.UNSETTLED_PRICE_TOTAL &lt;&gt; 0) THEN 10
+                                    WHEN (35 &lt;= S.MAINTAIN_RATE AND S.MAINTAIN_RATE &lt; 51 AND S.UNSETTLED_PRICE_TOTAL &lt;&gt; 0) THEN 9
+                                    ELSE NULL
+                                END AS ALERT_ID,
+                                S.BUTEN_CODE,
+                                TO_NUMBER(S.ACCOUNT_NUMBER) AS ACCOUNT_NUMBER,
+                                S.BROKER_CODE,
+                                S.BROKER_BRANCH_CODE,
+                                S.BROKER_CHARGE_CODE
+                            FROM
+                                T_US_MARGIN_CALL S
+                            <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                WHERE
+                                    S.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                            </if>
+                            UNION ALL
+                        </if>
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and req.sql001AlertClassIdList.contains(13) and req.requestAlertClassIdList.contains(13)'>
+                            <!-- ※SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"13"が含まれる場合 -->
+                            SELECT
+                                13 AS ALERT_ID,
+                                T.BUTEN_CODE,
+                                T.ACCOUNT_NUMBER,
+                                T.BROKER_CODE,
+                                T.BROKER_BRANCH_CODE,
+                                T.BROKER_EMPLOYEE_CODE AS BROKER_CHARGE_CODE
+                            FROM
+                                TOUSHIN_BASE_PRICE_CHANGE T
+                            WHERE
+                                T.BASE_DATE_TO = TO_DATE(#{req.dateYmdMutualFundPrice}, 'YYYYMMDD')
+                                <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                    AND T.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                                </if>
+                            UNION ALL
+                        </if>
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and (
+                                (req.sql001AlertClassIdList.contains(14) and req.requestAlertClassIdList.contains(14))
+                                or
+                                (req.sql001AlertClassIdList.contains(15) and req.requestAlertClassIdList.contains(15))
+                            )'>
+                            <!-- ※SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"14","15"のいずれかの同じ値が含まれる場合 -->
+                            SELECT
+                                CASE
+                                    WHEN U.EVENT_KBN = '10' THEN 14
+                                    WHEN U.EVENT_KBN = '20' THEN 15
+                                    ELSE NULL
+                                END AS ALERT_ID,
+                                U.BUTEN_CODE,
+                                U.ACCOUNT_NUMBER,
+                                U.BROKER_CODE,
+                                U.BROKER_BRANCH_CODE,
+                                U.BROKER_CHARGE_CODE
+                            FROM
+                                KNOCKIN_KNOCKOUT_BRAND_HOLD U
+                            <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                WHERE
+                                    U.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                            </if>
+                            UNION ALL
+                        </if>
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and (
+                                (req.sql001AlertClassIdList.contains(16) and req.requestAlertClassIdList.contains(16))
+                                or
+                                (req.sql001AlertClassIdList.contains(17) and req.requestAlertClassIdList.contains(17))
+                            )'>
+                            <!-- ※SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"16","17"のいずれかの同じ値が含まれる場合 -->
+                            SELECT
+                                CASE
+                                    WHEN V.PRODUT_CD = '04' OR V.PRODUT_CD = '12' OR V.PRODUT_CD = '25' THEN 16
+                                    WHEN V.PRODUT_CD = '13' OR V.PRODUT_CD = '14' THEN 17
+                                    ELSE NULL
+                                END AS ALERT_ID,
+                                V.BUTEN_CODE,
+                                V.ACCOUNT_NUMBER,
+                                V.BROKER_CODE,
+                                V.BROKER_BRANCH_CODE,
+                                V.BROKER_CHARGE_CODE
+                            FROM
+                                T_PAYMENT V
+                            WHERE
+                                V.DATE_YMD = #{req.dateYmdMaturityRedemption}
+                                AND V.PAYMENT_TYPE = '02'
+                                AND V.SCHEDULE_DATE &lt;= TO_CHAR(TO_DATE(#{req.designatedDate}, 'YYYY-MM-DD HH24:MI:SS'), 'YYYYMMDD')
+                                <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                    AND V.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                                </if>
+                            UNION ALL
+                        </if>
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and req.sql001AlertClassIdList.contains(18) and req.requestAlertClassIdList.contains(18)'>
+                            <!-- ※SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"18"が含まれる場合 -->
+                            (
+                                SELECT
+                                    18 AS ALERT_ID,
+                                    W.BRANCH_NO AS BUTEN_CODE,
+                                    P.ACCOUNT_NUMBER,
+                                    P.BROKER_CODE,
+                                    NULL AS BROKER_BRANCH_CODE,
+                                    P.INTERMEDIARY_EMP_CD AS BROKER_CHARGE_CODE
+                                FROM
+                                    WNS_TB_PAYMENT_DEPOSIT W,
+                                    MEDIATE_USER_ATTRIBUTE_INFO P
+                                WHERE
+                                    W.BASE_DATE = #{req.dateYmdDepositWithdraw}
+                                    AND (
+                                        ( <!-- SUB020302_0203-01_入出金明細 追加構成③ 条件③ -->
+                                            W.TRADE_CODE_1 = '2'
+                                            AND W.TRADE_CODE_3 = '1'
+                                            AND (
+                                                (
+                                                    NOT (
+                                                        (
+                                                            W.TRADE_CODE_PARE = '01006'
+                                                            AND (
+                                                                W.ACCOUNTING_CODE = '389031000'
+                                                                OR W.ACCOUNTING_CODE = '389031001'
+                                                                OR W.ACCOUNTING_CODE = '389032010'
+                                                                OR W.ACCOUNTING_CODE = '389032020'
+                                                                OR W.ACCOUNTING_CODE = '389032030'
+                                                                OR W.ACCOUNTING_CODE = '389032000'
+                                                                OR W.ACCOUNTING_CODE = '320000103'
+                                                                OR W.ACCOUNTING_CODE = '320000105'
+                                                            )
+                                                        )
+                                                        OR (
+                                                            W.TRADE_CODE_PARE = '01022'
+                                                            OR W.TRADE_CODE_PARE = '01026'
+                                                        )
+                                                    )
+                                                )
+                                                OR (NVL(W.TRADE_CODE_PARE, '         ') = '         ')
+                                            )
+                                        )
+                                        OR ( <!-- SUB020302_0203-01_入出金明細 追加構成③ 条件④ -->
+                                            W.TRADE_CODE_1 = '2'
+                                            AND W.TRADE_CODE_3 = '0'
+                                            AND (
+                                                (
+                                                    NOT (
+                                                        (
+                                                            W.TRADE_CODE_PARE = '01006'
+                                                            AND (
+                                                                W.ACCOUNTING_CODE = '389031000'
+                                                                OR W.ACCOUNTING_CODE = '389031001'
+                                                                OR W.ACCOUNTING_CODE = '389032010'
+                                                                OR W.ACCOUNTING_CODE = '389032020'
+                                                                OR W.ACCOUNTING_CODE = '389032030'
+                                                                OR W.ACCOUNTING_CODE = '389032000'
+                                                                OR W.ACCOUNTING_CODE = '320000103'
+                                                                OR W.ACCOUNTING_CODE = '320000105'
+                                                            )
+                                                        )
+                                                        OR (
+                                                            W.TRADE_CODE_PARE = '01022'
+                                                            OR W.TRADE_CODE_PARE = '01026'
+                                                        )
+                                                    )
+                                                )
+                                                OR (NVL(W.TRADE_CODE_PARE,'     ') = '     ')
+                                            )
+                                        )
+                                    )
+                                    AND W.BRANCH_NO = P.BUTEN_CODE
+                                    AND TO_NUMBER(W.ACCOUNT_NO) = P.ACCOUNT_NUMBER
+                                    <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                        AND P.BROKER_CODE IN
+                                        <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                            #{brokerCode}
+                                        </foreach>
+                                    </if>
+                                UNION
+                                SELECT
+                                    18 AS ALERT_ID,
+                                    Z.BRANCH_NO AS BUTEN_CODE,
+                                    P.ACCOUNT_NUMBER,
+                                    P.BROKER_CODE,
+                                    NULL AS BROKER_BRANCH_CODE,
+                                    P.INTERMEDIARY_EMP_CD AS BROKER_CHARGE_CODE
+                                FROM
+                                    WNS_TB_MRF_ORDER Z,
+                                    MEDIATE_USER_ATTRIBUTE_INFO P
+                                WHERE
+                                    Z.BASE_DATE = #{req.dateYmdDepositWithdraw}
+                                    AND Z.BRANCH_NO = P.BUTEN_CODE
+                                    AND TO_NUMBER(Z.ACCOUNT_NO) = P.ACCOUNT_NUMBER
+                                    AND Z.HIS_BUY_SEL_KBN = 'RIBY'
+                                    <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                        AND P.BROKER_CODE IN
+                                        <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                            #{brokerCode}
+                                        </foreach>
+                                    </if>
+                            )
+                            UNION ALL
+                        </if>
+                        <if test='req.sql001AlertClassIdList != null and req.requestAlertClassIdList != null
+                            and req.sql001AlertClassIdList.contains(19) and req.requestAlertClassIdList.contains(19)'>
+                            <!-- ※SQL001.アラート分類IDとリクエスト.アラート分類リストの両方に"19"が含まれる場合 -->
+                            SELECT
+                                19 AS ALERT_ID,
+                                RTRIM(X.BUTEN_CODE) AS BUTEN_CODE,
+                                P.ACCOUNT_NUMBER,
+                                P.BROKER_CODE,
+                                NULL AS BROKER_BRANCH_CODE,
+                                P.INTERMEDIARY_EMP_CD AS BROKER_CHARGE_CODE
+                            FROM
+                                MEDIATE_SEC_INOUT_STAR X,
+                                MEDIATE_USER_ATTRIBUTE_INFO P
+                            WHERE
+                                X.TRADE_DATE = #{req.dateYmdDeliverInOut}
+                                AND (
+                                    <!-- SUB020302_0204-01_入出庫明細 追加構成② 条件④ -->
+                                    X.DEALING_SEARCH_CODE3 IN ('E10', 'E11', 'E13', 'E14', 'E19', 'F10', 'F11', 'F13', 'F14', 'F17')
+                                    AND ( <!-- SUB020302_0204-01_入出庫明細 追加構成② 条件⑤ -->
+                                        NOT (
+                                            X.DELIVERY_BREAKDOWN_DIV IS NOT NULL
+                                            AND X.STOCK_REASON2 IS NOT NULL
+                                            AND X.DROWOUT_REASON_DIV IS NOT NULL
+                                            AND X.STOCK_DIV IS NOT NULL
+                                            AND X.DEALING_CODE3 IS NOT NULL
+                                            AND (
+                                                (X.DEALING_CODE3 = '0' AND X.DELIVERY_BREAKDOWN_DIV &lt;&gt; '2' AND X.STOCK_REASON2 = '2')
+                                                OR (X.DEALING_CODE3 = '0' AND X.DROWOUT_REASON_DIV = '2')
+                                                OR (X.DEALING_CODE3 = '0' AND X.DELIVERY_BREAKDOWN_DIV IN ('H', 'I', 'J', 'K', 'L'))
+                                                OR (X.DEALING_CODE3 = '0' AND X.STOCK_REASON2 &lt;&gt; '2' AND X.STOCK_DIV IN ('H', 'I', 'J', 'K', 'L'))
+                                                OR (X.DEALING_CODE3 = '0' AND (X.DROWOUT_REASON_DIV = '3' OR X.STOCK_REASON2 = '3'))
+                                                OR (X.DEALING_CODE3 = '1' AND X.STOCK_REASON2 = '2' AND X.STOCK_DIV &lt;&gt; '2')
+                                                OR (X.DEALING_CODE3 = '1' AND X.STOCK_DIV IN ('H', 'I', 'J', 'K', 'L'))
+                                                OR (X.DEALING_CODE3 = '1' AND X.STOCK_REASON2 = '3')
+                                            )
+                                        )
+                                    )
+                                )
+                                AND X.BUTEN_CODE = P.BUTEN_CODE
+                                AND TO_NUMBER(X.ACCOUNT_NUMBER) = P.ACCOUNT_NUMBER
+                                <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                    AND P.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                                </if>
+                            UNION
+                            SELECT
+                                19 AS ALERT_ID,
+                                Y.BUTEN_CODE,
+                                P.ACCOUNT_NUMBER,
+                                P.BROKER_CODE,
+                                NULL AS BROKER_BRANCH_CODE,
+                                P.INTERMEDIARY_EMP_CD AS BROKER_CHARGE_CODE
+                            FROM
+                                MEDIATE_SEC_INOUT_FSTOCK Y,
+                                MEDIATE_USER_ATTRIBUTE_INFO P
+                            WHERE
+                                Y.TRADE_DATE = TO_DATE(#{req.dateYmdDeliverInOut}, 'YYYYMMDD')
+                                AND Y.INCREASEDECREASEREASONCODE &lt;&gt; '91'
+                                AND Y.BUTEN_CODE = P.BUTEN_CODE
+                                AND Y.ACCOUNT_NUMBER = P.ACCOUNT_NUMBER
+                                <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0'>
+                                    AND P.BROKER_CODE IN
+                                    <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                                        #{brokerCode}
+                                    </foreach>
+                                </if>
+                            UNION ALL
+                        </if>
+                        <!-- if文すべてに合致しなかった場合にFROM句が生成されなくなるのを防ぐための考慮 -->
+                        SELECT
+                            NULL AS ALERT_ID,
+                            NULL AS BUTEN_CODE,
+                            NULL AS ACCOUNT_NUMBER,
+                            NULL AS BROKER_CODE,
+                            NULL AS BROKER_BRANCH_CODE,
+                            NULL AS BROKER_CHARGE_CODE
+                        FROM
+                            DUAL
+                        WHERE
+                            1 = 0
+                    </trim>
+                    ) A
+                    INNER JOIN MEDIATE_ALERT_CATEGORY B
+                        ON A.ALERT_ID = B.ALERT_ID
+                    INNER JOIN MEDIATE_BRANCH N
+                        ON A.BROKER_CODE = N.BROKER_CODE
+                            AND N.BROKER_BRANCH_KIND = '00'
+                    LEFT JOIN V_MEDIATE_CHARGE_INFO O
+                        ON A.BROKER_CODE = O.BROKER_CODE
+                            AND A.BROKER_CHARGE_CODE = O.BROKER_CHARGE_CODE
+                    INNER JOIN MEDIATE_USER_ATTRIBUTE_INFO AA
+                        ON A.BUTEN_CODE = AA.BUTEN_CODE
+                            AND A.ACCOUNT_NUMBER = AA.ACCOUNT_NUMBER
+                <where>
+                    <if test='"1".equals(req.privId) == false and req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0'>
+                        <choose>
+                            <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                                (A.BROKER_CODE IN
+                                <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                    <if test="index % 1000 == 0 and index != 0">
+                                        ) OR A.BROKER_CODE IN(
+                                    </if>
+                                    <if test="index % 1000 != 0">
+                                        ,
+                                    </if>
+                                    #{brokerCharge.brokerCode}
+                                </foreach>
+                                )
+                            </when>
+                            <otherwise>
+                                ((A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN
+                                <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                    <if test="index % 1000 == 0 and index != 0">
+                                        ) OR (A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN(
+                                    </if>
+                                    <if test="index % 1000 != 0">
+                                        ,
+                                    </if>
+                                    (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                                </foreach>
+                                )
+                            </otherwise>
+                        </choose>
+                    </if>
+                    <if test='req.requestAlertClassIdList != null and req.requestAlertClassIdList.size() &gt; 0'>
+                        AND A.ALERT_ID IN
+                        <foreach item="alertClass" index="index" collection="req.requestAlertClassIdList" open="(" separator="," close=")">
+                            #{alertClass}
+                        </foreach>
+                    </if>
+                    <if test='req.tradeCourseList != null and req.tradeCourseList.size() &gt; 0'>
+                        AND AA.CUSTOMER_ATTRIBUTE IN
+                        <foreach item="tradeCourse" index="index" collection="req.tradeCourseList" open="(" separator="," close=")">
+                            #{tradeCourse}
+                        </foreach>
+                    </if>
+                </where>
+            )
+        WHERE
+            ROWNUM &lt;= #{req.maxCsvRowNum}
+    </select>
+
+    <select id="selectIfaCustomerAlertCsvOutputSql004" resultType="java.lang.Integer">
+        SELECT /* @SQLID=SUB01-02#Sql004 */
+            NAME
+        FROM
+            M_CODE
+        WHERE
+            START_DATE <![CDATA[<=]]> IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        AND
+            END_DATE >= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        AND
+            CODE_TYPE = '67'
+        AND
+            CODE_1 = '01'
+        AND
+            CODE_2 = 'MARGIN_SDATE'
+    </select>
+
+    <select id="selectIfaCustomerAlertCsvOutputSql005" resultType="java.lang.String">
+        SELECT /* @SQLID=SUB01-02#Sql005 */
+            MAX(C_TARGET_DATE)
+        FROM
+            M_CALENDAR
+        WHERE
+            C_CALENDAR_ID = 'T003'
+            AND C_ISO_COUNTRY_CODE = 'JP'
+            AND C_TARGET_DATE <![CDATA[<=]]> IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND C_BUS_NONBUS_DIV = '2'
+            AND C_DELETE_FLG = '0'
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+{
+    "ignorePathList": [
+        "/alive",
+        "/dynamicjs",
+        "/procedureWaiting",
+        "/procedureCompletionCheck",
+        "/sso/ccsLoginForm",
+        "/sso/ccsView",
+        "/sso/userHasCcsData",
+        "/broker/appOrderList",
+        "/broker/appExecutionList",
+        "/broker/appManagingContractList"
+    ],
+    "maskingParamKeyList": [
+        "password",
+        "oldPassword",
+        "newPassword",
+        "newPasswordRepeat"
+    ]
+}

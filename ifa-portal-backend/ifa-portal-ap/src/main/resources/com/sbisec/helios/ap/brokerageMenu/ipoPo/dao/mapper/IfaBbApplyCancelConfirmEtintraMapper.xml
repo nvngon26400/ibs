@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0204_02-03_2
+    画面名：BB申込取消確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IfaBbApplyCancelConfirmEtintraMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：BB申込情報取消
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaBbApplyCancelConfirmSql001" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0204_02-03_2#Sql001 */
+        FROM BB_ACCEPT A
+        WHERE
+        A.BB_PRODUCT_CODE = #{req.brandCode}
+        AND    
+        A.BB_PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom}）
+        AND
+        A.BB_BRANCH_CODE = UPPER(RPAD(#{req.butenCode}, 4, ' '))
+        AND
+        TO_NUMBER(A.BB_ACCOUNT_NUMBER) = TO_NUMBER(#{req.accountNumber})
+
+    </delete>
+    
+    
+    <!-- 
+        SQLID：Sql015
+        SQL名：BB申込情報登録
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaBbApplyCancelConfirmSql015" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0204_02-03_2#Sql015 */
+        FROM SR_ACCEPT B
+        WHERE
+        B.BB_PRODUCT_CODE = #{req.brandCode}
+        AND    
+        B.BB_PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom}）
+        AND
+        B.BB_BRANCH_CODE = UPPER(RPAD(#{req.butenCode}, 4, ' '))
+        AND
+        TO_NUMBER(B.BB_ACCOUNT_NUMBER) = TO_NUMBER(#{req.accountNumber})
+    </delete>
+    
+</mapper>

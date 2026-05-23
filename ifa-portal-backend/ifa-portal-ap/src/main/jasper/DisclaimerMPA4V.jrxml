@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-03-01T19:04:11 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DisclaimerMPA4V" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d8cef26-79cb-47c6-991e-0034affc4475">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="src\main\jasper\MPDataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="MPlogo" class=" java.io.InputStream"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="type2Broker" class="java.lang.String"/>
+	<field name="broker" class="java.lang.String"/>
+	<field name="bankAgent" class="java.lang.String"/>
+	<field name="moneylender" class="java.lang.String"/>
+	<field name="importantPoints" class="java.lang.String"/>
+	<field name="aboutFinancialProductBrokerage" class="java.lang.String"/>
+	<field name="aboutBankAgent" class="java.lang.String"/>
+	<field name="aboutInsuranceAgency" class="java.lang.String"/>
+	<field name="pageNumber" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="191" height="35" uuid="74e7e172-f632-414f-b70f-8b44234401ad"/>
+				<imageExpression><![CDATA[$P{MPlogo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="752" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="12" uuid="22130d41-4c5d-461f-8686-d7fa55883882"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SBIマネープラザ株式会社]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="555" height="12" uuid="ea925e4e-3259-4bfb-bc2e-f050b0571897"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[・第二種金融商品取引業者、投資助言・代理業者]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="29" width="545" height="28" uuid="6bdf8adb-df93-4840-b9e6-eb3280156d46"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type2Broker}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="62" width="555" height="12" uuid="73b8d9c6-2137-460f-ac5b-ac492439fc06"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[・金融商品仲介業者]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="74" width="545" height="84" uuid="04ff9f18-81f2-48da-8051-70d1f7f63fe2"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{broker}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="163" width="555" height="12" uuid="f6e36564-fdfc-4606-8798-d781e8df19eb"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[・銀行代理業者]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="175" width="545" height="56" uuid="95e098c1-7539-40aa-8f9f-5bbda89aabcf"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bankAgent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="236" width="555" height="12" uuid="46e31ab1-0d57-480a-90f8-08c88a964b2d"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[・貸金業者]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="248" width="545" height="28" uuid="11c0dc1e-8239-4d3f-a690-41c52d37284c"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneylender}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="281" width="555" height="12" uuid="a73f3fdd-625e-4264-9c1c-12f51aa7e5b0"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[【注意事項】]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="293" width="545" height="28" uuid="6c65df53-0591-4c7d-a906-a7cfb32aaf8f"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importantPoints}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="326" width="555" height="12" uuid="acbb44cc-6828-4211-84de-29918d7c70ac"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[（金融商品仲介業について）]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="338" width="545" height="70" uuid="5ec625e5-d83a-462b-b61e-b516fea17dde"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aboutFinancialProductBrokerage}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="405" width="555" height="12" uuid="886d481d-3deb-4ea9-a4e6-0d2457c899ec"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[（銀行代理業について）]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="418" width="545" height="14" uuid="bf420f42-14af-42aa-9323-3c43f6d59e1b"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aboutBankAgent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="434" width="555" height="12" uuid="aa158ec1-feac-4361-a8aa-d45129cb5e72"/>
+				<textElement>
+					<font fontName="IPAexGothic" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[（保険代理店業務について）]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="446" width="545" height="56" uuid="fdc6338d-c929-4870-8a55-f330a477a6b5"/>
+				<textElement markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aboutInsuranceAgency}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="217" y="740" width="121" height="12" uuid="4108cb1a-f2e0-4f4c-99bb-e1da37b53843"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="html">
+					<font fontName="IPAexGothic" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pageNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

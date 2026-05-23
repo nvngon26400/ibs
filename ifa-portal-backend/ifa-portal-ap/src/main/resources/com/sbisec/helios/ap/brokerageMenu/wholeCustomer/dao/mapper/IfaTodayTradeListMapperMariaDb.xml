@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020302_0102-01
+    画面名：国内株当日約定一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaTodayTradeListMapperMariaDb">
+
+    <resultMap id="ResultMapIfaTodayTradeListSql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaTodayTradeListSql002ResponseModel" >
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：銘柄コード存在チェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTodayTradeListSql002" resultMap="ResultMapIfaTodayTradeListSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0102-01#Sql002 */ 
+        localCode, <!-- 証券コード -->
+        ISIN, <!--ISIN -->
+        name, <!--銘柄略称 -->
+        name_en, <!--英語銘柄略称 -->
+        fullname, <!--銘柄名称 -->
+        fullname_en, <!-- 英語銘柄名称 -->
+        fullname_kana, <!--読みカナ銘柄名称 -->
+        shareCls, <!--種類株区分 -->
+        fundCls, <!--投資信託区分 -->
+        indCode, <!--証券コード協議会業種コード -->
+        preExCode, <!--主要取引所コード -->
+        preExCodeSBI, <!--SBI主要取引所コード -->
+        shareUnit <!--単元株数 -->
+        FROM stock_master
+        WHERE 
+        localCode = #{req.brandCode}
+    </select>
+
+</mapper>

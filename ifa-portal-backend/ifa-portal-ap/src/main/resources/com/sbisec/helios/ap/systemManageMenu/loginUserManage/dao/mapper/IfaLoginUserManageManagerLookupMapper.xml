@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0601_01-01
+    画面名：ログイン者管理（管理者用）照会
+-->
+<mapper namespace="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.mapper.IfaLoginUserManageManagerLookupMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaLoginUserManageManagerLookupSql001" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginUserManageManagerLookupSql001ResponseModel" >
+        <result property="userName" column="USER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="employeeName" column="EMPLOYEE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="headOfficeBranchName" column="HEAD_OFFICE_BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaLoginUserManageManagerLookupSql002" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginUserManageManagerLookupSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaLoginUserManageManagerLookupSql007" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginUserManageManagerLookupSql007ResponseModel" >
+        <result property="menuTitle" column="MENU_TITLE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：ユーザ情報検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginUserManageManagerLookupSql001" resultMap="ResultMapIfaLoginUserManageManagerLookupSql001" statementType="PREPARED">
+		WITH B AS (
+			SELECT
+				BROKER_CODE,
+				BRANCH_NAME
+			FROM
+				MEDIATE_BRANCH F
+			WHERE
+				BROKER_BRANCH_KIND = '00'
+		)
+		
+		SELECT /* @SQLID=SUB0601_01-01#Sql001 */
+			USER_ID,
+			USER_NM USER_NAME,
+			PASSWORD,
+			LASTPWUPTIME PASSWORD_UPDATE_TIME,
+			PRIV_ID,
+			BRANCH_ID SBI_SECURITY_CODE,
+			BROKER_ID BROKER_CODE,
+			SUB_BROKER_ID,
+			EMPLOYEE_ID,
+			EMPLOYEE_NAME,
+			GOVERNOR_FLAG,
+			LOGIN_STATUS,
+			PARTNER_USER_ID LOGIN_ID,
+			PARTNER_USER_PW LOGIN_PASSWORD,
+			CCS_USER_ID CCS_ID,
+			CCS_USER_PW CCS_PASSWORD,
+			CREATE_USER,
+			CREATE_TIME,
+			UPTIMESTAMP_USER UPDATE_USER,
+			UPTIMESTAMP_TIME UPDATE_TIME,
+			BRANCH_NAME HEAD_OFFICE_BRANCH_NAME,
+			BROKER_NAME,
+			MAIL_ADDRESS,
+			MANAGER_COUNT
+		FROM
+			(
+				SELECT
+					A.USER_ID,
+					A.USER_NM,
+					A.PASSWORD,
+					A.LASTPWUPTIME,
+					A.PRIV_ID,
+					A.BRANCH_ID,
+					A.BROKER_ID,
+					A.SUB_BROKER_ID,
+					A.EMPLOYEE_ID,
+					A.EMPLOYEE_NAME,
+					A.GOVERNOR_FLAG,
+					A.LOGIN_STATUS,
+					A.PARTNER_USER_ID,
+					A.PARTNER_USER_PW,
+					A.CCS_USER_ID,
+					A.CCS_USER_PW,
+					A.CREATE_USER,
+					A.CREATE_TIME,
+					A.UPTIMESTAMP_USER,
+					A.UPTIMESTAMP_TIME,
+					A.MAIL_ADDRESS,
+					B.BRANCH_NAME AS BROKER_NAME,
+					C.BRANCH_NAME,
+					1 MANAGER_COUNT
+				FROM
+					TB_MED_USERS A
+					LEFT OUTER JOIN B
+						ON A.BROKER_ID = B.BROKER_CODE
+					LEFT OUTER JOIN BRANCH C 
+						ON C.BRANCH_CODE = A.BRANCH_ID
+				WHERE
+					1 = 1
+					<if test="req.userId != null and req.userId != '' ">
+						AND A.USER_ID LIKE CONCAT('%', CONCAT(#{req.userId}, '%'))
+					</if>
+					<if test="req.employeeNameChargeName != null and req.employeeNameChargeName !=''">
+						AND ( A.EMPLOYEE_NAME LIKE CONCAT('%', CONCAT(#{req.employeeNameChargeName}, '%'))
+						OR A.USER_NM LIKE CONCAT('%', CONCAT(#{req.employeeNameChargeName}, '%')) )
+					</if>
+				UNION
+				SELECT
+					AA.USER_ID,
+					AA.USER_NM,
+					AA.PASSWORD,
+					AA.LASTPWUPTIME,
+					AA.PRIV_ID,
+					E.BRANCH_ID,
+					E.BROKER_ID,
+					E.SUB_BROKER_ID,
+					E.EMPLOYEE_ID,
+					E.EMPLOYEE_NAME,
+					AA.GOVERNOR_FLAG,
+					AA.LOGIN_STATUS,
+					AA.PARTNER_USER_ID,
+					AA.PARTNER_USER_PW,
+					AA.CCS_USER_ID,
+					AA.CCS_USER_PW,
+					AA.CREATE_USER,
+					AA.CREATE_TIME,
+					AA.UPTIMESTAMP_USER,
+					AA.UPTIMESTAMP_TIME,
+					AA.MAIL_ADDRESS,
+					BB.BRANCH_NAME AS BROKER_NAME,
+					CC.BRANCH_NAME,
+					1 + ROW_NUMBER() OVER(
+						PARTITION BY 
+							AA.USER_ID
+						ORDER BY
+							AA.USER_ID ASC
+					) MANAGER_COUNT
+				FROM
+					(select * from TB_MED_USERS where PRIV_ID IN ('3', '4', '5', '6', '7', '8', '9') ) AA
+					INNER JOIN TB_MED_USERS_PRIV E
+            			ON AA.USER_ID = E.USER_ID
+		            LEFT OUTER JOIN B BB
+		                ON E.BROKER_ID = BB.BROKER_CODE 
+		            LEFT OUTER JOIN BRANCH CC 
+		                ON CC.BRANCH_CODE = E.BRANCH_ID
+				WHERE
+					1 = 1
+					<if test="req.userId != null and req.userId != ''">
+						AND AA.USER_ID LIKE CONCAT('%', CONCAT(#{req.userId}, '%'))
+					</if>
+					<if test="req.employeeNameChargeName != null and req.employeeNameChargeName != ''">
+						AND ( AA.EMPLOYEE_NAME LIKE CONCAT('%', CONCAT(#{req.employeeNameChargeName}, '%'))
+						OR AA.USER_NM LIKE CONCAT('%', CONCAT(#{req.employeeNameChargeName}, '%')) )
+					</if>
+				) D
+			<if test="req.branchNameBrokerName != null and req.branchNameBrokerName != ''">
+			WHERE
+				( D.BRANCH_NAME LIKE CONCAT('%', CONCAT(#{req.branchNameBrokerName}, '%')) 
+				OR D.BROKER_NAME LIKE CONCAT('%', CONCAT(#{req.branchNameBrokerName}, '%')) )
+			</if>
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：Horusユーザー権限情報の存在チェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginUserManageManagerLookupSql002" resultMap="ResultMapIfaLoginUserManageManagerLookupSql002" statementType="PREPARED">
+		SELECT /* @SQLID=SUB0601_01-01#Sql002 */
+			COUNT(*) COUNT
+		FROM
+			 TB_MED_USERS_PRIV A
+		WHERE
+			A.USER_ID = #{req.loginId}
+			AND A.DELETE_FLG = '0'
+    </select>
+    
+    <!-- 
+        SQLID：Sql007
+        SQL名：メニューリスト検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginUserManageManagerLookupSql007" resultMap="ResultMapIfaLoginUserManageManagerLookupSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0601_01-01#Sql007 */ 
+        	A.MENU_ID,
+        	A.MENU_NAME MENU_TITLE
+        FROM
+        	TB_MED_MENU_NEW A
+        WHERE
+        	A.IS_LEAF = '1'
+        	OR IS_POPPAGE = '1'
+        ORDER BY MENU_ID
+    </select>
+    
+    
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：Cordysユーザーとメニューマッピング情報削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaLoginUserManageManagerLookupSql003" statementType="PREPARED">
+		DELETE /* @SQLID=SUB0601_01-01#Sql003 */ 
+		FROM
+			TB_MED_GOV_MENU_NEW
+		WHERE
+			USER_ID = #{req.loginId}
+    </delete>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：Horusユーザー情報削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaLoginUserManageManagerLookupSql004" statementType="PREPARED">
+		DELETE /* @SQLID=SUB0601_01-01#Sql004 */
+		FROM
+			TB_MED_USERS
+		WHERE
+			USER_ID = #{req.loginId}
+    </delete>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：認証ユーザー情報削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaLoginUserManageManagerLookupSql005" statementType="PREPARED">
+		DELETE /* @SQLID=SUB0601_01-01#Sql005 */
+		FROM
+			TB_MED_VERIFY_USERS
+		WHERE
+			USER_ID = #{req.loginId}
+    </delete>
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：Horusユーザー権限情報の削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaLoginUserManageManagerLookupSql006" statementType="PREPARED">
+		DELETE /* @SQLID=SUB0601_01-01#Sql006 */
+		FROM
+			TB_MED_USERS_PRIV A
+		WHERE
+			A.USER_ID = #{req.loginId}
+			<if test="req.sbiSecurityCode != null and req.sbiSecurityCode != ''">
+				AND A.BRANCH_ID = #{req.sbiSecurityCode}
+			</if>
+			<if test="req.brokerCode != null and req.brokerCode != ''">
+				AND A.BROKER_ID = #{req.brokerCode}
+			</if>
+			<if test="req.subBrokerId != null and req.subBrokerId != ''">
+				AND A.SUB_BROKER_ID = #{req.subBrokerId}
+			</if>
+			<if test="req.employeeId != null and req.employeeId != ''">
+				AND A.EMPLOYEE_ID = #{req.employeeId}
+			</if>
+			AND A.DELETE_FLG = '0'
+    </delete>
+    
+    
+</mapper>

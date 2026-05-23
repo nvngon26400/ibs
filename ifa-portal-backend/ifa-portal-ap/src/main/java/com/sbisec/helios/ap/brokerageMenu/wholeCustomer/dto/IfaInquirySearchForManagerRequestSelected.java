@@ -1,0 +1,22 @@
+package com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dto;
+
+import lombok.Data;
+
+/**
+ * 画面ID:SUB020304-01
+ * 画面名:接触履歴（入力）検索
+ *
+ * @author SBI大連 夏
+ * @date   2025/08/18
+ */
+
+@Data
+public class IfaInquirySearchForManagerRequestSelected {
+
+    /** id */
+    private String id;
+
+    /** isSelected */
+    private Boolean isSelected;
+    
+}

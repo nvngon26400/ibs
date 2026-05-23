@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB00_02, -06-02
+    画面名：皆様からの要望詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.suggestionBox.dao.mapper.IfaSuggestionBoxCommonDetailMapper">
+
+    <resultMap
+        id="ResultMapIfaSuggestionBoxCommonDetailSql001"
+        type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxCommonDetailSql001ResponseModel">
+        <result property="suggestion" column="SUGGESTION" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="answer" column="ANSWER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="title" column="TITLE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="file1" column="FILE1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="file2" column="FILE2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="file3" column="FILE3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+        
+    <!--
+        SQLID：SQL001
+        SQL名：皆様からの要望詳細取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSugBoxCommonDetailSql001"
+        resultMap="ResultMapIfaSuggestionBoxCommonDetailSql001"
+        statementType="PREPARED"
+    >
+		SELECT
+		    SBC.TITLE
+		    , TO_CHAR(SBC.CREATE_TIME, 'yyyy/mm/dd') AS CREATE_DATE
+		    , SBC.STATUS
+		    , SBC.SUGGESTION
+		    , SBC.FILE1
+		    , SBC.FILE2
+		    , SBC.FILE3
+		    , SBCA.SBCA_NO
+		    , SBCA.ANSWER_DATE
+		    , SBCA.ANSWER_UPDATE_DATE
+		    , SBCA.ANSWER 
+		FROM
+		    SUG_BOX_COMMON SBC 
+		    LEFT JOIN SUG_BOX_COMMON_A SBCA 
+		        ON SBC.SBC_NO = SBCA.SBC_NO 
+		WHERE
+		    SBC.SBC_NO = TO_NUMBER(#{req.sbcNo})
+		ORDER BY
+		    SBCA.SBCA_NO ASC
+    </select>
+
+</mapper>

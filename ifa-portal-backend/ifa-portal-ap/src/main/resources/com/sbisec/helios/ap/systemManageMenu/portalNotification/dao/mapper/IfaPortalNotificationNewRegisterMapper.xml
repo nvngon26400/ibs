@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0602-02_1
+    画面名：ポータルお知らせ新規登録
+-->
+<mapper namespace="com.sbisec.helios.ap.systemManageMenu.portalNotification.dao.mapper.IfaPortalNotificationNewRegisterMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：お知らせ情報登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaPortalNotificationNewRegisterSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0602-02_1#Sql001 */ 
+		INTO TB_MED_INFORMATION( 
+		    INFO_ID
+		    , INFO_DETAIL
+		    , IMPORTANT_FLG
+		    , DISPLAY_ORDER
+		    , DELETE_FLG
+		    , DISPLAY_PERIOD_FROM
+		    , DISPLAY_PERIOD_TO
+		    , CREATE_TIME
+		    , CREATE_USER
+		    , UPDATE_TIME
+		    , UPDATE_USER
+		) 
+		VALUES ( 
+		    (SELECT DECODE(MAX(INFO_ID), null , 0, MAX(INFO_ID)) FROM TB_MED_INFORMATION) +1
+		    , #{req.notificationContent}
+		    , #{req.importantNotification}
+		    , 0
+		    , #{req.nonDisplay}
+		    <if test='req.displayPeriodFrom != "" and req.displayPeriodFrom != null'>
+		    	, TO_DATE(#{req.displayPeriodFrom}, 'YYYY/MM/DD')
+		    </if>
+		    <if test='req.displayPeriodFrom == "" and req.displayPeriodFrom != null'>
+		    	, IFA_DATE_UTIL.IFA_GET_DATE
+		    </if>
+		    <if test='req.displayPeriodTo != "" and req.displayPeriodTo != null'>
+		    	, TO_DATE(#{req.displayPeriodTo}, 'YYYY/MM/DD') + INTERVAL '23:59:59' HOUR TO SECOND
+		    </if>
+		    <if test='req.displayPeriodTo == "" and req.displayPeriodTo != null'>
+		    	, TO_DATE('9999/12/31', 'YYYY/MM/DD')
+		    </if>
+		    , IFA_DATE_UTIL.IFA_GET_DATE
+		    , #{req.createUser}
+		    , IFA_DATE_UTIL.IFA_GET_DATE
+		    , #{req.updateUser}
+		)
+    </insert>
+    
+    
+    
+</mapper>

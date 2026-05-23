@@ -1,0 +1,62 @@
+package com.sbisec.helios.gw.brokerageMenu.wholeCustomer.form;
+
+import java.util.List;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import lombok.Data;
+/**
+ * 画面ID：SUB020303-01
+ * 画面名：顧客振込先金融機関口座
+
+ * @author 大崎 辰弥
+    2023/10/27 新規作成
+ *
+ */
+
+@Data
+public class IfaCustomerDestinationBankAccountA002ApiRequest {
+
+    /** 仲介業者コード（数字）. */
+    @Size(max = 49)
+    @Pattern(regexp = "[a-zA-Z0-9\\,]*")
+    private String brokerCode;
+    
+    /** 仲介業者除外（全角半角）. */
+    private String chkBrokerCodeExclude;
+    
+    /** 支店コード（数字）. */
+    @Pattern(regexp = "[0-9]*", message = "支店コード")
+    @Size(max = 3, message = "支店コード")
+    private String branchCode;
+    
+    /** 営業員コード（半角英数字）. */
+    @Pattern(regexp = "(^[a-zA-Z0-9]{4}$)|(^$)", message = "営業員コード")
+    private String empCode;
+    
+    /** 部店コード（半角英数字）. */
+    @Pattern(regexp = "(^[a-zA-Z0-9]{3}$)|(^$)", message = "部店コード")
+    private String butenCode;
+    
+    /** 口座番号（数字）. */
+    @Pattern(regexp = "[0-9]*", message = "口座番号")
+    @Size(max = 7, message = "口座番号")
+    private String accountNumber;
+    
+    /** 顧客名（漢字／カナ）（全角半角）. */
+    @Size(max = 72, message = "顧客名（漢字／カナ）")
+    private String customerNameKanjiKana;
+    
+    /** 顧客名（漢字／カナ）_条件. */
+    private String customerNameKanjiKanaTerms;
+    
+    /** 取引コース. */
+    @NotEmpty(message = "取引コース")
+    private List<IfaCustomerDestinationBankAccountApiRequestCourseSelected> courseSelected;
+    
+    /** 仲介業者コードリスト. */
+    private List<String> brokerCodeList;
+
+
+}

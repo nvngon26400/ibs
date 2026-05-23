@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+   画面ID：SUB00_01-06_3
+   画面名：要望事項 詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.suggestionBox.dao.mapper.IfaSuggestionBoxPersonalDetailMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaSuggestionBoxPersonalDetailSql001" type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxPersonalDetailSql001ResponseModel" >
+        <result column="TITLE" property="title" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="SUGGESTION" property="suggestion" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="FILE1" property="file1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="FILE2" property="file2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="FILE3" property="file3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaSuggestionBoxPersonalDetailSql002" type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxPersonalDetailSql002ResponseModel" >
+        <result column="ANSWER_CONTENTS" property="answerContents" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：要望取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalDetailSql001" resultMap="ResultMapIfaSuggestionBoxPersonalDetailSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00_01-06_3#Sql001 */
+            LPAD(SBP_NO, 6, '0') AS SBP_NO,
+            TITLE AS TITLE,
+            CATEGORY AS CATEGORY,
+            STATUS AS STATUS,
+            SUGGESTION AS SUGGESTION,
+            FILE1 AS REGISTERED_ATTACH_FILE1,
+            FILE2 AS REGISTERED_ATTACH_FILE2,
+            FILE3 AS REGISTERED_ATTACH_FILE3
+        FROM
+            CORDYS.SUG_BOX_PERSONAL
+        WHERE
+            SBP_NO = TO_NUMBER(#{req.sbpNo})
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：回答取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalDetailSql002" resultMap="ResultMapIfaSuggestionBoxPersonalDetailSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00_01-06_3#Sql002 */
+            SBPA_NO AS ANSWER_NO,
+            ANSWER AS ANSWER_CONTENTS,
+            TO_CHAR(CREATE_TIME, 'YYYYMMDD') AS CREATE_TIME,
+            TO_CHAR(ANSWER_UPDATE_TIME, 'YYYYMMDD') AS ANSWER_UPDATE_TIME
+        FROM
+            CORDYS.SUG_BOX_PERSONAL_A
+        WHERE
+            SBP_NO = TO_NUMBER(#{req.sbpNo})
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：回答既読更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaSuggestionBoxPersonalDetailSql003" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB00_01-06_3#Sql003 */
+            CORDYS.SUG_BOX_PERSONAL_A
+        SET
+            UNREAD_FLG = '0'
+            , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER =　#{req.userId}
+        <where>
+            SBP_NO = TO_NUMBER(#{req.sbpNo})
+            AND UNREAD_FLG = '1'
+        </where>
+    </update>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：未読回答のある要望件数取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalDetailSql004" statementType="PREPARED" resultType="Integer">
+        SELECT /* @SQLID=SUB00_01-06_3#Sql004 */
+            COUNT(DISTINCT SBP.SBP_NO) AS SUG_BOX_UNREAD_ITEMS
+        FROM
+            CORDYS.SUG_BOX_PERSONAL SBP
+        INNER JOIN CORDYS.SUG_BOX_PERSONAL_A SBPA
+            ON SBP.SBP_NO = SBPA.SBP_NO
+        <where>
+            SBP.CREATE_USER = #{req.userId}
+            AND SBPA.UNREAD_FLG = '1'
+        </where>
+    </select>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：要望更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaSuggestionBoxPersonalDetailSql006" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB00_01-06_3#Sql006 */
+            CORDYS.SUG_BOX_PERSONAL
+        SET
+            TITLE = #{req.title}
+            , CATEGORY = #{req.category}
+            , SUGGESTION =　#{req.suggestion}
+            
+            <if test='(req.attachFile1 != null and req.attachFile1 != "") or req.registeredAttachFile1DeleteFlag == "1"'>
+            , FILE1 = #{req.attachFile1}
+            </if>
+            <if test='(req.attachFile2 != null and req.attachFile2 != "") or req.registeredAttachFile2DeleteFlag == "1"'>
+            , FILE2 = #{req.attachFile2}
+            </if>
+            <if test='(req.attachFile3 != null and req.attachFile3 != "") or req.registeredAttachFile3DeleteFlag == "1"'>
+            , FILE3 = #{req.attachFile3}
+            </if>
+            , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER = #{req.userId}
+        <where>
+            SBP_NO = TO_NUMBER(#{req.sbpNo})
+        </where>
+    </update>
+
+</mapper>

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0212-02_2
+    画面名：信用新規注文訂正確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaMarginNewOrderCorrectConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaMarginNewOrderCorrectConfirmSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMarginNewOrderCorrectConfirmSql003ResponseModel">
+    </resultMap>
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：発注前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaMarginNewOrderCorrectConfirmSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0212-02_2#Sql001 */ INTO T_JP_ORDER (
+        IFA_ORDER_NO
+        ,IFA_ORDER_SUB_NO
+        ,BUTEN_CODE
+        ,ACCOUNT_NUMBER
+        ,CUSTOMER_ID
+        ,SPECIFIC_KBN
+        ,BRAND_CD
+        ,MARKET
+        ,ORDER_STATUS
+        ,TRADE_KBN
+        ,QUANTITY
+        ,LIMIT
+        ,AZUKARI_KBN
+        ,PAYMENT_LIMIT
+        ,REPAYMENT_METHOD_TYPE
+        ,REQUEST_TYPE
+        ,ORDER_SYUBETSU
+        ,ORDER_SYUBETSU_LIST
+        ,KANYU_KBN
+        ,JUTYU_KBN
+        ,CHECK_INSIDER
+        ,CHECK_SOR
+        ,CHECK_COMP_WRN_ALERT
+        ,SHIKIN_SEIKAKU_KBN
+        ,USER_ID
+        ,CANCEL_USER_ID
+        ,TESUURYOU_KBN
+        ,ALTER_FLG
+        ,AUTO_ORDER_KIND
+        ,RBE_ORDER_KIND
+        ,SASINARI_KBN
+        ,PRICE
+        ,TRIGGER_ZONE
+        ,TRIGGER_PRICE
+        ,OCO_SASINARI_KBN
+        ,OCO_SASHINE
+        ,DONE_SASINARI_KBN
+        ,DONE_SASHINE
+        ,DONE_RBE_ORDER_KIND
+        ,DONE_TRIGGER_ZONE
+        ,DONE_TRIGGER_NEDAN
+        ,DONE_OCO_SASINARI_KBN
+        ,DONE_OCO_SASHINE
+        ,DONE_LIMIT
+        ,JO_ZEI_KBN
+        ,ALTER_ORDER_NUM
+        ,RBE_ORDER_STATUS
+        ,ORDER_TYPE
+        ,ORDER_NUM
+        ,ACCEPT_DATE
+        ,ACCEPT_TIME
+        ,SHUBETU
+        ,CODE
+        ,MESSAGE
+        ,ESTIMATE_PRICE
+        ,AMOUNT
+        ,COMMISSION
+        ,CONSUMPTION_TAX
+        ,CAPITAL_GAIN_TAX
+        ,NET_AMOUNT
+        ,COST
+        ,TRADE_DATE
+        ,SETTLEMENT_DATE
+        ,ACCEPT_LIMIT
+        ,DONE_ACCEPT_LIMIT
+        ,COM_ID_R
+        ,AC_POSITION
+        ,AC_POSITION_AFTER
+        ,AC_BALANCE
+        ,AC_BALANCE_AFTER
+        ,ORDERED_MARKET
+        ,TRADE_DEFICIT_AMOUNT
+        ,ISA_BUY_LIMIT
+        ,JRNISA_TRANSFER_AMOUNT
+        ,SOR_LINK_KBN
+        ,UNCLOSED_QUANTITY
+        ,UNCLOSED_QUANTITY_AFTER
+        ,MARGIN_CAPABILITY
+        ,MARGIN_CAPABILITY_AFTER
+        ,ACTUAL_GRNT_RATE
+        ,ACTUAL_GRNT_RATE_AFTER
+        ,APP_INTEREST_RATES
+        ,APP_LENDING_STOCK
+        ,PREMIUM
+        ,TPOINT
+        ,TPOINT_AFTER
+        ,DAILY_CREDIT_KBN
+        ,PAYMENT_LIMIT_DATE
+        ,DATE_KBN
+        ,BROKER_CODE
+        ,INTERMEDIARY_EMP_CD
+        ,CREATE_TIME
+        ,CREATE_USER
+        ,UPDATE_TIME
+        ,UPDATE_USER
+        ,CCS_SEND_DATE
+        ) VALUES (
+        #{req.ifaOrderNo}
+        ,#{req.ifaOrderSubNo}
+        ,#{req.butenCode}
+        ,#{req.accountNumber}
+        ,#{req.kokyakuId}
+        ,#{req.tokuteiKouzaKbn}
+        ,#{req.brandCode}
+        ,#{req.market}
+        ,#{req.orderStatus}
+        ,#{req.tradeCd}
+        ,#{req.quantity}
+        ,#{req.yukoKigen}
+        ,#{req.depositType}
+        ,#{req.paymentDeadline}
+        ,#{req.repayMethod}
+        ,#{req.repayOrder}
+        ,#{req.orderKind}
+        ,#{req.orderStatusListOrderClass}
+        ,#{req.kanyuKbn}
+        ,#{req.receiveOrder}
+        ,#{req.checkInsider}
+        ,#{req.checkSor}
+        ,#{req.checkCompWrnAlert}
+        ,#{req.uaiQaFundCharacter}
+        ,#{req.userId}
+        ,#{req.torikeshiUserId}
+        ,#{req.tesuuryouKbn}
+        ,#{req.teiseiKbn}
+        ,#{req.autoOrderClass}
+        ,#{req.rbeChumonShubetsu}
+        ,#{req.sasinariKbn}
+        ,#{req.sashine}
+        ,#{req.triggerZone}
+        ,#{req.triggerNedan}
+        ,#{req.ocoSasinariKbn}
+        ,#{req.ocoSashine}
+        ,#{req.doneSasinariKbn}
+        ,#{req.doneSashine}
+        ,#{req.doneRbeOrderKind}
+        ,#{req.doneTriggerZone}
+        ,#{req.doneTriggerNedan}
+        ,#{req.doneOcoSasinariKbn}
+        ,#{req.doneOcoSashine}
+        ,#{req.doneYuukouKigen}
+        ,#{req.joutoekizeiKbn}
+        ,#{req.ec}
+        ,#{req.rbeOrderStand}
+        ,#{req.securityType}
+        ,#{req.ecOrderNo}
+        ,#{req.inputDate}
+        ,#{req.orderTime}
+        ,#{req.shubetu}
+        ,#{req.code}
+        ,#{req.errMessage}
+        ,#{req.estimatePrice}
+        ,#{req.amount}
+        ,#{req.commission}
+        ,#{req.consumptionTax}
+        ,#{req.capitalGainTax}
+        ,#{req.netAmount}
+        ,#{req.cost}
+        ,#{req.contractDate}
+        ,#{req.deliveryDate}
+        ,#{req.acceptLimit}
+        ,#{req.doneAcceptLimit}
+        ,#{req.comIdR}
+        ,#{req.acPosition}
+        ,#{req.acPositionAfter}
+        ,#{req.acBalance}
+        ,#{req.acBalanceAfter}
+        ,#{req.orderedMarket}
+        ,#{req.tradeDeficitAmount}
+        ,#{req.isaBuyLimit}
+        ,#{req.jrnisaTransferAmount}
+        ,#{req.sorLinkKbn}
+        ,#{req.unclosedQuantity}
+        ,#{req.unclosedQuantityAfter}
+        ,#{req.marginCapability}
+        ,#{req.marginCapabilityAfter}
+        ,#{req.rate}
+        ,#{req.actualGrntRateAfter}
+        ,#{req.applicableInterestRate}
+        ,#{req.applicableStockLendingFees}
+        ,#{req.premium}
+        ,#{req.tpoint}
+        ,#{req.tpointAfter}
+        ,#{req.dailyCreditKbn}
+        ,#{req.paymentDeadlineDate}
+        ,#{req.dateKbn}
+        ,#{req.brokerCode}
+        ,#{req.brokerChargeCode}
+        ,IFA_DATE_UTIL.IFA_GET_DATE
+        ,#{req.createUser}
+        ,IFA_DATE_UTIL.IFA_GET_DATE
+        ,#{req.updateUser}
+        ,#{req.ccsDate}
+        )
+
+    </insert>
+    
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaMarginNewOrderCorrectConfirmSql002" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0212-02_2#Sql002 */ T_JP_ORDER 
+        SET 
+            SHUBETU = #{req.shubetu}
+            ,CODE = #{req.code}
+            ,MESSAGE = #{req.errMessage}
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.updateUser}
+            ,ACCEPT_DATE = #{req.orderDate}
+            <if test="req.code.trim() == '' or req.code.indexOf('W') == 0">
+                ,ACCEPT_TIME = #{req.orderTime}
+                ,ESTIMATE_PRICE = #{req.estimatePrice}
+                ,AMOUNT = #{req.amount}
+                ,COMMISSION = #{req.commission}
+                ,CONSUMPTION_TAX = #{req.consumptionTax}
+                ,CAPITAL_GAIN_TAX = #{req.capitalGainTax}
+                ,NET_AMOUNT = #{req.netAmount}
+                ,COST = #{req.cost}
+                ,TRADE_DATE = #{req.contractDate}
+                ,SETTLEMENT_DATE = #{req.deliveryDate}
+                ,ACCEPT_LIMIT = #{req.acceptLimit}
+                ,DONE_ACCEPT_LIMIT = #{req.doneAcceptLimit}
+                ,COM_ID_R = #{req.comIdR}
+                ,AC_POSITION = #{req.acPosition}
+                ,AC_POSITION_AFTER = #{req.acPositionAfter}
+                ,AC_BALANCE = #{req.acBalance}
+                ,AC_BALANCE_AFTER = #{req.acBalanceAfter}
+                ,ORDERED_MARKET = #{req.orderedMarket}
+                ,TRADE_DEFICIT_AMOUNT = #{req.tradeDeficitAmount}
+                ,ISA_BUY_LIMIT = #{req.isaBuyLimit}
+                ,JRNISA_TRANSFER_AMOUNT = #{req.jrnisaTransferAmount}
+                ,SOR_LINK_KBN = #{req.sorLinkKbn}
+                ,UNCLOSED_QUANTITY = #{req.unclosedQuantity}
+                ,UNCLOSED_QUANTITY_AFTER = #{req.unclosedQuantityAfter}
+                ,MARGIN_CAPABILITY = #{req.marginCapability}
+                ,MARGIN_CAPABILITY_AFTER = #{req.marginCapabilityAfter}
+                ,ACTUAL_GRNT_RATE = #{req.customerInfoDetentionRate}
+                ,ACTUAL_GRNT_RATE_AFTER = #{req.actualGrntRateAfter}
+                ,APP_INTEREST_RATES = #{req.applicableInterestRate}
+                ,APP_LENDING_STOCK = #{req.applicableStockLendingFees}
+                ,PREMIUM = #{req.premium}
+                ,TPOINT = #{req.tpoint}
+                ,TPOINT_AFTER = #{req.tpointAfter}
+            </if>
+        WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+    </update>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新(発注がエラーの場合(API応答なし))
+        SQLタイプ：update
+    -->
+    <update id="updateIfaMarginNewOrderCorrectConfirmSql002b" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0212-02_2#Sql002 */ T_JP_ORDER 
+        SET
+            UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.updateUser}
+            ,ACCEPT_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+    </update>
+    
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：既存レコードのチェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaMarginNewOrderCorrectConfirmSql003"  resultMap="ResultMapIfaMarginNewOrderCorrectConfirmSql003"  statementType="PREPARED">
+        WITH temp AS ( 
+            SELECT
+                TO_CHAR(IFA_ORDER_NO) IFA_ORDER_NO
+                , TO_CHAR(IFA_ORDER_SUB_NO) IFA_ORDER_SUB_NO
+                , TO_CHAR(BUTEN_CODE) BUTEN_CODE
+                , TO_CHAR(ACCOUNT_NUMBER) ACCOUNT_NUMBER
+                , TO_CHAR(CUSTOMER_ID) CUSTOMER_ID
+                , TO_CHAR(SPECIFIC_KBN) SPECIFIC_KBN
+                , TO_CHAR(JO_ZEI_KBN) JO_ZEI_KBN
+                , TO_CHAR(CHECK_SOR) CHECK_SOR
+                , TO_CHAR(ORDER_NUM) ORDER_NUM
+            FROM
+                T_JP_ORDER 
+            WHERE
+                ORDER_NUM = #{req.ecOrderNo}
+                AND BUTEN_CODE = #{req.butenCode}
+                AND ACCEPT_DATE &gt;= #{req.inputDate}
+                AND IFA_ORDER_SUB_NO = ( 
+                    SELECT
+                        MAX(IFA_ORDER_SUB_NO) 
+                    FROM
+                        T_JP_ORDER 
+                    WHERE
+                        ORDER_NUM = #{req.ecOrderNo}
+                        AND BUTEN_CODE = #{req.butenCode}
+                        AND ACCEPT_DATE &gt;= #{req.inputDate}
+                )
+        )
+        SELECT
+            NVL(IFA_ORDER_NO, IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') || LPAD(SEQ_T_JP_ORDER.NEXTVAL, 10, '0')
+            ) IFA_ORDER_NO
+            , IFA_ORDER_SUB_NO + 1 IFA_ORDER_SUB_NO
+            , BUTEN_CODE
+            , ACCOUNT_NUMBER
+            , CUSTOMER_ID KOKYAKU_ID
+            , SPECIFIC_KBN TOKUTEIKOUZA_KBN
+            , JO_ZEI_KBN JOUTOEKIZEI_KBN
+            , CHECK_SOR
+            , ORDER_NUM EC_ORDER_NO
+        FROM
+            ( 
+                SELECT
+                    * 
+                FROM
+                    temp  
+                UNION ALL 
+                SELECT
+                    NULL IFA_ORDER_NO
+                    , '0' IFA_ORDER_SUB_NO
+                    , #{req.butenCode} BUTEN_CODE
+                    , #{req.accountNumber} ACCOUNT_NUMBER
+                    , #{req.kokyakuId} CUSTOMER_ID
+                    , #{req.tokuteiKouzaKbn} SPECIFIC_KBN
+                    , NULL JO_ZEI_KBN
+                    , #{req.checkSor} CHECK_SOR
+                    , #{req.ecOrderNo} ORDER_NUM 
+                FROM
+                    dual 
+                WHERE
+                    (SELECT count(*) FROM temp) = 0
+            )
+    </select>
+
+</mapper>

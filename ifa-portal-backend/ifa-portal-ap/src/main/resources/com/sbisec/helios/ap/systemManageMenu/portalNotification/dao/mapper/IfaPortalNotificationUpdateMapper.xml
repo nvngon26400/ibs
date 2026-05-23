@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0602-04_1
+    画面名：ポータルお知らせ更新
+-->
+<mapper
+	namespace="com.sbisec.helios.ap.systemManageMenu.portalNotification.dao.mapper.IfaPortalNotificationUpdateMapper">
+	<!--
+	全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+	<!--
+	住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+	<resultMap id="ResultMapIfaPortalNotificationUpdateSql001" type="com.sbisec.helios.ap.systemManageMenu.portalNotification.dao.model.IfaPortalNotificationUpdateSql001ResponseModel">
+		<result property="infoDetail" column="INFO_DETAIL" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="importantFlg" column="IMPORTANT_FLG"/>
+        <result property="deleteFlg" column="DELETE_FLG"/>
+        <result property="displayPeriodFrom" column="DISPLAY_PERIOD_FROM"/>
+        <result property="displayPeriodTo" column="DISPLAY_PERIOD_TO"/>
+	</resultMap>
+
+
+	<!-- 
+        SQLID：Sql001
+        SQL名：ポータルお知らせ取得
+        SQLタイプ：select
+    -->
+	<select id="selectIfaPortalNotificationUpdateSql001" resultMap="ResultMapIfaPortalNotificationUpdateSql001" statementType="PREPARED">
+	<if test='req.notificationId != "" or req.notificationId != null'>
+		SELECT /* @SQLID=SUB0602-04_1#Sql001 */
+		    INFO_DETAIL
+		    , IMPORTANT_FLG
+		    , DELETE_FLG
+		    , DISPLAY_PERIOD_FROM
+		    , DISPLAY_PERIOD_TO
+		FROM
+		    TB_MED_INFORMATION 
+		WHERE
+		    INFO_ID = TO_NUMBER(#{req.notificationId})
+	</if>
+	</select>
+
+
+	<!-- 
+        SQLID：Sql002
+        SQL名：ポータルお知らせ更新
+        SQLタイプ：update
+    -->
+	<update id="updateIfaPortalNotificationUpdateSql002" statementType="PREPARED">
+	<if test='req.notificationId != "" and req.notificationId != null'>
+		UPDATE /* @SQLID=SUB0602-04_1#Sql002 */ TB_MED_INFORMATION 
+		SET
+		    INFO_DETAIL = #{req.notificationContent}
+		    , IMPORTANT_FLG = #{req.importantNotification}
+		    , DELETE_FLG = #{req.nonDisplay}
+		    <if test='req.displayPeriodFrom != "" and req.displayPeriodFrom != null'>
+		    	, DISPLAY_PERIOD_FROM = TO_DATE(#{req.displayPeriodFrom}, 'YYYY/MM/DD')
+		    </if>
+		    <if test='req.displayPeriodFrom == "" or req.displayPeriodFrom == null'>
+				, DISPLAY_PERIOD_FROM = IFA_DATE_UTIL.IFA_GET_DATE
+		    </if>
+		    <if test='req.displayPeriodTo != "" and req.displayPeriodTo != null'>
+		    	, DISPLAY_PERIOD_TO = TO_DATE(#{req.displayPeriodTo}, 'YYYY/MM/DD') + INTERVAL '23:59:59' HOUR TO SECOND
+		    </if>
+		    <if test='req.displayPeriodTo == "" or req.displayPeriodTo == null'>
+		    	, DISPLAY_PERIOD_TO = TO_DATE('9999/12/31', 'YYYY/MM/DD')
+		    </if>
+		    , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+		    , UPDATE_USER = #{req.updateUser}
+		WHERE
+		    INFO_ID = TO_NUMBER(#{req.notificationId})
+	</if>
+	</update>
+</mapper>

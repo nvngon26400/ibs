@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MedInformationMapper">
+
+    <resultMap type="com.sbisec.helios.ap.common.dao.model.MedInformation"
+        id="MedInformation">
+        <result property="infoDetail" column="INFO_DETAIL"
+            typeHandler="StringTypeHandler" />
+        <result property="createUser" column="CREATE_USER"
+            typeHandler="StringTypeHandler" />
+        <result property="updateUser" column="UPDATE_USER"
+            typeHandler="StringTypeHandler" />
+    </resultMap>
+
+    <select id="getMedInformationList" resultMap="MedInformation"
+        statementType="PREPARED">
+        SELECT
+        INFO_ID,
+        INFO_DETAIL,
+        IMPORTANT_FLG,
+        DISPLAY_ORDER,
+        DELETE_FLG,
+        CREATE_TIME,
+        CREATE_USER,
+        UPDATE_TIME,
+        UPDATE_USER
+        FROM
+        TB_MED_INFORMATION
+        WHERE
+        DELETE_FLG &lt;&gt; '1'
+        AND
+        DISPLAY_PERIOD_FROM &lt;= IFA_DATE_UTIL.IFA_GET_DATE
+        AND
+        IFA_DATE_UTIL.IFA_GET_DATE &lt;= DISPLAY_PERIOD_TO
+        ORDER BY IMPORTANT_FLG DESC NULLS LAST, DISPLAY_ORDER ASC NULLS LAST,
+        CREATE_TIME DESC, INFO_ID ASC
+    </select>
+
+</mapper>

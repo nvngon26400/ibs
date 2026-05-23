@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0502-02_2
+    画面名：為替注文確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaFxOrderConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaFxOrderConfirmSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0502-02_2#Sql001 */ INTO EXCHANGE_ORDER (
+	        IFA_ORDER_NO
+			,IFA_ORDER_SUB_NO
+			,BUTEN_CODE
+			,ACCOUNT_NUMBER
+			,TRADE_TYPE
+			,FX_SURYO_METHOD
+			,FX_SELLING_METHOD
+			,CURRENCY_CODE
+			,CURRENCY_NAME
+			,FX_ORDER_AMOUNT
+			,FX_TRADING
+			,APPLY_SPREAD
+			,FX_SPECIFIC_ACCOUNT_CODE
+			,FX_DEPOSIT_TYPE
+			,FX_TRADE_SERVICE_TYPE
+			,FX_ORDER_STATUS
+			,FX_CYCLE_NO
+			,FX_EVENT_ID
+			,ORDER_NO
+			,EXEC_DATETIME
+			,STL_DATE
+			,EXCHANGE_RATE
+			,EXCHANGE_RATE_DATETIME
+			,STL_AMOUNT_YEN
+			,ORDER_DATETIME
+			,ORDER_SHUBETSU
+			,API_ERROR_CODE
+			,API_STATUS_CODE
+			,API_MESSAGE
+			,BROKER_CODE
+			,INTERMEDIARY_EMP_CD
+			,CREATE_TIME
+			,CREATE_USER
+			,UPDATE_TIME
+			,UPDATE_USER
+        ) VALUES(
+        	#{req.ifaOrderNo}
+        	,#{req.ifaOrderSubNo}
+        	,#{req.butenCode}
+        	,#{req.accountNumber}
+        	,#{req.tradeCd}
+        	,#{req.quantityDesignationMethod}
+        	,#{req.saleMethod}
+        	,#{req.currencyCode}
+        	,#{req.currency}
+        	,#{req.quantity}
+        	,#{req.fxTrade}
+        	,null 	<!-- 為替スプレッド -->
+        	,#{req.accountType}
+        	,#{req.depositType}
+        	,#{req.fxTradeType}
+        	,#{req.fxTradeOrderStatus}
+        	,null	<!-- 為替取引サイクル番号 -->
+			,null	<!-- 為替取引注文イベントID -->
+			,null	<!-- 注文番号 -->
+			,null	<!-- 約定日時 -->
+			,null	<!-- 受渡日  -->
+			,null	<!-- 為替レート -->
+			,null	<!-- 為替レート日時 -->
+			,null	<!-- 受渡金額（円貨） -->
+			,null	<!-- 注文日時 -->
+			,null	<!-- 注文種別表示 -->
+			,null	<!-- APIエラーコード -->
+			,null	<!-- APIステータスコード -->
+			,null	<!-- APIメッセージ -->
+        	,#{req.brokerCode}
+        	,#{req.brokerChargeCode}
+        	,SYSDATE
+        	,#{req.createUser}
+        	,SYSDATE
+        	,#{req.updateUser}
+        )
+    </insert>
+    
+    
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaFxOrderConfirmSql002" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0502-02_2#Sql002 */ EXCHANGE_ORDER 
+        SET 
+        	<if test="req.apiErrorCode == null or req.apiErrorCode == ''">
+				ORDER_NO = #{req.orderNumber}					<!-- 注文番号 -->
+				,EXEC_DATETIME = TO_DATE(#{req.tradeDateTime}, 'YYYY-MM-DD HH24:MI:SS')			<!-- 約定日時 -->
+				,STL_DATE = #{req.settlementDate}				<!-- 受渡日  -->
+				,EXCHANGE_RATE = #{req.fxRate}					<!-- 為替レート -->
+				,EXCHANGE_RATE_DATETIME = TO_DATE(#{req.rateDatetime}, 'YYYY-MM-DD HH24:MI:SS')	<!-- 為替レート日時 -->
+				,STL_AMOUNT_YEN = #{req.yenDeliveryAmount}		<!-- 受渡金額（円貨） -->
+				,ORDER_DATETIME = TO_DATE(#{req.orderDate}, 'YYYY-MM-DD HH24:MI:SS')					<!-- 注文日時 -->
+				,ORDER_SHUBETSU = #{req.orderClass}				<!-- 注文種別表示 -->
+				,API_ERROR_CODE = null							<!-- APIエラーコード -->
+			</if>
+			<if test="req.apiErrorCode != null and req.apiErrorCode != ''">
+				API_ERROR_CODE = #{req.apiErrorCode}			<!-- APIエラーコード -->
+			</if>
+			,API_STATUS_CODE = #{req.aPIStatusCode}			<!-- APIステータスコード -->
+			,API_MESSAGE = SUBSTRB(#{req.apiMsg}, 1, 100)	<!-- APIメッセージ -->
+			,UPDATE_TIME = SYSDATE							<!-- 更新日時 -->
+			,UPDATE_USER = #{req.updateUser}				<!-- 更新者 -->
+        WHERE 
+        	IFA_ORDER_NO = #{req.ifaOrderNo}				<!-- IFA注文番号 -->
+        	AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}		<!-- IFA注文サブ番号 -->
+        	
+    </update>
+    
+    <select id="selectIfaFxOrderConfirmSql003" resultType="String" statementType="PREPARED">
+		SELECT 	
+			TO_CHAR(sysdate,  'YYYYMMDD') || LPAD(SEQ_EXCHANGE_ORDER.NEXTVAL, 10, '0') AS IFA_ORDER_NO
+		FROM	
+			DUAL
+
+	</select>
+    
+</mapper>

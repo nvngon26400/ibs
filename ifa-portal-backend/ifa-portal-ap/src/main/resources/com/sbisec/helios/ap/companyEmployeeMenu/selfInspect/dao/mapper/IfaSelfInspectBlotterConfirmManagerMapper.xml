@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0506_01-01
+    画面名：自己点検記録簿確認（管理者用）
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.mapper.IfaSelfInspectBlotterConfirmManagerMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaSelfInspectBlotterConfirmManagerSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectBlotterConfirmManagerSql001ResponseModel" >
+        <result property="codeName" column="CODE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap id="ResultMapIfaSelfInspectBlotterConfirmManagerSql002" type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectBlotterConfirmManagerSql002ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason1" column="ANSWER_REASON1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason2" column="ANSWER_REASON2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason3" column="ANSWER_REASON3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason4" column="ANSWER_REASON4" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason5" column="ANSWER_REASON5" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason6" column="ANSWER_REASON6" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason7" column="ANSWER_REASON7" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason8" column="ANSWER_REASON8" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason9" column="ANSWER_REASON9" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason10" column="ANSWER_REASON10" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason11" column="ANSWER_REASON11" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason12" column="ANSWER_REASON12" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason13" column="ANSWER_REASON13" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason14" column="ANSWER_REASON14" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason15" column="ANSWER_REASON15" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason16" column="ANSWER_REASON16" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason17" column="ANSWER_REASON17" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason18" column="ANSWER_REASON18" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason19" column="ANSWER_REASON19" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerReason20" column="ANSWER_REASON20" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：登録年月dropDownLisTデータ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterConfirmManagerSql001" resultMap="ResultMapIfaSelfInspectBlotterConfirmManagerSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0506_01-01#Sql001 */
+            TO_CHAR(
+                ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, - month_num)
+                , 'YYYY"年"MM"月"'
+            ) AS CODE_NAME
+            , TO_CHAR(
+                ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, - month_num)
+                , 'YYYYMM'
+            ) AS CODE_ID
+        FROM
+            (
+                SELECT
+                    rownum - 1 AS month_num
+                FROM
+                    all_catalog
+                WHERE
+                    rownum &lt; 61
+            )
+    </select>
+
+    <!--
+        SQLID：Sql002
+        SQL名：自己点検記録簿情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterConfirmManagerSql002" resultMap="ResultMapIfaSelfInspectBlotterConfirmManagerSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0506_01-01#Sql002 */ *
+        FROM
+        (SELECT
+            COUNT(*) OVER() as total_rows,
+            A.BROKER_CODE,A.BROKER_NAME,A.COR_CONFIRMATION_DATE,A.COR_ENFORCE_DATE,
+            B.CONFIRM_FLG1,B.CONFIRM_FLG2,B.CONFIRM_FLG3,B.CONFIRM_FLG4,B.CONFIRM_FLG5,B.CONFIRM_FLG6,B.CONFIRM_FLG7,B.CONFIRM_FLG8,B.CONFIRM_FLG9,B.CONFIRM_FLG10,
+            B.CONFIRM_FLG11,B.CONFIRM_FLG12,B.CONFIRM_FLG13,B.CONFIRM_FLG14,B.CONFIRM_FLG15,B.CONFIRM_FLG16,B.CONFIRM_FLG17,B.CONFIRM_FLG18,B.CONFIRM_FLG19,B.CONFIRM_FLG20,
+            B.ANSWER_REASON1, B.ANSWER_REASON2, B.ANSWER_REASON3, B.ANSWER_REASON4, B.ANSWER_REASON5, B.ANSWER_REASON6, B.ANSWER_REASON7, B.ANSWER_REASON8, B.ANSWER_REASON9, B.ANSWER_REASON10,
+            B.ANSWER_REASON11, B.ANSWER_REASON12, B.ANSWER_REASON13, B.ANSWER_REASON14, B.ANSWER_REASON15, B.ANSWER_REASON16, B.ANSWER_REASON17, B.ANSWER_REASON18, B.ANSWER_REASON19, B.ANSWER_REASON20,
+            B.ANSWER_RESULT1,B.ANSWER_RESULT2,B.ANSWER_RESULT3,B.ANSWER_RESULT4,B.ANSWER_RESULT5,B.ANSWER_RESULT6,B.ANSWER_RESULT7,B.ANSWER_RESULT8,B.ANSWER_RESULT9,B.ANSWER_RESULT10,
+            B.ANSWER_RESULT11,B.ANSWER_RESULT12,B.ANSWER_RESULT13,B.ANSWER_RESULT14,B.ANSWER_RESULT15,B.ANSWER_RESULT16,B.ANSWER_RESULT17,B.ANSWER_RESULT18,B.ANSWER_RESULT19,B.ANSWER_RESULT20
+        FROM
+            (
+                SELECT
+                     LL.BROKER_CODE
+                    , LL.BRANCH_NAME AS BROKER_NAME
+                    , CASE WHEN MM.COR_ENFORCE_DATE IS NULL
+                    THEN NULL
+                    ELSE TO_CHAR(LL.COR_CONFIRMATION_DATE, 'YYYY/MM/DD')
+                    END AS COR_CONFIRMATION_DATE
+                    ,#{req.registerDate} AS COR_ENFORCE_DATE
+                FROM
+                (
+                    SELECT
+                        D.BROKER_CODE
+                        , D.BRANCH_NAME
+                        , A.COR_CONFIRMATION_DATE
+                    FROM
+                    (
+                        SELECT
+                            COR_BROKER_CODE
+                            , COR_CONFIRMATION_DATE
+                        FROM
+                            COR_SELF_CHECK
+                        WHERE COR_ENFORCE_DATE = #{req.registerDate}
+                    ) A
+                    RIGHT OUTER JOIN (
+                        SELECT
+                            BROKER_CODE
+                            , BRANCH_NAME
+                        FROM
+                            MEDIATE_BRANCH
+                        WHERE
+                            BROKER_BRANCH_KIND = '00'
+                            <if test='req.brokerName != null and req.brokerName != ""'>
+                            AND BRANCH_NAME LIKE #{req.brokerName}
+                            </if>
+                            <if test='req.brokerCode != null and req.brokerCode != ""'>
+                            AND BROKER_CODE = #{req.brokerCode}
+                            </if>
+                        ORDER BY
+                            BROKER_CODE
+                    ) D ON A.COR_BROKER_CODE = D.BROKER_CODE
+                    ORDER BY D.BROKER_CODE DESC
+                ) LL
+                LEFT OUTER JOIN (
+                    SELECT
+                        COR_BROKER_CODE
+                        , Max(COR_ENFORCE_DATE) AS COR_ENFORCE_DATE
+                    FROM
+                    (
+                        SELECT DISTINCT
+                            COR_BROKER_CODE
+                            , CASE
+                            WHEN COR_ENFORCE_DATE = #{req.registerDate}
+                            THEN COR_ENFORCE_DATE
+                            ELSE NULL
+                            END AS COR_ENFORCE_DATE
+                        FROM
+                            COR_SELF_CHECK
+                        ) A
+                        GROUP BY
+                            A.COR_BROKER_CODE
+                    ) MM ON LL.BROKER_CODE = MM.COR_BROKER_CODE
+                ORDER BY
+                    COR_CONFIRMATION_DATE DESC NULLS LAST, BROKER_CODE
+            ) A
+        LEFT OUTER JOIN
+            (
+                SELECT
+                    BROKER_CODE,
+                    MAX( CASE WHEN rn = 1 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG1,
+                    MAX( CASE WHEN rn = 2 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG2,
+                    MAX( CASE WHEN rn = 3 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG3,
+                    MAX( CASE WHEN rn = 4 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG4,
+                    MAX( CASE WHEN rn = 5 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG5,
+                    MAX( CASE WHEN rn = 6 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG6,
+                    MAX( CASE WHEN rn = 7 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG7,
+                    MAX( CASE WHEN rn = 8 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG8,
+                    MAX( CASE WHEN rn = 9 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG9,
+                    MAX( CASE WHEN rn = 10 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG10,
+                    MAX( CASE WHEN rn = 11 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG11,
+                    MAX( CASE WHEN rn = 12 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG12,
+                    MAX( CASE WHEN rn = 13 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG13,
+                    MAX( CASE WHEN rn = 14 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG14,
+                    MAX( CASE WHEN rn = 15 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG15,
+                    MAX( CASE WHEN rn = 16 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG16,
+                    MAX( CASE WHEN rn = 17 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG17,
+                    MAX( CASE WHEN rn = 18 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG18,
+                    MAX( CASE WHEN rn = 19 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG19,
+                    MAX( CASE WHEN rn = 20 THEN COR_CONFIRMATION_FLG ELSE NULL END ) CONFIRM_FLG20,
+                    MAX( CASE WHEN rn = 1 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON1,
+                    MAX( CASE WHEN rn = 2 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON2,
+                    MAX( CASE WHEN rn = 3 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON3,
+                    MAX( CASE WHEN rn = 4 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON4,
+                    MAX( CASE WHEN rn = 5 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON5,
+                    MAX( CASE WHEN rn = 6 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON6,
+                    MAX( CASE WHEN rn = 7 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON7,
+                    MAX( CASE WHEN rn = 8 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON8,
+                    MAX( CASE WHEN rn = 9 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON9,
+                    MAX( CASE WHEN rn = 10 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON10,
+                    MAX( CASE WHEN rn = 11 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON11,
+                    MAX( CASE WHEN rn = 12 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON12,
+                    MAX( CASE WHEN rn = 13 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON13,
+                    MAX( CASE WHEN rn = 14 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON14,
+                    MAX( CASE WHEN rn = 15 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON15,
+                    MAX( CASE WHEN rn = 16 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON16,
+                    MAX( CASE WHEN rn = 17 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON17,
+                    MAX( CASE WHEN rn = 18 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON18,
+                    MAX( CASE WHEN rn = 19 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON19,
+                    MAX( CASE WHEN rn = 20 THEN COR_ANSWER_REASON ELSE NULL END ) ANSWER_REASON20,
+                    MAX( CASE WHEN rn = 1 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT1,
+                    MAX( CASE WHEN rn = 2 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT2,
+                    MAX( CASE WHEN rn = 3 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT3,
+                    MAX( CASE WHEN rn = 4 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT4,
+                    MAX( CASE WHEN rn = 5 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT5,
+                    MAX( CASE WHEN rn = 6 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT6,
+                    MAX( CASE WHEN rn = 7 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT7,
+                    MAX( CASE WHEN rn = 8 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT8,
+                    MAX( CASE WHEN rn = 9 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT9,
+                    MAX( CASE WHEN rn = 10 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT10,
+                    MAX( CASE WHEN rn = 11 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT11,
+                    MAX( CASE WHEN rn = 12 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT12,
+                    MAX( CASE WHEN rn = 13 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT13,
+                    MAX( CASE WHEN rn = 14 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT14,
+                    MAX( CASE WHEN rn = 15 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT15,
+                    MAX( CASE WHEN rn = 16 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT16,
+                    MAX( CASE WHEN rn = 17 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT17,
+                    MAX( CASE WHEN rn = 18 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT18,
+                    MAX( CASE WHEN rn = 19 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT19,
+                    MAX( CASE WHEN rn = 20 THEN COR_ANSWER_RESULT ELSE NULL END ) ANSWER_RESULT20,
+                    MAX( CASE WHEN rn = 1 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION1,
+                    MAX( CASE WHEN rn = 2 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION2,
+                    MAX( CASE WHEN rn = 3 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION3,
+                    MAX( CASE WHEN rn = 4 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION4,
+                    MAX( CASE WHEN rn = 5 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION5,
+                    MAX( CASE WHEN rn = 6 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION6,
+                    MAX( CASE WHEN rn = 7 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION7,
+                    MAX( CASE WHEN rn = 8 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION8,
+                    MAX( CASE WHEN rn = 9 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION9,
+                    MAX( CASE WHEN rn = 10 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION10,
+                    MAX( CASE WHEN rn = 11 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION11,
+                    MAX( CASE WHEN rn = 12 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION12,
+                    MAX( CASE WHEN rn = 13 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION13,
+                    MAX( CASE WHEN rn = 14 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION14,
+                    MAX( CASE WHEN rn = 15 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION15,
+                    MAX( CASE WHEN rn = 16 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION16,
+                    MAX( CASE WHEN rn = 17 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION17,
+                    MAX( CASE WHEN rn = 18 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION18,
+                    MAX( CASE WHEN rn = 19 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION19,
+                    MAX( CASE WHEN rn = 20 THEN BROKER_DIVISION ELSE NULL END ) BROKER_DIVISION20
+                FROM
+                    (
+                        SELECT
+                            M.BROKER_CODE
+                            , C.COR_CONFIRMATION_FLG
+                            , C.COR_ANSWER_REASON
+                            , NVL(C.COR_ANSWER_RESULT,'1') AS COR_ANSWER_RESULT
+                            , A.BROKER_DIVISION
+                            , row_number() over ( partition by M.BROKER_CODE order by M.BROKER_CODE) rn
+                        FROM
+                            COR_SELF_CHECK_ITEM A
+                            , COR_SELF_CHECK B
+                            , COR_SELF_CHECK_CONFIRMATION C
+                            , MEDIATE_BRANCH M
+                        WHERE
+                            A.COR_INDICATION_FLG = '1'
+                            AND B.COR_ENFORCE_DATE = #{req.registerDate}
+                            AND B.COR_BROKER_CODE = M.BROKER_CODE
+                            AND B.COR_SELF_CHECK_ID = C.COR_SELF_CHECK_ID
+                            AND C.COR_SELF_CHECK_ITEM_ID = A.COR_SELF_CHECK_ITEM_ID
+                            AND M.BROKER_BRANCH_KIND = '00'
+                        ORDER BY
+                            M.BROKER_CODE, COR_SORT_NO
+                    )
+                GROUP BY
+                    BROKER_CODE
+            ) B
+        ON A.BROKER_CODE = B.BROKER_CODE
+        <where>
+            <choose>
+                <when test='req.answerStatus == "1"'>
+                    AND (
+                    (B.CONFIRM_FLG1 IS NULL AND B.ANSWER_REASON1 IS NULL AND B.BROKER_DIVISION1 IS NULL) AND
+                    (B.CONFIRM_FLG2 IS NULL AND B.ANSWER_REASON2 IS NULL AND B.BROKER_DIVISION2 IS NULL) AND
+                    (B.CONFIRM_FLG3 IS NULL AND B.ANSWER_REASON3 IS NULL AND B.BROKER_DIVISION3 IS NULL) AND
+                    (B.CONFIRM_FLG4 IS NULL AND B.ANSWER_REASON4 IS NULL AND B.BROKER_DIVISION4 IS NULL) AND
+                    (B.CONFIRM_FLG5 IS NULL AND B.ANSWER_REASON5 IS NULL AND B.BROKER_DIVISION5 IS NULL) AND
+                    (B.CONFIRM_FLG6 IS NULL AND B.ANSWER_REASON6 IS NULL AND B.BROKER_DIVISION6 IS NULL) AND
+                    (B.CONFIRM_FLG7 IS NULL AND B.ANSWER_REASON7 IS NULL AND B.BROKER_DIVISION7 IS NULL) AND
+                    (B.CONFIRM_FLG8 IS NULL AND B.ANSWER_REASON8 IS NULL AND B.BROKER_DIVISION8 IS NULL) AND
+                    (B.CONFIRM_FLG9 IS NULL AND B.ANSWER_REASON9 IS NULL AND B.BROKER_DIVISION9 IS NULL) AND
+                    (B.CONFIRM_FLG10 IS NULL AND B.ANSWER_REASON10 IS NULL AND B.BROKER_DIVISION10 IS NULL) AND
+                    (B.CONFIRM_FLG11 IS NULL AND B.ANSWER_REASON11 IS NULL AND B.BROKER_DIVISION11 IS NULL) AND
+                    (B.CONFIRM_FLG12 IS NULL AND B.ANSWER_REASON12 IS NULL AND B.BROKER_DIVISION12 IS NULL) AND
+                    (B.CONFIRM_FLG13 IS NULL AND B.ANSWER_REASON13 IS NULL AND B.BROKER_DIVISION13 IS NULL) AND
+                    (B.CONFIRM_FLG14 IS NULL AND B.ANSWER_REASON14 IS NULL AND B.BROKER_DIVISION14 IS NULL) AND
+                    (B.CONFIRM_FLG15 IS NULL AND B.ANSWER_REASON15 IS NULL AND B.BROKER_DIVISION15 IS NULL) AND
+                    (B.CONFIRM_FLG16 IS NULL AND B.ANSWER_REASON16 IS NULL AND B.BROKER_DIVISION16 IS NULL) AND
+                    (B.CONFIRM_FLG17 IS NULL AND B.ANSWER_REASON17 IS NULL AND B.BROKER_DIVISION17 IS NULL) AND
+                    (B.CONFIRM_FLG18 IS NULL AND B.ANSWER_REASON18 IS NULL AND B.BROKER_DIVISION18 IS NULL) AND
+                    (B.CONFIRM_FLG19 IS NULL AND B.ANSWER_REASON19 IS NULL AND B.BROKER_DIVISION19 IS NULL) AND
+                    (B.CONFIRM_FLG20 IS NULL AND B.ANSWER_REASON20 IS NULL AND B.BROKER_DIVISION20 IS NULL)
+                    )
+                </when>
+                <when test='req.answerStatus == "2"'>
+                    AND (
+                    ((B.BROKER_DIVISION1 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION2 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION3 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION4 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION5 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION6 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION7 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION8 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION9 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION10 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION11 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION12 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION13 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION14 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION15 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION16 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION17 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION18 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION19 IS NOT NULL) OR 
+                     (B.BROKER_DIVISION20 IS NOT NULL)
+                    )
+                    AND(
+                    (B.CONFIRM_FLG1 IS NOT NULL OR B.ANSWER_REASON1 IS NOT NULL OR B.BROKER_DIVISION1 IS NULL) AND
+                    (B.CONFIRM_FLG2 IS NOT NULL OR B.ANSWER_REASON2 IS NOT NULL OR B.BROKER_DIVISION2 IS NULL) AND
+                    (B.CONFIRM_FLG3 IS NOT NULL OR B.ANSWER_REASON3 IS NOT NULL OR B.BROKER_DIVISION3 IS NULL) AND
+                    (B.CONFIRM_FLG4 IS NOT NULL OR B.ANSWER_REASON4 IS NOT NULL OR B.BROKER_DIVISION4 IS NULL) AND
+                    (B.CONFIRM_FLG5 IS NOT NULL OR B.ANSWER_REASON5 IS NOT NULL OR B.BROKER_DIVISION5 IS NULL) AND
+                    (B.CONFIRM_FLG6 IS NOT NULL OR B.ANSWER_REASON6 IS NOT NULL OR B.BROKER_DIVISION6 IS NULL) AND
+                    (B.CONFIRM_FLG7 IS NOT NULL OR B.ANSWER_REASON7 IS NOT NULL OR B.BROKER_DIVISION7 IS NULL) AND
+                    (B.CONFIRM_FLG8 IS NOT NULL OR B.ANSWER_REASON8 IS NOT NULL OR B.BROKER_DIVISION8 IS NULL) AND
+                    (B.CONFIRM_FLG9 IS NOT NULL OR B.ANSWER_REASON9 IS NOT NULL OR B.BROKER_DIVISION9 IS NULL) AND
+                    (B.CONFIRM_FLG10 IS NOT NULL OR B.ANSWER_REASON10 IS NOT NULL OR B.BROKER_DIVISION10 IS NULL) AND
+                    (B.CONFIRM_FLG11 IS NOT NULL OR B.ANSWER_REASON11 IS NOT NULL OR B.BROKER_DIVISION11 IS NULL) AND
+                    (B.CONFIRM_FLG12 IS NOT NULL OR B.ANSWER_REASON12 IS NOT NULL OR B.BROKER_DIVISION12 IS NULL) AND
+                    (B.CONFIRM_FLG13 IS NOT NULL OR B.ANSWER_REASON13 IS NOT NULL OR B.BROKER_DIVISION13 IS NULL) AND
+                    (B.CONFIRM_FLG14 IS NOT NULL OR B.ANSWER_REASON14 IS NOT NULL OR B.BROKER_DIVISION14 IS NULL) AND
+                    (B.CONFIRM_FLG15 IS NOT NULL OR B.ANSWER_REASON15 IS NOT NULL OR B.BROKER_DIVISION15 IS NULL) AND
+                    (B.CONFIRM_FLG16 IS NOT NULL OR B.ANSWER_REASON16 IS NOT NULL OR B.BROKER_DIVISION16 IS NULL) AND
+                    (B.CONFIRM_FLG17 IS NOT NULL OR B.ANSWER_REASON17 IS NOT NULL OR B.BROKER_DIVISION17 IS NULL) AND
+                    (B.CONFIRM_FLG18 IS NOT NULL OR B.ANSWER_REASON18 IS NOT NULL OR B.BROKER_DIVISION18 IS NULL) AND
+                    (B.CONFIRM_FLG19 IS NOT NULL OR B.ANSWER_REASON19 IS NOT NULL OR B.BROKER_DIVISION19 IS NULL) AND
+                    (B.CONFIRM_FLG20 IS NOT NULL OR B.ANSWER_REASON20 IS NOT NULL OR B.BROKER_DIVISION20 IS NULL)
+                    )
+                    )
+                </when>
+            </choose>
+            <choose>
+                <when test='req.answerResult == "1"'>
+                    AND (
+                    (B.ANSWER_RESULT1 = '1' OR B.BROKER_DIVISION1 IS NULL) AND
+                    (B.ANSWER_RESULT2 = '1' OR B.BROKER_DIVISION2 IS NULL) AND
+                    (B.ANSWER_RESULT3 = '1' OR B.BROKER_DIVISION3 IS NULL) AND
+                    (B.ANSWER_RESULT4 = '1' OR B.BROKER_DIVISION4 IS NULL) AND
+                    (B.ANSWER_RESULT5 = '1' OR B.BROKER_DIVISION5 IS NULL) AND
+                    (B.ANSWER_RESULT6 = '1' OR B.BROKER_DIVISION6 IS NULL) AND
+                    (B.ANSWER_RESULT7 = '1' OR B.BROKER_DIVISION7 IS NULL) AND
+                    (B.ANSWER_RESULT8 = '1' OR B.BROKER_DIVISION8 IS NULL) AND
+                    (B.ANSWER_RESULT9 = '1' OR B.BROKER_DIVISION9 IS NULL) AND
+                    (B.ANSWER_RESULT10 = '1' OR B.BROKER_DIVISION10 IS NULL) AND
+                    (B.ANSWER_RESULT11 = '1' OR B.BROKER_DIVISION11 IS NULL) AND
+                    (B.ANSWER_RESULT12 = '1' OR B.BROKER_DIVISION12 IS NULL) AND
+                    (B.ANSWER_RESULT13 = '1' OR B.BROKER_DIVISION13 IS NULL) AND
+                    (B.ANSWER_RESULT14 = '1' OR B.BROKER_DIVISION14 IS NULL) AND
+                    (B.ANSWER_RESULT15 = '1' OR B.BROKER_DIVISION15 IS NULL) AND
+                    (B.ANSWER_RESULT16 = '1' OR B.BROKER_DIVISION16 IS NULL) AND
+                    (B.ANSWER_RESULT17 = '1' OR B.BROKER_DIVISION17 IS NULL) AND
+                    (B.ANSWER_RESULT18 = '1' OR B.BROKER_DIVISION18 IS NULL) AND
+                    (B.ANSWER_RESULT19 = '1' OR B.BROKER_DIVISION19 IS NULL) AND
+                    (B.ANSWER_RESULT20 = '1' OR B.BROKER_DIVISION20 IS NULL)
+                    )
+                </when>
+                <when test='req.answerResult == "2"'>
+                    AND (
+                    B.ANSWER_RESULT1 = '0' OR
+                    B.ANSWER_RESULT2 = '0' OR
+                    B.ANSWER_RESULT3 = '0' OR
+                    B.ANSWER_RESULT4 = '0' OR
+                    B.ANSWER_RESULT5 = '0' OR
+                    B.ANSWER_RESULT6 = '0' OR
+                    B.ANSWER_RESULT7 = '0' OR
+                    B.ANSWER_RESULT8 = '0' OR
+                    B.ANSWER_RESULT9 = '0' OR
+                    B.ANSWER_RESULT10 = '0' OR
+                    B.ANSWER_RESULT11 = '0' OR
+                    B.ANSWER_RESULT12 = '0' OR
+                    B.ANSWER_RESULT13 = '0' OR
+                    B.ANSWER_RESULT14 = '0' OR
+                    B.ANSWER_RESULT15 = '0' OR
+                    B.ANSWER_RESULT16 = '0' OR
+                    B.ANSWER_RESULT17 = '0' OR
+                    B.ANSWER_RESULT18 = '0' OR
+                    B.ANSWER_RESULT19 = '0' OR
+                    B.ANSWER_RESULT20 = '0'
+                    )
+                    </when>
+            </choose>
+        </where>
+        )
+        WHERE ROWNUM &lt;= #{req.maxRows}
+    </select>
+</mapper>

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0204_01-04_1
+    画面名：募集期間マスタ登録
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IfaSubscriptPeriodMasterRegisterInputMapper">
+    
+    <resultMap
+        id="ResultMapIfaSubscriptPeriodMasterRegisterInputSql001"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptPeriodMasterRegisterInputSql001ResponseModel"
+    >
+        <result
+            property="brandName"
+            column="brandName"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            property="brand"
+            column="brand"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            property="applyUnit"
+            column="applyUnit"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result 
+            property="bookBuildingApplyPeriod"
+            column="bookBuildingApplyPeriod"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            property="sellBuyUnitType"
+            column="sellBuyUnitType"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+        <result
+            property="assumeCondition"
+            column="assumeCondition"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+    </resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptPeriodMasterRegisterInputSql002"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptPeriodMasterRegisterInputSql002ResponseModel"
+    >
+    </resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptPeriodMasterRegisterInputSql003"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptPeriodMasterRegisterInputSql003ResponseModel"
+    >
+    </resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptPeriodMasterRegisterInputSql004"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptPeriodMasterRegisterInputSql004ResponseModel"
+    >
+    </resultMap>
+    
+    <resultMap
+        id="ResultMapIfaSubscriptPeriodMasterRegisterInputSql007"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptPeriodMasterRegisterInputSql007ResponseModel"
+    >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：銘柄情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSubscriptPeriodMasterRegisterInputSql001" resultMap="ResultMapIfaSubscriptPeriodMasterRegisterInputSql001"
+        statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-04_1#Sql001 */
+                A.BB_PRODUCT_CODE AS brandCode,
+                A.BB_PRODUCT_NAME AS brandName,
+                A.BB_PRODUCT_NAME || '（' || A.BB_PRODUCT_CODE || '）' AS brand,
+                A.BB_STOCK AS  unit,
+                CASE
+                WHEN A.BB_UNIT_KBN = '1' THEN
+                DECODE(A.BB_STOCK, null, null, TO_CHAR(A.BB_STOCK, 'FM9,999,999,999') || '株')
+                WHEN A.BB_UNIT_KBN = '2' THEN
+                DECODE(A.BB_STOCK, null, null, TO_CHAR(A.BB_STOCK, 'FM9,999,999,999') || '円')
+                WHEN A.BB_UNIT_KBN = '3' THEN
+                DECODE(A.BB_STOCK, null, null, TO_CHAR(A.BB_STOCK, 'FM9,999,999,999') || '口')
+                END AS applyUnit,
+                TO_CHAR(A.BB_LOT_DATE, 'YYYY/MM/DD HH24:MI') AS bbLotDate,
+                A.BB_GESTURE_VALUE AS issuePriceType,
+                A.BB_PRICE_FROM AS startPriceDisplay,
+                A.BB_PRICE_TO AS finishPriceDisplay,
+                A.BB_PRICE_CUT AS priceDisplayTick,
+                A.BB_DISCOUNT_FROM AS startDiscountRate,
+                A.BB_DISCOUNT_TO AS finishDiscountRate,
+                A.BB_DISCOUNT_CUT AS discountRateTick,
+                A.BB_STRIKE_PRICE AS marketOrderStrikePrice,
+                TO_CHAR(NVL(B.BB_PRESENTATION_FROM, A.BB_PRESENTATION_FROM), 'YYYY/MM/DD HH24:MI') AS bookBuildingPresentationFrom,
+                TO_CHAR(B.BB_PRESENTATION_TO, 'YYYY/MM/DD HH24:MI') AS bookBuildingPresentationTo,
+                TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYYMMDD') AS bookBuildingPresentationFromForKeep,
+                TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYY/MM/DD HH24:MI')
+                || '～'
+                || TO_CHAR(A.BB_PRESENTATION_TO, 'YYYY/MM/DD HH24:MI') AS bookBuildingApplyPeriod,
+                A.BB_SETTLE_DATE AS deliveryDueDate,
+                A.BB_URGENT_STOP AS emergencyInputSuspend,
+                DECODE(A.BB_UNIT_KBN, '1', '株', '2', '円', '3', '口', '株') AS sellBuyUnitType,
+                A.BB_IPO_PO_KBN AS ipoPoClassification,
+                CASE
+                WHEN A.BB_STRIKE_PRICE = '0' AND A.BB_GESTURE_VALUE = '1' THEN
+                TO_CHAR(A.BB_PRICE_FROM, 'FM9,999,999,999')
+                || '円'
+                || '～'
+                || TO_CHAR(A.BB_PRICE_TO, 'FM9,999,999,999')
+                || '円'
+                WHEN A.BB_STRIKE_PRICE = '0' AND A.BB_GESTURE_VALUE = '2' THEN
+                'ディスカウント率・'
+                || RTRIM(TO_CHAR(A.BB_DISCOUNT_FROM, 'FM990.9999'), '.')
+                || '%'
+                || '～'
+                || RTRIM(TO_CHAR(A.BB_DISCOUNT_TO, 'FM990.9999'), '.')
+                || '%'
+                WHEN A.BB_STRIKE_PRICE = '1' AND A.BB_GESTURE_VALUE = '1' THEN
+                'ストライクプライス・'
+                || TO_CHAR(A.BB_PRICE_FROM, 'FM9,999,999,999')
+                || '円'
+                || '～'
+                || TO_CHAR(A.BB_PRICE_TO, 'FM9,999,999,999')
+                || '円'
+                WHEN A.BB_STRIKE_PRICE = '1' AND A.BB_GESTURE_VALUE = '2' THEN
+                'ディスカウント率・ストライクプライス・'
+                || RTRIM(TO_CHAR(A.BB_DISCOUNT_FROM, 'FM990.9999'), '.')
+                || '%'
+                || '～'
+                || RTRIM(TO_CHAR(A.BB_DISCOUNT_TO, 'FM990.9999'), '.')
+                || '%'
+                END AS assumeCondition
+        FROM
+            CORDYS.BB_PRODUCT_MASTER A
+        LEFT OUTER JOIN
+            CORDYS.M_IPO_PO_BB_PERIOD B
+        ON
+            A.BB_PRODUCT_CODE = B.PRODUCT_CODE
+            AND TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYYMMDD') = B.PRESENTATION_FROM
+        WHERE
+            A.BB_PRODUCT_CODE = #{req.brandCode12}
+            AND TO_CHAR(A.BB_PRESENTATION_FROM, 'YYYYMMDD') = #{req.bbPresentationFrom}
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：募集期間情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSubscriptPeriodMasterRegisterInputSql002" resultMap="ResultMapIfaSubscriptPeriodMasterRegisterInputSql002"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0204_01-04_1#Sql002 */
+            PRODUCT_CODE AS brandCode,
+            PRESENTATION_FROM AS bookBuildingPresentationFrom,
+            ATTACHED_BRAND AS brandCodeWith1,
+            CIGARETTE_SHOW_FLAG AS smokingCigarette,
+            EDELIV_ONLY_FLAG AS onlyElectronicDelivery,
+            MAX_ALLOCATION AS maxAllocation,
+            PAYMENT_DATE AS depositScheduleDate,
+            BB_PERIOD_FROM AS bbPeriodFrom,
+            BB_PERIOD_TO AS bbPeriodTo,
+            PRICE AS issueBbPrice,
+            PRESENTATION_DATE AS listedDate,
+            TO_CHAR(CREATE_TIME,'YYYY/MM/DD HH24:MI:SS') AS createDate,
+            CREATE_USER AS createUser,
+            TO_CHAR(UPDATE_TIME,'YYYY/MM/DD HH24:MI:SS') AS updateDate,
+            UPDATE_USER AS updateUser,
+            SYS_ID AS functionId,
+            TO_CHAR(BB_PRESENTATION_FROM,'YYYY/MM/DD HH24:MI') AS ifaBookBuildingPresentationFrom,
+            TO_CHAR(BB_PRESENTATION_TO,'YYYY/MM/DD HH24:MI') AS ifaBookBuildingPresentationTo,
+            COM AS comm,
+            CHANGE_PRICE_FLAG AS changePriceFlag,
+            CHANGE_PRICE_MSG AS changePriceMsg,
+            CHANGE_BB_PERIOD_FLAG AS changeBbPeriodFlag,
+            CHANGE_BB_PERIOD_MSG AS changeBbPeriodMsg
+        FROM
+            CORDYS.M_IPO_PO_BB_PERIOD
+        WHERE
+            PRODUCT_CODE = #{req.brandCode12}
+            AND TO_CHAR(PRESENTATION_FROM) = TO_CHAR(TO_DATE(#{req.bbPresentationFrom},'yyyy/MM/dd hh24:mi'),'YYYYMMDD')
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：対面募集注文確認
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSubscriptPeriodMasterRegisterInputSql003" resultMap="ResultMapIfaSubscriptPeriodMasterRegisterInputSql003"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0204_01-04_1#Sql003 */
+            COUNT(*) AS subscriptInputCount
+        FROM
+            CORDYS.T_IPO_PO_ORDER
+        WHERE
+            PRODUCT_CODE = #{req.brandCode12}
+        AND TO_CHAR(PRESENTATION_FROM) = TO_CHAR(TO_DATE(#{req.bbPresentationFrom},'yyyy/MM/dd hh24:mi'),'YYYYMMDD')
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：募集期間情報登録有無確認
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSubscriptPeriodMasterRegisterInputSql004" resultMap="ResultMapIfaSubscriptPeriodMasterRegisterInputSql004"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0204_01-04_1#Sql004 */
+            COUNT(*) AS subscriptPeriodInfoRegisterCount
+        FROM
+            CORDYS.M_IPO_PO_BB_PERIOD
+        WHERE 
+            PRODUCT_CODE = #{req.brandCode12}
+        AND TO_CHAR(PRESENTATION_FROM) = TO_CHAR(TO_DATE(#{req.bbPresentationFrom} ,'yyyy/MM/dd hh24:mi'),'YYYYMMDD')
+    </select>
+    
+    
+    <!-- 
+         SQLID：Sql005
+         SQL名：対面募集期間マスタ登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertIfaSubscriptPeriodMasterRegisterInputSql005"
+        statementType="PREPARED"
+    >
+        INSERT /* @SQLID=SUB0204_01-04_1#Sql005 */ INTO M_IPO_PO_BB_PERIOD
+            (
+                PRODUCT_CODE,
+                PRESENTATION_FROM,
+                ATTACHED_BRAND,
+                CIGARETTE_SHOW_FLAG,
+                EDELIV_ONLY_FLAG,
+                MAX_ALLOCATION,
+                PAYMENT_DATE,
+                BB_PERIOD_FROM,
+                BB_PERIOD_TO,
+                PRICE,
+                PRESENTATION_DATE,
+                CREATE_TIME,
+                CREATE_USER,
+                UPDATE_TIME,
+                UPDATE_USER,
+                SYS_ID,
+                BB_PRESENTATION_FROM,
+                BB_PRESENTATION_TO,
+                COM,
+                CHANGE_PRICE_FLAG,
+                CHANGE_PRICE_MSG,
+                CHANGE_BB_PERIOD_FLAG,
+                CHANGE_BB_PERIOD_MSG
+            ) VALUES(
+                #{req.brandCode},
+                TO_NUMBER(#{req.bookBuildingPresentationFrom}),
+                #{req.brandCodeWith1},
+                #{req.smokingCigarette},
+                #{req.onlyElectronicDelivery},
+                TO_NUMBER(#{req.maxAllocation}),
+                #{req.depositScheduleDate},
+                #{req.bbPeriodFrom},
+                #{req.bbPeriodTo},
+                <choose>
+                    <when test="req.issuePriceType == 2 and req.issueBbPrice != null and req.issueBbPrice != ''.toString()">
+                        TO_NUMBER(#{req.issueBbPrice}),
+                    </when>
+                    <otherwise>
+                        null,
+                    </otherwise>
+                </choose>
+                #{req.listedDate},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.createUser},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.updateUser},
+                'SUB0204_01-04_1',
+                TO_DATE(#{req.ifaBookBuildingPresentationFrom}, 'YYYY/MM/DD HH24:MI'),
+                TO_DATE(#{req.ifaBookBuildingPresentationTo}, 'YYYY/MM/DD HH24:MI'),
+                TO_NUMBER(#{req.comm}),
+                #{req.changePriceFlag},
+                #{req.changePriceMsg},
+                #{req.changeBbPeriodFlag},
+                #{req.changeBbPeriodMsg}
+            )
+    </insert>
+    
+    
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：対面募集期間マスタ更新
+        SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptPeriodMasterRegisterInputSql006"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_01-04_1#Sql006 */ M_IPO_PO_BB_PERIOD
+            SET
+                ATTACHED_BRAND = #{req.brandCodeWith1}
+                ,CIGARETTE_SHOW_FLAG = #{req.smokingCigarette}
+                ,EDELIV_ONLY_FLAG = #{req.onlyElectronicDelivery}
+                ,PAYMENT_DATE = #{req.depositScheduleDate}
+                ,BB_PERIOD_FROM = #{req.bbPeriodFrom}
+                ,BB_PERIOD_TO = #{req.bbPeriodTo}
+                ,PRESENTATION_DATE = #{req.listedDate}
+                <choose>
+                    <when test="req.issuePriceType == 2 and req.issueBbPrice != null and req.issueBbPrice != ''.toString()">
+                        ,PRICE = TO_NUMBER(#{req.issueBbPrice})
+                    </when>
+                    <otherwise>
+                        ,PRICE = null
+                    </otherwise>
+                </choose>
+                ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+                ,UPDATE_USER = #{req.updateUser}
+                ,SYS_ID = 'SUB0204_01-04_1'
+                ,MAX_ALLOCATION = TO_NUMBER(#{req.maxAllocation})
+                ,BB_PRESENTATION_FROM = TO_DATE(#{req.ifaBookBuildingPresentationFrom},'YYYY/MM/DD HH24:MI')
+                ,BB_PRESENTATION_TO = TO_DATE(#{req.ifaBookBuildingPresentationTo},'YYYY/MM/DD HH24:MI')
+                ,COM = TO_NUMBER(#{req.comm})
+                ,CHANGE_PRICE_FLAG = #{req.changePriceFlag}
+                ,CHANGE_PRICE_MSG = #{req.changePriceMsg}
+                ,CHANGE_BB_PERIOD_FLAG = #{req.changeBbPeriodFlag}
+                ,CHANGE_BB_PERIOD_MSG = #{req.changeBbPeriodMsg}
+        WHERE PRODUCT_CODE = #{req.brandCode}
+        AND PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom})
+        AND TO_CHAR(UPDATE_TIME, 'yyyy/MM/dd hh24:mi:ss') = #{req.updateDate}
+    </update>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：営業日チェック
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSubscriptPeriodMasterRegisterInputSql007" resultMap="ResultMapIfaSubscriptPeriodMasterRegisterInputSql007"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0204_01-04_1#Sql007 */     
+            COUNT(*) AS nonBusinessDayCount
+        FROM
+            CORDYS.M_CALENDAR
+        WHERE    
+            C_DELETE_FLG = '0'
+            AND C_BUS_NONBUS_DIV = '0'
+            AND C_ISO_COUNTRY_CODE = 'JP'
+            AND C_TARGET_DATE = #{req.date}
+            AND C_CALENDAR_ID = 'T003'
+    </select>
+    
+</mapper>

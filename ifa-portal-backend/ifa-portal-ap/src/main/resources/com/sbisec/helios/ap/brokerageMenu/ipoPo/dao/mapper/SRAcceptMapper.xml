@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.SRAcceptMapper">
+
+    <insert id="insertUploadIpopoBBApplyInfoToSrAccept" parameterType="java.util.List">
+        <foreach collection="insertList" item="param" index="index" open="begin" close=";end;" separator=";">
+            INSERT /* @SQLID=SUB0204_01-03_1#SQL013 */ 
+            INTO ETINTRA.SR_ACCEPT
+            (
+                BB_PRODUCT_CODE,
+                BB_PRESENTATION_FROM,
+                BB_BRANCH_CODE,
+                BB_ACCOUNT_NUMBER,
+                BB_QUANTITY,
+                QUANTITY_SAIRYOU,
+                CHOSE_REASON,
+                SR_CREATE_DATE,
+                SR_UPDATE_USER_ID
+            )
+            (SELECT
+                #{param.brandCode},
+                #{param.bbPresentationFrom},
+                #{param.butenCode},
+                #{param.accountNumber},
+                TO_NUMBER(#{param.bbQuantityForSairyou}),
+                TO_NUMBER(#{param.quantitySairyou}),
+                #{param.choseReason},
+                CORDYS.IFA_DATE_UTIL.IFA_GET_DATE,
+                #{param.userId}
+            FROM
+                DUAL
+            ) 
+        </foreach>
+    </insert>
+
+</mapper>

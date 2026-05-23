@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    IfaServiceNowBranchAndBrokerInfomationMapper
+-->
+<mapper namespace="com.sbisec.helios.ap.extapi.servicenow.dao.mapper.IfaServiceNowMenuAndAclManagerMapper">
+    <resultMap
+        type="com.sbisec.helios.ap.extapi.servicenow.dto.common.IfaServiceNowMenuDto"
+        id="IfaServiceNowMenuDto"
+    >
+        <result property="menuTitle" column="MENU_TITLE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <!-- 
+         SQLID：selectA010Menu
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA010Menu"
+        statementType="PREPARED"
+        resultMap="IfaServiceNowMenuDto"
+    >
+
+        SELECT /* @SQLID=EXTAPI_01-010#selectA0100enu */
+            CASE 
+                WHEN COUNT(TMMP.PRIV_ID) > 0 
+                    THEN '1' 
+                WHEN COUNT(TMAC.ACC_CONTROL) = 0 
+                    THEN '3' 
+                ELSE '2' 
+                END          AS MENU_INFO_PRIV_FLAG, 
+            TMMS.SNMENU_ID   AS MENU_ID, 
+            TMMS.SNMENU_NAME AS MENU_TITLE 
+        FROM
+            TB_MED_MENU_NEW TMM 
+            INNER JOIN ( 
+                SELECT
+                    MENU_ID, 
+                    SNMENU_ID, 
+                    SNMENU_NAME 
+                FROM
+                    TB_MED_MENU_SN 
+                GROUP BY
+                    MENU_ID,
+                    SNMENU_ID, 
+                    SNMENU_NAME 
+            ) TMMS 
+                ON TMM.MENU_ID = TMMS.MENU_ID 
+            LEFT OUTER JOIN TB_MED_MENU_PRIV_NEW TMMP 
+                ON TMM.MENU_ID = TMMP.MENU_ID 
+                AND TMMP.PRIV_ID = #{req.privId} 
+            LEFT OUTER JOIN TB_MED_ACC_CONTROL_NEW TMAC 
+                ON TMM.MENU_ID = TMAC.MENU_ID 
+                AND TMAC.ITEM_ID LIKE 'viewCtl%' 
+                AND TMAC.ACC_CONTROL != '1' 
+                AND TO_NUMBER(#{req.privId}) BETWEEN TO_NUMBER(TMAC.PRIV_ID_FROM) AND TO_NUMBER(TMAC.PRIV_ID_TO) 
+        WHERE
+            (TMM.IS_LEAF = '1' OR TMM.IS_POPPAGE = '1') 
+        GROUP BY
+            TMMS.SNMENU_ID, 
+            TMMS.SNMENU_NAME 
+        ORDER BY
+            TMMS.SNMENU_ID ASC
+
+    </select>
+
+    <!-- 
+         SQLID：deleteA011MenuByUserId
+         SQL名：メニュー削除
+         SQLタイプ：delete
+    -->
+    <delete
+        id="deleteA011MenuByUserId"
+        statementType="PREPARED"
+    >
+        DELETE /* @SQLID=EXTAPI_01-011#deleteA011MenuByUserId */ 
+        FROM
+            TB_MED_GOV_MENU_NEW 
+        WHERE
+            USER_ID = #{req.userId}
+        
+    </delete>
+    
+
+    <!-- 
+         SQLID：deleteA012MenuByUserIdAndMenuIdAndPrivId
+         SQL名：メニュー削除
+         SQLタイプ：delete
+    -->
+    <delete
+        id="deleteA012MenuByUserIdAndMenuIdAndPrivId"
+        statementType="PREPARED"
+    >
+        DELETE /* @SQLID=EXTAPI_01-012#deleteA012MenuByUserIdAndMenuIdAndPrivId */
+        FROM TB_MED_GOV_MENU_NEW
+        WHERE
+            USER_ID = #{req.userId}
+            AND MENU_ID IN ( 
+                SELECT
+                    TMMS.MENU_ID 
+                FROM
+                    TB_MED_MENU_SN TMMS 
+                WHERE
+                    ( 0 = 1 OR TMMS.SNMENU_ID = #{req.menuId} )
+                    AND TMMS.PRIV_ID = #{req.privId}
+                UNION
+                SELECT
+                    TMMP.MENU_ID
+                FROM
+                    TB_MED_MENU_PRIV_NEW TMMP
+                INNER JOIN TB_MED_MENU_NEW TMMN
+                    ON TMMP.MENU_ID = TMMN.MENU_ID
+                    AND (
+                        TMMN.IS_LEAF = '1'
+                        OR TMMN.IS_POPPAGE = '1'
+                    )
+                WHERE
+                    TMMP.PRIV_ID = #{req.privId}
+            )
+
+    </delete> 
+    
+    <!-- 
+         SQLID：insertA012Menu
+         SQL名：メニュー登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertA012Menu"
+        statementType="PREPARED"
+    >
+        INSERT /* @EXTAPI_01-012#insertA012Menu */
+        INTO TB_MED_GOV_MENU_NEW(
+            USER_ID,
+            MENU_ID,
+            CREATE_USER,
+            CREATE_TIME,
+            UPDATE_USER,
+            UPDATE_TIME
+        )
+        SELECT
+            #{req.userId},
+            TMMS.MENU_ID,
+            #{req.createUser},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.uptimestampUser},
+            IFA_DATE_UTIL.IFA_GET_DATE
+        FROM
+            TB_MED_MENU_SN TMMS 
+        WHERE
+            ( 0 = 1 OR TMMS.SNMENU_ID = #{req.menuId} )
+            AND TMMS.PRIV_ID = #{req.privId}
+        UNION
+        SELECT
+            #{req.userId},
+            TMMP.MENU_ID,
+            #{req.createUser},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.uptimestampUser},
+            IFA_DATE_UTIL.IFA_GET_DATE
+        FROM
+            TB_MED_MENU_PRIV_NEW TMMP
+        INNER JOIN TB_MED_MENU_NEW TMMN
+            ON TMMP.MENU_ID = TMMN.MENU_ID
+            AND (
+                TMMN.IS_LEAF = '1'
+                OR TMMN.IS_POPPAGE = '1'
+            )
+        WHERE
+            TMMP.PRIV_ID = #{req.privId}
+        
+    </insert>
+ 
+    <!-- 
+         SQLID：deleteA012OldMenuByUserId
+         SQL名：メニュー削除
+         SQLタイプ：delete
+    -->
+    <delete
+        id="deleteA012OldMenuByUserId"
+        statementType="PREPARED"
+    >
+        DELETE /* @SQLID=EXTAPI_01-012#deleteA012OldMenuByUserId */
+        FROM TB_MED_GOV_MENU
+        WHERE
+            USER_ID = #{req.userId}
+
+    </delete> 
+
+    <!-- 
+         SQLID：insertA012OldMenu
+         SQL名：メニュー登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertA012OldMenu"
+        statementType="PREPARED"
+    >
+        INSERT /* @EXTAPI_01-012#insertA012OldMenu */
+        INTO TB_MED_GOV_MENU(
+            USER_ID,
+            MENU_ID,
+            CREATE_USER,
+            CREATE_TIME,
+            UPTIMESTAMP_USER,
+            UPTIMESTAMP_TIME
+        )
+        SELECT
+            #{req.userId},
+            MENU_ID,
+            #{req.createUser},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.uptimestampUser},
+            IFA_DATE_UTIL.IFA_GET_DATE
+        FROM (
+            SELECT DISTINCT MENU_ID
+            FROM (
+                SELECT
+                    TMMP.MENU_ID AS MENU_ID
+                FROM
+                    TB_MED_MENU_PRIV TMMP
+                INNER JOIN TB_MED_MENU TMMN
+                    ON TMMP.MENU_ID = TMMN.MENU_ID
+                    AND (
+                        TMMN.IS_LEAF = '1'
+                        OR TMMN.IS_POPPAGE = '1'
+                    )
+                WHERE
+                    TMMP.PRIV_ID = #{req.privId}
+            ) inner_combined_menu_ids
+        ) combined_menu_ids
+        
+    </insert>
+
+    <!-- 
+         SQLID：selectA013AvailableMenu
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA013AvailableMenu"
+        statementType="PREPARED"
+        resultMap="IfaServiceNowMenuDto"
+    >
+        SELECT /* @EXTAPI_01-013#selectA013AvailableMenu */
+            DISTINCT
+            SN.SNMENU_ID    AS MENU_ID, 
+            SN.SNMENU_NAME  AS MENU_TITLE
+        FROM
+            ( 
+                SELECT
+                    A.MENU_ID 
+                FROM
+                    TB_MED_GOV_MENU_NEW A 
+                    INNER JOIN TB_MED_MENU_NEW B 
+                        ON A.MENU_ID = B.MENU_ID 
+                WHERE
+                    A.USER_ID = #{req.userId}
+                    AND (B.IS_LEAF = '1' OR B.IS_POPPAGE = '1')
+            ) GM 
+            INNER JOIN TB_MED_MENU_SN SN 
+                ON GM.MENU_ID = SN.MENU_ID 
+        ORDER BY
+            SN.SNMENU_ID ASC
+            
+     </select>
+ 
+    
+</mapper>

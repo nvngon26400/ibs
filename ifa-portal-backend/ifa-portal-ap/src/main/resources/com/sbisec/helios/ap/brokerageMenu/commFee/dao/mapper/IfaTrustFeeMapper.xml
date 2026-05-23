@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020503-01
+    画面名：信託報酬
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.commFee.dao.mapper.IfaTrustFeeMapper">
+    
+    <resultMap id="ResultMapIfaTrustFeeSql001" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaTrustFeeSql001ToSql006ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="course" column="COURSE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="CUSTOMER_NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="CUSTOMER_NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="SECURITY_CLASS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brandName" column="BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>        
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+        
+    <!-- 
+        SQLID：Sql001
+        SQL名：信託報酬（日次-明細）一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTrustFeeSql001" resultMap="ResultMapIfaTrustFeeSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020503-01#Sql001 */
+            * 
+        FROM (
+            SELECT
+                <if test='req.useHintFlag'>
+                    /*+
+                    FULL(A@SEL$5)
+                    OPT_PARAM('_optimizer_skip_scan_enabled', 'false')
+                    */
+                </if>
+                count(*) over()             AS TOTAL_COUNT,           <!-- 総件数 -->
+                BROKER_CODE                 AS BROKER_CODE,           <!-- 仲介業者コード -->
+                BROKER_NAME                 AS BROKER_NAME,           <!-- 仲介業者名 -->
+                BROKER_CHARGE_CODE          AS EMP_CODE,              <!-- 営業員コード -->
+                BROKER_CHARGE_NAME          AS BROKER_CHARGE_NAME,    <!-- 営業員名 -->
+                BUTEN_CODE                  AS BUTEN,                 <!-- 部店 -->
+                ACCOUNT_NUMBER              AS ACCOUNT_NUMBER,        <!-- 口座番号 -->
+                DEALER_NUMBER               AS DEALER_NUMBER,         <!-- 扱者コード -->
+                CUSTOMER_ATTRIBUTE_NAME     AS COURSE,                <!-- コース名 -->
+                NAME_KANJI                  AS CUSTOMER_NAME_KANJI,   <!-- 顧客名（漢字） -->
+                NAME_KANA                   AS CUSTOMER_NAME_KANA,    <!-- 顧客名（カナ） -->
+                PRODUT_NAME                 AS SECURITY_CLASS,        <!-- 証券種別 -->
+                BASE_DATE                   AS HOLDINGC_DATE,         <!-- 保有日 -->
+                BRAND_CODE                  AS BRAND_CODE,            <!-- 銘柄コード -->
+                BRAND_NAME                  AS BRAND_NAME,            <!-- 銘柄名 -->
+                QUANTITY                    AS QUANTITY,              <!-- 数量 -->
+                ACQUIRE_PRICE               AS REFERENCE_PRICE,       <!-- 参考価額 -->
+                PRICE                       AS PRICE,                 <!-- 基準価額 --> 
+                SUM(NVL(FUND_BALANCE,0))    AS VALUATION,             <!-- 評価額 -->                
+                TRUST_FEE_RATE              AS TRUST_FEE_RATE,        <!-- 信託報酬率 -->                               
+                CURRENCY                    AS CURRENCY,              <!-- 通貨 -->
+                EXCHANGE_RATE               AS FX_RATE,               <!-- 為替レート -->
+                SUM(NVL(YEN_TRUST_FEE,0))   AS TRUST_FEE_AMOUNT,      <!-- 信託報酬額 -->                
+                BROKER_BRANCH_CODE          AS BRANCH_CODE,           <!-- 支店コード -->
+                BROKER_BRANCH_NAME          AS BRANCH_NAME            <!-- 支店名 -->
+            FROM (
+                SELECT
+                    TFR.BROKER_CODE                                             AS BROKER_CODE,               <!-- 仲介業者コード -->
+                    TFR.BROKER_NAME                                             AS BROKER_NAME,               <!-- 仲介業者名 -->
+                    TFR.BROKER_CHARGE_CODE                                      AS BROKER_CHARGE_CODE,        <!-- 営業員コード -->
+                    TFR.BROKER_CHARGE_NAME                                      AS BROKER_CHARGE_NAME,        <!-- 営業員名 -->
+                    TFR.BUTEN_CODE                                              AS BUTEN_CODE,                <!-- 部店コード -->
+                    TFR.ACCOUNT_NUMBER                                          AS ACCOUNT_NUMBER,            <!-- 口座番号 -->
+                    TFR.DEALER_NUMBER                                           AS DEALER_NUMBER,             <!-- 扱者コード -->                   
+                    TFR.CUSTOMER_ATTRIBUTE_NAME                                 AS CUSTOMER_ATTRIBUTE_NAME,   <!-- コース名 -->
+                    TFR.NAME_KANJI                                              AS NAME_KANJI,                <!-- 顧客名_姓名(漢字) -->
+                    TFR.NAME_KANA                                               AS NAME_KANA,                 <!-- 顧客名_姓名(カナ) -->                           
+                    TFR.PRODUT_NAME                                             AS PRODUT_NAME,               <!-- 証券種別名 -->
+                    TO_CHAR(TO_DATE(TFR.BASE_DATE,'YYYY/MM/DD'),'YYYY/MM/DD')   AS BASE_DATE,                 <!-- 保有日 -->                                      
+                    TFR.BRAND_CODE                                              AS BRAND_CODE,                <!-- 銘柄コード -->
+                    TFR.BRAND_NAME                                              AS BRAND_NAME,                <!-- 銘柄名 -->
+                    NVL(TFR.QUANTITY,0)                                         AS QUANTITY,                  <!-- 数量 -->
+                    NVL(TFR.ACQUIRE_PRICE,0)                                    AS ACQUIRE_PRICE,             <!-- 参考価額 -->
+                    NVL(TFR.PRICE,0)                                            AS PRICE,                     <!-- 基準価額 -->                   
+                    NVL(TFR.FUND_BALANCE,0)                                     AS FUND_BALANCE,              <!-- 評価額 -->
+                    NVL(TFR.TRUST_FEE_RATE,0)                                   AS TRUST_FEE_RATE,            <!-- 信託報酬率 -->                   
+                    TFR.CURRENCY                                                AS CURRENCY,                  <!-- 通貨 -->
+                    NVL(TFR.EXCHANGE_RATE,0)                                    AS EXCHANGE_RATE,             <!-- 為替レート -->
+                    NVL(TFR.YEN_TRUST_FEE,0)                                    AS YEN_TRUST_FEE,             <!-- 信託報酬額（日本円） -->
+                    TFR.BROKER_BRANCH_CODE                                      AS BROKER_BRANCH_CODE,        <!-- 支店コード -->
+                    TFR.BROKER_BRANCH_NAME                                      AS BROKER_BRANCH_NAME         <!-- 支店名 -->
+                FROM (
+                    SELECT 
+                        TFR.*,
+                        MUAI.NAME_KANA,
+                        MB.BRANCH_NAME AS BROKER_BRANCH_NAME
+                    FROM 
+                        V_TRUST_FEE_DAY TFR
+                    LEFT OUTER JOIN  MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                        ON TFR.BROKER_CODE = MUAI.BROKER_CODE
+                        AND TFR.BUTEN_CODE = MUAI.BUTEN_CODE
+                        AND TFR.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB
+                        ON TFR.BROKER_CODE = MB.BROKER_CODE
+                        AND TFR.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                ) TFR
+                <!-- WHERE句は外部に定義 -->
+                <include refid="whereQueryConditions" />
+            )
+            GROUP BY 
+                BROKER_CODE,
+                BROKER_NAME,
+                BROKER_CHARGE_CODE,
+                BROKER_CHARGE_NAME,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                DEALER_NUMBER,
+                CUSTOMER_ATTRIBUTE_NAME,
+                NAME_KANJI,
+                NAME_KANA,
+                PRODUT_NAME,
+                BASE_DATE,
+                BRAND_CODE,
+                BRAND_NAME,
+                QUANTITY,
+                ACQUIRE_PRICE,
+                PRICE,
+                TRUST_FEE_RATE,
+                CURRENCY,
+                EXCHANGE_RATE,
+                BROKER_BRANCH_CODE,
+                BROKER_BRANCH_NAME
+            ORDER BY
+                BASE_DATE DESC,
+                BROKER_CODE ASC,
+                BUTEN_CODE ASC,
+                ACCOUNT_NUMBER ASC
+        )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+    
+    
+    <resultMap id="ResultMapIfaTrustFeeSql002" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaTrustFeeSql001ToSql006ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="course" column="COURSE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="CUSTOMER_NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="CUSTOMER_NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="SECURITY_CLASS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>     
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+        
+    <!-- 
+        SQLID：Sql002
+        SQL名：信託報酬（日次-顧客・証券種別・通貨毎）一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTrustFeeSql002" resultMap="ResultMapIfaTrustFeeSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020503-01#Sql002 */
+            *
+        FROM (
+            SELECT
+                <if test='req.useHintFlag'>
+                    /*+
+                    FULL(A@SEL$5)
+                    OPT_PARAM('_optimizer_skip_scan_enabled', 'false')
+                    */
+                </if>
+                count(*) over()             AS TOTAL_COUNT,           <!-- 総件数 -->
+                BROKER_CODE                 AS BROKER_CODE,           <!-- 仲介業者コード -->
+                BROKER_NAME                 AS BROKER_NAME,           <!-- 仲介業者名 -->
+                BROKER_CHARGE_CODE          AS EMP_CODE,              <!-- 営業員コード -->
+                BROKER_CHARGE_NAME          AS BROKER_CHARGE_NAME,    <!-- 営業員名 -->
+                BUTEN_CODE                  AS BUTEN,                 <!-- 部店 -->
+                ACCOUNT_NUMBER              AS ACCOUNT_NUMBER,        <!-- 口座番号 -->
+                DEALER_NUMBER               AS DEALER_NUMBER,         <!-- 扱者コード -->
+                CUSTOMER_ATTRIBUTE_NAME     AS COURSE,                <!-- コース名 -->
+                NAME_KANJI                  AS CUSTOMER_NAME_KANJI,   <!-- 顧客名（漢字） -->
+                NAME_KANA                   AS CUSTOMER_NAME_KANA,    <!-- 顧客名（カナ） -->
+                PRODUT_NAME                 AS SECURITY_CLASS,        <!-- 証券種別 -->
+                BASE_DATE                   AS HOLDINGC_DATE,         <!-- 保有日 -->
+                SUM(NVL(FUND_BALANCE,0))    AS VALUATION,             <!-- 評価額 -->                                           
+                CURRENCY                    AS CURRENCY,              <!-- 通貨 -->
+                EXCHANGE_RATE               AS FX_RATE,               <!-- 為替レート -->
+                SUM(NVL(YEN_TRUST_FEE,0))   AS TRUST_FEE_AMOUNT,      <!-- 信託報酬額 -->                
+                BROKER_BRANCH_CODE          AS BRANCH_CODE,           <!-- 支店コード -->
+                BROKER_BRANCH_NAME          AS BRANCH_NAME            <!-- 支店名 -->
+            FROM (
+                SELECT
+                    TFR.BROKER_CODE                                             AS BROKER_CODE,               <!-- 仲介業者コード -->
+                    TFR.BROKER_NAME                                             AS BROKER_NAME,               <!-- 仲介業者名 -->
+                    TFR.BROKER_CHARGE_CODE                                      AS BROKER_CHARGE_CODE,        <!-- 営業員コード -->
+                    TFR.BROKER_CHARGE_NAME                                      AS BROKER_CHARGE_NAME,        <!-- 営業員名 -->
+                    TFR.BUTEN_CODE                                              AS BUTEN_CODE,                <!-- 部店コード -->
+                    TFR.ACCOUNT_NUMBER                                          AS ACCOUNT_NUMBER,            <!-- 口座番号 -->
+                    TFR.DEALER_NUMBER                                           AS DEALER_NUMBER,             <!-- 扱者コード -->                   
+                    TFR.CUSTOMER_ATTRIBUTE_NAME                                 AS CUSTOMER_ATTRIBUTE_NAME,   <!-- コース名 -->
+                    TFR.NAME_KANJI                                              AS NAME_KANJI,                <!-- 顧客名_姓名(漢字) -->
+                    TFR.NAME_KANA                                               AS NAME_KANA,                 <!-- 顧客名_姓名(カナ) -->                           
+                    TFR.PRODUT_NAME                                             AS PRODUT_NAME,               <!-- 証券種別名 -->
+                    TO_CHAR(TO_DATE(TFR.BASE_DATE,'YYYY/MM/DD'),'YYYY/MM/DD')   AS BASE_DATE,                 <!-- 保有日 -->                                                       
+                    NVL(TFR.FUND_BALANCE,0)                                     AS FUND_BALANCE,              <!-- 評価額 -->                
+                    TFR.CURRENCY                                                AS CURRENCY,                  <!-- 通貨 -->
+                    NVL(TFR.EXCHANGE_RATE,0)                                    AS EXCHANGE_RATE,             <!-- 為替レート -->
+                    NVL(TFR.YEN_TRUST_FEE,0)                                    AS YEN_TRUST_FEE,             <!-- 信託報酬額（日本円） -->
+                    TFR.BROKER_BRANCH_CODE                                      AS BROKER_BRANCH_CODE,        <!-- 支店コード -->
+                    TFR.BROKER_BRANCH_NAME                                      AS BROKER_BRANCH_NAME         <!-- 支店名 -->
+                FROM (
+                    SELECT 
+                        TFR.*,
+                        MUAI.NAME_KANA,
+                        MB.BRANCH_NAME AS BROKER_BRANCH_NAME
+                    FROM 
+                        V_TRUST_FEE_DAY TFR
+                    LEFT OUTER JOIN  MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                        ON TFR.BROKER_CODE = MUAI.BROKER_CODE
+                        AND TFR.BUTEN_CODE = MUAI.BUTEN_CODE
+                        AND TFR.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB
+                        ON TFR.BROKER_CODE = MB.BROKER_CODE
+                        AND TFR.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                ) TFR
+                <!-- WHERE句は外部に定義 -->
+                <include refid="whereQueryConditions" />
+            )
+            GROUP BY 
+                BROKER_CODE,
+                BROKER_NAME,
+                BROKER_CHARGE_CODE,
+                BROKER_CHARGE_NAME,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                DEALER_NUMBER,
+                CUSTOMER_ATTRIBUTE_NAME,
+                NAME_KANJI,
+                NAME_KANA,
+                PRODUT_NAME,
+                BASE_DATE,                                     
+                CURRENCY,
+                EXCHANGE_RATE,            
+                BROKER_BRANCH_CODE,
+                BROKER_BRANCH_NAME       
+            ORDER BY
+                BASE_DATE DESC,
+                BROKER_CODE ASC,
+                BUTEN_CODE ASC,
+                ACCOUNT_NUMBER ASC
+        )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+    
+    
+    <resultMap id="ResultMapIfaTrustFeeSql003" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaTrustFeeSql001ToSql006ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="SECURITY_CLASS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>     
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：信託報酬（日次-通貨毎）一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTrustFeeSql003" resultMap="ResultMapIfaTrustFeeSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020503-01#Sql003 */
+            *
+        FROM (
+            SELECT
+                <if test='req.useHintFlag'>
+                    /*+
+                    FULL(A@SEL$5)
+                    OPT_PARAM('_optimizer_skip_scan_enabled', 'false')
+                    */
+                </if>
+                count(*) over()             AS TOTAL_COUNT,       <!-- 総件数 -->
+                BROKER_CODE                 AS BROKER_CODE,       <!-- 仲介業者コード -->
+                BROKER_NAME                 AS BROKER_NAME,       <!-- 仲介業者名 -->
+                PRODUT_NAME                 AS SECURITY_CLASS,    <!-- 証券種別 -->
+                BASE_DATE                   AS HOLDINGC_DATE,     <!-- 保有日 -->
+                SUM(NVL(FUND_BALANCE,0))    AS VALUATION,         <!-- 評価額 -->                                           
+                CURRENCY                    AS CURRENCY,          <!-- 通貨 -->
+                EXCHANGE_RATE               AS FX_RATE,           <!-- 為替レート -->
+                SUM(NVL(YEN_TRUST_FEE,0))   AS TRUST_FEE_AMOUNT   <!-- 信託報酬額 -->                         
+            FROM (
+                SELECT
+                    TFR.BROKER_CODE                                             AS BROKER_CODE,     <!-- 仲介業者コード -->   
+                    TFR.BROKER_NAME                                             AS BROKER_NAME,     <!-- 仲介業者名 -->
+                    TFR.PRODUT_NAME                                             AS PRODUT_NAME,     <!-- 証券種別名 -->
+                    TO_CHAR(TO_DATE(TFR.BASE_DATE,'YYYY/MM/DD'),'YYYY/MM/DD')   AS BASE_DATE,       <!-- 保有日 -->                                                       
+                    NVL(TFR.FUND_BALANCE,0)                                     AS FUND_BALANCE,    <!-- 評価額 -->      
+                    TFR.CURRENCY                                                AS CURRENCY,        <!-- 通貨 -->
+                    NVL(TFR.EXCHANGE_RATE,0)                                    AS EXCHANGE_RATE,   <!-- 為替レート -->
+                    NVL(TFR.YEN_TRUST_FEE,0)                                    AS YEN_TRUST_FEE    <!-- 信託報酬額（日本円） -->
+                FROM (
+                    SELECT 
+                        TFR.*,
+                        MUAI.NAME_KANA
+                    FROM 
+                        V_TRUST_FEE_DAY TFR
+                    LEFT OUTER JOIN  MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                        ON TFR.BROKER_CODE = MUAI.BROKER_CODE
+                        AND TFR.BUTEN_CODE = MUAI.BUTEN_CODE
+                        AND TFR.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                ) TFR
+                <!-- WHERE句は外部に定義 -->
+                <include refid="whereQueryConditions" />
+            )
+            GROUP BY 
+                BROKER_CODE,
+                BROKER_NAME,
+                PRODUT_NAME,
+                BASE_DATE,
+                CURRENCY,
+                EXCHANGE_RATE
+            ORDER BY
+                BASE_DATE DESC,
+                BROKER_CODE ASC
+        )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+    
+    
+    <resultMap id="ResultMapIfaTrustFeeSql004" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaTrustFeeSql001ToSql006ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="course" column="COURSE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="CUSTOMER_NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="CUSTOMER_NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="SECURITY_CLASS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brandName" column="BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>        
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：信託報酬（月次累計-明細）一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTrustFeeSql004" resultMap="ResultMapIfaTrustFeeSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020503-01#Sql004 */
+            *
+        FROM (
+            SELECT
+                <if test='req.useHintFlag'>
+                    /*+
+                    FULL(TFR@SEL$4)
+                    OPT_PARAM('_optimizer_skip_scan_enabled', 'false')
+                    */
+                </if>
+                count(*) over()             AS TOTAL_COUNT,           <!-- 総件数 -->
+                BROKER_CODE                 AS BROKER_CODE,           <!-- 仲介業者コード -->
+                BROKER_NAME                 AS BROKER_NAME,           <!-- 仲介業者名 -->
+                BROKER_CHARGE_CODE          AS EMP_CODE,              <!-- 営業員コード -->
+                BROKER_CHARGE_NAME          AS BROKER_CHARGE_NAME,    <!-- 営業員名 -->
+                BUTEN_CODE                  AS BUTEN,                 <!-- 部店 -->
+                ACCOUNT_NUMBER              AS ACCOUNT_NUMBER,        <!-- 口座番号 -->
+                DEALER_NUMBER               AS DEALER_NUMBER,         <!-- 扱者コード -->
+                CUSTOMER_ATTRIBUTE_NAME     AS COURSE,                <!-- コース名 -->
+                NAME_KANJI                  AS CUSTOMER_NAME_KANJI,   <!-- 顧客名（漢字） -->
+                NAME_KANA                   AS CUSTOMER_NAME_KANA,    <!-- 顧客名（カナ） -->
+                PRODUT_NAME                 AS SECURITY_CLASS,        <!-- 証券種別 -->
+                BASE_MONTH                  AS BASE_MONTH,            <!-- 保有月 -->
+                BRAND_CODE                  AS BRAND_CODE,            <!-- 銘柄コード -->
+                BRAND_NAME                  AS BRAND_NAME,            <!-- 銘柄名 -->
+                SUM(NVL(FUND_BALANCE,0))    AS VALUATION,             <!-- 評価額 -->                                             
+                CURRENCY                    AS CURRENCY,              <!-- 通貨 -->
+                EXCHANGE_RATE               AS FX_RATE,               <!-- 為替レート -->
+                SUM(NVL(YEN_TRUST_FEE,0))   AS TRUST_FEE_AMOUNT,      <!-- 信託報酬額 -->                
+                BROKER_BRANCH_CODE          AS BRANCH_CODE,           <!-- 支店コード -->
+                BROKER_BRANCH_NAME          AS BRANCH_NAME            <!-- 支店名 -->
+            FROM (
+                SELECT
+                    TFR.BROKER_CODE                                       AS BROKER_CODE,               <!-- 仲介業者コード -->
+                    TFR.BROKER_NAME                                       AS BROKER_NAME,               <!-- 仲介業者名 -->
+                    TFR.BROKER_CHARGE_CODE                                AS BROKER_CHARGE_CODE,        <!-- 営業員コード -->
+                    TFR.BROKER_CHARGE_NAME                                AS BROKER_CHARGE_NAME,        <!-- 営業員名 -->
+                    TFR.BUTEN_CODE                                        AS BUTEN_CODE,                <!-- 部店コード -->
+                    TFR.ACCOUNT_NUMBER                                    AS ACCOUNT_NUMBER,            <!-- 口座番号 -->
+                    TFR.DEALER_NUMBER                                     AS DEALER_NUMBER,             <!-- 扱者コード -->                   
+                    TFR.CUSTOMER_ATTRIBUTE_NAME                           AS CUSTOMER_ATTRIBUTE_NAME,   <!-- コース名 -->
+                    TFR.NAME_KANJI                                        AS NAME_KANJI,                <!-- 顧客名_姓名(漢字) -->
+                    TFR.NAME_KANA                                         AS NAME_KANA,                 <!-- 顧客名_姓名(カナ) -->                           
+                    TFR.PRODUT_NAME                                       AS PRODUT_NAME,               <!-- 証券種別名 -->
+                    TO_CHAR(TO_DATE(TFR.BASE_DATE,'YYYY/MM'),'YYYY/MM')   AS BASE_MONTH,                <!-- 保有月 -->                                      
+                    TFR.BRAND_CODE                                        AS BRAND_CODE,                <!-- 銘柄コード -->
+                    TFR.BRAND_NAME                                        AS BRAND_NAME,                <!-- 銘柄名 -->                 
+                    NVL(TFR.FUND_BALANCE,0)                               AS FUND_BALANCE,              <!-- 評価額 -->                
+                    TFR.CURRENCY                                          AS CURRENCY,                  <!-- 通貨 -->
+                    NVL(TFR.EXCHANGE_RATE,0)                              AS EXCHANGE_RATE,             <!-- 為替レート -->
+                    NVL(TFR.YEN_TRUST_FEE,0)                              AS YEN_TRUST_FEE,             <!-- 信託報酬額（日本円） -->
+                    TFR.BROKER_BRANCH_CODE                                AS BROKER_BRANCH_CODE,        <!-- 支店コード -->
+                    TFR.BROKER_BRANCH_NAME                                AS BROKER_BRANCH_NAME         <!-- 支店名 -->
+                FROM (
+                    SELECT 
+                        TFR.*,
+                        MUAI.NAME_KANA,
+                        MB.BRANCH_NAME AS BROKER_BRANCH_NAME
+                    FROM 
+                        V_TRUST_FEE_MONTH TFR
+                    LEFT OUTER JOIN  MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                        ON TFR.BROKER_CODE = MUAI.BROKER_CODE
+                        AND TFR.BUTEN_CODE = MUAI.BUTEN_CODE
+                        AND TFR.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB
+                        ON TFR.BROKER_CODE = MB.BROKER_CODE
+                        AND TFR.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                ) TFR
+                <!-- WHERE句は外部に定義 -->
+                <include refid="whereQueryConditions" />
+            )
+            GROUP BY 
+                BROKER_CODE,
+                BROKER_NAME,
+                BROKER_CHARGE_CODE,
+                BROKER_CHARGE_NAME,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                DEALER_NUMBER,
+                CUSTOMER_ATTRIBUTE_NAME,
+                NAME_KANJI,
+                NAME_KANA,
+                PRODUT_NAME,
+                BASE_MONTH,
+                BRAND_CODE,
+                BRAND_NAME,                                   
+                CURRENCY,
+                EXCHANGE_RATE,    
+                BROKER_BRANCH_CODE,
+                BROKER_BRANCH_NAME
+            ORDER BY
+                BASE_MONTH DESC,
+                BROKER_CODE ASC,
+                BUTEN_CODE ASC,
+                ACCOUNT_NUMBER ASC
+        )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+    
+    
+    <resultMap id="ResultMapIfaTrustFeeSql005" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaTrustFeeSql001ToSql006ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="course" column="COURSE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="CUSTOMER_NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="CUSTOMER_NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="SECURITY_CLASS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>       
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：信託報酬（月次累計-顧客・証券種別・通貨毎）一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTrustFeeSql005" resultMap="ResultMapIfaTrustFeeSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020503-01#Sql005 */
+            *
+        FROM (
+            SELECT
+                <if test='req.useHintFlag'>
+                    /*+
+                    FULL(TFR@SEL$4)
+                    OPT_PARAM('_optimizer_skip_scan_enabled', 'false')
+                    */
+                </if>
+                count(*) over()             AS TOTAL_COUNT,           <!-- 総件数 -->
+                BROKER_CODE                 AS BROKER_CODE,           <!-- 仲介業者コード -->
+                BROKER_NAME                 AS BROKER_NAME,           <!-- 仲介業者名 -->
+                BROKER_CHARGE_CODE          AS EMP_CODE,              <!-- 営業員コード -->
+                BROKER_CHARGE_NAME          AS BROKER_CHARGE_NAME,    <!-- 営業員名 -->
+                BUTEN_CODE                  AS BUTEN,                 <!-- 部店 -->
+                ACCOUNT_NUMBER              AS ACCOUNT_NUMBER,        <!-- 口座番号 -->
+                DEALER_NUMBER               AS DEALER_NUMBER,         <!-- 扱者コード -->
+                CUSTOMER_ATTRIBUTE_NAME     AS COURSE,                <!-- コース名 -->
+                NAME_KANJI                  AS CUSTOMER_NAME_KANJI,   <!-- 顧客名（漢字） -->
+                NAME_KANA                   AS CUSTOMER_NAME_KANA,    <!-- 顧客名（カナ） -->
+                PRODUT_NAME                 AS SECURITY_CLASS,        <!-- 証券種別 -->
+                BASE_MONTH                  AS BASE_MONTH,            <!-- 保有月 -->
+                SUM(NVL(FUND_BALANCE,0))    AS VALUATION,             <!-- 評価額 -->                                             
+                CURRENCY                    AS CURRENCY,              <!-- 通貨 -->
+                EXCHANGE_RATE               AS FX_RATE,               <!-- 為替レート -->
+                SUM(NVL(YEN_TRUST_FEE,0))   AS TRUST_FEE_AMOUNT,      <!-- 信託報酬額 -->                
+                BROKER_BRANCH_CODE          AS BRANCH_CODE,           <!-- 支店コード -->
+                BROKER_BRANCH_NAME          AS BRANCH_NAME            <!-- 支店名 -->
+            FROM (
+                SELECT
+                    TFR.BROKER_CODE                                       AS BROKER_CODE,               <!-- 仲介業者コード -->
+                    TFR.BROKER_NAME                                       AS BROKER_NAME,               <!-- 仲介業者名 -->
+                    TFR.BROKER_CHARGE_CODE                                AS BROKER_CHARGE_CODE,        <!-- 営業員コード -->
+                    TFR.BROKER_CHARGE_NAME                                AS BROKER_CHARGE_NAME,        <!-- 営業員名 -->
+                    TFR.BUTEN_CODE                                        AS BUTEN_CODE,                <!-- 部店コード -->
+                    TFR.ACCOUNT_NUMBER                                    AS ACCOUNT_NUMBER,            <!-- 口座番号 -->
+                    TFR.DEALER_NUMBER                                     AS DEALER_NUMBER,             <!-- 扱者コード -->                   
+                    TFR.CUSTOMER_ATTRIBUTE_NAME                           AS CUSTOMER_ATTRIBUTE_NAME,   <!-- コース名 -->
+                    TFR.NAME_KANJI                                        AS NAME_KANJI,                <!-- 顧客名_姓名(漢字) -->
+                    TFR.NAME_KANA                                         AS NAME_KANA,                 <!-- 顧客名_姓名(カナ) -->                           
+                    TFR.PRODUT_NAME                                       AS PRODUT_NAME,               <!-- 証券種別名 -->
+                    TO_CHAR(TO_DATE(TFR.BASE_DATE,'YYYY/MM'),'YYYY/MM')   AS BASE_MONTH,                <!-- 保有月 -->                 
+                    NVL(TFR.FUND_BALANCE,0)                               AS FUND_BALANCE,              <!-- 評価額 -->                
+                    TFR.CURRENCY                                          AS CURRENCY,                  <!-- 通貨 -->
+                    NVL(TFR.EXCHANGE_RATE,0)                              AS EXCHANGE_RATE,             <!-- 為替レート -->
+                    NVL(TFR.YEN_TRUST_FEE,0)                              AS YEN_TRUST_FEE,             <!-- 信託報酬額（日本円） -->
+                    TFR.BROKER_BRANCH_CODE                                AS BROKER_BRANCH_CODE,        <!-- 支店コード -->
+                    TFR.BROKER_BRANCH_NAME                                AS BROKER_BRANCH_NAME         <!-- 支店名 -->
+                FROM (
+                    SELECT 
+                        TFR.*,
+                        MUAI.NAME_KANA,
+                        MB.BRANCH_NAME AS BROKER_BRANCH_NAME
+                    FROM 
+                        V_TRUST_FEE_MONTH TFR
+                    LEFT OUTER JOIN  MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                        ON TFR.BROKER_CODE = MUAI.BROKER_CODE
+                        AND TFR.BUTEN_CODE = MUAI.BUTEN_CODE
+                        AND TFR.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB
+                        ON TFR.BROKER_CODE = MB.BROKER_CODE
+                        AND TFR.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                ) TFR
+                <!-- WHERE句は外部に定義 -->
+                <include refid="whereQueryConditions" />
+            )
+            GROUP BY 
+                BROKER_CODE,
+                BROKER_NAME,
+                BROKER_CHARGE_CODE,
+                BROKER_CHARGE_NAME,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                DEALER_NUMBER,
+                CUSTOMER_ATTRIBUTE_NAME,
+                NAME_KANJI,
+                NAME_KANA,
+                PRODUT_NAME,
+                BASE_MONTH,
+                CURRENCY,
+                EXCHANGE_RATE,
+                BROKER_BRANCH_CODE,
+                BROKER_BRANCH_NAME
+            ORDER BY
+                BASE_MONTH DESC,
+                BROKER_CODE ASC,
+                BUTEN_CODE ASC,
+                ACCOUNT_NUMBER ASC
+        )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+    
+    
+    <resultMap id="ResultMapIfaTrustFeeSql006" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaTrustFeeSql001ToSql006ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="SECURITY_CLASS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>       
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：信託報酬（月次累計-通貨毎）一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTrustFeeSql006" resultMap="ResultMapIfaTrustFeeSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020503-01#Sql006 */
+            *
+        FROM (
+            SELECT
+                <if test='req.useHintFlag'>
+                    /*+
+                    FULL(TFR@SEL$4)
+                    OPT_PARAM('_optimizer_skip_scan_enabled', 'false')
+                    */
+                </if>
+                count(*) over()             AS TOTAL_COUNT,       <!-- 総件数 -->
+                BROKER_CODE                 AS BROKER_CODE,       <!-- 仲介業者コード -->
+                BROKER_NAME                 AS BROKER_NAME,       <!-- 仲介業者名 -->
+                PRODUT_NAME                 AS SECURITY_CLASS,    <!-- 証券種別 -->
+                BASE_MONTH                  AS BASE_MONTH,        <!-- 保有月 -->
+                SUM(NVL(FUND_BALANCE,0))    AS VALUATION,         <!-- 評価額 -->                                             
+                CURRENCY                    AS CURRENCY,          <!-- 通貨 -->
+                EXCHANGE_RATE               AS FX_RATE,           <!-- 為替レート -->
+                SUM(NVL(YEN_TRUST_FEE,0))   AS TRUST_FEE_AMOUNT   <!-- 信託報酬額 -->                
+            FROM (
+                SELECT
+                    TFR.BROKER_CODE                                       AS BROKER_CODE,     <!-- 仲介業者コード -->
+                    TFR.BROKER_NAME                                       AS BROKER_NAME,     <!-- 仲介業者名 -->                        
+                    TFR.PRODUT_NAME                                       AS PRODUT_NAME,     <!-- 証券種別名 -->
+                    TO_CHAR(TO_DATE(TFR.BASE_DATE,'YYYY/MM'),'YYYY/MM')   AS BASE_MONTH,      <!-- 保有月 -->                 
+                    NVL(TFR.FUND_BALANCE,0)                               AS FUND_BALANCE,    <!-- 評価額 -->                
+                    TFR.CURRENCY                                          AS CURRENCY,        <!-- 通貨 -->
+                    NVL(TFR.EXCHANGE_RATE,0)                              AS EXCHANGE_RATE,   <!-- 為替レート -->
+                    NVL(TFR.YEN_TRUST_FEE,0)                              AS YEN_TRUST_FEE    <!-- 信託報酬額（日本円） -->
+                FROM (
+                    SELECT 
+                        TFR.*,
+                        MUAI.NAME_KANA
+                    FROM 
+                        V_TRUST_FEE_MONTH TFR
+                    LEFT OUTER JOIN  MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                        ON TFR.BROKER_CODE = MUAI.BROKER_CODE
+                        AND TFR.BUTEN_CODE = MUAI.BUTEN_CODE
+                        AND TFR.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                ) TFR
+                <!-- WHERE句は外部に定義 -->
+                <include refid="whereQueryConditions" />
+            )
+            GROUP BY 
+                BROKER_CODE,
+                BROKER_NAME,
+                PRODUT_NAME,
+                BASE_MONTH,
+                CURRENCY,
+                EXCHANGE_RATE
+            ORDER BY
+                BASE_MONTH DESC,
+                BROKER_CODE ASC
+        )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+
+    
+    <!-- SQLフラグメントの定義（SQL001~SQL006用WHERE句） -->
+    <sql id="whereQueryConditions">
+        WHERE
+            TFR.PRODUT_CD IN
+            <foreach item="securityClass" collection="req.securityClassList" open="(" separator="," close=")">
+                #{securityClass}
+            </foreach>
+            
+            AND TFR.PRODUT_CD != '30'
+            
+            <!-- パターンNoがNo1,2,3の場合  -->
+            <if test='req.patternNo == "1" or req.patternNo == "2" or req.patternNo == "3"'> 
+                AND TFR.BASE_DATE &gt;= TO_CHAR(TO_DATE(#{req.periodFrom}, 'YYYY/MM/DD'), 'YYYYMMDD')
+                AND TFR.BASE_DATE &lt;= TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM/DD'), 'YYYYMMDD')
+            </if>
+                        
+            <!-- パターンNoがNo4,5,6の場合  -->
+            <if test='req.patternNo == "4" or req.patternNo == "5" or req.patternNo == "6"'> 
+                AND TFR.BASE_DATE &gt;= TO_CHAR(TO_DATE(#{req.periodFrom}, 'YYYY/MM'), 'YYYYMM')
+                AND TFR.BASE_DATE &lt;= TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM'), 'YYYYMM')
+            </if>
+               
+            <!-- 部店コードに入力値がある場合 -->
+            <if test='req.butenCode != null and req.butenCode != ""'>    
+                AND TFR.BUTEN_CODE =#{req.butenCode}
+            </if>
+            
+            <!-- 口座番号に入力値がある場合 -->
+            <if test='req.accountNumber != null and req.accountNumber != ""'>
+                AND TFR.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            </if>
+            
+            <!-- 銘柄コードに入力値がある場合 -->
+            <if test='req.brandCode != null and req.brandCode != ""'>
+                 AND (TFR.BRAND_CODE = #{req.brandCode} 
+                     OR TFR.BRAND_CODE = '0' || #{req.brandCode} )
+            </if>
+            
+            <!-- パターンNoがNo1,2,4,5 の場合だけ条件に追加 -->
+            <if test='req.patternNo == "1" or req.patternNo == "2" or req.patternNo == "4" or req.patternNo == "5"'>            
+                <!-- 支店コードに入力値がある場合 -->
+                <if test='req.branchCode != null and req.branchCode != ""'>
+                    AND TFR.BROKER_BRANCH_CODE =#{req.branchCode}
+                </if>
+            </if>            
+            
+            <!-- 仲介業者コードに入力値がある かつ 仲介業者除外がfalseの場合 -->
+            <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "0"'>
+                AND BROKER_CODE IN
+                <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            
+            <!-- 仲介業者コードに入力値がある かつ 仲介業者除外がtrueの場合 -->
+             <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "1"'>
+                 AND TFR.BROKER_CODE NOT IN
+                 <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                     #{brokerCode}
+                 </foreach>
+             </if>
+             
+            <!-- 営業員コード に入力値がある場合 -->
+            <if test='req.empCode != null and req.empCode != ""'>
+                AND TFR.BROKER_CHARGE_CODE =#{req.empCode}
+            </if>
+             
+            <!-- 顧客名(漢字/カナ)に入力値がある かつ 顧客名(漢字/カナ)_条件が'0':と等しい の場合 -->
+            <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "1"'>
+                 AND (TFR.NAME_KANJI = #{req.customerNameKanjiKana}
+                     OR TFR.NAME_KANA = #{req.customerNameKanjiKana} )
+            </if>
+            
+            <!-- 顧客名(漢字/カナ)に入力値がある かつ 顧客名(漢字/カナ)_条件が'1':で始まる の場合 -->
+            <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "2"'>
+                 AND (TFR.NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%'
+                     OR TFR.NAME_KANA LIKE #{req.customerNameKanjiKana} || '%' )
+            </if>
+            
+            <!-- 顧客名(漢字/カナ)に入力値がある かつ 顧客名(漢字/カナ)_条件が'2':を含む の場合 -->
+            <if test='req.customerNameKanjiKana != null and !req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "3"'>
+                 AND (TFR.NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                     OR TFR.NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%' )
+            </if>
+            
+            AND TFR.CUSTOMER_ATTRIBUTE IN
+            <foreach item="course" collection="req.courseList" open="(" separator="," close=")">
+                #{course}
+            </foreach>
+
+            <if test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                AND (TFR.BROKER_CODE IN
+                <foreach item="brokerCharge" collection="req.brokerChargeList" index="index" open="(" separator="" close=")">
+                    <if test="index % 1000 == 0 and index != 0">
+                        ) OR TFR.BROKER_CODE IN (
+                    </if>
+                    <if test="index % 1000 != 0">
+                        ,
+                    </if>
+                    #{brokerCharge.brokerCode}
+                </foreach>
+                )
+            </if>
+            <if test='req.privId != "1" and req.privId != "3" and req.privId != "4" and req.privId != "5"'>
+                AND ((TFR.BROKER_CODE, TFR.BROKER_CHARGE_CODE) IN
+                <foreach item="brokerCharge" collection="req.brokerChargeList" index="index" open="(" separator="" close=")">
+                    <if test="index % 1000 == 0 and index != 0">
+                        ) OR (TFR.BROKER_CODE, TFR.BROKER_CHARGE_CODE) IN (
+                    </if>
+                    <if test="index % 1000 != 0">
+                        ,
+                    </if>
+                    (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                </foreach>
+                )
+            </if>
+    </sql>
+</mapper>

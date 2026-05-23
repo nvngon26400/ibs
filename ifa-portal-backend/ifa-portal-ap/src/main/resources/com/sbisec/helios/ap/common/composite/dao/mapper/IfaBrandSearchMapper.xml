@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：CC014
+    画面名：画面共通部品_銘柄検索
+-->
+<mapper namespace="com.sbisec.helios.ap.common.composite.dao.mapper.IfaBrandSearchMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaBrandSearchSql001" type="com.sbisec.helios.ap.common.composite.model.IfaBrandSearchSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBrandSearchSql002" type="com.sbisec.helios.ap.common.composite.model.IfaBrandSearchSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBrandSearchSql003" type="com.sbisec.helios.ap.common.composite.model.IfaBrandSearchSql003ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBrandSearchSql004" type="com.sbisec.helios.ap.common.composite.model.IfaBrandSearchSql004ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaBrandSearchSql005" type="com.sbisec.helios.ap.common.composite.model.IfaBrandSearchSql005ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrandSearchSql001" resultMap="ResultMapIfaBrandSearchSql001" statementType="PREPARED">
+        SELECT 
+        	/* @SQLID=CC014#Sql001 */ 
+        	BRAND_NAME
+        FROM 
+        	ETINTRA.STAR_BRAND_MASTER 
+        WHERE 
+        	SUBSTR(COMPANY_CD, -4) = SUBSTR(#{req.brandCode},0,4)
+        	AND NEW_OLD_CLASSIFY = SUBSTR(#{req.brandCode},-1)
+        	AND RIGHT_CLASSIFY = ' '
+			AND PRODUCT_CLASSIFY = 'K'
+			AND DOMESTIC_FOREIGN_CLASSIFY = '0'
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrandSearchSql002" resultMap="ResultMapIfaBrandSearchSql002" statementType="PREPARED">
+        SELECT
+		    /* @SQLID=CC014#Sql002 */
+		    A.TOPIX_100_FLG AS topixFlg
+		    , A.REG_KBN
+		    , A.SOR_SERVICE_KBN
+		    , B.IPM_SE_INVESTMENTS_CODE UPPER_RANK_MKT 
+		FROM
+		    STOCK_DETAIL_MASTER A 
+		    LEFT OUTER JOIN ( 
+		        SELECT
+		            SUBSTR(IPM_PRODUCT_CODE,0, 5) BRAND_CODE
+		            , IPM_SE_INVESTMENTS_CODE 
+		        FROM
+		            I_PRODUCT_MASTER 
+		        WHERE
+		            IPM_PRODUCT_FLAG = '0' 
+		            AND SUBSTR(IPM_PRODUCT_CODE,0, 5) = #{req.brandCode} 
+		            AND IPM_PRI_EX_FLAG = '1'
+		    ) B 
+		        ON TRIM(A.SEC_CODE) = TRIM(B.BRAND_CODE)
+		WHERE
+		    A.SEC_CODE = TRIM(#{req.brandCode})
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrandSearchSql003" resultMap="ResultMapIfaBrandSearchSql003" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=CC014#Sql003 */ 
+            <if test="req.domesticMarginAccountType == '0'.toString()">
+                A.SOR_SERVICE_KBN MKT_SOR
+                ,A.MKT_KBN_TKY MKT_TKY
+                ,A.MKT_KBN_NGY MKT_NGY
+                ,A.MKT_KBN_FKO MKT_FKO
+                ,A.MKT_KBN_SPR MKT_SPR
+                ,NVL(B.CNT, '0') MKT_PTS
+            FROM 
+                STOCK_DETAIL_MASTER A
+            LEFT JOIN (SELECT SEC_CODE,COUNT(*) CNT FROM PTS_BRAND_MASTER GROUP BY SEC_CODE) B
+            ON B.SEC_CODE = A.SEC_CODE
+            WHERE 
+                A.SEC_CODE = TRIM(#{req.brandCode})
+            </if>
+            <if test="req.domesticMarginAccountType == '1'.toString()">
+                '1' MKT_TKY
+                ,A.SOR_SERVICE_KBN MKT_SOR
+                ,NVL(B.CNT, '0') MKT_PTS
+            FROM 
+                STOCK_DETAIL_MASTER A
+            LEFT JOIN (
+                SELECT 
+                    SEC_CODE,COUNT(*) CNT
+                FROM 
+                    PTS_BRAND_MASTER 
+                WHERE 
+                    MKT_KBN_PTS = '1'
+                    AND (MKT_LOAN_KBN_PTS IN('1', '2')
+                    OR MKT_IPPAN_LOAN_KBN_PTS = '1')
+                     
+                GROUP BY SEC_CODE
+            ) B
+            ON B.SEC_CODE = A.SEC_CODE
+            WHERE 
+                A.SEC_CODE = TRIM(#{req.brandCode})
+            </if>
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrandSearchSql004" resultMap="ResultMapIfaBrandSearchSql004" statementType="PREPARED">
+        SELECT
+		    /* @SQLID=CC014#Sql004 */
+		    A.BRAND_CODE
+		    , A.BRAND_NAME
+		    , B.MKT_KBN_TKY MKT_TKY
+		    , B.MKT_KBN_NGY MKT_NGY
+		    , B.MKT_KBN_FKO MKT_FKO
+		    , B.MKT_KBN_SPR MKT_SPR
+		    , C.CNT MKT_PTS
+		    , D.IPM_SE_INVESTMENTS_CODE UPPER_RANK_MKT 
+		FROM
+		    ( 
+		        select
+		            CONCAT(substr(COMPANY_CD, - 4), NEW_OLD_CLASSIFY) BRAND_CODE
+		            , BRAND_NAME 
+		        from
+		            ETINTRA.STAR_BRAND_MASTER 
+		        where
+		            CONCAT(substr(COMPANY_CD, - 4), NEW_OLD_CLASSIFY) LIKE '%'|| #{req.search} || '%'
+		            AND PRODUCT_CLASSIFY = 'K' 
+		            AND DOMESTIC_FOREIGN_CLASSIFY = '0'
+		            AND RIGHT_CLASSIFY = ' '
+		    ) A 
+		    LEFT JOIN STOCK_DETAIL_MASTER B 
+		        ON TRIM(A.BRAND_CODE) = B.SEC_CODE 
+		    LEFT JOIN ( 
+		        select
+		            SEC_CODE
+		            , count(*) CNT 
+		        from
+		            PTS_BRAND_MASTER 
+		        group by
+		            SEC_CODE
+		    ) C 
+		        ON TRIM(A.BRAND_CODE) = C.SEC_CODE 
+		    LEFT JOIN ( 
+		        select
+		            IPM_SE_INVESTMENTS_CODE
+		            , SUBSTR(IPM_PRODUCT_CODE,0,5) IPM_PRODUCT_CODE
+		        from
+		            I_PRODUCT_MASTER 
+		        where
+		            IPM_PRODUCT_FLAG = '0' 
+		            AND IPM_PRI_EX_FLAG = '1'
+		    ) D 
+		        ON A.BRAND_CODE = D.IPM_PRODUCT_CODE
+		 ORDER BY A.BRAND_CODE
+    </select>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrandSearchSql005" resultMap="ResultMapIfaBrandSearchSql005" statementType="PREPARED">
+        select
+		    /* @SQLID=CC014#Sql005 */
+		    A.BRAND_CODE
+		    , A.BRAND_NAME
+		    , B.MKT_KBN_TKY MKT_TKY
+		    , B.MKT_KBN_NGY MKT_NGY
+		    , B.MKT_KBN_FKO MKT_FKO
+		    , B.MKT_KBN_SPR MKT_SPR
+		    , C.CNT MKT_PTS
+		    , D.IPM_SE_INVESTMENTS_CODE UPPER_RANK_MKT
+		FROM
+		    ( 
+		        select
+		            CONCAT(substr(COMPANY_CD, - 4), NEW_OLD_CLASSIFY) BRAND_CODE
+		            , BRAND_NAME 
+		        from
+		            ETINTRA.STAR_BRAND_MASTER
+		        where
+		            CONCAT(BRAND_NAME, NEW_OLD_CLASSIFY) LIKE '%'|| #{req.search} || '%'
+		            and PRODUCT_CLASSIFY = 'K' 
+		            ANd DOMESTIC_FOREIGN_CLASSIFY = '0'
+		            AND RIGHT_CLASSIFY = ' '
+		    ) A 
+		    LEFT JOIN STOCK_DETAIL_MASTER B 
+		        ON TRIM(A.BRAND_CODE) = B.SEC_CODE 
+		    LEFT JOIN ( 
+		        select
+		            SEC_CODE
+		            , count(*) CNT 
+		        from
+		            PTS_BRAND_MASTER 
+		        group by
+		            SEC_CODE
+		    ) C 
+		        ON TRIM(A.BRAND_CODE) = C.SEC_CODE 
+		    LEFT JOIN ( 
+		        select
+		        	IPM_SE_INVESTMENTS_CODE
+		            , SUBSTR(IPM_PRODUCT_CODE,0,5) IPM_PRODUCT_CODE
+		        from
+		            I_PRODUCT_MASTER 
+		        where
+		            IPM_PRODUCT_FLAG = '0' 
+		            AND IPM_PRI_EX_FLAG = '1'
+		    ) D 
+		        ON A.BRAND_CODE = D.IPM_PRODUCT_CODE 
+		ORDER BY
+		    A.BRAND_CODE
+    </select>
+    
+</mapper>

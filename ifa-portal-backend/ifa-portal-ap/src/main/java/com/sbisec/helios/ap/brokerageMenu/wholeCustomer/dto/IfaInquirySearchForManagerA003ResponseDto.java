@@ -1,0 +1,23 @@
+package com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dto;
+
+import java.util.List;
+
+import com.sbisec.helios.ap.brokerageMenu.customerMenu.dto.IfaContactToiawaseListDto;
+
+import lombok.Data;
+
+/**
+ * 画面ID:SUB020304-01
+ * 画面名:接触履歴（入力）検索
+ * A003レスポンスDto
+ *
+ * @author SBI大連 夏
+ * @date   2025/08/15
+ */
+
+@Data
+public class IfaInquirySearchForManagerA003ResponseDto {
+
+    /** 問合せカテゴリリスト */
+    private List<IfaContactToiawaseListDto> toiawaseSList;
+}

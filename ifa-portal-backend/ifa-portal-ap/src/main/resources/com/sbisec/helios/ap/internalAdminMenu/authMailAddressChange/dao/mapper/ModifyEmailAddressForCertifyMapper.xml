@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.sbisec.helios.ap.internalAdminMenu.authMailAddressChange.dao.mapper.ModifyEmailAddressForCertifyMapper">
+    <resultMap id = "modifyEmailAddressForCertifyInfoList" type = "com.sbisec.helios.ap.internalAdminMenu.authMailAddressChange.model.ModifyEmailAddressForCertifyModel">
+        <result property = "branchName"   column = "BRANCH_NAME"    typeHandler = "StringTypeHandler"/>
+        <result property = "brokerName"   column = "BROKER_NAME"    typeHandler = "StringTypeHandler"/>
+        <result property = "userNm"       column = "USER_NM"        typeHandler = "StringTypeHandler"/>
+    </resultMap>
+    
+    <select id = "getCertifyInfoList" resultMap = "modifyEmailAddressForCertifyInfoList" statementType = "PREPARED">
+        SELECT /* @SQLID=SUB0404-01#SQL001 */ * FROM (
+            SELECT 
+                COUNT(*) OVER()                      AS TOTALROW,
+                TMU.USER_ID                          AS USER_ID,
+                BR.BRANCH_NAME                       AS BRANCH_NAME,
+                MB.BRANCH_NAME                       AS BROKER_NAME,
+                TMU.USER_NM                          AS USER_NM,
+                TMYU.MAIL_ADDRESS                    AS MAIL_ADDRESS,
+                TMYU.VERIFY_STATUS                   AS VERIFY_STATUS
+            FROM
+                TB_MED_USERS TMU
+            INNER JOIN TB_MED_VERIFY_USERS  TMYU
+            ON  TMU.USER_ID = TMYU.USER_ID
+            AND TMYU.VERIFY_STATUS = '1'
+            LEFT OUTER JOIN BRANCH BR
+            ON TMU.BRANCH_ID = BR.BRANCH_CODE
+            LEFT OUTER JOIN MEDIATE_BRANCH MB
+            ON  TMU.BROKER_ID = MB.BROKER_CODE
+            AND MB.BROKER_BRANCH_CODE = '999'
+            AND MB.BROKER_BRANCH_KIND = '00'
+            WHERE
+                1 = 1
+            <if test='privId == "3" or privId == "4" or privId == "5"'>
+                AND(TMU.BROKER_ID IN
+                <foreach item="brokerCharge" index="index" collection="brokerChargeList" open="(" close=")">
+                   <if test="index%1000 == 0 and index!=0">
+                       ) OR TMU.BROKER_ID IN(
+                   </if>
+                   <if test="index%1000 != 0">
+                       ,
+                   </if>
+                   #{brokerCharge.brokerCode}
+                </foreach>
+                )   
+            </if>    
+            <if test='privId != "1" and privId != "3" and privId != "4" and privId != "5"'>
+                AND((TMU.BROKER_ID, TMU.EMPLOYEE_ID) IN
+                <foreach item="brokerCharge" index="index" collection="brokerChargeList" open="(" close=")">
+                   <if test="index%1000 == 0 and index!=0">
+                       ) OR (TMU.BROKER_ID, TMU.EMPLOYEE_ID) IN(
+                   </if>
+                   <if test="index%1000 != 0">
+                       ,
+                   </if>
+                   (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                </foreach>
+                )   
+            </if>                    
+            <if test="userId != null and userId != ''">
+                AND TMU.USER_ID LIKE #{userId} ESCAPE '!'
+            </if>
+	        <if test="employeeName != null and employeeName != ''">
+	          	AND (TMU.EMPLOYEE_NAME LIKE #{employeeName} ESCAPE '!' 
+	          	OR TMU.USER_NM LIKE #{employeeName} ESCAPE '!')
+	        </if>           
+            <if test="brokerOrBranchName != null and brokerOrBranchName != ''">
+                AND ( BR.BRANCH_NAME LIKE #{brokerOrBranchName} ESCAPE '!'
+                OR MB.BRANCH_NAME LIKE #{brokerOrBranchName} ESCAPE '!')
+            </if>
+            ORDER BY USER_ID ASC
+        )
+        <where>
+            <if test="rowNum != null and rowNum != ''">
+                AND ROWNUM &lt;= #{rowNum}
+            </if>
+        </where>
+    </select>
+    
+	<select id="existCnt" resultType ="Integer" statementType="PREPARED">
+		SELECT /* @SQLID=SUB0404-01#SQL002 */
+		    COUNT(1) AS COUNT
+		FROM
+		    TB_MED_VERIFY_USERS
+		WHERE
+		    USER_ID = #{userId}
+	</select>
+	
+    <update id="updateMailInfo" statementType="PREPARED">
+        UPDATE TB_MED_VERIFY_USERS /* @SQLID=SUB0404-02_1#SQL001 */
+        SET
+          MAIL_ADDRESS = #{model.mailAddress}
+        , UPDATE_DATE  = IFA_DATE_UTIL.IFA_GET_DATE
+        , UPDATE_BY    = #{model.updateBy}
+        WHERE
+          USER_ID      = #{model.userId}
+    </update>
+
+</mapper>

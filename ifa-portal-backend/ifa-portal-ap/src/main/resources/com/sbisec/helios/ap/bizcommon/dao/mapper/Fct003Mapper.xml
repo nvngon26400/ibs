@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct003Mapper">
+
+    <resultMap
+        type="com.sbisec.helios.ap.bizcommon.dao.model.Fct003Sql001ResponseModel"
+        id="sql001Response">
+    </resultMap>
+
+    <resultMap
+        type="com.sbisec.helios.ap.bizcommon.dao.model.Fct003Sql002ResponseModel"
+        id="sql002Response">
+    </resultMap>
+
+    <!-- FCT003.SQL001 顧客取引コース情報取得 -->
+    <select id="getFct003Sql001" resultMap="sql001Response"
+        statementType="PREPARED">
+        SELECT
+        /* @SQLID=FCT003#Sql001 */
+        BUTEN_CODE
+        , ACCOUNT_NUMBER
+        , BROKER_CODE
+        , CUSTOMER_ATTRIBUTE
+        FROM
+        MEDIATE_USER_ATTRIBUTE_INFO
+        WHERE
+        BUTEN_CODE = #{fct003Sql001RequestModel.butenCode}
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{fct003Sql001RequestModel.accountNumber})
+    </select>
+
+    <!-- FCT003.SQL002 取引コース媒介可否取得 -->
+    <select id="getFct003Sql002" resultMap="sql002Response"
+        statementType="PREPARED">
+        SELECT
+        /* @SQLID=FCT003#Sql002 */
+        TRIM(PRODUCT_CD) AS PRODUCT_CD
+        , TRIM(TRADE_CD) AS TRADE_CD
+        , COUNTRY_CD
+        , CURRENCY_CODE
+        , VALUE
+        FROM
+        M_MED_PROPRIETY
+        WHERE
+        CUSTOMER_ATTRIBUTE = #{fct003Sql002RequestModel.customerAttribute}
+        <if test="fct003Sql002RequestModel.productCd != null and fct003Sql002RequestModel.productCd != ''">
+            AND TRIM(PRODUCT_CD) = #{fct003Sql002RequestModel.productCd}
+        </if>
+        <if test="fct003Sql002RequestModel.tradeCd != null and fct003Sql002RequestModel.tradeCd != ''">
+            AND TRIM(TRADE_CD) = #{fct003Sql002RequestModel.tradeCd}
+        </if>
+        <if test="fct003Sql002RequestModel.countryCd != null and fct003Sql002RequestModel.countryCd != ''">
+            AND COUNTRY_CD = #{fct003Sql002RequestModel.countryCd}
+        </if>
+        <if test="fct003Sql002RequestModel.currencyCode != null and fct003Sql002RequestModel.currencyCode != ''">
+            AND CURRENCY_CODE = #{fct003Sql002RequestModel.currencyCode}
+        </if> 
+        AND START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE
+        AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_DATE
+    </select>
+
+</mapper>

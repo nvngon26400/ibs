@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+files:
+  - source: gw-3.war
+    destination: /opt/tomcat/webapps
+permissions:
+  - object: /opt/tomcat/webapps/gw-3.war
+    owner: tomcat
+    group: tomcat
+file_exists_behavior: OVERWRITE
+

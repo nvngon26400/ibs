@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB020502-02
+    画面名：その他報酬詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.commFee.dao.mapper.IfaOtherFeeDetailMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaOtherFeeDetailSql001" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaOtherFeeDetailSql001ResponseModel" >
+        <result property="totalCount" column="TOTAL_ROW" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="targetDateYm" column="SUM_DATE_YM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="sequentialNumber" column="NO" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="feeAmount" column="REWARD_PRICE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="otherFeeMessage" column="MESSAGE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="feeAmountTotal" column="TOTAL_REWARD_PRICE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+</resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：その他報酬詳細一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaOtherFeeDetailSql001" resultMap="ResultMapIfaOtherFeeDetailSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020502-02#Sql001 */
+            TOTAL_ROW
+            , SUM_DATE_YM
+            , BROKER_CODE
+            , BROKER_NAME
+            , DEALER_NUMBER
+            , NO
+            , REWARD_PRICE
+            , MESSAGE
+            , TOTAL_REWARD_PRICE 
+        FROM
+        (
+            SELECT
+                count(*) over () as TOTAL_ROW
+                , row_number() over (ORDER BY DEALER_NUMBER, NO) AS rn
+                , SUM_DATE_YM
+                , BROKER_CODE
+                , BROKER_NAME
+                , DEALER_NUMBER
+                , NO
+                , REWARD_PRICE
+                , MESSAGE
+                , TOTAL_REWARD_PRICE
+            FROM
+                V_EXTRA_REWARD
+            WHERE
+                1=1
+                <if test='req.privId != "1"'>
+                    AND ( V_EXTRA_REWARD.BROKER_CODE IN
+                    <foreach item="brokerCharge" collection="req.brokerChargeList" index="index" open="(" separator="" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                             ) OR (V_EXTRA_REWARD.BROKER_CODE) IN (
+                         </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                        #{brokerCharge.brokerCode}
+                     </foreach>
+                     )
+                 </if>
+                AND BROKER_CODE = #{req.brokerCode}
+                AND SUM_DATE_YM = REPLACE(#{req.targetDateYm}, '/')
+            ORDER BY
+                DEALER_NUMBER
+                , NO
+        )
+        WHERE
+            rn &lt;= #{req.searchLimitRow}
+        
+    </select>
+
+
+
+
+</mapper>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB00-07_1
+    画面名：リリースノート
+-->
+<mapper namespace="com.sbisec.helios.ap.releaseNote.dao.mapper.IfaReleaseNoteMapper">
+
+    <resultMap id="ResultMapIfaReleaseNoteSql002" type="com.sbisec.helios.ap.releaseNote.dao.model.IfaReleaseNoteSql002ResponseModel" >
+        <result property="title" column="TITLE" typeHandler="StringTypeHandler"/>
+        <result property="updateTime" column="UPDATE_TIME" typeHandler="StringTypeHandler"/>
+        <result property="detailedFile" column="DETAILED_FILE" typeHandler="StringTypeHandler"/>
+        <result property="releaseNoteNo" column="RELEASE_NOTE_NO" typeHandler="StringTypeHandler"/>
+        <result property="menuName" column="MENU_NAME" typeHandler="StringTypeHandler"/>
+        <result property="screenName" column="SCREEN_NAME" typeHandler="StringTypeHandler"/>
+        <result property="content" column="CONTENT" typeHandler="StringTypeHandler"/>
+        <result property="releaseNoteCoNo" column="RELEASE_NOTE_CO_NO" typeHandler="StringTypeHandler"/>
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：リリースノート次回表示フラグ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaReleaseNoteNextDispFlgSql001" resultType="String" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00-07_1#Sql001 */
+            NEXT_DISP_FLG
+        FROM CORDYS.RELEASE_NOTE_READ
+        <where>
+            USER_ID = #{userId}
+        </where>
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：リリースノート一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaReleaseNoteSql002" resultMap="ResultMapIfaReleaseNoteSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00-07_1#Sql002 */
+            RN.TITLE AS TITLE,
+            TO_CHAR(RN.UPDATE_TIME, 'YYYY/MM/DD HH24:MI') AS UPDATE_TIME,
+            NVL2(RN.DETAILED_FILE,'1','0') AS DETAILED_FILE,
+            RN.RELEASE_NOTE_NO AS RELEASE_NOTE_NO,
+            RNC.MENU_NAME AS MENU_NAME,
+            RNC.SCREEN_NAME AS SCREEN_NAME,
+            RNC.CONTENT AS CONTENT,
+            RNC.RELEASE_NOTE_CO_NO AS RELEASE_NOTE_CO_NO
+        FROM CORDYS.RELEASE_NOTE RN
+        LEFT OUTER JOIN RELEASE_NOTE_CONTENTS RNC
+            ON RN.RELEASE_NOTE_NO = RNC.RELEASE_NOTE_NO
+        <where>
+            RN.DISPLAYED_DATE &gt;= TO_DATE(#{displayYear} || '0101', 'YYYYMMDD')
+            AND RN.DISPLAYED_DATE &lt;= TO_DATE(#{displayYear} || '1231', 'YYYYMMDD')
+            AND RN.DISPLAYED_DATE &lt;= SYSDATE
+        </where>
+        ORDER BY
+            RN.DISPLAYED_DATE DESC,
+            RN.RELEASE_NOTE_NO DESC,
+            RNC.RELEASE_NOTE_CO_NO ASC
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：リリースノート閲覧状況更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaReleaseNoteSql003" statementType="PREPARED">
+        MERGE /* @SQLID=SUB00-07_1#Sql003 */
+        INTO CORDYS.RELEASE_NOTE_READ RNR
+        USING (
+            SELECT
+                #{userId} AS USER_ID
+            FROM DUAL
+        ) A
+        ON (
+            RNR.USER_ID = A.USER_ID
+        )
+        WHEN MATCHED THEN
+            UPDATE SET
+                LAST_READ_TIME = SYSDATE,
+                UPDATE_TIME = SYSDATE,
+                UPDATE_USER = A.USER_ID
+        WHEN NOT MATCHED THEN
+            INSERT (
+                USER_ID,
+                LAST_READ_TIME,
+                NEXT_DISP_FLG,
+                CREATE_TIME,
+                CREATE_USER,
+                UPDATE_TIME,
+                UPDATE_USER
+            )
+            VALUES (
+                A.USER_ID,
+                SYSDATE,
+                '1',
+                SYSDATE,
+                A.USER_ID,
+                SYSDATE,
+                A.USER_ID
+            )
+    </update>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：リリースノート次回表示フラグ更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaReleaseNoteNextDispFlgSql004" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB00-07_1#Sql004 */
+            CORDYS.RELEASE_NOTE_READ
+        SET
+            NEXT_DISP_FLG = #{req.nextDispFlg},
+            UPDATE_TIME = SYSDATE,
+            UPDATE_USER = #{req.userId}
+        <where>
+            USER_ID = #{req.userId}
+        </where>
+    </update>
+
+    <!--
+        SQLID：Sql005
+        SQL名：リリースノート表示対象年取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaReleaseNoteDisplayYearSql005" resultType="String" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00-07_1#Sql005 */
+            TO_CHAR(NVL(MIN(DISPLAYED_DATE), SYSDATE), 'YYYY') AS MIN_YEAR
+        FROM CORDYS.RELEASE_NOTE
+    </select>
+
+</mapper>

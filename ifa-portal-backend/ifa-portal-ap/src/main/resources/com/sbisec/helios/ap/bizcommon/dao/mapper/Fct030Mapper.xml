@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：FCT030
+    画面名：仲介業者コード営業員リスト取得
+-->
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct030Mapper">
+
+    <resultMap id="ResultMapFct030Sql001" type="com.sbisec.helios.ap.bizcommon.dao.model.Fct030Sql001ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapFct030Sql002" type="com.sbisec.helios.ap.bizcommon.dao.model.Fct030Sql002ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapFct030Sql003" type="com.sbisec.helios.ap.bizcommon.dao.model.Fct030Sql003ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapFct030Sql004" type="com.sbisec.helios.ap.bizcommon.dao.model.Fct030Sql004ResponseModel" >
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectFct030Sql001" resultMap="ResultMapFct030Sql001" statementType="PREPARED">
+        SELECT
+            /* @SQLID=FCT030#Sql001 */
+            C.BROKER_CODE,
+            C.BROKER_CHARGE_CODE
+        FROM (
+            SELECT  #{req.privId} "PRIVILEGE_ID"
+            FROM DUAL
+            WHERE #{req.privId} ='2'
+        ) A
+        INNER JOIN(
+            SELECT
+                BRANCH_KIND
+            FROM
+                BRANCH
+            WHERE
+                BRANCH_CODE=#{req.branchCode}
+                AND BRANCH_KIND='00'
+        ) B ON 1=1
+        INNER JOIN(
+            SELECT
+                BROKER_CODE,
+                BROKER_CHARGE_CODE
+            FROM
+                MEDIATE_CHARGE_INFO
+        ) C ON 1=1
+        UNION
+        SELECT
+            F.BROKER_CODE,
+            F.BROKER_CHARGE_CODE
+        FROM (
+            SELECT  #{req.privId} "PRIVILEGE_ID"
+            FROM DUAL
+            WHERE #{req.privId} = '2'
+        ) D
+        INNER JOIN(
+            SELECT
+                BRANCH_KIND
+            FROM
+                BRANCH
+            WHERE
+                BRANCH_CODE=#{req.branchCode}
+                AND BRANCH_KIND!='00'
+        ) E ON 1=1
+        INNER JOIN(
+            SELECT
+                G.BROKER_CODE,
+                G.BROKER_CHARGE_CODE
+            FROM
+                MEDIATE_CHARGE_INFO G
+            INNER JOIN
+                BRANCH_MEDIATE_INFO H
+            ON
+                G.BROKER_CODE=H.BROKER_CODE
+                AND G.BROKER_BRANCH_CODE=H.BROKER_BRANCH_CODE
+                AND H.BRANCH_CODE=#{req.branchCode}
+        ) F ON 1=1
+    </select>
+
+    <!--
+        SQLID：Sql002
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectFct030Sql002" resultMap="ResultMapFct030Sql002" statementType="PREPARED">
+        SELECT
+            /* @SQLID=FCT030#Sql002 */
+            C.BROKER_CODE,
+            C.BROKER_CHARGE_CODE
+        FROM (
+            SELECT #{req.privId} "PRIVILEGE_ID"
+            FROM DUAL
+            WHERE #{req.privId} IN ('6','7','8')
+        ) A
+        INNER JOIN(
+            SELECT
+                BROKER_BRANCH_KIND
+            FROM
+                MEDIATE_BRANCH
+            WHERE
+                BROKER_CODE=#{req.brokerCode}
+                AND BROKER_BRANCH_CODE=#{req.subBrokerCode}
+                AND BROKER_BRANCH_KIND='00'
+        ) B ON 1=1
+        INNER JOIN(
+            SELECT
+                G.BROKER_CODE,
+                G.BROKER_CHARGE_CODE
+            FROM
+                MEDIATE_CHARGE_INFO G
+            INNER JOIN(
+                SELECT
+                    BROKER_ID,
+                    SUB_BROKER_ID
+                FROM
+                    TB_MED_USERS
+                WHERE
+                    USER_ID=#{req.userId}
+                UNION
+                SELECT
+                    BROKER_ID,
+                    SUB_BROKER_ID
+                FROM
+                    TB_MED_USERS_PRIV
+                WHERE
+                    USER_ID=#{req.userId}
+
+            ) H ON G.BROKER_CODE=H.BROKER_ID
+        ) C ON 1=1
+        UNION
+        SELECT
+            F.BROKER_CODE,
+            F.BROKER_CHARGE_CODE
+        FROM (
+            SELECT #{req.privId} "PRIVILEGE_ID"
+            FROM DUAL
+            WHERE #{req.privId} IN ('6','7','8')
+        ) D
+        INNER JOIN(
+            SELECT
+                BROKER_BRANCH_KIND
+            FROM
+                MEDIATE_BRANCH
+            WHERE
+                BROKER_CODE=#{req.brokerCode}
+                AND BROKER_BRANCH_CODE=#{req.subBrokerCode}
+                AND BROKER_BRANCH_KIND!='00'
+        ) E ON 1=1
+        INNER JOIN(
+            SELECT
+                I.BROKER_CODE,
+                I.BROKER_CHARGE_CODE
+            FROM
+                MEDIATE_CHARGE_INFO I
+            INNER JOIN(
+                SELECT
+                    BROKER_ID,
+                    SUB_BROKER_ID
+                FROM
+                    TB_MED_USERS
+                WHERE
+                    USER_ID=#{req.userId}
+                UNION
+                SELECT
+                    BROKER_ID,
+                    SUB_BROKER_ID
+                FROM
+                    TB_MED_USERS_PRIV
+                WHERE
+                    USER_ID=#{req.userId}
+
+            ) J ON
+                    I.BROKER_CODE=J.BROKER_ID
+                    AND I.BROKER_BRANCH_CODE=J.SUB_BROKER_ID
+        ) F ON 1=1
+    </select>
+
+    <!--
+        SQLID：Sql003
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectFct030Sql003" resultMap="ResultMapFct030Sql003" statementType="PREPARED">
+        SELECT
+            /* @SQLID=FCT030#Sql003 */
+            C.BROKER_ID AS BROKER_CODE,
+            NULL AS BROKER_CHARGE_CODE
+        FROM (
+            SELECT #{req.privId} "PRIVILEGE_ID"
+            FROM DUAL
+            WHERE #{req.privId} IN ('3','4','5')
+        ) A
+        INNER JOIN(
+            SELECT
+                BROKER_BRANCH_KIND
+            FROM
+                MEDIATE_BRANCH
+            WHERE
+                BROKER_CODE=#{req.brokerCode}
+                AND BROKER_BRANCH_KIND='00'
+        ) B ON 1=1
+        INNER JOIN(
+            SELECT
+                BROKER_ID
+            FROM
+                TB_MED_USERS
+            WHERE
+                USER_ID=#{req.userId}
+
+            UNION
+
+            SELECT
+                BROKER_ID
+            FROM
+                TB_MED_USERS_PRIV
+            WHERE
+                USER_ID=#{req.userId}
+        ) C ON 1=1
+    </select>
+
+    <!--
+        SQLID：Sql004
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectFct030Sql004" resultMap="ResultMapFct030Sql004" statementType="PREPARED">
+        SELECT
+            /* @SQLID=FCT030#Sql004 */
+            C.BROKER_CODE,
+            C.BROKER_CHARGE_CODE
+        FROM (
+            SELECT #{req.privId} "PRIVILEGE_ID"
+            FROM DUAL
+            WHERE #{req.privId} = '9'
+        ) A
+        INNER JOIN(
+            SELECT
+                BROKER_BRANCH_KIND
+            FROM
+                MEDIATE_BRANCH
+            WHERE
+                BROKER_CODE=#{req.brokerCode}
+                AND BROKER_BRANCH_CODE=#{req.subBrokerCode}
+                AND BROKER_BRANCH_KIND!='00'
+        ) B ON 1=1
+        INNER JOIN(
+            SELECT
+                D.BROKER_CODE,
+                D.BROKER_CHARGE_CODE
+            FROM
+                MEDIATE_CHARGE_INFO D
+            INNER JOIN(
+                SELECT
+                    BROKER_ID,
+                    SUB_BROKER_ID,
+                    EMPLOYEE_ID
+                FROM
+                    TB_MED_USERS
+                WHERE
+                    USER_ID=#{req.userId}
+                UNION
+                SELECT
+                    BROKER_ID,
+                    SUB_BROKER_ID,
+                    EMPLOYEE_ID
+                FROM
+                    TB_MED_USERS_PRIV
+                WHERE
+                    USER_ID=#{req.userId}
+            ) E ON
+                D.BROKER_CODE=E.BROKER_ID
+                AND D.BROKER_BRANCH_CODE=E.SUB_BROKER_ID
+                AND D.BROKER_CHARGE_CODE=E.EMPLOYEE_ID
+        ) C ON 1=1
+    </select>
+
+</mapper>

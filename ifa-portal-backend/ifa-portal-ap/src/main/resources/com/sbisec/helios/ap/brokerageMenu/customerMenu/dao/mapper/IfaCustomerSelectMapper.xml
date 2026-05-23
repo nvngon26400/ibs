@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	画面ID：SUB0202_00-01
+	画面名：顧客選択
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaCustomerSelectMapper">
+	<!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+	<!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+	
+	<resultMap id="ResultMapIfaCustomerSelectSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerSelectSql001ResponseModel" >
+		<result property="butenCode" column="BUTEN_CODE" typeHandler="StringTypeHandler"/>
+		<result property="accountNumber" column="ACCOUNT_NUMBER" typeHandler="StringTypeHandler"/>
+		<result property="customerNameKanji" column="NAME_KANJI" typeHandler="StringTypeHandler"/>
+		<result property="customerNameKana" column="NAME_KANA" typeHandler="StringTypeHandler"/>
+		<result property="openAcctDate" column="OPEN_ACCT_DATE" typeHandler="StringTypeHandler"/>
+		<result property="customerCode" column="CUSTOMER_ID" typeHandler="StringTypeHandler"/>
+		<result property="favoRegStatus" column="FAVO_REG_STATUS" typeHandler="StringTypeHandler"/>
+		<result property="tradeRestrictButenCode" column="TRADE_RESTRICT_BUTEN_CODE" typeHandler="StringTypeHandler"/>
+		<result property="noticeInfoErrorCount" column="NOTICE_INFO_ERROR_COUNT" typeHandler="StringTypeHandler"/>
+		<result property="searchCount" column="TOTAL_ROW" typeHandler="StringTypeHandler"/>
+	</resultMap>
+	
+	<resultMap id="ResultMapIfaCustomerSelectSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerSelectSql002ResponseModel" >
+		<result property="customerId" column="CUSTOMER_ID" typeHandler="StringTypeHandler"/>
+		<result property="userId" column="USER_ID" typeHandler="StringTypeHandler"/>
+		<result property="favorite" column="FAVO_REG_STATUS" typeHandler="StringTypeHandler"/>
+	</resultMap>
+	
+	
+	<!-- 
+		SQLID：Sql001
+		SQL名：検索
+		SQLタイプ：select
+	-->
+	<select id="selectIfaCustomerSelectSql001"
+		parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerSelectSql001RequestModel" 
+		resultMap="ResultMapIfaCustomerSelectSql001"
+		statementType="PREPARED"
+		fetchSize="50"
+	>
+		WITH MU_LIST AS (
+			SELECT
+				BUTEN_CODE
+				,ACCOUNT_NUMBER
+				,NAME_KANJI
+				,NAME_KANA
+				,OPEN_ACCT_DATE
+				,CUSTOMER_ID
+			FROM MEDIATE_USER_ATTRIBUTE_INFO
+			<where>
+				<if test='"1".equals(req.privId) == false and req.brokerChargeList != null and 0 &lt; req.brokerChargeList.size()'>
+					<choose>
+						<when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+							AND (BROKER_CODE IN
+							<foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+								<if test="index%1000 == 0 and index!=0">
+									) OR BROKER_CODE IN (
+								</if>
+								<if test="index%1000 != 0">
+									,
+								</if>
+									#{brokerCharge.brokerCode}
+							</foreach>
+							)
+						</when>
+						<otherwise>
+							AND ( (BROKER_CODE,INTERMEDIARY_EMP_CD) IN
+							<foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+								<if test="index%1000 == 0 and index!=0">
+									) OR (BROKER_CODE,INTERMEDIARY_EMP_CD) IN (
+								</if>
+								<if test="index%1000 != 0">
+									,
+								</if>
+									(#{brokerCharge.brokerCode},#{brokerCharge.empCode})
+							</foreach>
+							)
+						</otherwise>
+					</choose>
+				</if>
+				<if test='req.customerId != null and "".equals(req.customerId) == false'>
+					AND CUSTOMER_ID = #{req.customerId}
+				</if>
+				<if test='req.butenCode != null and "".equals(req.butenCode) == false'>
+					AND BUTEN_CODE = #{req.butenCode}
+				</if>
+				<if test='req.accountNumber != null and "".equals(req.accountNumber) == false'>
+					AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+				</if>
+				<if test='req.customerName != null and "".equals(req.customerName) == false'>
+					AND NAME_KANJI LIKE #{req.customerName}
+				</if>
+			</where>
+			<if test='req.customerName != null and "".equals(req.customerName) == false'>
+				UNION
+				SELECT
+					BUTEN_CODE
+					,ACCOUNT_NUMBER
+					,NAME_KANJI
+					,NAME_KANA
+					,OPEN_ACCT_DATE
+					,CUSTOMER_ID
+				FROM MEDIATE_USER_ATTRIBUTE_INFO
+				<where>
+					<if test='"1".equals(req.privId) == false and req.brokerChargeList != null and 0 &lt; req.brokerChargeList.size()'>
+						<choose>
+							<when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+								AND (BROKER_CODE IN
+								<foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+									<if test="index%1000 == 0 and index!=0">
+										) OR BROKER_CODE IN (
+									</if>
+									<if test="index%1000 != 0">
+										,
+									</if>
+										#{brokerCharge.brokerCode}
+								</foreach>
+								)
+							</when>
+							<otherwise>
+								AND ( (BROKER_CODE,INTERMEDIARY_EMP_CD) IN
+								<foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+									<if test="index%1000 == 0 and index!=0">
+										) OR (BROKER_CODE,INTERMEDIARY_EMP_CD) IN (
+									</if>
+									<if test="index%1000 != 0">
+										,
+									</if>
+										(#{brokerCharge.brokerCode},#{brokerCharge.empCode})
+								</foreach>
+								)
+							</otherwise>
+						</choose>
+					</if>
+					<if test='req.customerId != null and "".equals(req.customerId) == false'>
+						AND CUSTOMER_ID = #{req.customerId}
+					</if>
+					<if test='req.butenCode != null and "".equals(req.butenCode) == false'>
+						AND BUTEN_CODE = #{req.butenCode}
+					</if>
+					<if test='req.accountNumber != null and "".equals(req.accountNumber) == false'>
+						AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+					</if>
+					<if test='req.customerName != null and "".equals(req.customerName) == false'>
+						AND NAME_KANA LIKE #{req.customerName}
+					</if>
+				</where>
+			</if>
+		)
+
+		SELECT
+			/* @SQLID=SUB0202_00-01#Sql001 */
+			* 
+		FROM
+			( 
+				SELECT
+					A.BUTEN_CODE
+					, A.ACCOUNT_NUMBER
+					, A.NAME_KANJI
+					, A.NAME_KANA
+					, A.OPEN_ACCT_DATE
+					, A.CUSTOMER_ID
+					, NVL(B.FAVO_REG_STATUS, 0) AS FAVO_REG_STATUS
+					, C.NOTICE_INFO_ERROR_COUNT
+					, D.BUTEN_CODE AS TRADE_RESTRICT_BUTEN_CODE
+					, COUNT(*) OVER () AS TOTAL_ROW 
+				FROM
+					MU_LIST A 
+					LEFT JOIN USER_FAVORITE_ACCOUNT B 
+						ON A.CUSTOMER_ID = B.CUSTOMER_ID 
+						AND B.USER_ID = #{req.userId}
+					LEFT JOIN ( 
+						SELECT
+							F.CUSTOMER_ID
+							, COUNT(F.CUSTOMER_ID) AS NOTICE_INFO_ERROR_COUNT 
+						FROM
+							ATTENTION_INFO F
+							, ATTENTION_CATEGORY_MASTER G 
+						WHERE
+							F.ON_OFF_FLG = '有効' 
+							AND F.DELETE_TIME IS NULL
+							AND F.CATEGORY = G.CATEGORY_NAME 
+							AND G.CATEGORY_CD IN ( 
+								SELECT
+									RESTRICT_CODE 
+								FROM
+									M_MED_TRADE_RESTRICT E 
+								WHERE
+									RESTRICT_TYPE = '1' 
+									AND VALUE = '2' 
+									AND E.START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE 
+									AND E.END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_DATE
+							) 
+						GROUP BY
+							F.CUSTOMER_ID
+					) C 
+						ON A.CUSTOMER_ID = C.CUSTOMER_ID 
+					LEFT JOIN MED_TRADE_RESTRICT_ERR_ACC D 
+						ON A.BUTEN_CODE = D.BUTEN_CODE 
+						AND A.ACCOUNT_NUMBER = D.ACCOUNT_NUMBER 
+				<where>
+					<if test='req.favorite != null and "true".equals(req.favorite)'>
+						AND B.FAVO_REG_STATUS = '1'
+					</if>
+					<if test='req.tradeRestrictionSelect != null and "true".equals(req.tradeRestrictionSelect)'>
+						AND (
+								C.NOTICE_INFO_ERROR_COUNT &gt; 0
+								OR D.BUTEN_CODE IS NOT NULL
+							)
+					</if>
+				</where>
+				ORDER BY
+					A.OPEN_ACCT_DATE DESC
+					, A.BUTEN_CODE ASC
+					, A.ACCOUNT_NUMBER ASC
+			)
+		<where>
+			ROWNUM &lt;= 5000
+		</where>
+	</select>
+
+	<!-- 
+		SQLID：Sql002
+		SQL名：検索
+		SQLタイプ：select
+	-->
+	<select id="selectIfaCustomerSelectSql002"
+	parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerSelectSql002RequestModel" 
+	resultMap="ResultMapIfaCustomerSelectSql002" statementType="PREPARED">
+		SELECT /* @SQLID=SUB0202_00-01#Sql002 */
+		 A.CUSTOMER_ID
+		,B.USER_ID
+		,B.FAVO_REG_STATUS
+		FROM  MEDIATE_USER_ATTRIBUTE_INFO A
+		     ,USER_FAVORITE_ACCOUNT B
+		<where>
+		    A.BUTEN_CODE = #{req.butenCode}
+		AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+		AND A.CUSTOMER_ID = B.CUSTOMER_ID
+		AND B.USER_ID = #{req.userId}
+		</where>
+	</select>
+	
+	
+	<!-- 
+		SQLID：Sql002
+		SQL名：更新
+		SQLタイプ：select
+	-->
+	<update id="selectIfaCustomerSelectSql00201"
+	parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerSelectSql002RequestModel" 
+	statementType="PREPARED">
+		UPDATE  /* @SQLID=SUB0202_00-01#Sql002 */
+		  USER_FAVORITE_ACCOUNT SET
+		  FAVO_REG_STATUS  = #{req.favoRegStatus}
+		, UPDATE_USER = #{req.userId}
+		, UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+		<where>
+			USER_ID     = #{req.userId}
+		AND CUSTOMER_ID = TO_NUMBER(#{req.customerCode})
+		</where>
+	</update>	
+	
+	<!-- 
+		SQLID：Sql002
+		SQL名：挿入
+		SQLタイプ：select
+	-->
+	<insert id="selectIfaCustomerSelectSql00202"
+	parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerSelectSql002RequestModel" 
+	statementType="PREPARED">
+		INSERT  /* @SQLID=SUB0202_00-01#Sql002 */
+		INTO USER_FAVORITE_ACCOUNT
+		(	USER_ID
+			,CUSTOMER_ID
+			,FAVO_REG_STATUS
+			,CREATE_USER
+			,CREATE_TIME
+			,UPDATE_USER
+			,UPDATE_TIME
+		)
+		VALUES (
+			#{req.userId}
+			,TO_NUMBER(#{req.customerCode})
+			,#{req.favoRegStatus}
+			,#{req.userId}
+			,IFA_DATE_UTIL.IFA_GET_DATE
+			,#{req.userId}
+			,IFA_DATE_UTIL.IFA_GET_DATE
+		)
+	</insert>
+	
+</mapper>

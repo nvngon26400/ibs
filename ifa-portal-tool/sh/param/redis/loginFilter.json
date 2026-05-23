@@ -1,0 +1,12 @@
+{
+    "whiteList": [
+        "/login/ifaLoginInitializeA001",
+        "/login/ifaAuthCodeInputAuthA002",
+        "/login/ifaMailAddressRegisterRegisterA005",
+        "/login/ifaLoginLoginA008",
+        "/common/logout",
+        "/alive",
+        "/testTool/**",
+        "/api/driver"
+    ]
+}

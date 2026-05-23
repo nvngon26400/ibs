@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0109-01
+    画面名：取引履歴（顧客別）
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaCustomerTradeHistoryMapper">
+
+    <resultMap
+        id="ResultMapIfaCustomerTradeHistorySql001"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerTradeHistorySql001ResponseModel"
+    >
+        <result property="securityType" column="SECURITY_TYPE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brandCode" column="BRAND_CODE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brandName" column="BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="detailsTrade" column="DETAILS_TRADE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="detailsType" column="DETAILS_TYPE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="depositTax" column="DEPOSIT_TAX" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="tradeMarketReason" column="TRADE_MARKET_REASON" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="currency" column="CURRENCY" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：取引履歴（顧客別）一覧取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaCustomerTradeHistorySql001"
+        resultMap="ResultMapIfaCustomerTradeHistorySql001"
+        statementType="PREPARED"
+    >
+        SELECT
+            /* @SQLID=SUB0202_0109-01#Sql001 */
+            *
+        FROM
+            ( 
+                SELECT
+                    count(*) over () as TOTAL_ROW
+                    , TRADE_DATE
+                    , GET_DATE AS DELIVERY_DATE
+                    , PRODUCT_SHORT_NAME AS SECURITY_TYPE
+                    , BRAND_CD AS BRAND_CODE
+                    , FORMAL_BRAND_NAME AS BRAND_NAME
+                    , TRADE_SHORT_NAME1 AS DETAILS_TRADE
+                    , TRADE_SHORT_NAME2 AS DETAILS_TYPE
+                    , CAPITAL_GAIN_TAX_IND AS DEPOSIT_TAX
+                    , PRICE
+                    , NEW_TRADE_PRICE AS OPEN_PRICE
+                    , ISSUE_CURRENCY_NAME AS CURRENCY
+                    , EXCHANGE_RATE AS FX
+                    , QUANTITY
+                    , FEE
+                    , CONSUMPTION_TAX
+                    , ACCRUED_INTEREST_IND AS TRADE_MARKET_REASON
+                    , ACCRUED_INTEREST
+                    , WITHHOLDING_TAX AS REAL_PROFIT_AND_LOSS
+                    , CAPITAL_GAIN_TAX
+                    , ACCURATE_AMOUNT
+                    , CANCEL_FLG
+                    , NEW_TRADE_DATE AS ACQUIRE_DATE
+                FROM
+                    (
+                        <!-- A002.実行パターン＝１ の場合 -->
+                        <if test='req.exPattern == "1"'>
+                            <!-- サブクエリ実行パターン = 1（信用取引系以外） -->
+                            <bind name="exPatternSubQuery" value="1" />
+                            <include refid='selectIfaCustomerTradeHistorySql001Sub' />
+                        </if>
+                        <!-- A002.実行パターン＝2 の場合 -->
+                        <if test='req.exPattern == "2"'>
+                            <!-- サブクエリ実行パターン = 2（信用取引系と取得日なし） -->
+                            <bind name="exPatternSubQuery" value="2" />
+                            <include refid='selectIfaCustomerTradeHistorySql001Sub' />
+                            UNION ALL
+                            <!-- サブクエリ実行パターン = 3（信用取引系と取得日あり） -->
+                            <bind name="exPatternSubQuery" value="3" />
+                            <include refid='selectIfaCustomerTradeHistorySql001Sub' />
+                        </if>
+                        <!-- A002.実行パターン＝3 の場合 -->
+                        <if test='req.exPattern == "3"'>
+                            <!-- サブクエリ実行パターン = 1（信用取引系以外） -->
+                            <bind name="exPatternSubQuery" value="1" />
+                            <include refid='selectIfaCustomerTradeHistorySql001Sub' />
+                            UNION ALL
+                            <!-- サブクエリ実行パターン = 2（信用取引系と取得日なし） -->
+                            <bind name="exPatternSubQuery" value="2" />
+                            <include refid='selectIfaCustomerTradeHistorySql001Sub' />
+                            UNION ALL
+                            <!-- サブクエリ実行パターン = 3（信用取引系と取得日あり） -->
+                            <bind name="exPatternSubQuery" value="3" />
+                            <include refid='selectIfaCustomerTradeHistorySql001Sub' />
+                        </if>
+                    )
+                ORDER BY
+                    <!-- リクエスト.並び順指定【項目】=0　AND　リクエスト.並び順指定【属性】=0 の場合 -->
+                    <if test='req.sortOrderItem == "0" and req.sortOrderProfile == "0"'>
+                        TRADE_DATE
+                        , ORDER_NO
+                        , BRAND_CD
+                    </if>
+                    <!-- リクエスト.並び順指定【項目】=0　AND　リクエスト.並び順指定【属性】=1 の場合 -->
+                    <if test='req.sortOrderItem == "0" and req.sortOrderProfile == "1"'>
+                        TRADE_DATE DESC
+                        , ORDER_NO DESC
+                        , BRAND_CD DESC
+                    </if>
+                    <!-- リクエスト.並び順指定【項目】=1　AND　リクエスト.並び順指定【属性】=0 の場合 -->
+                    <if test='req.sortOrderItem == "1" and req.sortOrderProfile == "0"'>
+                        BRAND_CD
+                        , FORMAL_BRAND_NAME
+                        , TRADE_DATE
+                    </if>
+                    <!-- リクエスト.並び順指定【項目】=1　AND　リクエスト.並び順指定【属性】=1 の場合 -->
+                    <if test='req.sortOrderItem == "1" and req.sortOrderProfile == "1"'>
+                        BRAND_CD DESC
+                        , FORMAL_BRAND_NAME DESC
+                        , TRADE_DATE DESC
+                    </if>
+            )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+
+    <!-- 
+        SQL001サブクエリ①（信用取引系以外, 信用取引系・取得日なし, 信用取引系・取得日あり）
+    -->
+    <sql id="selectIfaCustomerTradeHistorySql001Sub">
+        SELECT
+            TH.gyou
+            , min(to_char(TH.TRADE_DATE, 'YYYY/MM/DD')) AS TRADE_DATE
+            , min( 
+                TO_CHAR(TH.GET_DATE, 'YYYY/MM/DD')
+            ) AS GET_DATE
+            , min(TH.PRODUCT_SHORT_NAME) AS PRODUCT_SHORT_NAME
+            , min(decode(TH.BRAND_CD, ' ', '', TH.BRAND_CD)) AS BRAND_CD
+            , min(TH.FORMAL_BRAND_NAME) AS FORMAL_BRAND_NAME
+            , min(TH.TRADE_SHORT_NAME1) AS TRADE_SHORT_NAME1
+            , min(TH.TRADE_SHORT_NAME2) AS TRADE_SHORT_NAME2
+            , min(TH.CAPITAL_GAIN_TAX_IND) AS CAPITAL_GAIN_TAX_IND
+            , min( 
+                replace ( trim( to_char(trunc(TH.PRICE, 4), '99G999G999G990D9999')) , '.0000', '')
+            ) AS PRICE
+            , min( 
+                replace ( trim( to_char( trunc(TH.NEW_TRADE_PRICE, 4), '99G999G999G990D9999')) , '.0000', '')
+            ) AS NEW_TRADE_PRICE
+            , min(TH.ISSUE_CURRENCY_NAME) AS ISSUE_CURRENCY_NAME
+            , min( 
+                replace ( trim( to_char(trunc(TH.EXCHANGE_RATE, 6), '999G999G990D999999')) , '.000000', '')
+            ) AS EXCHANGE_RATE
+            , min( 
+                replace ( trim( to_char(trunc(TH.QUANTITY, 4), '99G999G999G990D9999')) , '.0000', '')
+            ) AS QUANTITY
+            , min( 
+                trim(to_char(TH.FEE, '99G999G999G999'))
+            ) AS FEE
+            , min( 
+                trim(to_char(TH.CONSUMPTION_TAX, '99G999G999G999'))
+            ) AS CONSUMPTION_TAX
+            , min(TH.ACCRUED_INTEREST_IND) AS ACCRUED_INTEREST_IND
+            , min( 
+                trim(to_char(TH.ACCRUED_INTEREST, '99G999G999G999'))
+            ) AS ACCRUED_INTEREST
+            , min( 
+                trim(to_char(TH.WITHHOLDING_TAX, '99G999G999G999'))
+            ) AS WITHHOLDING_TAX
+            , min( 
+                trim(to_char(TH.CAPITAL_GAIN_TAX, '99G999G999G999'))
+            ) AS CAPITAL_GAIN_TAX
+            , min( 
+                trim(to_char(TH.ACCURATE_AMOUNT, '9G999G999G999G999'))
+            ) AS ACCURATE_AMOUNT
+            , min(nvl(TH.CANCEL_FLG, 0)) AS CANCEL_FLG
+            <choose>
+                <!-- サブクエリ実行パターン = 3（信用取引系と取得日あり）以外の場合 -->
+                <when test='exPatternSubQuery != "3"'>
+                    , '' AS NEW_TRADE_DATE
+                </when>
+                <!-- サブクエリ実行パターン = 3（信用取引系と取得日あり）の場合 -->
+                <otherwise>
+                    , min( 
+                        decode( THT.NEW_TRADE_DATE, '1 ', '', '1', '', '', '', substr(THT.NEW_TRADE_DATE, 1, 4) || '/' || substr(THT.NEW_TRADE_DATE, 5, 2) || '/' || substr(THT.NEW_TRADE_DATE, 7, 2))
+                    ) AS NEW_TRADE_DATE
+                </otherwise>
+            </choose>
+            , min(TH.ORDER_NO) AS ORDER_NO
+        FROM
+        (
+            SELECT 
+                ROWNUM as gyou
+                , CUSTOMER_ID
+                , BRANCH_NO
+                , ACCOUNT_NO
+                , SEARCH_TRADE_S_CD
+                , BRAND_CD
+                , FORMAL_BRAND_NAME
+                , TRADE_DATE
+                , GET_DATE
+                , ORDER_NO
+                , PRODUCT_SHORT_NAME
+                , TRADE_SHORT_NAME1
+                , TRADE_SHORT_NAME2
+                , CAPITAL_GAIN_TAX_IND
+                , PRICE
+                , NEW_TRADE_PRICE
+                , ISSUE_CURRENCY_NAME
+                , EXCHANGE_RATE
+                , QUANTITY
+                , FEE
+                , CONSUMPTION_TAX
+                , ACCRUED_INTEREST_IND
+                , ACCRUED_INTEREST
+                , WITHHOLDING_TAX
+                , CAPITAL_GAIN_TAX
+                , ACCURATE_AMOUNT
+                , CANCEL_FLG
+                , SEARCH_TRADE_L_CD
+                , SEARCH_TRADE_M_CD
+                , SEARCH_PRODUCT_S_CD
+                , SEARCH_PRODUCT_M_CD
+                , SEARCH_PRODUCT_L_CD 
+            FROM
+                ETINTRA.TRADE_HISTORY
+            WHERE
+                CUSTOMER_ID = #{req.customerCode}
+                AND TRADE_DATE between to_date(#{req.periodFrom}, 'YYYY/MM/DD') AND to_date(#{req.periodTo}, 'YYYY/MM/DD') +1 - (1/86400)
+                
+                <choose>
+                    <!-- サブクエリ実行パターン = 1（信用取引系以外）の場合 -->
+                    <when test='exPatternSubQuery == "1"'>
+                        AND SEARCH_TRADE_L_CD &lt;&gt; 'D'
+                    </when>
+                    <!-- サブクエリ実行パターン = 1（信用取引系以外）以外 の場合 -->
+                    <otherwise>
+                        AND SEARCH_TRADE_L_CD = 'D'
+                    </otherwise>
+                </choose>
+
+                <!-- サブクエリ実行パターン = 2（信用取引系と取得日なし）の場合 -->
+                <if test='exPatternSubQuery == "2"'>
+                    AND NOT EXISTS (
+                        <!-- サブクエリ（信用取引追加情報確認）-->
+                        SELECT
+                            1 
+                        FROM
+                            ETINTRA.TRADE_HISTORY_TRUST THT
+                        WHERE
+                            <!-- 追加構成① -->
+                            <bind name="tableAlias" value="'TRADE_HISTORY'" />
+                            <include refid='tradeHistoryTrustwhereQuery' />
+                    )
+                </if>
+                
+                <!-- 商品検索ｺｰﾄﾞ -->
+                <!-- A002.商品検索ｺｰﾄﾞ(小分類)が未設定（nullまたは空文字）ではない場合 -->
+                <if test='req.securitySearchCodeSmallClass != null and req.securitySearchCodeSmallClass != ""'>
+                    AND SEARCH_PRODUCT_S_CD = #{req.securitySearchCodeSmallClass}
+                </if>
+                <!-- A002.商品検索ｺｰﾄﾞ(中分類)が未設定（nullまたは空文字）ではない場合  -->
+                <if test='req.securitySearchCodeMidClass != null and req.securitySearchCodeMidClass != ""'>
+                    AND SEARCH_PRODUCT_M_CD = #{req.securitySearchCodeMidClass}
+                </if>
+                <!-- A002.商品検索ｺｰﾄﾞ(大分類)が未設定（nullまたは空文字）ではない場合  -->
+                <if test='req.securitySearchCodeBigClass != null and req.securitySearchCodeBigClass != ""'>
+                    AND SEARCH_PRODUCT_L_CD = #{req.securitySearchCodeBigClass}
+                </if>
+
+                <!-- 取引検索ｺｰﾄﾞ -->
+                <!-- A002.取引検索ｺｰﾄﾞ(小分類)が未設定（nullまたは空文字）ではない場合  -->
+                <if test='req.tradeSearchCodeSmallClass != null and req.tradeSearchCodeSmallClass != ""'>
+                    AND SEARCH_TRADE_S_CD = #{req.tradeSearchCodeSmallClass}
+                </if>
+                <!-- A002.取引検索ｺｰﾄﾞ(中分類)が未設定（nullまたは空文字）ではない場合  -->
+                <if test='req.tradeSearchCodeMidClass != null and req.tradeSearchCodeMidClass != ""'>
+                    AND SEARCH_TRADE_M_CD = #{req.tradeSearchCodeMidClass}
+                </if>
+                <!-- A002.取引検索ｺｰﾄﾞ(大分類)が未設定（nullまたは空文字）ではない場合  -->
+                <if test='req.tradeSearchCodeBigClass != null and req.tradeSearchCodeBigClass != ""'>
+                    AND SEARCH_TRADE_L_CD = #{req.tradeSearchCodeBigClass}
+                </if>
+
+                <!-- A002.銘柄コードが未設定（nullまたは空文字）ではない場合 -->
+                <if test='req.brandCode != null and req.brandCode != ""'>
+                    AND BRAND_CD = #{req.brandCode}
+                </if>
+        ) TH
+        <!-- サブクエリ実行パターン = 3（信用取引系と取得日あり）の場合 -->
+        <if test='exPatternSubQuery == "3"'>
+            , ETINTRA.TRADE_HISTORY_TRUST THT
+            WHERE
+                <!-- 追加構成① -->
+                <bind name="tableAlias" value="'TH'" />
+                <include refid='tradeHistoryTrustwhereQuery' />
+        </if>
+        GROUP BY
+            GYOU
+    </sql>
+
+    <!-- 
+        追加構成①
+        取引履歴信用取引追加情報（TRADE_HISTORY_TRUST）の抽出条件
+    -->
+    <sql id="tradeHistoryTrustwhereQuery">
+        ${tableAlias}.BRANCH_NO = THT.BRANCH_NO 
+        AND ${tableAlias}.ACCOUNT_NO = THT.ACCOUNT_NO 
+        AND ${tableAlias}.SEARCH_TRADE_S_CD = THT.SEARCH_TRADE_S_CD 
+        AND ${tableAlias}.BRAND_CD = THT.BRAND_CD 
+        AND ${tableAlias}.FORMAL_BRAND_NAME = THT.FORMAL_BRAND_NAME 
+        AND ${tableAlias}.TRADE_DATE = THT.TRADE_DATE 
+        AND ${tableAlias}.GET_DATE = THT.GET_DATE 
+        AND ${tableAlias}.ORDER_NO = THT.ORDER_NO 
+        AND nvl(${tableAlias}.PRICE, 0) = nvl(THT.PRICE, 0) 
+        AND nvl(${tableAlias}.NEW_TRADE_PRICE, 0) = nvl(THT.NEW_TRADE_PRICE, 0) 
+        AND nvl(${tableAlias}.QUANTITY, 0) = nvl(THT.QUANTITY, 0) 
+        AND nvl(${tableAlias}.FEE, 0) = nvl(THT.FEE, 0) 
+        AND nvl(${tableAlias}.CONSUMPTION_TAX, 0) = nvl(THT.CONSUMPTION_TAX, 0) 
+        AND nvl(${tableAlias}.CAPITAL_GAIN_TAX, 0) = nvl(THT.CAPITAL_GAIN_TAX, 0) 
+        AND ${tableAlias}.ACCURATE_AMOUNT = THT.ACCURATE_AMOUNT 
+        AND nvl(${tableAlias}.CANCEL_FLG, 0) = nvl(THT.CANCEL_FLG, 0)
+    </sql>
+</mapper>

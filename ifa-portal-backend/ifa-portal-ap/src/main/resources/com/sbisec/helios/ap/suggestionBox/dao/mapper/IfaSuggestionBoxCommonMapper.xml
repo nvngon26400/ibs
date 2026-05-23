@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB00_02-06_1, SUB0511_02-01
+    画面名：皆様からの要望
+-->
+<mapper namespace="com.sbisec.helios.ap.suggestionBox.dao.mapper.IfaSuggestionBoxCommonMapper">
+
+    <resultMap
+        id="ResultMapIfaSuggestionBoxCommonSql002"
+        type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxCommonSql002ResponseModel"
+    >
+        <result property="title"  column="TITLE"  typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="suggestion"  column="SUGGESTION"  typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+        
+    <!--
+        SQLID：Sql002
+        SQL名：皆様からの要望一覧取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSugBoxCommonSql002"
+        resultMap="ResultMapIfaSuggestionBoxCommonSql002"
+        statementType="PREPARED"
+    >
+		SELECT /* @SQLID=SUB00_02-06_1#Sql002 */
+		    SUB.* 
+		FROM
+		    ( 
+		        SELECT
+		            COUNT(*) OVER () AS TOTAL_COUNT
+		            ,LPAD(SBC_NO,6,'0') AS SBC_NO
+		            ,TO_CHAR(UPDATE_TIME, 'yyyy/mm/dd') AS UPDATE_DATE
+		            ,TO_CHAR(CREATE_TIME, 'yyyy/mm/dd') AS CREATE_DATE
+		            ,TITLE
+		            ,CATEGORY
+		            ,STATUS
+		            ,SUGGESTION
+		        FROM
+		            SUG_BOX_COMMON
+		        WHERE
+		        TO_DATE(TO_CHAR(CREATE_TIME, 'yyyy/mm/dd'), 'yyyy/mm/dd') BETWEEN TO_DATE(#{req.registerDateFrom}, 'yyyy/mm/dd') AND TO_DATE(#{req.registerDateTo}, 'yyyy/mm/dd')
+		        <if test='req.title != null'>
+		            AND TITLE LIKE '%' || #{req.title} || '%'
+		        </if>
+		         <if test='req.status != null'>
+		            AND STATUS = #{req.status}
+		        </if>
+		        ORDER BY SBC_NO ASC
+		    ) SUB
+		WHERE
+		    ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+
+</mapper>

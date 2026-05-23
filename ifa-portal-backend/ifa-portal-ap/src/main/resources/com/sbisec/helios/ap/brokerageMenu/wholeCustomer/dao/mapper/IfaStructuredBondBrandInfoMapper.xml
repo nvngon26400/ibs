@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020302_0104-02
+    画面名：仕組債銘柄情報
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaStructuredBondBrandInfoMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaStructuredBondBrandInfoSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaStructuredBondBrandInfoSql001ResponseModel" >
+        <result property="sbmBondName" column="SBM_BOND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaStructuredBondBrandInfoSql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaStructuredBondBrandInfoSql002ResponseModel" >
+        <result property="flexField04" column="FLEX_FIELD_04" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaStructuredBondBrandInfoSql003" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaStructuredBondBrandInfoSql003ResponseModel" >
+        <result property="flexField04" column="FLEX_FIELD_04" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaStructuredBondBrandInfoSql004" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaStructuredBondBrandInfoSql004ResponseModel" >
+        <result property="flexField04" column="FLEX_FIELD_04" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaStructuredBondBrandInfoSql005" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaStructuredBondBrandInfoSql005ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaStructuredBondBrandInfoSql006" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaStructuredBondBrandInfoSql006ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaStructuredBondBrandInfoSql007" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaStructuredBondBrandInfoSql007ResponseModel" >
+        <result property="sbjmBrandName" column="SBJM_BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="flexField04" column="FLEX_FIELD_04" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：仕組債マスタ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStructuredBondBrandInfoSql001" resultMap="ResultMapIfaStructuredBondBrandInfoSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-02#Sql001 */ 
+            SBM_BOND_CODE,                -- STAR債券コード
+            SBM_ISIN_CODE,                -- ISINコード
+            SBM_SUBSCRIPTION_WAY,         -- 公募私募区分
+            SBM_BOND_NAME,                -- 債券名
+            SBM_ISSUE_DATE,               -- 発行日
+            SBM_PAYMENT_DATE,             -- 満期償還日
+            SBM_NOCKIN_EVENT_KBN,         -- ノックインイベント区分
+            SBM_EARLY_PAYMENT_KBN,        -- 早期償還イベント区分
+            SBM_BEFORE_TRADE_DAYS,        -- 取引所判断日数
+            SBM_NOCALL_PERIOD,            -- ノンコール期間
+            SBM_CURRENT_RATE,             -- 適用利率
+            SBM_COUPON_TYPE,              -- クーポン種類
+            SBM_FIX_COUPON,               -- 固定クーポン
+            SBM_FIX_COUPON_TIMES,         -- 固定クーポン回数
+            SBM_HIGH_COUPON_LEVEL,        -- ハイ判定水準
+            SBM_HIGH_COUPON_CALC,         -- ハイクーポン端数計算
+            SBM_HIGH_COUPON_ROUND,        -- ハイクーポン端数処理
+            SBM_HIGH_COUPON,              -- ハイクーポン
+            SBM_MID_COUPON_LEVEL,         -- ミッド判定水準
+            SBM_MID_COUPON_CALC,          -- ミッドクーポン端数計算
+            SBM_MID_COUPON_ROUND,         -- ミッドクーポン端数処理
+            SBM_MID_COUPON,               -- ミッドクーポン
+            SBM_LOW_COUPON_LEVEL,         -- ロー判定水準
+            SBM_LOW_COUPON_CALC,          -- ロークーポン端数計算
+            SBM_LOW_COUPON_ROUND,         -- ロークーポン端数処理
+            SBM_LOW_COUPON,               -- ロークーポン
+            SBM_PAYMENT_JUDGEMENT_DATE,   -- 満期償還判定日
+            SBM_FIRST_JUDGEMENT_DATE,     -- 当初価格設定判定日
+            SBM_OBSERVATION_PERIOD_FROM,  -- 観察期間from
+            SBM_OBSERVATION_PERIOD_TO,    -- 観察期間to
+            SBM_VALUE_TYPE,               -- 参照値
+            SBM_CURRENCY_PAIR,            -- 通貨ペア
+            SBM_USE_RATE,                 -- 使用レート
+            SBM_LEVERAGE,                 -- レバレッジ
+            SBM_NOCKIN_EXEMPTION_KBN,     -- ノックイン免除有無
+            SBM_NOCKIN_EXEMPTION_FROM,    -- ノックイン免除観察期間FROM
+            SBM_NOCKIN_EXEMPTION_TO,      -- ノックイン免除観察期間TO
+            SBM_KO_MEMORY_KBN            -- 早期償還メモリ有無
+        FROM 
+            ETRADE.STRUCTURED_BOND_MASTER@CORDYS_ET10.WORLD 
+        WHERE 
+            SBM_BOND_CODE = #{req.brandCode}
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：参照営業日カレンダー取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStructuredBondBrandInfoSql002" resultMap="ResultMapIfaStructuredBondBrandInfoSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-02#Sql002 */
+            B.FLEX_FIELD_04  -- 汎用フィールド4
+        FROM ETRADE.STRUCTURED_BOND_REFER_CAL@CORDYS_ET10.WORLD A 
+        LEFT JOIN ETRADE.ETRADE_GENERAL_CD_MASTER@CORDYS_ET10.WORLD B 
+            ON A.SBRC_CALENDAR_TYPE = B.FLEX_FIELD_01
+            AND A.SBRC_CALENDAR_ID = B.FLEX_FIELD_02
+            AND A.SBRC_COUNTRY_CODE = B.FLEX_FIELD_03
+        WHERE 
+            A.SBRC_BOND_CODE = #{req.brandCode}
+            AND B.SEQ_NO = 80039
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：参照取引所カレンダー取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStructuredBondBrandInfoSql003" resultMap="ResultMapIfaStructuredBondBrandInfoSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-02#Sql003 */ 
+            B.FLEX_FIELD_04  -- 汎用フィールド4
+        FROM ETRADE.STRUCTURED_BOND_REFER_CAL@CORDYS_ET10.WORLD A 
+        LEFT JOIN ETRADE.ETRADE_GENERAL_CD_MASTER@CORDYS_ET10.WORLD B 
+            ON A.SBRC_CALENDAR_TYPE = B.FLEX_FIELD_01
+            AND A.SBRC_CALENDAR_ID = B.FLEX_FIELD_02
+            AND A.SBRC_COUNTRY_CODE = B.FLEX_FIELD_03
+        WHERE 
+            A.SBRC_BOND_CODE = #{req.brandCode}
+            AND B.SEQ_NO = 80038
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：コード値の表示用文言取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStructuredBondBrandInfoSql004" resultMap="ResultMapIfaStructuredBondBrandInfoSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-02#Sql004 */ 
+            FLEX_FIELD_04  -- 汎用フィールド4
+        FROM ETRADE.ETRADE_GENERAL_CD_MASTER@CORDYS_ET10.WORLD 
+        WHERE 
+            SEQ_NO = #{req.seqNo}
+            AND FLEX_FIELD_02 = #{req.displayItemCode}
+    </select>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：早期償還判定日取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStructuredBondBrandInfoSql005" resultMap="ResultMapIfaStructuredBondBrandInfoSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-02#Sql005 */ 
+            SBEP_EARLY_PAYMENT_JUDGE_DATE  -- 早期償還判定日
+        FROM ETRADE.STRUCTURED_BOND_EARLY_PAY@CORDYS_ET10.WORLD 
+        WHERE 
+            SBEP_BOND_CODE = #{req.brandCode}
+        ORDER BY
+            SBEP_EARLY_PAYMENT_JUDGE_DATE ASC
+    </select>
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：仕組債判定条件マスタ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStructuredBondBrandInfoSql006" resultMap="ResultMapIfaStructuredBondBrandInfoSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-02#Sql006 */
+            SBJM_NOCKIN_LEVEL,            -- ノックイン判定水準
+            SBJM_NOCKIN_CALC,             -- ノックイン判定端数計算
+            SBJM_NOCKIN_ROUND,            -- ノックイン判定端数処理
+            SBJM_EARLY_PAYMENT_LEVEL,     -- 早期償還判定水準
+            SBJM_EARLY_PAYMENT_CALC,      -- 早期償還判定端数計算
+            SBJM_EARLY_PAYMENT_ROUND,     -- 早期償還判定端数処理
+            SBJM_EARLY_PLD_FLG,           -- '0'(なし)、'1'(あり)
+            SBJM_EARLY_PLD_FROM,          -- 早期償還判定水準ステップダウン開始回目
+            SBJM_EARLY_PLD_VALUE,         -- 早期償還判定水準ステップダウン設定値
+            SBJM_EARLY_PLD_MIN,           -- 早期償還判定水準ステップダウン下限
+            SBJM_EARLY_PLD_MIN_CALC,      -- 早期償還判定水準ステップダウン下限端数計算
+            SBJM_EARLY_PLD_MIN_ROUND,     -- 早期償還判定水準ステップダウン下限端数処理
+            SBJM_EARLY_PAYMENT_PERCENT,   -- 早期償還価格比率
+            SBJM_EXERCISE_PRICE_PERCENT,  -- 行使価格比率
+            SBJM_EXERCISE_PRICE_CALC,     -- 行使価格端数計算
+            SBJM_EXERCISE_PRICE_ROUND,    -- 行使価格端数処理
+            SBJM_PAYMENT_CHECK_LEVEL,     -- 満期償還判定水準
+            SBJM_EXPIRE_PAYMENT_CALC,     -- 満期償還端数計算
+            SBJM_EXPIRE_PAYMENT_ROUND,    -- 満期償還端数処理
+            SBJM_EXPIRE_PAYMENT_PERCENT,  -- 満期償還価格比率
+            SBJM_NOCKIN_EXEMPTION_LEVEL,  -- ノックイン免除判定水準
+            SBJM_NOCKIN_EXEMPTION_CALC,   -- ノックイン免除判定端数計算
+            SBJM_NOCKIN_EXEMPTION_ROUND   -- ノックイン免除判定端数処理
+        FROM ETRADE.STRUCTURED_BOND_JUDGE_MST@CORDYS_ET10.WORLD         
+        WHERE 
+            SBJM_BOND_CODE = #{req.brandCode}
+            AND ROWNUM = 1
+    </select>
+    
+    <!-- 
+        SQLID：Sql007
+        SQL名：参照銘柄リスト取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStructuredBondBrandInfoSql007" resultMap="ResultMapIfaStructuredBondBrandInfoSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0104-02#Sql007 */ 
+            A.SBJM_GROUP_CODE,           -- 判定銘柄種別
+            A.SBJM_EXCHANGE_CODE,        -- 判定市場コード 
+            A.SBJM_TICKER_CODE,          -- 判定銘柄コード
+            A.SBJM_BRAND_NAME,           -- 判定銘柄名 
+            B.FLEX_FIELD_04,             -- 汎用フィールド4 
+            A.SBJM_FIRST_PRICE,          -- 当初価格 
+            A.SBJM_NOCKIN_PRICE,         -- ノックイン水準価格
+            A.SBJM_EARLY_PAYMENT_PRICE,  -- 早期償還水準価格
+            A.SBJM_NOCKIN_ONSET_DATE,    -- ノックイン発生日
+            A.SBJM_NOCKIN_ONSET_PRICE,   -- ノックイン発生時価格
+            A.SBJM_DISPLAY_ORDER         -- 表示順
+        FROM ETRADE.STRUCTURED_BOND_JUDGE_MST@CORDYS_ET10.WORLD A 
+        LEFT JOIN ETRADE.ETRADE_GENERAL_CD_MASTER@CORDYS_ET10.WORLD B 
+            ON A.SBJM_UNIT = B.FLEX_FIELD_02
+        WHERE 
+            A.SBJM_BOND_CODE = #{req.brandCode}
+            AND B.SEQ_NO = 80006
+        ORDER BY
+            A.SBJM_DISPLAY_ORDER ASC
+    </select>
+
+</mapper>

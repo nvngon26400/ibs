@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct008Mapper">
+
+    <!-- SQL001：営業日取得 -->
+    <select id="getBusinessDayList" resultType="java.lang.String">
+        select /* @SQLID=FCT008#SQL001 */
+        　　　* 
+        from (
+            select 
+                C_TARGET_DATE
+            from 
+                M_CALENDAR
+            where
+                C_CALENDAR_ID = 'T003'
+                and IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') &lt;= C_TARGET_DATE
+                and C_BUS_NONBUS_DIV = '2'
+                and C_DELETE_FLG = '0'
+            order by C_TARGET_DATE
+        )
+        where rownum &lt;=16
+    </select>
+
+    <!--SQL002：優先市場の取得-->
+    <select id="getMarket" resultType="com.sbisec.helios.ap.bizcommon.dao.model.Fct008Sql002ResponseModel">
+        select /* @SQLID=FCT008#SQL002 */
+            IPM_SE_INVESTMENTS_CODE 
+        from
+            I_PRODUCT_MASTER
+        where 
+            IPM_PRODUCT_FLAG = '0'
+            and substr(IPM_PRODUCT_CODE,1,5) = #{brandCode}
+            and IPM_PRI_EX_FLAG = '1'
+    </select>
+    
+    <!-- 国内株式取引市場終了時刻取得 -->
+    <select id="getOverTime" resultType="com.sbisec.helios.ap.bizcommon.dao.model.Fct008Sql003ResponseModel">
+		select /* @SQLID=FCT008#SQL003 */
+		NAME AS overTime
+		from
+		M_CODE
+		where
+		CODE_TYPE = '57'
+		<choose>
+			<when test='req.periodTargetMarket == "0" or req.periodTargetMarket == "2"
+			 or req.periodTargetMarket == "6" or req.periodTargetMarket== "8" or req.periodTargetMarket == "H"'>
+			    AND CODE_1 = #{req.periodTargetMarket}
+			</when>
+			<when test="req.sql002ResSize == 1">
+				AND CODE_2 = TRIM(#{req.ipmSeInvestmentsCode})
+			</when>
+			<otherwise>
+				AND CODE_2 = 'DMY'
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

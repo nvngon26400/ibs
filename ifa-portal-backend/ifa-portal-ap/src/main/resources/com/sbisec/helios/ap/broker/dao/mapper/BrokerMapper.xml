@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.broker.dao.mapper.BrokerMapper">
+
+	<!-- jlumme, 20151208, for BasicCustomerSearch -->
+	<resultMap
+		type="com.sbisec.helios.ap.broker.model.GetCustomerBasicDataModel" id="ResultSetGetCustomerBasicData">
+		<result property="display" column="DISPLAY" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="customerId" column="CUSTOMER_ID" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="butenCode" column="BUTEN_CODE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="accountNumber" column="ACCOUNT_NUMBER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="brokerCode" column="BROKER_CODE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="intermediaryEmpCd" column="INTERMEDIARY_EMP_CD" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="customerAttribute" column="CUSTOMER_ATTRIBUTE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="customerAttributeName" column="CUSTOMER_ATTRIBUTE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="corporationKbn" column="CORPORATION_KBN" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="nameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="nameKana" column="NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="addressKanji1" column="ADDRESS_KANJI1" typeHandler="com.sbisec.helios.ap.common.typehandler.AddressConvertHandler" />
+		<result property="addressKana1" column="ADDRESS_KANA1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="phoneNumber" column="PHONE_NUMBER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="phoneFlg" column="PHONE_FLG" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="sexKbn" column="SEX_KBN" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="birthDay" column="BIRTH_DAY" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="age" column="AGE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="accountOpeningDate" column="OPEN_ACCT_DATE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="tcCompRank" column="TC_COMP_RANK" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="lastContractDate" column="LAST_CONTRACT_DATE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="evaluation" column="EVALUATION" />
+		<result property="branchCode" column="BROKER_BRANCH_CODE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+	</resultMap>
+
+	<select id="getCustomerBasicData" resultMap="ResultSetGetCustomerBasicData"
+		statementType="PREPARED">
+		SELECT * FROM (
+		SELECT count(*) over() as totalRow,M.*,N.LAST_CONTRACT_DATE,N.EVALUATION
+		FROM (SELECT DISTINCT '表示' AS DISPLAY,
+		A.CUSTOMER_ID
+		,A.BUTEN_CODE
+		,A.ACCOUNT_NUMBER AS ACCOUNT_NUMBER
+		,A.BROKER_CODE
+		,B.BROKER_NAME
+		,A.INTERMEDIARY_EMP_CD
+		,A.CUSTOMER_ATTRIBUTE
+		,A.CUSTOMER_ATTRIBUTE_NAME
+		,E.BROKER_CHARGE_NAME
+		,A.CORPORATION_KBN
+		,A.NAME_KANJI
+		,A.NAME_KANA
+		,CASE WHEN A.ZIP_CODE IS NULL THEN A.ADDRESS_KANJI1 ELSE SUBSTR(A.ZIP_CODE, 1, 3)||'-'||SUBSTR(A.ZIP_CODE, 4, 7)||' '||A.ADDRESS_KANJI1 END AS ADDRESS_KANJI1
+		,A.ADDRESS_KANA1
+		,A.PHONE_NUMBER
+		,A.PHONE_FLG
+		,A.SEX_KBN
+		,A.BIRTH_DAY
+		,A.AGE
+		,A.OPEN_ACCT_DATE
+		,A.TC_COMP_RANK
+		,MCI.BROKER_BRANCH_CODE
+		,MB.BRANCH_NAME
+		<!-- ,C.BRANCH_NAME -->
+		FROM ( SELECT *
+		FROM MEDIATE_USER_ATTRIBUTE_INFO
+		WHERE 1=1
+		<if test="butenCode != null">
+			AND BUTEN_CODE = #{butenCode}
+		</if>
+		<if test="accountNumber != null">
+			AND ACCOUNT_NUMBER = TO_NUMBER(#{accountNumber})
+		</if>
+
+		<if test="privId != null">
+			<choose>
+			 	<when test='"1".equals(privId)'>
+					<choose>
+			 			<when test='"1".equals(chkBrokerCodeExclude) and brokerCodeExcludeList != null and 0 &lt; brokerCodeExcludeList.size()'>
+			 				AND BROKER_CODE NOT IN
+							<foreach item="brokerCodeExclude" index="index" collection="brokerCodeExcludeList" open="(" separator="," close=")">
+								#{brokerCodeExclude}
+							</foreach>
+			 			</when>
+			 			<when test='"0".equals(chkBrokerCodeExclude) and brokerCodeExcludeList != null and 0 &lt; brokerCodeExcludeList.size()'>
+			 				AND BROKER_CODE IN
+							<foreach item="brokerCodeExclude" index="index" collection="brokerCodeExcludeList" open="(" separator="," close=")">
+								#{brokerCodeExclude}
+							</foreach>
+			 			</when>
+			 			<otherwise>
+						</otherwise>
+					</choose>
+				</when>
+				<otherwise>
+					<if test="brokerCode != null">
+						AND BROKER_CODE = #{brokerCode}
+					</if>
+				</otherwise>
+			</choose>
+		</if>
+
+		<if test="intermediaryEmpCd != null">
+			AND INTERMEDIARY_EMP_CD = #{intermediaryEmpCd}
+		</if>
+
+		<if
+			test="customerAttribute != null and customerAttribute != '0'.toString()">
+			AND CUSTOMER_ATTRIBUTE = #{customerAttribute}
+		</if>
+
+		<if test="phoneNumber != null">
+			AND PHONE_NUMBER = #{phoneNumber}
+		</if>
+		<if test="customerName != null">
+			<choose>
+				<when test="customerName.endsWith('%')">
+					AND (
+					NAME_KANJI LIKE #{customerName} ESCAPE '!'
+					OR
+					NAME_KANA LIKE #{customerName} ESCAPE '!'
+					)
+				</when>
+				<otherwise>
+					AND (
+					NAME_KANJI = #{customerName}
+					OR
+					NAME_KANA = #{customerName}
+					)
+				</otherwise>
+			</choose>
+		</if>
+		<if test="address != null">
+			<choose>
+				<when test="address.endsWith('%')">
+					AND ADDRESS_KANJI1 LIKE #{address}
+				</when>
+				<otherwise>
+					AND ADDRESS_KANJI1 = #{address}
+				</otherwise>
+			</choose>
+		</if>
+
+		<if test="tcCompRankFrom != null">
+			AND TC_COMP_RANK &gt;= #{tcCompRankFrom}
+		</if>
+
+		<if test="tcCompRankTo != null">
+			AND TC_COMP_RANK &lt;= #{tcCompRankTo}
+		</if>
+
+		<if test="accountOpenDate != null">
+			AND OPEN_ACCT_DATE &gt;= #{accountOpenDate}
+		</if>
+
+		<if test="accountCloseDate != null">
+			AND OPEN_ACCT_DATE &lt;= #{accountCloseDate}
+		</if>
+		<!--Privilege check -->
+<!-- 
+		<include
+			refid="com.sbibits.horus.ap.common.dao.mapper.fragment.privilegeCheckCustomerBasicSearch" />
+ -->
+		) A
+        LEFT OUTER JOIN MEDIATE_CHARGE_INFO MCI
+        ON MCI.BROKER_CODE = A.BROKER_CODE
+        AND MCI.BROKER_CHARGE_CODE = A.INTERMEDIARY_EMP_CD
+        AND (
+                SELECT
+                    COUNT(*)
+                FROM
+                    MEDIATE_CHARGE_INFO MCI2
+                WHERE
+                    A.BROKER_CODE = MCI2.BROKER_CODE
+                AND A.INTERMEDIARY_EMP_CD = MCI2.BROKER_CHARGE_CODE
+            ) = 1
+		LEFT OUTER JOIN MEDIATE_BRANCH MB
+        ON MB.BROKER_CODE = A.BROKER_CODE
+        AND MCI.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+		LEFT OUTER JOIN
+		(
+		SELECT BROKER_CODE,BRANCH_NAME AS BROKER_NAME
+		FROM MEDIATE_BRANCH
+		WHERE BROKER_BRANCH_KIND='00'
+		) B
+		ON B.BROKER_CODE = A.BROKER_CODE
+		<!--
+		LEFT OUTER JOIN BRANCH C
+		ON C.BRANCH_CODE = A.BUTEN_CODE
+		-->
+		LEFT OUTER JOIN (
+		SELECT DISTINCT BROKER_CODE,BROKER_CHARGE_CODE,BROKER_CHARGE_NAME FROM
+		MEDIATE_CHARGE_INFO
+		WHERE BROKER_CHARGE_CODE &lt;&gt;'0000' AND DELETE_FLG = '0'
+		) E
+		ON E.BROKER_CODE = A.BROKER_CODE
+		AND E.BROKER_CHARGE_CODE = A.INTERMEDIARY_EMP_CD
+		)M
+		LEFT OUTER JOIN
+		(SELECT CUSTOMER_ID,
+		BUTEN_CODE,ACCOUNT_NUMBER,LAST_CONTRACT_DATE,(PROF_LOSS_STOCK+PROF_LOSS_FOR_STOCK+PROF_LOSS_TRUST+PROF_LOSS_FOR_TRUST+PROF_LOSS_TRUST_STOCK)
+		AS EVALUATION
+		FROM USER_ATTRIBUTE )
+		N ON M.CUSTOMER_ID = N.CUSTOMER_ID
+		<if test="valuationFrom != null or  valuationTo != null">
+			LEFT OUTER JOIN
+			(SELECT MAX(CUSTOMER_ID) AS CUSTOMER_ID,SUM(ASSETS) AS ASSETS FROM
+			USER_INFO_ASSETS GROUP BY CUSTOMER_ID) Q
+			ON M.CUSTOMER_ID=Q.CUSTOMER_ID
+		</if>
+<!-- 
+		<if test="comissionValueLimiterFrom != null or comissionValueLimiterTo != null">
+			LEFT OUTER JOIN
+			(SELECT MAX(CUSTOMER_ID) AS CUSTOMER_ID,SUM(NVL(COMMISSION,0)) AS COMMISSION
+			FROM
+			(
+			SELECT * FROM USER_INFO_COMMISSION WHERE 1 = 1
+			<include
+				refid="com.sbibits.horus.ap.common.dao.mapper.fragment.securityTypeSearch" />
+			) WHERE 1 = 1
+
+			<if test="comissionDateLimiter != 'all'">
+				AND YM = #{comissionDateLimiter}
+			</if>
+			GROUP BY (CUSTOMER_ID)) P ON M.CUSTOMER_ID=P.CUSTOMER_ID
+		</if>
+ -->
+		WHERE 1 = 1
+		<!-- 支店コード -->
+        <if test="branchCode != null">
+              AND M.BROKER_BRANCH_CODE = #{branchCode}
+        </if>
+		<!-- 最後約定日 -->
+		<if test="lastContractDateFrom != null">
+			AND TO_CHAR(N.LAST_CONTRACT_DATE,'YYYYMMDD') &gt;=
+			#{lastContractDateFrom}
+		</if>
+		<if test="lastContractDateTo != null">
+			AND TO_CHAR(N.LAST_CONTRACT_DATE,'YYYYMMDD') &lt;= #{lastContractDateTo}
+		</if>
+		<!-- 評価額 -->
+		<if test="valuationFrom != null">
+			AND Q.ASSETS &gt;= #{valuationFrom}
+		</if>
+		<if test="valuationTo != null">
+			AND Q.ASSETS &lt;= #{valuationTo}
+		</if>
+		<!-- Move this to the block with date limiter above? -->
+		<!-- 手数料累計値 -->
+		<if test="comissionValueLimiterFrom != null">
+			AND P.COMMISSION &gt;= #{comissionValueLimiterFrom}
+		</if>
+		<if test="comissionValueLimiterTo != null">
+			AND P.COMMISSION &lt;= #{comissionValueLimiterTo}
+		</if>
+		<if test="ageMinimum != -1">
+			AND AGE &gt;= #{ageMinimum, jdbcType=INTEGER}
+		</if>
+		<if test="ageMaximum != -1">
+			AND AGE &lt;= #{ageMaximum, jdbcType=INTEGER}
+		</if>
+
+		<!-- Sort order -->
+		<choose>
+			<when test='"1".equals(privId) or "2".equals(privId)'>
+				ORDER BY M.BROKER_CODE ASC,M.BUTEN_CODE ASC,M.ACCOUNT_NUMBER ASC
+			</when>
+			<otherwise>
+				ORDER BY M.BUTEN_CODE ASC,M.ACCOUNT_NUMBER ASC
+			</otherwise>
+		</choose>
+		) WHERE 1 = 1
+		<if test="querySizeLimit != null">
+			AND ROWNUM &lt;= #{querySizeLimit}
+		</if>
+
+	</select>
+
+</mapper>

@@ -1,0 +1,72 @@
+package com.sbisec.helios.gw.brokerageMenu.wholeCustomer.controller;
+
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.sbibits.earth.servlet.annotation.ScreenId;
+import com.sbibits.earth.servlet.annotation.SessionCheckTarget;
+import com.sbibits.earth.util.json.JsonConverter;
+import com.sbisec.helios.ap.common.model.DataList;
+import com.sbisec.helios.ap.common.util.ApiRequestUtil;
+import com.sbisec.helios.gw.common.controller.BaseController;
+import com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dto.IfaDomesticMarginCollateralDeficientAlertListA002RequestDto;
+import com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dto.IfaDomesticMarginCollateralDeficientAlertListA002ResponseDto;
+import com.sbisec.helios.gw.brokerageMenu.wholeCustomer.form.IfaDomesticMarginCollateralDeficientAlertListA002ApiRequest;
+import com.sbisec.helios.gw.brokerageMenu.wholeCustomer.form.IfaDomesticMarginCollateralDeficientAlertListA002ApiResponse;
+
+/**
+ * 画面ID：SUB020301_01-02
+ * 画面名：国内信用担保不足アラート一覧
+ *
+ * @author BASE李
+ 2024/06/11 新規作成
+ */
+@RestController
+@SessionCheckTarget(type = "httpSession")
+@ScreenId(groupId = "MAIN02", id = "SUB020301_01-02", screenNumber = "")
+public class IfaDomesticMarginCollateralDeficientAlertListController extends BaseController {
+
+    private JsonConverter jc = JsonConverter.getInstance();
+
+    /**
+     * アクセス：/brokerageMenu/wholeCustomer/ifaDomesticMarginCollateralDeficientAlertListDisplayA002
+     * アクションID：A002
+     * アクション名：表示
+     * APIリクエスト：IfaDomesticMarginCollateralDeficientAlertListA002ApiRequest
+     * Apiレスポンス：IfaDomesticMarginCollateralDeficientAlertListA002ApiResponse
+     * Dtoリクエスト：IfaDomesticMarginCollateralDeficientAlertListA002RequestDto
+     * Dtoレスポンス：IfaDomesticMarginCollateralDeficientAlertListA002ResponseDto
+     *
+     * @param apiReq リクエスト
+     * @return apiRes レスポンス
+     * @exception exception システムエラー
+     */
+    @PostMapping(value = "/brokerageMenu/wholeCustomer/ifaDomesticMarginCollateralDeficientAlertListDisplayA002")
+    public String displayA002(@RequestBody IfaDomesticMarginCollateralDeficientAlertListA002ApiRequest apiReq) throws Exception {
+
+        IfaDomesticMarginCollateralDeficientAlertListA002RequestDto appReq = new IfaDomesticMarginCollateralDeficientAlertListA002RequestDto();
+
+        // Beanコピー用共通部品。
+        BeanUtils.copyProperties(appReq, apiReq);
+
+        DataList<IfaDomesticMarginCollateralDeficientAlertListA002ResponseDto> appRes = ApiRequestUtil.invoke("cmpIfaDomesticMarginCollateralDeficientAlertListService",
+                "displayA002", new TypeReference<DataList<IfaDomesticMarginCollateralDeficientAlertListA002ResponseDto>>() {
+                }, appReq);
+        
+        DataList<IfaDomesticMarginCollateralDeficientAlertListA002ApiResponse> apiRes = new DataList<IfaDomesticMarginCollateralDeficientAlertListA002ApiResponse>();
+        
+        BeanUtils.copyProperties(apiRes, appRes);
+        
+        return jc.toString(apiRes);
+    }
+
+    @Override
+    protected String getFirstViewName() {
+        return null;
+    }
+}
+

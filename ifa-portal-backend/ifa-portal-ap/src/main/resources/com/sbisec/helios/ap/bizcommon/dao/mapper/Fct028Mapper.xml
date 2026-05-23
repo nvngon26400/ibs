@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct028Mapper">
+
+    <resultMap
+        type="com.sbisec.helios.ap.bizcommon.dao.model.Fct028Sql001ResponseModel"
+        id="sql001Response">
+    </resultMap>
+
+    <!-- FCT028.SQL001.店頭取引注文情報の取得 -->
+    <select id="getFct028Sql001" resultMap="sql001Response" statementType="PREPARED"> 
+        SELECT 
+        /* @SQLID=FCT028#Sql001 */
+        ORDER_NO , 
+        BROKER_CODE,
+        BRAND_CODE,
+        BUTEN_CODE,
+        DEPOSIT_TYPE,
+        ACCOUNT_NUMBER,
+        ORDER_COUNT,
+        ORDER_STATUS,
+        TRADE_TYPE,
+        APPOINT_PRICE
+        FROM 
+        T_COUNTER_ORDER
+        WHERE
+        BUTEN_CODE = #{fct028Sql001RequestModel.butenCode} 
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{fct028Sql001RequestModel.accountNumber})
+        AND BRAND_CODE = #{fct028Sql001RequestModel.brandCode}
+        AND DEPOSIT_TYPE = #{fct028Sql001RequestModel.depositType}
+        AND ORDER_STATUS IN ('10','30')
+        AND ORDER_DAY = TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYYMMDD')
+     </select>
+
+</mapper>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_00-02
+    画面名：顧客ポータル_顧客情報
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaCustomerPortalMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql002ResponseModel" >
+		<result property="ifaMemoContent" column="IFA_MEMO_CONTENT" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql004ResponseModel" >
+		<result property="ccsMemo" column="CCS_MEMO" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql005" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql005ResponseModel" >
+		<result property="customerInfoCourse" column="CUSTOMER_INFO_COURSE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql003Select" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql003SelectResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql003SelectExclusive" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql003SelectExclusiveResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSqlStb" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSqlStbResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql007" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql007ResponseModel">
+        <result property="nameKana" column="NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="addressKanji1" column="ADDRESS_KANJI1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="addressKana1" column="ADDRESS_KANA1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql008" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql008ResponseModel">
+        <result property="uaiOfficeName" column="UAI_OFFICE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql009" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql009ResponseModel">
+        <result property="idPwFlg" column="ID_PW_FLG" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="empCrName" column="EMP_CR_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="empCsName" column="EMP_CS_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaCustomerPortalSql010" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaCustomerPortalSql010ResponseModel">
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：メモ(IFA専用)取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerPortalSql002" resultMap="ResultMapIfaCustomerPortalSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#Sql002 */
+        	A.CUSTOMER_ID CUSTOMER_CODE
+        	,A.CONTENTS IFA_MEMO_CONTENT
+        	,A.UPDATE_TIME IFA_MEMO_UPDATE_DATE_TIME
+        FROM 
+        	MEDIATE_MEMO A
+        WHERE
+        	A.CUSTOMER_ID = #{req.customerCode}
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：CCS顧客メモ情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerPortalSql004" resultMap="ResultMapIfaCustomerPortalSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#Sql004 */
+	        A.CCS_CONTENTS CCS_MEMO
+        FROM 
+        	CCS_CUSTOMER_MEMO A
+        WHERE
+        	A.CUSTOMER_ID = #{req.customerCode}
+    </select>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：コース名情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerPortalSql005" resultMap="ResultMapIfaCustomerPortalSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#Sql005 */
+        	A.COURSE_NAME CUSTOMER_INFO_COURSE
+        FROM 
+        	DEALER_COURSE_MASTER A
+        WHERE
+        	A.DEALER_NUMBER = #{req.dealerNumber}
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：メモ(IFA専用)取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerPortalSql003" resultMap="ResultMapIfaCustomerPortalSql003Select" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#Sql003Select */
+        	A.CUSTOMER_ID CUSTOMER_CODE
+        FROM 
+        	MEDIATE_MEMO A
+        WHERE
+        	A.CUSTOMER_ID = #{req.customerCode}
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：メモ(IFA専用)取得(排他制御)
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerPortalSql003Exclusive" resultMap="ResultMapIfaCustomerPortalSql003SelectExclusive" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#Sql003Select */
+        	A.CUSTOMER_ID CUSTOMER_CODE
+        FROM 
+        	MEDIATE_MEMO A
+        WHERE
+        	A.CUSTOMER_ID = #{req.customerCode}
+        	AND UPDATE_TIME = TO_DATE(#{req.ifaMemoUpdateDateTime}, 'YYYY-MM-DD HH24:MI:SS')
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：メモ(IFA専用)更新
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaCustomerPortalSql003" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_00-02#Sql003Insert */
+        INTO MEDIATE_MEMO ( 
+		    CUSTOMER_ID
+		    , CONTENTS
+		    , CREATE_USER
+		    , CREATE_TIME
+		    , UPDATE_USER
+		    , UPDATE_TIME
+		) 
+		VALUES ( 
+		    #{req.customerCode}
+		    , #{req.ifaMemoContent}
+		    , #{req.userId}
+		    , IFA_DATE_UTIL.IFA_GET_DATE
+		    , #{req.userId}
+		    , IFA_DATE_UTIL.IFA_GET_DATE
+		)
+    </insert>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：メモ(IFA専用)更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaCustomerPortalSql003" statementType="PREPARED">
+		UPDATE /* @SQLID=SUB0202_00-02#Sql003Update */
+		MEDIATE_MEMO
+		SET
+			CONTENTS = #{req.ifaMemoContent}
+		    , UPDATE_USER = #{req.userId}
+		    , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+		WHERE 
+			CUSTOMER_ID = #{req.customerCode}
+    </update>
+    
+    
+    <!-- 
+        SQLID：SqlStb
+        SQL名：レスポンス情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerPortalSqlStb" resultMap="ResultMapIfaCustomerPortalSqlStb" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#SqlStb */
+            A.*
+		    , B.MARGIN_POWER_INFO_YEN_ACQUIRE_FAILURE_MSG
+		    , B.MARGIN_POWER_INFO_YEN_ACQUIRE_FAILURE_ERROR_LEVEL
+		    , B.FOREIGN_TRADE_ACCOUNT_OPEN_STATUS_ACQUIRE_FAILURE_MSG
+		    , B.FOREIGN_TRADE_ACCOUNT_OPEN_STATUS_ACQUIRE_FAILURE_ERROR_LEVEL
+		    , B.BUY_RESERVE_POWER_INFO_FOREIGN_ACQUIRE_FAILURE_MSG
+		    , B.BUY_RESERVE_POWER_INFO_FOREIGN_ACQUIRE_FAILURE_ERROR_LEVEL
+		    , B.US_STOCK_MARGIN_ACCOUNT_OPEN_STATUS_ACQUIRE_FAILURE_MSG
+		    , B.US_STOCK_MARGIN_ACCOUNT_OPEN_STATUS_ACQUIRE_FAILURE_ERROR_LEVEL 
+		FROM
+		    TEST_CUSTOMER_CACHE A 
+		    LEFT JOIN TEST_CUSTOMER_CACHE_ERROR_LIST B 
+		        ON A.CUSTOMER_CODE = B.CUSTOMER_CODE 
+		WHERE
+		    A.BUTEN_CODE = #{req.butenCode}
+		    AND TO_NUMBER(A.ACCOUNT_NUMBER) = TO_NUMBER(#{req.accountNumber})
+    </select>
+    
+    <select id="selectIfaCustomerPortalSql007" resultMap="ResultMapIfaCustomerPortalSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#Sql007 */
+            A.NAME_KANA,
+            A.ZIP_CODE,
+            A.ADDRESS_KANJI1,
+            A.ADDRESS_KANA1,
+            A.SEX_KBN
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO A
+        WHERE
+            A.CUSTOMER_ID = #{req.customerCode}
+    </select>
+    
+    <select id="selectIfaCustomerPortalSql008" resultMap="ResultMapIfaCustomerPortalSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#Sql008 */
+            TRIM(A.UAI_OCCUPATION) AS UAI_OCCUPATION,
+            A.UAI_OFFICE_NAME,
+            A.UAI_OFFICE_PHONE_LONG_DIST,
+            A.UAI_OFFICE_PHONE_CITY_CODE,
+            A.UAI_OFFICE_PHONE_NUMBER,
+            A.UAI_OFFICE_DAIHYO_KBN,
+            A.UAI_CORP_SETTLEMENT_TERM1,
+            A.UAI_CORP_SETTLEMENT_TERM2,
+            A.OPEN_ACCT_DATE AS UAI_OPEN_ACCT_DATE,
+            A.UAI_JNISA_SEIGEN_SHURYO_YMD
+        FROM
+            CORDYS.MEDIATE_USER_ATTRIBUTE_INFO A
+        WHERE
+            A.CUSTOMER_ID = #{req.customerCode}
+    </select>
+    
+    <select id="selectIfaCustomerPortalSql009" resultMap="ResultMapIfaCustomerPortalSql009" statementType="PREPARED">
+        SELECT /* @SQLID+SUB0202_00-02#Sql009 */
+            A.VISIBLE_BUTEN_CODE,
+            (CASE A.ID_PW_FLG
+                WHEN '0' THEN 'IDあり/取引PWあり'
+                WHEN '1' THEN 'IDあり/取引PWなし'
+                WHEN '2' THEN 'IDなし/取引PWなし'
+                ELSE '' 
+            END) AS ID_PW_FLG,
+            A.EMP_CR_CD,
+            A.EMP_CS_CD,
+            B.SDM_NAME AS EMP_CR_NAME,
+            C.SDM_NAME AS EMP_CS_NAME
+            
+        FROM
+            ETINTRA.SUB_DEALER_CODE_RELATION A
+        LEFT OUTER JOIN
+            ETRADE.SUB_DEALER_MEMBER@CORDYS_ET10.WORLD B ON
+            B.SDM_BROKER_CODE = '0000'
+            AND A.EMP_CR_CD = B.SDM_CODE
+            AND B.SDM_TYPE = '3'
+            AND B.SDM_DELETE_FLG = '0'
+        LEFT OUTER JOIN
+            ETRADE.SUB_DEALER_MEMBER@CORDYS_ET10.WORLD C ON
+            A.BROKER_CODE = C.SDM_BROKER_CODE
+            AND A.EMP_CS_CD = C.SDM_CODE
+            AND C.SDM_TYPE = '1'
+            AND C.SDM_DELETE_FLG = '0'
+        WHERE
+            A.BUTEN_CODE = #{req.butenCode}
+            AND A.ACCOUNT_NUMBER = #{req.accountNumber}
+    </select>
+    
+    <select id="selectIfaCustomerPortalSql010" resultMap="ResultMapIfaCustomerPortalSql010" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_00-02#Sql010 */
+            A.USER_NAME,
+            A.COMMISSION_ID,
+            A.NEW_COMMISSION_ID,
+            TO_CHAR(A.NEW_COMMISSION_DATE, 'YYYYMMDD') AS NEW_COMMISSION_DATE
+        FROM
+            CALLCENTER.WEB_USER_NAME A
+        WHERE
+            A.CUSTOMER_ID = #{req.customerCode}
+    </select>
+    
+    <!-- 
+        SQLID：Sql011
+        SQL名：店群情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerPortalSql011" resultType="String" statementType="PREPARED">
+        SELECT
+          TENGUN_ID
+        FROM
+          CORDYS.BUTEN_TENGUN_INFO
+        WHERE
+          BUTEN_CODE = #{req.butenCode}
+    </select>
+</mapper>

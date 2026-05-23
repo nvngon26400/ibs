@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0501_01-02_1
+    画面名：情報新規登録
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.mapper.IfaInfoNewRegisterMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaInfoNewRegisterSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoNewRegisterSql001ResponseModel" >
+        <result property="t9nName" column="T9N_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap id="ResultMapIfaInfoNewRegisterSql005" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoNewRegisterSql005ResponseModel" >
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="userNm" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+
+    <resultMap id="ResultMapIfaInfoNewRegisterSql007" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoNewRegisterSql007ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap id="ResultMapIfaInfoNewRegisterSql008" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoNewRegisterSql008ResponseModel" >
+        <result property="fileDir" column="FILE_DIR" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：資料種別一覧
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoNewRegisterSql001" resultMap="ResultMapIfaInfoNewRegisterSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-02_1#Sql001 */
+            T9N_INFO_CAT
+            , T9N_NAME
+            , T9N_REQUIRED_FLG
+        FROM
+            PSITE_T9N_INFO_CAT
+        WHERE
+            T9N_DEL_FLAG = '0'
+        ORDER BY
+            T9N_SORT
+    </select>
+
+    <!--
+        SQLID：Sql005
+        SQL名：全担当者メールアドレス取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoNewRegisterSql005" resultMap="ResultMapIfaInfoNewRegisterSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-02_1#Sql005 */
+            NVL(VER.MAIL_ADDRESS, USE.MAIL_ADDRESS) AS mail_address
+            , USE.USER_NM
+            , BRA.BRANCH_NAME
+        FROM
+            TB_MED_USERS USE
+            LEFT JOIN MEDIATE_BRANCH BRA
+                ON BRA.BROKER_CODE = USE.BROKER_ID
+                AND bra.BROKER_BRANCH_KIND = '00'
+            LEFT JOIN TB_MED_VERIFY_USERS VER
+                ON USE.USER_ID = VER.USER_ID
+            <where>
+                <choose>
+                    <when test='req.viewerSetting.equals("2")'>
+                        USE.PRIV_ID IN
+                        <foreach item="id" collection="req.notificationReferenceAuthorityList" index="idx"
+                            open="(" separator="," close=")">
+                            #{id}
+                        </foreach>
+                    </when>
+                    <when test='req.viewerSetting.equals("3")'>
+                       USE.USER_ID IN
+                        <foreach item="id" collection="req.individualRepList" index="idx"
+                            open="(" separator="," close=")">
+                            #{id}
+                        </foreach>
+                    </when>
+                  </choose>
+            </where>
+    </select>
+
+
+
+    <!--
+        SQLID：Sql007
+        SQL名：送信者メールアドレス取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoNewRegisterSql007" resultMap="ResultMapIfaInfoNewRegisterSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-02_1#Sql007 */ USER_NM, MAIL_ADDRESS FROM TB_MED_USERS
+            WHERE
+                USER_ID = #{req.userId}
+    </select>
+
+    <!--
+        SQLID：Sql008
+        SQL名：登録ファイルディレクトリ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoNewRegisterSql008" resultMap="ResultMapIfaInfoNewRegisterSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-02_1#Sql008 */ FILE_DIR FROM TB_MED_TEMP_FILE_DIR
+            WHERE FUNC_ID = #{req.funcId}
+            AND CAT_ID = #{req.catId}
+    </select>
+
+
+    <!--
+         SQLID：Sql002
+         SQL名：お知らせテーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaInfoNewRegisterSql002" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0501_01-02_1#Sql002 */ INTO PSITE_T4N_INFO(
+            T4N_ID
+            , T4N_TITLE
+            , T4N_CONTENT
+            , T4N_CREATED_AT
+            , T4N_FILE1
+            , T4N_FILE2
+            , T4N_FILE3
+            , T4N_CAT1
+            , T4N_FILE_COM1
+            , T4N_FILE_COM2
+            , T4N_FILE_COM3
+            , T4N_URL
+            , COR_URL_COM
+            , COR_REFERENCE_CONDITION
+            , COR_DISCLAIMER
+            , COR_READ_FLG
+            , COR_CREATE_BY
+            , COR_UPDATE_DATE
+            , COR_UPDATE_BY
+        )
+        VALUES (
+            SEQ_PSITE_T4_INFO.nextval
+            , #{ req.t4nTitle }
+            , #{ req.t4nContent }
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{ req.t4nFile1 }
+            , #{ req.t4nFile2 }
+            , #{ req.t4nFile3 }
+            , #{ req.t4nCat1 }
+            , #{ req.t4nFileCom1 }
+            , #{ req.t4nFileCom2 }
+            , #{ req.t4nFileCom3 }
+            , #{ req.t4nUrl }
+            , #{ req.corUrlCom }
+            , #{ req.corReferenceCondition }
+            , #{ req.corDisclaimer }
+            , #{ req.corReadFlg }
+            , #{ req.corCreateBy }
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{ req.corUpdateBy })
+    </insert>
+
+    <!--
+         SQLID：Sql003
+         SQL名：お知らせ参照権限テ ーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaInfoNewRegisterSql003" statementType="PREPARED">
+        <foreach collection="req.notificationReferenceAuthorityList" item="item" index="index" open="begin" close=";end;" separator=";">
+            INSERT
+            /* @SQLID=SUB0501_01-02_1#Sql003 */
+            INTO PSITE_T4N_INFO_PRIV(
+                T4N_ID
+                , PRIV_ID
+                , COR_CREATE_DATE
+                , COR_CREATE_BY
+                , COR_UPDATE_DATE
+                , COR_UPDATE_BY
+            )
+            SELECT
+                NVL(MAX(T4N_ID), 0)
+                , #{ item }
+                , IFA_DATE_UTIL.IFA_GET_DATE
+                , #{ req.userId }
+                , IFA_DATE_UTIL.IFA_GET_DATE
+                , #{ req.userId }
+            FROM
+                PSITE_T4N_INFO
+            WHERE
+                COR_CREATE_BY = #{ req.userId }
+        </foreach>
+    </insert>
+
+    <!--
+         SQLID：Sql004
+         SQL名：お知らせ既読テーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaInfoNewRegisterSql004" statementType="PREPARED">
+        <foreach collection="req.individualRepList" item="item" index="index" open="begin" close=";end;" separator=";">
+            INSERT
+            /* @SQLID=SUB0501_01-02_1#Sql004 */
+            INTO PSITE_T5N_INFO_READ(
+                T5N_ID
+                , T5N_INFO_ID
+                , T5N_FA_ID
+                , T5N_READ_FLG
+                , T5N_READ_AT
+                , T5N_LOGIN
+            )
+            SELECT
+                SEQ_PSITE_T5_INFO_READ.nextval
+                , max_id
+                , NULL
+                , '0'
+                , NULL
+                , #{ item }
+            FROM
+                (
+                    SELECT
+                        NVL(MAX(T4N_ID), 0) max_id
+                    FROM
+                        PSITE_T4N_INFO
+                    WHERE
+                        COR_CREATE_BY = #{ req.userId }
+                )
+        </foreach>
+    </insert>
+
+
+
+</mapper>

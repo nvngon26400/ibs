@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID: SUB020302_0401-01
+    画面名：取引動向検索
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaTradeTrendSearchMapper">
+
+    <!-- 
+        SQLID: SQL002
+        SQL名: 取引動向検索
+        SQLタイプ: select
+    -->
+    
+    <resultMap id="ResultMapIfaTradeTrendSearchSql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaTradeTrendSearchSql002ResponseModel" >
+        <result property="brokerCode"                   column="BROKER_CODE"                       typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerName"                   column="BROKER_NAME"                       typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName"             column="BROKER_CHARGE_NAME"                typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="butenCode"                    column="BUTEN_CODE"                        typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="accountNumber"                column="ACCOUNT_NUMBER"                    typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="nameKanji"                    column="NAME_KANJI"                        typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="age"                          column="AGE"                               typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="tcCompRank"                   column="TC_COMP_RANK"                      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerAttribute"            column="CUSTOMER_ATTRIBUTE"                typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="corporationKbn"               column="UAI_CORPORATION_KBN"               typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="occupation"                   column="OCCUPATION"                        typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="investmentPlan"               column="INVESTMENT_PLAN"                   typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="fundCharacter"                column="FUND_CHARACTER"                    typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="emloymentPeriod"              column="EMPLOYMENT_PERIOD"                 typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="incomeForm"                   column="INCOME_FORM"                       typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="annualIncome"                 column="ANNUAL_INCOME"                     typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="financialAssets"              column="FINANCIAL_ASSETS"                  typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="uaiExpStock"                  column="UAI_EXP_STOCK"                     typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="uaiExpMargin"                 column="UAI_EXP_MARGIN"                    typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="uaiExpOtherfund"              column="UAI_EXP_OTHERFUND"                 typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="uaiExpForeign"                column="UAI_EXP_FOREIGN"                   typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="empCode"                      column="BROKER_CHARGE_CODE"                typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="dealerNumber"                 column="DEALER_NUMBER"                     typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerBranchCode"             column="BROKER_BRANCH_CODE"                typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="branchName"                   column="BRANCH_NAME"                       typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="visibleButenCode"             column="VISIBLE_BUTEN_CODE"                typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="tradeCount"                   column="TRADE_COUNT"                       typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="adjustmentTradeCount"         column="ADJUSTMENT_TRADE_COUNT"            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="grossAmountYen"               column="GROSS_AMOUNT_YEN"                  typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="assets"                       column="ASSETS"                            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="grossAmountYenAssets"         column="GROSS_AMOUNT_YEN_ASSETS"           typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="fee"                          column="FEE"                               typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="rewardPrice"                  column="REWARD_PRICE"                      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="feeRewardPrice"               column="FEE_REWARD_PRICE"                  typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="currenctPrice"                column="CURRENCT_PRICE"                    typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="profitAndLoss"                column="PROFIT_AND_LOSS"                   typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="profitAndLossCurrenctPrice"   column="PROFIT_AND_LOSS_CURRENCT_PRICE"    typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="currenctPriceMonth"           column="MOM_VALUATION_PROFIT_AND_LOSS"     typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="yearRealProfitAndLoss"        column="YEAR_REAL_PROFIT_AND_LOSS"         typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="monthlyRealProfitAndLoss"     column="MONTHLY_REAL_PROFIT_AND_LOSS"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="periodRealProfitAndLoss"      column="PERIOD_REAL_PROFIT_AND_LOSS"       typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <select id="selectIfaTradeTrendSearchSql002" resultMap="ResultMapIfaTradeTrendSearchSql002" statementType="PREPARED">
+    
+        WITH WTS AS
+        (
+            SELECT /*+ full(F) */
+                F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                , F.BROKER_NAME                                   <!-- 仲介業者名 -->
+                , F.BROKER_CHARGE_CODE                            <!-- 営業員コード -->
+                , F.BROKER_CHARGE_NAME                            <!-- 営業員名 -->
+                , F.BROKER_BRANCH_CODE                            <!-- 支店コード -->
+                , F.BUTEN_CODE                                    <!-- 部店コード -->
+                , F.ACCOUNT_NUMBER                                <!-- 口座番号 -->
+                , F.DEALER_NUMBER                                 <!-- 扱者コード -->
+                , F.NAME_KANJI                                    <!-- 顧客名_姓名(漢字) -->
+                , F.AGE                                           <!-- 年齢 -->
+                , F.TC_COMP_RANK                                  <!-- コンプラランク -->
+                , F.CUSTOMER_ATTRIBUTE                            <!-- 契約締結前交付書面コード -->
+                , F.VISIBLE_BUTEN_CODE                            <!-- 閲覧可能部店コード -->
+                , F.TRADE_COUNT                                   <!-- 取引回数 -->
+                , F.ADJUSTMENT_TRADE_COUNT                        <!-- 調整後回数 -->
+                , F.GROSS_AMOUNT_YEN                              <!-- 約定総金額 -->
+                , F.FEE                                           <!-- 手数料合計 -->
+                , F.REWARD_PRICE                                  <!-- 担当者手数料 -->
+                , F.CURRENCT_PRICE                                <!-- 評価額 -->
+                , F.PROFIT_AND_LOSS                               <!-- 評価損益 -->
+                , F.MONTHLY_REAL_PROFIT_AND_LOSS                  <!-- 当月実現損益 -->
+                , F.MOM_VALUATION_PROFIT_AND_LOSS                 <!-- 前月比評価損益 -->
+                , F.ASSETS                                        <!-- 顧客別総資産 -->
+                , F.SUM_DATE_YM                                   <!-- 対象年月 -->
+            FROM
+                CORDYS.T_SUM_TRADE_TENDENCY F                     <!-- テーブル「取引動向集計」 -->
+
+                <!-- WHERE句は外部に定義 -->
+                <include refid="whereQueryConditions" />
+
+                    <!-- 期間指定FROM -->
+                    AND F.SUM_DATE_YM &gt;= TO_CHAR(TO_DATE(#{req.periodFrom}, 'YYYY/MM'), 'YYYYMM')
+                    <!-- 期間指定TO -->
+                    AND F.SUM_DATE_YM &lt;= TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM'), 'YYYYMM')
+        )
+
+        SELECT /* @SQLID=SUB020302_0401-01#Sql002 */
+            * 
+        FROM
+        ( 
+        <choose>
+            <!-- (集計単位)が顧客 and ((部店コード) or (口座番号))が null以外 の場合 -->
+            <when test='req.countingUnit == "3".toString() and ((req.butenCode != null and req.butenCode != "") or (req.accountNumber != null and req.accountNumber != ""))'>
+                SELECT
+            </when>
+            <otherwise>
+                SELECT /*+
+                        full(B) full(D) full(F)
+                        use_hash(B) use_hash(D) use_hash(F)
+                        */
+            </otherwise>
+        </choose>
+                count(*) over() AS TOTAL_COUNT
+                , W.BROKER_CODE                                            <!-- 仲介業者コード -->
+                , W.BROKER_NAME                                          <!-- 仲介業者名 -->
+                <!-- (集計単位)が仲介業者以外の場合 -->
+                <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    , W.BROKER_CHARGE_NAME                                   <!-- 営業員名 -->
+                </if>
+                
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    , W.BUTEN_CODE                                           <!-- 部店コード -->
+                    , W.ACCOUNT_NUMBER                                       <!-- 口座番号 -->
+                    , W.NAME_KANJI                                           <!-- 顧客名_姓名(漢字) -->
+                    , TRIM(W.AGE) AS AGE                                     <!-- 年齢 -->
+                    , W.TC_COMP_RANK                                         <!-- コンプラランク -->
+                    , W.CUSTOMER_ATTRIBUTE                                   <!-- 契約締結前交付書面コード -->
+                    , D.CORPORATION_KBN AS UAI_CORPORATION_KBN          <!-- 法人区分 -->
+                    , D.UAI_OCCUPATION AS OCCUPATION                        <!-- 本人職業区分 -->
+                    , D.UAI_QA_INVESTMENT_PLAN AS INVESTMENT_PLAN           <!-- 投資方針区分 -->
+                    , D.UAI_QA_FUND_CHARACTER AS FUND_CHARACTER             <!-- 資金性格区分 -->
+                    , D.UAI_QA_EMPLOYMENT_PERIOD AS  EMPLOYMENT_PERIOD      <!-- 資産運用期間区分 -->
+                    , D.UAI_QA_INCOME_FORM AS INCOME_FORM                   <!-- 主な収入源区分 -->
+                    , D.UAI_QA_ANNUAL_INCOME AS ANNUAL_INCOME               <!-- 推定年収区分 -->
+                    , D.UAI_QA_FINANCIAL_ASSETS AS FINANCIAL_ASSETS         <!-- 金融資産区分 -->
+    
+                    , TO_NUMBER(NVL(D.UAI_EXP_STOCK, 0)) || '年' AS UAI_EXP_STOCK                    <!-- 投資経験年数（株式現物） -->
+                    , TO_NUMBER(NVL(D.UAI_EXP_MARGIN, 0)) || '年' AS UAI_EXP_MARGIN                  <!-- 投資経験年数（信用） -->
+                    , TO_NUMBER(NVL(D.UAI_EXP_OTHERFUND, 0)) || '年' AS UAI_EXP_OTHERFUND            <!-- 投資経験年数（その他投信） -->
+                    , TO_NUMBER(NVL(D.UAI_EXP_FOREIGN, 0)) || '年' AS UAI_EXP_FOREIGN                <!-- 投資経験年数（外国証券） -->
+                    
+                </if>
+    
+                <!-- (集計単位)が仲介業者以外の場合 -->
+                <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    , W.BROKER_CHARGE_CODE                                                         <!-- 営業員コード -->
+                </if>
+    
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    , W.DEALER_NUMBER                                                              <!-- 扱者コード -->
+                </if>
+    
+                <!-- (集計単位)が仲介業者以外の場合 -->
+                <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    , W.BROKER_BRANCH_CODE                                                         <!-- 支店コード -->
+                    , B.BRANCH_NAME                                                                <!-- 仲介業者支店名 -->
+                </if>
+    
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    , W.VISIBLE_BUTEN_CODE                                                         <!-- 閲覧可能部店コード -->
+                </if>
+    
+                , X.TRADE_COUNT                                                                <!-- 取引回数 -->
+                , X.ADJUSTMENT_TRADE_COUNT                                                     <!-- 調整後回数 -->
+                , X.GROSS_AMOUNT_YEN                                                           <!-- 約定総金額 -->
+                , T.ASSETS                                                                     <!-- 預り資産 -->
+                , ROUND(X.GROSS_AMOUNT_YEN * 100 / (CASE WHEN T.ASSETS = 0 THEN NULL ELSE T.ASSETS END) , 2) AS GROSS_AMOUNT_YEN_ASSETS    <!-- 資金回転率 -->
+                , X.FEE                                                                        <!-- 手数料合計 -->
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    , V.REWARD_PRICE                                                               <!-- 担当者手数料 -->
+                    , NVL(ROUND(X.FEE * 100 / (CASE WHEN V.REWARD_PRICE = 0 THEN NULL ELSE V.REWARD_PRICE END) , 2), 0) AS FEE_REWARD_PRICE            <!-- 手数料依存率 -->
+                </if>
+                
+                , Y.CURRENCT_PRICE                                                             <!-- 評価額 -->
+                , Y.PROFIT_AND_LOSS                                                            <!-- 評価損益 -->
+                , ROUND(Y.PROFIT_AND_LOSS * 100 / (CASE WHEN Y.CURRENCT_PRICE - Y.PROFIT_AND_LOSS = 0 THEN NULL ELSE Y.CURRENCT_PRICE - Y.PROFIT_AND_LOSS END) , 2)
+                AS PROFIT_AND_LOSS_CURRENCT_PRICE                                              <!-- 評価損益率 -->
+                , Y.MOM_VALUATION_PROFIT_AND_LOSS                                              <!-- 前月比評価損益 -->
+                , NVL(U.YEAR_REAL_PROFIT_AND_LOSS, 0) AS YEAR_REAL_PROFIT_AND_LOSS             <!-- 年間実現損益 -->
+                , Y.MONTHLY_REAL_PROFIT_AND_LOSS                                               <!-- 当月実現損益 -->
+                
+                <!-- (期間指定.From) <> (期間指定.To) -->
+                <if test='req.periodFrom != req.periodTo'>
+                    , Z.PERIOD_REAL_PROFIT_AND_LOSS                                            <!-- 期間指定実現損益 -->
+                </if>
+                
+            FROM
+            (
+                <!-- サブクエリ_一覧抽出 W -->
+                SELECT
+                    F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                    , F.BROKER_NAME                                   <!-- 仲介業者名 -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                        , F.BROKER_CHARGE_NAME                        <!-- 営業員名 -->
+                        , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        , F.BUTEN_CODE                                <!-- 部店コード -->
+                        , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                        , F.DEALER_NUMBER                             <!-- 扱者コード -->
+                        , F.NAME_KANJI                                <!-- 顧客名_姓名(漢字) -->
+                        , F.AGE                                       <!-- 年齢 -->
+                        , F.TC_COMP_RANK                              <!-- コンプラランク -->
+                        , F.CUSTOMER_ATTRIBUTE                        <!-- 契約締結前交付書面コード -->
+                        , F.VISIBLE_BUTEN_CODE                        <!-- 閲覧可能部店コード -->
+                    </if>
+                FROM
+                    WTS F
+                GROUP BY
+                    F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                    , F.BROKER_NAME                                   <!-- 仲介業者名 -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                        , F.BROKER_CHARGE_NAME                        <!-- 営業員名 -->
+                        , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        , F.BUTEN_CODE                                <!-- 部店コード -->
+                        , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                        , F.DEALER_NUMBER                             <!-- 扱者コード -->
+                        , F.NAME_KANJI                                <!-- 顧客名_姓名(漢字) -->
+                        , F.AGE                                       <!-- 年齢 -->
+                        , F.TC_COMP_RANK                              <!-- コンプラランク -->
+                        , F.CUSTOMER_ATTRIBUTE                        <!-- 契約締結前交付書面コード -->
+                        , F.VISIBLE_BUTEN_CODE                        <!-- 閲覧可能部店コード -->
+                    </if>
+            )W
+    
+            <!-- (集計単位)が顧客の場合 -->
+            <if test='req.countingUnit == "3".toString()'>
+               LEFT OUTER JOIN CORDYS.MEDIATE_USER_ATTRIBUTE_INFO D   <!-- 顧客口座属性 -->
+                    ON W.BUTEN_CODE = D.BUTEN_CODE                    <!-- 部店コード -->
+                    AND W.ACCOUNT_NUMBER = D.ACCOUNT_NUMBER           <!-- 口座番号 -->
+            </if>
+            <!-- (集計単位)が仲介業者以外の場合 -->
+            <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                LEFT OUTER JOIN CORDYS.MEDIATE_BRANCH B                   <!-- 仲介業者支店 -->
+                    ON W.BROKER_CODE = B.BROKER_CODE                      <!-- 仲介業者コード -->
+                    AND W.BROKER_BRANCH_CODE = B.BROKER_BRANCH_CODE       <!-- 支店コード  -->
+            </if>
+    
+            INNER JOIN
+            (
+                <!-- サブクエリ_合計値算出 X -->
+                SELECT
+                    F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                        , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        , F.BUTEN_CODE                                <!-- 部店コード -->
+                        , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                    </if>
+                    , SUM(NVL(F.TRADE_COUNT, 0)) AS TRADE_COUNT               <!-- 取引回数 -->
+                    , SUM(NVL(F.ADJUSTMENT_TRADE_COUNT, 0)) AS ADJUSTMENT_TRADE_COUNT               <!-- 調整後回数 -->
+                    , SUM(NVL(F.GROSS_AMOUNT_YEN, 0)) AS GROSS_AMOUNT_YEN     <!-- 約定総金額 -->
+                    , SUM(NVL(F.FEE, 0)) AS FEE                               <!-- 手数料合計 -->
+
+                FROM
+                    WTS F
+                GROUP BY
+                    F.BROKER_CODE                                       <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test = 'req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , F.BROKER_BRANCH_CODE                          <!-- 支店コード -->
+                        , F.BROKER_CHARGE_CODE                          <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test = 'req.countingUnit == "3".toString()' >
+                        , F.BUTEN_CODE                                  <!-- 部店コード -->
+                        , F.ACCOUNT_NUMBER                              <!-- 口座番号 -->
+                    </if>
+            )X
+                ON W.BROKER_CODE =  X.BROKER_CODE                       <!-- 仲介業者コード -->
+                <!-- (集計単位)が仲介業者以外の場合 -->
+                <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    AND W.BROKER_BRANCH_CODE = X.BROKER_BRANCH_CODE       <!-- 支店コード -->
+                    AND W.BROKER_CHARGE_CODE = X.BROKER_CHARGE_CODE       <!-- 営業員コード -->
+                </if>
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    AND W.BUTEN_CODE = X.BUTEN_CODE                       <!-- 部店コード -->
+                    AND W.ACCOUNT_NUMBER = X.ACCOUNT_NUMBER               <!-- 口座番号 -->
+                </if>
+    
+            LEFT OUTER JOIN
+            (
+                <!-- サブクエリ_最新抽出 Y -->
+                SELECT
+                    F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                        , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        , F.BUTEN_CODE                                <!-- 部店コード -->
+                        , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                    </if>
+                    , SUM(F.CURRENCT_PRICE) AS CURRENCT_PRICE                <!-- 評価額 -->
+                    , SUM(F.PROFIT_AND_LOSS) AS PROFIT_AND_LOSS              <!-- 評価損益 -->
+                    , SUM(NVL(F.MONTHLY_REAL_PROFIT_AND_LOSS, 0)) AS MONTHLY_REAL_PROFIT_AND_LOSS       <!-- 当月実現損益 -->
+                    , SUM(F.MOM_VALUATION_PROFIT_AND_LOSS) AS MOM_VALUATION_PROFIT_AND_LOSS             <!-- 前月比評価損益 -->
+                FROM
+                    WTS F
+                WHERE
+                    1 = 1 
+                    <!-- 期間指定TO -->
+                    AND F.SUM_DATE_YM = TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM'), 'YYYYMM')
+                GROUP BY
+                    F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                        , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        , F.BUTEN_CODE                                <!-- 部店コード -->
+                        , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                    </if>
+            )Y
+                ON W.BROKER_CODE =  Y.BROKER_CODE                     <!-- 仲介業者コード -->
+                <!-- (集計単位)が仲介業者以外の場合 -->
+                <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    AND W.BROKER_BRANCH_CODE = Y.BROKER_BRANCH_CODE       <!-- 支店コード -->
+                    AND W.BROKER_CHARGE_CODE = Y.BROKER_CHARGE_CODE       <!-- 営業員コード -->
+                </if>
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    AND W.BUTEN_CODE = Y.BUTEN_CODE                       <!-- 部店コード -->
+                    AND W.ACCOUNT_NUMBER = Y.ACCOUNT_NUMBER               <!-- 口座番号 -->
+                </if>
+
+            LEFT OUTER JOIN
+            (
+                <!-- サブクエリ_最新年間実現損益抽出 U -->
+                SELECT /*+ full(F) */
+                    F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                        , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        , F.BUTEN_CODE                                <!-- 部店コード -->
+                        , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                    </if>
+                    , SUM(NVL(F.YEARLY_REAL_PROFIT_AND_LOSS, 0)) AS YEAR_REAL_PROFIT_AND_LOSS           <!-- 年間実現損益 -->
+                FROM
+                    CORDYS.T_SUM_TRADE_TENDENCY F                             <!-- 取引動向集計 -->
+                INNER JOIN
+                    (
+                        SELECT /*+ full(F) */
+                            F.BUTEN_CODE                                  <!-- 部店コード -->
+                            , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                            , F.PRODUT_CD                                 <!-- 証券種別コード -->
+                            , MAX(F.SUM_DATE_YM) AS SUM_DATE_YM           <!-- 対象年月 -->
+                        FROM 
+                            CORDYS.T_SUM_TRADE_TENDENCY F                             <!-- 取引動向集計 -->
+                        WHERE
+                            F.SUM_DATE_YM &gt;= SUBSTR((TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM'), 'YYYYMM')), 1, 4) || '01'
+                            AND F.SUM_DATE_YM &lt;= TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM'), 'YYYYMM')
+                        GROUP BY
+                            F.BUTEN_CODE
+                            , F.ACCOUNT_NUMBER
+                            , F.PRODUT_CD
+                    )U1
+                        ON F.BUTEN_CODE = U1.BUTEN_CODE           <!-- 部店コード -->
+                        AND F.ACCOUNT_NUMBER = U1.ACCOUNT_NUMBER  <!-- 口座番号 -->
+                        AND F.PRODUT_CD = U1.PRODUT_CD            <!-- 証券種別コード -->
+                        AND F.SUM_DATE_YM = U1.SUM_DATE_YM        <!-- 対象年月 -->
+    
+                <!-- WHERE句は外部に定義 -->
+                <include refid="whereQueryConditions" />
+
+                GROUP BY
+                    F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                        , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        , F.BUTEN_CODE                                <!-- 部店コード -->
+                        , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                    </if>
+            )U
+                ON W.BROKER_CODE =  U.BROKER_CODE                     <!-- 仲介業者コード -->
+                <!-- (集計単位)が仲介業者以外の場合 -->
+                <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    AND W.BROKER_BRANCH_CODE = U.BROKER_BRANCH_CODE       <!-- 支店コード -->
+                    AND W.BROKER_CHARGE_CODE = U.BROKER_CHARGE_CODE       <!-- 営業員コード -->
+                </if>
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    AND W.BUTEN_CODE = U.BUTEN_CODE                       <!-- 部店コード -->
+                    AND W.ACCOUNT_NUMBER = U.ACCOUNT_NUMBER               <!-- 口座番号 -->
+                </if>
+            LEFT OUTER JOIN
+            (
+                <!-- サブクエリ_預り資産抽出 T -->
+                SELECT
+                    T1.BROKER_CODE                                     <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        , T1.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                        , T1.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        , T1.BUTEN_CODE                                <!-- 部店コード -->
+                        , T1.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                    </if>
+                    , SUM(T1.ASSETS) AS ASSETS           <!-- 預り資産 -->
+                FROM
+                    (
+                        SELECT
+                            F.BROKER_CODE                                  <!-- 仲介業者コード -->
+                            , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                            , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                            , F.BUTEN_CODE                                <!-- 部店コード -->
+                            , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                            , MAX(F.ASSETS) AS ASSETS                     <!-- 顧客別総資産 -->
+                        FROM
+                            WTS F
+                        WHERE
+                            1 = 1 
+                            <!-- 期間指定TO -->
+                            AND F.SUM_DATE_YM = TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM'), 'YYYYMM')
+                        GROUP BY
+                            F.BROKER_CODE                                 <!-- 仲介業者コード -->
+                            , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                            , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                            , F.BUTEN_CODE                                <!-- 部店コード -->
+                            , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                    ) T1 
+                GROUP BY
+                    T1.BROKER_CODE                                 <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    , T1.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                    , T1.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                    , T1.BUTEN_CODE                                <!-- 部店コード -->
+                    , T1.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                    </if>
+
+            ) T
+                ON W.BROKER_CODE =  T.BROKER_CODE                     <!-- 仲介業者コード -->
+                <!-- (集計単位)が仲介業者以外の場合 -->
+                <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    AND W.BROKER_BRANCH_CODE = T.BROKER_BRANCH_CODE       <!-- 支店コード -->
+                    AND W.BROKER_CHARGE_CODE = T.BROKER_CHARGE_CODE       <!-- 営業員コード -->
+                </if>
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    AND W.BUTEN_CODE = T.BUTEN_CODE                       <!-- 部店コード -->
+                    AND W.ACCOUNT_NUMBER = T.ACCOUNT_NUMBER               <!-- 口座番号 -->
+                </if>
+
+            <!-- (期間指定.From) <> (期間指定.To) -->
+            <if test='req.periodFrom != req.periodTo'>
+                LEFT OUTER JOIN
+                (
+                    <!-- サブクエリ_期間指定実現損益抽出 Z -->
+                    SELECT
+                        F.BROKER_CODE                                     <!-- 仲介業者コード -->
+                        <!-- (集計単位)が仲介業者以外の場合 -->
+                        <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                            , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                            , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                        </if>
+                        <!-- (集計単位)が顧客の場合 -->
+                        <if test='req.countingUnit == "3".toString()'>
+                            , F.BUTEN_CODE                                <!-- 部店コード -->
+                            , F.ACCOUNT_NUMBER                            <!-- 口座番号 -->
+                        </if>
+                        , SUM(NVL(F.MONTHLY_REAL_PROFIT_AND_LOSS, 0)) AS PERIOD_REAL_PROFIT_AND_LOSS               <!-- 期間指定実現損益 -->
+                    FROM
+                        WTS F
+                    GROUP BY
+                        F.BROKER_CODE                                       <!-- 仲介業者コード -->
+                        <!-- (集計単位)が仲介業者以外の場合 -->
+                        <if test = 'req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                            , F.BROKER_BRANCH_CODE                          <!-- 支店コード -->
+                            , F.BROKER_CHARGE_CODE                          <!-- 営業員コード -->
+                        </if>
+                        <!-- (集計単位)が顧客の場合 -->
+                        <if test = 'req.countingUnit == "3".toString()' >
+                            , F.BUTEN_CODE                                  <!-- 部店コード -->
+                            , F.ACCOUNT_NUMBER                              <!-- 口座番号 -->
+                        </if>
+                )Z
+                    ON W.BROKER_CODE =  Z.BROKER_CODE                       <!-- 仲介業者コード -->
+                    <!-- (集計単位)が仲介業者以外の場合 -->
+                    <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                        AND W.BROKER_BRANCH_CODE = Z.BROKER_BRANCH_CODE       <!-- 支店コード -->
+                        AND W.BROKER_CHARGE_CODE = Z.BROKER_CHARGE_CODE       <!-- 営業員コード -->
+                    </if>
+                    <!-- (集計単位)が顧客の場合 -->
+                    <if test='req.countingUnit == "3".toString()'>
+                        AND W.BUTEN_CODE = Z.BUTEN_CODE                       <!-- 部店コード -->
+                        AND W.ACCOUNT_NUMBER = Z.ACCOUNT_NUMBER               <!-- 口座番号 -->
+                    </if>
+            </if>
+            
+            <!-- (集計単位)が顧客の場合 -->
+            <if test='req.countingUnit == "3".toString()'>
+                LEFT OUTER JOIN
+                (
+                    <!-- サブクエリ_担当者手数料  V -->
+                    SELECT /*+ full(F) */
+                        F.BROKER_CODE                                 <!-- 仲介業者コード -->
+                        , F.BROKER_BRANCH_CODE                        <!-- 支店コード -->
+                        , F.BROKER_CHARGE_CODE                        <!-- 営業員コード -->
+                        , SUM(NVL(F.FEE, 0)) AS REWARD_PRICE          <!-- 担当者手数料 -->
+                    FROM
+                        CORDYS.T_SUM_TRADE_TENDENCY F                 <!-- 取引動向集計 -->
+                    WHERE
+                        <!-- 期間指定FROM -->
+                         F.SUM_DATE_YM &gt;= TO_CHAR(TO_DATE(#{req.periodFrom}, 'YYYY/MM'), 'YYYYMM')
+                        <!-- 期間指定TO -->
+                        AND F.SUM_DATE_YM &lt;= TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM'), 'YYYYMM')
+                    GROUP BY
+                        F.BROKER_CODE                                   <!-- 仲介業者コード -->
+                        , F.BROKER_BRANCH_CODE                          <!-- 支店コード -->
+                        , F.BROKER_CHARGE_CODE                          <!-- 営業員コード -->
+                )V
+                    ON W.BROKER_CODE =  V.BROKER_CODE                     <!-- 仲介業者コード -->
+                    AND W.BROKER_BRANCH_CODE = V.BROKER_BRANCH_CODE       <!-- 支店コード -->
+                    AND W.BROKER_CHARGE_CODE = V.BROKER_CHARGE_CODE       <!-- 営業員コード -->
+            </if>
+            
+            ORDER BY
+                W.BROKER_CODE                   <!-- 仲介業者コード -->
+                <!-- (集計単位)が仲介業者以外の場合 -->
+                <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                    , W.BROKER_NAME               <!-- 仲介業者名 -->
+                    , W.BROKER_CHARGE_NAME        <!-- 営業員名 -->
+                </if>
+                <!-- (集計単位)が顧客の場合 -->
+                <if test='req.countingUnit == "3".toString()'>
+                    , W.BUTEN_CODE                <!-- 部店コード -->
+                    , W.ACCOUNT_NUMBER            <!-- 口座番号 -->
+                </if>
+        )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>    
+
+
+    <!-- SQLフラグメントの定義（SQL002用WHERE句） -->
+    <sql id="whereQueryConditions">
+        WHERE
+            1 = 1
+
+            <!-- 仲介業者除外チェック入れない場合 -->
+            <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "0"'>
+                AND F.BROKER_CODE IN
+                <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            <!-- 仲介業者除外チェック入れる場合 -->
+            <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "1"'>
+                AND F.BROKER_CODE NOT IN
+                <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            <!-- (集計単位)が仲介業者以外の場合 -->
+            <if test='req.countingUnit == "3".toString() or req.countingUnit == "2".toString()'>
+                <!-- (支店コード)が null 以外の場合 -->
+                <if test='req.branchCode != null and req.branchCode != ""'>
+                    AND F.BROKER_BRANCH_CODE = #{req.branchCode}
+                </if>
+                <!-- (営業員コード)が null 以外の場合 -->
+                <if test='req.empCode != null and req.empCode != ""'>
+                    AND F.BROKER_CHARGE_CODE =#{req.empCode}
+                </if>
+            </if>
+            <!-- (集計単位)が顧客かつ(部店コード)が null 以外の場合 -->
+            <if test='req.countingUnit == "3".toString() and req.butenCode != null and req.butenCode != "" '>
+                AND F.BUTEN_CODE = #{req.butenCode}
+            </if>
+            <!-- (集計単位)が顧客かつ(口座番号)が null 以外の場合 -->
+            <if test='req.countingUnit == "3".toString() and req.accountNumber != null and req.accountNumber != "" '>
+                AND F.ACCOUNT_NUMBER = #{req.accountNumber}
+            </if>
+            <!-- 取引コース -->
+                AND F.CUSTOMER_ATTRIBUTE IN
+                        <foreach item="course" collection="req.courseList" open="(" separator="," close=")">
+                            #{course}
+                        </foreach>
+            <!-- (集計単位)が顧客かつ(リスト.閲覧可能部店)が空き以外の場合 -->
+            <if test='req.countingUnit == "3".toString() and req.visibleButenCodeList != null and !req.visibleButenCodeList.isEmpty()'>
+                AND F.VISIBLE_BUTEN_CODE IN
+                <foreach item="visibleButenCode" index="index" collection="req.visibleButenCodeList" open="(" separator="," close=")">
+                    #{visibleButenCode}
+                </foreach>
+            </if>
+            <!-- 証券種別 -->
+            <if test="req.securityClassList != null and !req.securityClassList.isEmpty()">
+                AND F.PRODUT_CD IN
+                <foreach item="securityClass" collection="req.securityClassList" open="(" separator="," close=")"> 
+                    #{securityClass}
+                </foreach>
+            </if>
+
+            <choose>
+                <when test='req.privId == "1"'>
+                    AND 1 = 1
+                </when>
+                <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                    AND (F.BROKER_CODE IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR F.BROKER_CODE IN(
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                            #{brokerCharge.brokerCode}
+                    </foreach>
+                    )
+                </when>
+                <otherwise>
+                    AND ((F.BROKER_CODE, F.BROKER_CHARGE_CODE) IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR (F.BROKER_CODE, F.BROKER_CHARGE_CODE) IN(
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                            (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                    </foreach>
+                    )
+                </otherwise>
+            </choose>
+
+    </sql>
+
+</mapper>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_010201-01
+    画面名：保有商品一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaHoldingSecurityListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaHoldingSecurityListSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaHoldingSecurityListSql002ResponseModel" >
+        <result property="basePriceUnit" column="M_F_TANI" typeHandler="StringTypeHandler"/>
+        <result property="kyoukaiCd" column="M_F_CODE" typeHandler="StringTypeHandler"/>
+        <result property="times" column="M_F_KAISU" typeHandler="StringTypeHandler"/>
+        <result property="issue2" column="M_F_GO" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaHoldingSecurityListSql005" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaHoldingSecurityListSql005ResponseModel" >
+        <result property="ipmSeInvestmentsCode" column="IPM_SE_INVESTMENTS_CODE" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaHoldingSecurityListSql006" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaHoldingSecurityListSql006ResponseModel" >
+        <result property="isaBuyAbleThisYear" column="UAI_ISA_BUY_CURRENT_YEAR_KBN" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="isaBuyAbleNextYear" column="UAI_ISA_BUY_NEXT_YEAR_KBN" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaHoldingSecurityListSql007" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaHoldingSecurityListSql007ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaHoldingSecurityListSql008" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaHoldingSecurityListSql008ResponseModel" >
+        <result property="tradeCodePare" column="HOJO_CODE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaHoldingSecurityListSql009" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaHoldingSecurityListSql009ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaHoldingSecurityListSql010" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaHoldingSecurityListSql010ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapIfaHoldingSecurityListSql011" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaHoldingSecurityListSql011ResponseModel" >
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：基準価額単位取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaHoldingSecurityListSql002" resultMap="ResultMapIfaHoldingSecurityListSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010201-01#Sql002 */
+            M_F_TANI
+            , M_F_CODE
+            , M_F_KAISU
+            , M_F_GO
+        FROM
+            FUND 
+        <where>
+            M_F_NRICODE IN ( #{req.brandCode} )
+            AND M_F_DELFLG = '0'
+        </where>
+    </select>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：優先市場取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaHoldingSecurityListSql005"
+    resultMap="ResultMapIfaHoldingSecurityListSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010201-01#Sql005 */
+            IPM_SE_INVESTMENTS_CODE
+        FROM
+            I_PRODUCT_MASTER 
+        <where>
+            IPM_PRODUCT_FLAG = '0' 
+            AND SUBSTR(IPM_PRODUCT_CODE,1,5) =  #{req.ipmProductCode}
+            AND IPM_PRI_EX_FLAG = '1'
+        </where>
+    </select>
+    
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：ISA買付可能判定区分取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaHoldingSecurityListSql006"
+    resultMap="ResultMapIfaHoldingSecurityListSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010201-01#Sql006 */
+            UAI_ISA_BUY_CURRENT_YEAR_KBN 
+            , UAI_ISA_BUY_NEXT_YEAR_KBN
+            , CUSTOMER_ID <!-- returnInstanceForEmptyRow回避用 -->
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO
+        WHERE
+            CUSTOMER_ID = TO_NUMBER(#{req.customerCode})
+    </select>
+    
+    <select id="selectIfaHoldingSecurityListSql007"
+    resultMap="ResultMapIfaHoldingSecurityListSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010201-01#Sql007 */
+            SOR_SERVICE_KBN,
+            MKT_KBN_TKY,
+            MKT_KBN_NGY,
+            MKT_KBN_FKO,
+            MKT_KBN_SPR,
+            (SELECT COUNT(*) FROM PTS_BRAND_MASTER WHERE SEC_CODE = TRIM(#{req.brandCode})) AS pts
+        FROM
+            STOCK_DETAIL_MASTER A
+        WHERE
+            A.SEC_CODE = TRIM(#{req.brandCode})
+    </select>
+    
+    <select id="selectIfaHoldingSecurityListSql008"
+    resultMap="ResultMapIfaHoldingSecurityListSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010201-01#Sql008 */
+            SUBSTR('00' || TRIM(HOJO_CODE),-2)  AS HOJO_CODE
+        FROM
+            ST_ODX_SECURITY_HOJO
+        WHERE
+            TRIM(BR_SUB_NO_2) = #{req.issue2}
+    </select>
+    
+    <select id="selectIfaHoldingSecurityListSql009"
+    resultMap="ResultMapIfaHoldingSecurityListSql009" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010201-01#Sql009 */
+            BRAND_CODE
+        FROM
+            V_BOND_ST
+        WHERE
+            BRAND_CODE = #{req.brandCode}
+    </select>
+    
+    <select id="selectIfaHoldingSecurityListSql010"
+    resultMap="ResultMapIfaHoldingSecurityListSql010" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010201-01#Sql010 */
+            DATE_YMD,
+            BUTEN_CODE,
+            ACCOUNT_NUMBER,
+            BRAND_CODE,
+            BRAND_NAME,
+            DEPOSIT_TYPE,
+            DEPOSIT_NAME,
+            ACQUIRE_PRICE,
+            APPRAISE_MARKET_PRICE,
+            EXEC_BASE_BALANCE,
+            CURRENCT_PRICE,
+            TOTAL_CURRENT_PRICE,
+            CASE
+            WHEN APPRAISE_PROFIT_LOSS_PRICE IS NOT NULL THEN APPRAISE_PROFIT_LOSS_PRICE
+            WHEN APPRAISE_MARKET_PRICE IS NOT NULL AND ACQUIRE_PRICE IS NOT NULL AND EXEC_BASE_BALANCE IS NOT NULL THEN 
+                (APPRAISE_MARKET_PRICE - ACQUIRE_PRICE) * EXEC_BASE_BALANCE
+            ELSE NULL
+            END AS APPRAISE_PROFIT_LOSS_PRICE
+        FROM
+            T_BALANCE_PREV
+        <where>
+            DATE_YMD = (SELECT MAX(DATE_YMD) FROM T_BALANCE_PREV)	
+            AND	BUTEN_CODE = #{req.butenCode}
+            AND ACCOUNT_NUMBER = #{req.accountNumber}	
+            AND PRODUT_CD IN ('33')	
+            <if test='req.accountGetKbn == " "'>
+                AND DEPOSIT_TYPE IN ('1', '2')
+            </if>
+            <if test='req.accountGetKbn == "1"'>
+                AND DEPOSIT_TYPE IN ('5', '6')
+            </if>
+        </where>
+        ORDER BY	
+	        BRAND_CODE,
+            EXEC_BASE_BALANCE
+    </select>
+
+    <select id="selectIfaHoldingSecurityListSql011"
+    resultMap="ResultMapIfaHoldingSecurityListSql011" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_010201-01#Sql011 */
+            A.KIJUNKAKAKU AS BASE_PRICE,
+            A.KYOUKAI_CD
+        FROM
+            TOUSHIN_KIJYUN_KAKAKU A
+        WHERE
+            A.KYOUKAI_CD IN ( #{req.kyoukaiCd} )
+    </select>
+</mapper>

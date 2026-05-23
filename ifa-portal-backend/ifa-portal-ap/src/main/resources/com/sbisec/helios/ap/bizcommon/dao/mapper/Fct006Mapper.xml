@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct006Mapper">
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct006Sql001ResponseModel" id="Fct006Sql001ResponseModel">
+	</resultMap>
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct006Sql002ResponseModel" id="Fct006Sql002ResponseModel">
+	</resultMap>
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct006Sql003ResponseModel" id="Fct006Sql003ResponseModel">
+	</resultMap>
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct006Sql004ResponseModel" id="Fct006Sql004ResponseModel">
+	</resultMap>
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct006Sql006ResponseModel" id="Fct006Sql006ResponseModel">
+	</resultMap>
+	<select id="getComplianceRank" resultMap="Fct006Sql001ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT006#SQL001 */
+			A.BUTEN_CODE,
+			A.ACCOUNT_NUMBER,
+			A.CORPORATION_KBN,
+			A.TC_COMP_RANK,
+			A.UAI_QA_FUND_CHARACTER　
+		FROM
+		    MEDIATE_USER_ATTRIBUTE_INFO A 
+		WHERE
+			A.BUTEN_CODE = #{fct006Sql001RequestModel.butenCode}
+	    AND 
+	        A.ACCOUNT_NUMBER = TO_NUMBER(#{fct006Sql001RequestModel.accountNumber})
+	</select>
+
+
+     <!--SQL002-->
+           
+     <select id="getComplianceRank2" resultMap="Fct006Sql002ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT006#SQL002 */
+           PRODUCT_RANK 
+       FROM
+           M_PRODUCT_RANK A
+      <if test="fct006Sql002RequestModel.brDomesticFgnInd == 0 and fct006Sql002RequestModel.brBrandInd == 1">	
+		  WHERE 
+		   BR_DOMESTIC_FGN_IND = '0'
+	   AND
+	       BR_BRAND_IND = '1 '
+	   AND
+		   SUBSTR(BRAND_CD,2,4) = SUBSTR(#{fct006Sql002RequestModel.brandCode1},1,4)
+	   AND
+           COMPANY_CD = '0' || SUBSTR(#{fct006Sql002RequestModel.brandCode1},1,4)
+       AND  
+           SUBSTR(BRAND_CD,7,1) = SUBSTR(#{fct006Sql002RequestModel.brandCode1},5,1)
+      </if>
+           
+      <if test="fct006Sql002RequestModel.brDomesticFgnInd == 0 and fct006Sql002RequestModel.brBrandInd == 3">
+		  WHERE
+		  BR_DOMESTIC_FGN_IND ='0'
+       AND
+           BR_BRAND_IND = '3 '
+       AND  
+           SUBSTR(BRAND_CD,9,4) = #{fct006Sql002RequestModel.brandCode1}
+        AND
+            SUBSTR(BRAND_CD,4,2) = SUBSTR(#{fct006Sql002RequestModel.brandCode2}, 2, 2)
+		  
+      </if>   
+
+	  <!-- 外国株式の暫定対応のため一時的に削除 リクエスト.国内外国区分が1（外国）かつリクエスト.商品区分が1△（株式）の場合
+      <if test="fct006Sql002RequestModel.brDomesticFgnInd == 1 and fct006Sql002RequestModel.brBrandInd == 1">
+        INNER JOIN 
+            STAR_FLARE_PRODUCT_RELATION B
+        ON 
+            SUBSTR(A.BRAND_CD,1,5) = B.N_PRODUCT_CODE
+        And 
+            B.PRODUCT_CLASSIFY = '81'
+        AND
+            B.F_COUNTRY_CODE = #{fct006Sql002RequestModel.countryCode}
+        WHERE
+            A.BR_DOMESTIC_FGN_IND = '1'
+        And 
+            A.BR_BRAND_IND = '1 '
+		And 
+			<choose>
+				<when test='fct006Sql002RequestModel.productCode != null and fct006Sql002RequestModel.productCode != ""'>
+					TRIM(B.F_PRODUCT_CODE) = #{fct006Sql002RequestModel.productCode}
+				</when>
+				<otherwise>
+					TRIM(B.F_PRODUCT_CODE) = TRIM(#{fct006Sql002RequestModel.brandCode1})
+				</otherwise>
+			</choose>
+      </if> 
+      -->
+
+      <if test="fct006Sql002RequestModel.brDomesticFgnInd == 1 and fct006Sql002RequestModel.brBrandInd == 3">
+        INNER JOIN 
+            STAR_FLARE_PRODUCT_RELATION B
+        ON 
+            SUBSTR(A.BRAND_CD,1,5) = B.N_PRODUCT_CODE
+        And 
+            B.PRODUCT_CLASSIFY = '89'
+	    AND
+            B.F_COUNTRY_CODE = #{fct006Sql002RequestModel.countryCode}
+ 	    WHERE
+            A.BR_DOMESTIC_FGN_IND = '1'
+        And 
+            A.BR_BRAND_IND = '3 '
+        And 
+            TRIM(B.F_PRODUCT_CODE) = TRIM(#{fct006Sql002RequestModel.brandCode1})
+      </if>
+      
+      <if test=" (fct006Sql002RequestModel.brDomesticFgnInd != 0 and fct006Sql002RequestModel.brDomesticFgnInd != 1) or (fct006Sql002RequestModel.brBrandInd != 1 and fct006Sql002RequestModel.brBrandInd != 3) ">
+        where
+         1 = 0 
+      </if>     
+      </select>   
+	  
+	  <!--SQL002 外国株式 暫定対応用-->  
+      <select id="getComplianceRank2ForeignStock" resultMap="Fct006Sql002ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT006#SQL002ForeignStock */
+			CASE
+				<choose>
+					<when test='fct006Sql002RequestModel.requestCountryCode == "US"'>
+						WHEN COUNT = 1 THEN '5'
+						ELSE '4'
+					</when>
+					<otherwise>
+						WHEN COUNT = 1 THEN '6'
+						ELSE '5'
+					</otherwise>
+				</choose>
+			END PRODUCT_RANK
+		FROM
+			(
+				SELECT
+					COUNT(*) as COUNT
+				FROM
+					M_CODE
+				WHERE
+					START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+					AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+					AND CODE_TYPE = '75'
+					AND CODE_1 = #{fct006Sql002RequestModel.requestCountryCode}
+					AND 
+					<choose>
+						<when test='fct006Sql002RequestModel.productCode != null and fct006Sql002RequestModel.productCode != ""'>
+							CODE_2 = #{fct006Sql002RequestModel.productCode}
+						</when>
+						<otherwise>
+							CODE_2 = TRIM(#{fct006Sql002RequestModel.brandCode1})
+						</otherwise>
+					</choose>
+			)
+      </select>
+
+       <!--SQL003-->  
+      <select id="getComplianceRank3" resultMap="Fct006Sql003ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT006#SQL003 */
+			COMP_STS
+		FROM
+		    M_COMP 
+		WHERE
+		    COMP_RANK = #{fct006Sql003RequestModel.tcCompRank}
+	    AND 
+	        INVITATION_TYPE = #{fct006Sql003RequestModel.invitationType}
+		<if test='fct006Sql003RequestModel.invitationType == "1"'>
+		AND 
+	        FUND_CHARACTER = #{fct006Sql003RequestModel.complaCheckFundCharacter}
+	    AND 
+	        ORDER_METHOD_TYPE = #{fct006Sql003RequestModel.orderMethod}
+		</if>
+	    <if test='fct006Sql003RequestModel.invitationType == "2"'>
+		AND 
+	        FUND_CHARACTER = ' '
+	    AND 
+	        ORDER_METHOD_TYPE = ' '
+		</if>
+	    AND 
+	        PRODUCT_RANK = #{fct006Sql003RequestModel.productRank}
+	  </select>   
+      
+      <!--SQL004-->
+      <select id="getComplianceRank4" resultMap="Fct006Sql004ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT006#SQL004 */
+			CHK_RESULT,
+			MESSAGE_ID,
+		    CHK_BOX_LABEL
+		FROM
+		    M_COMP_CHK_RESULT
+		WHERE 
+	        COMP_STS = #{fct006Sql004RequestModel.compSts}
+	   	AND
+	   		CHK_TYPE = #{fct006Sql004RequestModel.chkType}
+	    AND 
+	        INVITATION_TYPE = #{fct006Sql004RequestModel.invitationType}
+	  </select>
+
+	  <!--SQL006-->
+      <select id="getComplianceRank6" resultMap="Fct006Sql006ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT006#SQL006 */
+			PRODUCT_CODE
+		FROM
+			ETJP_PRODUCT_MASTER
+		WHERE
+			STATUS = '0'
+			AND COUNTRY_CODE = #{fct006Sql006RequestModel.countryCode}
+			AND INVESTOR_PRODUCT_CODE = TRIM(#{fct006Sql006RequestModel.brandCode1})
+	  </select>
+</mapper>

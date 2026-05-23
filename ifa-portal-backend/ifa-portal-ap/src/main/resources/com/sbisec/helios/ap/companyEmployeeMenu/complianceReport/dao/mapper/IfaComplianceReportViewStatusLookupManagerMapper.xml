@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0505_02-01
+    画面名：コンプライアンス通信閲覧状況照会（管理者用）
+-->
+<mapper
+	namespace="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.mapper.IfaComplianceReportViewStatusLookupManagerMapper">
+	<!--
+	全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+	<!--
+	住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+	<resultMap id="ResultMapIfaComplianceReportViewStatusLookupManagerSql001"
+		type="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.model.IfaComplianceReportViewStatusLookupManagerSql001ResponseModel">
+		<result property="titleDesc" column="TITLE_DESC" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+		<result property="titleValue" column="TITLE_VALUE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+	</resultMap>
+	<resultMap id="ResultMapIfaComplianceReportViewStatusLookupManagerSql002"
+		type="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.model.IfaComplianceReportViewStatusLookupManagerSql002ResponseModel">
+	    <result property="title" column="title" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+	    <result property="employeeName" column="employeeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="branchNameOfBranch" column="branchNameOfBranch" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="userId" column="userId" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+	    <result property="codeName" column="codeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+	</resultMap>
+	<resultMap id="ResultMapIfaComplianceReportViewStatusLookupManagerSql005"
+		type="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.model.IfaComplianceReportViewStatusLookupManagerSql005ResponseModel">
+	</resultMap>
+
+
+	<!-- 
+        SQLID：Sql001
+        SQL名：タイトル取得
+        SQLタイプ：select
+    -->
+	<select id="selectIfaComplianceReportViewStatusLookupManagerSql001"
+		resultMap="ResultMapIfaComplianceReportViewStatusLookupManagerSql001"
+		statementType="PREPARED">
+		SELECT /* @SQLID=SUB0505_02-01#Sql001 */
+		TITLE_DESC,
+		TITLE_VALUE,
+		COMMDATE
+		FROM (
+		SELECT
+		' ' AS TITLE_DESC,
+		' ' AS TITLE_VALUE,
+		'999999' AS COMMDATE
+		FROM
+		DUAL
+		)
+		UNION
+		(SELECT
+		COR_TITLE AS TITLE_DESC,
+		COR_TITLE AS TITLE_VALUE,
+		COR_COMMUNICATION_DATE AS COMMDATE
+		FROM
+		COR_COMPLIANCE_COMMUNICATION
+		WHERE
+		COR_COMMUNICATION_DATE >(SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY')-5,to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM')) FROM DUAL)
+		AND COR_COMMUNICATION_DATE &lt; = (SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY'), to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM')) FROM DUAL)
+		)
+		ORDER BY COMMDATE DESC
+	</select>
+
+	<!-- 
+        SQLID：Sql002
+        SQL名：コンプライアンス通信の閲覧状況取得
+        SQLタイプ：select
+    -->
+	<select id="selectIfaComplianceReportViewStatusLookupManagerSql002"
+		resultMap="ResultMapIfaComplianceReportViewStatusLookupManagerSql002"
+		statementType="PREPARED"> 
+		SELECT /* @SQLID=SUB0505_02-01#Sql002 */
+		N.wholeCount,
+		N.lectureId,
+		N.title,
+		N.employeeId,
+		N.employeeName,
+		N.branchNameOfBranch,
+		N.userId,
+		N.confirmDateTime,
+		N.viewReportUser,
+		N.corBrowseFlag,
+		N.codeName,
+		N.brokerCode
+		FROM(
+			SELECT
+			COUNT(*) OVER() AS wholeCount,
+			M.lectureId,
+			M.title,
+			M.employeeId,
+			M.employeeName,
+			M.branchNameOfBranch,
+			M.userId,
+			A.COR_CONFIRMATION_DATE AS confirmDateTime,
+			A.COR_UPDATE_BY,
+			CASE
+				WHEN M.userId &lt;&gt; A.COR_UPDATE_BY THEN MU2.USER_NM
+				ELSE NULL
+			END AS viewReportUser,
+			B.COR_BROWSE_FLAG AS corBrowseFlag,
+			CM.CODE_NAME AS codeName,
+			M.brokerCode
+			FROM(
+				SELECT
+				MU.USER_ID AS userId,
+				MU.EMPLOYEE_ID AS employeeId,
+				MU.USER_NM AS employeeName,
+				MU.BROKER_ID AS brokerCode,
+				MU.SUB_BROKER_ID,
+				MU.BRANCH_ID,
+				CC.COR_LEC_ID AS lectureId,
+				CC.COR_TITLE AS title,
+				CC.COR_COMMUNICATION_DATE AS comDate,
+				MB.BRANCH_NAME AS branchNameOfBranch
+				FROM
+				COR_COMPLIANCE_COMMUNICATION CC,
+				TB_MED_USERS MU
+				<choose>
+					<when test="req.brokerName != null and req.brokerName != ''">
+						INNER JOIN
+						MEDIATE_BRANCH MB
+						ON
+						MU.BROKER_ID = MB.BROKER_CODE
+						AND
+						MB.BROKER_BRANCH_KIND = '00'
+						AND UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(MB.BRANCH_NAME)),'kana_fwkatakana') LIKE '%'||
+						UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(#{req.brokerName})), 'kana_fwkatakana')||'%'
+					</when>
+					<otherwise>
+						LEFT JOIN
+						MEDIATE_BRANCH MB
+						ON
+						MU.BROKER_ID = MB.BROKER_CODE
+						AND
+						MB.BROKER_BRANCH_KIND = '00'
+					</otherwise>
+				</choose>
+				WHERE 
+				MU.PRIV_ID &lt;> '1' 
+				AND 
+				MU.PRIV_ID &lt;> '2' 
+				<choose>
+					<when test="(req.titleThisMonth == null or req.titleThisMonth == '') and (req.titleLastMonth == null or req.titleLastMonth == '')">
+						AND
+						CC.COR_COMMUNICATION_DATE > (SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY')- 5,to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM'))  FROM DUAL)
+						AND
+						CC.COR_COMMUNICATION_DATE &lt;= (SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY'),to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM'))  FROM DUAL)
+					</when>
+					<otherwise>
+					    <choose>
+							<when test="req.titleLastMonth != null and req.titleLastMonth != ''">
+								AND
+					            CC.COR_COMMUNICATION_DATE > (SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY')- 5,to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM'))  FROM DUAL)
+								AND
+							    CC.COR_COMMUNICATION_DATE &lt; (SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY'),to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM'))  FROM DUAL)
+							</when>
+							<otherwise>
+								AND
+							    CC.COR_COMMUNICATION_DATE = (SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY'),to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM'))  FROM DUAL)
+							</otherwise>
+						</choose>
+					</otherwise>
+				</choose>
+			)M
+			LEFT JOIN 
+			COR_COMPLIANCE_CONFIRMATION A
+			ON
+			M.lectureId = A.COR_LEC_ID
+			AND
+			M.userId = A.COR_USER_ID
+			LEFT JOIN
+			COR_BROWSE_CONTROL_INDV B
+			ON
+			M.userId = B.COR_USER_ID
+			LEFT JOIN
+			CORDYS_CODE_MASTER CM
+			ON
+			CM.FUNCTION_ID = '013'
+			AND
+			A.COR_CONFIRMATION_FLG = CM.CODE_ID
+			LEFT JOIN
+			TB_MED_USERS MU2
+			ON
+			A.COR_UPDATE_BY = MU2.USER_ID
+			AND
+			MU2.PRIV_ID = '1'
+			WHERE
+			1=1 
+			<if test="req.brokerChargeName != null and req.brokerChargeName != ''">
+				AND
+				M.employeeName LIKE '%'||#{req.brokerChargeName}||'%'
+			</if>
+			<if test='req.title != null and req.title.trim() != ""'>
+				AND
+				M.title = #{req.title}
+			</if>
+			<if test="req.viewStatus == '1'.toString() ">
+				AND
+				A.COR_CONFIRMATION_FLG = #{req.viewStatus}
+			</if>
+			<if test="req.viewStatus == '3'.toString() ">
+				AND
+				( A.COR_CONFIRMATION_FLG IS NULL OR
+				A.COR_CONFIRMATION_FLG = #{req.viewStatus})
+			</if>
+			<if test="req.privId == '2'.toString()">
+				AND
+				M.BRANCH_ID = #{req.branchId}
+			</if> 
+			<if test="req.viewNecessity == '0'.toString()">
+				AND
+				(B.COR_BROWSE_FLAG IS NULL OR
+				B.COR_BROWSE_FLAG = #{req.viewNecessity})
+			</if>
+			<if test="req.viewNecessity == '1'.toString()">
+				AND
+				B.COR_BROWSE_FLAG = #{req.viewNecessity}
+			</if>
+			ORDER BY
+			M.comDate DESC, M.brokerCode
+		)N
+		WHERE
+		1=1
+		<if test="req.rownum != null and req.rownum != ''">
+			AND
+			ROWNUM &lt;= #{req.rownum}
+		</if> 
+		
+	</select>
+
+	<!-- 
+         SQLID：Sql003
+         SQL名：コンプライアンス通信の閲覧不要登録
+         SQLタイプ：insert
+    -->
+	<insert id="insertIfaComplianceReportViewStatusLookupManagerSql003"
+		statementType="PREPARED">
+		INSERT /* @SQLID=SUB0505_02-01#Sql003 */
+		INTO COR_BROWSE_CONTROL_INDV
+		(COR_USER_ID,
+		COR_BROKER_CODE,
+		COR_EMPLOYEE_ID,
+		COR_BROWSE_FLAG,
+		COR_REGISTRATION_DATE,
+		COR_CREATE_DATE,
+		COR_CREATE_BY,
+		COR_UPDATE_DATE,
+		COR_UPDATE_BY)
+		VALUES
+		(#{req.userId},
+		#{req.brokerCode},
+		#{req.employeeId},
+		'1',
+		IFA_DATE_UTIL.IFA_GET_DATE,
+		IFA_DATE_UTIL.IFA_GET_DATE,
+		#{req.createBy},
+		IFA_DATE_UTIL.IFA_GET_DATE,
+		#{req.updateBy})
+
+	</insert>
+
+	<!-- 
+        SQLID：Sql004
+        SQL名：コンプライアンス通信の閲覧不要登録解除
+        SQLタイプ：delete
+    -->
+	<delete id="deleteIfaComplianceReportViewStatusLookupManagerSql004"
+		statementType="PREPARED">
+		DELETE /* @SQLID=SUB0505_02-01#Sql004 */
+		FROM COR_BROWSE_CONTROL_INDV
+		WHERE COR_USER_ID = #{req.userId}
+	</delete>
+
+	<!-- 
+        SQLID：Sql005
+        SQL名：コンプライアンス通信閲覧状況のデータ量取得
+	SQLタイプ：select
+    -->
+	<select id="selectIfaComplianceReportViewStatusLookupManagerSql005"
+		resultMap="ResultMapIfaComplianceReportViewStatusLookupManagerSql005"
+		statementType="PREPARED">
+		SELECT /* @SQLID=SUB0505_02-01#Sql005 */
+		COUNT(1) AS count 
+		FROM 
+		( 
+			SELECT 
+			USE.USER_ID, 
+			USE.USER_NM, 
+			USE.BROKER_ID,
+			USE.BRANCH_ID, 
+			COM.COR_LEC_ID, 
+			COM.COR_TITLE,
+			COM.COR_COMMUNICATION_DATE, 
+			BRA.BRANCH_NAME 
+			FROM
+			COR_COMPLIANCE_COMMUNICATION COM, 
+			TB_MED_USERS USE 
+			<choose>
+				<when test="req.brokerName != null and req.brokerName != ''">
+					INNER JOIN
+					MEDIATE_BRANCH BRA
+					ON
+					USE.BROKER_ID = BRA.BROKER_CODE
+					AND
+					BRA.BROKER_BRANCH_KIND = '00'
+					AND
+					UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(BRA.BRANCH_NAME)),'kana_fwkatakana') LIKE '%'||
+					UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(#{req.brokerName})), 'kana_fwkatakana')||'%'
+				</when>
+				<otherwise>
+					LEFT JOIN
+					MEDIATE_BRANCH BRA
+					ON
+					USE.BROKER_ID = BRA.BROKER_CODE
+					AND
+					BRA.BROKER_BRANCH_KIND = '00'
+				</otherwise>
+			</choose>
+			WHERE
+			USE.PRIV_ID &lt;> '1' 
+			AND
+			USE.PRIV_ID &lt;> '2' 
+			AND 
+			COM.COR_COMMUNICATION_DATE > 
+				(SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY')- 5,to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM'))  FROM DUAL) 
+				AND 
+				COM.COR_COMMUNICATION_DATE &lt;= (SELECT concat(to_char(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY'),to_char(IFA_DATE_UTIL.IFA_GET_DATE,'MM'))  FROM DUAL) 
+		) N 
+		LEFT JOIN
+		COR_COMPLIANCE_CONFIRMATION CON 
+		ON 
+		N.COR_LEC_ID = CON.COR_LEC_ID 
+		AND
+		N.USER_ID = CON.COR_USER_ID 
+		LEFT JOIN 
+		CORDYS_CODE_MASTER MAS 
+		ON
+		MAS.FUNCTION_ID = '013' 
+		AND 
+		CON.COR_CONFIRMATION_FLG = MAS.CODE_ID
+		LEFT JOIN 
+		COR_BROWSE_CONTROL_INDV IND 
+		ON 
+		N.USER_ID = IND.COR_USER_ID 
+		<where>
+			<if test="req.brokerChargeName != null and req.brokerChargeName != ''">
+				N.USER_NM LIKE '%'||#{req.brokerChargeName}||'%'
+			</if>
+			<if test='req.title != null and req.title.trim() != ""'>
+				AND
+				N.COR_TITLE = #{req.title}
+			</if>
+			<if test="req.viewStatus == '3'.toString()">
+				AND
+				(CON.COR_CONFIRMATION_FLG IS NULL OR
+				CON.COR_CONFIRMATION_FLG = #{req.viewStatus})
+			</if>
+			<if test="req.viewStatus == '1'.toString() ">
+				AND
+				CON.COR_CONFIRMATION_FLG = #{req.viewStatus}
+			</if>
+
+			<if test="req.privId == '2'.toString()">
+				AND
+				N.BRANCH_ID = #{req.branchId}
+			</if>
+
+			<if test="req.viewNecessity == '0'.toString()">
+				AND
+				(IND.COR_BROWSE_FLAG IS NULL OR
+				IND.COR_BROWSE_FLAG = #{req.viewNecessity})
+			</if>
+			<if test="req.viewNecessity == '1'.toString()">
+				AND
+				IND.COR_BROWSE_FLAG = #{req.viewNecessity}
+			</if>
+		</where>
+	</select>
+
+    <!--
+        SQLID：Sql006
+        SQL名：コンプライアンス通信の閲覧報告
+        SQLタイプ：insert/update
+    -->
+    <update id="updateIfaComplianceReportViewStatusLookupManagerSql006"
+        statementType="PREPARED">
+        MERGE /* @SQLID=SUB0505_02-01#Sql006_1 */
+        INTO CORDYS.COR_COMPLIANCE_CONFIRMATION CON 
+        USING ( 
+            SELECT
+                #{req.lectureId} AS COR_LEC_ID
+                , #{req.userId} AS COR_USER_ID 
+            FROM
+                DUAL
+        ) data 
+        ON ( 
+            CON.COR_LEC_ID = data.COR_LEC_ID 
+            AND CON.COR_USER_ID = data.COR_USER_ID
+        )
+        WHEN MATCHED THEN
+            UPDATE SET
+                COR_CONFIRMATION_FLG = '1'
+                , COR_CONFIRMATION_DATE = IFA_DATE_UTIL.IFA_GET_DATE
+                , COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE
+                , COR_UPDATE_BY = #{req.userAccountUserId}
+        WHEN NOT MATCHED THEN 
+            INSERT ( 
+                COR_LEC_ID
+                , COR_USER_ID
+                , COR_CONFIRMATION_DATE
+                , COR_CONFIRMATION_FLG
+                , COR_CREATE_DATE
+                , COR_CREATE_BY
+                , COR_UPDATE_DATE
+                , COR_UPDATE_BY
+            ) 
+            VALUES ( 
+                #{req.lectureId}
+                , #{req.userId}
+                , IFA_DATE_UTIL.IFA_GET_DATE
+                , '1'
+                , IFA_DATE_UTIL.IFA_GET_DATE
+                , #{req.userAccountUserId}
+                , IFA_DATE_UTIL.IFA_GET_DATE
+                , #{req.userAccountUserId}
+            )
+    </update>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：コンプライアンス通信の閲覧報告解除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaComplianceReportViewStatusLookupManagerSql007" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0505_02-01#Sql007 */
+        FROM
+            CORDYS.COR_COMPLIANCE_CONFIRMATION
+        WHERE
+            COR_LEC_ID = #{req.lectureId}
+            AND COR_USER_ID = #{req.userId}
+    </delete>
+</mapper>

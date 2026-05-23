@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：CC013
+    画面名：銘柄時価情報（国内株）
+-->
+<mapper namespace="com.sbisec.helios.ap.common.composite.dao.mapper.IfaBrandPriceInfoMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaBrandPriceInfoSql001" type="com.sbisec.helios.ap.common.composite.model.IfaBrandPriceInfoSql001ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaBrandPriceInfoSql002" type="com.sbisec.helios.ap.common.composite.model.IfaBrandPriceInfoSql002ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaBrandPriceInfoSql003" type="com.sbisec.helios.ap.common.composite.model.IfaBrandPriceInfoSql003ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrandPriceInfoSql001" resultMap="ResultMapIfaBrandPriceInfoSql001" statementType="PREPARED">
+        SELECT /* @SQLID=CC013#Sql001 */ 
+            BASE_PRICE_LOW BEYOND_ORDER_PRICE_UNIT
+            , BASE_PRICE_HIGH WITHIN_ORDER_PRICE_UNIT
+            <if test="req.market == '7'.toString()">
+            , YOBINE_PTS CALL_PRICE_ORDER_PRICE_UNIT <!--選択市場 = PTS-->
+            </if>
+            <if test="req.market != '7'.toString()">
+            , YOBINE CALL_PRICE_ORDER_PRICE_UNIT  <!--選択市場 != PTS-->
+            </if>
+        FROM
+            YOBINE_MASTER 
+        WHERE
+            YOBINE_TANI_NO = #{req.orderPriceUnit}
+        ORDER BY
+            BEYOND_ORDER_PRICE_UNIT
+            , WITHIN_ORDER_PRICE_UNIT
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrandPriceInfoSql002" resultMap="ResultMapIfaBrandPriceInfoSql002" statementType="PREPARED">
+        SELECT /* @SQLID=CC013#Sql002 */ 
+            A.B_S_UNIT unit,
+            A.TOPIX_500_FLG
+        FROM
+            STOCK_DETAIL_MASTER A
+        WHERE
+            A.SEC_CODE = TRIM(#{req.brandCode})
+    </select>
+
+    <!-- 
+        SQLID：SQL003
+        SQL名：指定銘柄呼値単位番号取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaBrandPriceInfoSql003" resultMap="ResultMapIfaBrandPriceInfoSql003" statementType="PREPARED">
+        SELECT /* @SQLID=CC013#Sql003 */ 
+            A.SMALLTICK_NO_TKY AS orderPriceUnitTokyo,                 <!-- 呼値単位番号(東京) -->
+            A.SMALLTICK_NO_NGY AS orderPriceUnitNagoya,                <!-- 呼値単位番号(名古屋) -->
+            A.SMALLTICK_NO_FKO AS orderPriceUnitFukuoka,               <!-- 呼値単位番号(福岡) -->
+            A.SMALLTICK_NO_SPR AS orderPriceUnitSapporo                <!-- 呼値単位番号(札幌) -->
+        FROM
+            STAR_BRAND_MASTER A                                        <!-- 銘柄属性情報 -->
+        WHERE
+            SUBSTR(A.COMPANY_CD, -4) = SUBSTR(#{req.brandCode}, 1, 4)  <!-- A.会社コード = 銘柄コード先頭4桁 -->
+            AND A.NEW_OLD_CLASSIFY = SUBSTR(#{req.brandCode}, -1)      <!-- A.新旧区分 = 銘柄コード末尾1桁 -->
+            AND A.RIGHT_CLASSIFY = ' '                                 <!-- A.権利区分 = '△' -->
+            AND A.PRODUCT_CLASSIFY = 'K'                               <!-- A.商品区分='K':株式 -->
+            AND A.DOMESTIC_FOREIGN_CLASSIFY = '0'                      <!-- A.国内外国区分='0':国内 -->
+    </select>
+
+</mapper>

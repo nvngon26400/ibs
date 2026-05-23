@@ -1,0 +1,17 @@
+package com.sbisec.helios.ap.brokerageMenu.customerMenu.dto;
+
+import lombok.Data;
+
+/**
+ * 画面ID：SUB0202_0109-01
+ * 画面名：取引履歴（顧客別）
+ * 2025/07/24 新規作成
+ *
+ * @author SCSK
+ */
+@Data
+public class IfaCustomerTradeHistoryA002RequestDto extends IfaCustomerTradeHistoryCommonRequestDto {
+
+    // パラメータはA002,A004共通のリクエストモデルから継承
+
+}

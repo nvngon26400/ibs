@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0602-01
+    画面名：ポータルお知らせ（管理者用）照会
+-->
+<mapper namespace="com.sbisec.helios.ap.systemManageMenu.portalNotification.dao.mapper.IfaPortalNotificationManagerLookupMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaPortalNotificationManagerLookupSql001" type="com.sbisec.helios.ap.systemManageMenu.portalNotification.dao.model.IfaPortalNotificationManagerLookupSql001ResponseModel" >
+    </resultMap>
+
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：お知らせ情報一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaPortalNotificationManagerLookupSql001" resultMap="ResultMapIfaPortalNotificationManagerLookupSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0602-01#Sql001 */
+            *
+        FROM (
+            SELECT
+                count(*) over() as totalRow
+                , INFO_ID
+                , INFO_DETAIL
+                , IMPORTANT_FLG
+                , DELETE_FLG
+                , CREATE_TIME
+                , DISPLAY_PERIOD_FROM
+                , DISPLAY_PERIOD_TO
+            FROM
+                TB_MED_INFORMATION 
+            WHERE
+                1 = 1
+                <if test='req.searchDateYmdFrom != null and req.searchDateYmdFrom != ""'>
+                    AND CREATE_TIME &gt;= TO_TIMESTAMP(#{req.searchDateYmdFrom}, 'YYYY-MM-DD HH24:MI:SS')
+                </if>
+                <if test='req.searchDateYmdTo != null and req.searchDateYmdTo != ""'>
+                    AND CREATE_TIME &lt;= TO_TIMESTAMP(#{req.searchDateYmdTo}, 'YYYY-MM-DD HH24:MI:SS')
+                </if>
+                <if test='req.pastDateExcrude == "true"'>
+                    AND DISPLAY_PERIOD_TO &gt;= IFA_DATE_UTIL.IFA_GET_DATE
+                </if>
+            ORDER BY
+                IMPORTANT_FLG DESC NULLS LAST,
+                CREATE_TIME DESC,
+                INFO_ID ASC
+        )
+        WHERE ROWNUM &lt;= 5000
+    </select>
+
+
+
+        <!-- 
+        SQLID：Sql002
+        SQL名：お知らせ情報削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaPortalNotificationManagerLookupSql002" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0602-01#Sql002 */
+        FROM
+            TB_MED_INFORMATION 
+        WHERE
+            INFO_ID = TO_NUMBER(#{req.notificationId}) 
+    </delete>
+</mapper>

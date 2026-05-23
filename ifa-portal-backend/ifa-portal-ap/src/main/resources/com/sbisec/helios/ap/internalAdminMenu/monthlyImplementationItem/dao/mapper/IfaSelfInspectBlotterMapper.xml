@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0401_02-01
+    画面名：自己点検記録簿
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.mapper.IfaSelfInspectBlotterMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaSelfInspectBlotterSql001" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaSelfInspectBlotterSql001ResponseModel" >
+        <result property="codeName" column="CODE_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaSelfInspectBlotterSql002" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaSelfInspectBlotterSql002ResponseModel" >
+        <result property="lastUpdateTime" column="LAST_UPDATE_TIME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaSelfInspectBlotterSql003" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaSelfInspectBlotterSql003ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaSelfInspectBlotterSql004" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaSelfInspectBlotterSql004ResponseModel" >
+        <result property="selfAssessmentItemName" column="SELF_ASSESSMENT_ITEM_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaSelfInspectBlotterSql005" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaSelfInspectBlotterSql005ResponseModel" >
+        <result property="selfAssessmentItemName" column="SELF_ASSESSMENT_ITEM_NAME" typeHandler="StringTypeHandler"/>
+        <result property="answerReason" column="ANSWER_REASON" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：表示年月dropDownLisTデータ取得
+        SQLタイプ：
+    -->
+    <select id="selectIfaSelfInspectBlotterSql001" resultMap="ResultMapIfaSelfInspectBlotterSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_02-01#Sql001 */
+            TO_CHAR( 
+                TO_DATE(ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, - S.MONTHS)), 
+                'YYYY"年"MM"月"'
+            ) AS CODE_NAME, 
+            TO_CHAR( 
+                TO_DATE(ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, - S.MONTHS)), 
+                'YYYYMM'
+            ) AS CODE_ID 
+        FROM
+            ( 
+                SELECT
+                    rownum - 1 AS MONTHS 
+                FROM
+                    all_catalog 
+                WHERE
+                    rownum &lt; 61
+            ) S
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：最終更新日時取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterSql002" resultMap="ResultMapIfaSelfInspectBlotterSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_02-01#Sql002 */
+            TO_CHAR(A.COR_CONFIRMATION_DATE, 'yyyy"年"mm"月"dd"日"') AS LAST_UPDATE_TIME 
+        FROM
+            ( 
+                SELECT
+                    * 
+                FROM
+                    COR_SELF_CHECK 
+                WHERE
+                    COR_BROKER_CODE = #{req.brokerCode} 
+                ORDER BY
+                    COR_CONFIRMATION_DATE DESC
+            ) A 
+        WHERE
+            ROWNUM = 1
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：自己点検確認日取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterSql003" resultMap="ResultMapIfaSelfInspectBlotterSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_02-01#Sql003 */
+            COR_CONFIRMATION_DATE AS CONFIRMATION_DATE 
+        FROM
+            COR_SELF_CHECK 
+        WHERE
+            COR_ENFORCE_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMM') 
+            AND COR_BROKER_CODE = #{req.brokerCode}
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：未登録自己点検記録簿情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterSql004" resultMap="ResultMapIfaSelfInspectBlotterSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_02-01#Sql004 */
+            A.COR_SORT_NO AS SORT_NO, 
+            A.COR_SELF_CHECK_ITEM_ID AS SELF_CHECK_ITEM_ID, 
+            A.COR_SELF_CHECK_ITEM_NAME AS SELF_ASSESSMENT_ITEM_NAME, 
+            A.REASON_REQUIRED_FLG AS REASON_REQUIRED_FLAG, 
+            A.ANSWER
+        FROM
+            COR_SELF_CHECK_ITEM A
+            <if test='"1".equals(req.privId) == false and "2".equals(req.privId) == false '>
+                , COR_SELF_CHECK_BROKER_ANS B 
+            </if>
+        WHERE
+            A.COR_ENFORCE_DATE = #{req.assignMonth} 
+            <if test='"1".equals(req.privId) == false and "2".equals(req.privId) == false '>
+                AND B.BROKER_CODE = #{req.brokerCode} 
+                AND A.BROKER_DIVISION = B.BROKER_DIVISION 
+            </if>
+            AND A.COR_INDICATION_FLG = '1' 
+        ORDER BY
+            A.BROKER_DIVISION ASC, A.COR_SORT_NO ASC
+    </select>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：登録自己点検記録簿情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterSql005" resultMap="ResultMapIfaSelfInspectBlotterSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_02-01#Sql005 */ 
+            A.COR_SORT_NO AS SORT_NO, 
+            A.COR_SELF_CHECK_ITEM_ID AS SELF_CHECK_ITEM_ID, 
+            A.COR_SELF_CHECK_ITEM_NAME AS SELF_ASSESSMENT_ITEM_NAME, 
+            C.COR_CONFIRMATION_FLG AS CONFIRMATION, 
+            A.ANSWER, 
+            A.REASON_REQUIRED_FLG AS REASON_REQUIRED_FLAG, 
+            C.COR_ANSWER_REASON AS ANSWER_REASON, 
+            C.COR_ANSWER_COUNT AS ANSWER_COUNT, 
+            C.COR_ANSWER_RESULT AS ANSWER_RESULT 
+        FROM
+            COR_SELF_CHECK_ITEM A, 
+            COR_SELF_CHECK B, 
+            COR_SELF_CHECK_CONFIRMATION C 
+        WHERE
+            B.COR_ENFORCE_DATE = #{req.assignMonth}  
+            AND B.COR_BROKER_CODE = #{req.brokerCode}  
+            AND A.COR_INDICATION_FLG = '1' 
+            AND B.COR_SELF_CHECK_ID = C.COR_SELF_CHECK_ID 
+            AND C.COR_SELF_CHECK_ITEM_ID = A.COR_SELF_CHECK_ITEM_ID 
+        ORDER BY
+            A.BROKER_DIVISION ASC, A.COR_SORT_NO ASC
+    </select>
+
+</mapper>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0505_03-01
+    画面名：コンプライアンス通信仲介業者一括閲覧不要設定
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.mapper.IfaComplianceReportBrokerBlockViewExcludeSettingMapper">
+    <!-- SQL001 全角文字対策のtypeHandler設定 -->
+    <resultMap
+        type="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.model.IfaComplianceReportBrokerBlockViewExcludeSettingSql001ResponseModel"
+        id="selectIfaComplianceReportBrokerBlockViewExcludeSettingSql001ResultMap"
+    >
+        <result
+            property="branchNameOfBroker"
+            column="BRANCH_NAME"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"
+        />
+    </resultMap>
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：コンプライアンス通信の閲覧要否管理情報取得
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectIfaComplianceReportBrokerBlockViewExcludeSettingSql001"
+        statementType="PREPARED"
+        resultMap="selectIfaComplianceReportBrokerBlockViewExcludeSettingSql001ResultMap"
+    >
+        SELECT /* @SQLID=SUB0505_03-01#SQL001 */
+            MB.BROKER_CODE AS brokerCode,
+            MB.BRANCH_NAME,
+            CB.COR_BROWSE_FLAG AS corBrowseFlag,
+            TO_CHAR(CB.COR_REGISTRATION_DATE, 'YYYY/MM/DD') AS registeredDate
+        FROM
+            MEDIATE_BRANCH MB
+        LEFT OUTER JOIN
+            COR_BROWSE_CONTROL_BULK CB
+        ON
+            MB.BROKER_CODE = CB.COR_BROKER_CODE
+        WHERE
+            MB.DELETE_FLG='0'
+            AND MB.BROKER_BRANCH_KIND='00'
+            <if test="req.brokerName != null and req.brokerName != ''">
+                AND
+                    UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(MB.BRANCH_NAME)), 'kana_fwkatakana')  LIKE '%'
+                    || UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(#{req.brokerName, jdbcType=VARCHAR, typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler})), 'kana_fwkatakana')
+                    || '%'
+            </if>
+        ORDER BY
+            MB.BROKER_CODE
+    </select>
+    
+    <!-- 
+         SQLID：Sql002
+         SQL名：コンプライアンス通信の閲覧要否管理情報登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertIfaComplianceReportBrokerBlockViewExcludeSettingSql002"
+        statementType="PREPARED"
+    >
+        INSERT/* @SQLID=SUB0505_03-01#SQL002 */
+        INTO
+            COR_BROWSE_CONTROL_BULK
+            (
+                COR_BROKER_CODE,
+                COR_BROWSE_FLAG,
+                COR_REGISTRATION_DATE,
+                COR_CREATE_DATE,
+                COR_CREATE_BY,
+                COR_UPDATE_DATE,
+                COR_UPDATE_BY
+            )
+        VALUES(
+            #{req.brokerCode},
+            '1',
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.createBy},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.updateBy}
+        )
+    </insert>
+    
+    <!-- 
+         SQLID：Sql003
+         SQL名：コンプライアンス通信の閲覧要否管理情報削除
+         SQLタイプ：delete
+    -->
+    <delete
+        id="deleteIfaComplianceReportBrokerBlockViewExcludeSettingSql003"
+        statementType="PREPARED"
+    >
+        DELETE /* @SQLID=SUB0505_03-01#SQL003 */
+        FROM
+            COR_BROWSE_CONTROL_BULK
+        WHERE
+            COR_BROKER_CODE = #{req.brokerCode}
+    </delete>
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 
+    画面ID：SUB0511_01-02
+    画面名：仲介業者からの要望詳細
+-->
+<mapper
+	namespace="com.sbisec.helios.ap.suggestionBox.dao.mapper.IfaSuggestionBoxPersonalDetailFromBrokerMapper">
+
+    <resultMap
+        id="ResultMapIfaSuggestionBoxPersonalDetailFromBrokerSql001"
+        type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxPersonalDetailFromBrokerSql001ResponseModel"
+    >
+        <result property="title" column="TITLE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="suggestion" column="SUGGESTION" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attachFile1" column="ATTACH_FILE1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attachFile2" column="ATTACH_FILE2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attachFile3" column="ATTACH_FILE3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：仲介業者からの要望取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalDetailFromBrokerSql001" resultMap="ResultMapIfaSuggestionBoxPersonalDetailFromBrokerSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0511_01-02#Sql001 */
+            SBP_NO
+            , TITLE
+            , STATUS
+            , SUGGESTION
+            , FILE1 AS ATTACH_FILE1
+            , FILE2 AS ATTACH_FILE2
+            , FILE3 AS ATTACH_FILE3
+            , TO_CHAR(CREATE_TIME, 'YYYYMMDD') AS REGISTER_DATE
+        FROM
+            SUG_BOX_PERSONAL
+        WHERE
+            SBP_NO = TO_NUMBER(#{req.sbpNo})
+    </select>
+
+    <resultMap
+        id="ResultMapIfaSuggestionBoxPersonalDetailFromBrokerSql002"
+        type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxPersonalDetailFromBrokerSql002ResponseModel"
+    >
+        <result property="answerContents" column="ANSWER_CONTENTS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：仲介業者からの要望回答取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalDetailFromBrokerSql002" resultMap="ResultMapIfaSuggestionBoxPersonalDetailFromBrokerSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0511_01-02#Sql002 */
+            SBPA_NO AS ANSWER_NO
+            , ANSWER AS ANSWER_CONTENTS
+            , TO_CHAR(CREATE_TIME, 'YYYYMMDD') AS ANSWER_REGISTER_DATE
+            , TO_CHAR(ANSWER_UPDATE_TIME, 'YYYYMMDD') AS ANSWER_UPDATE_DATE
+        FROM
+            SUG_BOX_PERSONAL_A
+        WHERE
+            SBP_NO = TO_NUMBER(#{req.sbpNo})
+        ORDER BY
+            SBPA_NO ASC
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：回答更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaSuggestionBoxPersonalDetailFromBrokerSql003" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0511_01-02#Sql003 */
+            CORDYS.SUG_BOX_PERSONAL_A 
+        SET
+            ANSWER = #{req.answerContents}
+            , ANSWER_UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            , ANSWER_UPDATE_USER = #{req.userId}
+            , UNREAD_FLG = '1'
+            , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER = #{req.userId}
+        WHERE
+            SBP_NO = TO_NUMBER(#{req.sbpNo}) 
+            AND SBPA_NO = TO_NUMBER(#{req.answerNo})
+    </update>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：回答登録
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaSuggestionBoxPersonalDetailFromBrokerSql004" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0511_01-02#Sql004 */ 
+        INTO CORDYS.SUG_BOX_PERSONAL_A (
+            SBP_NO
+            , SBPA_NO
+            , ANSWER
+            , ANSWER_UPDATE_TIME
+            , ANSWER_UPDATE_USER
+            , UNREAD_FLG
+            , CREATE_TIME
+            , CREATE_USER
+            , UPDATE_TIME
+            , UPDATE_USER
+        )
+        SELECT 
+            TO_NUMBER(#{req.sbpNo})         AS SBP_NO
+            , NVL(MAX(SBPA_NO)+1, 1)        AS SBPA_NO
+            , #{req.answerContents}         AS ANSWER
+            , IFA_DATE_UTIL.IFA_GET_DATE    AS ANSWER_UPDATE_TIME
+            , #{req.userId}                 AS ANSWER_UPDATE_USER
+            , '1'                           AS UNREAD_FLG
+            , IFA_DATE_UTIL.IFA_GET_DATE    AS CREATE_TIME
+            , #{req.userId}                 AS CREATE_USER
+            , IFA_DATE_UTIL.IFA_GET_DATE    AS UPDATE_TIME
+            , #{req.userId}                 AS UPDATE_USER
+        FROM
+            CORDYS.SUG_BOX_PERSONAL_A
+        WHERE
+            SBP_NO = TO_NUMBER(#{req.sbpNo})
+    </insert>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：要望更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaSuggestionBoxPersonalDetailFromBrokerSql005" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0511_01-02#Sql005 */
+            CORDYS.SUG_BOX_PERSONAL
+        SET
+            STATUS = #{req.status}
+            , ANS_UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER = #{req.userId}
+        WHERE
+            SBP_NO = TO_NUMBER(#{req.sbpNo}) 
+    </update>
+</mapper>

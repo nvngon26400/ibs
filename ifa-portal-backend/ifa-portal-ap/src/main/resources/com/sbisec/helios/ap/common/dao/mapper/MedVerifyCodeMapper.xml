@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MedVerifyCodeMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.MedVerifyCode" id="MedVerifyCode">
+		<result property="userId"    	column="USER_ID"    	typeHandler="StringTypeHandler"/>
+		<result property="verifyCode"   column="VERIFY_CODE"  	typeHandler="StringTypeHandler"/>
+		<result property="verifyDate" 	column="VERIFY_DATE"  	typeHandler="StringTypeHandler"/>
+		<result property="nowDate" 	column="NOW_DATE"  	typeHandler="StringTypeHandler"/>
+	</resultMap>
+
+	<select id="getMedVerifyCode" resultMap="MedVerifyCode" statementType="PREPARED">
+		SELECT
+			USER_ID,
+			VERIFY_CODE,
+			TO_CHAR(VERIFY_DATE,'YYYY-MM-DD HH24-MI-SS') VERIFY_DATE,
+			TO_CHAR(SYSDATE,'YYYY-MM-DD HH24-MI-SS') NOW_DATE
+		FROM
+		    TB_MED_VERIFY_CODE
+		WHERE
+			USER_ID = #{userId}
+	</select>
+	
+	<insert id="insertMedVerifyCode" statementType="PREPARED">
+		INSERT INTO TB_MED_VERIFY_CODE(
+			USER_ID,
+			VERIFY_CODE,
+			VERIFY_DATE)
+		VALUES (
+			#{medVerifyCode.userId},
+			#{medVerifyCode.verifyCode},
+			IFA_DATE_UTIL.IFA_GET_DATE
+		)			
+	</insert>
+
+	<delete id="deleteMedVerifyCode" statementType="PREPARED">
+		DELETE FROM TB_MED_VERIFY_CODE
+		<where>
+			USER_ID = #{medVerifyCode.userId}
+		</where>
+	</delete>
+</mapper>

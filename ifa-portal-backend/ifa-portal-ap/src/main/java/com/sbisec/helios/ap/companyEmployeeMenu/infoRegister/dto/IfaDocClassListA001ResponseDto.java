@@ -1,0 +1,37 @@
+package com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dto;
+
+import java.util.List;
+import lombok.Data;
+
+/**
+ * 画面ID：SUB0501_02-01
+ * 資料種別一覧 A001（カテゴリ一覧） レスポンスパラメタ
+ *
+ * @author SCSK
+ *     2024/02/05 新規作成
+ */
+@Data
+public class IfaDocClassListA001ResponseDto {
+    
+    /** お知らせカテゴリリスト. */
+    private List<InfoCategory> infoCategoryList;
+    
+    public IfaDocClassListA001ResponseDto() {}
+    
+    /**
+     * お知らせカテゴリ
+     */
+    @Data
+    public static class InfoCategory {
+
+        public InfoCategory() {}
+        
+        /** カテゴリID（数字）. */
+        private String t9nInfoCat;
+        
+        /** カテゴリ名（全角半角）. */
+        private String t9nName;
+        
+    }
+    
+}

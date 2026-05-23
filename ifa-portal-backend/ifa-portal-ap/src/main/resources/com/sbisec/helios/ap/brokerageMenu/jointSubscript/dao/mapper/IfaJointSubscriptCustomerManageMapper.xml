@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0206_01
+    画面名：共同募集　顧客管理
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.mapper.IfaJointSubscriptCustomerManageMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <!-- 
+        SQLID：SQL001
+        SQL名：一覧表示情報を取得する
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaJointSubscriptCustomerManageSql001" 
+            type="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.model.IfaJointSubscriptCustomerManageSql001ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerAttributeName" column="CUSTOMER_ATTRIBUTE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="nameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="jointBranchName" column="JOINT_BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="editStatusNm" column="EDIT_STATUS_NM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <select id="selectIfaJointSubscriptCustomerManageSql001" resultMap="ResultMapIfaJointSubscriptCustomerManageSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_01#SQL001 */
+            *
+        FROM (
+            SELECT
+                 COUNT(*) OVER() AS TOTAL_COUNT                                                <!-- 総件数 -->
+                ,MUAI.BROKER_CODE AS BROKER_CODE                                               <!-- 仲介業者コード -->
+                ,MB1.BRANCH_NAME AS BROKER_NAME                                                <!-- 仲介業者名 -->
+                ,MJU.BUTEN_CODE AS BUTEN_CODE                                                  <!-- 部店コード -->
+                ,MJU.ACCOUNT_NUMBER AS ACCOUNT_NUMBER                                          <!-- 口座番号 -->
+                ,MUAI.CUSTOMER_ATTRIBUTE_NAME AS CUSTOMER_ATTRIBUTE_NAME                       <!-- コード名 -->
+                ,MUAI.NAME_KANJI AS NAME_KANJI                                                 <!-- 顧客名_姓名(漢字) -->
+                ,MJU.JOINT_BRANCH_CODE AS JOINT_BRANCH_CODE                                    <!-- 共募支店コード -->
+                ,MB2.BRANCH_NAME AS JOINT_BRANCH_NAME                                          <!-- 共募支店名 -->
+                ,MJU.CONTRACT_DATE AS CONTRACT_DATE                                            <!-- 契約締結日 -->
+                ,MJU.START_DATE AS START_DATE                                                  <!-- 同意日 -->
+                ,MJU.END_DATE AS END_DATE                                                      <!-- 終了日 -->
+                ,MJU.JOINT_REWARD_RATE AS JOINT_REWARD_RATE                                    <!-- 支払率 -->
+                ,MJU.EDIT_STATUS AS EDIT_STATUS                                                <!-- 手続状況 -->
+                ,CO.NAME AS EDIT_STATUS_NAME                                                   <!-- 手続状況名 -->
+                ,MUAI.INTERMEDIARY_EMP_CD AS BROKER_CHARGE_CODE                                <!-- 営業員コード -->
+                ,MCI.BROKER_CHARGE_NAME AS BROKER_CHARGE_NAME                                  <!-- 営業員名 -->
+                ,MJUBI.REASON_CODE AS JOINTUSERDISPKBN                                         <!-- 更新理由 -->
+            FROM
+                CORDYS.M_JOINT_USER MJU                                                        <!-- 【共同募集顧客マスタ】 -->
+                LEFT JOIN CORDYS.MEDIATE_USER_ATTRIBUTE_INFO MUAI                              <!-- 【仲介業者顧客口座属性】 -->
+                       ON MUAI.BUTEN_CODE = MJU.BUTEN_CODE
+                      AND MUAI.ACCOUNT_NUMBER = MJU.ACCOUNT_NUMBER
+                LEFT JOIN CORDYS.MEDIATE_BRANCH MB1                                            <!-- 【仲介業者支店】仲介業者名取得用 -->
+                       ON MB1.BROKER_CODE = MUAI.BROKER_CODE
+                      AND MB1.BROKER_BRANCH_KIND = '00'                                        <!-- 仲介業者支店種別:'00'仲介業者名 -->
+                LEFT JOIN CORDYS.MEDIATE_BRANCH MB2                                            <!-- 【仲介業者支店】共募支店名取得用 -->
+                       ON MB2.BROKER_CODE = #{req.broker0509}                                  <!-- マネプラ（0509）のみ -->
+                      AND MB2.BROKER_BRANCH_CODE = MJU.JOINT_BRANCH_CODE
+                LEFT JOIN CORDYS.M_CODE CO                                                     <!-- 【コードマスタ】 -->
+                       ON CO.CODE_TYPE = '12'
+                      AND (CO.CODE_1 = '0' OR CO.CODE_1 = '1')
+                      AND TO_NUMBER(CO.CODE_2) - 1 = MJU.EDIT_STATUS
+                LEFT JOIN (
+                            SELECT DISTINCT
+                                 BROKER_CODE
+                                ,BROKER_CHARGE_CODE
+                                ,CASE BROKER_CHARGE_CODE
+                                    WHEN '0000' THEN ''
+                                    ELSE BROKER_CHARGE_NAME
+                                 END AS BROKER_CHARGE_NAME
+                            FROM
+                                CORDYS.MEDIATE_CHARGE_INFO                                     <!-- 【仲介業者営業員情報】 -->
+                            WHERE
+                                DELETE_FLG='0'
+                           ) MCI
+                       ON MUAI.BROKER_CODE = MCI.BROKER_CODE 
+                      AND MUAI.INTERMEDIARY_EMP_CD = MCI.BROKER_CHARGE_CODE
+                LEFT JOIN CORDYS.M_JOINT_USER_BROKER_INFO MJUBI                                <!-- 【共同募集顧客仲介業者情報】 -->
+                       ON MJU.BUTEN_CODE = MJUBI.BUTEN_CODE
+                      AND MJU.ACCOUNT_NUMBER = MJUBI.ACCOUNT_NUMBER
+            WHERE
+                MJU.EDIT_STATUS != '3'
+                AND MJU.EDIT_NUMBER = '0'
+            <!-- 部店コードの指定がある場合 -->
+            <if test='req.butenCode != null and req.butenCode != ""'>
+                AND MJU.BUTEN_CODE = #{req.butenCode}
+            </if>
+            <!-- 口座番号の指定がある場合 -->
+            <if test='req.accountNumber != null and req.accountNumber != ""'>
+                AND MJU.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            </if>
+            <!-- 仲介業者コードの指定がある場合 且つ 仲介業者除外はfalse の場合 -->
+            <if test='req.brokerCode != null and req.brokerCode != "" and req.chkBrokerCodeExclude == ""'>
+                AND MUAI.BROKER_CODE IN
+                <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            <!-- 仲介業者コードの指定がある場合 且つ 仲介業者除外はtrue の場合 -->
+            <if test='req.brokerCode != null and req.brokerCode != "" and req.chkBrokerCodeExclude == "true"'>
+                AND MUAI.BROKER_CODE NOT IN
+                <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            <!-- 共募支店コードの指定がある場合 -->
+            <if test='req.jointBranchCode != null and req.jointBranchCode != ""'>
+                AND MJU.JOINT_BRANCH_CODE = #{req.jointBranchCode}
+            </if>
+            <!-- 手続き状況の指定がある場合 -->
+            <if test='req.editStatus != null and req.editStatus != ""'>
+                AND MJU.EDIT_STATUS = #{req.editStatus}
+            </if>
+            <!-- ユーザ権限判定 -->
+            <if test='req.privId != null and req.privId != ""'>
+                <!-- 本店と支店以外の場合 -->
+                <if test="req.privId != '1'.toString() and req.privId != '2'.toString()" >
+                AND MJU.START_DATE &lt;= TO_CHAR(SYSDATE, 'YYYYMMDD')
+                AND MJU.END_DATE &gt; TO_CHAR(SYSDATE, 'YYYYMMDD')
+                </if>
+                <if test="req.privId == '6'.toString() or req.privId == '7'.toString() or req.privId == '8'.toString() or req.privId == '9'.toString()" >
+                AND MJU.JOINT_BRANCH_CODE IN (
+                        SELECT
+                            SUB_BROKER_ID
+                        FROM
+                            CORDYS.TB_MED_USERS
+                        WHERE
+                            USER_ID = #{req.loginId}
+                        UNION
+                        SELECT
+                            SUB_BROKER_ID
+                        FROM
+                            CORDYS.TB_MED_USERS_PRIV
+                        WHERE
+                            USER_ID = #{req.loginId}
+                            AND BROKER_ID = #{req.broker0509}
+                    )
+                </if>
+            </if>
+            ORDER BY
+                 MJU.START_DATE DESC
+                ,MUAI.BROKER_CODE
+                ,MJU.BUTEN_CODE
+                ,MJU.ACCOUNT_NUMBER
+        )
+        <where>
+            1=1
+        <if test='req.querySizeLimit != null and req.querySizeLimit != ""'>
+            AND ROWNUM &lt;= #{req.querySizeLimit}
+        </if>
+        </where>
+    </select>
+
+    <!-- 
+        SQLID：SQL002
+        SQL名：顧客情報　詳細を取得する
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaJointSubscriptCustomerManageSql002"
+            type="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.model.IfaJointSubscriptCustomerManageSql002ResponseModel">
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="nameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="nameKana" column="NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="addressKanji1" column="ADDRESS_KANJI1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="phoneNumber" column="PHONE_NUMBER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <select id="selectIfaJointSubscriptCustomerManageSql002" resultMap="ResultMapIfaJointSubscriptCustomerManageSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_01#SQL002 */
+             MUAI.BUTEN_CODE                                                                   <!-- 口座番号 -->
+            ,MUAI.ACCOUNT_NUMBER                                                               <!-- 部店コード -->
+            ,MUAI.BROKER_CODE                                                                  <!-- 仲介業者コード -->
+            ,MB.BRANCH_NAME AS BROKER_NAME                                                     <!-- 仲介業者名 -->
+            ,MUAI.INTERMEDIARY_EMP_CD AS BROKER_CHARGE_CODE                                    <!-- 仲介業者営業員コード -->
+            ,MCI.BROKER_CHARGE_NAME AS BROKER_CHARGE_NAME                                      <!-- 仲介業者担当者名 -->
+            ,MUAI.NAME_KANJI                                                                   <!-- 顧客名_姓名(漢字) -->
+            ,MUAI.NAME_KANA                                                                    <!-- 顧客名_姓名(カナ) -->
+            ,MUAI.ADDRESS_KANJI1                                                               <!-- 住所(漢字) -->
+            ,MUAI.PHONE_NUMBER                                                                 <!-- 電話番号 -->
+            ,MUAI.PHONE_FLG                                                                    <!-- 自宅電話不可フラグ -->
+            ,MUAI.SEX_KBN AS SEX                                                               <!-- 性別区分 -->
+            ,MUAI.AGE                                                                          <!-- 年齢 -->
+            ,MUAI.OPEN_ACCT_DATE                                                               <!-- 口座開設年月日 -->
+            ,MUAI.TC_COMP_RANK                                                                 <!-- コンプラランク -->
+        FROM
+            CORDYS.MEDIATE_USER_ATTRIBUTE_INFO MUAI                                            <!-- 【仲介業者顧客口座属性】 -->
+            LEFT JOIN CORDYS.MEDIATE_CHARGE_INFO MCI                                           <!-- 【仲介業者営業員情報】 -->
+                   ON MCI.BROKER_CODE = MUAI.BROKER_CODE
+                  AND MCI.BROKER_CHARGE_CODE = MUAI.INTERMEDIARY_EMP_CD
+            LEFT JOIN CORDYS.MEDIATE_BRANCH MB                                                 <!-- 【仲介業者支店】 -->
+                   ON MB.BROKER_CODE = MUAI.BROKER_CODE
+                  AND MB.BROKER_BRANCH_KIND = '00'
+        WHERE
+            MUAI.BUTEN_CODE = #{req.butenCode}
+            AND MUAI.ACCOUNT_NUMBER = #{req.accountNumber}
+    </select>
+
+    <!-- 
+        SQLID：SQL003
+        SQL名：顧客情報　詳細を取得する
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaJointSubscriptCustomerManageSql003" 
+            type="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.model.IfaJointSubscriptCustomerManageSql003ResponseModel" >
+    </resultMap>
+
+    <select id="selectIfaJointSubscriptCustomerManageSql003" resultMap="ResultMapIfaJointSubscriptCustomerManageSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_01#SQL003 */
+             START_DATE                                                                        <!-- 同意日 -->
+            ,BUTEN_CODE                                                                        <!-- 部店コード -->
+            ,ACCOUNT_NUMBER                                                                    <!-- 口座番号 -->
+            ,EDIT_NUMBER                                                                       <!-- 編集履歴 -->
+        FROM
+            CORDYS.M_JOINT_USER                                                                <!-- 【共同募集顧客マスタ】 -->
+        WHERE
+            BUTEN_CODE = #{req.butenCode}
+            AND ACCOUNT_NUMBER = #{req.accountNumber}
+            AND START_DATE = #{req.startDate}
+        ORDER BY
+            EDIT_NUMBER DESC
+    </select>
+
+    <!-- 
+        SQLID：SQL004
+        SQL名：指定顧客情報の編集履歴を更新する
+        SQLタイプ：update
+    -->
+    <update id="updateIfaJointSubscriptCustomerManageSql004" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0206_01#SQL004 */
+            CORDYS.M_JOINT_USER 
+        SET
+            EDIT_NUMBER = #{req.editNumber} + 1                                                <!-- 編集履歴 -->
+        WHERE
+            START_DATE = #{req.startDate} 
+            AND BUTEN_CODE = #{req.butenCode} 
+            AND ACCOUNT_NUMBER = #{req.accountNumber} 
+            AND EDIT_NUMBER = #{req.editNumber}
+    </update>
+
+    <!-- 
+        SQLID：SQL005
+        SQL名：新しい顧客情報を共同募集顧客マスタに新規登録する
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaJointSubscriptCustomerManageSql005" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0206_01#SQL005 */
+        INTO CORDYS.M_JOINT_USER (
+             START_DATE
+            ,END_DATE
+            ,BUTEN_CODE
+            ,ACCOUNT_NUMBER
+            ,JOINT_BRANCH_CODE
+            ,JOINT_REWARD_RATE
+            ,CONTRACT_DATE
+            ,EDIT_NUMBER
+            ,EDIT_USER
+            ,EDIT_DATE
+            ,EDIT_STATUS
+            ,SYS_USERID
+            ,SYS_MACHINEID
+            ,SYS_TRIGGER
+            ,SYS_TIME
+            ,SYS_APPDATE
+        )
+        VALUES
+        (
+             #{req.startDate}                                                                  <!-- 同意日 -->
+            ,#{req.endDate}                                                                    <!-- 終了日 -->
+            ,#{req.butenCode}                                                                  <!-- 部店コード -->
+            ,#{req.accountNumber}                                                              <!-- 口座番号 -->
+            ,#{req.jointBranchCode}                                                            <!-- 共募支店コード -->
+            ,#{req.jointRewardRate}                                                            <!-- 支払率 -->
+            ,#{req.contractDate}                                                               <!-- 契約締結日 -->
+            ,0                                                                                 <!-- 編集履歴 -->
+            ,SUBSTRB(#{req.loginName}, 0, 20)                                                  <!-- 編集者名 -->
+            ,TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDDHHMM')                               <!-- 編集日時 -->
+            ,#{req.editStatus}                                                                 <!-- 状況 -->
+            ,#{req.loginId}                                                                    <!-- ユーザID -->
+            ,#{req.sysMachineId}                                                               <!-- 端末ID -->
+            ,#{req.sysTrigger}                                                                 <!-- トリガーID -->
+            ,TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYMMDDHHMMSS')                               <!-- 時間[YYMMDDHHMMSS] -->
+            ,TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')                                   <!-- システム日付[YYYYMMDD] -->
+        )
+    </insert>
+
+    <!-- 
+        SQLID：SQL006
+        SQL名：仲介業者顧客口座属性情報を取得する
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaJointSubscriptCustomerManageSql006" 
+            type="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.model.IfaJointSubscriptCustomerManageSql006ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <select id="selectIfaJointSubscriptCustomerManageSql006" resultMap="ResultMapIfaJointSubscriptCustomerManageSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_01#SQL006 */
+             MB.BROKER_CODE                                                                    <!-- 仲介業者コード -->
+            ,MB.BRANCH_NAME AS BROKER_NAME                                                     <!-- 仲介業者名 -->
+        FROM
+            CORDYS.MEDIATE_USER_ATTRIBUTE_INFO MUAI                                            <!-- 【仲介業者顧客口座属性】 -->
+            LEFT JOIN CORDYS.MEDIATE_BRANCH MB                                                 <!-- 【仲介業者支店】 -->
+                   ON MB.BROKER_CODE = MUAI.BROKER_CODE
+                  AND MB.BROKER_BRANCH_KIND = '00'                                             <!-- 仲介業者支店種別:'00'仲介業者名 -->
+        WHERE
+            MUAI.BUTEN_CODE = #{req.butenCode}
+            AND MUAI.ACCOUNT_NUMBER = #{req.accountNumber}
+    </select>
+
+    <!-- 
+        SQLID：SQL007
+        SQL名：仲介業者支店名を取得する。
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaJointSubscriptCustomerManageSql007" 
+            type="com.sbisec.helios.ap.brokerageMenu.jointSubscript.dao.model.IfaJointSubscriptCustomerManageSql007ResponseModel" >
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <select id="selectIfaJointSubscriptCustomerManageSql007" resultMap="ResultMapIfaJointSubscriptCustomerManageSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_01#SQL007 */
+            BRANCH_NAME                                                                        <!-- 仲介業者支店名 -->
+        FROM
+            CORDYS.MEDIATE_BRANCH MB                                                           <!-- 【仲介業者支店】 -->
+        WHERE
+            BROKER_CODE = #{req.broker0509}                                                    <!-- マネプラ（0509）のみ -->
+            AND BROKER_BRANCH_CODE = #{req.jointBranchCode}                                    <!-- 共募支店コード -->
+            AND DELETE_FLG = '0'
+    </select>
+
+    <!-- 
+        SQLID：SQL008
+        SQL名：共通募集顧客テーブルに、指定の条件で口座が存在するか判定する
+        SQLタイプ：select
+    -->
+    <resultMap id="ResultMapIfaJointSubscriptCustomerManageSql008" type="java.lang.Integer" >
+    </resultMap>
+
+    <select id="selectIfaJointSubscriptCustomerManageSql008" resultMap="ResultMapIfaJointSubscriptCustomerManageSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_01#SQL008 */
+            COUNT(*)
+        FROM
+            CORDYS.M_JOINT_USER                                                                <!-- 【共同募集顧客マスタ】 -->
+        WHERE
+            BUTEN_CODE = #{req.butenCode}
+            AND ACCOUNT_NUMBER = #{req.accountNumber}
+            AND EDIT_NUMBER = '0'                                                              <!-- 編集履歴:0 -->
+            AND EDIT_STATUS != '3'                                                             <!-- 状況:3.削除 -->
+    </select>
+
+    <!--
+        SQLID: SQL010
+        SQL名: 新しい共同募集顧客情報を共同募集顧客仲介業者情報に新規登録する。
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaJointSubscriptCustomerManageSql010" statementType="PREPARED">
+        MERGE INTO CORDYS.M_JOINT_USER_BROKER_INFO A　　　　　　　　　　　　　　　　　　　　　　　　　　 <!-- 【共同募集顧客仲介業者情報】 -->
+        USING (
+            SELECT
+                MUAI.CUSTOMER_ID AS CUSTOMER_ID                                                <!-- 顧客ID -->
+            FROM
+                MEDIATE_USER_ATTRIBUTE_INFO MUAI                                               <!-- 【仲介業者顧客口座属性】 -->
+            WHERE
+                MUAI.BUTEN_CODE = #{req.butenCode}                                             <!-- 部店コード -->
+            AND MUAI.ACCOUNT_NUMBER = #{req.accountNumber}                                     <!-- 口座番号 -->
+        ) B
+        ON (
+            A.CUSTOMER_ID = B.CUSTOMER_ID                                                      <!-- 顧客ID -->
+        )
+        WHEN MATCHED THEN
+            UPDATE SET
+                A.BUTEN_CODE = #{req.butenCode},                                               <!-- 部店 -->
+                A.ACCOUNT_NUMBER = #{req.accountNumber},　　　　　　　　　　　　　　　　　　　　　　　　<!-- 口座番号 -->
+                A.BROKER_CODE = #{req.brokerCode},                                             <!-- 仲介業者コード -->
+                A.REASON_CODE = '0'                                                            <!-- 更新理由 0:未設定 -->
+        WHEN NOT MATCHED THEN
+            INSERT (
+                 CUSTOMER_ID,                                                                  <!-- 顧客ID -->
+                 BUTEN_CODE,                                                                   <!-- 部店 -->
+                 ACCOUNT_NUMBER,                                                               <!-- 口座番号 -->
+                 BROKER_CODE,                                                                  <!-- 仲介業者コード -->
+                 REASON_CODE                                                                   <!-- 更新理由 0:未設定 -->
+            )
+            VALUES (
+                 B.CUSTOMER_ID,                                                                <!-- 顧客ID -->
+                 #{req.butenCode},                                                             <!-- 部店 -->
+                 #{req.accountNumber},                                                         <!-- 口座番号 -->
+                 #{req.brokerCode},                                                            <!-- 仲介業者コード -->
+                 '0'                                                                           <!-- 更新理由 0:未設定 -->
+            )
+    </insert>
+
+    <!--
+    SQLID: SQL011
+    SQL名: IFA顧客属性テーブルに、指定の部店、口座番号が存在するか確認する。
+    SQLタイプ：select
+    -->
+    <select id="selectIfaJointSubscriptCustomerManageSql011" resultType="java.lang.Integer" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_01#SQL011 */
+            COUNT(*)
+        FROM
+            CORDYS.MEDIATE_USER_ATTRIBUTE_INFO MUAI                                             <!-- 【仲介業者顧客口座属性】 -->
+        WHERE
+            BUTEN_CODE = #{req.butenCode}                                                       <!-- 部店コード -->
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})                                    <!-- 口座番号 -->
+    </select>
+
+    <!--
+    SQLID: SQL012
+    SQL名: IFA顧客属性テーブルに、指定の部店、口座番号が契約先仲介業者に紐づいているか確認する
+    SQLタイプ：select
+    -->
+    <select id="selectIfaJointSubscriptCustomerManageSql012" resultType="java.lang.Integer" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0206_01#SQL012 */
+            COUNT(*)
+        FROM
+            CORDYS.MEDIATE_USER_ATTRIBUTE_INFO MUAI                                             <!-- 【仲介業者顧客口座属性】 -->
+            INNER JOIN CORDYS.M_JOINT_BROKER MJB                                                <!-- 【共同募集顧客仲介業者情報】 -->
+                    ON MUAI.BROKER_CODE = MJB.BROKER_CODE                                       <!-- 仲介業者コード -->
+                    AND MJB.DELETE_FLG = '0'                                                    <!-- 削除フラグ 0：有効 -->
+                    AND MJB.CONTRACT_STATUS = '1'                                               <!-- 契約状態 1:契約 -->
+        WHERE
+            MUAI.BUTEN_CODE = #{req.butenCode}                                                  <!-- 部店コード -->
+            AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})                           <!-- 口座番号 -->
+    </select>
+</mapper>

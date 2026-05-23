@@ -1,0 +1,160 @@
+image:
+  name: nexus.jp.sbibits.com:8442/cb/gitlab-ci/rocky8.8-openjdk17-mvn-nodejs:2024.08-1
+before_script:
+    - export TZ=Asia/Tokyo
+stages:
+    - back_build_rpm
+    - back_upload_repo
+    - front_build_rpm
+    - front_upload_repo
+    - tool_build_rpm
+    - tool_upload_repo
+
+variables:
+    GW_NAME: "helios-gw"
+    AP_NAME: "helios-ap"
+    CNT_NAME: "helios-cnt"
+    TOOL_NAME: "helios-tool"
+    UPLOAD_PATH: 'ftp://repo-manager.sbisec.int/bits-el7/'
+    MAVEN_CLI_OPTS: '-s /builds/$CI_PROJECT_PATH/mvn_settings.xml'
+
+
+back_build_rpm:
+    stage: back_build_rpm
+    tags:
+        - base
+        - bits
+        - centos7
+        - vanilla
+    when: manual
+    allow_failure: true
+    script:
+        # mvn build
+        - mvn --version
+        - echo Build started on `date`
+        - cd /builds/$CI_PROJECT_PATH/ifa-portal-backend
+        - mvn ${MAVEN_CLI_OPTS} clean install -P IntegrationS -Dmaven.test.skip=true
+        - ls /builds/$CI_PROJECT_PATH/ifa-portal-backend/ifa-portal-ap/target/ifa-portal-ap/WEB-INF/lib/
+        - pwd
+        - ls -lR ./ifa-portal-ap/target/ifa-portal-ap.war
+        - ls -lR ./ifa-portal-gw/target/ifa-portal-gw.war
+
+        # rpm build
+        - cd /builds/${CI_PROJECT_PATH}
+        - mkdir -p /root/rpmbuild/SOURCES
+        - cp ./ifa-portal-backend/ifa-portal-ap/target/ifa-portal-ap.war /root/rpmbuild/SOURCES/
+        - rpmbuild -bb ./spec/helios-ap.spec | tee rpm_build.log
+        - cp ./ifa-portal-backend/ifa-portal-gw/target/ifa-portal-gw.war /root/rpmbuild/SOURCES/
+        - rpmbuild -bb ./spec/helios-gw.spec | tee rpm_build.log
+        - mv /root/rpmbuild/RPMS/*/*.rpm  .
+        - ls -l ./${AP_NAME}-*.rpm
+        - ls -l ./${GW_NAME}-*.rpm
+
+    artifacts:
+        paths:
+            - ${AP_NAME}-*.rpm
+            - ${GW_NAME}-*.rpm
+        expire_in: 1 week
+
+back_upload_repo:
+    stage: back_upload_repo
+    tags:
+        - base
+        - bits
+        - centos7
+        - vanilla
+    when: manual
+    script:
+        - pwd
+        - ls -l ${AP_NAME}-*.rpm
+        - curl -v -u anonymous:'' -T ${AP_NAME}-*.rpm ${UPLOAD_PATH}
+        - ls -l ${GW_NAME}-*.rpm
+        - curl -v -u anonymous:'' -T ${GW_NAME}-*.rpm ${UPLOAD_PATH}
+    dependencies:
+        - back_build_rpm
+
+front_build_rpm:
+    stage: front_build_rpm
+    tags:
+        - base
+        - bits
+        - centos7
+        - vanilla
+    when: manual
+    allow_failure: true
+    script:
+        # npm build
+        - cd /builds/${CI_PROJECT_PATH}/ifa-portal-frontend
+        - echo "Installing dependencies..."
+        #- npm cache clean --force
+        - npm install --legacy-peer-deps
+        
+        - echo "Building Vue.js application..."
+        - npm run build:prod
+        - ls dist
+
+        # build rpm
+        - cd /builds/${CI_PROJECT_PATH}/
+        - mkdir -p /root/rpmbuild/SOURCES
+        - pwd
+        - cp -r ./ifa-portal-frontend/dist /root/rpmbuild/SOURCES/dist
+        - rpmbuild -bb ./spec/helios-cnt.spec | tee rpm_build.log
+        - mv /root/rpmbuild/RPMS/*/*.rpm  .
+        - ls -l ./${CNT_NAME}-*.rpm
+
+    artifacts:
+        paths:
+            - ${CNT_NAME}-*.rpm
+        expire_in: 1 week
+
+front_upload_repo:
+    stage: front_upload_repo
+    tags:
+        - base
+        - bits
+        - centos7
+        - vanilla
+    when: manual
+    script:
+        - pwd
+        - ls -l ${CNT_NAME}-*.rpm
+        - curl -v -u anonymous:'' -T ${CNT_NAME}-*.rpm ${UPLOAD_PATH}
+    dependencies:
+        - front_build_rpm
+
+tool_build_rpm:
+    stage: tool_build_rpm
+    tags:
+        - base
+        - bits
+        - centos7
+        - vanilla
+    when: manual
+    allow_failure: true
+    script:
+        - cd /builds/${CI_PROJECT_PATH}/
+        - mkdir -p /root/rpmbuild/SOURCES
+        - cp -r ./ifa-portal-tool/sh /root/rpmbuild/SOURCES/ifa-portal-tool
+        - rpmbuild -bb ./spec/helios-tool.spec | tee rpm_build.log
+        - mv /root/rpmbuild/RPMS/*/*.rpm  .
+        - ls -l ./${TOOL_NAME}-*.rpm
+
+    artifacts:
+        paths:
+            - ${TOOL_NAME}-*.rpm
+        expire_in: 1 week
+
+tool_upload_repo:
+    stage: tool_upload_repo
+    tags:
+        - base
+        - bits
+        - centos7
+        - vanilla
+    when: manual
+    script:
+        - pwd
+        - ls -l ${TOOL_NAME}-*.rpm
+        - curl -v -u anonymous:'' -T ${TOOL_NAME}-*.rpm ${UPLOAD_PATH}
+    dependencies:
+        - tool_build_rpm

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0110-02_1
+    画面名：その他余力拘束注文取消確認
+-->
+<mapper
+    namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaOtherRemainPowerRestrainCancelConfirmMapper">
+
+    <resultMap id="ResultMapIfaOtherRemainPowerRestrainCancelConfirmSql001" 
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaOtherRemainPowerRestrainCancelConfirmSql001ResponseModel" >
+    </resultMap>
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：その他注文履歴情報取得
+         SQLタイプ：select
+    -->
+    <select id="selectIfaOtherRemainPowerRestrainCancelConfirmSql001" resultMap="ResultMapIfaOtherRemainPowerRestrainCancelConfirmSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0110-02_1#SQL001 */
+             A.TRAN_ID                                                                <!-- トランザクションＩＤ -->
+            ,A.EDABAN                                                                 <!-- 枝番 -->
+        FROM
+            CORDYS.TB_ADDITIONAL_ORDER_IFA A                                          <!-- 【IFAその他注文履歴】 -->
+            ,(
+                SELECT
+                    TRAN_ID
+                FROM
+                    CORDYS.TB_ADDITIONAL_ORDER_IFA                                    <!-- 【IFAその他注文履歴】 -->
+                WHERE
+                    EC_JUCHUU_NO = RPAD(#{req.ecJuchuuNo}, 6, ' ')                    <!-- EC受注番号（その他商品） -->
+                    AND EDABAN = '1'                                                  <!-- 枝番 -->
+            ) B
+        WHERE
+            A.TRAN_ID = B.TRAN_ID
+        ORDER BY A.EDABAN DESC
+        FETCH FIRST 1 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：その他注文履歴情報(取消発注)の件数取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaOtherRemainPowerRestrainCancelConfirmSql002" resultType="int" statementType="PREPARED">
+        SELECT
+             COUNT(*)                                                               <!-- データ件数 -->
+        FROM
+            CORDYS.TB_ADDITIONAL_ORDER_IFA                                          <!-- 【IFAその他注文履歴】 -->
+        WHERE
+            TRAN_ID = #{req.tranId}                                                 <!-- A.トランザクションID = SQL001で取得したトランザクションIDの値 -->
+            AND STS_CD = #{req.stsCd}                                               <!-- ステータスコード = '1' -->
+            AND TORIKESHI_KBN = #{req.torikeshiKbn}                                 <!-- 取消区分 = '1' -->
+            AND (SHUBETSU = '     ' OR SUBSTR(ERROR_CD,1,1) = 'W')                  <!-- "     "(半角スペース5文字)：API正常終了(発注済)、エラーコードの先頭1文字 = "W"：APIワーニング(発注済) -->
+    </select>
+
+    <!-- 
+         SQLID：Sql003
+         SQL名：発注前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaOtherRemainPowerRestrainCancelConfirmSql003" statementType="PREPARED">
+        INSERT INTO CORDYS.TB_ADDITIONAL_ORDER_IFA (
+             TRAN_ID
+            ,EDABAN
+            ,KOKYAKU_ID
+            ,BUTEN_CD
+            ,KOUZA_NO
+            ,HATTYUU_KBN
+            ,TOKUTEI_AZUKARI_BAIBAI_KBN
+            ,TOKUTEI_KOUZA_KBN
+            ,JUCHUBI
+            ,EC_JUCHUU_NO
+            ,KEITOU_KBN
+            ,KAISHA_CD
+            ,SHINKYU_KBN
+            ,KAISUU
+            ,GOU
+            ,SHOUHINMEI
+            ,SHOUHIN_KBN
+            ,STS_CD
+            ,USER_ID
+            ,ERROR_CD
+            ,ERROR_MESSAGE
+            ,EC_JUCHUU_NICHIJI
+            ,BAIBAI_KBN
+            ,SEISAN_KINGAKU
+            ,KAKUTEI_SEISAN_KINGAKU
+            ,CHUMON_DEKI_KBN
+            ,TORIKESHI_KBN
+            ,UKEWATASHI_HOUHO
+            ,SIHARAI_HOUHO
+            ,SURYOU
+            ,DEKI_SURYOU
+            ,SASHINARI_KBN
+            ,TANKA
+            ,KEIKA_RISI
+            ,JOUTOEKIZEI_KBN
+            ,TSUUKA
+            ,KAWASE_RATE
+            ,KAWASE_TESUURYOU
+            ,COUPON_RATE
+            ,COUPON_KASU
+            ,UKETSUKE_KEIRO_KBN
+            ,YORYOKU_CHECK_KBN
+            ,SHUBETSU
+            ,KAITSUKEKANOU_KINGAKU
+            ,CHUMON_KAITSUKEKANOU_KINGAKU
+            ,SHIKKOU_KBN
+            ,SHIJOU
+            ,SHORI_FLG
+            ,KAIYAKU_SHITEI_KBN
+            ,YAKUJOU_YOTEIBI
+            ,UKEWATASHI_YOTEIBI
+            ,NYUURYOKU_JUCHUU_NICHIJI
+            ,DEKI_HICHIJI
+            ,KOKUNAI_YAKUJOUBI
+            ,KOKUNAI_UKEWATASHIBI
+            ,GENCHI_UKEWATASHIBI
+            ,HATTYU_RIYU
+            ,INSATSU_FLG
+            ,TOUROKU_NICHIJI
+            ,HENKOU_NICHIJI
+            ,SAKUJO_NICHIJI
+            ,SAKUJO_FLG
+            ,KANNYUU_KBN
+            ,JYUUCHUU_HOUHOU
+            ,SHIKIN_SEIKAKU
+            ,MARUYU_KOUZA_KBN
+            ,KOUSOKU_KBN
+            ,NISA_KINGAKU
+            ,KOUSOKU_SYUBETU
+            ,CCS_SEND_DATE
+          )
+          SELECT 
+             SRC.TRAN_ID                                                            <!-- トランザクションＩＤ -->
+            ,SRC.EDABAN + 1                                                         <!-- 枝番 -->
+            ,SRC.KOKYAKU_ID                                                         <!-- 顧客ID -->
+            ,SRC.BUTEN_CD                                                           <!-- 部店CD -->
+            ,SRC.KOUZA_NO                                                           <!-- 口座番号 -->
+            ,#{req.hattyuuKbn}                                                      <!-- 発注区分 -->
+            ,#{req.tokuteiAzukariBaibaiKbn}                                         <!-- 特定預り売買区分 -->
+            ,SRC.TOKUTEI_KOUZA_KBN                                                  <!-- 特定口座区分 -->
+            ,#{req.juchubi}                                                         <!-- 受注日 -->
+            ,SRC.EC_JUCHUU_NO                                                       <!-- EC受注番号（その他商品） -->
+            ,#{req.keitouKbn}                                                       <!-- 継投区分 -->
+            ,#{req.kaishaCd}                                                        <!-- 会社コード -->
+            ,#{req.shinkyuKbn}                                                      <!-- 新旧区分 -->
+            ,#{req.kaisuu}                                                          <!-- 回数 -->
+            ,#{req.gou}                                                             <!-- 号 -->
+            ,#{req.shouhinmei}                                                      <!-- 商品名 -->
+            ,#{req.shouhinKbn}                                                      <!-- 商品区分 -->
+            ,#{req.stsCd}                                                           <!-- ステータスコード -->
+            ,#{req.userId}                                                          <!-- ユーザーＩＤ -->
+            ,#{req.errorCd}                                                         <!-- エラーコード -->
+            ,#{req.errorMessage}                                                    <!-- エラーメッセージ -->
+            ,SRC.EC_JUCHUU_NICHIJI                                                  <!-- EC受注日時 -->
+            ,#{req.baibaiKbn}                                                       <!-- 売買区分 -->
+            ,SRC.SEISAN_KINGAKU                                                     <!-- 精算金額 -->
+            ,#{req.kakuteiSeisanKingaku}                                            <!-- 確定精算金額 -->
+            ,#{req.chumonDekiKbn}                                                   <!-- 注文・出来区分 -->
+            ,#{req.torikeshiKbn}                                                    <!-- 取消区分 -->
+            ,#{req.ukewatashiHouho}                                                 <!-- 受渡方法 -->
+            ,#{req.siharaiHouho}                                                    <!-- 支払い方法 -->
+            ,#{req.suryou}                                                          <!-- 数量 -->
+            ,#{req.dekiSuryou}                                                      <!-- 出来数量 -->
+            ,#{req.sashinariKbn}                                                    <!-- 指成区分 -->
+            ,#{req.tanka}                                                           <!-- 単価 -->
+            ,#{req.keikaRisi}                                                       <!-- 経過利子 -->
+            ,#{req.joutoekizeiKbn}                                                  <!-- 譲渡益税区分 -->
+            ,#{req.tsuuka}                                                          <!-- 通貨 -->
+            ,#{req.kawaseRate}                                                      <!-- 為替レート -->
+            ,#{req.kawaseTesuuryou}                                                 <!-- 為替手数料 -->
+            ,#{req.couponRate}                                                      <!-- クーポンレート -->
+            ,#{req.couponKasu}                                                      <!-- クーポン回数（年） -->
+            ,SRC.UKETSUKE_KEIRO_KBN                                                 <!-- 受付経路区分 -->
+            ,#{req.yoryokuCheckKbn}                                                 <!-- 余力チェック区分 -->
+            ,#{req.shubetsu}                                                        <!-- 種別 -->
+            ,#{req.kaitsukekanouKingaku}                                            <!-- 買付可能金額 -->
+            ,#{req.chumonKaitsukekanouKingaku}                                      <!-- 注文後の買付可能金額 -->
+            ,#{req.shikkouKbn}                                                      <!-- 失効区分 -->
+            ,#{req.shijou}                                                          <!-- 市場 -->
+            ,#{req.shoriFlg}                                                        <!-- 処理フラグ -->
+            ,#{req.kaiyakuShitei_kbn}                                               <!-- 解約指定区分 -->
+            ,SRC.YAKUJOU_YOTEIBI                                                    <!-- 約定予定日 -->
+            ,SRC.UKEWATASHI_YOTEIBI                                                 <!-- 受渡予定日 -->
+            ,SRC.NYUURYOKU_JUCHUU_NICHIJI                                           <!-- 入力受注日時 -->
+            ,#{req.dekiHichiji}                                                     <!-- 出来日時 -->
+            ,#{req.kokunaiYakujoubi}                                                <!-- 国内約定日 -->
+            ,#{req.kokunaiUkewatashibi}                                             <!-- 国内受渡日 -->
+            ,#{req.genchiUkewatashibi}                                              <!-- 現地受渡日 -->
+            ,SRC.HATTYU_RIYU                                                        <!-- 発注理由 -->
+            ,#{req.insatsuFlg}                                                      <!-- 印刷フラグ -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE                                             <!-- 登録日時 -->
+            ,#{req.henkouNichiji}                                                   <!-- 変更日時 -->
+            ,#{req.sakujo_nichiji}                                                  <!-- 削除日時 -->
+            ,#{req.sakujoFlg}                                                       <!-- 削除フラグ -->
+            ,#{req.kannyuuKbn}                                                      <!-- 勧誘区分 -->
+            ,#{req.jyuuchuuHouhou}                                                  <!-- 受注方法 -->
+            ,#{req.shikinSeikaku}                                                   <!-- 資金性格 -->
+            ,SRC.MARUYU_KOUZA_KBN                                                   <!-- マル優口座区分 -->
+            ,SRC.KOUSOKU_KBN                                                        <!-- 拘束区分 -->
+            ,SRC.NISA_KINGAKU                                                       <!-- 拘束金額（NISA） -->
+            ,SRC.KOUSOKU_SYUBETU                                                    <!-- 拘束種別 -->
+            ,#{req.ccsSendDate}                                                     <!-- CCS送付日 -->
+        FROM
+            CORDYS.TB_ADDITIONAL_ORDER_IFA SRC
+        WHERE 
+            TRAN_ID = #{req.tranId}
+            AND EDABAN = #{req.edaban}
+    </insert>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaOtherRemainPowerRestrainCancelConfirmSql004" statementType="PREPARED">
+        UPDATE CORDYS.TB_ADDITIONAL_ORDER_IFA
+        <set>
+          HENKOU_NICHIJI = IFA_DATE_UTIL.IFA_GET_DATE                                   <!-- 変更日時 -->
+          <!-- 発注が正常の場合 -->
+          <if test='"API_RESP_OK".equals(req.apiError)'>
+            ,JUCHUBI = #{req.juchubi}                                                   <!-- 受注日 -->
+            ,EC_JUCHUU_NO = #{req.ecJuchuuNo}                                           <!-- EC受注番号（その他商品） -->
+            ,YAKUJOU_YOTEIBI = TO_DATE(#{req.yakujouYoteibi}, 'yyyy/MM/dd')             <!-- 約定予定日 -->
+            ,ERROR_CD = #{req.errorCd}                                                  <!-- エラーコード -->
+            ,ERROR_MESSAGE = #{req.errorMessage}                                        <!-- エラーメッセージ -->
+            ,SHUBETSU = #{req.shubetsu}                                                 <!-- 種別 -->
+          </if>
+          <!-- 発注がエラーの場合(API応答あり) -->
+          <if test='"API_RESP_NG_ON".equals(req.apiError)'>
+            ,JUCHUBI = #{req.juchubi}                                                   <!-- 受注日 -->
+            ,ERROR_CD = #{req.errorCd}                                                  <!-- エラーコード -->
+            ,ERROR_MESSAGE = #{req.errorMessage}                                        <!-- エラーメッセージ -->
+            ,SHUBETSU = #{req.shubetsu}                                                 <!-- 種別 -->
+          </if>
+          <!-- 発注がエラーの場合(API応答なし) -->
+          <if test='"API_RESP_NG_OFF".equals(req.apiError)'>
+            ,JUCHUBI = IFA_DATE_UTIL.IFA_GET_SDATE('yyyyMMdd')                          <!-- 受注日 -->
+          </if>
+        </set>
+        WHERE 
+          TRAN_ID = #{req.tranId}
+          AND EDABAN = #{req.edaban}
+    </update>
+</mapper>

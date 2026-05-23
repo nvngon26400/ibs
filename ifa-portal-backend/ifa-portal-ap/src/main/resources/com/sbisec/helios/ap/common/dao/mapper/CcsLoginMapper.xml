@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    CCSログイン
+-->
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.CcsLoginMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapCcsLoginSql002" type="com.sbisec.helios.ap.common.dao.model.CcsLoginSql002ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：CCSログインユーザー情報更新
+        SQLタイプ：update
+    -->
+    <update id="updateCcsLoginSql001" statementType="PREPARED">
+        UPDATE /* @SQLID=CcsLogin#Sql001 */ TB_MED_USERS SET 
+            CCS_USER_PW = #{req.ccsUserPw},
+            UPTIMESTAMP_TIME= IFA_DATE_UTIL.IFA_GET_DATE 
+        WHERE
+            USER_ID = #{req.userId}
+    </update>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：CCSURL取得
+        SQLタイプ：select
+    -->
+    <select id="selectCcsLoginSql002" resultMap="ResultMapCcsLoginSql002" statementType="PREPARED">
+        SELECT /* @SQLID=CcsLogin#Sql002 */
+            VAR_NAME,
+            VAR_VALUE 
+        FROM 
+            TB_MED_SYSTEM_VARIABLE 
+        WHERE
+            VAR_NAME = #{req.targetUrl}
+    </select>
+    
+</mapper>

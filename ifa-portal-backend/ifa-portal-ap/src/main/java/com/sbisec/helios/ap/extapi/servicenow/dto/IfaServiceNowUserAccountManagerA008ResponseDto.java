@@ -1,0 +1,17 @@
+package com.sbisec.helios.ap.extapi.servicenow.dto;
+
+import com.sbisec.helios.ap.extapi.servicenow.dto.common.IfaServiceNowDataList;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * ユーザ&&利用できるメニューを削除 レスポンスDto
+ *
+ * @author SCSK
+ */
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class IfaServiceNowUserAccountManagerA008ResponseDto extends IfaServiceNowDataList {
+    
+}

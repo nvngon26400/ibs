@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IpopoBBApplyUploadMapper">
+
+    <resultMap id="ipopoBBApplyUploadModel" type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.IpopoBBApplyUploadModel">
+        <result property="brandName" column="BRAND_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <select id ="getIpopoBBBrandInfo" statementType="PREPARED" resultMap ="ipopoBBApplyUploadModel">
+        SELECT /* @SQLID=SUB0204_01-03_1#SQL004 */
+            A.BB_PRODUCT_CODE AS BRAND_CODE,
+            A.BB_PRODUCT_NAME AS BRAND_NAME,
+            A.BB_GESTURE_VALUE,
+            A.BB_PRICE_FROM,
+            A.BB_PRICE_TO,
+            A.BB_PRICE_CUT,
+            A.BB_DISCOUNT_FROM,
+            A.BB_DISCOUNT_TO,
+            A.BB_DISCOUNT_CUT,
+            A.BB_STRIKE_PRICE,
+            A.BB_PRESENTATION_FROM,
+            A.BB_PRESENTATION_TO,
+            A.BB_STOCK,
+            A.BB_IPO_PO_KBN,
+            A.BB_URGENT_STOP,
+            B.PRESENTATION_DATE,
+            NVL(C.MAX_ALLOCATION_UNITS,10) AS MAX_ALLOCATION_UNITS,
+            DECODE(A.BB_UNIT_KBN, '1', '株', '2', '円', '3', '口', '株') AS BB_UNIT_KBN,
+            B.BB_PRESENTATION_FROM AS IFA_BB_PRESENTATION_FROM,
+            B.BB_PRESENTATION_TO AS IFA_BB_PRESENTATION_TO,
+            B.EDELIV_ONLY_FLAG
+        FROM
+            ETINTRA.BB_PRODUCT_MASTER A
+        LEFT JOIN M_IPO_PO_BB_PERIOD B
+        ON    A.BB_PRODUCT_CODE = B.PRODUCT_CODE
+        AND TO_CHAR(A.BB_PRESENTATION_FROM,'YYYYMMDD') =B.PRESENTATION_FROM
+        LEFT JOIN ETINTRA.BB_MAX_ALLOCATION_QUANTITY C
+        ON A.BB_PRODUCT_CODE = C.BB_PRODUCT_CODE 
+        AND TO_CHAR(A.BB_PRESENTATION_FROM,'YYYYMMDD') =C.BB_PRESENTATION_FROM
+        WHERE
+            A.BB_PRODUCT_CODE = #{brandCode} 
+            AND TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'yyyyMMddhh24mi') BETWEEN TO_CHAR(NVL(B.BB_PRESENTATION_FROM,A.BB_PRESENTATION_FROM), 'yyyyMMddhh24mi') AND NVL(TO_CHAR(B.BB_PRESENTATION_TO, 'yyyyMMddhh24mi'),'999912312359')
+            AND NOT EXISTS (
+                SELECT 1
+                  FROM ETRADE.STO_BOSYU_MASTER@CORDYS_ET10.WORLD SBM
+                 WHERE A.BB_PRODUCT_CODE = SBM.SBM_PRODUCT_CODE
+                   AND SBM.SBM_SYOHIN_TYPE = '21'
+            )
+    </select>
+
+    <resultMap id="ipopoUploadBBCustomerOverMaxCheckModel" type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.IpopoUploadBBCustomerOverMaxCheckModel">
+    </resultMap>
+
+    <select id ="getMaybeSairyouCount" statementType="PREPARED" resultMap ="ipopoUploadBBCustomerOverMaxCheckModel">
+        SELECT
+            /* @SQLID=SUB0204_01-03_1#SQL006_#SQL007_#SQL008 */
+            NVL(A.MAX_SAIRYOU_ALLO,10) - NVL(A.SAIRYOU_ALLO_COUNT,0) - NVL(G.OLD_SAIRYOU_ALLO_COUNT,0) AS MAYBE_SAIRYOU_COUNT,
+            NVL(A.SAIRYOU_ALLO_COUNT,0) AS SAIRYOU_ALLO_COUNT,
+            NVL(G.OLD_SAIRYOU_ALLO_COUNT,0) AS OLD_SAIRYOU_ALLO_COUNT,
+            G.OLD_BRANCH_NO,
+            G.OLD_ACCOUNT_NO,
+            NVL(A.MAX_SAIRYOU_ALLO,10) AS MAX_SAIRYOU_ALLO
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO MUAI
+        LEFT JOIN ETINTRA.IPO_COUNT_MASTER A
+        ON MUAI.BUTEN_CODE = SUBSTR(A.BRANCH_NO,1,3) 
+        AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(A.ACCOUNT_NO)
+        AND TO_CHAR(A.ANNUAL,'YYYY') = TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY') - CASE WHEN IFA_DATE_UTIL.IFA_GET_SDATE('MM') &lt; '04' THEN 1 ELSE 0 END
+        LEFT JOIN 
+            (
+                SELECT
+                    E.BUTEN_CODE AS BUTEN_CODE,
+                    E.ACCOUNT_NUMBER AS ACCOUNT_NUMBER,
+                    NVL(F.SAIRYOU_ALLO_COUNT,0) AS OLD_SAIRYOU_ALLO_COUNT,
+                    E.OLD_BRANCH_NO,
+                    E.OLD_ACCOUNT_NO
+                FROM 
+                    (
+                        SELECT
+                            C.BUTEN_CODE,
+                            C.ACCOUNT_NUMBER,
+                            D.OLD_BRANCH_NO,
+                            D.OLD_ACCOUNT_NO
+                        FROM MEDIATE_USER_ATTRIBUTE_INFO C
+                        INNER JOIN CALLCENTER.CHANGE_ACCOUNT D
+                        ON C.BUTEN_CODE = SUBSTR(D.NEW_BRANCH_NO,1,3)
+                        AND C.ACCOUNT_NUMBER = TO_NUMBER(D.NEW_ACCOUNT_NO)
+                        WHERE C.BUTEN_CODE = #{butenCode}
+                        AND C.ACCOUNT_NUMBER = TO_NUMBER(#{accountNumber})
+                    ) E
+                    LEFT JOIN ETINTRA.IPO_COUNT_MASTER F
+                ON E.OLD_BRANCH_NO = F.BRANCH_NO
+                AND TO_NUMBER(E.OLD_ACCOUNT_NO) = TO_NUMBER(F.ACCOUNT_NO)
+                AND TO_CHAR(F.ANNUAL,'YYYY') = TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYY') - CASE WHEN IFA_DATE_UTIL.IFA_GET_SDATE('MM') &lt; '04' THEN 1 ELSE 0 END
+            ) G
+        ON
+            MUAI.BUTEN_CODE = G.BUTEN_CODE
+        AND
+            MUAI.ACCOUNT_NUMBER = G.ACCOUNT_NUMBER
+        WHERE 
+            MUAI.BUTEN_CODE = #{butenCode}
+            AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(#{accountNumber})
+    </select>
+
+    <select id ="getUnSelectionCount"  resultType ="Integer" statementType="PREPARED">
+        SELECT  /* @SQLID=SUB0204_01-03_1#SQL009_#SQL010 */
+            COUNT(*)
+        FROM
+            ETINTRA.BB_PRODUCT_MASTER A
+        INNER JOIN ETINTRA.SR_ACCEPT B
+        ON A.BB_PRODUCT_CODE = B.BB_PRODUCT_CODE
+        AND
+            TO_CHAR(A.BB_PRESENTATION_FROM,'YYYYMMDD') = TO_CHAR(B.BB_PRESENTATION_FROM)
+        AND
+            B.BB_BRANCH_CODE = RPAD(#{butenCode}, 4, ' ')
+        AND
+            TO_NUMBER(B.BB_ACCOUNT_NUMBER) = TO_NUMBER(LPAD(#{accountNumber}, 7, 0))
+        WHERE
+            A.BB_LOT = '0'
+        AND
+            A.BB_IPO_PO_KBN = '1'
+        <if test="brandCode != null and brandCode != ''">
+        AND A.BB_PRODUCT_CODE &lt;&gt; #{brandCode}
+        </if>
+    </select>
+
+    <resultMap id="sectionModel" type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.SectionModel">
+        <result property="sectionName" column="SECTION_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+
+    <select id ="getSectionInfo" statementType="PREPARED" resultMap ="sectionModel">
+        SELECT /* @SQLID=SUB0204_01-03_1#SQL003 */
+            C.SECTION_ID,
+            C.SECTION_NAME
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO A
+        LEFT JOIN MEDIATE_CHARGE_INFO B
+        ON B.BROKER_CODE = A.BROKER_CODE
+        AND B.BROKER_CHARGE_CODE = A.INTERMEDIARY_EMP_CD
+        LEFT JOIN T_IPO_PO_SECTION_REF C
+        ON A.BROKER_CODE = C.BROKER_CODE
+        AND B.BROKER_BRANCH_CODE = C.BROKER_BRANCH_CODE
+        WHERE
+            A.BUTEN_CODE = #{butenCode}
+        AND A.ACCOUNT_NUMBER = TO_NUMBER(#{accountNumber})
+        AND ROWNUM = 1
+    </select>
+
+    <resultMap id="ipopoBBApplyEdelivAgreementModel" type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.IpopoBBApplyEdelivAgreementModel">
+        <result property="edelivAgreementKbn" column="EDELIV_AGREEMENT_KBN" typeHandler="StringTypeHandler"/>
+        <result property="edelivAgreementDate" column="EDELIV_AGREEMENT_DATE" typeHandler="StringTypeHandler"/>
+    </resultMap>
+
+    <select id ="getEdelivAgreementInfo" statementType="PREPARED" resultMap ="ipopoBBApplyEdelivAgreementModel">
+        SELECT /* @SQLID=SUB0204_01-03_1#SQL014 */
+            A.EDELIV_AGREEMENT_KBN,
+            DECODE(A.EDELIV_AGREEMENT_KBN, 1, TO_CHAR(A.EDELIV_AGREEMENT_DATE, 'YYYY/MM/DD'),'') AS EDELIV_AGREEMENT_DATE
+        FROM
+            T_IPO_PO_EDELIV_AGRMNT A
+        WHERE
+            A.BUTEN_CODE = #{butenCode}
+        AND A.ACCOUNT_NUMBER = TO_NUMBER(#{accountNumber})
+    </select>
+</mapper>

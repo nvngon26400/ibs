@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0208_02
+    画面名：共同店舗　信託報酬
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.jointMarket.dao.mapper.IfaJointMarketTrustFeeMapper">
+    
+    <resultMap id="ResultMapIfaJointMarketTrustFeeSql001" type="com.sbisec.helios.ap.brokerageMenu.jointMarket.dao.model.IfaJointMarketTrustFeeSql001ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="course" column="COURSE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="CUSTOMER_NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="CUSTOMER_NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="SECURITY_CLASS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brandName" column="BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>        
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+        
+    <!-- 
+        SQLID：Sql001
+        SQL名：共同店舗　信託報酬一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaJointMarketTrustFeeSql001" resultMap="ResultMapIfaJointMarketTrustFeeSql001" statementType="PREPARED">
+       SELECT
+            /* @SQLID=SUB0208_02-01#Sql001 */ *
+        FROM
+            (
+                SELECT
+                    <!-- 性能改善のためヒント句 -->
+                    /*+
+                    FULL(TRC)
+                    OPT_PARAM('_optimizer_skip_scan_enabled',  'false')
+                    */
+                    count(*) over()                                                                 AS TOTAL_COUNT,                <!-- 総件数 -->
+                    TRC.BROKER_CODE                                                                 AS BROKER_CODE,                <!-- 仲介業者コード -->
+                    TRC.BROKER_NAME                                                                 AS BROKER_NAME,                <!-- 仲介業者名 -->
+                    <if test="req.detailCustomerCurrencyCountingUnit == '0'.toString() or req.detailCustomerCurrencyCountingUnit == '1'.toString()" >
+                        TRC.BUTEN_CODE                                                                         AS BUTEN,                    <!-- 部店 -->
+                        TRC.ACCOUNT_NUMBER                                                                     AS ACCOUNT_NUMBER,            <!-- 口座番号 -->
+                        TRC.CUSTOMER_ATTRIBUTE_NAME                                                            AS COURSE,                     <!-- コース名 -->
+                        TRC.NAME_KANJI                                                                         AS CUSTOMER_NAME_KANJI,        <!-- 顧客名（漢字） -->
+                        MUAI.NAME_KANA                                                                         AS CUSTOMER_NAME_KANA,        <!-- 顧客名（カナ） -->
+                        TRC.BROKER_CHARGE_CODE                                                                 AS EMP_CODE,                  <!-- 営業員コード -->
+                        TRC.BROKER_CHARGE_NAME                                                                 AS BROKER_CHARGE_NAME,        <!-- 営業員名 -->
+                    </if>
+                    TRC.BROKER_BRANCH_CODE                                                                 AS BRANCH_CODE,               <!-- 支店コード -->
+                    B.BRANCH_NAME                                                                          AS BRANCH_NAME,                <!-- 支店名 -->
+                    TRC.PRODUT_NAME                                                                        AS SECURITY_CLASS,            <!-- 証券種別 -->
+                    <if test="req.dailyMonthlyCountingUnitTotal == '0'.toString()">
+                        TO_CHAR(TO_DATE(TRC.BASE_DATE, 'YYYYMMDD'), 'YYYY/MM/DD')                         AS HOLDINGC_DATE,             <!-- 保有日 -->
+                    </if>
+                    <if test="req.dailyMonthlyCountingUnitTotal == '1'.toString()">
+                        TO_CHAR(TO_DATE(TRC.BASE_DATE, 'YYYYMMDD'), 'YYYY/MM')                            AS BASE_MONTH,                <!-- 保有月 -->
+                    </if>
+                    <if test="req.detailCustomerCurrencyCountingUnit == '0'.toString()">
+                        TRC.BRAND_CODE                                                                         AS BRAND_CODE,                <!-- 銘柄コード -->
+                        TRC.BRAND_NAME                                                                         AS BRAND_NAME,                <!-- 銘柄名 -->
+                    </if>
+                    <if test="req.detailCustomerCurrencyCountingUnit == '0'.toString() and req.dailyMonthlyCountingUnitTotal == '0'.toString()" >
+                        NVL(TRC.QUANTITY,0)                                                                  AS QUANTITY,               <!-- 数量 -->
+                        NVL(TRC.ACQUIRE_PRICE,0)                                                             AS REFERENCE_PRICE,           <!-- 参考価額 -->
+                        NVL(TRC.PRICE,0)                                                                     AS PRICE,                     <!-- 基準価額 -->
+                        NVL(TRC.TRUST_FEE_RATE,0)                                                            AS TRUST_FEE_RATE,            <!-- 信託報酬率 -->
+                        C.JOINT_RATE                                                                         AS JOINT_RATE,                <!-- 共募報酬率  -->
+                    </if>
+                    TRC.CURRENCY                                                                        AS CURRENCY,                <!-- 通貨 -->
+                    <if test="req.dailyMonthlyCountingUnitTotal == '0'.toString()">
+                        NVL(TRC.EXCHANGE_RATE,0)                                                         AS FX_RATE,               <!-- 為替レート -->
+                    </if>
+                    <if test="req.dailyMonthlyCountingUnitTotal == '1'.toString()">
+                        0                                                                                 AS FX_RATE,               <!-- 為替レート -->
+                    </if>
+                    SUM(NVL(TRC.CURRENCT_PRICE,0))                                                      AS VALUATION,             <!-- 評価額 -->
+                    SUM(NVL(TRC.YEN_TRUST_FEE,0))                                                       AS TRUST_FEE_AMOUNT,      <!-- 信託報酬額 -->
+                    SUM(NVL(TRC.YEN_TRUST_FEE,0) * C.JOINT_RATE * 0.01)                                 AS REWARD_PRICE              <!-- 支払額     -->
+                FROM
+                    T_REWARD_COMMISSION TRC
+                INNER JOIN
+                    M_JOINT_MANAGEMENT C
+                ON TRC.BROKER_CODE = C.TARGET_JOINT_BROKER_CODE
+                AND TRC.DEALER_NUMBER = C.DEALER_NUMBER
+                AND TRC.PRODUT_CD = C.PRODUT_CD
+                AND TRC.BASE_DATE BETWEEN C.START_DATE_YM || '01' AND C.END_DATE_YM || '31'
+                AND C.JOINT_RATE &lt;&gt; 0
+                LEFT JOIN
+                    MEDIATE_BRANCH B
+                ON TRC.BROKER_CODE = B.BROKER_CODE
+                AND TRC.BROKER_BRANCH_CODE = B.BROKER_BRANCH_CODE
+                LEFT JOIN
+                    MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                ON  TRC.BROKER_CODE = MUAI.BROKER_CODE
+                AND TRC.BUTEN_CODE　= MUAI.BUTEN_CODE
+                AND TRC.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                WHERE    
+                    <!-- 手数料種別 -->
+                    TRC.RECORD_TYPE = '2'
+                    <!-- 部店コードに入力値がある場合 -->
+                    <if test='req.butenCode != null and req.butenCode != "" '>
+                        AND TRC.BUTEN_CODE = #{req.butenCode}
+                    </if>
+                     <!-- 口座番号に入力値がある場合 -->
+                    <if test='req.accountNumber != null and req.accountNumber != "" '>
+                        AND TRC.ACCOUNT_NUMBER = #{req.accountNumber}
+                    </if>
+                     <!-- 仲介業者除外チェック入れない場合 -->
+                    <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "0"'>
+                        AND TRC.BROKER_CODE IN
+                        <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{brokerCode}
+                        </foreach>
+                    </if>
+                     <!-- 仲介業者除外チェック入れる場合 -->
+                    <if test='req.brokerCodeList != null and !req.brokerCodeList.isEmpty() and req.chkBrokerCodeExclude == "1"'>
+                        AND TRC.BROKER_CODE NOT IN
+                        <foreach item="brokerCode" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{brokerCode}
+                        </foreach>
+                     </if>    
+                     <!-- 営業員コード に入力値がある場合 -->
+                    <if test='req.empCode != null and req.empCode != ""'>
+                        AND TRC.BROKER_CHARGE_CODE =#{req.empCode}
+                    </if>
+                     <!-- 支店コード -->
+                     <if test="req.detailCustomerCurrencyCountingUnit != '2'.toString()">
+                        <if test='req.branchCode != null and req.branchCode != ""'>
+                            AND TRC.BROKER_BRANCH_CODE = #{req.branchCode}
+                        </if>
+                    </if>    
+                    <!-- 証券種別 -->
+                    <if test="req.securityClassList != null">
+                        AND TRC.PRODUT_CD IN
+                        <foreach item="produtCdItem" collection="req.securityClassList" open="(" separator="," close=")"> 
+                            #{produtCdItem}
+                        </foreach>
+                    </if>    
+                    <!-- 銘柄コードに入力値がある場合 -->
+                    <if test='req.brandCode != null and req.brandCode != ""'>
+                        AND (TRC.BRAND_CODE = #{req.brandCode}
+                            OR TRC.BRAND_CODE = '0' || #{req.brandCode} )
+                    </if>
+                    <!-- 期間指定FROM -->
+                    <if test="req.periodFrom != null">
+                        AND TRC.BASE_DATE &gt;= #{req.periodFrom}
+                    </if>
+                    <!-- 期間指定TO -->
+                    <if test="req.periodTo != null">
+                        AND TRC.BASE_DATE &lt;= #{req.periodTo}
+                    </if>
+                    <!-- 顧客名(漢字/カナ)に入力値がある かつ 顧客名(漢字/カナ)_条件が'1':と等しい の場合 -->
+                    <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "1"'>
+                         AND (TRC.NAME_KANJI = #{req.customerNameKanjiKana}
+                             OR MUAI.NAME_KANA = #{req.customerNameKanjiKana} )
+                    </if>
+                    
+                    <!-- 顧客名(漢字/カナ)に入力値がある かつ 顧客名(漢字/カナ)_条件が'2':で始まる の場合 -->
+                    <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "2"'>
+                         AND (TRC.NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%'
+                             OR MUAI.NAME_KANA LIKE #{req.customerNameKanjiKana} || '%' )
+                    </if>
+                    
+                    <!-- 顧客名(漢字/カナ)に入力値がある かつ 顧客名(漢字/カナ)_条件が'3':を含む の場合 -->
+                    <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "3"'>
+                         AND (TRC.NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                             OR MUAI.NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%' )
+                    </if>
+                    <!-- 取引コース -->
+                     AND TRC.CUSTOMER_ATTRIBUTE IN
+                                <foreach item="course" collection="req.courseList" open="(" separator="," close=")">
+                                    #{course}
+                                </foreach>
+                    <!-- ユーザ共通情報.権限コード = 3or4or5の場合 -->
+                    <if  test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                        AND (TRC.BROKER_CODE IN
+                        <foreach item="brokerCharge" collection="req.brokerChargeList" index="index" open="(" separator="" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR TRC.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                            #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                    </if>
+                    <!-- ユーザ共通情報.権限コード 1.3.4.5権限以外の場合 -->
+                     <if  test='req.privId != "1" and req.privId != "3" and req.privId != "4" and req.privId != "5"'>
+                        AND ((TRC.BROKER_CODE, TRC.BROKER_CHARGE_CODE) IN
+                        <foreach item="brokerCharge" collection="req.brokerChargeList" index="index" open="(" separator="" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR (TRC.BROKER_CODE, TRC.BROKER_CHARGE_CODE) IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                            (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                        </foreach>
+                        )
+                    </if>
+                GROUP BY
+                    TRC.BROKER_CODE,
+                    TRC.BROKER_NAME,
+                    <if test="req.detailCustomerCurrencyCountingUnit == '0'.toString() or req.detailCustomerCurrencyCountingUnit == '1'.toString()">
+                        TRC.BUTEN_CODE,
+                        TRC.ACCOUNT_NUMBER,
+                        TRC.CUSTOMER_ATTRIBUTE_NAME,
+                        TRC.NAME_KANJI,
+                        MUAI.NAME_KANA,
+                        TRC.BROKER_CHARGE_CODE,
+                        TRC.BROKER_CHARGE_NAME,
+                    </if>
+                    TRC.BROKER_BRANCH_CODE,
+                    B.BRANCH_NAME,
+                    TRC.PRODUT_NAME,
+                    <if test="req.dailyMonthlyCountingUnitTotal == '0'.toString()">
+                        TO_CHAR(TO_DATE(TRC.BASE_DATE, 'YYYYMMDD'), 'YYYY/MM/DD'),
+                    </if>
+                    <if test="req.dailyMonthlyCountingUnitTotal == '1'.toString()">
+                        TO_CHAR(TO_DATE(TRC.BASE_DATE, 'YYYYMMDD'), 'YYYY/MM'),
+                    </if>
+                    <if test="req.detailCustomerCurrencyCountingUnit == '0'.toString()" >
+                        TRC.BRAND_CODE,
+                        TRC.BRAND_NAME,
+                    </if>
+                    <if test="req.detailCustomerCurrencyCountingUnit == '0'.toString() and req.dailyMonthlyCountingUnitTotal == '0'.toString()" >
+                        NVL(TRC.QUANTITY,0),
+                        NVL(TRC.ACQUIRE_PRICE,0),
+                        NVL(TRC.PRICE,0),
+                        NVL(TRC.TRUST_FEE_RATE,0),
+                        C.JOINT_RATE,
+                    </if>
+                    TRC.CURRENCY,
+                    <if test="req.dailyMonthlyCountingUnitTotal == '0'.toString()">
+                        NVL(TRC.EXCHANGE_RATE,0)
+                    </if>
+                    <if test="req.dailyMonthlyCountingUnitTotal == '1'.toString()">
+                        0
+                    </if>
+                ORDER BY
+                    <if test="req.dailyMonthlyCountingUnitTotal == '0'.toString()">
+                        TO_CHAR(TO_DATE(TRC.BASE_DATE, 'YYYYMMDD'), 'YYYY/MM/DD') DESC,
+                    </if>
+                    <if test="req.dailyMonthlyCountingUnitTotal == '1'.toString()">
+                        TO_CHAR(TO_DATE(TRC.BASE_DATE, 'YYYYMMDD'), 'YYYY/MM') DESC,
+                    </if>
+                        TRC.BROKER_CODE ASC,
+                        TRC.BROKER_BRANCH_CODE ASC
+                    <if test="req.detailCustomerCurrencyCountingUnit == '0'.toString() or req.detailCustomerCurrencyCountingUnit == '1'.toString()" >
+                        ,TRC.BUTEN_CODE ASC
+                        ,TRC.ACCOUNT_NUMBER ASC
+                    </if>
+            )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+
+</mapper>

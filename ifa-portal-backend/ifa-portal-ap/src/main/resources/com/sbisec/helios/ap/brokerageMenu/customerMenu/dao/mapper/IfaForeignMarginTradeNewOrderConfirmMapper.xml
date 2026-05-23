@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0303-01_2
+    画面名：米株信用取引新規注文確認
+-->
+    <mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignMarginTradeNewOrderConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：発注前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaForeignMarginTradeNewOrderConfirmSql001" useGeneratedKeys="true" keyColumn="IFA_ORDER_NO" keyProperty="req.ifaOrderNo" statementType="PREPARED">
+    INSERT INTO
+        FOREIGN_CONSIGNMENT_ORDER(
+            IFA_ORDER_NO
+            , IFA_ORDER_SUB_NO
+            , ACCEPT_ORDER_NO
+            , ACCEPT_ORDER_SUB_NO
+            , BUTEN_CODE
+            , ACCOUNT_NUMBER
+            , BRAND_CODE
+            , BRAND_NAME
+            , EXCHANGE_CODE
+            , METHOD_TYPE
+            , TRADE_TYPE
+            , ORDER_QUANTITY
+            , TRADE_METHOD_TYPE
+            , LIMIT_PRICE
+            , STOP_PRICE
+            , CURRENCY_CODE
+            , SETTLEMENT_TYPE
+            , DEPOSIT_TYPE
+            , INVITATION_TYPE
+            , ORDER_METHOD_TYPE
+            , WARNING_APPLY_TYPE
+            , EXPLANATION_INFO_TYPE
+            , TRANSFER_INVITATION_TYPE
+            , ENG_PUB_BRAND_EXP_TYPE
+            , CONFIRMATION_TYPE
+            , ORDER_TYPE
+            , ORDER_DATE
+            , ORDER_TIME
+            , TRADE_DATE
+            , TRADE_LIMIT_DATE
+            , BROKER_CODE
+            , INTERMEDIARY_EMP_CD
+            , API_ERROR_CODE
+            , API_STATUS_CODE
+            , API_MESSAGE
+            , CREATE_TIME
+            , CREATE_USER
+            , UPDATE_TIME
+            , UPDATE_USER)
+        VALUES(
+            TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,  'YYYYMMDD') || LPAD(SEQ_FOREIGN_CONSIGNMENT_ORDER.NEXTVAL, 5, '0')
+            , 1
+            , #{req.orderNumber}
+            , #{req.orderSubNumber}
+            , #{req.butenCode}
+            , #{req.accountNumber}
+            , #{req.brandCode}
+            , #{req.brandName}
+            , #{req.marketCode}
+            , '10'
+            , #{req.tradeKbn}
+            , #{req.foreignQuantity}
+            , #{req.orderPriceKindList}
+            , TO_NUMBER(#{req.hiddenOrderPrice})
+            , TO_NUMBER(#{req.stopOrderPrice2})
+            , #{req.stopOrderPriceText2}
+            , #{req.kessaiHoho}
+            , #{req.depositType}
+            , #{req.kanyuKbn}
+            , #{req.orderClassification}
+            , null
+            , #{req.importantMatterType}
+            , null
+            , #{req.engPubText}
+            , #{req.checkInsider}
+            , '0'
+            , TO_CHAR(#{req.orderDateTime}, 'YYYYMMDD')
+            , #{req.orderDateTime}
+            , #{req.tradeDate}
+            , #{req.period}
+            , #{req.brokerCode}
+            , #{req.brokerChargeCode}
+            , null
+            , null
+            , null
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{req.userId}
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{req.userId})
+    </insert>
+    
+        <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaForeignMarginTradeNewOrderConfirmSql002" statementType="PREPARED">
+        <choose>
+            <when test="req.errorCode == null or req.errorCode == ''">
+            UPDATE
+                FOREIGN_CONSIGNMENT_ORDER
+            SET
+                ACCEPT_ORDER_NO = #{req.orderNumber}
+                , ACCEPT_ORDER_SUB_NO = #{req.orderSubNumber}
+                , ORDER_DATE = TO_CHAR(#{req.orderDateTime}, 'YYYYMMDD')
+                , ORDER_TIME = #{req.orderDateTime}
+                , TRADE_LIMIT_DATE = #{req.period}
+                , API_ERROR_CODE = null
+                , API_STATUS_CODE = #{req.responseCode}
+                , API_MESSAGE = null
+                , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+                , UPDATE_USER = #{req.userId}
+            WHERE
+                IFA_ORDER_NO = #{req.ifaOrderNo}
+                AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+            </when>
+            <otherwise>
+            UPDATE
+                FOREIGN_CONSIGNMENT_ORDER
+            SET
+                API_ERROR_CODE = #{req.errorCode}
+                , API_STATUS_CODE = #{req.responseCode}
+                , API_MESSAGE = SUBSTRB(#{req.errMessage}, 1, 100)
+                , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+                , UPDATE_USER = #{req.userId}
+            WHERE
+                IFA_ORDER_NO = #{req.ifaOrderNo}
+                AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+            </otherwise>
+        </choose>
+    </update>
+    
+</mapper>

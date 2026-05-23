@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+    前システムのメニュー情報取得のためのMapper、下記のMapperをコピーして作成
+    MedGovMenuMapper
+-->
+<mapper namespace="com.sbisec.helios.ap.ph1only.dao.mapper.PreviousSystemMedGovMenuMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.MedGovMenu" id="MedGovMenu">
+		<result property="createUser"      column="CREATE_USER"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+		<result property="uptimestampUser" column="UPTIMESTAMP_USER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+	</resultMap>
+
+	<select id="getMedGovMenuList" resultMap="MedGovMenu" statementType="PREPARED">
+	SELECT
+			USER_ID,
+			MENU_ID,
+			CREATE_USER,
+			CREATE_TIME,
+			UPTIMESTAMP_USER,
+			UPTIMESTAMP_TIME
+	FROM
+		(SELECT
+			A.USER_ID,
+			A.MENU_ID,
+			A.CREATE_USER,
+			A.CREATE_TIME,
+			A.UPTIMESTAMP_USER,
+			A.UPTIMESTAMP_TIME,
+			B.DISPORDER
+		FROM
+			TB_MED_GOV_MENU A, TB_MED_MENU B
+		WHERE
+			A.USER_ID = #{userId}
+			AND A.MENU_ID = B.MENU_ID
+		UNION
+		SELECT DISTINCT
+			null
+			, B.PARENT_MENU_ID
+			, null
+			, null
+			, null
+			, null
+			, null
+		FROM
+			TB_MED_MENU B
+			, TB_MED_GOV_MENU C
+		WHERE
+			B.MENU_ID = C.MENU_ID
+			AND C.USER_ID = #{userId}
+		UNION
+		SELECT DISTINCT
+			null
+			, F.PARENT_MENU_ID
+			, null
+			, null
+			, null
+			, null
+			, null
+		FROM
+			TB_MED_GOV_MENU D
+			, TB_MED_MENU E
+			, TB_MED_MENU F
+		WHERE
+			F.MENU_ID = E.PARENT_MENU_ID
+			AND F.PARENT_MENU_ID is not null
+			AND E.MENU_ID = D.MENU_ID
+			AND D.USER_ID = #{userId}
+		)
+		ORDER BY DISPORDER
+	</select>
+
+</mapper>

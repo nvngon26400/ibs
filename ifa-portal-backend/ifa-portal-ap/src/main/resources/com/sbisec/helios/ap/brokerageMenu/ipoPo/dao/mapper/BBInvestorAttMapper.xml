@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.BBInvestorAttMapper">
+
+    <resultMap type="com.sbisec.helios.ap.brokerageMenu.ipoPo.model.BBInvestorAttModel" id="bbInvestorAttModel">
+        <result property="bbInvestorAttName" column="BB_INVESTOR_ATT_NAME" typeHandler="StringTypeHandler" />
+    </resultMap>
+
+    <select id="getBBInvestorAttInfoList" resultMap="bbInvestorAttModel" statementType="PREPARED">
+        SELECT  /* @SQLID=SUB0204_01-03_1#SQL011 */
+            BB_SEQ,
+            BB_INVESTOR_ATT_NAME
+        FROM
+            ETINTRA.BB_INVESTOR_ATT
+        WHERE
+            BB_PRODUCT_CODE = #{bbProductCode}
+        AND
+            BB_PRESENTATION_FROM = TO_NUMBER(#{bbPresentationFrom})
+        ORDER BY
+            BB_SEQ ASC
+    </select>
+
+</mapper>

@@ -1,0 +1,1124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0201_01-01
+    画面名：顧客一覧・基本
+    SQL002は欠番
+-->
+
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerList.dao.mapper.IfaCustomerListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaCustomerListSql001" type="com.sbisec.helios.ap.brokerageMenu.customerList.dao.model.IfaCustomerListSql001ResponseModel" >
+        <result property="tcCompRank" column="TC_COMP_RANK"/>
+        <result property="customerAttributeName" column="CUSTOMER_ATTRIBUTE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="openAcctDate" column="OPEN_ACCT_DATE"/>
+        <result property="accountNumber" column="ACCOUNT_NUMBER"/>
+        <result property="zipCodeBeforeAndAfter" column="ZIP_CODE"/>
+        <result property="adressKanji" column="ADDRESS_KANJI1" typeHandler="com.sbisec.helios.ap.common.typehandler.AddressConvertHandler"/>
+        <result property="brokerCode" column="BROKER_CODE"/>
+        <result property="brokerChargeCode" column="INTERMEDIARY_EMP_CD"/>
+        <result property="corporatePhoneNumber" column="PHONE_NUMBER"/>
+        <result property="corBirthFlg" column="BIRTH_DAY"/>
+        <result property="age" column="AGE"/>
+        <result property="butenCode" column="BUTEN_CODE"/>
+        <result property="branchNameOfBranch" column="BRANCH_NAME"/>
+        <result property="branchNameOfBroker" column="BROKER_NAME"/>
+        <result property="chargeName" column="BROKER_CHARGE_NAME"/>
+        <result property="subBrokerId" column="BRANCH_CODE"/>
+        <result property="lastTradeDate" column="LAST_CONTRACT_DATE"/>
+        <result property="customerListProfitAndLoss" column="PROF_LOSS_SUM"/>
+        <result property="totalAssets" column="ASSETS"/>
+        <result property="commTotalAmountOfYear" column="COMMISSION_THIS_YEAR"/>
+        <result property="commTotalAmount" column="COMMISSION_TOTAL"/>
+        <result property="viewAblrButenCode" column="VISIBLE_BUTEN_CODE"/>
+        <result property="valuationTotalJpyAmount" column="TOTAL_CURRENCT_PRICE"/>
+        <result property="electronicDocConsentDate" column="EDELIV_AGREEMENT_DATE"/>
+        <result property="nisaContractKbnViewInfo" column="NISA_CONTRACT_VIEW_INFO"/>
+        <result property="foreignSecurityAccountViewInfo" column="FOREIGN_VIEW_INFO"/>
+        <result property="changeFinishDateTime" column="COMPLETE_DATE"/>
+        <result property="tradeRestriction" column="TRADE_RESTRICTION"/>
+        <result property="totalRow" column="TOTAL_ROW"/>
+		<result property="corporationKbn" column="CORPORATION_KBN"/>
+		<result property="investmentPlan" column="INVESTMENT_PLAN"/>
+		<result property="occupation" column="OCCUPATION"/>
+		<result property="annualIncome" column="ANNUAL_INCOME"/>
+		<result property="employmentPeriod" column="EMPLOYMENT_PERIOD"/>
+		<result property="financialAssets" column="FINANCIAL_ASSETS"/>
+		<result property="fundCharacter" column="FUND_CHARACTER"/>
+		<result property="incomeForm" column="INCOME_FORM"/>
+		<result property="stockExpKbn" column="EXP_STOCK_KBN"/>
+		<result property="stockExp" column="EXP_STOCK"/>
+		<result property="debentureExpKbn" column="EXP_DEBENTURE_KBN"/>
+		<result property="debentureExp" column="EXP_DEBENTURE"/>
+		<result property="cbExpKbn" column="EXP_CB_KBN"/>
+		<result property="cbExp" column="EXP_CB"/>
+		<result property="marginExpKbn" column="EXP_MARGIN_KBN"/>
+		<result property="marginExp" column="EXP_MARGIN"/>
+		<result property="warrantExpKbn" column="EXP_WARRANT_KBN"/>
+		<result property="warrantExp" column="EXP_WARRANT"/>
+		<result property="futureopExpKbn" column="EXP_FUTUREOP_KBN"/>
+		<result property="futureopExp" column="EXP_FUTUREOP"/>
+		<result property="savedtypefundExpKbn" column="EXP_SAVEDTYPEFUND_KBN"/>
+		<result property="savedtypefundExp" column="EXP_SAVEDTYPEFUND"/>
+		<result property="foreignExpKbn" column="EXP_FOREIGN_KBN"/>
+		<result property="foreignExp" column="EXP_FOREIGN"/>
+		<result property="otherfundExpKbn" column="EXP_OTHERFUND_KBN"/>
+		<result property="otherfundExp" column="EXP_OTHERFUND"/>
+    </resultMap>
+
+
+    <resultMap id="ResultMapIfaCustomerListSql003" type="com.sbisec.helios.ap.brokerageMenu.customerList.dao.model.IfaCustomerListSql003ResponseModel" >
+        <result property="butenCode" column="UAI_BUTEN_CODE"/>
+        <result property="accountNumber" column="UAI_ACCOUNT_NUMBER"/>
+        <result property="investmentPolicyType" column="UAI_QA_INVESTMENT_PLAN"/>
+        <result property="professionClassification" column="UAI_OCCUPATION"/>
+        <result property="stockSpotInvestExperienceYears" column="UAI_EXP_STOCK"/>
+        <result property="officeNameKanji" column="UAI_OFFICE_NAME"/>
+        <result property="financialAssetsType" column="UAI_QA_FINANCIAL_ASSETS"/>
+        <result property="corporationType" column="UAI_CORPORATION_KBN"/>
+        <result property="customerLastNameKanji" column="UAI_FAMILY_NAME_KANJI"/>
+        <result property="customerFirstNameKanji" column="UAI_NAME_KANJI"/>
+        <result property="customerLastNameKana" column="UAI_FAMILY_NAME_KANA"/>
+        <result property="customerFirstNameKana" column="UAI_NAME_KANA"/>
+        <result property="dealerNumber" column="UAI_DEALER_NUMBER"/>
+        <result property="customerNameKanji" column="NAME_KANJI"/>
+        <result property="openAcctDate" column="OPEN_ACCT_DATE"/>
+        <result property="complianceLank" column="TC_COMP_RANK"/>
+    </resultMap>
+
+
+    <resultMap id="ResultMapIfaCustomerListSql004" type="com.sbisec.helios.ap.brokerageMenu.customerList.dao.model.IfaCustomerListSql004ResponseModel" >
+        <result property="ifaCustomerListComment" column="VIEW_COMMENT"/>
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerListSql001" resultMap="ResultMapIfaCustomerListSql001" statementType="PREPARED">
+        <!-- 性能改善に使用する、顧客IDの一覧 -->
+        WITH CUSTOMER_ID_LIST AS (
+            SELECT
+                MU.CORPORATION_KBN,
+				MU.BUTEN_CODE,
+				MU.ACCOUNT_NUMBER,
+				MU.BROKER_CODE,
+				MU.INTERMEDIARY_EMP_CD,
+				MU.PHONE_NUMBER,
+				MU.NAME_KANJI,
+				MU.NAME_KANA,
+				MU.ADDRESS_KANJI1,
+				MU.TC_COMP_RANK,
+				MU.OPEN_ACCT_DATE,
+				MU.CUSTOMER_ID,
+				MU.CUSTOMER_ATTRIBUTE_NAME,
+				MU.ZIP_CODE,
+				MU.BIRTH_DAY,
+				MU.AGE,
+				MU.UAI_QA_INVESTMENT_PLAN,
+				MU.UAI_OCCUPATION,
+				MU.UAI_QA_EMPLOYMENT_PERIOD,
+				MU.UAI_QA_ANNUAL_INCOME,
+				MU.UAI_QA_FINANCIAL_ASSETS,
+				MU.UAI_QA_INCOME_FORM,
+				MU.UAI_QA_FUND_CHARACTER,
+				MU.UAI_EXP_STOCK_KBN,
+				MU.UAI_EXP_DEBENTURE_KBN,
+				MU.UAI_EXP_CB_KBN,
+				MU.UAI_EXP_MARGIN_KBN,
+				MU.UAI_EXP_WARRANT_KBN,
+				MU.UAI_EXP_FUTUREOP_KBN,
+				MU.UAI_EXP_SAVEDTYPEFUND_KBN,
+				MU.UAI_EXP_OTHERFUND_KBN,
+				MU.UAI_EXP_FOREIGN_KBN,
+				MU.UAI_ISA_CONTRACT_KBN,
+				MU.UAI_JNISA_CONTRACT_KBN,
+				MU.UAI_EXP_STOCK,
+				MU.UAI_EXP_DEBENTURE,
+				MU.UAI_EXP_CB,
+				MU.UAI_EXP_MARGIN,
+				MU.UAI_EXP_WARRANT,
+				MU.UAI_EXP_FUTUREOP,
+				MU.UAI_EXP_SAVEDTYPEFUND,
+				MU.UAI_EXP_FOREIGN,
+				MU.UAI_EXP_OTHERFUND
+            FROM
+                 MEDIATE_USER_ATTRIBUTE_INFO MU
+                    <if test="req.selectFlg != null">
+                        WHERE 1=1
+                        AND MU.CORPORATION_KBN = #{req.personalCorporation}
+                        <if test="req.investmentPlanList != null and 0 &lt; req.investmentPlanList.size()" >
+                            AND (
+                            <if test="!req.investmentPlanList.contains('999') or (req.investmentPlanList.contains('999') and 1 &lt; req.investmentPlanList.size())" >
+                                TRIM(MU.UAI_QA_INVESTMENT_PLAN) IN
+                                <foreach item="investmentPlan" index="index" collection="req.investmentPlanList" open="(" separator="," close=")">
+                                    #{investmentPlan}
+                                </foreach>
+                            </if>
+                            <if test="req.investmentPlanList.contains('999') and 1 &lt; req.investmentPlanList.size()" >
+                                OR
+                            </if>
+                            <if test="req.investmentPlanList.contains('999')" >
+                                TRIM(MU.UAI_QA_INVESTMENT_PLAN) NOT IN
+                                <foreach item="notLoggedInvestmentPlan" index="index" collection="req.notLoggedMap['INVESTMENTPLAN']" open="(" separator="," close=")">
+                                    #{notLoggedInvestmentPlan}
+                                </foreach>
+                                OR TRIM(MU.UAI_QA_INVESTMENT_PLAN) IS NULL
+                            </if>
+                            )
+                        </if>
+                        <if test="req.occupationList != null and 0 &lt; req.occupationList.size()">
+                            AND (
+                            <if test="!req.occupationList.contains('999') or (req.occupationList.contains('999')and 1 &lt; req.occupationList.size())" >
+                                TRIM(MU.UAI_OCCUPATION) IN
+                                <foreach item="occupation" index="index" collection="req.occupationList" open="(" separator="," close=")">
+                                    #{occupation}
+                                </foreach>
+                            </if>
+                            <if test="req.occupationList.contains('999') and 1 &lt; req.occupationList.size()" >
+                                OR
+                            </if>
+                            <if test="req.occupationList.contains('999')" >
+                                TRIM(MU.UAI_OCCUPATION) NOT IN
+                                <foreach item="notLoggedOccupation" index="index" collection="req.notLoggedMap['OCCUPATION']" open="(" separator="," close=")">
+                                    #{notLoggedOccupation}
+                                </foreach>
+                                OR TRIM(MU.UAI_OCCUPATION) IS NULL
+                            </if>
+                            )
+                        </if>
+                        <if test="req.employmentPeriodList != null and 0 &lt; req.employmentPeriodList.size()">
+                            AND (
+                            <if test="!req.employmentPeriodList.contains('999') or (req.employmentPeriodList.contains('999')and 1 &lt; req.employmentPeriodList.size())" >
+                                TRIM(MU.UAI_QA_EMPLOYMENT_PERIOD) IN
+                                <foreach item="employmentPeriod" index="index" collection="req.employmentPeriodList" open="(" separator="," close=")">
+                                    #{employmentPeriod}
+                                </foreach>
+                            </if>
+                            <if test="req.employmentPeriodList.contains('999') and 1 &lt; req.employmentPeriodList.size()" >
+                                OR
+                            </if>
+                            <if test="req.employmentPeriodList.contains('999')" >
+                                TRIM(MU.UAI_QA_EMPLOYMENT_PERIOD) NOT IN
+                                <foreach item="notLoggedEmploymentPeriod" index="index" collection="req.notLoggedMap['EMLOYMENTPERIOD']" open="(" separator="," close=")">
+                                    #{notLoggedEmploymentPeriod}
+                                </foreach>
+                                OR TRIM(MU.UAI_QA_EMPLOYMENT_PERIOD) IS NULL
+                                </if>
+                            )
+                        </if>
+                        <if test="req.annualIncomeList != null and 0 &lt; req.annualIncomeList.size()">
+                            AND (
+                            <if test="!req.annualIncomeList.contains('999') or (req.annualIncomeList.contains('999')and 1 &lt; req.annualIncomeList.size())" >
+                                TRIM(MU.UAI_QA_ANNUAL_INCOME) IN
+                                <foreach item="annualIncome" index="index" collection="req.annualIncomeList" open="(" separator="," close=")">
+                                    #{annualIncome}
+                                </foreach>
+                            </if>
+                            <if test="req.annualIncomeList.contains('999') and 1 &lt; req.annualIncomeList.size()" >
+                                OR
+                            </if>
+                            <if test="req.annualIncomeList.contains('999')" >
+                                TRIM(MU.UAI_QA_ANNUAL_INCOME) NOT IN
+                                <foreach item="notLoggedAnnualIncome" index="index" collection="req.notLoggedMap['ANNUALINCOME']" open="(" separator="," close=")">
+                                    #{notLoggedAnnualIncome}
+                                </foreach>
+                                OR TRIM(MU.UAI_QA_ANNUAL_INCOME) IS NULL
+                            </if>
+                            )
+                        </if>
+                        <if test="req.financialAssetsList != null and 0 &lt; req.financialAssetsList.size()">
+                            AND (
+                            <if test="!req.financialAssetsList.contains('999') or (req.financialAssetsList.contains('999')and 1 &lt; req.financialAssetsList.size())" >
+                                TRIM(MU.UAI_QA_FINANCIAL_ASSETS) IN
+                                <foreach item="financialAssets" index="index" collection="req.financialAssetsList" open="(" separator="," close=")">
+                                    #{financialAssets}
+                                </foreach>
+                            </if>
+                            <if test="req.financialAssetsList.contains('999') and 1 &lt; req.financialAssetsList.size()" >
+                                OR
+                            </if>
+                            <if test="req.financialAssetsList.contains('999')" >
+                                TRIM(MU.UAI_QA_FINANCIAL_ASSETS) NOT IN
+                                <foreach item="notLoggedFinancialAssets" index="index" collection="req.notLoggedMap['FINANCIALASSETS']" open="(" separator="," close=")">
+                                    #{notLoggedFinancialAssets}
+                                </foreach>
+                                OR TRIM(MU.UAI_QA_FINANCIAL_ASSETS) IS NULL
+                            </if>
+                            )
+                        </if>
+                        <if test="req.incomeFormList != null and 0 &lt; req.incomeFormList.size()">
+                            AND (
+                            <if test="!req.incomeFormList.contains('999') or (req.incomeFormList.contains('999')and 1 &lt; req.incomeFormList.size())" >
+                                TRIM(MU.UAI_QA_INCOME_FORM) IN
+                                <foreach item="incomeForm" index="index" collection="req.incomeFormList" open="(" separator="," close=")">
+                                    #{incomeForm}
+                                </foreach>
+                            </if>
+                            <if test="req.incomeFormList.contains('999') and 1 &lt; req.incomeFormList.size()" >
+                                OR
+                            </if>
+                            <if test="req.incomeFormList.contains('999')" >
+                                TRIM(MU.UAI_QA_INCOME_FORM) NOT IN
+                                <foreach item="notLoggedIncomeForm" index="index" collection="req.notLoggedMap['INCOMEFORM']" open="(" separator="," close=")">
+                                    #{notLoggedIncomeForm}
+                                </foreach>
+                                OR TRIM(MU.UAI_QA_INCOME_FORM) IS NULL
+                            </if>
+                            )
+                        </if>
+                        <if test="req.fundCharacterList != null and 0 &lt; req.fundCharacterList.size()">
+                            AND (
+                            <if test="!req.fundCharacterList.contains('999') or (req.fundCharacterList.contains('999')and 1 &lt; req.fundCharacterList.size())" >
+                                TRIM(MU.UAI_QA_FUND_CHARACTER) IN
+                                <foreach item="fundCharacter" index="index" collection="req.fundCharacterList" open="(" separator="," close=")">
+                                    #{fundCharacter}
+                                </foreach>
+                            </if>
+                            <if test="req.fundCharacterList.contains('999') and 1 &lt; req.fundCharacterList.size()" >
+                                OR
+                            </if>
+                            <if test="req.fundCharacterList.contains('999')" >
+                                TRIM(MU.UAI_QA_FUND_CHARACTER) NOT IN
+                                <foreach item="notLoggedFundCharacter" index="index" collection="req.notLoggedMap['FUNDCHARACTER']" open="(" separator="," close=")">
+                                    #{notLoggedFundCharacter}
+                                </foreach>
+                                OR TRIM(MU.UAI_QA_FUND_CHARACTER) IS NULL
+                            </if>
+                            )
+                        </if>
+                        <if test="req.investmentExpKeyList != null and 0 &lt; req.investmentExpKeyList.size()">
+                            AND
+                            <foreach item="investmentExp" index="index" collection="req.investmentExpKeyList" open="(" separator="OR" close=")">
+                                <if test='"key1".equals(investmentExp)'>
+                                    MU.UAI_EXP_STOCK_KBN IN
+                                    <foreach item="stock" index="index" collection="req.investmentExpKbnMap['key1']" open="(" separator="," close=")">
+                                        #{stock}
+                                    </foreach>
+                                </if>
+                                <if test='"key2".equals(investmentExp)'>
+                                    MU.UAI_EXP_DEBENTURE_KBN IN
+                                    <foreach item="debenture" index="index" collection="req.investmentExpKbnMap.get('key2')" open="(" separator="," close=")">
+                                        #{debenture}
+                                    </foreach>
+                                </if>
+                                <if test='"key3".equals(investmentExp)'>
+                                    MU.UAI_EXP_CB_KBN IN
+                                    <foreach item="cb" index="index" collection="req.investmentExpKbnMap.get('key3')" open="(" separator="," close=")">
+                                        #{cb}
+                                    </foreach>
+                                </if>
+                                <if test='"key4".equals(investmentExp)'>
+                                    MU.UAI_EXP_MARGIN_KBN IN
+                                    <foreach item="margin" index="index" collection="req.investmentExpKbnMap.get('key4')" open="(" separator="," close=")">
+                                        #{margin}
+                                    </foreach>
+                                </if>
+                                <if test='"key5".equals(investmentExp)'>
+                                    MU.UAI_EXP_WARRANT_KBN IN
+                                    <foreach item="warrant" index="index" collection="req.investmentExpKbnMap.get('key5')" open="(" separator="," close=")">
+                                        #{warrant}
+                                    </foreach>
+                                </if>
+                                <if test='"key6".equals(investmentExp)'>
+                                    MU.UAI_EXP_FUTUREOP_KBN IN
+                                    <foreach item="futureop" index="index" collection="req.investmentExpKbnMap.get('key6')" open="(" separator="," close=")">
+                                        #{futureop}
+                                    </foreach>
+                                </if>
+                                <if test='"key7".equals(investmentExp)'>
+                                    MU.UAI_EXP_SAVEDTYPEFUND_KBN IN
+                                    <foreach item="savedtypefund" index="index" collection="req.investmentExpKbnMap.get('key7')" open="(" separator="," close=")">
+                                        #{savedtypefund}
+                                    </foreach>
+                                </if>
+                                <if test='"key8".equals(investmentExp)'>
+                                    MU.UAI_EXP_OTHERFUND_KBN IN
+                                    <foreach item="other" index="index" collection="req.investmentExpKbnMap.get('key8')" open="(" separator="," close=")">
+                                        #{other}
+                                    </foreach>
+                                </if>
+                                <if test='"key9".equals(investmentExp)'>
+                                    MU.UAI_EXP_FOREIGN_KBN IN
+                                    <foreach item="foreign" index="index" collection="req.investmentExpKbnMap.get('key9')" open="(" separator="," close=")">
+                                        #{foreign}
+                                    </foreach>
+                                </if>
+                            </foreach>
+                        </if>
+                    </if>
+				<if test='!"2".equals(req.personalCorporation) and req.selectFlg == null'>
+					WHERE 1=1
+					AND MU.CORPORATION_KBN = #{req.personalCorporation}
+				</if>
+				<if test='"2".equals(req.personalCorporation)'>
+					WHERE 1=1
+				</if>
+			<if test="req.selectFlg != null or req.selectNisaFlg != null">	                   
+				<if test="req.selectNisaFlg != null">
+					<if test='req.nisaContractKbnList == "1"'>
+                        AND (MU.UAI_ISA_CONTRACT_KBN = '1' OR MU.UAI_JNISA_CONTRACT_KBN = '1')
+                    </if>
+                    <if test='req.nisaContractKbnList == "2"'>
+                        AND ((MU.UAI_ISA_CONTRACT_KBN IS NULL OR MU.UAI_ISA_CONTRACT_KBN != '1') AND (MU.UAI_JNISA_CONTRACT_KBN IS NULL OR MU.UAI_JNISA_CONTRACT_KBN != '1'))
+                    </if>
+                </if>
+			</if>
+            <if test='req.butenCode != null and req.butenCode != ""'>
+                AND MU.BUTEN_CODE = #{req.butenCode}
+            </if>
+            <if test='req.accountNumber != null and req.accountNumber != ""'>
+                AND MU.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            </if>
+            <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.brokerCodeExcludeCheckbox == "1"'>
+                AND MU.BROKER_CODE NOT IN
+                <foreach item="brokerCode" collection="req.brokerCodeList" index="idx"
+                    open="(" separator="," close=")">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.brokerCodeExcludeCheckbox != "1"'>
+                AND MU.BROKER_CODE IN
+                <foreach item="brokerCode" collection="req.brokerCodeList" index="idx"
+                    open="(" separator="," close=")">
+                    #{brokerCode}
+                </foreach>
+            </if>
+            <if test='req.brokerChargeCode != null and req.brokerChargeCode != ""'> 
+                AND MU.INTERMEDIARY_EMP_CD = #{req.brokerChargeCode}
+            </if>
+            <if test='req.corporatePhoneNumber != null and req.corporatePhoneNumber != ""'> 
+                AND TRIM(MU.PHONE_NUMBER) = #{req.corporatePhoneNumber}
+            </if>
+            <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != ""'>
+                <!-- 正規表現で検索しているため、検索条件での出し分けが不要 -->
+                AND (
+                        REGEXP_LIKE(MU.NAME_KANJI, #{req.customerNameKanjiKana})
+                    OR  REGEXP_LIKE(MU.NAME_KANA, #{req.customerNameKanjiKana})
+                    )
+            </if>
+            <if test='req.tradeCourseList != null and req.tradeCourseList.size() &gt; 0'>
+                <!-- 全てのコースが選択されている(trueの)場合、サービス処理で空の配列にしている -->
+                AND MU.CUSTOMER_ATTRIBUTE IN
+                <foreach item="tradeCourse" collection="req.tradeCourseList" index="idx"
+                    open="(" separator="," close=")">
+                    #{tradeCourse}
+                </foreach>
+            </if>
+            <if test='req.adress != null and req.adress != ""'>
+                <!-- "2"：で始まる、"3"：を含む -->
+                <if test='req.adressConditionList == "2" or req.adressConditionList == "3"'>
+                    AND MU.ADDRESS_KANJI1 LIKE #{req.adress}
+                </if>
+                <!-- "1"：と等しい -->
+                <if test='req.adressConditionList == "1"'>
+                    AND MU.ADDRESS_KANJI1 = #{req.adress}
+                </if>
+            </if>
+            <if test='req.complianceLankFrom != null and req.complianceLankFrom != ""'>
+                AND MU.TC_COMP_RANK &gt;= #{req.complianceLankFrom}
+            </if>
+            <if test='req.complianceLankTo != null and req.complianceLankTo != ""'>
+                AND MU.TC_COMP_RANK &lt;= #{req.complianceLankTo}
+            </if>
+            <if test='req.openAccountFrom != null and req.openAccountFrom != ""'> 
+                AND REPLACE(#{req.openAccountFrom}, '/') &lt;= MU.OPEN_ACCT_DATE 
+            </if>
+            <if test='req.openAccountTo != null and req.openAccountTo != ""'> 
+                AND MU.OPEN_ACCT_DATE &lt;= REPLACE(#{req.openAccountTo}, '/')
+            </if>
+            <choose>
+                <when test='req.privId == "1"'>
+                    AND 1 = 1
+                </when>
+                <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                    AND(BROKER_CODE IN
+                    <foreach item="brokerChargeList" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index%1000 == 0 and index!=0">
+                            ) OR BROKER_CODE IN (
+                        </if>
+                        <if test="index%1000 != 0">
+                            ,
+                        </if>
+                        #{brokerChargeList.brokerCode}
+                    </foreach>
+                    )
+                </when>
+                <otherwise>
+                    AND((BROKER_CODE, INTERMEDIARY_EMP_CD) IN
+                    <foreach item="brokerChargeList" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index%1000 == 0 and index!=0">
+                            ) OR (BROKER_CODE, INTERMEDIARY_EMP_CD) IN (
+                        </if>
+                        <if test="index%1000 != 0">
+                            ,
+                        </if>
+                        (#{brokerChargeList.brokerCode},#{brokerChargeList.empCode})
+                    </foreach>
+                    )
+                </otherwise>
+            </choose>
+        )
+
+        SELECT    /* @SQLID=SUB0201_01-01#Sql001 */
+            *
+        FROM
+            (
+            SELECT
+                count(*) over () as TOTAL_ROW
+              , VBB.*
+              , J.TOTAL_CURRENCT_PRICE
+              , SDCR.VISIBLE_BUTEN_CODE
+              , BCL.COMPLETE_DATE
+            FROM
+                (
+                SELECT
+                    M.TC_COMP_RANK
+                  , M.CUSTOMER_ATTRIBUTE_NAME
+                  , M.NAME_KANA
+                  , M.NAME_KANJI
+                  , M.OPEN_ACCT_DATE
+                  , M.ACCOUNT_NUMBER
+                  , M.ZIP_CODE
+                  , M.ADDRESS_KANJI1
+                  , M.BROKER_CODE
+                  , M.INTERMEDIARY_EMP_CD
+                  , M.PHONE_NUMBER
+                  , M.BIRTH_DAY
+                  , M.AGE
+                  , M.BUTEN_CODE
+                  , M.BRANCH_NAME
+                  , M.BROKER_NAME /* BRANCH_NAMEをASで改称 */
+                  , M.BROKER_CHARGE_NAME
+                  , M.BROKER_CHARGE_CODE
+                  , M.BROKER_BRANCH_CODE AS BRANCH_CODE
+                  , M.EDELIV_AGREEMENT_DATE
+                <if test='req.lastTradeDateDisplay == "true"
+                    or (req.lastTradeDateFrom != null and req.lastTradeDateFrom != "")
+                    or (req.lastTradeDateTo != null and req.lastTradeDateTo != "")'>
+                      , E.LAST_CONTRACT_DATE
+                </if>
+                  , R.PROF_LOSS_SUM
+                  , F2.ASSETS
+                  , G.COMMISSION_TOTAL
+                  , N.COMMISSION_THIS_YEAR
+              <if test='req.foreignSecurityAccountList == "1" or req.foreignSecurityAccountList == "2"'>
+                  <!-- 外国証券取引口座」に"外国株式"もしくは"米国株式（信用）"が選択されている場合 -->
+                  , CASE
+                    <if test='req.foreignSecurityAccountList == "1"'>
+                        WHEN SAP.FOREIGN_VIEW_INFO = '1' THEN '外国株式'
+                    </if>
+                    <if test='req.foreignSecurityAccountList == "2"'>
+                        WHEN SAP.FOREIGN_VIEW_INFO = '1' THEN '米国株式（信用）'
+                    </if>
+                        ELSE ' '
+                    END AS FOREIGN_VIEW_INFO
+              </if>
+                , CASE
+                        WHEN K.ERROR_COUNT_1 &gt; 0 THEN '1'
+                        WHEN EXISTS (
+                            SELECT
+                                *
+                            FROM
+                                MED_TRADE_RESTRICT_ERR_ACC L
+                            WHERE
+                                M.BUTEN_CODE = L.BUTEN_CODE
+                                AND M.ACCOUNT_NUMBER = L.ACCOUNT_NUMBER
+                        ) THEN '1'
+                        ELSE '0'
+                    END AS TRADE_RESTRICTION
+					<if test="req.selectFlg != null">
+						,M.CORPORATION_KBN
+						,M.INVESTMENT_PLAN
+						,M.OCCUPATION
+						,M.ANNUAL_INCOME
+						,M.EMPLOYMENT_PERIOD
+						,M.FINANCIAL_ASSETS
+						,M.FUND_CHARACTER
+						,M.INCOME_FORM
+						,M.EXP_STOCK_KBN
+						,M.EXP_STOCK
+						,M.EXP_DEBENTURE_KBN
+						,M.EXP_DEBENTURE
+						,M.EXP_CB_KBN
+						,M.EXP_CB
+						,M.EXP_MARGIN_KBN
+						,M.EXP_MARGIN
+						,M.EXP_WARRANT_KBN
+						,M.EXP_WARRANT
+						,M.EXP_FUTUREOP_KBN
+						,M.EXP_FUTUREOP
+						,M.EXP_SAVEDTYPEFUND_KBN
+						,M.EXP_SAVEDTYPEFUND
+						,M.EXP_FOREIGN_KBN
+						,M.EXP_FOREIGN
+						,M.EXP_OTHERFUND_KBN
+						,M.EXP_OTHERFUND
+					</if>
+                    <if test="req.selectNisaFlg != null">
+                        ,M.NISA_CONTRACT_VIEW_INFO
+                    </if>
+                FROM
+                    (
+                    SELECT
+                        A.CUSTOMER_ID
+                      , A.TC_COMP_RANK
+                      , A.CUSTOMER_ATTRIBUTE_NAME
+                      , A.NAME_KANA
+                      , A.NAME_KANJI
+                      , A.OPEN_ACCT_DATE
+                      , A.ACCOUNT_NUMBER
+                      , A.ZIP_CODE
+                      , A.ADDRESS_KANJI1
+                      , A.BROKER_CODE
+                      , A.INTERMEDIARY_EMP_CD
+                      , A.PHONE_NUMBER
+                      , A.BIRTH_DAY
+                      , A.AGE
+                      , A.BUTEN_CODE
+                      , MB.BRANCH_NAME
+                      , B.BROKER_NAME <!-- BRANCH_NAMEをASで改称した項目 -->
+                      , C.BROKER_CHARGE_NAME
+                      , C.BROKER_CHARGE_CODE
+                      , MCI.BROKER_BRANCH_CODE <!-- 検索用の抽出であり、返却用の項目ではない -->
+                      , D.EDELIV_AGREEMENT_DATE
+					<if test="req.selectFlg != null">
+						,A.CORPORATION_KBN
+						,TRIM(A.UAI_QA_INVESTMENT_PLAN) AS INVESTMENT_PLAN
+						,TRIM(A.UAI_OCCUPATION) AS OCCUPATION
+						,TRIM(A.UAI_QA_ANNUAL_INCOME) AS ANNUAL_INCOME
+						,TRIM(A.UAI_QA_EMPLOYMENT_PERIOD) AS EMPLOYMENT_PERIOD
+						,TRIM(A.UAI_QA_FINANCIAL_ASSETS) AS FINANCIAL_ASSETS
+						,TRIM(A.UAI_QA_FUND_CHARACTER) AS FUND_CHARACTER
+						,TRIM(A.UAI_QA_INCOME_FORM) AS INCOME_FORM
+						,A.UAI_EXP_STOCK_KBN AS EXP_STOCK_KBN
+						,A.UAI_EXP_STOCK AS EXP_STOCK
+						,A.UAI_EXP_DEBENTURE_KBN AS EXP_DEBENTURE_KBN
+						,A.UAI_EXP_DEBENTURE AS EXP_DEBENTURE
+						,A.UAI_EXP_CB_KBN AS EXP_CB_KBN
+						,A.UAI_EXP_CB AS EXP_CB
+						,A.UAI_EXP_MARGIN_KBN AS EXP_MARGIN_KBN
+						,A.UAI_EXP_MARGIN AS EXP_MARGIN
+						,A.UAI_EXP_WARRANT_KBN AS EXP_WARRANT_KBN
+						,A.UAI_EXP_WARRANT AS EXP_WARRANT
+						,A.UAI_EXP_FUTUREOP_KBN AS EXP_FUTUREOP_KBN
+						,A.UAI_EXP_FUTUREOP AS EXP_FUTUREOP
+						,A.UAI_EXP_SAVEDTYPEFUND_KBN AS EXP_SAVEDTYPEFUND_KBN
+						,A.UAI_EXP_SAVEDTYPEFUND AS EXP_SAVEDTYPEFUND
+						,A.UAI_EXP_FOREIGN_KBN AS EXP_FOREIGN_KBN
+						,A.UAI_EXP_FOREIGN AS EXP_FOREIGN
+						,A.UAI_EXP_OTHERFUND_KBN AS EXP_OTHERFUND_KBN
+						,A.UAI_EXP_OTHERFUND AS EXP_OTHERFUND
+					</if>
+                    <if test="req.selectNisaFlg != null">
+                        , CASE 
+                            WHEN A.UAI_ISA_CONTRACT_KBN = '1' OR A.UAI_JNISA_CONTRACT_KBN = '1' THEN '開設済'
+                            ELSE '未開設'
+                            END AS NISA_CONTRACT_VIEW_INFO
+                    </if>
+                    FROM
+                        CUSTOMER_ID_LIST A
+                        LEFT OUTER JOIN MEDIATE_CHARGE_INFO MCI
+                            ON  A.BROKER_CODE = MCI.BROKER_CODE
+                            AND A.INTERMEDIARY_EMP_CD = MCI.BROKER_CHARGE_CODE
+                            AND (MCI.BROKER_CODE, MCI.BROKER_CHARGE_CODE) IN (
+                                SELECT
+                                    BROKER_CODE, BROKER_CHARGE_CODE
+                                FROM
+                                    MEDIATE_CHARGE_INFO MCI2
+                                GROUP BY BROKER_CODE, BROKER_CHARGE_CODE
+                                HAVING COUNT(*) = 1
+                            )
+                        LEFT OUTER JOIN MEDIATE_BRANCH MB
+                            ON  A.BROKER_CODE = MB.BROKER_CODE
+                            AND MCI.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                        LEFT OUTER JOIN (
+                            SELECT
+                                DISTINCT BROKER_CODE
+                              , BRANCH_NAME AS BROKER_NAME
+                            FROM
+                                MEDIATE_BRANCH
+                            WHERE
+                                BROKER_BRANCH_KIND = '00'
+                        ) B
+                            ON B.BROKER_CODE = A.BROKER_CODE
+                        LEFT OUTER JOIN (
+                            SELECT
+                                DISTINCT BROKER_CODE
+                              , BROKER_CHARGE_CODE
+                              , BROKER_CHARGE_NAME
+                              , BROKER_BRANCH_CODE
+                            FROM
+                                MEDIATE_CHARGE_INFO
+                            WHERE
+                                BROKER_CHARGE_CODE != '0000'
+                            AND DELETE_FLG = '0'
+                        ) C
+                            ON  A.BROKER_CODE = C.BROKER_CODE
+                            AND A.INTERMEDIARY_EMP_CD = C.BROKER_CHARGE_CODE
+                        LEFT OUTER JOIN (
+                            SELECT
+                                BUTEN_CODE
+                              , ACCOUNT_NUMBER
+                              , EDELIV_AGREEMENT_DATE
+                            FROM
+                                T_IPO_PO_EDELIV_AGRMNT
+                            WHERE
+                                EDELIV_AGREEMENT_KBN = '1'
+                        ) D
+                            ON  A.ACCOUNT_NUMBER = D.ACCOUNT_NUMBER
+                            AND A.BUTEN_CODE = D.BUTEN_CODE
+                ) M
+                <if test='req.lastTradeDateDisplay == "true"
+                    or (req.lastTradeDateFrom != null and req.lastTradeDateFrom != "")
+                    or (req.lastTradeDateTo != null and req.lastTradeDateTo != "")'>
+                    LEFT OUTER JOIN (
+                        SELECT
+                          DISTINCT CUSTOMER_ID
+                        , LAST_CONTRACT_DATE
+                        FROM
+                            USER_ATTRIBUTE
+                    ) E
+                    ON  M.CUSTOMER_ID = E.CUSTOMER_ID
+                </if>
+                LEFT OUTER JOIN (
+                    SELECT
+                        CUSTOMER_ID
+                      , PROF_LOSS_SUM
+                    FROM
+                        USER_PROF_LOSS_SUM
+                ) R
+                    ON  M.CUSTOMER_ID = R.CUSTOMER_ID
+                LEFT OUTER JOIN (
+                    SELECT DISTINCT
+                        CUSTOMER_ID,
+                        SUM(ASSETS) AS ASSETS
+                    FROM (
+                        SELECT
+                            *
+                        FROM
+                            USER_INFO_ASSETS
+                        WHERE
+                            CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM CUSTOMER_ID_LIST)
+                    )
+                    WHERE
+                        TARGET_FLG = '07'
+                        OR TARGET_FLG = '08'
+                    GROUP BY
+                        CUSTOMER_ID
+                ) F2
+                    ON  M.CUSTOMER_ID = F2.CUSTOMER_ID
+                LEFT OUTER JOIN (
+                    SELECT
+                        DISTINCT CUSTOMER_ID
+                      , SUM(NVL(COMMISSION,0)) AS COMMISSION_TOTAL
+                    FROM
+                        USER_INFO_COMMISSION
+                    WHERE
+                        1 = 1
+                <if test='req.commTotalAmountConditionList != null and req.commTotalAmountConditionList != "" and req.commTotalAmountConditionList != "1"'>
+                    <if test='req.commTotalAmountConditionList == "2"'>
+                        AND TARGET_FLG IN ('01', '02')
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "3"'>
+                        AND TARGET_FLG = '01'
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "4"'>
+                        AND TARGET_FLG = '02'
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "5"'>
+                        AND TARGET_FLG = '05'
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "6"'>
+                        AND TARGET_FLG = '07'
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "7"'>
+                        AND TARGET_FLG IN ('04', '10')
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "8"'>
+                        AND TARGET_FLG = '04'
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "9"'>
+                        AND TARGET_FLG = '10'
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "10"'>
+                        AND TARGET_FLG = '06'
+                    </if>
+                    <if test='req.commTotalAmountConditionList == "11"'>
+                        AND TARGET_FLG = '08'
+                    </if>
+                </if>
+                <if test='req.commTotalList != null and req.commTotalList != "" and req.commTotalList != "1"'>
+                    <if test='req.commTotalPeriodFrom != null and req.commTotalPeriodFrom != ""'>
+                        AND REPLACE(#{req.commTotalPeriodFrom}, '/') &lt;= YM
+                    </if>
+                    <if test='req.commTotalPeriodTo != null and req.commTotalPeriodTo != ""'>
+                        AND YM &lt;= REPLACE(#{req.commTotalPeriodTo}, '/')
+                    </if>
+                </if>
+                        AND CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM CUSTOMER_ID_LIST)
+                    GROUP BY
+                        CUSTOMER_ID
+                ) G
+                    ON  M.CUSTOMER_ID = G.CUSTOMER_ID
+                LEFT OUTER JOIN (
+                    SELECT
+                        DISTINCT CUSTOMER_ID
+                      , SUM(NVL(COMMISSION, 0)) AS COMMISSION_THIS_YEAR
+                    FROM
+                        USER_INFO_COMMISSION
+                    WHERE
+                        YM BETWEEN TO_CHAR(SYSDATE, 'YYYY') || '01' AND TO_CHAR(SYSDATE, 'YYYYMM')
+                        AND CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM CUSTOMER_ID_LIST)
+                    GROUP BY
+                        CUSTOMER_ID
+                ) N
+                    ON  M.CUSTOMER_ID = N.CUSTOMER_ID
+                <if test='req.foreignSecurityAccountList == "1" or req.foreignSecurityAccountList == "2"'>
+                LEFT OUTER JOIN (
+                    SELECT
+                        ACCT_ID
+                      , CASE
+                            WHEN COUNT(ACCT_ID) &gt; 0 THEN '1'
+                            ELSE ' '
+                        END AS FOREIGN_VIEW_INFO
+
+                    FROM (
+                            SELECT
+                                *
+                            FROM
+                                SVC_ACCT_PROFILE_IFAP
+                            WHERE
+                                ACCT_ID IN (
+                                    SELECT
+                                        BUTEN_CODE || '-' || SUBSTR('0000000' || ACCOUNT_NUMBER, -7)
+                                    FROM
+                                        CUSTOMER_ID_LIST
+                                )
+                            <if test='req.foreignSecurityAccountList == "1"'>
+                            AND PROFILE_NAME = 'TradeFStockUSPermission'
+                            AND PROFILE_VALUE = 'Yes'
+                            </if>
+                            <if test='req.foreignSecurityAccountList == "2"'>
+                            AND PROFILE_NAME = 'TradeFMarginUSPermission'
+                            AND PROFILE_VALUE = 'Yes'
+                            </if>
+                    )
+                    GROUP BY
+                        ACCT_ID
+                ) SAP
+                    ON M.BUTEN_CODE || '-' || SUBSTR('000000' || M.ACCOUNT_NUMBER, -7) = SAP.ACCT_ID
+                </if>
+                LEFT OUTER JOIN (
+                    SELECT
+                        AI.CUSTOMER_ID
+                        , COUNT(*) AS ERROR_COUNT_1
+                    FROM (
+                        SELECT
+                            *
+                        FROM
+                            CALLCENTER.ATTENTION_INFO
+                        WHERE
+                            CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM CUSTOMER_ID_LIST)
+                            AND ON_OFF_FLG = '有効'
+                            AND DELETE_TIME IS NULL
+                    ) AI
+                    INNER JOIN
+                        CALLCENTER.ATTENTION_CATEGORY_MASTER ACM
+                    ON
+                        AI.CATEGORY = ACM.CATEGORY_NAME
+                    INNER JOIN (
+                        SELECT
+                            RESTRICT_CODE
+                        FROM
+                            M_MED_TRADE_RESTRICT
+                        WHERE
+                            RESTRICT_TYPE = '1'
+                        AND VALUE = '2'
+                        AND START_DATE &lt;= SYSDATE
+                        AND SYSDATE &lt;= END_DATE
+                    ) SK
+                    ON
+                        ACM.CATEGORY_CD = SK.RESTRICT_CODE
+                    GROUP BY
+                        AI.CUSTOMER_ID
+                ) K
+                ON M.CUSTOMER_ID = K.CUSTOMER_ID
+                WHERE
+                    1 = 1
+            <if test='req.branchCode != null and req.branchCode != ""'>
+                AND M.BROKER_BRANCH_CODE = #{req.branchCode}
+            </if>
+            <if test='req.lastTradeDateFrom != null and req.lastTradeDateFrom != ""'>
+                AND E.LAST_CONTRACT_DATE &gt;= TO_DATE(#{req.lastTradeDateFrom}, 'YYYY/MM/DD')
+            </if>
+            <if test='req.lastTradeDateTo != null and req.lastTradeDateTo != ""'>
+                AND E.LAST_CONTRACT_DATE &lt;= TO_DATE(#{req.lastTradeDateTo}, 'YYYY/MM/DD') +1 - (1/86400)
+            </if>
+            <if test='req.commTotalAmountFrom != null and req.commTotalAmountFrom != ""'>
+                AND #{req.commTotalAmountFrom} &lt;= G.COMMISSION_TOTAL
+            </if>
+            <if test='req.commTotalAmountTo != null and req.commTotalAmountTo != ""'>
+                AND G.COMMISSION_TOTAL  &lt;= #{req.commTotalAmountTo}
+            </if>
+            <if test='req.ageFrom != null and req.ageFrom != ""'>
+                AND CASE
+                    WHEN REGEXP_LIKE(TRIM(M.AGE), '^\d+$')
+                THEN TO_NUMBER(M.AGE)
+                ELSE null
+                END &gt;= TO_NUMBER(#{req.ageFrom})
+            </if>
+            <if test='req.ageTo != null and req.ageTo != ""'>
+                AND CASE
+                    WHEN REGEXP_LIKE(TRIM(M.AGE), '^\d+$')
+                THEN TO_NUMBER(M.AGE)
+                ELSE null
+                END &lt;= TO_NUMBER(#{req.ageTo})
+            </if>
+            <if test='req.birthDateFrom != null and req.birthDateFrom != ""'>
+                AND REPLACE(#{req.birthDateFrom}, '/') &lt;= M.BIRTH_DAY
+            </if>
+            <if test='req.birthDateTo != null and req.birthDateTo != ""'>
+                AND M.BIRTH_DAY &lt;= REPLACE(#{req.birthDateTo}, '/')
+            </if>
+                ORDER BY
+                    M.BROKER_CODE
+                  , M.BUTEN_CODE
+                  , M.ACCOUNT_NUMBER
+                ) VBB
+                LEFT OUTER JOIN (
+                    SELECT
+                        ACCOUNT_NUMBER
+                      , BUTEN_CODE
+                      , SUM(CURRENCT_PRICE) AS TOTAL_CURRENCT_PRICE
+                      , SUM(
+                        <choose>
+                            <when test='req.valuationConditionList == null or req.valuationConditionList == ""'>
+                               CURRENCT_PRICE
+                            </when>
+                            <otherwise>
+                                CASE
+                                    WHEN PRODUT_CD = #{req.valuationConditionList} THEN CURRENCT_PRICE
+                                    ELSE 0
+                                END
+                            </otherwise>
+                        </choose>
+                      ) AS TOTAL_CURRENCT_PRICE_FOR_SEARCH
+                    FROM
+                        <!-- サブクエリが冗長だが、性能改善のために必要。(本番環境で打鍵して確認。) -->
+                        (
+                            SELECT
+                                *
+                            FROM
+                                V_BALANCE
+                            WHERE
+                                1 = 1
+                                <if test='req.butenCode != null and req.butenCode != ""'><!-- 性能改善 -->
+                                    AND BUTEN_CODE = #{req.butenCode}
+                                </if>
+                                <if test='req.accountNumber != null and req.accountNumber != ""'><!-- 性能改善 -->
+                                    AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                                </if>
+                                AND (BUTEN_CODE, ACCOUNT_NUMBER) IN (SELECT BUTEN_CODE, ACCOUNT_NUMBER FROM CUSTOMER_ID_LIST)
+                        ) V_BALANCE
+                    WHERE
+                        DATE_YMD = (SELECT MAX(DATE_YMD) FROM V_BALANCE)
+                        AND PRODUT_CD IN ('01','04','06','08','09','12','13','14','15','16','25','33','50','98','99','100')
+                    <if test='req.butenCode != null and req.butenCode != ""'>
+                        AND BUTEN_CODE = #{req.butenCode}
+                    </if>
+                    <if test='req.accountNumber != null and req.accountNumber != ""'>
+                        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                    </if>
+                    <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.brokerCodeExcludeCheckbox == "1"'>
+                       AND BROKER_CODE NOT IN
+                        <foreach item="brokerCode" collection="req.brokerCodeList" index="idx"
+                            open="(" separator="," close=")">
+                            #{brokerCode}
+                        </foreach>
+                    </if>
+                    <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.brokerCodeExcludeCheckbox != "1"'>
+                        AND BROKER_CODE IN
+                        <foreach item="brokerCode" collection="req.brokerCodeList" index="idx"
+                            open="(" separator="," close=")">
+                            #{brokerCode}
+                        </foreach>
+                    </if>
+                    GROUP BY
+                         ACCOUNT_NUMBER
+                       , BUTEN_CODE
+                ) J
+                    ON VBB.ACCOUNT_NUMBER = J.ACCOUNT_NUMBER
+                   AND VBB.BUTEN_CODE = J.BUTEN_CODE
+                LEFT OUTER JOIN (
+                    SELECT
+                        ACCOUNT_NUMBER
+                      , BUTEN_CODE
+                      , VISIBLE_BUTEN_CODE
+                    FROM
+                        SUB_DEALER_CODE_RELATION_IFAP
+                ) SDCR
+                   ON VBB.ACCOUNT_NUMBER = SDCR.ACCOUNT_NUMBER
+                  AND VBB.BUTEN_CODE = SDCR.BUTEN_CODE
+                LEFT OUTER JOIN (
+                    SELECT
+                        ACCOUNT_NUMBER
+                      , BUTEN_CODE
+                      , COMPLETE_DATE
+                    FROM
+                        BROKER_CHANGE_LIST
+                ) BCL
+                   ON VBB.ACCOUNT_NUMBER = BCL.ACCOUNT_NUMBER
+                  AND VBB.BUTEN_CODE = BCL.BUTEN_CODE
+            WHERE
+                1 = 1
+            <if test='req.commTotalAmountConditionList != null and req.commTotalAmountConditionList != "" and req.commTotalAmountConditionList != "1"'>
+                AND VBB.COMMISSION_TOTAL IS NOT NULL
+            </if>
+            <if test='req.foreignSecurityAccountList == "1" or req.foreignSecurityAccountList == "2"'>
+                AND VBB.FOREIGN_VIEW_INFO != ' '
+            </if>
+            <if test='req.butenCodeArray != null and req.butenCodeArray.size() &gt; 0'>
+                AND SDCR.VISIBLE_BUTEN_CODE IN
+                <foreach item="butenCode" collection="req.butenCodeArray" index="idx"
+                        open="(" separator="," close=")">
+                    #{butenCode}
+                </foreach>
+            </if>
+            <if test='req.courseChangeFinishDateFrom != null and req.courseChangeFinishDateFrom != ""'>
+                AND BCL.COMPLETE_DATE &gt;= REPLACE(#{req.courseChangeFinishDateFrom}, '/')
+            </if>
+            <if test='req.courseChangeFinishDateTo != null and req.courseChangeFinishDateTo != ""'>
+                AND BCL.COMPLETE_DATE &lt;= REPLACE(#{req.courseChangeFinishDateTo}, '/')
+            </if>
+            <if test='req.valuationFrom != null and req.valuationFrom != ""'>
+                AND NVL(TOTAL_CURRENCT_PRICE_FOR_SEARCH, 0) &gt;= #{req.valuationFrom}
+            </if>
+            <if test='req.valuationTo != null and req.valuationTo != ""'>
+                AND NVL(TOTAL_CURRENCT_PRICE_FOR_SEARCH, 0) &lt;= #{req.valuationTo}
+            </if>
+            <if test='req.tradeRestrictionCheckbox == "true"'>
+                AND VBB.TRADE_RESTRICTION = '1'
+            </if>
+            )
+        WHERE
+            1 = 1
+        AND ROWNUM &lt;= #{req.searchLimitRow}
+        ORDER BY
+            BROKER_CODE
+          , BUTEN_CODE
+          , ACCOUNT_NUMBER
+    </select>
+
+    <!--
+        SQLID：Sql003
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerListSql003" resultMap="ResultMapIfaCustomerListSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0201_01-01#Sql003 */
+            MUAI.BUTEN_CODE AS UAI_BUTEN_CODE
+          , MUAI.ACCOUNT_NUMBER AS UAI_ACCOUNT_NUMBER
+          , MUAI.UAI_QA_INVESTMENT_PLAN
+          , MUAI.UAI_OCCUPATION
+          , MUAI.UAI_EXP_STOCK
+          , MUAI.UAI_OFFICE_NAME
+          , MUAI.UAI_QA_FINANCIAL_ASSETS
+          , MUAI.CORPORATION_KBN AS UAI_CORPORATION_KBN
+          , MUAI.UAI_FAMILY_NAME_KANJI
+          , MUAI.UAI_NAME_KANJI
+          , MUAI.UAI_FAMILY_NAME_KANA
+          , MUAI.UAI_NAME_KANA
+          , MUAI.DEALER_NUMBER AS UAI_DEALER_NUMBER
+          , MUAI.NAME_KANJI
+          , MUAI.OPEN_ACCT_DATE
+          , MUAI.TC_COMP_RANK
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO MUAI
+        WHERE
+            MUAI.BUTEN_CODE = #{req.butenCode}
+        AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        AND MUAI.UAI_ACCT_DEL_FLG = '0'
+        AND MUAI.TC_COMP_RANK != 'Z'
+        <choose>
+            <when test='req.privId == "1"'>
+                <if test='req.brokerCode != null and req.brokerCode != ""'>
+                    AND MUAI.BROKER_CODE = #{req.brokerCode}
+                </if>
+                <if test='req.empCode != null and req.empCode != ""'>
+                    AND MUAI.INTERMEDIARY_EMP_CD = #{req.empCode}
+                </if>
+            </when>
+            <when test='req.privId == "2"'>
+                <if test='req.brokerCode != null and req.brokerCode != ""'>
+                    AND MUAI.BROKER_CODE = #{req.brokerCode}
+                </if>
+                <if test='req.empCode != null and req.empCode != ""'>
+                    AND MUAI.INTERMEDIARY_EMP_CD = #{req.empCode}
+                </if>
+                <if test='req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0'>
+                    AND (MUAI.BROKER_CODE, MUAI.INTERMEDIARY_EMP_CD) IN (
+                    <foreach item="chargeList" collection="req.brokerChargeList"
+                        open="(" separator="),(" close="))">
+                        #{chargeList.brokerCode},
+                        #{chargeList.empCode}
+                    </foreach>
+               </if>
+            </when>
+            <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                <if test='req.brokerCode != null and req.brokerCode != ""'>
+                    AND MUAI.BROKER_CODE = #{req.brokerCode}
+                </if>
+                <if test='req.empCode != null and req.empCode != ""'>
+                    AND MUAI.INTERMEDIARY_EMP_CD = #{req.empCode}
+                </if>
+            </when>
+            <when test='req.privId == "6" or req.privId == "7" or req.privId == "8" or req.privId == "10"'>
+                <if test='req.brokerCode != null and req.brokerCode != ""'>
+                    AND MUAI.BROKER_CODE = #{req.brokerCode}
+                </if>
+                <if test='req.empCode != null and req.empCode != ""'>
+                    AND MUAI.INTERMEDIARY_EMP_CD = #{req.empCode}
+                </if>
+                <if test='req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0'>
+                    AND (MUAI.BROKER_CODE, MUAI.INTERMEDIARY_EMP_CD) IN (
+                    <foreach item="chargeList" collection="req.brokerChargeList"
+                        open="(" separator="),(" close="))">
+                        #{chargeList.brokerCode},
+                        #{chargeList.empCode}
+                    </foreach>
+                </if>
+            </when>
+            <when test='req.privId == "9"'>
+                    AND MUAI.BROKER_CODE = #{req.brokerCode}
+                    AND MUAI.INTERMEDIARY_EMP_CD = #{req.empCode}
+            </when>
+        </choose>
+    </select>
+
+    <!--
+        SQLID：Sql004
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaCustomerListSql004" resultMap="ResultMapIfaCustomerListSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0201_01-01#Sql004 */
+            NAME AS VIEW_COMMENT
+        FROM
+            M_CODE
+        WHERE
+            START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+        AND CODE_TYPE = '99'
+        AND CODE_1 = '01'
+        AND CODE_2 IN ('12','17','18')
+        ORDER BY CODE_2
+    </select>
+
+</mapper>

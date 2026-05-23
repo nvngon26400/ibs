@@ -1,0 +1,8 @@
+<services >
+	<!-- service-config-ap.xml -->
+	<import resource="service-config-ap.xml"/>
+
+	<!-- service-config-test -->
+	<import resource="service-config-apitest.xml"/>
+
+</services>

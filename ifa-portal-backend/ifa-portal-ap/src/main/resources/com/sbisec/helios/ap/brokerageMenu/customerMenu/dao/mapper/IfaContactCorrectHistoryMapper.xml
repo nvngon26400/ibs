@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    画面ID:SUB0202_0106-08
+    画面名:接触履歴（入力）修正履歴
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaContactCorrectHistoryMapper">
+    <!--
+        SQLID:Sql001
+        SQL名修正履歴取得
+        SQLタイプ:select
+    -->
+    <resultMap id="ResultMapIfaContactCorrectHistorySql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactCorrectHistorySql001ResponseModel">
+        <result property="nyuuryokusyaName" column="NYUURYOKUSYA_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="syuuseisyaName" column="SYUUSEISYA_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="naiyou1" column="NAIYOU_1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="naiyou2" column="NAIYOU_2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="naiyou3" column="NAIYOU_3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="naiyou4" column="NAIYOU_4" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="naiyou5" column="NAIYOU_5" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <select id="selectIfaContactCorrectHistorySql001" resultMap="ResultMapIfaContactCorrectHistorySql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-08#SQL001 */
+             NYUURYOKU_DATE                                                                       <!-- 入力日時 -->
+            ,NYUURYOKUSYA_NAME                                                                    <!-- 入力者名 -->
+            ,SYUUSEI_DATE                                                                         <!-- 修正日時 -->
+            ,SYUUSEISYA_NAME                                                                      <!-- 修正者名 -->
+            ,NAIYOU_1                                                                             <!-- 内容1 -->
+            ,NAIYOU_2                                                                             <!-- 内容2 -->
+            ,NAIYOU_3                                                                             <!-- 内容3 -->
+            ,NAIYOU_4                                                                             <!-- 内容4 -->
+            ,NAIYOU_5                                                                             <!-- 内容5 -->
+        FROM
+            CORDYS.TB_CONTACT_IFA_HIS
+        WHERE
+            IFA_TOIAWASE_NO = #{req.ifaToiawaseNo} AND                                            <!-- IFA問合せNO -->
+            TOUROKU_GROUP = #{req.tourokuGroup}                                                   <!-- 登録グループ -->
+        ORDER BY
+            SYUUSEI_DATE DESC                                                                     <!-- 修正日時 -->
+    </select>
+</mapper>

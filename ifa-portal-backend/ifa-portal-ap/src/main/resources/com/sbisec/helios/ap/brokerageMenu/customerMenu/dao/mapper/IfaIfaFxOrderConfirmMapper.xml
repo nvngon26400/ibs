@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0503-02_2
+    画面名：【IFA】為替注文確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaIfaFxOrderConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaIfaFxOrderConfirmSql001" statementType="PREPARED">
+        INSERT INTO EXCHANGE_ORDER (
+            IFA_ORDER_NO, <!-- IFA注文番号 -->
+            IFA_ORDER_SUB_NO, <!-- IFA注文サブ番号 -->
+            BUTEN_CODE, <!-- 部店コード -->
+            ACCOUNT_NUMBER, <!-- 口座番号 -->
+            TRADE_TYPE, <!-- 取引種別 -->
+            FX_SURYO_METHOD, <!-- 数量の指定方法 -->
+            FX_SELLING_METHOD, <!-- 売却方法 -->
+            CURRENCY_CODE, <!-- 通貨コード -->
+            CURRENCY_NAME, <!-- 通貨名 -->
+            FX_ORDER_AMOUNT, <!-- 為替注文金額 -->
+            FX_TRADING, <!-- 為替取引 -->
+            APPLY_SPREAD, <!-- 適用スプレッド -->
+            FX_SPECIFIC_ACCOUNT_CODE, <!-- 口座分類（為替取引） -->
+            FX_DEPOSIT_TYPE, <!-- 預り区分（為替取引） -->
+            FX_TRADE_SERVICE_TYPE, <!-- 為替取引サービス種別 -->
+            FX_ORDER_STATUS, <!-- 為替取引注文状況 -->
+            FX_CYCLE_NO, <!-- 為替取引サイクル番号 -->
+            FX_EVENT_ID, <!-- 為替取引注文イベントID -->
+            ORDER_NO, <!-- 注文番号 -->
+            EXEC_DATETIME, <!-- 約定日時 -->
+            STL_DATE, <!-- 受渡日 -->
+            EXCHANGE_RATE, <!-- 為替レート -->
+            EXCHANGE_RATE_DATETIME, <!-- 為替レート日時 -->
+            STL_AMOUNT_YEN, <!-- 受渡金額（円貨） -->
+            ORDER_DATETIME, <!-- 注文日時 -->
+            ORDER_SHUBETSU, <!-- 注文種別表示 -->
+            API_ERROR_CODE, <!-- APIエラーコード -->
+            API_STATUS_CODE, <!-- APIステータスコード -->
+            API_MESSAGE, <!-- APIメッセージ -->
+            BROKER_CODE, <!-- 仲介業者コード -->
+            INTERMEDIARY_EMP_CD, <!-- 仲介業者営業員コード -->
+            CREATE_TIME, <!-- 作成日時 -->
+            CREATE_USER, <!-- 作成者 -->
+            UPDATE_TIME, <!-- 更新日時 -->
+            UPDATE_USER <!-- 更新者 -->
+        )
+        VALUES (
+            #{req.ifaOrderNo}, <!-- IFA注文番号 -->
+            '1', <!-- IFA注文サブ番号 -->
+            #{req.butenCode}, <!-- 部店コード -->
+            #{req.accountNumber}, <!-- 口座番号 -->
+            #{req.tradeCd}, <!-- 取引種別 -->
+            #{req.quantityDesignationMethod}, <!-- 数量の指定方法 -->
+            #{req.saleMethod}, <!-- 売却方法 -->
+            #{req.currencyCode}, <!-- 通貨コード -->
+            #{req.currency}, <!-- 通貨名 -->
+            #{req.fxOrderAmount}, <!-- 為替注文金額 -->
+            '1', <!-- 為替取引 -->
+            #{req.selectedCurrencyInfo}, <!-- 適用スプレッド -->
+            #{req.accountClass}, <!-- 口座分類（為替取引） -->
+            '3', <!-- 預り区分（為替取引） -->
+            '1', <!-- 為替取引サービス種別 -->
+            '0', <!-- 為替取引注文状況 -->
+            null, <!-- 為替取引サイクル番号 -->
+            null, <!-- 為替取引注文イベントID -->
+            null, <!-- 注文番号 -->
+            null, <!-- 約定日時 -->
+            null, <!-- 受渡日 -->
+            null, <!-- 為替レート -->
+            null, <!-- 為替レート日時 -->
+            null, <!-- 受渡金額（円貨） -->
+            null, <!-- 注文日時 -->
+            null, <!-- 注文種別表示 -->
+            null, <!-- APIエラーコード -->
+            null, <!-- APIステータスコード -->
+            null, <!-- APIメッセージ -->
+            #{req.brokerCode}, <!-- 仲介業者コード -->
+            #{req.brokerChargeCode}, <!-- 仲介業者営業員コード -->
+            IFA_DATE_UTIL.IFA_GET_DATE, <!-- 作成日時 -->
+            #{req.userId}, <!-- 作成者 -->
+            IFA_DATE_UTIL.IFA_GET_DATE, <!-- 更新日時 -->
+            #{req.userId}<!-- 更新者 -->
+        )
+    </insert>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaIfaFxOrderConfirmSql002" statementType="PREPARED">
+        UPDATE 
+        EXCHANGE_ORDER SET 
+        <if test="!req.orderPlacementErrorFlag">
+        ORDER_NO = #{req.orderNumber}, <!-- IFA注文番号 -->
+        EXEC_DATETIME = TO_TIMESTAMP(#{req.tradeDateTime},'YYYY-MM-DD"T"HH24:MI:SS.FF3"+09:00"'), <!-- 約定日時 -->
+        STL_DATE = TO_CHAR(TO_DATE(#{req.settlementDate},'YYYY-MM-DD'),'YYYYMMDD'), <!-- 受渡日 -->
+        EXCHANGE_RATE = #{req.fxRate}, <!-- 為替レート -->
+        EXCHANGE_RATE_DATETIME = TO_TIMESTAMP(#{req.exchangeRateDateTime},'YYYY-MM-DD"T"HH24:MI:SS.FF3"+09:00"'), <!-- 為替レート日時 -->
+        STL_AMOUNT_YEN = #{req.yenDeliveryAmount}, <!-- 受渡金額（円貨） -->
+        ORDER_DATETIME = TO_TIMESTAMP(#{req.orderDate},'YYYY-MM-DD"T"HH24:MI:SS.FF6"+09:00"'), <!-- 注文日時 -->
+        ORDER_SHUBETSU = #{req.orderKindDisplay}, <!-- 注文種別表示 -->
+        </if>
+        API_ERROR_CODE = #{req.apiErrorCode}, <!-- APIエラーコード -->
+        API_STATUS_CODE = #{req.apiStatusCode}, <!-- APIステータスコード -->
+        API_MESSAGE = SUBSTRB(#{req.apiMsg}, 1, 100), <!-- APIメッセージ -->
+        UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE, <!-- 更新日時 -->
+        UPDATE_USER = #{req.userId} <!-- 更新者 -->
+        WHERE
+        IFA_ORDER_NO = #{req.ifaOrderNo}
+        AND IFA_ORDER_SUB_NO = '1'
+    </update>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：クエリ
+        SQLタイプ：select
+    -->
+    <select id="selectIfaIfaFxOrderConfirmSql003" resultType="String" statementType="PREPARED">
+        SELECT IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') || LPAD(SEQ_EXCHANGE_ORDER.NEXTVAL, 10, '0') AS IFA_ORDER_NO FROM DUAL
+    </select>
+    
+</mapper>

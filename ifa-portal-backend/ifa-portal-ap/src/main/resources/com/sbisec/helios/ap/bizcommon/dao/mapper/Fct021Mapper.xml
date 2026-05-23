@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct021Mapper">
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct021Sql001ResponseModel" id="Fct021Sql001ResponseModel">
+    </resultMap>
+    
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct021Sql002ResponseModel" id="Fct021Sql002ResponseModel">
+    </resultMap>
+
+    <select id="getFct021Sql001" resultMap="Fct021Sql001ResponseModel" statementType="PREPARED">
+        /* @SQLID=FCT021#Sql001 */
+        WITH WORK_TABLE AS(
+          SELECT
+              RESTRICT_TYPE,
+              TRIM(RESTRICT_CODE) as RESTRICT_CODE,
+              VALUE
+          FROM
+              M_MED_TRADE_RESTRICT
+          WHERE
+              TRIM(PRODUCT_CD)=#{fct021Sql001RequestModel.productCd}
+              AND TRIM(TRADE_CD)=TRIM(#{fct021Sql001RequestModel.tradeCd})
+              AND COUNTRY_CD=#{fct021Sql001RequestModel.countryCd}
+              AND CURRENCY_CODE=#{fct021Sql001RequestModel.currencyCode}
+              AND TRIM(TRADE_RESTRICT_CHK_MARKET)=#{fct021Sql001RequestModel.tradeRestrictChkMarket}
+              AND ONE_DAY_CREDIT_FLAG=#{fct021Sql001RequestModel.oneDayCreditFlag}
+              AND START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE
+              AND IFA_DATE_UTIL.IFA_GET_DATE &lt;= END_DATE
+        )
+        SELECT * 
+        FROM WORK_TABLE
+        UNION ALL
+        SELECT
+            RESTRICT_TYPE,
+            TRIM(RESTRICT_CODE) as RESTRICT_CODE,
+            VALUE
+        FROM
+            M_MED_TRADE_RESTRICT
+        WHERE
+            TRIM(PRODUCT_CD)=#{fct021Sql001RequestModel.productCd}
+            AND TRIM(TRADE_CD)=TRIM(#{fct021Sql001RequestModel.tradeCd})
+            AND COUNTRY_CD=#{fct021Sql001RequestModel.countryCd}
+            AND CURRENCY_CODE=#{fct021Sql001RequestModel.currencyCode}
+            AND TRADE_RESTRICT_CHK_MARKET='99'
+            AND ONE_DAY_CREDIT_FLAG=#{fct021Sql001RequestModel.oneDayCreditFlag}
+            AND START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE
+            AND IFA_DATE_UTIL.IFA_GET_DATE &lt;= END_DATE
+            AND (SELECT count(1) FROM WORK_TABLE)=0 
+    </select>
+    
+    <select id="getFct021Sql002" resultMap="Fct021Sql002ResponseModel" statementType="PREPARED">
+        <bind name="flag2" value="0" />
+        <bind name="flag3" value="0" />
+        <bind name="flag4" value="0" />
+        <bind name="flag5" value="0" />
+        <foreach item="sql001ResponseModel" index="index"
+                        collection="fct021Sql002RequestModel.fct021Sql001ResponseModel">
+            <if test="sql001ResponseModel.restrictType == 1 and sql001ResponseModel.value == 2">
+                <bind name="flag2" value="1" />
+            </if>
+        </foreach>
+        <foreach item="sql001ResponseModel" index="index"
+                        collection="fct021Sql002RequestModel.fct021Sql001ResponseModel">
+            <if test="sql001ResponseModel.restrictType == 1 and sql001ResponseModel.value == 1">
+                <bind name="flag3" value="1" />
+            </if>
+        </foreach>
+        <foreach item="sql001ResponseModel" index="index"
+                        collection="fct021Sql002RequestModel.fct021Sql001ResponseModel">
+            <if test="sql001ResponseModel.restrictType == 2 and sql001ResponseModel.value == 2">
+                <bind name="flag4" value="1" />
+            </if>
+        </foreach>
+        <foreach item="sql001ResponseModel" index="index"
+                        collection="fct021Sql002RequestModel.fct021Sql001ResponseModel">
+            <if test="sql001ResponseModel.restrictType == 2 and sql001ResponseModel.value == 1">
+                <bind name="flag5" value="1" />
+            </if>
+        </foreach>
+        WITH A AS (
+            SELECT
+                /* @SQLID=FCT021#Sql002 */
+                A.BUTEN_CODE,
+                A.ACCOUNT_NUMBER,
+                A.CUSTOMER_ID
+            FROM
+                MEDIATE_USER_ATTRIBUTE_INFO A
+            WHERE
+                A.BUTEN_CODE=#{fct021Sql002RequestModel.butenCode}
+                AND A.ACCOUNT_NUMBER=TO_NUMBER(#{fct021Sql002RequestModel.accountNumber})
+        )
+        
+        SELECT
+            A.BUTEN_CODE,
+            A.ACCOUNT_NUMBER,
+            <choose>
+                <when test="flag2==1">
+                    NVL(B.COUNT,0)
+                </when>
+                <otherwise>
+                    0
+                </otherwise>
+            </choose> AS noteInfoErrFlag,
+            <choose>
+                <when test="flag3==1">
+                    NVL(C.COUNT,0)
+                </when>
+                <otherwise>
+                    0
+                </otherwise>
+            </choose> AS noteInfoAlertFlag,
+            <choose>
+                <when test="flag4==1">
+                    NVL(D.COUNT,0)
+                </when>
+                <otherwise>
+                    0
+                </otherwise>
+            </choose> AS noteLimitErrFlag,
+            <choose>
+                <when test="flag5==1">
+                    NVL(E.COUNT,0)
+                </when>
+                <otherwise>
+                    0
+                </otherwise>
+            </choose> AS noteLimitAlertFlag
+            
+        FROM A
+        <if test="flag2 == 1">
+            LEFT JOIN
+            (SELECT
+                F.CUSTOMER_ID,
+                COUNT(1) AS COUNT
+            FROM
+                ATTENTION_INFO F
+            INNER JOIN
+                ATTENTION_CATEGORY_MASTER G
+            ON
+            F.CATEGORY = G.CATEGORY_NAME
+            
+            WHERE
+                F.ON_OFF_FLG='有効'
+                AND F.DELETE_TIME IS NULL
+                AND F.CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM A)
+                AND TRIM(G.CATEGORY_CD) IN 
+                <foreach item="sql001ResponseModel" index="index" 
+                collection="fct021Sql002RequestModel.fct021Sql001ResponseModel" open="(" separator="," close=")">
+                    <if test="sql001ResponseModel.restrictType == 1 and sql001ResponseModel.value == 2">
+                        #{sql001ResponseModel.restrictCode}
+                    </if>
+                </foreach>
+            GROUP BY F.CUSTOMER_ID
+            )B
+            ON
+                A.CUSTOMER_ID=B.CUSTOMER_ID
+        </if>
+        <if test="flag3 == 1">
+            LEFT JOIN
+            (SELECT
+                H.CUSTOMER_ID,
+                COUNT(1) AS COUNT
+            FROM
+                ATTENTION_INFO H
+            INNER JOIN
+                ATTENTION_CATEGORY_MASTER I
+            ON
+            H.CATEGORY = I.CATEGORY_NAME
+            WHERE
+                H.ON_OFF_FLG='有効'
+                AND H.DELETE_TIME IS NULL
+                AND H.CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM A)
+                AND TRIM(I.CATEGORY_CD) IN 
+                <foreach item="sql001ResponseModel" index="index" 
+                collection="fct021Sql002RequestModel.fct021Sql001ResponseModel" open="(" separator="," close=")">
+                    <if test="sql001ResponseModel.restrictType == 1 and sql001ResponseModel.value == 1">
+                        #{sql001ResponseModel.restrictCode}
+                    </if>
+                </foreach>
+            GROUP BY H.CUSTOMER_ID
+            )C
+            ON
+                A.CUSTOMER_ID=C.CUSTOMER_ID
+        </if>
+        <if test="flag4 == 1">
+            LEFT JOIN
+            (SELECT
+                JUS_BUTEN_CODE,
+                JUS_ACCOUNT_NUMBER,
+                COUNT(1) AS COUNT
+            FROM
+                JMSG_USER_STATUS
+            WHERE
+                JUS_CONFIRM_KBN='0'
+                AND (JUS_RESTRAINT_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE OR JUS_RESTRAINT_DATE IS NULL)
+                AND JUS_BUTEN_CODE IN (SELECT BUTEN_CODE FROM A)
+                AND JUS_ACCOUNT_NUMBER IN (SELECT ACCOUNT_NUMBER FROM A)
+                AND 
+                <foreach item="sql001ResponseModel" index="index" 
+                collection="fct021Sql002RequestModel.fct021Sql001ResponseModel" open="(" separator="OR" close=")">
+                    <if test="sql001ResponseModel.restrictType == 2 and sql001ResponseModel.value == 2">
+                        SUBSTR(JUS_RESTRAINT,${sql001ResponseModel.restrictCode},1)='1'
+                    </if>
+                </foreach>
+            GROUP BY JUS_BUTEN_CODE,JUS_ACCOUNT_NUMBER
+            )D
+            ON
+                A.BUTEN_CODE=D.JUS_BUTEN_CODE
+                AND A.ACCOUNT_NUMBER=D.JUS_ACCOUNT_NUMBER
+        </if>
+        <if test="flag5 == 1">
+            LEFT JOIN
+            (SELECT
+                JUS_BUTEN_CODE,
+                JUS_ACCOUNT_NUMBER,
+                COUNT(1) AS COUNT
+            FROM
+                JMSG_USER_STATUS
+            WHERE
+                JUS_CONFIRM_KBN='0'
+                AND (JUS_RESTRAINT_DATE &lt;= IFA_DATE_UTIL.IFA_GET_DATE OR JUS_RESTRAINT_DATE IS NULL)
+                AND JUS_BUTEN_CODE IN (SELECT BUTEN_CODE FROM A)
+                AND JUS_ACCOUNT_NUMBER IN (SELECT ACCOUNT_NUMBER FROM A)
+                AND 
+                <foreach item="sql001ResponseModel" index="index" 
+                collection="fct021Sql002RequestModel.fct021Sql001ResponseModel" open="(" separator="OR" close=")">
+                    <if test="sql001ResponseModel.restrictType == 2 and sql001ResponseModel.value == 1">
+                        SUBSTR(JUS_RESTRAINT,${sql001ResponseModel.restrictCode},1)='1'
+                    </if>
+                </foreach>
+            GROUP BY JUS_BUTEN_CODE,JUS_ACCOUNT_NUMBER
+            )E
+            ON
+                A.BUTEN_CODE=E.JUS_BUTEN_CODE
+                AND A.ACCOUNT_NUMBER=E.JUS_ACCOUNT_NUMBER
+        </if>
+    </select>
+
+</mapper>

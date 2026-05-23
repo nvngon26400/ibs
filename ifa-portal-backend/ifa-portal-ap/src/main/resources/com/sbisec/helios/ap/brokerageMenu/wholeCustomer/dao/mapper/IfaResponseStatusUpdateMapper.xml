@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020301_03-01_1
+    画面名：対応状況更新
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaResponseStatusUpdateMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaResponseStatusUpdateSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaResponseStatusUpdateSql001ResponseModel" >
+		<result property="toushinBrandName" column="TOUSHIN_BRAND_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="nameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="otherDetails" column="OTHER_DETAILS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：SQL001
+        SQL名：対応状況取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaResponseStatusUpdateSql001" resultMap="ResultMapIfaResponseStatusUpdateSql001" statementType="PREPARED">
+     SELECT /* @SQLID=SUB020301_03-01_1#SQL001 */
+	    A.DECLINE_RATE_KBN
+	    , A.BUTEN_CODE
+	    , A.ACCOUNT_NUMBER
+	    , A.TOUSHIN_KYOUKAI_CODE
+	    , A.BASE_DATE_TO
+	    , A.TOUSHIN_BRAND_NAME
+	    , A.BASE_PRICE_TO
+	    , A.ZENJITSU_HI
+	    , A.DECLINE_RATE
+	    , B.NAME_KANJI
+	    , A.STATUS_KBN
+	    , A.METHODS_KBN
+	    , A.OTHER_CONTENTS_KBN
+	    , A.OTHER_DETAILS
+	    , A.CUSTOMER_SUPPORT_DATE 
+	FROM
+	    TOUSHIN_BASE_PRICE_CHANGE A 
+	    LEFT OUTER JOIN MEDIATE_USER_ATTRIBUTE_INFO B 
+	        ON A.BUTEN_CODE = B.BUTEN_CODE 
+	        AND A.ACCOUNT_NUMBER = B.ACCOUNT_NUMBER 
+	        AND A.BROKER_CODE = B.BROKER_CODE 
+	WHERE
+	    A.DECLINE_RATE_KBN = #{req.declineRateKbn}
+	    AND A.BUTEN_CODE = #{req.butenCode}
+	    AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+	    AND A.TOUSHIN_KYOUKAI_CODE = #{req.investmentTrustAssociationCode}
+	    AND A.BASE_DATE_TO = TO_DATE(#{req.standardDateTo}, 'YYYY-MM-DD HH24:MI:SS')
+    </select>
+    
+    <!-- 
+        SQLID：SQL002
+        SQL名：対応状況更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaResponseStatusUpdateSql002" statementType="PREPARED">
+     UPDATE /* @SQLID=SUB020301_03-01_1#SQL002 */ TOUSHIN_BASE_PRICE_CHANGE
+	 SET
+	 <if test='"1".equals(req.responseCompleteConfirmUpdateFlag)'>
+	    STATUS_KBN = '1',
+	 </if>
+	 <if test='"0".equals(req.responseCompleteConfirmUpdateFlag)'>
+	    STATUS_KBN = '2',
+	 </if>
+	    METHODS_KBN = #{req.responseMethodClassification},
+	    OTHER_CONTENTS_KBN = #{req.otherContentsClassification},
+	    OTHER_DETAILS = #{req.otherDetail},
+	    CUSTOMER_SUPPORT_DATE = TO_DATE(#{req.customerResponseDate}, 'YYYY/MM/DD'),
+	 <if test='"1".equals(req.responseCompleteConfirmUpdateFlag)'>
+	    COMPLETION_CONFIRMATION_DATE = TO_DATE(#{req.responseFinishConfirmDate}, 'YYYY/MM/DD'),
+	 </if>
+	    UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE,
+	    UPDATE_BY = #{req.updateUser}
+	 WHERE
+	    DECLINE_RATE_KBN = #{req.declineRateKbn}
+	    AND BUTEN_CODE = #{req.butenCode}
+	    AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+	    AND TOUSHIN_KYOUKAI_CODE = #{req.investmentTrustAssociationCode}
+	    AND BASE_DATE_TO = TO_DATE(#{req.standardDateTo}, 'YYYY/MM/DD')
+    </update>
+    
+    
+</mapper>

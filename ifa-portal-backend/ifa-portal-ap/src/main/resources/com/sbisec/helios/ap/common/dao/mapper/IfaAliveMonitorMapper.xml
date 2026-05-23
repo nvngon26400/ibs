@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.IfaAliveMonitorMapper">
+
+	<select id="watch" resultType="int" statementType="PREPARED">
+		SELECT COUNT(1) FROM DUAL /** HELIOS alive */
+	</select>
+
+</mapper>

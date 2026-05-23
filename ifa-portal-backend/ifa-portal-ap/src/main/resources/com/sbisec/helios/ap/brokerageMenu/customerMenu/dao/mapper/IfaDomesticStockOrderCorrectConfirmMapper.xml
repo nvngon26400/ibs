@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0208-03_2
+    画面名：国内株式注文訂正確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDomesticStockOrderCorrectConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="selectIfaDomesticStockOrderCorrectConfirmSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticStockOrderCorrectConfirmSql003ResponseModel">
+    </resultMap>
+
+    <!-- 
+         SQLID：Sql00101
+         SQL名：発注前の注文登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaDomesticStockOrderCorrectConfirmSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0208-03_2#Sql001 */ 
+        INTO T_JP_ORDER (
+            IFA_ORDER_NO,
+            IFA_ORDER_SUB_NO,
+            BUTEN_CODE,
+            ACCOUNT_NUMBER,
+            CUSTOMER_ID,
+            SPECIFIC_KBN,
+            BRAND_CD,
+            MARKET,
+            ORDER_STATUS,
+            TRADE_KBN,
+            QUANTITY,
+            LIMIT,
+            AZUKARI_KBN,
+            PAYMENT_LIMIT,
+            REPAYMENT_METHOD_TYPE,
+            REQUEST_TYPE,
+            ORDER_SYUBETSU,
+            ORDER_SYUBETSU_LIST,
+            KANYU_KBN,
+            JUTYU_KBN,
+            CHECK_INSIDER,
+            CHECK_SOR,
+            CHECK_COMP_WRN_ALERT,
+            SHIKIN_SEIKAKU_KBN,
+            USER_ID,
+            CANCEL_USER_ID,
+            TESUURYOU_KBN,
+            ALTER_FLG,
+            AUTO_ORDER_KIND,
+            RBE_ORDER_KIND,
+            SASINARI_KBN,
+            PRICE,
+            TRIGGER_ZONE,
+            TRIGGER_PRICE,
+            OCO_SASINARI_KBN,
+            OCO_SASHINE,
+            DONE_SASINARI_KBN,
+            DONE_SASHINE,
+            DONE_RBE_ORDER_KIND,
+            DONE_TRIGGER_ZONE,
+            DONE_TRIGGER_NEDAN,
+            DONE_OCO_SASINARI_KBN,
+            DONE_OCO_SASHINE,
+            DONE_LIMIT,
+            JO_ZEI_KBN,
+            ALTER_ORDER_NUM,
+            RBE_ORDER_STATUS,
+            ORDER_TYPE,
+            ORDER_NUM,
+            ACCEPT_DATE,
+            ACCEPT_TIME,
+            SHUBETU,
+            CODE,
+            MESSAGE,
+            ESTIMATE_PRICE,
+            AMOUNT,
+            COMMISSION,
+            CONSUMPTION_TAX,
+            CAPITAL_GAIN_TAX,
+            NET_AMOUNT,
+            COST,
+            TRADE_DATE,
+            SETTLEMENT_DATE,
+            ACCEPT_LIMIT,
+            DONE_ACCEPT_LIMIT,
+            COM_ID_R,
+            AC_POSITION,
+            AC_POSITION_AFTER,
+            AC_BALANCE,
+            AC_BALANCE_AFTER,
+            ORDERED_MARKET,
+            TRADE_DEFICIT_AMOUNT,
+            ISA_BUY_LIMIT,
+            JRNISA_TRANSFER_AMOUNT,
+            SOR_LINK_KBN,
+            UNCLOSED_QUANTITY,
+            UNCLOSED_QUANTITY_AFTER,
+            MARGIN_CAPABILITY,
+            MARGIN_CAPABILITY_AFTER,
+            ACTUAL_GRNT_RATE,
+            ACTUAL_GRNT_RATE_AFTER,
+            APP_INTEREST_RATES,
+            APP_LENDING_STOCK,
+            PREMIUM,
+            TPOINT,
+            TPOINT_AFTER,   
+            DAILY_CREDIT_KBN,
+            PAYMENT_LIMIT_DATE,
+            DATE_KBN,
+            BROKER_CODE,
+            INTERMEDIARY_EMP_CD,
+            CREATE_TIME,
+            CREATE_USER,
+            UPDATE_TIME,
+            UPDATE_USER,
+            CCS_SEND_DATE
+        ) VALUES (
+             #{req.ifaOrderNo}               <!-- IFA注文番号 -->                                       
+            ,#{req.ifaOrderSubNo}            <!-- IFA注文サブ番号 -->
+            ,#{req.butenCode}                <!-- 部店コード -->
+            ,#{req.accountNumber}            <!-- 口座番号 -->
+            ,#{req.customerId}               <!-- 顧客ID -->
+            ,#{req.specificKbn}              <!-- 特定口座区分 -->
+            ,#{req.brandCd}                  <!-- 銘柄コード -->
+            ,#{req.market}                   <!-- 市場 -->
+            ,#{req.orderStatus}              <!-- 注文状況 -->
+            ,#{req.tradeKbn}                 <!-- 取引種別 -->
+            ,#{req.quantity}                 <!-- 数量 -->
+            ,#{req.limit}                    <!-- 有効期限 -->
+            ,#{req.azukariKbn}               <!-- 預り区分 -->
+            ,null                            <!-- 弁済期限 -->
+            ,null                            <!-- 返済方法 -->
+            ,null                            <!-- 返済順序 -->
+            ,#{req.orderSyubetsu}            <!-- 注文種別 -->
+            ,#{req.orderSyubetsuList}        <!-- 注文種別（一覧） -->
+            ,#{req.kanyuKbn}                 <!-- 勧誘区分 -->
+            ,#{req.jutyuKbn}                 <!-- 受注方法 -->
+            ,#{req.checkInsider}             <!-- 確認項目.インサイダー確認 -->
+            ,#{req.checkSor}                 <!-- 確認項目.SOR確認 -->
+            ,#{req.checkCompWrnAlert}        <!-- アラート内容確認.コンプラチェックワーニング確認 -->
+            ,#{req.shikinSeikakuKbn}         <!-- 資金性格区分 -->
+            ,#{req.userId}                   <!-- ユーザーＩＤ -->
+            ,null                            <!-- 取消ユーザーID -->
+            ,#{req.tesuuryouKbn}             <!-- 手数料区分 -->
+            ,#{req.alterFlg}                 <!-- 訂正区分 -->
+            ,#{req.autoOrderKind}            <!-- 自動注文種別 -->
+            ,#{req.rbeOrderKind}             <!-- RBE注文種別 -->
+            ,#{req.sasinariKbn}              <!-- 指成区分 -->
+            ,#{req.price}                    <!-- 指値 -->
+            ,#{req.triggerZone}              <!-- トリガ発動ゾーン -->
+            ,#{req.triggerPrice}             <!-- トリガ値段 -->
+            ,#{req.ocoSasinariKbn}           <!-- OCO指成区分 -->
+            ,#{req.ocoSashine}               <!-- OCO指値 -->
+            ,#{req.doneSasinariKbn}          <!-- DONE指成区分 -->
+            ,#{req.doneSashine}              <!-- DONE指値 -->
+            ,#{req.doneRbeOrderKind}         <!-- DONERBE注文種別 -->
+            ,#{req.doneTriggerZone}          <!-- DONEトリガ発動ゾーン -->
+            ,#{req.doneTriggerNedan}         <!-- DONEトリガ値段 -->
+            ,#{req.doneOcoSasinariKbn}       <!-- DONEOCO指成区分 -->
+            ,#{req.doneOcoSashine}           <!-- DONEOCO指値 -->
+            ,#{req.doneLimit}                <!-- DONE有効期限 -->
+            ,#{req.joZeiKbn}                 <!-- 譲渡益税区分 -->
+            ,#{req.alterOrderNum}            <!-- EC受注番号訂正時 -->
+            ,#{req.rbeOrderStatus}           <!-- RBE注文ステータス -->
+            ,#{req.orderType}                <!-- 商品区分 -->
+            ,#{req.orderNum}                 <!-- EC受注番号 -->
+            ,null                            <!-- 受注日 -->
+            ,null                            <!-- 受注時刻 -->
+            ,null                            <!-- 種別 -->
+            ,null                            <!-- エラーコード -->
+            ,null                            <!-- エラーメッセージ -->
+            ,null                            <!-- 与信チェック用時価 -->
+            ,null                            <!-- 約定金額（概算） -->
+            ,null                            <!-- 手数料（概算） -->
+            ,null                            <!-- 消費税（概算） -->
+            ,null                            <!-- 譲渡益税（概算） -->
+            ,null                            <!-- 精算金額（概算） -->
+            ,null                            <!-- 諸経費 -->
+            ,null                            <!-- 約定予定日 -->
+            ,null                            <!-- 受渡予定日 -->
+            ,null                            <!-- 受付有効期限 -->
+            ,null                            <!-- DONE 受付有効期限 -->
+            ,null                            <!-- 手数料区分（採用） -->
+            ,null                            <!-- 売却可能数量 -->
+            ,null                            <!-- 注文後の売却可能数量 -->
+            ,null                            <!-- 買付可能金額 -->
+            ,null                            <!-- 注文後の買付可能金額 -->
+            ,null                            <!-- 注文入力市場 -->
+            ,null                            <!-- 取引不足額 -->
+            ,null                            <!-- ISA買付可能枠 -->
+            ,null                            <!-- ジュニアNISA振替金額 -->
+            ,null                            <!-- SOR連携区分 -->
+            ,null                            <!-- 決済可能数量 -->
+            ,null                            <!-- 注文後の決済可能数量 -->
+            ,null                            <!-- 建玉余力 -->
+            ,null                            <!-- 注文後の建玉余力 -->
+            ,null                            <!-- 維持率 -->
+            ,null                            <!-- 注文後維持率 -->
+            ,null                            <!-- 適用金利 -->
+            ,null                            <!-- 適用貸株料 -->
+            ,null                            <!-- プレミアム料 -->
+            ,null                            <!-- Ｔポイント -->
+            ,null                            <!-- 利用後のＴポイント -->
+            ,null                            <!-- 一日信用区分 -->
+            ,null                            <!-- 弁済期限年月日数 -->
+            ,null                            <!-- 年月日区分 -->
+            ,#{req.brokerCode}               <!-- 仲介業者コード -->
+            ,#{req.intermediaryEmpCd}        <!-- 仲介業者営業員コード -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE      <!-- 作成日時 -->
+            ,#{req.createUser}               <!-- 作成者 -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE      <!-- 更新日時 -->
+            ,#{req.updateUser}               <!-- 更新者 -->
+            ,null                            <!-- CCS送付日 -->
+        )
+    </insert>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDomesticStockOrderCorrectConfirmSql002" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0208-03_2#Sql002 */ T_JP_ORDER
+        SET 
+            SHUBETU = #{req.shubetu}                                           <!-- 種別 -->
+            ,CODE = #{req.code}                                                <!-- エラーコード -->
+            ,MESSAGE = #{req.message}                                          <!-- エラーメッセージ -->
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE                          <!-- 更新日時 -->
+            ,UPDATE_USER = #{req.updateUser}                                   <!-- 更新者 -->
+            ,ACCEPT_DATE = #{req.acceptDate}                                   <!-- 受注日 -->
+            <if test="!req.isApiError">
+                ,ACCEPT_TIME = #{req.acceptTime}                               <!-- 受注時刻 -->
+                ,ESTIMATE_PRICE = #{req.estimatePrice}                         <!-- 与信チェック用時価 -->
+                ,AMOUNT = #{req.amount}                                        <!-- 約定金額（概算） -->
+                ,COMMISSION = #{req.commission}                                <!-- 手数料（概算） -->
+                ,CONSUMPTION_TAX = #{req.consumptionTax}                       <!-- 消費税（概算） -->
+                ,CAPITAL_GAIN_TAX = #{req.capitalGainTax}                      <!-- 譲渡益税（概算） -->
+                ,NET_AMOUNT = #{req.netAmount}                                 <!-- 精算金額（概算） -->
+                ,COST = #{req.cost}                                            <!-- 諸経費 -->
+                ,TRADE_DATE = #{req.tradeDate}                                 <!-- 約定予定日 -->
+                ,SETTLEMENT_DATE = #{req.settlementDate}                       <!-- 受渡予定日 -->
+                ,ACCEPT_LIMIT = #{req.acceptLimit}                             <!-- 受付有効期限 -->
+                ,DONE_ACCEPT_LIMIT = #{req.doneAcceptLimit}                    <!-- DONE 受付有効期限 -->
+                ,COM_ID_R = #{req.comIdR}                                      <!-- 手数料区分（採用） -->
+                ,AC_POSITION = #{req.acPosition}                               <!-- 売却可能数量 -->
+                ,AC_POSITION_AFTER = #{req.acPositionAfter}                    <!-- 注文後の売却可能数量 -->
+                ,AC_BALANCE = #{req.acBalance}                                 <!-- 買付可能金額 -->
+                ,AC_BALANCE_AFTER = #{req.acBalanceAfter}                      <!-- 注文後の買付可能金額 -->
+                ,ORDERED_MARKET = #{req.orderedMarket}                         <!-- 注文入力市場 -->
+                ,TRADE_DEFICIT_AMOUNT = #{req.tradeDeficitAmount}              <!-- 取引不足額 -->
+                ,ISA_BUY_LIMIT = #{req.isaBuyLimit}                            <!-- ISA買付可能枠 -->
+                ,JRNISA_TRANSFER_AMOUNT = #{req.jrnisaTransferAmount}          <!-- ジュニアNISA振替金額 -->
+                ,SOR_LINK_KBN = #{req.sorLinkKbn}                              <!-- SOR連携区分 -->
+                ,UNCLOSED_QUANTITY = #{req.unclosedQuantity}                   <!-- 決済可能数量 -->
+                ,UNCLOSED_QUANTITY_AFTER = #{req.unclosedQuantityAfter}        <!-- 注文後の決済可能数量 -->
+                ,MARGIN_CAPABILITY = #{req.marginCapability}                   <!-- 建玉余力 -->
+                ,MARGIN_CAPABILITY_AFTER = #{req.marginCapabilityAfter}        <!-- 注文後の建玉余力 -->
+                ,ACTUAL_GRNT_RATE = #{req.actualGrntRate}                      <!-- 維持率 -->
+                ,ACTUAL_GRNT_RATE_AFTER = #{req.actualGrntRateAfter}           <!-- 注文後維持率 -->
+                ,APP_INTEREST_RATES = #{req.appInterestRates}                  <!-- 適用金利 -->
+                ,APP_LENDING_STOCK = #{req.appLendingStock}                    <!-- 適用貸株料 -->
+                ,PREMIUM = #{req.premium}                                      <!-- プレミアム料 -->
+                ,TPOINT = #{req.tpoint}                                        <!-- Ｔポイント -->
+                ,TPOINT_AFTER = #{req.tpointAfter}                             <!-- 利用後のＴポイント -->
+            </if>
+        WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+
+    </update>
+
+     <!-- 
+        SQLID：Sql002
+        SQL名：発注後の注文更新(発注がエラーの場合(API応答なし))
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDomesticStockOrderCorrectConfirmSql002b" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0202_0208-03_2#Sql002 */ T_JP_ORDER
+        SET 
+            UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE                           <!-- 更新日時 -->
+            ,UPDATE_USER = #{req.updateUser}                                   <!-- 更新者 -->
+            ,ACCEPT_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')             <!-- 受注日 -->
+        WHERE 
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            AND IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+
+    </update>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：同じEC受注番号のデータを取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDomesticStockOrderCorrectConfirmSql003"  resultMap="selectIfaDomesticStockOrderCorrectConfirmSql003"  statementType="PREPARED">
+        WITH temp AS ( 
+            SELECT /* @SQLID=SUB0202_0208-03_2#Sql003 */
+                TO_CHAR(IFA_ORDER_NO) IFA_ORDER_NO
+                , TO_CHAR(IFA_ORDER_SUB_NO) IFA_ORDER_SUB_NO
+                , TO_CHAR(BUTEN_CODE) BUTEN_CODE
+                , TO_CHAR(ACCOUNT_NUMBER) ACCOUNT_NUMBER
+                , TO_CHAR(CUSTOMER_ID) CUSTOMER_ID
+                , TO_CHAR(SPECIFIC_KBN) SPECIFIC_KBN
+                , TO_CHAR(JO_ZEI_KBN) JO_ZEI_KBN
+                , TO_CHAR(CHECK_SOR) CHECK_SOR
+                , TO_CHAR(ORDER_NUM) ORDER_NUM
+            FROM
+                T_JP_ORDER 
+            WHERE
+                ORDER_NUM = #{req.orderNum}
+                AND BUTEN_CODE = #{req.butenCode}
+                AND ACCEPT_DATE &gt;= #{req.acceptDate}
+                AND IFA_ORDER_SUB_NO = ( 
+                    SELECT
+                        MAX(IFA_ORDER_SUB_NO) 
+                    FROM
+                        T_JP_ORDER 
+                    WHERE
+                        ORDER_NUM = #{req.orderNum}
+                        AND BUTEN_CODE = #{req.butenCode}
+                        AND ACCEPT_DATE &gt;= #{req.acceptDate}
+                )
+        ) 
+        SELECT
+            NVL(IFA_ORDER_NO, TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD') || LPAD(SEQ_T_JP_ORDER.NEXTVAL, 10, '0')) IFA_ORDER_NO
+            , IFA_ORDER_SUB_NO + 1 IFA_ORDER_SUB_NO
+            , BUTEN_CODE
+            , ACCOUNT_NUMBER
+            , CUSTOMER_ID CUSTOMER_ID
+            , SPECIFIC_KBN SPECIFIC_KBN
+            , JO_ZEI_KBN
+            , CHECK_SOR
+            , ORDER_NUM ORDER_NUM
+        FROM
+            ( 
+                SELECT
+                    * 
+                FROM
+                    temp 
+                UNION ALL 
+                SELECT
+                    NULL IFA_ORDER_NO
+                    , '0' IFA_ORDER_SUB_NO
+                    , #{req.butenCode} BUTEN_CODE
+                    , #{req.accountNumber} ACCOUNT_NUMBER
+                    , #{req.customerId} CUSTOMER_ID
+                    , #{req.specificKbn} SPECIFIC_KBN
+                    , NULL JO_ZEI_KBN
+                    , #{req.checkSor} CHECK_SOR
+                    , #{req.orderNum} ORDER_NUM 
+                FROM
+                    dual 
+                WHERE
+                    (SELECT count(*) FROM temp) = 0
+            )
+
+    </select>
+
+</mapper>

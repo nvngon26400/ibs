@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020301_03-01
+    画面名：投信基準価額変動の銘柄保有一覧
+-->
+<mapper
+	namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaMutualFundPriceChangeBrandHoldingListMapper">
+	<!--
+	全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+	<!--
+	住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+	<resultMap id="ResultMapIfaMutualFundPriceChangeBrandHoldingListSql001"
+		type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaMutualFundPriceChangeBrandHoldingListSql001ResponseModel">
+	</resultMap>
+
+
+	<!-- 
+        SQLID：Sql001
+        SQL名：投信基準価額変動情報一覧取得
+        SQLタイプ：select
+    -->
+	<select id="selectIfaMutualFundPriceChangeBrandHoldingListSql001"
+		resultMap="ResultMapIfaMutualFundPriceChangeBrandHoldingListSql001"
+		statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB020301_03-01#Sql001 */
+            *
+            FROM (
+                SELECT
+                    COUNT(*) OVER () AS TOTALROW
+                    , A.DECLINE_RATE_KBN
+                    , A.BUTEN_CODE
+                    , A.ACCOUNT_NUMBER
+                    , B.CUSTOMER_ATTRIBUTE
+                    , B.NAME_KANJI
+                    , B.NAME_KANA
+                    , B.DEALER_NUMBER
+                    , A.BROKER_CODE
+                    , C.BRANCH_NAME AS BRANCH_NAME
+                    , D.BROKER_BRANCH_CODE
+                    , D.BRANCH_NAME AS BROKER_BRANCH_NAME
+                    , A.BROKER_EMPLOYEE_CODE
+                    , D.BROKER_CHARGE_NAME
+                    , A.TOUSHIN_KYOUKAI_CODE
+                    , A.TOUSHIN_BRAND_NAME
+                    , A.BASE_DATE_FROM
+                    , A.BASE_PRICE_FROM
+                    , A.BASE_DATE_TO
+                    , A.BASE_PRICE_TO
+                    , A.ZENJITSU_HI
+                    , A.DECLINE_RATE
+                    , A.STATUS_KBN
+                    , A.METHODS_KBN
+                    , A.OTHER_CONTENTS_KBN
+                    , A.OTHER_DETAILS
+                    , A.CUSTOMER_SUPPORT_DATE
+                    , A.COMPLETION_CONFIRMATION_DATE 
+                FROM
+                    TOUSHIN_BASE_PRICE_CHANGE A 
+                    INNER JOIN MEDIATE_USER_ATTRIBUTE_INFO B 
+                        ON A.BUTEN_CODE = B.BUTEN_CODE 
+                        AND A.ACCOUNT_NUMBER = B.ACCOUNT_NUMBER 
+                        AND A.BROKER_CODE = B.BROKER_CODE 
+                    LEFT JOIN MEDIATE_BRANCH C 
+                        ON A.BROKER_CODE = C.BROKER_CODE 
+                        AND C.BROKER_BRANCH_KIND = '00' 
+                        AND C.DELETE_FLG = '0' 
+                    LEFT JOIN V_MEDIATE_CHARGE_INFO D 
+                        ON A.BROKER_CODE = D.BROKER_CODE 
+                        AND A.BROKER_EMPLOYEE_CODE = D.BROKER_CHARGE_CODE 
+
+                <where>
+                    <if test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                        (A.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR A.BROKER_CODE IN(
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                            #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                        AND
+                    </if>
+                    <if test='req.privId != "1" and req.privId != "3" and req.privId != "4" and req.privId != "5"'>
+                        ((A.BROKER_CODE, A.BROKER_EMPLOYEE_CODE) IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR (A.BROKER_CODE, A.BROKER_EMPLOYEE_CODE) IN(
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                            (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                        </foreach>
+                        )
+                        AND
+                    </if>
+                    <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                        <choose>
+                            <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                A.BROKER_CODE NOT IN
+                            </when>
+                            <otherwise>
+                                A.BROKER_CODE IN
+                            </otherwise>
+                        </choose>
+                        <foreach item="item" index="index"  collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                        AND
+                    </if>
+                    <if test="req.branchCode != null and req.branchCode != ''.toString()">
+                        D.BROKER_BRANCH_CODE = #{req.branchCode}
+                        AND
+                    </if>
+                    <if test="req.empCode != null and req.empCode != ''.toString()">
+                        A.BROKER_EMPLOYEE_CODE = #{req.empCode}
+                        AND
+                    </if>
+                    <if test="req.butenCode != null and req.butenCode != ''.toString()">
+                        A.BUTEN_CODE = #{req.butenCode}
+                        AND
+                    </if>
+                    <if test="req.accountNumber != null and req.accountNumber != ''.toString()">
+                        A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                        AND
+                    </if>
+                    <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != ''.toString()">
+                        <if test="req.customerNameKanjiKanaTerms == '1'.toString()" >
+                        (
+                            B.NAME_KANJI = #{req.customerNameKanjiKana}
+                            OR B.NAME_KANA = #{req.customerNameKanjiKana}		            
+                        )
+                        AND
+                        </if>
+                        <if test="req.customerNameKanjiKanaTerms == '2'.toString()" >
+                        (
+                            B.NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%'
+                            OR B.NAME_KANA LIKE #{req.customerNameKanjiKana} || '%'
+                        )
+                        AND
+                        </if>
+                        <if test="req.customerNameKanjiKanaTerms == '3'.toString()" >
+                        (
+                            B.NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                            OR B.NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                        )
+                        AND
+                        </if>		        
+                    </if>
+                    <if test="req.status != null and req.status != ''.toString()">
+                        A.STATUS_KBN = #{req.status}
+                        AND
+                    </if>
+                    <if test="req.investmentTrustAssociationCode != null and req.investmentTrustAssociationCode != ''.toString()">
+                        A.TOUSHIN_KYOUKAI_CODE = #{req.investmentTrustAssociationCode}
+                        AND
+                    </if>
+                        B.CUSTOMER_ATTRIBUTE IN
+                    <foreach item="course" index="index" collection="req.course" open="(" separator="," close=")">
+                        <if test="course.isSelected == true">
+                                #{course.id}
+                        </if>
+                    </foreach>
+                        AND A.BASE_DATE_TO BETWEEN TO_DATE(#{req.periodYmFrom}, 'yyyy/MM/dd') AND TO_DATE(#{req.periodYmTo}, 'yyyy/MM/dd')
+                </where>
+                ORDER BY
+                    A.DECLINE_RATE_KBN ASC,
+                    A.BASE_DATE_TO DESC,
+                    A.BROKER_CODE ASC,
+                    A.BUTEN_CODE ASC,
+                    A.ACCOUNT_NUMBER ASC,
+                    A.TOUSHIN_KYOUKAI_CODE ASC
+                )
+            WHERE ROWNUM &lt;= #{req.maxRow} 
+	</select>
+</mapper>

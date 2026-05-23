@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0204_02-04_2
+    画面名：募集入力確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IfaSubscriptInputConfirmMapper">
+    
+    <resultMap
+        id="ResultMapSelectIfaSubscriptInputConfirmSql005"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputConfirmSql005ResponseModel"
+    >
+    </resultMap>
+    <resultMap
+        id="ResultMapSelectIfaSubscriptInputConfirmSql007"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputConfirmSql007ResponseModel"
+    >
+    </resultMap>
+    <resultMap
+        id="ResultMapSelectIfaSubscriptInputConfirmSql008"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputConfirmSql008ResponseModel"
+    >
+    </resultMap>
+    <resultMap
+        id="ResultMapSelectIfaSubscriptInputConfirmSql009"
+        type="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.model.IfaSubscriptInputConfirmSql009ResponseModel"
+    >
+    </resultMap>
+
+    <!-- 
+         SQLID：Sql002_1
+         SQL名：対面募集注文テーブルの登録（管理者権限）
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertIfaSubscriptInputConfirmSql002_1"
+        statementType="PREPARED"
+    >
+        INSERT /* @SQLID=SUB0204_02-04_2#Sql002_1 */ INTO T_IPO_PO_ORDER
+            (
+                PRODUCT_CODE,
+                PRESENTATION_FROM,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                BROKER_CODE,
+                INTERMEDIARY_EMP_CD,
+                DEALER_NUMBER,
+                LOTTERY_RESULT,
+                QUANTITY_ALLOC,
+                ORDER_PRICE,
+                CREATE_TIME,
+                CREATE_USER,
+                UPDATE_TIME,
+                UPDATE_USER,
+                SYS_ID
+            ) VALUES(
+                #{req.brandCode},
+                #{req.bookBuildingPresentationFrom},
+                #{req.butenCode},
+                #{req.accountNumber},
+                #{req.brokerCode},
+                #{req.brokerChargeCode},
+                #{req.dealerNumber},
+                #{req.lotteryResult},
+                #{req.bbQuantityAlloc},
+                null,
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                'SUB0204_02-04_2'
+            )
+    </insert>
+
+    <!-- 
+         SQLID：Sql002_2
+         SQL名：対面募集注文明細テーブルの登録（管理者権限）
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertIfaSubscriptInputConfirmSql002_2"
+        statementType="PREPARED"
+    >
+        INSERT /* @SQLID=SUB0204_02-04_2#Sql002_2 */ INTO T_IPO_PO_ORDER_DETAIL
+            (
+                PRODUCT_CODE,
+                PRESENTATION_FROM,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                DETAIL_NUMBER,
+                ORDER_STATUS,
+                ORDER_USER,
+                ORDER_TIME,
+                ORDER_COUNT,
+                APPOINT_PRICE,
+                DEPOSIT_TYPE,
+                INVITATION_TYPE,
+                ORDER_METHOD,
+                PROSPECTUS,
+                EXPLANATION_INFO,
+                WARNING_APPLY,
+                CREATE_TIME,
+                CREATE_USER,
+                UPDATE_TIME,
+                UPDATE_USER,
+                SYS_ID
+            ) VALUES(
+                #{req.brandCode},
+                #{req.bookBuildingPresentationFrom},
+                #{req.butenCode},
+                #{req.accountNumber},
+                '001',
+                #{req.orderStatus},
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                'SUB0204_02-04_2'
+            )
+    </insert>
+
+    <!-- 
+         SQLID：Sql003_1
+         SQL名：対面募集注文テーブルの更新（管理者権限）
+         SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptInputConfirmSql003_1"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_02-04_2#Sql003_1 */ T_IPO_PO_ORDER
+            SET
+            LOTTERY_RESULT = #{req.lotteryResult}
+            ,QUANTITY_ALLOC = #{req.bbQuantityAlloc}
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.userId}
+            ,SYS_ID = 'SUB0204_02-04_2'
+        WHERE PRODUCT_CODE = #{req.brandCode}
+        AND BUTEN_CODE = #{req.butenCode}
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        AND PRESENTATION_FROM = #{req.bookBuildingPresentationFrom}
+    </update>
+
+    <!-- 
+         SQLID：Sql003_2
+         SQL名：対面募集注文明細テーブルの更新（管理者権限）
+         SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptInputConfirmSql003_2"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_02-04_2#Sql003_2 */ T_IPO_PO_ORDER_DETAIL
+            SET
+            ORDER_STATUS = #{req.orderStatus}
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.userId}
+            ,SYS_ID = 'SUB0204_02-04_2'
+        WHERE PRODUCT_CODE = #{req.brandCode}
+        AND BUTEN_CODE = #{req.butenCode}
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        AND PRESENTATION_FROM = #{req.bookBuildingPresentationFrom}
+        AND DETAIL_NUMBER = #{req.detailNumber}
+        AND UPDATE_TIME = TO_DATE(#{req.updateTimeForOrderExclusivity}, 'YYYY/MM/DD HH24:MI:SS')
+    </update>
+
+    <!-- 
+         SQLID：Sql004
+         SQL名：対面募集注文明細テーブルの更新（管理者権限）
+         SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptInputConfirmSql004"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_02-04_2#Sql004 */ T_IPO_PO_ORDER_DETAIL
+            SET
+            ORDER_STATUS = #{req.orderStatus}
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.userId}
+            ,SYS_ID = 'SUB0204_02-04_2'
+        WHERE PRODUCT_CODE = #{req.brandCode}
+        AND BUTEN_CODE = #{req.butenCode}
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        AND PRESENTATION_FROM = #{req.bookBuildingPresentationFrom}
+        AND DETAIL_NUMBER = #{req.detailNumber}
+        AND UPDATE_TIME = TO_DATE(#{req.updateTimeForOrderExclusivity}, 'YYYY/MM/DD HH24:MI:SS')
+    </update>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：利用時間チェック
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSubscriptInputConfirmSql005" resultMap="ResultMapSelectIfaSubscriptInputConfirmSql005"
+        statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_2#Sql005 */
+            NAME
+        FROM
+            M_CODE
+        WHERE
+            CODE_TYPE = '38'
+            AND CODE_1 = '01'
+            AND CODE_2 = 'END_TIME'
+    </select>
+
+    <!-- 
+         SQLID：Sql006_1
+         SQL名：対面募集注文明細テーブルの更新
+         SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptInputConfirmSql006_1"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_02-04_2#Sql006_1 */ T_IPO_PO_ORDER_DETAIL
+            SET
+            ORDER_STATUS = '6'
+            ,CANCEL_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.userId}
+            ,SYS_ID = 'SUB0204_02-04_2'
+        WHERE PRODUCT_CODE = #{req.brandCode}
+        AND BUTEN_CODE = #{req.butenCode}
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        AND PRESENTATION_FROM = #{req.bookBuildingPresentationFrom}
+        AND DETAIL_NUMBER = #{req.detailNumber}
+        AND UPDATE_TIME = TO_DATE(#{req.updateTimeForOrderExclusivity}, 'YYYY/MM/DD HH24:MI:SS')
+    </update>
+
+    <!-- 
+         SQLID：Sql006_2
+         SQL名：対面募集注文明細テーブルの登録
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertIfaSubscriptInputConfirmSql006_2"
+        statementType="PREPARED"
+    >
+        INSERT /* @SQLID=SUB0204_02-04_2#Sql006_2 */ INTO T_IPO_PO_ORDER_DETAIL
+            (
+                PRODUCT_CODE,
+                PRESENTATION_FROM,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                DETAIL_NUMBER,
+                ORDER_STATUS,
+                ORDER_USER,
+                ORDER_TIME,
+                ORDER_COUNT,
+                APPOINT_PRICE,
+                DEPOSIT_TYPE,
+                INVITATION_TYPE,
+                ORDER_METHOD,
+                PROSPECTUS,
+                EXPLANATION_INFO,
+                WARNING_APPLY,
+                CREATE_TIME,
+                CREATE_USER,
+                UPDATE_TIME,
+                UPDATE_USER,
+                SYS_ID
+            ) VALUES(
+                #{req.brandCode},
+                #{req.bookBuildingPresentationFrom},
+                #{req.butenCode},
+                #{req.accountNumber},
+                LPAD(#{req.detailNumber} + 1,3,'0'),
+                '0',
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                'SUB0204_02-04_2'
+            )
+    </insert>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：口座種別チェック情報取得
+        SQLタイプ：select
+    -->
+    <select 
+        id="selectIfaSubscriptInputConfirmSql007" resultMap="ResultMapSelectIfaSubscriptInputConfirmSql007"
+        statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_2#Sql007 */
+            UAI_SPECIFIC_KBN AS TOKUTEI_KOUZA_KBN,
+            UAI_ISA_CONTRACT_KBN AS ISA_CONTRACT_TYPE,
+            UAI_ISA_BUY_CURRENT_YEAR_KBN as ISA_BUY_ABLE_JUDGE_CLASSIFICATION_YEAR,
+            CUSTOMER_ID AS CUSTOMER_ID
+        FROM
+            CORDYS.MEDIATE_USER_ATTRIBUTE_INFO
+        WHERE
+            CUSTOMER_ID = TO_NUMBER(#{req.customerCode})
+    </select>
+
+    <!-- 
+        SQLID：Sql008
+        SQL名：重要事項の説明確認
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSubscriptInputConfirmSql008" resultMap="ResultMapSelectIfaSubscriptInputConfirmSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_2#Sql008 */
+            COUNT(*) AS ROW_COUNT
+        FROM
+            CALLCENTER.ATTENTION_INFO
+        WHERE
+            CUSTOMER_ID = TO_NUMBER(#{req.customerCode})
+            AND ON_OFF_FLG = '有効'
+            AND DELETE_TIME IS NULL
+            AND ATTENTION = '株式'
+            AND CATEGORY = 'リスク説明未1'
+    </select>
+
+    <!-- 
+        SQLID：Sql009
+        SQL名：セクション関連情報の取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSubscriptInputConfirmSql009" resultMap="ResultMapSelectIfaSubscriptInputConfirmSql009"
+        statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_02-04_2#Sql009 */
+            T_IPO_PO_SECTION_REF.SECTION_ID,
+            T_IPO_PO_SECTION_REF.SECTION_NAME AS BRANCH_NAME
+        FROM
+            MEDIATE_USER_ATTRIBUTE_INFO
+        LEFT OUTER JOIN
+            MEDIATE_CHARGE_INFO
+        ON
+            MEDIATE_USER_ATTRIBUTE_INFO.BROKER_CODE = MEDIATE_CHARGE_INFO.BROKER_CODE
+            AND MEDIATE_USER_ATTRIBUTE_INFO.INTERMEDIARY_EMP_CD = MEDIATE_CHARGE_INFO.BROKER_CHARGE_CODE
+        LEFT OUTER JOIN
+            T_IPO_PO_SECTION_REF
+        ON
+            MEDIATE_USER_ATTRIBUTE_INFO.BROKER_CODE = T_IPO_PO_SECTION_REF.BROKER_CODE
+            AND MEDIATE_CHARGE_INFO.BROKER_BRANCH_CODE = T_IPO_PO_SECTION_REF.BROKER_BRANCH_CODE
+        WHERE
+            MEDIATE_USER_ATTRIBUTE_INFO.BUTEN_CODE = #{req.butenCode}
+            AND MEDIATE_USER_ATTRIBUTE_INFO.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            AND ROWNUM = 1
+    </select>
+
+    <!-- 
+         SQLID：Sql010_1
+         SQL名：対面募集注文テーブルの登録（仲介業者権限）
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertIfaSubscriptInputConfirmSql010_1"
+        statementType="PREPARED"
+    >
+        INSERT /* @SQLID=SUB0204_02-04_2#Sql010_1 */ INTO T_IPO_PO_ORDER
+            (
+                PRODUCT_CODE,
+                PRESENTATION_FROM,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                BROKER_CODE,
+                INTERMEDIARY_EMP_CD,
+                DEALER_NUMBER,
+                LOTTERY_RESULT,
+                QUANTITY_ALLOC,
+                ORDER_PRICE,
+                CREATE_TIME,
+                CREATE_USER,
+                UPDATE_TIME,
+                UPDATE_USER,
+                SYS_ID
+            ) VALUES(
+                #{req.brandCode},
+                #{req.bookBuildingPresentationFrom},
+                #{req.butenCode},
+                #{req.accountNumber},
+                #{req.brokerCode},
+                #{req.brokerChargeCode},
+                #{req.dealerNumber},
+                #{req.lotteryResult},
+                #{req.bbQuantityAlloc},
+                #{req.issueBbPrice},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                'SUB0204_02-04_2'
+            )
+    </insert>
+    <!-- 
+         SQLID：Sql010_2
+         SQL名：対面募集注文明細テーブルの登録（仲介業者権限）
+         SQLタイプ：insert
+    -->
+    <insert
+        id="insertIfaSubscriptInputConfirmSql010_2"
+        statementType="PREPARED"
+    >
+        INSERT /* @SQLID=SUB0204_02-04_2#Sql010_2 */ INTO T_IPO_PO_ORDER_DETAIL
+            (
+                PRODUCT_CODE,
+                PRESENTATION_FROM,
+                BUTEN_CODE,
+                ACCOUNT_NUMBER,
+                DETAIL_NUMBER,
+                ORDER_STATUS,
+                ORDER_USER,
+                ORDER_TIME,
+                ORDER_COUNT,
+                APPOINT_PRICE,
+                DEPOSIT_TYPE,
+                INVITATION_TYPE,
+                ORDER_METHOD,
+                PROSPECTUS,
+                EXPLANATION_INFO,
+                WARNING_APPLY,
+                CREATE_TIME,
+                CREATE_USER,
+                UPDATE_TIME,
+                UPDATE_USER,
+                SYS_ID
+            ) VALUES(
+                #{req.brandCode},
+                #{req.bookBuildingPresentationFrom},
+                #{req.butenCode},
+                #{req.accountNumber},
+                '001',
+                '1',
+                #{req.orderUser},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.quantity},
+                #{req.contractAmount},
+                #{req.depositType},
+                #{req.kanyuKbn},
+                #{req.jutyuKbn},
+                #{req.mokuromiKoufuKbn},
+                #{req.importantMatterType},
+                <choose>
+                    <when test='req.complianceCheckMsg == "1"'>
+                        #{req.invitationCheck},
+                    </when>
+                    <when test='req.complianceCheckMsg == "2"'>
+                        '2',
+                    </when>
+                    <otherwise>
+                        '0',
+                    </otherwise>
+                </choose>
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                IFA_DATE_UTIL.IFA_GET_DATE,
+                #{req.userId},
+                'SUB0204_02-04_2'
+            )
+    </insert>
+
+    <!-- 
+         SQLID：Sql012_1
+         SQL名：対面募集注文テーブルの更新（仲介業者権限）
+         SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptInputConfirmSql012_1"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_02-04_2#Sql012_1 */ T_IPO_PO_ORDER
+            SET
+            ORDER_PRICE = #{req.issueBbPrice}
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.userId}
+            ,SYS_ID = 'SUB0204_02-04_2'
+        WHERE PRODUCT_CODE = #{req.brandCode}
+        AND BUTEN_CODE = #{req.butenCode}
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        AND PRESENTATION_FROM = #{req.bookBuildingPresentationFrom}
+    </update>
+
+    <!-- 
+         SQLID：Sql012_2
+         SQL名：対面募集注文明細テーブルの更新（仲介業者権限）
+         SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptInputConfirmSql012_2"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_02-04_2#Sql012_2 */ T_IPO_PO_ORDER_DETAIL
+            SET
+            ORDER_STATUS = '1'
+            ,ORDER_USER = #{req.userId}
+            ,ORDER_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,ORDER_COUNT = #{req.quantity}
+            ,APPOINT_PRICE = #{req.contractAmount}
+            ,DEPOSIT_TYPE = #{req.depositType}
+            ,INVITATION_TYPE = #{req.kanyuKbn}
+            ,ORDER_METHOD = #{req.jutyuKbn}
+            ,PROSPECTUS = #{req.mokuromiKoufuKbn}
+            ,EXPLANATION_INFO = #{req.importantMatterType}
+            <choose>
+                <when test='req.complianceCheckMsg == "1"'>
+                    ,WARNING_APPLY = #{req.invitationCheck}
+                </when>
+                <when test='req.complianceCheckMsg == "2"'>
+                    ,WARNING_APPLY = '2'
+                </when>
+                <otherwise>
+                    ,WARNING_APPLY = '0'
+                </otherwise>
+            </choose>
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.userId}
+            ,SYS_ID = 'SUB0204_02-04_2'
+        WHERE PRODUCT_CODE = #{req.brandCode}
+        AND BUTEN_CODE = #{req.butenCode}
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        AND PRESENTATION_FROM = #{req.bookBuildingPresentationFrom}
+        AND DETAIL_NUMBER = #{req.detailNumber}
+        AND UPDATE_TIME = TO_DATE(#{req.updateTimeForOrderExclusivity}, 'YYYY/MM/DD HH24:MI:SS')
+    </update>
+    
+    <!-- 
+         SQLID：Sql013
+         SQL名：対面募集注文明細テーブルの更新（仲介業者権限）
+         SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSubscriptInputConfirmSql013"
+        statementType="PREPARED"
+    >
+        UPDATE /* @SQLID=SUB0204_02-04_2#Sql013 */ T_IPO_PO_ORDER_DETAIL
+            SET
+            INVITATION_TYPE = #{req.kanyuKbn}
+            ,ORDER_METHOD = #{req.jutyuKbn}
+            ,PROSPECTUS = #{req.mokuromiKoufuKbn}
+            ,EXPLANATION_INFO = #{req.importantMatterType}
+            <choose>
+                <when test='req.complianceCheckMsg == "1"'>
+                    ,WARNING_APPLY = #{req.invitationCheck}
+                </when>
+                <when test='req.complianceCheckMsg == "2"'>
+                    ,WARNING_APPLY = '2'
+                </when>
+                <otherwise>
+                    ,WARNING_APPLY = '0'
+                </otherwise>
+            </choose>
+            ,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            ,UPDATE_USER = #{req.userId}
+            ,SYS_ID = 'SUB0204_02-04_2'
+        WHERE PRODUCT_CODE = #{req.brandCode}
+        AND BUTEN_CODE = #{req.butenCode}
+        AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        AND PRESENTATION_FROM = #{req.bookBuildingPresentationFrom}
+        AND DETAIL_NUMBER = #{req.detailNumber}
+        AND UPDATE_TIME = TO_DATE(#{req.updateTimeForOrderExclusivity}, 'YYYY/MM/DD HH24:MI:SS')
+    </update>
+    
+</mapper>

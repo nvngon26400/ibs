@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0501_01-01
+    画面名：情報登録照会
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.mapper.IfaInfoRegisterLookupMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaInfoRegisterLookupSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterLookupSql001ResponseModel" >
+        <result column="t9n_name" property="t9nName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />	
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaInfoRegisterLookupSql002" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterLookupSql002ResponseModel" >
+		<!-- <result column="notificationId" property="notificationId" /> -->
+        <result column="title" property="title" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="contents" property="contents" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result column="attachFile1" property="attachFile1" />
+        <result column="attachFile2" property="attachFile2" />
+        <result column="attachFile3" property="attachFile3" />
+        <result column="attachFileComment1" property="attachFileComment1" />
+        <result column="attachFileComment2" property="attachFileComment2" />
+        <result column="attachFileComment3" property="attachFileComment3" />
+        <result column="t4nImportance" property="t4nImportance" />
+        <result column="url" property="url" />
+        <result column="urlComment" property="urlComment" />
+        <result column="disclaimer" property="disclaimer" />
+        <result column="corReferenceCondition" property="corReferenceCondition" />
+        <result column="registerDayTime" property="registerDayTime" />
+        <result column="createBy" property="createBy" />
+        <result column="updateTime" property="updateTime" />
+        <result column="updateUser" property="updateUser" />
+        <result column="corReadFlg" property="corReadFlg" />
+        <result column="t9nName" property="t9nName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaInfoRegisterLookupSql003" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterLookupSql003ResponseModel" >
+    </resultMap>
+        
+    <resultMap id="ResultMapIfaInfoRegisterLookupSql004" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterLookupSql004ResponseModel" >
+    </resultMap>
+        
+    <resultMap id="ResultMapIfaInfoRegisterLookupSql005" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterLookupSql005ResponseModel" >
+    </resultMap>
+        
+    <resultMap id="ResultMapIfaInfoRegisterLookupSql006" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoRegisterLookupSql006ResponseModel" >
+		<result column="fileDir" property="fileDir" />
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：資料種別一覧
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoRegisterLookupSql001" resultMap="ResultMapIfaInfoRegisterLookupSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-01#Sql001 */
+            A.t9n_info_cat,
+            A.t9n_name,
+            A.t9n_required_flg AS required_flag
+        FROM 
+            CORDYS.PSITE_T9N_INFO_CAT A
+        WHERE 
+            A.t9n_del_flag = '0'
+        ORDER BY 
+            A.t9n_sort ASC
+    </select>
+       
+    <!-- 
+        SQLID：Sql002
+        SQL名：情報明細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoRegisterLookupSql002" resultMap="ResultMapIfaInfoRegisterLookupSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-01#Sql002 */
+            A1.T4N_ID AS notificationId,  <!-- お知らせID -->
+	        A1.T4N_TITLE AS title,        <!-- タイトル -->
+	        A1.T4N_CONTENT AS contents,   <!-- 内容 -->
+	        A1.T4N_FILE1 AS attachFile1,  <!-- 添付ファイル１ -->
+	        A1.T4N_FILE2 AS attachFile2,  <!-- 添付ファイル２ -->
+	        A1.T4N_FILE3 AS attachFile3,  <!-- 添付ファイル３ -->
+            A1.T4N_FILE_COM1 AS attachFileComment1,  <!-- 添付ファイルコメント１ -->
+	        A1.T4N_FILE_COM2 AS attachFileComment2,  <!-- 添付ファイルコメント２ -->
+	        A1.T4N_FILE_COM3 AS attachFileComment3,  <!-- 添付ファイルコメント３ -->
+	        A1.T4N_IMPORTANCE AS t4nImportance,      <!-- 重要度 -->
+	        A1.T4N_URL AS url,                       <!-- URL -->
+	        A1.COR_URL_COM AS urlComment,            <!-- URLコメント -->
+	        A1.COR_DISCLAIMER AS disclaimer,         <!-- ディスクレーマー -->
+	        A1.COR_REFERENCE_CONDITION AS corReferenceCondition,  <!-- 参照範囲 -->
+	        A1.T4N_CREATED_AT AS registerDayTime,    <!-- 登録日時 -->
+	        A1.COR_CREATE_BY AS createBy,            <!-- 登録者 -->
+	        A1.COR_UPDATE_DATE AS updateTime,        <!-- 更新日時 -->
+	        A1.COR_UPDATE_BY AS updateUser,          <!-- 更新者 -->
+	        A1.COR_READ_FLG AS corReadFlg,           <!-- 既読管理フラグ -->
+	        B1.T9N_NAME AS t9nName,                  <!-- カテゴリ名 -->
+            MU.USER_NM AS userName                   <!-- ユーザー名 -->
+        FROM
+            CORDYS.PSITE_T4N_INFO A1
+        INNER JOIN CORDYS.PSITE_T9N_INFO_CAT B1 ON
+            A1.T4N_CAT1 = B1.T9N_INFO_CAT
+        LEFT OUTER JOIN CORDYS.TB_MED_USERS MU ON
+            A1.COR_UPDATE_BY = MU.USER_ID
+       <where>
+                <choose>
+                    <!-- 画面入力がカテゴリ（大分類）：「全て」指定（カテゴリID=0、必須フラグ=1）の場合-->
+                    <when test='req.notificationCategoryList != null and req.notificationCategoryList.size() > 0 and "0".equals(req.notificationCategoryList[0].t9nInfoCat) == true and "1".equals(req.notificationCategoryList[0].requiredFlag) == true'>
+                        <!-- 何も追加条件なし -->
+                        1=1
+                    </when>
+                    <!-- 画面入力がカテゴリ（大分類）：指定あり（カテゴリID=0以外、必須フラグ=1）の場合  -->
+                    <when test='req.notificationCategoryList != null and req.notificationCategoryList.size() > 0 and "0".equals(req.notificationCategoryList[0].t9nInfoCat) == false and "1".equals(req.notificationCategoryList[0].requiredFlag) == true'>
+                         1=1 AND A1.T4N_CAT1 = #{req.notificationCategoryList[0].t9nInfoCat}
+                    </when>
+                    <otherwise>
+						1=0
+					</otherwise>
+                </choose>
+            <!-- 削除フラグによる条件 -->
+                AND B1.T9N_DEL_FLAG = '0'
+       </where>
+        ORDER BY
+            A1.COR_UPDATE_DATE DESC,
+            A1.T4N_TITLE ASC
+    </select>
+    
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：お知らせテーブル情報削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaInfoRegisterLookupSql003" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0501_01-01#Sql003 */
+        FROM
+            CORDYS.PSITE_T4N_INFO
+        WHERE
+            T4N_ID = #{req.notificationId}
+    </delete>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：お知らせ既読テーブル情報削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaInfoRegisterLookupSql004" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0501_01-01#Sql004 */
+        FROM
+            CORDYS.PSITE_T5N_INFO_READ
+        WHERE
+            T5N_INFO_ID = #{req.notificationId}
+    </delete>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：お知らせ参照権限テーブル情報削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaInfoRegisterLookupSql005" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0501_01-01#Sql005 */
+        FROM
+            CORDYS.PSITE_T4N_INFO_PRIV
+        WHERE
+            T4N_ID = #{req.notificationId}
+    </delete>
+    
+        <!-- 
+        SQLID：Sql006
+        SQL名：添付ファイルディレクトリ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoRegisterLookupSql006" resultMap="ResultMapIfaInfoRegisterLookupSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-01#Sql006 */
+            FILE_DIR  AS fileDir   
+        FROM
+            CORDYS.TB_MED_TEMP_FILE_DIR
+        WHERE 
+            FUNC_ID = #{req.funcId}
+            AND CAT_ID = #{req.catId}
+    </select>
+    
+</mapper>

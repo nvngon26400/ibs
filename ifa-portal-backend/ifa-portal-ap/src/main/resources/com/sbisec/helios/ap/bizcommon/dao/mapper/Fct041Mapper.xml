@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct041Mapper">
+
+	<resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct041Sql001ResponseModel" id="Fct041Sql001ResponseModel">
+	</resultMap>
+
+	<!-- FCT041.SQL001 紐付け共募支店コードを取得する -->
+	<select id="getUserAuthorityBranch" resultMap="Fct041Sql001ResponseModel" statementType="PREPARED">
+		SELECT /* @SQLID=FCT041#SQL001 */
+			COUNT(*) AS COUNT
+		FROM
+			TB_MED_USERS_PRIV
+		WHERE
+			USER_ID = #{fct041Sql001RequestModel.userId}
+			AND BROKER_ID = #{fct041Sql001RequestModel.brokerId}
+			AND SUB_BROKER_ID <![CDATA[<>]]> #{fct041Sql001RequestModel.subBrokerId}
+	</select>
+
+</mapper>

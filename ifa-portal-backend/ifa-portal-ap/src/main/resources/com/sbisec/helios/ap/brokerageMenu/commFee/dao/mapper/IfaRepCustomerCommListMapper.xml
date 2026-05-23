@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020501-01
+    画面名：担当顧客別手数料一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.commFee.dao.mapper.IfaRepCustomerCommListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaRepCustomerCommListSql001" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaRepCustomerCommListSql001ResponseModel" >
+        <result property="brokerCode" column="BROKER_CODE" />
+        <result property="brokerName" column="BROKER_NAME"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="empCode" column="BROKER_CHARGE_CODE" />
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerageBranchCode" column="BROKER_BRANCH_CODE" />
+        <result property="brokerBranchName" column="BRANCH_NAME"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="butenCode" column="BUTEN_CODE" />
+        <result property="accountNumber" column="ACCOUNT_NUMBER" />
+        <result property="customerNameKanji" column="NAME_KANJI"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="customerNameKana" column="NAME_KANA"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="dealerNumber" column="DEALER_NUMBER" />
+        <result property="courseName" column="CUSTOMER_ATTRIBUTE_NAME"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="commTotal" column="COMM_TOTAL" />
+    </resultMap>
+    <resultMap id="ResultMapIfaRepCustomerCommListSql002" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaRepCustomerCommListSql002ResponseModel" >
+        <result property="brokerCode" column="CODE_2" />
+        <result property="brokerName" column="NAME"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>    
+    <resultMap id="ResultMapIfaRepCustomerCommListSql003" type="java.lang.String" >
+        <result column="NAME"
+            typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：担当顧客別手数料一覧取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaRepCustomerCommListSql001" resultMap="ResultMapIfaRepCustomerCommListSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020501-01#Sql001 */
+        /* +OPT_PARAM('_optimizer_skip_scan_enabled', 'false') */
+        * 
+        FROM 
+        (
+            SELECT
+                COUNT(*) OVER() AS TOTAL_ROW,
+                T.*
+            FROM
+            (
+                SELECT 
+                    A.BROKER_CODE
+                    , A.BROKER_NAME
+                    , A.BROKER_CHARGE_CODE
+                    , A.BROKER_CHARGE_NAME
+                    , A.BROKER_BRANCH_CODE
+                    , C.BRANCH_NAME
+                    <if test='req.chargeCustomerCountingUnit == "1"'>
+                        , A.BUTEN_CODE
+                        , A.ACCOUNT_NUMBER
+                        , B.NAME_KANJI
+                        , B.NAME_KANA
+                        , A.DEALER_NUMBER
+                        , A.CUSTOMER_ATTRIBUTE_NAME
+                    </if>
+                    , SUM(
+                        CASE
+                            WHEN A.RECORD_TYPE = 0 THEN CASE
+                                WHEN NVL(A.REWARD_RATE, 0) = 0 THEN 0
+                                ELSE NVL(A.FEE, 0)
+                            END
+                            WHEN A.RECORD_TYPE = 1 THEN CASE
+                                WHEN NVL(A.REWARD_RATE, 0) = 0 THEN 0
+                                ELSE NVL(A.EXCHANGE_SPREAD, 0)
+                            END
+                            ELSE 0
+                        END
+                    ) AS COMM_TOTAL
+                FROM (
+                    SELECT
+                        /*+ INDEX_SS(T_REWARD_COMMISSION T_REWARD_COMMISSION_IDX1) */
+                        *
+                    FROM
+                        T_REWARD_COMMISSION TRC
+                    <where>
+                        <if test='req.privId != "1" and req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0'>
+                            <choose>
+                                <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                                    (TRC.BROKER_CODE IN
+                                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                        <if test="index % 1000 == 0 and index != 0">
+                                            ) OR TRC.BROKER_CODE IN(
+                                        </if>
+                                        <if test="index % 1000 != 0">
+                                            ,
+                                        </if>
+                                        #{brokerCharge.brokerCode}
+                                    </foreach>
+                                    )
+                                </when>
+                                <otherwise>
+                                    ((TRC.BROKER_CODE, TRC.BROKER_CHARGE_CODE) IN
+                                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                        <if test="index % 1000 == 0 and index != 0">
+                                            ) OR (TRC.BROKER_CODE, TRC.BROKER_CHARGE_CODE) IN(
+                                        </if>
+                                        <if test="index % 1000 != 0">
+                                            ,
+                                        </if>
+                                        (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                                    </foreach>
+                                    )
+                                </otherwise>
+                            </choose>
+                        </if>
+                        <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.chkBrokerCodeExclude != "1"'>
+                            AND TRC.BROKER_CODE IN
+                            <foreach item="includeBrokerCode" collection="req.brokerCodeList" index="idx" open="(" separator="," close=")">
+                                #{includeBrokerCode}
+                            </foreach>
+                        </if>
+                        <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.chkBrokerCodeExclude == "1"'>
+                            AND TRC.BROKER_CODE NOT IN
+                            <foreach item="excludeBrokerCode" collection="req.brokerCodeList" index="idx" open="(" separator="," close=")">
+                                #{excludeBrokerCode}
+                            </foreach>
+                        </if>
+                        <if test='req.branchCode != null and req.branchCode != ""'>
+                            AND TRC.BROKER_BRANCH_CODE = #{req.branchCode}
+                        </if>
+                        <if test='req.empCode != null and req.empCode != ""'>
+                            AND TRC.BROKER_CHARGE_CODE = #{req.empCode}
+                        </if>
+                        <if test='req.butenCode != null and req.butenCode != ""'>
+                            AND TRC.BUTEN_CODE = #{req.butenCode}
+                        </if>
+                        <if test='req.accountNumber != null and req.accountNumber != ""'>
+                            AND TRC.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                        </if>
+                        <if test='req.brandCode != null and req.brandCode != ""'>
+                            AND (TRC.BRAND_CODE = #{req.brandCode} OR TRC.BRAND_CODE = CONCAT('0', #{req.brandCode}))
+                        </if>
+                        AND TRC.CUSTOMER_ATTRIBUTE IN 
+                        <foreach item="course" collection="req.courseList" index="idx" open="(" separator="," close=")">
+                            #{course}
+                        </foreach>
+                        AND (TRC.TRADE_DATE &gt;= REPLACE(#{req.periodYmFrom}, '/')
+                            AND TRC.TRADE_DATE &lt;= REPLACE(#{req.periodYmTo}, '/'))
+
+                        <if test='req.securityClassList != null and req.securityClassList.size() &gt; 0'>
+                            AND (
+                            <trim prefixOverrides="OR ">
+                                <if test='req.securityClassList.contains("99")'>
+                                    TRC.RECORD_TYPE = 1
+                                </if>
+                                <if test='req.isContainTrade'>
+                                    OR (
+                                        TRC.PRODUT_CD IN 
+                                        <foreach item="includeSecurityClass" collection="req.securityClassList" index="idx" open="(" separator="," close=")">
+                                            #{includeSecurityClass}
+                                        </foreach>
+                                        <if test='req.excludeSecurityClass != null and req.excludeSecurityClass != ""'>
+                                            AND TRC.PRODUT_CD &lt;&gt; #{req.excludeSecurityClass}
+                                        </if>
+                                        AND TRC.RECORD_TYPE = 0
+                                    )
+                                </if>
+                            </trim>
+                            )
+                        </if>
+                    </where>
+                ) A
+                LEFT OUTER JOIN (
+                    SELECT
+                        MUAI.BUTEN_CODE
+                        ,MUAI.ACCOUNT_NUMBER
+                        ,MUAI.BROKER_CODE
+                        ,MUAI.NAME_KANJI
+                        ,MUAI.NAME_KANA
+                    FROM
+                        MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                    <where>
+                        <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "1"'>
+                            AND (
+                                MUAI.NAME_KANJI = #{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler}
+                                OR MUAI.NAME_KANA = #{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler}
+                            )
+                        </if>
+                        <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "2"'>
+                            AND (
+                                MUAI.NAME_KANJI LIKE CONCAT(#{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler},'%')
+                                OR MUAI.NAME_KANA like CONCAT(#{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler},'%')
+                            )
+                        </if>
+                        <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "3"'>
+                            AND (
+                                MUAI.NAME_KANJI LIKE CONCAT(CONCAT('%',#{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler}),'%')
+                                OR MUAI.NAME_KANA like CONCAT(CONCAT('%',#{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler}),'%')
+                            )
+                        </if>
+                    </where>
+                ) B
+                ON  A.BUTEN_CODE = B.BUTEN_CODE
+                AND A.ACCOUNT_NUMBER = B.ACCOUNT_NUMBER
+                AND A.BROKER_CODE = B.BROKER_CODE
+                LEFT OUTER JOIN
+                    MEDIATE_BRANCH C
+                ON  A.BROKER_CODE = C.BROKER_CODE
+                AND A.BROKER_BRANCH_CODE = C.BROKER_BRANCH_CODE
+                <where>
+                    <if test='req.privId != "1" and req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0'>
+                        <choose>
+                            <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                                (A.BROKER_CODE IN
+                                <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                    <if test="index % 1000 == 0 and index != 0">
+                                        ) OR A.BROKER_CODE IN(
+                                    </if>
+                                    <if test="index % 1000 != 0">
+                                        ,
+                                    </if>
+                                    #{brokerCharge.brokerCode}
+                                </foreach>
+                                )
+                            </when>
+                            <otherwise>
+                                ((A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN
+                                <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                    <if test="index % 1000 == 0 and index != 0">
+                                        ) OR (A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN(
+                                    </if>
+                                    <if test="index % 1000 != 0">
+                                        ,
+                                    </if>
+                                    (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                                </foreach>
+                                )
+                            </otherwise>
+                        </choose>
+                    </if>
+                    <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.chkBrokerCodeExclude != "1"'>
+                        AND A.BROKER_CODE IN
+                        <foreach item="includeBrokerCode" collection="req.brokerCodeList" index="idx" open="(" separator="," close=")">
+                            #{includeBrokerCode}
+                        </foreach>
+                    </if>
+                    <if test='req.brokerCodeList != null and req.brokerCodeList.size() &gt; 0 and req.chkBrokerCodeExclude == "1"'>
+                        AND A.BROKER_CODE NOT IN
+                        <foreach item="excludeBrokerCode" collection="req.brokerCodeList" index="idx" open="(" separator="," close=")">
+                            #{excludeBrokerCode}
+                        </foreach>
+                    </if>
+                    <if test='req.branchCode != null and req.branchCode != ""'>
+                        AND A.BROKER_BRANCH_CODE = #{req.branchCode}
+                    </if>
+                    <if test='req.empCode != null and req.empCode != ""'>
+                        AND A.BROKER_CHARGE_CODE = #{req.empCode}
+                    </if>
+                    <if test='req.butenCode != null and req.butenCode != ""'>
+                        AND A.BUTEN_CODE = #{req.butenCode}
+                    </if>
+                    <if test='req.accountNumber != null and req.accountNumber != ""'>
+                        AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                    </if>
+                    <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "1"'>
+                        AND (
+                            B.NAME_KANJI = #{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler}
+                            OR B.NAME_KANA = #{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler}
+                        )
+                    </if>
+                    <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "2"'>
+                        AND (
+                            B.NAME_KANJI LIKE CONCAT(#{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler},'%')
+                            OR B.NAME_KANA like CONCAT(#{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler},'%')
+                        )
+                    </if>
+                    <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "3"'>
+                        AND (
+                            B.NAME_KANJI LIKE CONCAT(CONCAT('%',#{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler}),'%')
+                            OR B.NAME_KANA like CONCAT(CONCAT('%',#{req.customerNameKanjiKana,typeHandler=com.sbibits.earth.dao.typehandler.StringTypeHandler}),'%')
+                         )
+                    </if>
+                    <if test='req.brandCode != null and req.brandCode != ""'>
+                        AND (A.BRAND_CODE = #{req.brandCode} OR A.BRAND_CODE = CONCAT('0', #{req.brandCode}))
+                    </if>
+                    AND A.CUSTOMER_ATTRIBUTE IN 
+                    <foreach item="course" collection="req.courseList" index="idx" open="(" separator="," close=")">
+                        #{course}
+                    </foreach>
+                    AND (A.TRADE_DATE &gt;= REPLACE(#{req.periodYmFrom}, '/')
+                        AND A.TRADE_DATE &lt;= REPLACE(#{req.periodYmTo}, '/'))
+
+                    <if test='req.securityClassList != null and req.securityClassList.size() &gt; 0'>
+                        AND (
+                        <trim prefixOverrides="OR ">
+                            <if test='req.securityClassList.contains("99")'>
+                                A.RECORD_TYPE = 1
+                            </if>
+                            <if test='req.isContainTrade'>
+                                OR (
+                                    A.PRODUT_CD IN 
+                                    <foreach item="includeSecurityClass" collection="req.securityClassList" index="idx" open="(" separator="," close=")">
+                                        #{includeSecurityClass}
+                                    </foreach>
+                                    <if test='req.excludeSecurityClass != null and req.excludeSecurityClass != ""'>
+                                        AND A.PRODUT_CD &lt;&gt; #{req.excludeSecurityClass}
+                                    </if>
+                                    AND A.RECORD_TYPE = 0
+                                )
+                            </if>
+                        </trim>
+                        )
+                    </if>
+                </where>
+                GROUP BY
+                <if test='req.chargeCustomerCountingUnit == "0"'>
+                    A.BROKER_CODE
+                    , A.BROKER_NAME
+                    , A.BROKER_CHARGE_CODE
+                    , A.BROKER_CHARGE_NAME
+                    , A.BROKER_BRANCH_CODE
+                    , C.BRANCH_NAME
+                </if>
+                <if test='req.chargeCustomerCountingUnit == "1"'>
+                    A.BROKER_CODE
+                    , A.BROKER_NAME
+                    , A.BROKER_CHARGE_CODE
+                    , A.BROKER_CHARGE_NAME
+                    , A.BUTEN_CODE
+                    , A.ACCOUNT_NUMBER
+                    , B.NAME_KANJI
+                    , B.NAME_KANA
+                    , A.DEALER_NUMBER
+                    , A.CUSTOMER_ATTRIBUTE_NAME
+                    , A.BROKER_BRANCH_CODE
+                    , C.BRANCH_NAME
+                </if>
+                ORDER BY
+                <if test='req.chargeCustomerCountingUnit == "0"'>
+                    A.BROKER_CODE ASC
+                    , A.BROKER_CHARGE_CODE ASC
+                </if>
+                <if test='req.chargeCustomerCountingUnit == "1"'>
+                    A.BROKER_CODE ASC
+                    , A.BROKER_CHARGE_CODE ASC
+                    , A.BUTEN_CODE ASC
+                    , A.ACCOUNT_NUMBER ASC
+                </if>
+            ) T
+        )
+        WHERE
+            ROWNUM &lt;= #{req.searchLimitRow}
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：現株ポイント参照可能仲介業者取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaRepCustomerCommListSql002" resultMap="ResultMapIfaRepCustomerCommListSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020501-01#Sql002 */
+            CODE_2 <!-- 仲介業者コード -->
+            , NAME <!-- 仲介業者名 -->
+        FROM
+            M_CODE
+        WHERE
+            START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        AND CODE_TYPE = '19'
+        AND CODE_1 = '2'
+    </select>
+      
+    <!-- 
+        SQLID：Sql003
+        SQL名：担当顧客別手数料コメント取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaRepCustomerCommListSql003" resultMap="ResultMapIfaRepCustomerCommListSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020501-01#Sql003 */
+            NAME <!-- 担当顧客別手数料コメント -->
+        FROM
+            M_CODE
+        WHERE
+            START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        AND CODE_TYPE = '99'
+        AND CODE_1 = '01'
+        AND CODE_2 = '02'
+    </select>
+    
+</mapper>

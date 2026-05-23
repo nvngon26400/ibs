@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.BBAcceptMapper">
+
+    <select id="getBBAcceptInfoCount" resultType ="Integer" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-03_1#SQL005 */
+            COUNT(*)
+        FROM
+            ETINTRA.BB_ACCEPT
+        WHERE
+            BB_PRODUCT_CODE = #{bbProductCode}
+        AND
+            BB_PRESENTATION_FROM = TO_NUMBER(#{bbPresentationFrom})
+        AND
+            BB_BRANCH_CODE = RPAD(#{bbBranchCode}, 4, ' ')
+        AND
+            TO_NUMBER(BB_ACCOUNT_NUMBER) = TO_NUMBER(LPAD(#{bbAccountNumber}, 7, 0))
+    </select>
+    
+	<insert id="insertUploadIpopoBBApplyInfoToBBAccept" parameterType="java.util.List">
+		<foreach collection="insertList" item="param" index="index" open="begin" close=";end;" separator=";">
+			INSERT /* @SQLID=SUB0204_01-03_1#SQL012 */
+			INTO ETINTRA.BB_ACCEPT 
+			(
+				BB_PRODUCT_CODE,
+				BB_PRESENTATION_FROM,
+				BB_BRANCH_CODE,
+				BB_ACCOUNT_NUMBER,
+				BB_DEALER_NUMBER,
+				BB_FAMILY_NAME_KANJI,
+				BB_NAME_KANJI,
+				BB_FAMILY_NAME_KANA,
+				BB_NAME_KANA,
+				BB_QUANTITY,
+				BB_PRICE,
+				BB_DISCOUNT,
+				BB_SEQ,
+				BB_INVESTOR_ATT_NAME,
+				BB_REMARK,
+				BB_CREATE_DATE,
+				BB_CREATE_USER_ID,
+				BB_CREATE_SECTION_ID,
+				BB_CREATE_SECTION_NAME,
+				BB_CREATE_USER_NAME,
+				BB_STRIKE_PRICE
+			)
+			(SELECT
+				#{param.brandCode},
+				TO_NUMBER(#{param.bbPresentationFrom}),
+				#{param.butenCode},
+				#{param.accountNumber},
+				#{param.dealerNumber},
+				#{param.uaiFamilyNameKanji},
+				#{param.uaiNameKanji},
+				#{param.uaiFamilyNameKana},
+				#{param.uaiNameKana},
+				TO_NUMBER(#{param.bbQuantity}),
+				TO_NUMBER(#{param.bbPrice}),
+				TO_NUMBER(#{param.bbDiscount}),
+				TO_NUMBER(#{param.bbSeq}),
+				#{param.bbInvestorAttName},
+				#{param.bbRemark},
+				CORDYS.IFA_DATE_UTIL.IFA_GET_DATE,
+				#{param.userId},
+				#{param.sectionId},
+				#{param.sectionName},
+				#{param.userName},
+				#{param.bbStrikePrice}
+			FROM
+				DUAL
+			)
+		</foreach>
+	</insert>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB07-01
+    画面名：住所検索ポップアップ
+-->
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.IfaAddressSearchMapper">
+    <resultMap id="ResultMapAddressSearchSql001" type="com.sbisec.helios.ap.common.dao.model.IfaAddressSearchResponseModel">
+        <result property="address" column="ADDRESS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：住所検索
+        SQLタイプ：select
+    -->
+    <select id="addressSearch" resultMap="ResultMapAddressSearchSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB07-01#Sql001 */
+            PREFECTURE_KANJI || CITY_KANJI || TOWN_KANJI || KYOTO_COMMON_KANJI AS ADDRESS               <!-- 住所 -->
+        FROM ETRADE.ETJP_ADDRESS_MASTER@CORDYS_ET10.WORLD
+        WHERE ZIP_CODE = #{req.yuusouNumber}                                                            <!-- 郵便番号 -->
+        ORDER BY
+            PREFECTURE_KANJI
+            ,CITY_KANJI
+            ,TOWN_KANJI
+            ,KYOTO_COMMON_KANJI
+    </select>
+</mapper>

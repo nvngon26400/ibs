@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：FCT018
+    画面名：サービス時間チェック（外国）
+-->
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct018Mapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapFct018Sql001" type="com.sbisec.helios.ap.bizcommon.dao.model.Fct018Sql001ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectFct018Sql001" resultMap="ResultMapFct018Sql001" statementType="PREPARED">
+        SELECT 
+        	/* @SQLID=FCT018#Sql001 */ 
+        	CODE_2
+        	,NAME 
+        FROM 
+        	M_CODE 
+        WHERE 
+        	CODE_TYPE=#{req.syubetu}
+			AND CODE_1=#{req.countryCode}
+			AND (CODE_2='START_TIME'
+			OR	CODE_2='END_TIME')
+        
+    </select>
+    
+    
+    
+    
+</mapper>

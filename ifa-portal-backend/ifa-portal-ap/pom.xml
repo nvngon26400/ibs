@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>ifa-portal-ap</artifactId>
+	<packaging>war</packaging>
+
+	<name>ifa-portal-ap</name>
+	<description>ap server for ifa-portal-webapp</description>
+
+	<parent>
+		<groupId>com.sbisec</groupId>
+		<artifactId>ifa-portal-web</artifactId>
+		<version>${global.version}</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- java.versionについては17が正だがSpringframeworkのバージョンとミスマッチが生じるため暫定で11とする -->
+		<java.version>11</java.version>
+		<logback.prod>logback-spring-prod.xml</logback.prod>
+		<logback.dev>logback-spring-dev.xml</logback.dev>
+		<logback.base>logback-spring.xml</logback.base>
+		<!-- opencsv -->
+		<opencsv.version>2.3</opencsv.version>
+		<!-- データソース（devのみ） -->
+		<datasource.url>jdbc:oracle:thin:@localhost:53317/XEPDB1</datasource.url>
+		<datasource.username>cordys</datasource.username>
+		<datasource.password>cordys</datasource.password>
+		<datasource.driverClassName>oracle.jdbc.driver.OracleDriver</datasource.driverClassName>
+		<!-- データソース（dev以外） -->
+		<datasource.jndiName.cordys>jdbc/cordys</datasource.jndiName.cordys>
+		<datasource.jndiName.etintra>jdbc/etintra</datasource.jndiName.etintra>
+		<datasource.jndiName.mariadb>jdbc/mariadb</datasource.jndiName.mariadb>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- cache -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- health check -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- aop -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<!-- mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+			<version>1.18.26</version>
+		</dependency>
+
+		<!-- spring security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-ldap</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<version>3.0.2.RELEASE</version>
+		</dependency>
+
+		<!-- send mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<!-- csv file -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.4</version>
+		</dependency>
+
+		<!-- http client -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient-cache</artifactId>
+			<version>4.5.2</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.5.2</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+
+		<!-- json -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.5</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+
+		<!-- commons-lang -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.8.1</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<!-- google.guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>29.0-jre</version>
+		</dependency>
+
+		<!-- Xss attacks -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.13.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.7</version>
+		</dependency>
+
+		<!-- Dao -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+
+		<!-- oracle -->
+		<dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8-production</artifactId>
+			<version>19.7.0.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.oracle.database.xml</groupId>
+				<artifactId>xmlparserv2</artifactId>
+				</exclusion>
+			</exclusions>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- earth -->
+		<dependency>
+			<groupId>com.sbibits</groupId>
+			<artifactId>earth</artifactId>
+			<version>ifa-0.0.42</version>
+		</dependency>
+		<!-- pcenter-cli -->
+		<dependency>
+			<groupId>pcenter-cli</groupId>
+			<artifactId>pcenter-cli-core-j8</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>pcenter-cli</groupId>
+			<artifactId>pcenter-cli-yanap</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>pcenter-cli</groupId>
+			<artifactId>pcenter-cli-heracross</artifactId>
+			<version>ifa-1.1.2</version>
+		</dependency>
+		<!-- Validation -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+
+		<!-- Convert Util 利用パッケージ -->
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>69.1</version>
+		</dependency>
+		<!-- JWT操作用パッケージ -->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.18.2</version>
+		</dependency>
+
+		<!-- XMLパーサ -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+		</dependency>
+		<!-- PDF -->
+		<!-- https://mvnrepository.com/artifact/itext/iText -->
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.medsea.mimeutil</groupId>
+			<artifactId>mime-util</artifactId>
+			<version>2.1.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.3.1</version>
+		</dependency>
+
+	</dependencies>
+
+	<profiles>
+		<!-- Production -->
+		<profile>
+			<id>prod</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>maven-antrun</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<copy
+											file="${basedir}/src/main/resources/${logback.prod}"
+											tofile="${project.build.outputDirectory}/${logback.base}"
+											overwrite="true" failonerror="false" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<!-- テストツールの本番リリース除外設定 -->
+								<exclude>com/sbisec/helios/common/testtool/**</exclude>
+								<exclude>com/sbisec/helios/common/unittest/**</exclude>
+								<exclude>com/sbisec/helios/gw/testtool/**</exclude>
+								<exclude>com/sbisec/helios/ap/testtool/**</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													com.alexnederlof
+												</groupId>
+												<artifactId>
+													jasperreports-plugin
+												</artifactId>
+												<versionRange>
+													[2.0,)
+												</versionRange>
+												<goals>
+													<goal>jasper</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+			<properties>
+				<datasource.cordys.jndiName>${datasource.jndiName.cordys}</datasource.cordys.jndiName>
+				<datasource.cordys.url></datasource.cordys.url>
+				<datasource.cordys.username></datasource.cordys.username>
+				<datasource.cordys.password></datasource.cordys.password>
+				<datasource.cordys.driverClassName></datasource.cordys.driverClassName>
+				<datasource.etintra.jndiName>${datasource.jndiName.etintra}</datasource.etintra.jndiName>
+				<datasource.etintra.url></datasource.etintra.url>
+				<datasource.etintra.username></datasource.etintra.username>
+				<datasource.etintra.password></datasource.etintra.password>
+				<datasource.etintra.driverClassName></datasource.etintra.driverClassName>
+				<datasource.mariadb.jndiName>${datasource.jndiName.mariadb}</datasource.mariadb.jndiName>
+				<datasource.mariadb.url></datasource.mariadb.url>
+				<datasource.mariadb.username></datasource.mariadb.username>
+				<datasource.mariadb.password></datasource.mariadb.password>
+				<datasource.mariadb.driverClassName></datasource.mariadb.driverClassName>
+			</properties>
+		</profile>
+		<!-- Develop (default) -->
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<datasource.cordys.jndiName></datasource.cordys.jndiName>
+				<datasource.cordys.url>${datasource.url}</datasource.cordys.url>
+				<datasource.cordys.username>${datasource.username}</datasource.cordys.username>
+				<datasource.cordys.password>${datasource.password}</datasource.cordys.password>
+				<datasource.cordys.driverClassName>${datasource.driverClassName}</datasource.cordys.driverClassName>
+				<datasource.etintra.jndiName></datasource.etintra.jndiName>
+				<datasource.etintra.url>${datasource.url}</datasource.etintra.url>
+				<datasource.etintra.username>${datasource.username}</datasource.etintra.username>
+				<datasource.etintra.password>${datasource.password}</datasource.etintra.password>
+				<datasource.etintra.driverClassName>${datasource.driverClassName}</datasource.etintra.driverClassName>
+				<datasource.mariadb.jndiName></datasource.mariadb.jndiName>
+				<datasource.mariadb.url>${datasource.url}</datasource.mariadb.url>
+				<datasource.mariadb.username>${datasource.username}</datasource.mariadb.username>
+				<datasource.mariadb.password>${datasource.password}</datasource.mariadb.password>
+				<datasource.mariadb.driverClassName>${datasource.driverClassName}</datasource.mariadb.driverClassName>
+			</properties>
+		</profile>
+		<!-- Develop (Tomcat standalone) -->
+		<profile>
+			<id>dev_standalone</id>
+			<properties>
+				<datasource.cordys.jndiName>${datasource.jndiName.cordys}</datasource.cordys.jndiName>
+				<datasource.cordys.url></datasource.cordys.url>
+				<datasource.cordys.username></datasource.cordys.username>
+				<datasource.cordys.password></datasource.cordys.password>
+				<datasource.cordys.driverClassName></datasource.cordys.driverClassName>
+				<datasource.etintra.jndiName>${datasource.jndiName.etintra}</datasource.etintra.jndiName>
+				<datasource.etintra.url></datasource.etintra.url>
+				<datasource.etintra.username></datasource.etintra.username>
+				<datasource.etintra.password></datasource.etintra.password>
+				<datasource.etintra.driverClassName></datasource.etintra.driverClassName>
+				<datasource.mariadb.jndiName>${datasource.jndiName.mariadb}</datasource.mariadb.jndiName>
+				<datasource.mariadb.url></datasource.mariadb.url>
+				<datasource.mariadb.username></datasource.mariadb.username>
+				<datasource.mariadb.password></datasource.mariadb.password>
+				<datasource.mariadb.driverClassName></datasource.mariadb.driverClassName>
+			</properties>
+		</profile>
+		<!-- Integration-A面 -->
+		<profile>
+			<id>Integration</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>maven-antrun</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<copy
+											file="${basedir}/src/main/resources/${logback.dev}"
+											tofile="${project.build.outputDirectory}/${logback.base}"
+											overwrite="true" failonerror="false" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<datasource.cordys.jndiName>${datasource.jndiName.cordys}</datasource.cordys.jndiName>
+				<datasource.cordys.url></datasource.cordys.url>
+				<datasource.cordys.username></datasource.cordys.username>
+				<datasource.cordys.password></datasource.cordys.password>
+				<datasource.cordys.driverClassName></datasource.cordys.driverClassName>
+				<datasource.etintra.jndiName>${datasource.jndiName.etintra}</datasource.etintra.jndiName>
+				<datasource.etintra.url></datasource.etintra.url>
+				<datasource.etintra.username></datasource.etintra.username>
+				<datasource.etintra.password></datasource.etintra.password>
+				<datasource.etintra.driverClassName></datasource.etintra.driverClassName>
+				<datasource.mariadb.jndiName>${datasource.jndiName.mariadb}</datasource.mariadb.jndiName>
+				<datasource.mariadb.url></datasource.mariadb.url>
+				<datasource.mariadb.username></datasource.mariadb.username>
+				<datasource.mariadb.password></datasource.mariadb.password>
+				<datasource.mariadb.driverClassName></datasource.mariadb.driverClassName>
+			</properties>
+		</profile>
+		<!-- Integration-B面 -->
+		<profile>
+			<id>Integration2</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>maven-antrun</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<copy
+											file="${basedir}/src/main/resources/${logback.dev}"
+											tofile="${project.build.outputDirectory}/${logback.base}"
+											overwrite="true" failonerror="false" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<datasource.cordys.jndiName>${datasource.jndiName.cordys}</datasource.cordys.jndiName>
+				<datasource.cordys.url></datasource.cordys.url>
+				<datasource.cordys.username></datasource.cordys.username>
+				<datasource.cordys.password></datasource.cordys.password>
+				<datasource.cordys.driverClassName></datasource.cordys.driverClassName>
+				<datasource.etintra.jndiName>${datasource.jndiName.etintra}</datasource.etintra.jndiName>
+				<datasource.etintra.url></datasource.etintra.url>
+				<datasource.etintra.username></datasource.etintra.username>
+				<datasource.etintra.password></datasource.etintra.password>
+				<datasource.etintra.driverClassName></datasource.etintra.driverClassName>
+				<datasource.mariadb.jndiName>${datasource.jndiName.mariadb}</datasource.mariadb.jndiName>
+				<datasource.mariadb.url></datasource.mariadb.url>
+				<datasource.mariadb.username></datasource.mariadb.username>
+				<datasource.mariadb.password></datasource.mariadb.password>
+				<datasource.mariadb.driverClassName></datasource.mariadb.driverClassName>
+			</properties>
+		</profile>
+		<!-- Integration-C面 -->
+		<profile>
+			<id>Integration3</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>maven-antrun</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<copy
+											file="${basedir}/src/main/resources/${logback.dev}"
+											tofile="${project.build.outputDirectory}/${logback.base}"
+											overwrite="true" failonerror="false" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<datasource.cordys.jndiName>${datasource.jndiName.cordys}</datasource.cordys.jndiName>
+				<datasource.cordys.url></datasource.cordys.url>
+				<datasource.cordys.username></datasource.cordys.username>
+				<datasource.cordys.password></datasource.cordys.password>
+				<datasource.cordys.driverClassName></datasource.cordys.driverClassName>
+				<datasource.etintra.jndiName>${datasource.jndiName.etintra}</datasource.etintra.jndiName>
+				<datasource.etintra.url></datasource.etintra.url>
+				<datasource.etintra.username></datasource.etintra.username>
+				<datasource.etintra.password></datasource.etintra.password>
+				<datasource.etintra.driverClassName></datasource.etintra.driverClassName>
+				<datasource.mariadb.jndiName>${datasource.jndiName.mariadb}</datasource.mariadb.jndiName>
+				<datasource.mariadb.url></datasource.mariadb.url>
+				<datasource.mariadb.username></datasource.mariadb.username>
+				<datasource.mariadb.password></datasource.mariadb.password>
+				<datasource.mariadb.driverClassName></datasource.mariadb.driverClassName>
+			</properties>
+		</profile>
+		<!-- Integration-SBIBits -->
+		<profile>
+			<id>IntegrationS</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>maven-antrun</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<copy
+											file="${basedir}/src/main/resources/${logback.dev}"
+											tofile="${project.build.outputDirectory}/${logback.base}"
+											overwrite="true" failonerror="false" />
+										<copy file="${basedir}/src/main/resources/service-config-uat.xml"
+											tofile="${project.build.outputDirectory}/service-config.xml"
+											overwrite="true" failonerror="false" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<!-- テストツールの本番リリース除外設定 -->
+								<exclude>com/sbisec/helios/common/testtool/**</exclude>
+								<exclude>com/sbisec/helios/common/unittest/**</exclude>
+								<exclude>com/sbisec/helios/gw/testtool/**</exclude>
+								<exclude>com/sbisec/helios/ap/testtool/**</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<datasource.cordys.jndiName>${datasource.jndiName.cordys}</datasource.cordys.jndiName>
+				<datasource.cordys.url></datasource.cordys.url>
+				<datasource.cordys.username></datasource.cordys.username>
+				<datasource.cordys.password></datasource.cordys.password>
+				<datasource.cordys.driverClassName></datasource.cordys.driverClassName>
+				<datasource.etintra.jndiName>${datasource.jndiName.etintra}</datasource.etintra.jndiName>
+				<datasource.etintra.url></datasource.etintra.url>
+				<datasource.etintra.username></datasource.etintra.username>
+				<datasource.etintra.password></datasource.etintra.password>
+				<datasource.etintra.driverClassName></datasource.etintra.driverClassName>
+				<datasource.mariadb.jndiName>${datasource.jndiName.mariadb}</datasource.mariadb.jndiName>
+				<datasource.mariadb.url></datasource.mariadb.url>
+				<datasource.mariadb.username></datasource.mariadb.username>
+				<datasource.mariadb.password></datasource.mariadb.password>
+				<datasource.mariadb.driverClassName></datasource.mariadb.driverClassName>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<finalName>ifa-portal-ap</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+				<nonFilteredFileExtensions>
+					<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+					<nonFilteredFileExtension>jasper</nonFilteredFileExtension>
+				</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+			<!-- package into a war -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<attachClasses>true</attachClasses>
+					<classesClassifier>classes</classesClassifier>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default-war</id>
+						<phase>package</phase>
+						<goals>
+							<goal>war</goal>
+						</goals>
+						<configuration>
+							<packagingExcludes>WEB-INF/classes/${logback.prod}</packagingExcludes>
+							<packagingExcludes>WEB-INF/classes/${logback.dev}</packagingExcludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.7.10</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>make-a-jar</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<excludes>
+								<exclude>**/*.xml</exclude>
+								<exclude>**/App.class</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<packaging>jar</packaging>
+							<artifactId>${project.artifactId}</artifactId>
+							<groupId>${project.groupId}</groupId>
+							<version>${project.version}</version>
+							<file>${project.build.directory}/${project.artifactId}.jar</file>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.alexnederlof</groupId>
+				<artifactId>jasperreports-plugin</artifactId>
+				<version>2.0</version>
+				<executions>
+					<execution>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>jasper</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- These are the default configurations: -->
+					<compiler>net.sf.jasperreports.engine.design.JRJdtCompiler</compiler>
+					<sourceDirectory>${basedir}/src/main/jasper</sourceDirectory>
+					<outputDirectory>${basedir}/src/main/resources/jasper</outputDirectory>
+					<outputFileExt>.jasper</outputFileExt>
+					<xmlValidation>true</xmlValidation>
+					<verbose>false</verbose>
+					<numberOfThreads>4</numberOfThreads>
+					<failOnMissingSourceDirectory>true</failOnMissingSourceDirectory>
+					<sourceScanner>org.codehaus.plexus.compiler.util.scan.StaleSourceScanner</sourceScanner>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<!--This is just a workaround for Eclipse m2e issue. It has no influence 
+			on the Maven build itself. -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-clean-plugin</artifactId>
+										<versionRange>[2.6.1,)</versionRange>
+										<goals>
+											<goal>clean</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

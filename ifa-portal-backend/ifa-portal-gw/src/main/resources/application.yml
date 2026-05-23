@@ -1,0 +1,66 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /
+    session:
+      timeout: 18000
+    application-display-name: helios-gw
+#----------------------------------------
+# Framework common config
+#----------------------------------------
+spring:
+  jmx:
+    enabled: false
+  thymeleaf:
+    suffix: .html
+    cache: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 10000MB
+  messages:
+    fallback-to-system-locale: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  redis:
+    host: localhost
+    port: 6379
+#----------------------------------------
+# health check config
+#----------------------------------------
+management:
+  health:
+    defaults:
+      enabled: false
+  endpoint:
+    mappings:
+      enabled: true
+#----------------------------------------
+# Custom variable
+#----------------------------------------
+#security-ignore: /**, /actuator/health
+cors:
+  # Countparty Web Service, Ceres Ap Service
+  addMapping: /**
+  allowedMethods: HEAD,GET,POST,OPTIONS
+  allowedHeaders: Authorization,Cache-Control,X-User-Agent,Content-Type,X-XSRF-TOKEN,X-Token,authToken,frameworkSessionId,Ifap-Ext-Api-System-Id,Ifap-Ext-Api-User-Id,Ifap-Ext-Api-Auth-Token,Ifap-Ext-Api-Session-Id
+  envCrossOrigins: '@cors.crossorigins@'
+  maxAge: 3600
+  allowCredentials: true
+mail:
+  protocol: smtp
+  timeout: 3000
+  interval: 100
+app:
+  security:
+    ignore: /int/api/*, /actuator/health, /h2-console/*
+  xss:
+    enabled: true
+    excludes: 
+  timeout: 18000
+  version: '@version@'
+url:
+  helios:
+    ap: '@url.helios.ap@'
+  horus:
+    pl: '@url.horus.pl@'

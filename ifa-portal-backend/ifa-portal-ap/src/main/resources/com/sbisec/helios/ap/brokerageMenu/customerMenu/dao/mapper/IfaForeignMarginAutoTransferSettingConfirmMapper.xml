@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0306-01_2
+    画面名：米株信用自動振替設定確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignMarginAutoTransferSettingConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaForeignMarginAutoTransferSettingConfirmSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginAutoTransferSettingConfirmSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaForeignMarginAutoTransferSettingConfirmSql002_1" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginAutoTransferSettingConfirmSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaForeignMarginAutoTransferSettingConfirmSql002_2" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginAutoTransferSettingConfirmSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaForeignMarginAutoTransferSettingConfirmSql002_3" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginAutoTransferSettingConfirmSql002ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：当日店頭取引売却注文のチェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginAutoTransferSettingConfirmSql001" resultMap="ResultMapIfaForeignMarginAutoTransferSettingConfirmSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0306-01_2#Sql001 */
+        	count(*) count
+        FROM 
+        	T_COUNTER_ORDER 
+        WHERE 
+        	BUTEN_CODE = #{req.butenCode}
+       		AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+			AND TRADE_TYPE = '1'
+			AND ORDER_STATUS IN ('10','30')
+			AND ORDER_DAY = TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+    </select>
+    
+    <!-- 
+        SQLID：Sql002_1
+        SQL名：当日店頭取引買付注文の入力のチェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginAutoTransferSettingConfirmSql002_1" resultMap="ResultMapIfaForeignMarginAutoTransferSettingConfirmSql002_1" statementType="PREPARED">
+       
+        SELECT /* @SQLID=SUB0202_0306-01_2#Sql002_1 */
+        	count(*) count
+        FROM 
+        	T_COUNTER_ORDER
+        	
+        WHERE
+        	BUTEN_CODE = #{req.butenCode}
+       		AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+        	AND TRADE_TYPE = '3'
+			AND ORDER_STATUS IN ('10','30')
+			AND ORDER_DAY = TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+			
+    </select>
+    
+   <!-- 
+        SQLID：Sql002_2
+        SQL名：外債買付代金のチェック
+        SQLタイプ：select
+    -->
+
+    <select id="selectIfaForeignMarginAutoTransferSettingConfirmSql002_2" resultMap="ResultMapIfaForeignMarginAutoTransferSettingConfirmSql002_2" statementType="PREPARED">
+       
+        SELECT /* @SQLID=SUB0202_0306-01_2#Sql002_2 */
+        	count(*) count
+        FROM 
+        	T_BOND_F_SALES_PRICE 
+        	
+        WHERE
+        	BUTEN_CODE = #{req.butenCode}
+       		AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+            AND ORDER_TIME BETWEEN IFA_DATE_UTIL.IFA_GET_DATE + NUMTODSINTERVAL(-1 * #{req.timeInterval},'MINUTE') AND IFA_DATE_UTIL.IFA_GET_DATE
+			
+    </select>
+    
+    <!-- 
+        SQLID：Sql002_3
+        SQL名：遡る時間の取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginAutoTransferSettingConfirmSql002_3" resultMap="ResultMapIfaForeignMarginAutoTransferSettingConfirmSql002_3" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0306-01_2#Sql002_3 */
+            NAME
+        FROM 
+            M_CODE 
+        WHERE
+            CODE_TYPE = '46'
+            AND CODE_1 = '0'
+            AND CODE_2 = 'LIMIT_TIME'
+            AND START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+    </select>
+    
+    <!-- 
+         SQLID：Sql003
+         SQL名：設定指示前の指示情報登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaForeignMarginAutoTransferSettingConfirmSql003" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0306-01_2#Sql003 */ INTO AUTO_TRANSFER_SETTING (
+         	AUTO_TRANSFER_SETTING_NO
+			,BUTEN_CODE
+			,ACCOUNT_NUMBER
+			,MARGIN_BUYPOW_SHORTFALL_CASH
+			,MARGIN_BUYPOW_SHORTFALL_SEC
+			,MARGIN_SHORTFALL_CASH
+			,MARGIN_SHORTFALL_SEC
+			,DEPOSIT_TYPE
+			,CONFIG_DATE
+			,API_ERROR_CODE
+			,API_STATUS_CODE
+			,API_MESSAGE
+			,CREATE_TIME
+			,CREATE_USER
+			,UPDATE_TIME
+			,UPDATE_USER
+         )
+         VALUES(
+         	#{req.autoTransferSettingNo}			<!-- IFA注文番号 -->
+         	,#{req.butenCode}						<!-- 部店コード -->
+         	,#{req.accountNumber}					<!-- 口座番号 -->
+         	,#{req.marginBuypowShortfallCash}		<!-- 建余力不足 自動振替設定(米ドル) -->
+         	,#{req.marginBuypowShortfallSec}		<!-- 建余力不足 自動振替設定(米国株式) -->
+         	,#{req.marginShortfallCash}				<!-- 保証金不足 自動振替設定(米ドル) -->
+         	,#{req.marginShortfallSec}				<!-- 保証金不足 自動振替設定(米国株式) -->
+         	,#{req.depositType}						<!-- 現物買付時 株式自動振替先設定 -->
+         	,SYSDATE								<!-- 設定指示日時 -->
+         	,null									<!-- APIエラーコード -->
+         	,null									<!-- APIステータスコード -->
+         	,null									<!-- APIメッセージ -->
+         	,IFA_DATE_UTIL.IFA_GET_DATE				<!-- 作成日時 -->
+			,#{req.createUser}						<!-- 作成者 -->
+			,IFA_DATE_UTIL.IFA_GET_DATE				<!-- 更新日時 -->
+			,#{req.updateUser}						<!-- 更新者 -->
+         )
+    </insert>
+    
+    
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：設定指示後の指示情報更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaForeignMarginAutoTransferSettingConfirmSql004" statementType="PREPARED">
+        
+			UPDATE /* @SQLID=SUB0202_0306-01_2#Sql004 */ AUTO_TRANSFER_SETTING 
+			SET 
+				API_ERROR_CODE = #{req.apiErrorCode}
+				,API_STATUS_CODE = #{req.apiStatusCode}
+				,API_MESSAGE = SUBSTRB(#{req.apiMsg}, 1, 100)
+				,UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+        		,UPDATE_USER = #{req.updateUser}
+        		
+	        WHERE 
+        		AUTO_TRANSFER_SETTING_NO = #{req.autoTransferSettingNo}
+        	        	
+    </update>
+    
+        <!-- 
+        SQLID：Sql005
+        SQL名：シーケンスオブジェクトの取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginAutoTransferSettingConfirmSql005" resultType="String" statementType="PREPARED">
+        SELECT  /* @SQLID=SUB0202_0306-01_2#Sql005 */
+        TO_CHAR(sysdate,  'YYYYMMDD') || LPAD(SEQ_AUTO_TRANSFER_SETTING.NEXTVAL, 5, '0') AS AUTO_TRANSFER_SETTING_NO
+    FROM    
+        DUAL
+    </select>
+    
+</mapper>

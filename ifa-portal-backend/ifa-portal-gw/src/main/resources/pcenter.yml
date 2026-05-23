@@ -1,0 +1,18 @@
+crypt:
+   key: 'DUMMY'
+   iv: 'DUMMY'
+clients:
+  initial: 5
+  max: 20
+  connect_timeout: 1 # second
+applications:
+  yanap: #ec
+    protocol: 'http'
+    servers: ['d2-sec-ems-ecgw004.sbisec.int:8031']
+    loadbalance: 'roundrobin'
+    retry: 1
+  heracross: #ec
+    protocol: 'http'
+    servers: ['d2-sec-ems-ecgw004.sbisec.int:8031']
+    loadbalance: 'roundrobin'
+    retry: 1

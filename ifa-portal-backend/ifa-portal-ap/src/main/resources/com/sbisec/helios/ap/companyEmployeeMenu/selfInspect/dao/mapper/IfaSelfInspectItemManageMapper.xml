@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0506_02-01
+    画面名：自己点検項目管理
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.mapper.IfaSelfInspectItemManageMapper">
+    <resultMap
+        id="ResultMapIfaSelfInspectItemManageSql001"
+        type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectItemManageSql001ResponseModel"
+    >
+        <result property="dateName" column="DATE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaSelfInspectItemManageSql002"
+        type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectItemManageSql002ResponseModel"
+    >
+        <result property="classificationName" column="CLASSIFICATION_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaSelfInspectItemManageSql003"
+        type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectItemManageSql003ResponseModel"
+    >
+        <result property="selfAssessmentItemName" column="SELF_ASSESSMENT_ITEM_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaSelfInspectItemManageSql006"
+        type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectItemManageSql006ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaSelfInspectItemManageSql007"
+        type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectItemManageSql007ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaSelfInspectItemManageSql008"
+        type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectItemManageSql008ResponseModel"
+    >
+    </resultMap>
+
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：登録年月dropDownLisTデータ取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSelfInspectItemManageSql001"
+        resultMap="ResultMapIfaSelfInspectItemManageSql001"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0506_02-01#Sql001 */
+            TO_CHAR(
+                ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, 1 - MONTHS_RANGE_60.MONTHS),
+                'YYYYMM'
+            ) AS DATE_ID,                                                       <!-- 登録年月(YYYYMM) -->
+            TO_CHAR(
+                ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, 1 - MONTHS_RANGE_60.MONTHS),
+                'YYYY"年"MM"月"'
+            ) AS DATE_NAME                                                      <!-- 登録年月(YYYY年MM月) -->
+        FROM (
+            SELECT
+                ROWNUM - 1 AS MONTHS                                            <!-- MONTHS - 1ヶ月前 -->
+            FROM
+                ALL_CATALOG                                                     <!-- ALL_CATALOG -->
+            WHERE
+                ROWNUM &lt;= 61                                                 <!-- 行数 <= 61 -->
+        ) MONTHS_RANGE_60
+
+        UNION
+        
+        SELECT DISTINCT
+            COR_ENFORCE_DATE AS DATE_ID,                                        <!-- 年月_ID -->
+            TO_CHAR(
+                TO_DATE(COR_ENFORCE_DATE, 'YYYYMM'),
+                'YYYY"年"MM"月"'
+            ) AS DATE_NAME                                                      <!-- 年月_名称 -->
+        FROM
+            COR_SELF_CHECK_ITEM                                                 <!-- 自己点検項目 -->
+
+        ORDER BY
+            DATE_ID DESC NULLS LAST                                             <!-- 年月_ID 降順(NULLS LAST) -->
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：業者区分名称取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSelfInspectItemManageSql002"
+        resultMap="ResultMapIfaSelfInspectItemManageSql002"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0506_02-01#Sql002 */
+            BROKER_DIVISION AS BROKER_TYPE,                                     <!-- 業者区分-->
+            DIVISION_NAME AS CLASSIFICATION_NAME                                <!-- 区分名称 -->
+        FROM
+            COR_SELF_CHECK_BROKER_DIV                                           <!-- 自己点検仲介業者区分 -->
+        ORDER BY
+            BROKER_DIVISION ASC                                                 <!-- 業者区分 昇順 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：自己点検項目情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSelfInspectItemManageSql003"
+        resultMap="ResultMapIfaSelfInspectItemManageSql003"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0506_02-01#Sql003 */
+            COR_SELF_CHECK_ITEM_ID AS SELF_CHECK_ITEM_ID,                       <!-- 自己点検項目ID -->
+            COR_ENFORCE_DATE AS REGISTER_DATE,                                  <!-- 登録年月 -->
+            COR_SELF_CHECK_ITEM_NAME AS SELF_ASSESSMENT_ITEM_NAME,              <!-- 自己点検項目名 -->
+            COR_INDICATION_FLG AS DISPLAY_FLAG,                                 <!-- 表示フラグ -->
+            COR_SORT_NO AS SORT_NUMBER,                                         <!-- ソート番号 -->
+            COR_CONFIRMATION_INIT AS CONFIRMATION_INIT,                         <!-- 確認初期値 -->
+            COR_CREATE_DATE AS CREATE_DATE,                                     <!-- 登録日時 -->
+            COR_CREATE_BY AS CREATE_BY,                                         <!-- 登録者 -->
+            COR_UPDATE_DATE AS UPDATE_DATE,                                     <!-- 更新日時 -->
+            COR_UPDATE_BY AS UPDATE_BY,                                         <!-- 更新者 -->
+            BROKER_DIVISION AS BROKER_TYPE,                                     <!-- 業者区分 -->
+            ANSWER,                                                             <!-- 回答 -->
+            REASON_REQUIRED_FLG AS REASON_REQUIRED_FLAG,                        <!-- 理由必須フラグ -->
+            CASE WHEN(
+                COR_ENFORCE_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM')
+            )                                                                   <!-- 登録年月 >= システム日付 -->
+                THEN '1'
+                ELSE '0'
+            END AS DELETABLE_FLAG,                                              <!-- 削除可能フラグ -->
+            '0' AS CHANGED_FLAG                                                 <!-- 変更フラグ -->
+        FROM
+            COR_SELF_CHECK_ITEM                                                 <!-- 自己点検項目 -->
+        WHERE
+            1 = 1
+            <if test='req.assignMonthList != null and req.assignMonthList != ""'>
+                AND COR_ENFORCE_DATE = #{req.assignMonthList}                      <!-- 登録年月 = リクエスト.登録年月 -->
+            </if>
+            <if test='req.brokerType != null and req.brokerType != ""'>         <!-- A003以外からの呼び出しの場合、req.brokerType == null -->
+                AND BROKER_DIVISION = #{req.brokerType}                         <!-- 業者区分 = リクエスト.業者区分 -->
+            </if>
+        ORDER BY
+            SORT_NUMBER ASC
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：自己点検項目情報更新
+        SQLタイプ：update
+    -->
+    <update
+        id="updateIfaSelfInspectItemManageSql004"
+        statementType="PREPARED"
+    >
+        MERGE /* @SQLID=SUB0506_02-01#Sql004 */
+        INTO
+            COR_SELF_CHECK_ITEM ORGTABLE                                        <!-- 自己点検項目 -->
+
+        USING (
+            SELECT
+                #{req.selfCheckItemId} AS COR_SELF_CHECK_ITEM_ID                <!-- 自己点検項目ID -->
+            FROM
+                DUAL
+        )
+
+        NEWTABLE
+        ON (
+            ORGTABLE.COR_SELF_CHECK_ITEM_ID = NEWTABLE.COR_SELF_CHECK_ITEM_ID   <!-- オリジナル.自己点検項目ID = 新規.自己点検項目ID -->
+        )
+
+        WHEN MATCHED THEN UPDATE
+        SET
+            <if test='req.selfAssessmentItemName != null and req.selfAssessmentItemName != ""'>
+                COR_SELF_CHECK_ITEM_NAME = #{req.selfAssessmentItemName},       <!-- 自己点検項目名 = リクエスト.自己点検項目名 -->
+            </if>
+            <if test='req.displayFlag != null and req.displayFlag != ""'>
+                COR_INDICATION_FLG = #{req.displayFlag},                        <!--表示フラグ = リクエスト.表示フラグ -->
+            </if>
+            <if test='req.sortNumber != null and req.sortNumber != ""'>
+                COR_SORT_NO = #{req.sortNumber},                                <!-- ソート番号 = リクエスト.ソート番号 -->
+            </if>
+            <if test='req.confirmationInit != null and req.confirmationInit != ""'>
+                COR_CONFIRMATION_INIT = #{req.confirmationInit},                <!-- 確認初期値 = リクエスト.確認初期値 -->
+            </if>
+            COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE,                       <!-- 更新日 = システム日付 -->
+            <if test='req.userId != null and req.userId != ""'>
+                COR_UPDATE_BY = #{req.userId},                                  <!-- 更新者 = リクエスト.更新者 -->
+            </if>
+            BROKER_DIVISION = #{req.brokerType},                                <!-- 業者区分 = リクエスト.業者区分 -->
+            ANSWER = #{req.answer},                                             <!-- 回答 = リクエスト.回答 -->
+            REASON_REQUIRED_FLG = #{req.reasonRequiredFlag}                     <!-- 回答必須フラグ = リクエスト.回答必須フラグ -->
+        
+        WHEN NOT MATCHED THEN
+        INSERT (
+            COR_SELF_CHECK_ITEM_ID,                                             <!-- 自己点検項目ID -->
+            COR_SELF_CHECK_ITEM_NAME,                                           <!-- 自己点検項目名 -->
+            COR_INDICATION_FLG,                                                 <!-- 表示フラグ -->
+            COR_SORT_NO,                                                        <!-- ソート番号 -->
+            COR_CONFIRMATION_INIT,                                              <!-- 確認初期値(「はい」固定) -->
+            COR_CREATE_DATE,                                                    <!-- 登録日 -->
+            COR_CREATE_BY,                                                      <!-- 登録者 -->
+            COR_UPDATE_DATE,                                                    <!-- 更新日 -->
+            COR_UPDATE_BY,                                                      <!-- 更新者 -->
+            COR_ENFORCE_DATE,                                                   <!-- 登録年月 -->
+            BROKER_DIVISION,                                                    <!-- 業者区分 -->
+            ANSWER,                                                             <!-- 回答 -->
+            REASON_REQUIRED_FLG                                                 <!-- 回答必須フラグ -->
+        )
+        VALUES (
+            SEQ_COR_SELF_CHECK_ITEM.NEXTVAL,                                    <!-- 自己点検項目ID -->
+            #{req.selfAssessmentItemName},                                      <!-- 自己点検項目名 -->
+            #{req.displayFlag},                                                 <!-- 表示フラグ -->
+            #{req.sortNumber},                                                  <!-- ソート番号 -->
+            #{req.confirmationInit},                                            <!-- 確認初期値(「はい」固定) -->
+            IFA_DATE_UTIL.IFA_GET_DATE,                                         <!-- 登録日 -->
+            #{req.userId},                                                      <!-- 登録者 -->
+            IFA_DATE_UTIL.IFA_GET_DATE,                                         <!-- 更新日 -->
+            #{req.userId},                                                      <!-- 更新者 -->
+            #{req.registerDate},                                                <!-- 登録年月 -->
+            #{req.brokerType},                                                  <!-- 業者区分 -->
+            #{req.answer},                                                      <!-- 回答 -->
+            #{req.reasonRequiredFlag}                                           <!-- 回答必須フラグ -->
+        )
+    </update>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：自己点検項目情報削除
+        SQLタイプ：delete
+    -->
+    <delete
+        id="deleteIfaSelfInspectItemManageSql005"
+        statementType="PREPARED"
+    >
+        DELETE /* @SQLID=SUB0506_02-01#Sql005 */
+        FROM
+            COR_SELF_CHECK_ITEM                                                 <!-- 自己点検項目 -->
+        WHERE
+            COR_SELF_CHECK_ITEM_ID = #{req.selfCheckItemId}                     <!-- 自己点検項目ID = リクエスト.自己点検項目ID -->
+    </delete>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：業者区分存在チェック
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSelfInspectItemManageSql006"
+        resultMap="ResultMapIfaSelfInspectItemManageSql006"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0506_02-01#Sql006 */
+            COUNT(*) AS COUNT                                                   <!-- 件数 -->
+        FROM
+            COR_SELF_CHECK_BROKER_ANS                                           <!-- 自己点検仲介業者回答パターン -->
+        WHERE
+            BROKER_DIVISION IN                                                  <!-- 業者区分 IN リクエスト.業者区分 -->
+            <foreach item="brokerType" collection="req.brokerTypeList" open="(" separator="," close=")">
+                #{brokerType}
+            </foreach>
+    </select>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：業者区分重複チェック
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSelfInspectItemManageSql007"
+        resultMap="ResultMapIfaSelfInspectItemManageSql007"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0506_02-01#Sql007 */
+            BROKER_CODE
+        FROM (
+            SELECT
+                BROKER_CODE,                                                    <!-- 仲介業者コード -->
+                BROKER_DIVISION                                                 <!-- 業者区分 -->
+            FROM
+                COR_SELF_CHECK_BROKER_ANS                                       <!-- 自己点検仲介業者回答パターン -->
+            WHERE
+                BROKER_DIVISION IN                                              <!-- 業者区分 IN リクエスト.業者区分 -->
+                <foreach item="brokerType" collection="req.brokerTypeList" open="(" separator="," close=")">
+                    #{brokerType}
+                </foreach>
+
+                OR BROKER_DIVISION IN (                                         <!-- 業者区分 IN 検索②.業者区分 -->
+                    SELECT DISTINCT
+                        BROKER_DIVISION                                         <!-- 業者区分 -->
+                    FROM
+                        COR_SELF_CHECK_ITEM                                     <!-- 自己点検項目 -->
+                    WHERE
+                        COR_ENFORCE_DATE = #{req.assignMonthList}               <!-- 登録年月 = リクエスト.登録年月 -->
+                )
+        )
+        GROUP BY
+            BROKER_CODE                                                         <!-- 仲介業者コード -->
+        HAVING
+            COUNT(*) &gt; 1                                                     <!-- 1件 < 集計対象レコード数 --> 
+    </select>
+
+    <!-- 
+        SQLID：Sql008
+        SQL名：登録済み自己点検項目チェック
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSelfInspectItemManageSql008"
+        resultMap="ResultMapIfaSelfInspectItemManageSql008"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0506_02-01#Sql008 */
+            COUNT(*) AS COUNT                                                   <!-- 件数 -->
+        FROM
+            COR_SELF_CHECK_ITEM                                                 <!-- 自己点検項目 -->
+        WHERE
+            COR_ENFORCE_DATE = #{req.assignMonthList}                           <!-- 登録年月 = リクエスト.登録年月 -->
+            AND BROKER_DIVISION IN                                              <!-- 業者区分 IN リクエスト.業者区分 -->
+            <foreach item="brokerType" collection="req.brokerTypeList" open="(" separator="," close=")">
+                #{brokerType}
+            </foreach>
+    </select>
+
+    <!-- 
+        SQLID：Sql009
+        SQL名：登録済み自己点検項目データ削除
+        SQLタイプ：delete
+    -->
+    <delete
+        id="deleteIfaSelfInspectItemManageSql009"
+        statementType="PREPARED"
+    >
+        DELETE /* @SQLID=SUB0506_02-01#Sql009 */
+        FROM
+            COR_SELF_CHECK_ITEM
+        WHERE
+            COR_ENFORCE_DATE = #{req.assignMonthList}                           <!-- 登録年月 = リクエスト.登録年月 -->
+            AND BROKER_DIVISION IN                                              <!-- 業者区分 IN リクエスト.業者区分 -->
+            <foreach item="brokerType" collection="req.brokerTypeList" open="(" separator="," close=")">
+                #{brokerType}
+            </foreach>
+    </delete>
+
+</mapper>

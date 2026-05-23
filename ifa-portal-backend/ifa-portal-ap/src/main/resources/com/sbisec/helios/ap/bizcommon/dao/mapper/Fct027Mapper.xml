@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct027Mapper">
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct027Sql001ResponseModel" id="sql001Response">
+        <result property="brandName" column="BRAND_NAME"/>
+    </resultMap>
+    
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct027Sql002ResponseModel" id="sql002Response">
+        <result property="regKbn" column="REG_KBN"/>
+        <result property="mktIppanLoanKbnTky" column="MKT_IPPAN_LOAN_KBN_TKY"/>
+        <result property="mktIppanLoanKbnNgy" column="MKT_IPPAN_LOAN_KBN_NGY"/>
+        <result property="mktIppanLoanKbnFko" column="MKT_IPPAN_LOAN_KBN_FKO"/>
+        <result property="mktIppanLoanKbnSpr" column="MKT_IPPAN_LOAN_KBN_SPR"/>
+        <result property="sorServiceKbn" column="SOR_SERVICE_KBN"/>
+        <result property="premiumShortSellingKbn" column="PREMIUM_SHORT_SELLING_KBN"/>
+        <result property="bsUnit" column="B_S_UNIT"/>
+        <result property="mktLoanKbnTky" column="MKT_LOAN_KBN_TKY"/>
+    </resultMap>
+    
+     <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct027Sql003ResponseModel" id="sql003Response">
+        <result property="mktLoanKbnPts" column="MKT_LOAN_KBN_PTS"/>
+        <result property="mktIppanLoanKbnPts" column="MKT_IPPAN_LOAN_KBN_PTS"/>
+    </resultMap>
+
+    <!-- Fct027 SQL001.銘柄属性情報取得 -->
+    <select id="getFct027Sql001" resultMap="sql001Response" statementType="PREPARED">
+        SELECT /* @SQLID=FCT027#SQL001 */
+            BRAND_NAME
+        FROM
+            ETINTRA.STAR_BRAND_MASTER
+        WHERE
+            SUBSTR(COMPANY_CD, -4) = #{Fct027Sql001RequestModel.brandCodeFirst}
+        AND NEW_OLD_CLASSIFY = #{Fct027Sql001RequestModel.brandCodeLast}
+        AND RIGHT_CLASSIFY = ' '
+        AND PRODUCT_CLASSIFY = 'K'
+        AND DOMESTIC_FOREIGN_CLASSIFY = '0'
+    </select>
+    
+    <!-- Fct027 SQL002.株式詳細マスタ取得 -->
+    <select id="getFct027Sql002" resultMap="sql002Response" statementType="PREPARED">
+        SELECT /* @SQLID=FCT027#SQL002 */
+            REG_KBN
+          , MKT_IPPAN_LOAN_KBN_TKY
+          , MKT_IPPAN_LOAN_KBN_NGY
+          , MKT_IPPAN_LOAN_KBN_FKO
+          , MKT_IPPAN_LOAN_KBN_SPR
+          , SOR_SERVICE_KBN
+          , PREMIUM_SHORT_SELLING_KBN
+          , B_S_UNIT
+          , MKT_LOAN_KBN_TKY
+        FROM
+            STOCK_DETAIL_MASTER
+        WHERE
+            SEC_CODE = TRIM(#{Fct027Sql002RequestModel.brandCodeFirst})
+    </select>
+    
+    <!-- Fct027 SQL003.PTS銘柄マスタ取得 -->
+    <select id="getFct027Sql003" resultMap="sql003Response" statementType="PREPARED">
+        SELECT /* @SQLID=FCT027#SQL003 */
+            MKT_LOAN_KBN_PTS
+          , MKT_IPPAN_LOAN_KBN_PTS
+        FROM
+            PTS_BRAND_MASTER
+        WHERE
+            SEC_CODE = TRIM(#{Fct027Sql003RequestModel.brandCodeFirst})
+    </select>
+    
+
+</mapper>

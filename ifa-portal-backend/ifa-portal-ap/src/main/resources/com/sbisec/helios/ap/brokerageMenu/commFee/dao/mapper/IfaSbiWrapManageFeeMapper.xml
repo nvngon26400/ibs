@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB020504-01
+    画面名：SBIラップ管理報酬
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.commFee.dao.mapper.IfaSbiWrapManageFeeMapper">
+
+    <resultMap id="ResultMapIfaSbiWrapManageFeeSql001" type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaSbiWrapManageFeeSql001ResponseModel" >
+    </resultMap>
+
+
+    <!--
+        SQLID：SQL001
+        SQL名：SBIラップ管理報酬情報データリスト取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSbiWrapManageFeeSql001" resultMap="ResultMapIfaSbiWrapManageFeeSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020504-01#SQL001 */
+            *
+        FROM
+            (
+                SELECT
+                    count(*) over () as totalRow
+                    , A.BROKER_CODE
+                    , A.BROKER_NAME
+                    , A.BROKER_CHARGE_CODE
+                    , A.BROKER_CHARGE_NAME
+                    , A.BUTEN_CODE
+                    , A.ACCOUNT_NUMBER
+                    , A.DEALER_NUMBER
+                    , A.NAME_KANJI
+                    , A.SUM_DATE AS SUM_DATE
+                    , B.ADVISORY_FEE_COLLECTION_ID
+                    , C.NAME AS ADVISORY_SERVICE_ID
+                    , A.FEE
+                FROM
+                    T_REWARD_COMMISSION A
+                    <if test='req.authority == "3" or req.authority == "4" or req.authority == "5" or req.authority == "6" or req.authority == "7" or req.authority == "8" or req.authority == "9"'>
+                    INNER JOIN (
+                        SELECT
+                            MSR.BROKER_CODE AS BROKER_CODE_MSR
+                            , MSR.DEALER_NUMBER
+                            , MC1.CODE_2
+                            , MSR.START_DATE_YM AS START_DATE_MSR
+                            , MSR.END_DATE_YM AS END_DATE_MSR
+                            , MC1.START_DATE AS START_DATE_MC1
+                            , MC1.END_DATE AS END_DATE_MC1
+                        FROM
+                            M_SBIWRAP_REWARD MSR
+                            INNER JOIN M_CODE MC1
+                                ON MC1.NAME = MSR.ADVISORY_SERVICE_ID
+                                AND MC1.CODE_1 = '30'
+                                AND MC1.CODE_TYPE = '50'
+                                AND MSR.FEE_RATE <![CDATA[ <> ]]> 0
+                                AND MSR.REWARD_RATE <![CDATA[ <> ]]> 0
+                    ) T
+                        ON A.BROKER_CODE = T.BROKER_CODE_MSR
+                        AND A.DEALER_NUMBER = T.DEALER_NUMBER
+                        AND A.KBN_CD = T.CODE_2
+                        AND A.SUM_DATE &gt;= T.START_DATE_MC1
+                        AND A.SUM_DATE &lt;= T.END_DATE_MC1
+                        AND TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM') &gt;= T.START_DATE_MC1
+                        AND TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM') &lt;= T.END_DATE_MC1
+                        AND A.SUM_DATE &gt;= T.START_DATE_MSR
+                        AND A.SUM_DATE &lt;= T.END_DATE_MSR
+                        AND TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM') &gt;= T.START_DATE_MSR
+                        AND TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMM') &lt;= T.END_DATE_MSR
+                    </if>
+                    LEFT OUTER JOIN T_TRC_SAFI_REF B
+                        ON A.RECORD_ID = B.RECORD_ID
+                        AND A.SUM_DATE = B.ADVISORY_FEE_COLLECTION_DATE
+                    LEFT OUTER JOIN M_CODE C
+                        ON TO_NUMBER(A.SUM_DATE) BETWEEN TO_NUMBER(C.START_DATE) AND TO_NUMBER(C.END_DATE)
+                        AND C.CODE_2 = A.KBN_CD
+                        AND C.CODE_1 = '30'
+                        AND C.CODE_TYPE = '50'
+                WHERE
+                    A.PRODUT_CD = '30'
+                    <if test='req.butenCode != "" and req.butenCode != null'>
+                    AND A.BUTEN_CODE = #{req.butenCode}
+                    </if>
+                    <if test='req.accountNumber != "" and req.accountNumber != null'>
+                    AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                    </if>
+                    AND TO_CHAR(A.SUM_DATE) &gt;= REPLACE(#{req.registeredDateFrom}, '/')
+                    AND TO_CHAR(A.SUM_DATE) &lt;= REPLACE(#{req.registeredDateTo}, '/')
+                    <choose>
+                        <when test='req.authority == "1"'>
+                            AND 1 = 1
+                        </when>
+                        <when test='req.authority == "3" or req.authority == "4" or req.authority == "5"'>
+                            AND (BROKER_CODE IN
+                            <foreach item="brokerChargeList" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index%1000 == 0 and index!=0">
+                                    ) OR BROKER_CODE IN(
+                                </if>
+                                <if test="index%1000 != 0">
+                                    ,
+                                </if>
+                                #{brokerChargeList.brokerCode}
+                            </foreach>
+                            )
+                        </when>
+                        <otherwise>
+                            AND ((BROKER_CODE, BROKER_CHARGE_CODE) IN
+                            <foreach item="brokerChargeList" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index%1000 == 0 and index!=0">
+                                    ) OR (BROKER_CODE, BROKER_CHARGE_CODE) IN(
+                                </if>
+                                <if test="index%1000 != 0">
+                                    ,
+                                </if>
+                                (#{brokerChargeList.brokerCode}, #{brokerChargeList.empCode})
+                            </foreach>
+                            )
+                        </otherwise>
+                    </choose>
+                    <if test='req.brokerCode != "" and req.brokerCode != null and req.chkBrokerCodeExclude == "false"'>
+                    AND A.BROKER_CODE IN
+                    <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                    #{brokerCode}
+                    </foreach>
+                    </if>
+                    <if test='req.brokerCode != "" and req.brokerCode != null and req.chkBrokerCodeExclude == "true"'>
+                    AND A.BROKER_CODE NOT IN
+                    <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                    #{brokerCode}
+                    </foreach>
+                    </if>
+                ORDER BY
+                    A.SUM_DATE DESC
+                    , A.BROKER_BRANCH_CODE ASC
+                    , A.BUTEN_CODE ASC
+                    , A.ACCOUNT_NUMBER ASC
+            )
+        WHERE
+            ROWNUM &lt;= #{req.querySizeLimit}
+    </select>
+</mapper>

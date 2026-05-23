@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0106-04
+    画面名：接触履歴入力確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaContactConfirmMapper">
+    <!-- 
+         SQLID:Sql001
+         SQL名:問合せカテゴリ(中分類コード)取得
+         SQLタイプ:select
+    -->
+    <resultMap id="ResultMapIfaContactConfirmSql001" 
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactConfirmSql001ResponseModel" >
+        <result property="toiawaseMei" column="TOIAWASE_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <select id="selectIfaContactConfirmSql001" resultMap="ResultMapIfaContactConfirmSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-04#SQL001 */
+             TOIAWASE_CD                                                <!-- 問合せカテゴリコード -->
+            ,TOIAWASE_MEI                                               <!-- カテゴリー名称 -->
+        FROM
+            CORDYS.TB_QUESTION_MASTER_IFA                               <!-- 【IFA問合せマスタ】 -->
+        WHERE
+            TOIAWASE_D = RPAD(#{req.toiawaseD}, 5, ' ')                 <!-- 問合せカテゴリ(大分類) -->
+            AND TOIAWASE_KBN = #{req.toiawaseKbn}                       <!-- 問合せ区分 -->
+            AND SAKUJO_FLG = #{req.sakujoFlg}                           <!-- 削除フラグ -->
+    </select>
+
+    <!-- 
+        SQLID:Sql002
+        SQL名:問合せ情報登録
+        SQLタイプ:insert
+    -->
+    <insert id="insertIfaContactConfirmSql002" useGeneratedKeys="true" keyColumn="IFA_TOIAWASE_NO" keyProperty="req.ifaToiawaseNo" statementType="PREPARED">
+        INSERT INTO CORDYS.TB_QUESTION_IFA (
+             IFA_TOIAWASE_NO                                            <!-- IFA問合せNO -->
+            ,TOIAWASE_NO                                                <!-- 問合せNO -->
+            ,KOKYAKU_ID                                                 <!-- 顧客ID -->
+            ,USER_ID                                                    <!-- ユーザＩＤ -->
+            ,KOSIN_USER_ID                                              <!-- 更新ユーザID -->
+            ,SAKUJO_USER_ID                                             <!-- 削除ユーザID -->
+            ,TOIAWASE_CD                                                <!-- 問合せカテゴリコード（中） -->
+            ,TOIAWASE_MEI                                               <!-- カテゴリー名称（中） -->
+            ,TOIAWASE_D_CD                                              <!-- 問合せカテゴリコード（大） -->
+            ,TOIAWASE_D_MEI                                             <!-- カテゴリー名称（大） -->
+            ,TOIAWASE_NAIYOU                                            <!-- 問合せ内容 -->
+            ,TOIAWASE_NICHIJI                                           <!-- 問合せ日時 -->
+            ,JUUYOUDO                                                   <!-- 重要度 -->
+            ,CREAM                                                      <!-- クレーム -->
+            ,REQUEST                                                    <!-- リクエスト -->
+            ,HOUKOU                                                     <!-- 方向 -->
+            ,TAIOU_STS                                                  <!-- 対応ステータス -->
+            ,TOUROKU_NICHIJI                                            <!-- 登録日時 -->
+            ,HENKOU_NICHIJI                                             <!-- 変更日時 -->
+            ,SAKUJO_NICHIJI                                             <!-- 削除日時 -->
+            ,SAKUJO_FLG                                                 <!-- 削除フラグ -->
+            ,HOUMONBI                                                   <!-- 訪問日 -->
+            ,NEXT_HOUMONBI                                              <!-- 次回訪問予定日 -->
+            ,TOIAWASE_S_CD                                              <!-- 問合せカテゴリコード（小） -->
+            ,TOIAWASE_S_MEI                                             <!-- カテゴリー名称（小） -->
+            ,SESSYOKU_KEIRO                                             <!-- 接触経路 -->
+            ,IFA_NYUURYOKU_FLG                                          <!-- IFA入力フラグ -->
+            ,CCS_USER_ID                                                <!-- CCSユーザID -->
+            ,CCS_KOSIN_USER_ID                                          <!-- CCS更新ユーザID -->
+            ,CCS_SAKUJO_USER_ID                                         <!-- CCS削除ユーザID -->
+            ,USER_NAME                                                  <!-- ユーザ名 -->
+            ,BUTEN_CODE                                                 <!-- 部店コード -->
+            ,ACCOUNT_NUMBER                                             <!-- 口座番号 -->
+            ,BROKER_CODE                                                <!-- 仲介業者コード -->
+            ,INTERMEDIARY_EMP_CD                                        <!-- 仲介業者営業員コード -->
+            ,NAME_KANJI                                                 <!-- 顧客名_姓名(漢字) -->
+            ,NAME_KANA                                                  <!-- 顧客名_姓名(カナ) -->
+        )
+        VALUES (
+             SEQ_TB_QUESTION_IFA.NEXTVAL                                <!-- IFA問合せNO -->
+            ,#{req.toiawaseNo}                                          <!-- 問合せNO -->
+            ,#{req.kokyakuId}                                           <!-- 顧客ID -->
+            ,#{req.userId}                                              <!-- ユーザＩＤ -->
+            ,#{req.kosinUserId}                                         <!-- 更新ユーザID -->
+            ,#{req.sakujoUserId}                                        <!-- 削除ユーザID -->
+            ,#{req.toiawaseCd}                                          <!-- 問合せカテゴリコード（中） -->
+            ,#{req.toiawaseMei}                                         <!-- カテゴリー名称（中） -->
+            ,#{req.toiawaseDCd}                                         <!-- 問合せカテゴリコード（大） -->
+            ,#{req.toiawaseDMei}                                        <!-- カテゴリー名称（大） -->
+            ,#{req.toiawaseNaiyou}                                      <!-- 問合せ内容 -->
+            ,TO_DATE(#{req.toiawaseNichiji}, 'YYYY/MM/DD HH24:MI:SS')   <!-- 問合せ日時 -->
+            ,#{req.juuyoudo}                                            <!-- 重要度 -->
+            ,#{req.cream}                                               <!-- クレーム -->
+            ,#{req.request}                                             <!-- リクエスト -->
+            ,#{req.houkou}                                              <!-- 方向 -->
+            ,#{req.taiouSts}                                            <!-- 対応ステータス -->
+            ,TO_DATE(#{req.tourokuNichiji}, 'YYYY/MM/DD HH24:MI:SS')    <!-- 登録日時 -->
+            ,TO_DATE(#{req.henkouNichiji}, 'YYYY/MM/DD HH24:MI:SS')     <!-- 変更日時 -->
+            ,TO_DATE(#{req.sakujoNichiji}, 'YYYY/MM/DD HH24:MI:SS')     <!-- 削除日時 -->
+            ,#{req.sakujoFlg}                                           <!-- 削除フラグ -->
+            ,#{req.houmonbi}                                            <!-- 訪問日 -->
+            ,#{req.nextHoumonbi}                                        <!-- 次回訪問予定日 -->
+            ,#{req.toiawaseSCd}                                         <!-- 問合せカテゴリコード（小） -->
+            ,#{req.toiawaseSMei}                                        <!-- カテゴリー名称（小） -->
+            ,#{req.sessyokuKeiro}                                       <!-- 接触経路 -->
+            ,#{req.ifaNyuuryokuFlg}                                     <!-- IFA入力フラグ -->
+            ,#{req.ccsUserId}                                           <!-- CCSユーザID -->
+            ,#{req.ccsKosinUserId}                                      <!-- CCS更新ユーザID -->
+            ,#{req.ccsSakujoUserId}                                     <!-- CCS削除ユーザID -->
+            ,#{req.userName}                                            <!-- ユーザ名 -->
+            ,#{req.butenCode}                                           <!-- 部店コード -->
+            ,#{req.accountNumber}                                       <!-- 口座番号 -->
+            ,#{req.brokerCode}                                          <!-- 仲介業者コード -->
+            ,#{req.intermediaryEmpCd}                                   <!-- 仲介業者営業員コード -->
+            ,#{req.nameKanji}                                           <!-- 顧客名_姓名(漢字) -->
+            ,#{req.nameKana}                                            <!-- 顧客名_姓名(カナ) -->
+        )
+    </insert>
+
+    <!-- 
+        SQLID:Sql003
+        SQL名:問合せ情報更新
+        SQLタイプ:update
+    -->
+    <update id="updateIfaContactConfirmSql003" statementType="PREPARED">
+        UPDATE CORDYS.TB_QUESTION_IFA
+        <set>
+            ,TOIAWASE_CD = #{req.toiawaseCd}                            <!-- 問合せカテゴリコード（中） -->
+            ,TOIAWASE_MEI = #{req.toiawaseMei}                          <!-- カテゴリー名称（中） -->
+            ,TOIAWASE_D_CD = #{req.toiawaseDCd}                         <!-- 問合せカテゴリコード（大） -->
+            ,TOIAWASE_D_MEI = #{req.toiawaseDMei}                       <!-- カテゴリー名称（大） -->
+            ,TOIAWASE_S_CD = #{req.toiawaseSCd}                         <!-- 問合せカテゴリコード（小） -->
+            ,TOIAWASE_S_MEI = #{req.toiawaseSMei}                       <!-- カテゴリー名称（小） -->
+            ,JUUYOUDO = #{req.juuyoudo}                                 <!-- 重要度 -->
+            ,CREAM = #{req.cream}                                       <!-- クレーム -->
+            ,REQUEST = #{req.request}                                   <!-- リクエスト -->
+            ,HOUKOU = #{req.houkou}                                     <!-- 方向 -->
+            ,TAIOU_STS = #{req.taiouSts}                                <!-- 対応ステータス -->
+            ,HENKOU_NICHIJI = TO_DATE(#{req.henkouNichiji}, 'YYYY/MM/DD HH24:MI:SS') <!-- 変更日時 -->
+            ,HOUMONBI = #{req.houmonbi}                                 <!-- 訪問日 -->
+            ,NEXT_HOUMONBI = #{req.nextHoumonbi}                        <!-- 次回訪問予定日 -->
+            ,SESSYOKU_KEIRO = #{req.sessyokuKeiro}                      <!-- 接触経路 -->
+            ,KOSIN_USER_ID = #{req.kosinUserId}                         <!-- 更新ユーザID -->
+            ,CCS_KOSIN_USER_ID = #{req.ccsKosinUserId}                  <!-- CCS更新ユーザID -->
+        </set>
+        WHERE 
+            IFA_TOIAWASE_NO = #{req.ifaToiawaseNo}                      <!-- IFA問合せNO -->
+    </update>
+
+    <!-- 
+        SQLID:Sql004
+        SQL名:回答情報登録
+        SQLタイプ:insert
+    -->
+    <insert id="insertIfaContactConfirmSql004" useGeneratedKeys="true" keyColumn="IFA_KAITOU_NO" keyProperty="req.ifaKaitouNo" statementType="PREPARED">
+        INSERT INTO CORDYS.TB_ANSWER_IFA (
+             IFA_TOIAWASE_NO                                            <!-- IFA問合せNO -->
+            ,TOIAWASE_NO                                                <!-- 問合せNO -->
+            ,IFA_KAITOU_NO                                              <!-- IFA回答NO -->
+            ,KAITOU_NO                                                  <!-- 回答NO -->
+            ,USER_ID                                                    <!-- ユーザＩＤ -->
+            ,KOSIN_USER_ID                                              <!-- 更新ユーザID -->
+            ,SAKUJO_USER_ID                                             <!-- 削除ユーザID -->
+            ,KAITOU_NAIYOU                                              <!-- 回答内容 -->
+            ,KAITOU_NICHIJI                                             <!-- 回答日時 -->
+            ,TOUROKU_NICHIJI                                            <!-- 登録日時 -->
+            ,HENKOU_NICHIJI                                             <!-- 変更日時 -->
+            ,SAKUJO_NICHIJI                                             <!-- 削除日時 -->
+            ,SAKUJO_FLG                                                 <!-- 削除フラグ -->
+            ,SESSYOKU_KEIRO                                             <!-- 接触経路 -->
+            ,CCS_USER_ID                                                <!-- CCSユーザID -->
+            ,CCS_KOSIN_USER_ID                                          <!-- CCS更新ユーザID -->
+            ,CCS_SAKUJO_USER_ID                                         <!-- CCS削除ユーザID -->
+            ,USER_NAME                                                  <!-- ユーザ名 -->
+            ,TOUROKU_GROUP                                              <!-- 登録グループ -->
+        )
+        VALUES (
+             #{req.ifaToiawaseNo}                                       <!-- IFA問合せNO -->
+            ,#{req.toiawaseNo}                                          <!-- 問合せNO -->
+            ,SEQ_TB_ANSWER_IFA.NEXTVAL                                  <!-- IFA回答NO -->
+            ,#{req.kaitouNo}                                            <!-- 回答NO -->
+            ,#{req.userId}                                              <!-- ユーザＩＤ -->
+            ,#{req.kosinUserId}                                         <!-- 更新ユーザID -->
+            ,#{req.sakujoUserId}                                        <!-- 削除ユーザID -->
+            ,#{req.kaitouNaiyou}                                        <!-- 回答内容 -->
+            ,TO_DATE(#{req.kaitouNichiji}, 'YYYY/MM/DD HH24:MI:SS')     <!-- 回答日時 -->
+            ,TO_DATE(#{req.tourokuNichiji}, 'YYYY/MM/DD HH24:MI:SS')    <!-- 登録日時 -->
+            ,TO_DATE(#{req.henkouNichiji}, 'YYYY/MM/DD HH24:MI:SS')     <!-- 変更日時 -->
+            ,TO_DATE(#{req.sakujoNichiji}, 'YYYY/MM/DD HH24:MI:SS')     <!-- 削除日時 -->
+            ,#{req.sakujoFlg}                                           <!-- 削除フラグ -->
+            ,#{req.sessyokuKeiro}                                       <!-- 接触経路 -->
+            ,#{req.ccsUserId}                                           <!-- CCSユーザID -->
+            ,#{req.ccsKosinUserId}                                      <!-- CCS更新ユーザID -->
+            ,#{req.ccsSakujoUserId}                                     <!-- CCS削除ユーザID -->
+            ,#{req.userName}                                            <!-- ユーザ名 -->
+            ,#{req.tourokuGroup}                                        <!-- 登録グループ -->
+        )
+    </insert>
+
+    <!-- 
+        SQLID:Sql005
+        SQL名:問合せNO更新
+        SQLタイプ:update
+    -->
+    <update id="updateIfaContactConfirmSql005" statementType="PREPARED">
+        UPDATE CORDYS.TB_QUESTION_IFA
+        <set>
+            TOIAWASE_NO = #{req.toiawaseNo}                             <!-- 問合せNO -->
+        </set>
+        WHERE 
+            IFA_TOIAWASE_NO = #{req.ifaToiawaseNo}                      <!-- IFA問合せNO -->
+    </update>
+
+    <!-- 
+        SQLID:Sql006
+        SQL名:回答NO更新
+        SQLタイプ:update
+    -->
+    <update id="updateIfaContactConfirmSql006" statementType="PREPARED">
+        UPDATE CORDYS.TB_ANSWER_IFA
+        <set>
+             TOIAWASE_NO = #{req.toiawaseNo}                            <!-- 問合せNO -->
+            ,KAITOU_NO = #{req.kaitouNo}                                <!-- 回答NO -->
+        </set>
+        WHERE 
+            IFA_TOIAWASE_NO = #{req.ifaToiawaseNo}                      <!-- IFA問合せNO -->
+            AND IFA_KAITOU_NO = #{req.ifaKaitouNo}                      <!-- IFA回答NO -->
+    </update>
+
+    <!-- 
+         SQLID:Sql008
+         SQL名:CCSログイン用IDの取得
+         SQLタイプ:select
+    -->
+    <resultMap id="ResultMapIfaContactConfirmSql008" 
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactConfirmSql008ResponseModel">
+    </resultMap>
+    <select id="selectIfaContactConfirmSql008" resultMap="ResultMapIfaContactConfirmSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-04#SQL008 */
+             A.CCS_USER_ID AS CCS_USER_ID                                       <!-- B.CCSログイン用ID -->
+            ,TO_CHAR(A.TOUROKU_NICHIJI,'YYYYMMDDHH24MISS') AS TOUROKU_NICHIJI   <!-- A.登録日時 -->
+        FROM
+            CORDYS.TB_QUESTION_IFA  A                                           <!-- 【IFA問合せ】 -->
+        WHERE
+            A.IFA_TOIAWASE_NO = #{req.ifaToiawaseNo}                            <!-- IFA問合せNO -->
+    </select>
+
+    <!-- 
+        SQLID:Sql009
+        SQL名:IFA問合せ・回答エラーテーブル登録
+        SQLタイプ:insert
+    -->
+    <insert id="insertIfaContactConfirmSql009" statementType="PREPARED">
+        INSERT INTO CORDYS.TB_QUESTION_ANSWER_ERR_IFA (
+             PROCESS_ID                                                 <!-- 処理区分 -->
+            ,Q_TOIAWASE_NO                                              <!-- 問合せNO -->
+            ,Q_KOKYAKU_ID                                               <!-- 顧客ID -->
+            ,Q_USER_ID                                                  <!-- ユーザＩＤ -->
+            ,Q_KOSIN_USER_ID                                            <!-- 更新ユーザID -->
+            ,Q_TOIAWASE_CD                                              <!-- 問合せカテゴリコード（中）-->
+            ,Q_TOIAWASE_MEI                                             <!-- カテゴリー名称（中）-->
+            ,Q_TOIAWASE_D_CD                                            <!-- 問合せカテゴリコード（大）-->
+            ,Q_TOIAWASE_D_MEI                                           <!-- カテゴリー名称（大）-->
+            ,Q_TOIAWASE_S_CD                                            <!-- 問合せカテゴリコード（小）-->
+            ,Q_TOIAWASE_S_MEI                                           <!-- カテゴリー名称（小）-->
+            ,Q_TOIAWASE_NAIYOU                                          <!-- 問合せ内容 -->
+            ,Q_TOIAWASE_NICHIJI                                         <!-- 問合せ日時 -->
+            ,Q_JUUYOUDO                                                 <!-- 重要度 -->
+            ,Q_CREAM                                                    <!-- クレーム -->
+            ,Q_REQUEST                                                  <!-- リクエスト -->
+            ,Q_HOUKOU                                                   <!-- 方向 -->
+            ,Q_TAIOU_STS                                                <!-- 対応ステータス -->
+            ,Q_HOUMONBI                                                 <!-- 訪問日 -->
+            ,Q_NEXT_HOUMONBI                                            <!-- 次回訪問予定日 -->
+            ,Q_TOUROKU_NICHIJI                                          <!-- 問合せ登録日時 -->
+            ,Q_HENKOU_NICHIJI                                           <!-- 問合せ変更日時 -->
+            ,A_TOIAWASE_NO                                              <!-- 問合せNO -->
+            ,A_KAITOU_NO                                                <!-- 回答NO -->
+            ,A_USER_ID                                                  <!-- ユーザＩＤ -->
+            ,A_KOSIN_USER_ID                                            <!-- 更新ユーザID -->
+            ,A_KAITOU_NAIYOU                                            <!-- 回答内容 -->
+            ,A_KAITOU_NICHIJI                                           <!-- 回答日時 -->
+            ,A_TOUROKU_NICHIJI                                          <!-- 回答登録日時 -->
+            ,A_HENKOU_NICHIJI                                           <!-- 回答変更日時 -->
+            ,TOUROKU_NICHIJI                                            <!-- 登録日時 -->
+            ,HENKOU_NICHIJI                                             <!-- 変更日時 -->
+            ,SAKUJO_NICHIJI                                             <!-- 削除日時 -->
+            ,SYORI_FLG                                                  <!-- 処理フラグ -->
+            ,API_FLG                                                    <!-- APIフラグ -->
+            ,API_ERR_CNT												<!-- APIエラー回数 -->
+            ,EXP_ERR_CNT												<!-- Exception回数 -->
+        )
+        VALUES (
+             #{req.processId}                                           <!-- 処理区分 -->
+            ,#{req.qToiawaseNo}                                         <!-- 問合せNO -->
+            ,#{req.qKokyakuId}                                          <!-- 顧客ID -->
+            ,#{req.qUserId}                                             <!-- ユーザＩＤ -->
+            ,#{req.qKosinUserId}                                        <!-- 更新ユーザID -->
+            ,#{req.qToiawaseCd}                                         <!-- 問合せカテゴリコード（中）-->
+            ,#{req.qToiawaseMei}                                        <!-- カテゴリー名称（中）-->
+            ,#{req.qToiawaseDCd}                                        <!-- 問合せカテゴリコード（大）-->
+            ,#{req.qToiawaseDMei}                                       <!-- カテゴリー名称（大）-->
+            ,#{req.qToiawaseSCd}                                        <!-- 問合せカテゴリコード（小）-->
+            ,#{req.qToiawaseSMei}                                       <!-- カテゴリー名称（小）-->
+            ,#{req.qToiawaseNaiyou}                                     <!-- 問合せ内容 -->
+            ,TO_DATE(#{req.qToiawaseNichiji}, 'YYYY/MM/DD HH24:MI:SS')  <!-- 問合せ日時 -->
+            ,#{req.qJuuyoudo}                                           <!-- 重要度 -->
+            ,#{req.qCream}                                              <!-- クレーム -->
+            ,#{req.qRequest}                                            <!-- リクエスト -->
+            ,#{req.qHoukou}                                             <!-- 方向 -->
+            ,#{req.qTaiouSts}                                           <!-- 対応ステータス -->
+            ,#{req.qHoumonbi}                                           <!-- 訪問日 -->
+            ,#{req.qNextHoumonbi}                                       <!-- 次回訪問予定日 -->
+            ,TO_DATE(#{req.qTourokuNichiji}, 'YYYY/MM/DD HH24:MI:SS')   <!-- 問合せ登録日時 -->
+            ,TO_DATE(#{req.qHenkouNichiji}, 'YYYY/MM/DD HH24:MI:SS')    <!-- 問合せ変更日時 -->
+            ,#{req.aToiawaseNo}                                         <!-- 問合せNO -->
+            ,#{req.aKaitouNo}                                           <!-- 回答NO -->
+            ,#{req.aUserId}                                             <!-- ユーザＩＤ -->
+            ,#{req.aKosinUserId}                                        <!-- 更新ユーザID -->
+            ,#{req.aKaitouNaiyou}                                       <!-- 回答内容 -->
+            ,TO_DATE(#{req.aKaitouNichiji}, 'YYYY/MM/DD HH24:MI:SS')    <!-- 回答日時 -->
+            ,TO_DATE(#{req.aTourokuNichiji}, 'YYYY/MM/DD HH24:MI:SS')   <!-- 回答登録日時 -->
+            ,TO_DATE(#{req.aHenkouNichiji}, 'YYYY/MM/DD HH24:MI:SS')    <!-- 回答変更日時 -->
+            ,TO_DATE(#{req.tourokuNichiji}, 'YYYY/MM/DD HH24:MI:SS')    <!-- 登録日時 -->
+            ,TO_DATE(#{req.henkouNichiji}, 'YYYY/MM/DD HH24:MI:SS')     <!-- 変更日時 -->
+            ,TO_DATE(#{req.sakujoNichiji}, 'YYYY/MM/DD HH24:MI:SS')     <!-- 削除日時 -->
+            ,#{req.syoriFlg}                                            <!-- 処理フラグ -->
+            ,#{req.apiFlg}                                              <!-- APIフラグ -->
+            ,#{req.apiErrCnt}											<!-- APIエラー回数 -->
+            ,#{req.expErrCnt}											<!-- Exception回数 -->
+        )
+    </insert>
+
+    <!-- 
+         SQLID:Sql010
+         SQL名:登録グループ取得
+         SQLタイプ:select
+    -->
+    <resultMap id="ResultMapIfaContactConfirmSql010" 
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactConfirmSql010ResponseModel" >
+    </resultMap>
+    <select id="selectIfaContactConfirmSql010" resultMap="ResultMapIfaContactConfirmSql010" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-04#SQL010 */
+            NVL(MAX(TOUROKU_GROUP),0) + 1 AS TOUROKU_GROUP              <!-- 登録グループ -->
+        FROM
+            CORDYS.TB_ANSWER_IFA                                        <!-- 【IFA回答】 -->
+        WHERE
+            IFA_TOIAWASE_NO = #{req.ifaToiawaseNo}                          <!-- IFA問合せNO -->
+    </select>
+
+    <!-- 
+        SQLID:Sql011
+        SQL名:IFA接触履歴修正履歴テーブル登録
+        SQLタイプ:insert
+    -->
+    <insert id="insertIfaContactConfirmSql011" statementType="PREPARED">
+        INSERT INTO CORDYS.TB_CONTACT_IFA_HIS(
+             IFA_TOIAWASE_NO                                            <!-- IFA問合せNO -->
+            ,TOIAWASE_NO                                                <!-- 問合せNO -->
+            ,NYUURYOKU_DATE                                             <!-- 入力日時 -->
+            ,NYUURYOKUSYA_ID                                            <!-- 入力者 -->
+            ,NYUURYOKUSYA_NAME                                          <!-- 入力者名 -->
+            ,TOUROKU_GROUP                                              <!-- 登録グループ -->
+            ,SYUUSEI_DATE                                               <!-- 修正日時 -->
+            ,SYUUSEISYA_ID                                              <!-- 修正者 -->
+            ,SYUUSEISYA_NAME                                            <!-- 修正者名 -->
+            ,NAIYOU_1                                                   <!-- 内容1 -->
+            ,NAIYOU_2                                                   <!-- 内容2 -->
+            ,NAIYOU_3                                                   <!-- 内容3 -->
+            ,NAIYOU_4                                                   <!-- 内容4 -->
+            ,NAIYOU_5                                                   <!-- 内容5 -->
+            ,KOKYAKU_ID                                                 <!-- 顧客ID -->
+            ,BUTEN_CODE                                                 <!-- 部店コード -->
+            ,ACCOUNT_NUMBER                                             <!-- 口座番号 -->
+            ,BROKER_CODE                                                <!-- 仲介業者コード -->
+            ,INTERMEDIARY_EMP_CD                                        <!-- 仲介業者営業員コード -->
+            ,NAME_KANJI                                                 <!-- 顧客名_姓名(漢字) -->
+            ,NAME_KANA                                                  <!-- 顧客名_姓名(カナ) -->
+        )
+        VALUES (
+             #{req.ifaToiawaseNo}                                       <!-- IFA問合せNO -->
+            ,#{req.toiawaseNo}                                          <!-- 問合せNO -->
+            ,TO_DATE(#{req.nyuuryokuDate}, 'YYYY/MM/DD HH24:MI:SS')     <!-- 入力日時 -->
+            ,#{req.nyuuryokusyaId}                                      <!-- 入力者 -->
+            ,#{req.nyuuryokusyaName}                                    <!-- 入力者名 -->
+            ,#{req.tourokuGroup}                                        <!-- 登録グループ -->
+            ,TO_DATE(#{req.syuuseiDate}, 'YYYY/MM/DD HH24:MI:SS')       <!-- 修正日時 -->
+            ,#{req.syuuseisyaId}                                        <!-- 修正者 -->
+            ,#{req.syuuseisyaName}                                      <!-- 修正者名 -->
+            ,NVL(#{req.naiyou1}, '-')                                   <!-- 内容1 -->
+            ,#{req.naiyou2}                                             <!-- 内容2 -->
+            ,#{req.naiyou3}                                             <!-- 内容3 -->
+            ,#{req.naiyou4}                                             <!-- 内容4 -->
+            ,#{req.naiyou5}                                             <!-- 内容5 -->
+            ,#{req.kokyakuId}                                           <!-- 顧客ID -->
+            ,#{req.butenCode}                                           <!-- 部店コード -->
+            ,#{req.accountNumber}                                       <!-- 口座番号 -->
+            ,#{req.brokerCode}                                          <!-- 仲介業者コード -->
+            ,#{req.intermediaryEmpCd}                                   <!-- 仲介業者営業員コード -->
+            ,#{req.nameKanji}                                           <!-- 顧客名_姓名(漢字) -->
+            ,#{req.nameKana}                                            <!-- 顧客名_姓名(カナ) -->
+        )
+    </insert>
+</mapper>

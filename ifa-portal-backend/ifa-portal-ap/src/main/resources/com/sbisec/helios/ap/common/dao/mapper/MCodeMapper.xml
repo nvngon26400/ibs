@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MCodeMapper">
+
+	<resultMap id="MCode" type="com.sbisec.helios.ap.common.model.MCode" >
+		<result property="name" column="NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+	</resultMap>
+
+	<select id="getMCodeList" resultMap="MCode" statementType="PREPARED">
+ 
+		SELECT
+			START_DATE,
+			END_DATE,
+			CODE_TYPE,
+			CODE_1,
+			CODE_2,
+			NAME,
+			SYS_USERID,
+			SYS_MACHINEID,
+			SYS_TRIGGER,
+			SYS_TIME,
+			SYS_APPDATE
+		FROM
+		    M_CODE
+		WHERE
+			(START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')) AND ((TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD') &lt;= END_DATE) OR END_DATE IS NULL)
+
+	</select>
+
+</mapper>

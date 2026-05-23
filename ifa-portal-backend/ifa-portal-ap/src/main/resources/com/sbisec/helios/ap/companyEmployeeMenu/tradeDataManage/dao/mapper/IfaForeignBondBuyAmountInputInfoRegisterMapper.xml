@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0504_04-02_1
+    画面名：外債買付代金入力情報登録
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.tradeDataManage.dao.mapper.IfaForeignBondBuyAmountInputInfoRegisterMapper">
+
+	<resultMap type="com.sbisec.helios.ap.companyEmployeeMenu.tradeDataManage.dao.model.IfaForeignBondBuyAmountInputInfoRegisterSql001ResponseModel" id="ResultMapIfaForeignBondBuyAmountInputInfoRegisterSql001">
+		<result property="nameKanji" column="NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+	</resultMap>
+
+	<select id="selectIfaForeignBondBuyAmountInputInfoRegisterSql001" statementType="PREPARED" resultMap="ResultMapIfaForeignBondBuyAmountInputInfoRegisterSql001" >
+		SELECT /* @SQLID=SUB0504_04-02_1#Sql001 */
+			MUAI.NAME_KANJI,
+			MUAI.BUTEN_CODE,
+			MUAI.ACCOUNT_NUMBER
+		FROM
+			MEDIATE_USER_ATTRIBUTE_INFO MUAI
+		WHERE
+			MUAI.BUTEN_CODE = #{req.butenCode}
+			AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+	</select>
+
+	<insert id="insertIfaForeignBondBuyAmountInputInfoRegisterSql003" statementType="PREPARED">
+		INSERT INTO T_BOND_F_SALES_PRICE ( /* @SQLID=SUB0504_04-02_1#Sql003 */
+			IFA_ACCOUNT_SEQ_NO
+			,BUTEN_CODE
+			,ACCOUNT_NUMBER
+			,AMOUNT
+			,BASE_DATE
+			,ORDER_TIME
+			,CREATE_TIME
+			,CREATE_USER
+			,UPDATE_TIME
+			,UPDATE_USER
+		)
+		(
+		SELECT
+			IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') || LPAD(CORDYS.SEQ_T_BOND_F_SALES_PRICE.NEXTVAL,5,'0')
+			,#{req.butenCode}
+			,TO_NUMBER(#{req.accountNumber})
+			,#{req.amount}
+			,TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYYMMDD')
+			,IFA_DATE_UTIL.IFA_GET_DATE
+			,IFA_DATE_UTIL.IFA_GET_DATE
+			,#{req.createUser}
+			,IFA_DATE_UTIL.IFA_GET_DATE
+			,#{req.updateUser}
+		FROM
+			DUAL
+		)
+	</insert>
+	
+	<select id="selectIfaForeignBondBuyAmountInputInfoRegisterSql002" resultType="Integer" statementType="PREPARED">
+		SELECT   /* @SQLID=SUB0504_04-02_1#Sql002 */
+			COUNT(1)
+		FROM
+			MEDIATE_USER_ATTRIBUTE_INFO MUAI 
+		WHERE
+			1 = 1
+		<if test="req.butenCode != null">
+			AND MUAI.BUTEN_CODE = #{req.butenCode}
+		</if>
+		<if test="req.accountNumber != null">
+			AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+		</if>
+	</select>
+</mapper>

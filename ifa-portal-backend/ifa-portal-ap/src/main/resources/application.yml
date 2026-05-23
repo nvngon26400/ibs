@@ -1,0 +1,126 @@
+server:
+  port: 8089
+  servlet:
+    context-path: /
+    session:
+      timeout: 18000
+    application-display-name: helios-ap
+#----------------------------------------
+# Framework common config
+#----------------------------------------
+spring:
+  jmx:
+    enabled: false
+  thymeleaf:
+    suffix: .html
+    cache: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 10000MB
+  messages:
+    encoding: utf-8
+    basename: i18n/messages
+    fallback-to-system-locale: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  redis:
+    host: localhost
+    port: 6379
+#----------------------------------------
+# Database source config infomaction
+#----------------------------------------
+  datasource:
+    cordys:
+      name: cordys
+      jndi-name: '@datasource.cordys.jndiName@'
+      url: '@datasource.cordys.url@'
+      username: '@datasource.cordys.username@'
+      password: '@datasource.cordys.password@'
+      driver-class-name: '@datasource.cordys.driverClassName@'
+      mybatis:
+        type-aliases-package: com.sbibits.earth.dao.typehandler,com.sbibits.horus.ap.common.typehandler
+        type-handlers-package: com.sbibits.earth.dao.typehandler,com.sbibits.horus.ap.common.typehandler
+        configuration:
+          cache-enabled: false
+          map-underscore-to-camel-case: true
+          use-column-label: true
+          jdbc-type-for-null: 'NULL'
+      transaction:
+        default-timeout: 60
+    etintra:
+      name: etintra
+      jndi-name: '@datasource.etintra.jndiName@'
+      url: '@datasource.etintra.url@'
+      username: '@datasource.etintra.username@'
+      password: '@datasource.etintra.password@'
+      driver-class-name: '@datasource.etintra.driverClassName@'
+      mybatis:
+        type-aliases-package: com.sbibits.earth.dao.typehandler,com.sbisec.helios.ap.common.typehandler
+        type-handlers-package: com.sbibits.earth.dao.typehandler,com.sbisec.helios.ap.common.typehandler
+        configuration:
+          cache-enabled: false
+          map-underscore-to-camel-case: true
+          use-column-label: true
+          jdbc-type-for-null: 'NULL'
+      transaction:
+        default-timeout: 60
+    mariadb:
+      name: mariadb
+      jndi-name: '@datasource.mariadb.jndiName@'
+      url: '@datasource.mariadb.url@'
+      username: '@datasource.mariadb.username@'
+      password: '@datasource.mariadb.password@'
+      driver-class-name: '@datasource.mariadb.driverClassName@'
+      mybatis:
+        type-aliases-package: com.sbibits.earth.dao.typehandler,com.sbisec.helios.ap.common.typehandler
+        type-handlers-package: com.sbibits.earth.dao.typehandler,com.sbisec.helios.ap.common.typehandler
+        configuration:
+          cache-enabled: false
+          map-underscore-to-camel-case: true
+          use-column-label: true
+          jdbc-type-for-null: 'NULL'
+#----------------------------------------
+# Async config
+#----------------------------------------
+  task:
+    execution:
+      pool:
+        core-size: 64
+      shutdown:
+        await-termination: true
+#----------------------------------------
+# health check config
+#----------------------------------------
+management:
+  health:
+    defaults:
+      enabled: false
+  endpoint:
+    mappings:
+      enabled: true
+#----------------------------------------
+# Custom variable
+#----------------------------------------
+#security-ignore: /**, /actuator/health
+cors:
+  # Countparty Web Service, Ceres Ap Service
+  addMapping: /**
+  allowedMethods: HEAD,GET,POST,OPTIONS
+  allowedHeaders: Authorization,Cache-Control,X-User-Agent,Content-Type,X-XSRF-TOKEN,X-Token
+  maxAge: 3600
+  allowCredentials: true
+mail:
+  protocol: smtp
+  timeout: 3000
+  interval: 100
+app:
+  security:
+    ignore: /int/api/*, /actuator/health, /h2-console/*
+  xss:
+    enabled: true
+    excludes: 
+  timeout: 18000
+  version: '@version@'
+responsivesite:
+  commonKey: 'Z15zF3vMGmnfKwki'

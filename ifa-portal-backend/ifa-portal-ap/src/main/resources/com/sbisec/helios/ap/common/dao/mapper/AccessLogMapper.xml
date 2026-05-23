@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.AccessLogMapper">
+    <!-- アクセスログテーブル挿入SQL -->
+    <insert id="insert" parameterType="com.sbisec.helios.ap.common.dao.model.AccessLogEntity" statementType=" PREPARED">
+        INSERT INTO
+            TB_ACCESS_LOG
+        VALUES (
+            TO_CHAR(SYSDATE, 'YYYYMMDD')
+            , (
+                SELECT
+                    NVL(MAX(SERIAL_NUMBERS), 0) + 1
+                FROM
+                    TB_ACCESS_LOG
+                WHERE
+                    BASE_DAY = TO_CHAR(SYSDATE, 'YYYYMMDD')
+            )
+            , SYSDATE
+            , #{userId}
+            , #{userNm}
+            , #{privId}
+            , #{menuId}
+            , #{functionNm}
+            , #{methodNm}
+            , #{actionContent}
+            , #{position}
+            , #{parameters}
+        )
+    </insert>
+</mapper>

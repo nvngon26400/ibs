@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020302_0201-01
+    画面名：取引履歴
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaTradeHistoryMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaTradeHistorySql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaTradeHistorySql001ResponseModel" >
+        <result property="brokerName" column="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="brokerChargeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="courceName" column="courceName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKanji" column="customerNameKanji" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="customerNameKana" column="customerNameKana" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="tradeTypeName" column="tradeTypeName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="branchName" column="branchName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="securityClass" column="securityClass" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="bondIntermediary" column="bondIntermediary" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="usStockStoreEntrust" column="usStockStoreEntrust" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="visibleButenCode" column="visibleButenCode" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="depositName" column="depositName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaTradeHistorySql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaTradeHistorySql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaTradeHistorySql003" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaTradeHistorySql003ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：取引履歴情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTradeHistorySql001" resultMap="ResultMapIfaTradeHistorySql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0201-01#Sql001 */
+            /*+
+                FULL(A@SEL$3)
+                OPT_PARAM('_optimizer_skip_scan_enabled', 'false')
+            */
+          *
+        FROM
+        (
+            SELECT 
+              count(*) over() as totalRow                                                   --  総件数
+              ,VBB.*                                                                        --  全件
+              ,SCDR.VISIBLE_BUTEN_CODE as visibleButenCode                                  --  閲覧可能部店コード
+            FROM
+            (
+                SELECT
+                    TD.BROKER_CODE as brokerCode,                                               --01仲介業者コード
+                    TD.BROKER_NAME as brokerName,                                               --02仲介業者名
+                    TD.BROKER_BRANCH_CODE as branchCode,                                        --  仲介業支店コード
+                    TD.BROKER_CHARGE_CODE as empCode,                                           --03営業員コード
+                    TD.BROKER_CHARGE_NAME as brokerChargeName,                                  --04営業員名
+                    TD.CUSTOMER_ID as kokyakuId,                                                --  顧客ID
+                    TD.BUTEN_CODE as buten,                                                     --05部店
+                    TD.ACCOUNT_NUMBER as accountNumber,                                         --06口座番号
+                    MUAI.NAME_KANJI as customerNameKanji,                                       --顧客名_姓名(漢字)
+                    MUAI.NAME_KANA as customerNameKana,                                         --顧客名_姓名(カナ)
+                    TD.TC_COMP_RANK as tcCompRank,                                              --07Cランク
+                    TD.DEALER_NUMBER as dealerNumber,                                           --08扱者コード
+                    TD.CUSTOMER_ATTRIBUTE as customerAttribute,                                 --  コースコード
+                    TD.CUSTOMER_ATTRIBUTE_NAME as courseName,                                   --09コース名
+                    TD.PRODUT_CD as productCd,                                                  --  証券種別コード
+                    TD.PRODUT_NAME as securityClass,                                            --10証券種別
+                    TD.BRAND_CODE as brandCode,                                                 --11銘柄コード
+                    TD.BRAND_NAME as brandName,                                                 --12銘柄名
+                    TD.PRODUCT_RANK as productRank,                                             --13商品ランク
+                    TD.PRICE as price,                                                          --17単価
+                    TD.QUANTITY as quantity,                                                    --18数量
+                    TD.TRADE_CD as tradeCd,                                                     --  取引種別コード
+                    TD.TRADE_NAME as tradeTypeName,                                             --14取引種別
+                    TO_CHAR(TO_DATE(TD.TRADE_DATE,'YYYY/MM/DD'),'YYYY/MM/DD') AS tradeDate,     --15約定日
+                    TO_CHAR(TO_DATE(TD.GET_DATE,'YYYY/MM/DD'),'YYYY/MM/DD') AS settlementDate,  --16受渡日
+                    TD.GROSS_AMOUNT_YEN as contractAmountJpyAmount,                             --19約定金額(円貨)
+                    TD.FEE as yenFee,                                                           --20手数料(円貨)
+                    TD.ACCURATE_AMOUNT as yenDeliveryAmount,                                    --21受渡金額(円貨)
+                    TD.CURRENCY as currency,                                                    --22通貨
+                    TD.FOREIGN_GROSSAMOUNT as contractAmountForeign,                            --23約定金額(外貨)
+                    TD.FOREIGN_COMMISSION as foreignFee,                                        --25手数料(外貨)
+                    TD.FOREIGN_NETAMOUNT as foreignDeliveryAmount,                              --24受渡金額(外貨)
+                    TD.EXCHANGE_RATE as fxRate,                                                 --26為替レート
+                    TD.REWARD_RATE as rewardRate,                                               --  報酬率
+                    MB.BRANCH_NAME as branchName,                                               --  仲介業支店名
+                    CASE  TD.PRODUT_CD
+                        WHEN '12' THEN TD.KBN_NM
+                        WHEN '13' THEN TD.KBN_NM
+                        WHEN '14' THEN TD.KBN_NM
+                        WHEN '25' THEN TD.KBN_NM
+                    END as bondIntermediary,                                                    -- 債券　媒介/非媒介
+                    CASE  TD.PRODUT_CD
+                        WHEN '15' THEN TD.KBN_NM
+                    END as usStockStoreEntrust                                                  -- 米国株　店頭/委託
+                    <if test="req.securityClass != null and !req.securityClass.isEmpty()">
+                        <foreach item="item" index="index" collection="req.securityClass" open="" separator="" close="">
+                            <if test="item.id == '14'.toString() and item.isSelected == true">
+                                ,ZSFM.SHIKUMI_SAI_KBN AS structuredBondClassification            -- 仕組債区分
+                            </if>
+                        </foreach>
+                    </if>
+                     ,TD.DEPOSIT_NAME as depositName                                                            --預り区分
+                FROM    
+                    V_TRADE TD
+                    LEFT OUTER JOIN MEDIATE_BRANCH MB
+                        ON TD.BROKER_CODE = MB.BROKER_CODE
+                        AND TD.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                    LEFT OUTER JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI
+                        ON TD.BUTEN_CODE = MUAI.BUTEN_CODE
+                        AND TD.ACCOUNT_NUMBER = MUAI.ACCOUNT_NUMBER
+                        AND TD.BROKER_CODE = MUAI.BROKER_CODE
+                    LEFT OUTER JOIN ZERO_STAR_F_MASTER ZSFM
+                        ON TD.BRAND_CODE = ZSFM.KOYU_CD
+                <where>
+                    1=1
+                    
+                    -- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '0'（と等しい）の場合の条件
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "0"'>
+                        AND
+                        (MUAI.NAME_KANJI = #{req.customerName} OR MUAI.NAME_KANA = #{req.customerName})
+                    </if>
+                    
+                    -- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '1'（で始まる）の場合の条件
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "1"'>
+                        AND
+                        (MUAI.NAME_KANJI like CONCAT(#{req.customerName}, '%') OR MUAI.NAME_KANA like CONCAT(#{req.customerName}, '%'))
+                    </if>
+                    
+                    -- リクエスト.顧客名に値がある　かつ　リクエスト.顧客名検索オプション = '2'（を含む）の場合の条件
+                    <if test='req.customerName != null and req.customerName != "" and req.customerNameSearchType == "2"'>
+                        AND
+                        (MUAI.NAME_KANJI like CONCAT(CONCAT('%', #{req.customerName}), '%') OR MUAI.NAME_KANA like CONCAT(CONCAT('%', #{req.customerName}), '%'))
+                    </if>
+                    
+                    <if test="req.butenCode != null and req.butenCode != ''.toString()">                         --部店コードの指定がある場合
+                          AND TD.BUTEN_CODE =#{req.butenCode}
+                    </if>
+    
+                    <if test="req.accountNumber != null and req.accountNumber != ''.toString()">                 --口座番号の指定がある場合
+                          AND TD.ACCOUNT_NUMBER =　TO_NUMBER(#{req.accountNumber})
+                    </if>
+    
+                    <if test="req.isSecurityClassSelected == true">                       --証券種別の指定がある場合
+                          AND TD.PRODUT_CD IN 
+                          <foreach item="item" index="index" collection="req.securityClass" open="(" separator="," close=")">
+                              <if test="item.isSelected == true">
+                                  #{item.id}
+                              </if>
+                          </foreach>
+                    </if>
+    
+                    <if test="req.brandCode12 != null and req.brandCode12 != ''.toString()">                    --銘柄コードの指定がある場合
+                          AND LTRIM(TD.BRAND_CODE, '0') = LTRIM(#{req.brandCode12}, '0')
+                    </if>
+    
+                    <if test="req.periodDateFrom != null and req.periodDateFrom != ''.toString()">              --期間指定fromの指定がある場合
+                          AND TD.TRADE_DATE &gt;= #{req.periodDateFrom}
+                    </if>
+    
+                    <if test="req.periodDateTo != null and req.periodDateTo != ''.toString()">                  --期間指定toの指定がある場合
+                          AND TD.TRADE_DATE &lt;= #{req.periodDateTo}
+                    </if>
+                    
+                    AND TD.CUSTOMER_ATTRIBUTE IN                                                                --コースリストの件数分、コースを設定
+                    <foreach item="item" index="index" collection="req.course" open="(" separator="," close=")">
+                         <if test="item.isSelected == true">
+                            #{item.id}
+                        </if>
+                    </foreach>
+                    
+                    <if test="req.branchCode != null and req.branchCode != ''.toString()">
+                        AND TD.BROKER_BRANCH_CODE = #{req.branchCode}
+                    </if>
+                    <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                        <choose>
+                            <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                AND TD.BROKER_CODE NOT IN
+                            </when>
+                            <otherwise>
+                                AND TD.BROKER_CODE IN
+                            </otherwise>
+                        </choose>
+                        <foreach item="item" index="index"  collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if> 
+                    <if test="req.empCode != null and req.empCode != ''.toString()">
+                        AND TD.BROKER_CHARGE_CODE = #{req.empCode}
+                    </if>
+                    <choose>
+                        <when test='req.privId == "1"'>
+                            AND 1 = 1
+                        </when>
+                        <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                            AND (TD.BROKER_CODE IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR TD.BROKER_CODE IN(
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                    #{brokerCharge.brokerCode}
+                            </foreach>
+                            )
+                        </when>
+                        <otherwise>
+                            AND ((TD.BROKER_CODE, TD.BROKER_CHARGE_CODE) IN
+                            <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                <if test="index % 1000 == 0 and index != 0">
+                                    ) OR (TD.BROKER_CODE, TD.BROKER_CHARGE_CODE) IN(
+                                </if>
+                                <if test="index % 1000 != 0">
+                                    ,
+                                </if>
+                                    (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                            </foreach>
+                            )
+                        </otherwise>
+                    </choose>
+                </where>
+                ORDER BY                                                                                        --ソートキー（デフォルト）
+                    TD.TRADE_DATE DESC
+                    ,TD.BROKER_CODE ASC
+                    ,TD.BUTEN_CODE ASC
+                    ,TD.ACCOUNT_NUMBER ASC          
+            ) VBB
+            LEFT OUTER JOIN
+                SUB_DEALER_CODE_RELATION_IFAP SCDR
+                    ON VBB.accountNumber = SCDR.ACCOUNT_NUMBER
+                    AND VBB.buten = SCDR.BUTEN_CODE
+            <where>
+                1=1
+                <if test="req.visibleButenCodeList != null and 0 &lt; req.visibleButenCodeList.size() ">
+                    AND SCDR.VISIBLE_BUTEN_CODE　IN
+                    <foreach item="visibleButenCode" index="index" collection="req.visibleButenCodeList" open="(" separator="," close=")">
+                        #{visibleButenCode}
+                    </foreach>
+                </if>
+            </where>
+        )
+        WHERE
+            ROWNUM &lt;= #{req.rownum}
+            
+        
+
+        
+        
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：取引履歴画面コメント取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTradeHistorySql002" resultMap="ResultMapIfaTradeHistorySql002" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB020302_0201-01#Sql002 */
+            NAME AS "comment"
+        FROM
+            M_CODE 
+        WHERE
+            CODE_TYPE = '99'
+            AND CODE_1 = '01'
+            AND CODE_2 = '02'
+    </select>
+    
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：現株ポイント参照可能仲介業者チェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTradeHistorySql003" resultMap="ResultMapIfaTradeHistorySql003" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB020302_0201-01#Sql003 */
+            COUNT(*) AS "count"
+        FROM
+            M_CODE 
+        WHERE
+            START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND END_DATE &gt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND CODE_TYPE = '19'
+            AND CODE_1 = '2'
+            AND CODE_2 = #{req.brokerCode}
+    </select>
+    
+</mapper>

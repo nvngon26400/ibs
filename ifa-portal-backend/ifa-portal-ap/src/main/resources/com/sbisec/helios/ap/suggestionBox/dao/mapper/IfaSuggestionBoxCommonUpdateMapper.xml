@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0511_02-03
+    画面名：皆様からの要望更新
+-->
+<mapper namespace="com.sbisec.helios.ap.suggestionBox.dao.mapper.IfaSuggestionBoxCommonUpdateMapper">
+
+    <resultMap
+        id="ResultMapIfaSuggestionBoxCommonUpdateSql001"
+        type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxCommonUpdateSql001ResponseModel"
+    >
+        <result property="title" column="TITLE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="suggestion" column="SUGGESTION" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="answerContents" column="ANSWER_CONTENTS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attachFile1" column="ATTACH_FILE1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attachFile2" column="ATTACH_FILE2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="attachFile3" column="ATTACH_FILE3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+        
+    <!--
+        SQLID：Sql001
+        SQL名：皆様からの要望詳細取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSuggestionBoxCommonUpdateSql001"
+        resultMap="ResultMapIfaSuggestionBoxCommonUpdateSql001"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0511_02-03#Sql001 */
+            SBC.TITLE
+            , SBC.CATEGORY
+            , SBC.STATUS
+            , SBC.SUGGESTION
+            , LPAD(SBC.SBC_NO, 6, '0') AS SBC_NO
+            , SBC.FILE1 AS ATTACH_FILE1
+            , SBC.FILE2 AS ATTACH_FILE2
+            , SBC.FILE3 AS ATTACH_FILE3
+            , SBCA.SBCA_NO AS ANSWER_NO
+            , SBCA.ANSWER_DATE AS ANSWER_REGISTER_DATE
+            , SBCA.ANSWER_UPDATE_DATE
+            , SBCA.ANSWER AS ANSWER_CONTENTS
+        FROM
+            SUG_BOX_COMMON SBC
+            LEFT JOIN SUG_BOX_COMMON_A SBCA
+                ON SBC.SBC_NO = SBCA.SBC_NO
+        WHERE
+            SBC.SBC_NO = TO_NUMBER(#{req.sbcNo})
+        ORDER BY
+            SBCA.SBCA_NO ASC
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：要望更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaSuggestionBoxCommonUpdateSql003" statementType="PREPARED">
+        UPDATE  /* @SQLID=SUB0511_02-03#Sql003 */
+        CORDYS.SUG_BOX_COMMON 
+        SET
+            TITLE = #{req.title}
+            , CATEGORY = #{req.category}
+            , STATUS = #{req.status}
+            , SUGGESTION = #{req.suggestion}
+            <if test='(req.registerFileName1 != null and req.registerFileName1 != "") or req.registeredAttachFile1DeleteFlag == "1"'>
+                , FILE1 = #{req.registerFileName1}
+            </if>
+            <if test='(req.registerFileName2 != null and req.registerFileName2 != "") or req.registeredAttachFile2DeleteFlag == "1"'>
+                , FILE2 = #{req.registerFileName2}
+            </if>
+            <if test='(req.registerFileName3 != null and req.registerFileName3 != "") or req.registeredAttachFile3DeleteFlag == "1"'>
+                , FILE3 = #{req.registerFileName3}
+            </if>
+            , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER = #{req.userId}
+        WHERE
+            SBC_NO = TO_NUMBER(#{req.sbcNo}) 
+    </update>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：回答更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaSuggestionBoxCommonUpdateSql004" statementType="PREPARED">
+        UPDATE  /* @SQLID=SUB0511_02-03#Sql004 */
+        CORDYS.SUG_BOX_COMMON_A 
+        SET
+            ANSWER_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            , ANSWER = #{req.answerContents}
+            , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+            , UPDATE_USER = #{req.userId}
+        WHERE
+            SBC_NO = TO_NUMBER(#{req.sbcNo})
+            AND SBCA_NO = TO_NUMBER(#{req.answerNo})
+    </update>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：要望更新
+        SQLタイプ：update
+    -->
+    <insert id="insertIfaSuggestionBoxCommonUpdateSql005" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0511_02-03#Sql005 */
+        INTO CORDYS.SUG_BOX_COMMON_A (
+            SBC_NO
+            , SBCA_NO
+            , ANSWER_DATE
+            , ANSWER_UPDATE_DATE
+            , ANSWER
+            , CREATE_TIME
+            , CREATE_USER
+            , UPDATE_TIME
+            , UPDATE_USER
+        )
+        VALUES (
+            TO_NUMBER(#{req.sbcNo})
+            , TO_NUMBER(#{req.answerNo})
+            , #{req.answerRegisterDate}
+            , #{req.answerRegisterDate}
+            , #{req.answerContents}
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{req.userId}
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{req.userId}
+        )
+    </insert>
+</mapper>

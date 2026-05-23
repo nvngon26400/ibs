@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020305-01
+    画面名：新規口座開設不備状況
+-->
+<mapper namespace="com.sbisec.helios.ap.accountOpenMenu.newAccountOpenImcompleteStatus.dao.mapper.IfaNewAccountOpenImcompleteStatusMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaNewAccountOpenImcompleteStatusSql001" type="com.sbisec.helios.ap.accountOpenMenu.newAccountOpenImcompleteStatus.dao.model.IfaNewAccountOpenImcompleteStatusSql001ResponseModel" >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="documentName" column="DOCUMENT_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+        
+    <!-- 
+        SQLID：Sql001
+        SQL名：新規口座開設不備状況取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaNewAccountOpenImcompleteStatusSql001" resultMap="ResultMapIfaNewAccountOpenImcompleteStatusSql001" statementType="PREPARED">
+        
+    SELECT /* @SQLID=SUB020305-01#Sql001 */ * FROM (
+        SELECT COUNT(*) OVER() AS TOTAL_ROW, APP_LIST.* FROM (
+            SELECT 
+               A.BROKER_CODE
+               , B.BRANCH_NAME AS BROKER_NAME
+               , A.BROKER_CHARGE_CODE AS EMP_CODE
+               , C.BROKER_CHARGE_NAME AS BROKER_CHARGE_NAME
+               , A.PAPER_NAME AS DOCUMENT_NAME
+               , A.REMARKS AS CONTENTS
+               , A.CREATE_DATE AS SHIPPING_SCHEDULE_DATE
+        
+            FROM ETINTRA.NCS_CUSTID_UNSET_S A 
+               LEFT OUTER JOIN CORDYS.MEDIATE_BRANCH B
+                   ON A.BROKER_CODE = B.BROKER_CODE
+                   AND B.BROKER_BRANCH_CODE = '999'
+               LEFT OUTER JOIN V_MEDIATE_CHARGE_INFO C
+                   ON A.BROKER_CODE = C.BROKER_CODE
+                   AND A.BROKER_CHARGE_CODE = C.BROKER_CHARGE_CODE
+                <where>
+                    <if test='"1".equals(req.privId) == false and req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0'>
+                        <choose>
+                            <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                                AND (A.BROKER_CODE IN
+                                <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                    <if test="index % 1000 == 0 and index != 0">
+                                        ) OR A.BROKER_CODE IN(
+                                    </if>
+                                    <if test="index % 1000 != 0">
+                                        ,
+                                    </if>
+                                    #{brokerCharge.brokerCode}
+                                </foreach>
+                                )
+                            </when>
+                            <otherwise>
+                                AND ((A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN
+                                <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                    <if test="index % 1000 == 0 and index != 0">
+                                        ) OR (A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN(
+                                    </if>
+                                    <if test="index % 1000 != 0">
+                                        ,
+                                    </if>
+                                    (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                                </foreach>
+                                )
+                            </otherwise>
+                        </choose>
+                    </if>
+                   AND A.BROKER_CODE IS NOT NULL
+                   <if test="req.dispatchScheduleDateFrom != null and req.dispatchScheduleDateFrom != ''.toString()">
+                       AND A.CREATE_DATE >= TO_DATE(#{req.dispatchScheduleDateFrom}, 'YYYY/MM/DD')
+                   </if>
+                   <if test="req.dispatchScheduleDateTo != null and req.dispatchScheduleDateTo != ''.toString()">
+                       AND TO_DATE(#{req.dispatchScheduleDateTo}, 'YYYY/MM/DD') >= A.CREATE_DATE
+                   </if>
+                   <if test="req.brokerCodeList != null and 0 &lt; req.brokerCodeList.size() and req.chkBrokerCodeExclude == '0'.toString()">
+                       AND A.BROKER_CODE IN
+                       <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                           #{brokerCode}
+                       </foreach>
+                   </if>
+                   <if test="req.brokerCodeList != null and 0 &lt; req.brokerCodeList.size() and req.chkBrokerCodeExclude == '1'.toString()">
+                       AND A.BROKER_CODE NOT IN
+                       <foreach item="brokerCode" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                           #{brokerCode}
+                       </foreach>
+                   </if>
+                   <if test="req.empCode != null and req.empCode != ''.toString()">
+                       AND A.BROKER_CHARGE_CODE = #{req.empCode}
+                   </if>
+                </where>
+            ORDER BY A.BROKER_CODE DESC,A.CREATE_DATE ASC ) APP_LIST )
+        WHERE ROWNUM &lt;= #{req.maxRow}
+    </select>
+</mapper>

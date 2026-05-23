@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0501_02-01
+    画面名：資料種別一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.mapper.IfaDocClassListMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaDocClassListSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaDocClassListSql001ResponseModel" >
+        <result property="t9nInfoCat" column="T9N_INFO_CAT" typeHandler="StringTypeHandler"/>
+        <result property="t9nName" column="T9N_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaDocClassListSql005" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaDocClassListSql005ResponseModel" >
+        <result property="count" column="COUNT" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：カテゴリ一覧
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocClassListSql001" resultMap="ResultMapIfaDocClassListSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_02-01#Sql001 */
+            T9N_INFO_CAT,
+            T9N_NAME
+        FROM PSITE_T9N_INFO_CAT
+        <where>
+            T9N_DEL_FLAG = '0'
+            AND T9N_REQUIRED_FLG = '0'
+        </where>
+        ORDER BY T9N_SORT ASC
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：カテゴリ登録
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaDocClassListSql002"
+    parameterType="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaDocClassListSql002RequestModel"
+    statementType="PREPARED">
+        INSERT /* @SQLID=SUB0501_02-01#Sql002 */
+        INTO PSITE_T9N_INFO_CAT
+        (   T9N_INFO_CAT,
+            T9N_NAME,
+            T9N_SORT,
+            T9N_DEL_FLAG,
+            T9N_REQUIRED_FLG
+        )
+        VALUES (
+            (SELECT MAX(T9N_INFO_CAT) + 1 FROM PSITE_T9N_INFO_CAT),
+            #{req.category},
+            (SELECT MAX(T9N_SORT) + 1 FROM PSITE_T9N_INFO_CAT),
+            '0',
+            '0'
+        )
+    </insert>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：カテゴリ更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDocClassListSql003"
+    parameterType="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaDocClassListSql003RequestModel"
+    statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0501_02-01#Sql003 */
+            PSITE_T9N_INFO_CAT
+        SET
+            T9N_NAME = #{req.name}
+        <where>
+            T9N_INFO_CAT = (#{req.t9nInfoCat})
+        </where>
+    </update>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：カテゴリ削除
+        SQLタイプ：update
+    -->
+    <update id="updateIfaDocClassListSql004"
+    parameterType="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaDocClassListSql004RequestModel"
+    statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0501_02-01#Sql004 */
+            PSITE_T9N_INFO_CAT
+        SET
+            T9N_DEL_FLAG  = '1'
+        <where>
+            T9N_INFO_CAT IN(#{req.infoCat})
+        </where>
+    </update>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：登録存在チェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDocClassListSql005" resultMap="ResultMapIfaDocClassListSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_02-01#Sql005 */
+            COUNT(*) AS COUNT
+        FROM PSITE_T9N_INFO_CAT
+        <where>
+            T9N_NAME = #{req.category}
+            AND T9N_DEL_FLAG = '0'
+        </where>
+    </select>
+    
+</mapper>

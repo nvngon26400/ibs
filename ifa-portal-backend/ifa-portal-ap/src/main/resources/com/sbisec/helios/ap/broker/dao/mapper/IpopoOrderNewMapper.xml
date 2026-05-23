@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.broker.dao.mapper.IpopoOrderNewMapper">
+
+    <resultMap type="com.sbisec.helios.ap.broker.model.IpopoOrderInfoModel" id="resultIpopoOrderInfo">
+        <result property="bbProductName" column="BB_PRODUCT_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <!-- 募集入力画面初期化の検索処理 -->
+    <select id="getIpopoOrderInfo" resultMap="resultIpopoOrderInfo" statementType="PREPARED">
+          SELECT <!-- 銘柄情報 部 -->
+                 BBPM.BB_PRODUCT_CODE,                                                                          <!-- 銘柄CD -->
+                 BBPM.BB_PRODUCT_NAME,                                                                          <!-- 銘柄名 -->
+                 CASE
+                     WHEN BBPM.BB_GESTURE_VALUE = '1' THEN BBPM.BB_LOT_ISSUE_PRICE
+                     WHEN BBPM.BB_GESTURE_VALUE = '2' THEN MIPB.PRICE
+                  END AS BB_LOT_ISSUE_PRICE,                                                                    <!-- 発行価格 -->
+                 BBPM.BB_STOCK,                                                                                 <!-- 売買単位 -->
+                 DECODE(BBPM.BB_UNIT_KBN, '1', '株', '2', '円', '3', '口', '株') AS BB_UNIT_KBN,                 <!-- 売買単位区分 -->
+                 NVL(TO_CHAR(TO_DATE(MIPB.BB_PERIOD_FROM, 'YYYYMMDD'), 'YYYY/MM/DD'), ' ') AS BB_PERIOD_FROM,   <!-- 募集期間Fr -->
+                 TO_CHAR(TO_DATE(MIPB.BB_PERIOD_TO, 'YYYYMMDD'), 'YYYY/MM/DD') AS BB_PERIOD_TO,                 <!-- 募集期間To -->
+                 TO_CHAR(TO_DATE(MIPB.PAYMENT_DATE, 'YYYYMMDD'), 'YYYY/MM/DD') AS PAYMENT_DATE,                 <!-- 入金予定日（募集最終日） -->
+                 BBPM.BB_SETTLE_DATE,                                                                           <!-- 受渡期日 -->
+                 <!-- 顧客情報 部 -->
+                 MUAI.BUTEN_CODE AS BB_BRANCH_CODE,                                                             <!-- 部店 -->
+                 MUAI.ACCOUNT_NUMBER AS BB_ACCOUNT_NUMBER,                                                      <!-- 口座 -->
+                 MUAI.NAME_KANJI AS BB_USER_NM,                                                                 <!-- 顧客名 -->
+                 TO_CHAR(TO_DATE(MUAI.OPEN_ACCT_DATE, 'YYYYMMDD'), 'YYYY/MM/DD') AS OPEN_ACCT_DATE,             <!-- 口座開設年月日 -->
+                 TRIM(MUAI.UAI_OCCUPATION) AS UAI_OCCUPATION,                                                   <!-- 職業 -->
+                 CASE
+                     WHEN MUAI.CORPORATION_KBN = '0' THEN MUAI.UAI_OFFICE_NAME
+                     WHEN MUAI.CORPORATION_KBN = '1' THEN '-'
+                  END AS UAI_OFFICE_NAME,                                                                       <!-- 勤務先名 -->
+                 MUAI.TC_COMP_RANK,                                                                             <!-- コンプラランク -->
+                 TRIM(MUAI.UAI_QA_INVESTMENT_PLAN) AS UAI_QA_INVESTMENT_PLAN,                                   <!-- 投資方針 -->
+                 TO_NUMBER(NVL(MUAI.UAI_EXP_STOCK, 0)) AS UAI_EXP_STOCK,                                        <!-- 投資経験年数 -->
+                 CASE
+                     WHEN MUAI.CORPORATION_KBN = '0' THEN MUAI.UAI_QA_FINANCIAL_ASSETS
+                     WHEN MUAI.CORPORATION_KBN = '1' THEN '-'
+                  END AS UAI_QA_FINANCIAL_ASSETS,                                                               <!-- 登録金融資産額 -->
+                 NVL(ICM.SAIRYOU_ALLO_COUNT, 0) AS SAIRYOU_ALLO_COUNT,                                          <!-- 本年の年間裁量配分割当回数 -->
+                 NVL(ICM.MAX_SAIRYOU_ALLO, 10) AS MAS_SAIRYOU_ALLO,                                              <!-- 本年の年間配分可能回数 -->
+                 <!-- 募集入力 -->
+                 CASE
+                     WHEN TIPO.LOTTERY_RESULT IS NOT NULL THEN TIPO.LOTTERY_RESULT
+                     <!-- 4:裁量配分 -->
+                     WHEN BA.BB_WINNING = '2' AND BA.BB_EXCLUSION = '4' THEN '4'
+                     <!-- 2:落選 -->
+                     WHEN BA.BB_WINNING = '2' AND BA.BB_EXCLUSION &lt;&gt; '4' THEN '2'
+                     ELSE BA.BB_WINNING
+                  END AS LOTTERY_RESULT,                                                                        <!-- 抽選結果 -->
+                 CASE
+                     <!-- 1:当選,3:当選(繰上),4:裁量配分,5:申込取消(対面募集注文テーブル) -->
+                     WHEN TIPO.LOTTERY_RESULT IN ('1','3','4','5') THEN NVL(TIPO.QUANTITY_ALLOC, 0) || ''
+                     <!-- 2:落選(対面募集注文テーブル) -->
+                     WHEN TIPO.LOTTERY_RESULT = '2' THEN '0'
+                     <!-- 抽選前 -->
+                     WHEN BA.BB_WINNING = '0' THEN '-'
+                     <!-- 当選:割当数量 -->
+                     WHEN BA.BB_WINNING = '1' THEN BA.BB_QUANTITY_ALLOC || ''
+                     <!-- 裁量配分:裁量配分希望数量 -->
+                     WHEN BA.BB_WINNING = '2' AND  BA.BB_EXCLUSION = '4' THEN NVL(SA.QUANTITY_SAIRYOU, 0) || ''
+                     ELSE '0'
+                  END AS BB_QUANTITY_ALLOC,                                                                     <!-- 当選株数 -->
+                 BA.BB_QUANTITY,                                                                                <!-- BB申込株数 -->
+                 NVL(TIPO.ORDER_STATUS, '0') AS ORDER_STATUS,                                                   <!-- 注文状況 -->
+                 TO_CHAR(TIPO.ORDER_TIME, 'yyyy/MM/dd hh24:mi:ss') AS ORDER_TIME,                               <!-- 募集受注日時 -->
+                 TIPO.ORDER_COUNT,                                                                              <!-- 数量 -->
+                 TIPO.APPOINT_PRICE,                                                                            <!-- 約定金額 -->
+                 TIPO.DEPOSIT_TYPE,                                                                             <!-- 預り区分 -->
+                 TIPO.INVITATION_TYPE AS INVITATION,                                                            <!-- 勧誘有無 -->
+                 TIPO.ORDER_METHOD,                                                                             <!-- 受注方法 -->
+                 TIPO.PROSPECTUS,                                                                               <!-- 目論見書の交付方法   -->
+                 TIPO.EXPLANATION_INFO AS EXPLANATION,                                                          <!-- 最重要事項の説明 -->
+                 TIPO.WARNING_APPLY,                                                                            <!-- ワーニング申請 -->
+                 BA.BB_REMARK,                                                                                  <!-- 備考 -->
+                 <!-- ヒドゥン -->
+                 BA.BB_PRODUCT_CODE                                  AS BB_PRODUCT_CODE_H,
+                 MUAI.BUTEN_CODE                                     AS BB_BRANCH_CODE_H,
+                 MUAI.ACCOUNT_NUMBER                                 AS BB_ACCOUNT_NUMBER_H,
+                 TIPO.ORDER_COUNT                                    AS ORDER_COUNT_H,
+                 MUAI.CUSTOMER_ID                                    AS CUSTOMER_ID,
+                 BBPM.BB_SETTLE_DATE                                 AS BB_SETTLE_DATE_H,                       <!-- 受渡期日 -->
+                 BA.BB_PRESENTATION_FROM                             AS BB_PRESENTATION_FROM_H,                 <!-- ブックビルディング申込期間（開始） -->
+                 MUAI.BROKER_CODE                                    AS BROKER_CODE_H,                          <!-- 仲介業者コード -->
+                 MUAI.INTERMEDIARY_EMP_CD                            AS INTERMEDIARY_EMP_CD_H,                  <!-- 仲介業者営業員コード -->
+                 MUAI.DEALER_NUMBER                                  AS DEALER_NUMBER_H,                        <!-- 扱者コード -->
+                 MIPB.PRESENTATION_DATE                              AS PRESENTATION_DATE_H,                    <!-- 上場日 -->
+                 MIPB.MAX_ALLOCATION                                 AS MAX_ALLOCATION,                         <!-- 配分上限株数 -->
+                 BA.BB_REMARK                                        AS BB_REMARK_H,                            <!-- 備考(更新するかどうか判定用)  -->
+                 MIPB.ATTACHED_BRAND                                 AS ATTACHED_BRAND,                         <!-- 銘柄コード１付き -->
+                 MUAI.UAI_SPECIFIC_KBN                               AS UAI_SPECIFIC_KBN,                       <!-- 特定口座区分 -->
+                 MUAI.UAI_ISA_CONTRACT_KBN                           AS UAI_ISA_CONTRACT_KBN,                   <!-- ISA契約区分 -->
+                 MUAI.UAI_ISA_BUY_CURRENT_YEAR_KBN                   AS UAI_ISA_BUY_CURRENT_YEAR_KBN,           <!-- ISA買付可能判定区分（当年） -->
+                 TO_CHAR(TIPO.UPDATE_TIME, 'yyyy/MM/dd hh24:mi:ss')  AS UPDATE_TIME_H,
+                 TO_CHAR(BA.BB_UPDATE_DATE, 'yyyy/MM/dd hh24:mi:ss') AS BB_UPDATE_DATE,
+                 NVL2(JAIM.BUTEN_CODE, '1', '0')                     AS JRNISA_KBN,                             <!-- ジュニアNISA第二口座：1, 以外：0 -->
+                 NVL2(SAP.ACCT_ID, '1', '0')                         AS TMNISA_KBN                              <!-- つみたてNISA口座       ：1, 以外：0 -->
+            FROM ETINTRA.BB_ACCEPT BA                                    <!-- 【ブックビルディング受付】 -->
+       LEFT JOIN ETINTRA.BB_PRODUCT_MASTER BBPM                          <!-- 【ブックビルディング銘柄マスタ】 -->
+              ON BA.BB_PRODUCT_CODE = BBPM.BB_PRODUCT_CODE
+             AND BA.BB_PRESENTATION_FROM = TO_CHAR(BBPM.BB_PRESENTATION_FROM,'YYYYMMDD')
+       LEFT JOIN MEDIATE_USER_ATTRIBUTE_INFO MUAI                        <!-- 【仲介業者顧客口座属性】 -->
+              ON MUAI.BUTEN_CODE = SUBSTR(BA.BB_BRANCH_CODE, 1, 3) 
+             AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(BA.BB_ACCOUNT_NUMBER)
+             AND MUAI.TC_COMP_RANK &lt;&gt; 'Z'
+       LEFT JOIN ETINTRA.IPO_COUNT_MASTER ICM                            <!-- 【裁量・当選回数管理】 -->
+              ON TO_CHAR(ICM.ANNUAL, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY') - CASE WHEN TO_CHAR(SYSDATE,'MM') &lt; '04' THEN 1 ELSE 0 END
+             AND BA.BB_BRANCH_CODE = ICM.BRANCH_NO
+             AND TO_NUMBER(BA.BB_ACCOUNT_NUMBER) = TO_NUMBER(ICM.ACCOUNT_NO)
+       LEFT JOIN T_IPO_PO_ORDER TIPO                                     <!-- 【対面募集注文】 -->
+              ON BA.BB_PRODUCT_CODE = TIPO.PRODUCT_CODE
+             AND BA.BB_PRESENTATION_FROM = TIPO.PRESENTATION_FROM
+             AND SUBSTR(BA.BB_BRANCH_CODE,1,3) = TIPO.BUTEN_CODE
+             AND TO_NUMBER(BA.BB_ACCOUNT_NUMBER) = TIPO.ACCOUNT_NUMBER
+       LEFT JOIN M_IPO_PO_BB_PERIOD MIPB                                 <!-- 【対面募集期間マスタ】 -->
+              ON BA.BB_PRODUCT_CODE = MIPB.PRODUCT_CODE
+             AND BA.BB_PRESENTATION_FROM = MIPB.PRESENTATION_FROM
+       LEFT JOIN ETINTRA.SR_ACCEPT SA                                    <!-- 【裁量配分受付】 -->
+              ON BA.BB_PRODUCT_CODE = SA.BB_PRODUCT_CODE
+             AND BA.BB_PRESENTATION_FROM = SA.BB_PRESENTATION_FROM
+             AND BA.BB_BRANCH_CODE = SA.BB_BRANCH_CODE
+             AND TO_NUMBER(BA.BB_ACCOUNT_NUMBER) = TO_NUMBER(SA.BB_ACCOUNT_NUMBER)
+       LEFT JOIN ETRADE.JNISA_ACCOUNT_INFO@CORDYS_ET10.WORLD JAIM        <!-- 【ジュニアNISA口座属性情報(マテビュー)】  jrnisa判定用-->
+              ON SUBSTR(BA.BB_BRANCH_CODE,1,3) = JAIM.BUTEN_CODE
+             AND TO_NUMBER(BA.BB_ACCOUNT_NUMBER) = TO_NUMBER(JAIM.ACCOUNT_NUMBER)
+       LEFT JOIN SVC_ACCT_PROFILE SAP                                    <!-- 【サービスアカウントプロファイル】 つみたてnisa判定用-->
+              ON SAP.ACCT_ID = MUAI.BUTEN_CODE || '-' || LPAD(MUAI.ACCOUNT_NUMBER, 7, '0')
+             AND SAP.PROFILE_NAME = 'IsaOpenSelect_s_stage'
+             AND SAP.PROFILE_VALUE = 'OpenTUMINISA'                        <!--つみたてNISA開設済み-->
+           WHERE BA.BB_PRODUCT_CODE      = #{bbProductCode}                  <!-- 銘柄コード -->
+             AND BA.BB_PRESENTATION_FROM = #{bbPresentationFrom}             <!-- ブックビルディング申込期間Fr -->
+             AND BA.BB_BRANCH_CODE       = RPAD(#{bbBranchCode}, 4, ' ')     <!-- 部店 -->
+             AND TO_NUMBER(BA.BB_ACCOUNT_NUMBER)    = TO_NUMBER(LPAD(#{bbAccountNumber}, 7, '0'))  <!-- 口座 -->
+    </select>
+    <!-- 画面検索処理 -->
+    <select id="getIpopoOrderInfoSingle" resultMap="resultIpopoOrderInfo" statementType="PREPARED">
+          SELECT ORDER_COUNT
+            FROM T_IPO_PO_ORDER TIPO
+           WHERE TIPO.PRODUCT_CODE      = #{bbProductCode}
+             AND TIPO.PRESENTATION_FROM = TO_NUMBER(#{bbPresentationFrom})
+             AND TIPO.BUTEN_CODE        = #{bbBranchCode}
+             AND TIPO.ACCOUNT_NUMBER    = TO_NUMBER(#{bbAccountNumber})
+    </select>
+    <!-- 画面検索処理 -->
+    <select id="getIpopoOrderCountSum" resultMap="resultIpopoOrderInfo" statementType="PREPARED">
+          SELECT SUM(ORDER_COUNT) AS ORDER_COUNT
+            FROM T_IPO_PO_ORDER TIPO
+           WHERE TIPO.PRODUCT_CODE      = #{bbProductCode}
+             AND TIPO.PRESENTATION_FROM = TO_NUMBER(#{bbPresentationFrom})
+             AND TIPO.ORDER_STATUS IN ('1', '2', '3')
+    </select>
+	<!-- SBI本店更新 -->
+    <select id="updateIpopoOrderInfo" resultType ="Integer" statementType="PREPARED">
+    SELECT 1 FROM T_IPO_PO_ORDER
+         WHERE PRODUCT_CODE                                  = #{param.bbProductCodeH}                  <!-- 銘柄コード -->
+           AND PRESENTATION_FROM                             = TO_NUMBER(#{param.bbPresentationFromH})  <!-- ブックビルディング申込期間（開始） -->
+           AND BUTEN_CODE                                    = #{param.bbBranchCodeH}                   <!-- 部店 -->
+           AND ACCOUNT_NUMBER                                = TO_NUMBER(#{param.bbAccountNumberH})     <!-- 口座番号 -->
+           AND TO_CHAR(UPDATE_TIME, 'yyyy/MM/dd hh24:mi:ss') = #{param.updateTimeH}                     <!-- 更新日 -->
+    </select>
+
+    <!-- SBI本店更新 -->
+    <select id="updateIpopoOrderInfoSbi"  resultType ="Integer" statementType="PREPARED">
+     	SELECT 1 FROM T_IPO_PO_ORDER
+         WHERE PRODUCT_CODE                                  = #{param.bbProductCodeH}
+           AND PRESENTATION_FROM                             = TO_NUMBER(#{param.bbPresentationFromH})
+           AND BUTEN_CODE                                    = #{param.bbBranchCodeH}
+           AND ACCOUNT_NUMBER                                = TO_NUMBER(#{param.bbAccountNumberH})
+           AND TO_CHAR(UPDATE_TIME, 'yyyy/MM/dd hh24:mi:ss') = #{param.updateTimeH}
+    </select>
+</mapper>

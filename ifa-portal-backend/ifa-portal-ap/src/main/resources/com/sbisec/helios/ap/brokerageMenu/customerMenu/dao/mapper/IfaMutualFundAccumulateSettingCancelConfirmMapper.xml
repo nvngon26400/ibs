@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0403-01
+    画面名：投信積立設定解除確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaMutualFundAccumulateSettingCancelConfirmMapper">
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：設定解除受付データの格納
+         SQLタイプ：insert
+    -->
+
+    <insert id="insertIfaMutualFundAccumulateSettingCancelConfirmSql001" statementType="PREPARED" parameterType="java.util.List">
+    	<foreach collection="req.sql001DetailList" item="item" index="index" open="begin" close=";end;" separator=";">
+	        INSERT /* @SQLID=SUB0202_0403-01#Sql001 */
+	        INTO CORDYS.FUND_RESERVE_SETTING (
+				  BUTEN_CODE
+			    , ACCOUNT_NUMBER
+			    , FUND_CD_KAISU
+			    , FUND_CD_GOU
+			    , AZUKARI_KBN
+			    , MODIFY_KBN
+			    , PAYMENT_METHOD
+			    , NISA_BARELY_BUYING_KBN
+			    , NISA_EXCESS_BUYING_KBN
+			    , SETTING_AMOUNT
+			    , COURSE_KBN
+			    , SETTING_RESERVE_DD
+			    , SETTING_RESERVE_BIMONTHLY
+			    , SETTING_RESERVE_WEEKLY
+			    , SETTING_RESERVE_MULTIDAY
+			    , ONE_MONTH_SUM_AMOUNT
+			    , SETTING_BONUS_FLAG
+			    , PAYMENT_BONUS
+			    , RESERVE_MM_B1
+			    , RESERVE_DD_B1
+			    , RESERVE_MM_B2
+			    , RESERVE_DD_B2
+			    , PLAN_DATE
+			    , PLAN_DATE_BONUS1
+			    , PLAN_DATE_BONUS2
+			    , NEXT_RESERVE_DATE
+			    , KANYU_KBN
+			    , UKETUKE_HOUHOU
+			    , CHECK_COMP_WRN_ALERT
+			    , RECEPTION_ROUTE_KBN
+			    , OPERATOR_ID
+			    , BROKER_CODE
+			    , INTERMEDIARY_EMP_CD
+			    , DELETE_KBN
+			    , CREATE_TIME
+			    , CREATE_USER
+			    , UPDATE_TIME
+			    , UPDATE_USER
+			) 
+	    	(SELECT 
+				 #{item.butenCode} 					<!-- 部店コード-->
+				, #{item.accountNumber} 			<!-- 口座番号-->
+				, #{item.mfkaisu} 					<!-- ファンドコード（回数）-->
+				, #{item.mfgo} 						<!-- ファンドコード（号）-->
+				, #{item.accountType} 				<!-- 預り区分-->
+				, '3'					 			<!-- 更新区分-->
+				, '1'					 			<!-- 決済方法-->
+				, #{item.nisaBarelyBuyingType} 		<!-- NISA枠ぎりぎり買付区分-->
+				, #{item.taxShiftType} 				<!-- NISA枠超過時買付区分-->
+				, #{item.settingAmount} 			<!-- 設定金額-->
+				, #{item.courseType} 				<!-- コース区分-->
+				, #{item.settingReserveDay} 		<!-- 積立日付-->
+				, #{item.settingReserveBimonthly} 	<!-- 積立隔月設定-->
+				, #{item.settingReserveWeek} 		<!-- 積立毎週設定-->
+				, #{item.settingReserveMultiDay} 	<!-- 積立複数日設定-->
+				, #{item.oneMonthSumAmount} 		<!-- 1カ月あたりの積立金額-->
+				, #{item.settingBonus} 				<!-- ボーナス設定有無-->
+				, #{item.settingBonusAmount} 		<!-- ボーナス設定金額-->
+				, #{item.settingBonus1Month} 		<!-- ボーナス１設定月-->
+				, #{item.settingBonus1Day} 			<!-- ボーナス１設定日-->
+				, #{item.settingBonus2Month} 		<!-- ボーナス２設定月-->
+				, #{item.settingBonus2Day} 			<!-- ボーナス２設定日-->
+				, #{item.planDate} 					<!-- 買付予定日-->
+				, #{item.bonusPlanDate1} 			<!-- ボーナス１買付予定日-->
+				, #{item.bonusPlanDate2} 			<!-- ボーナス２買付予定日-->
+				, #{item.nextReserveDate} 			<!-- 次回買付日-->
+				, NULL 								<!-- 勧誘区分-->
+				, NULL 								<!-- 受付方法-->
+				, NULL 								<!-- アラート内容確認.コンプラチェックワーニング確認-->
+				, '2' 								<!-- 受付経路区分-->
+				, #{item.operatorId} 				<!-- オペレータＩＤ-->
+				, #{item.brokerCode} 				<!-- 仲介業者コード-->
+				, #{item.intermediaryEmpCd} 		<!-- 仲介業者営業員コード-->
+				, '0'  								<!-- 削除区分-->
+				, IFA_DATE_UTIL.IFA_GET_DATE 		<!-- 作成日時-->
+				, #{item.createUser} 				<!-- 作成者-->
+				, IFA_DATE_UTIL.IFA_GET_DATE 		<!-- 更新日時-->
+				, #{item.updateUser} 				<!-- 更新者-->	
+			FROM
+				DUAL   	
+	    	)
+	  	</foreach>
+
+    </insert>
+    
+   
+</mapper>

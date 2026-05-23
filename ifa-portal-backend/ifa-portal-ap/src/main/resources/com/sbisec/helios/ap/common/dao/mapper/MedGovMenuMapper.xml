@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MedGovMenuMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.MedGovMenu" id="MedGovMenu">
+		<result property="createUser"      column="CREATE_USER"      typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+		<result property="uptimestampUser" column="UPDATE_USER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+	</resultMap>
+
+	<select id="getMedGovMenuList" resultMap="MedGovMenu" statementType="PREPARED">
+		WITH MENU_LAYER (USER_ID, MENU_ID, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, DISPORDER) AS (
+			SELECT
+				G.USER_ID,
+				G.MENU_ID,
+				G.CREATE_USER,
+				G.CREATE_TIME,
+				G.UPDATE_USER,
+				G.UPDATE_TIME,
+				M.DISPORDER
+			FROM
+				TB_MED_GOV_MENU_NEW G
+			INNER JOIN
+				TB_MED_MENU_NEW M
+			ON
+				G.MENU_ID = M.MENU_ID
+			WHERE
+				G.USER_ID = #{userId}
+			UNION ALL
+			SELECT
+				NULL,
+				M.PARENT_MENU_ID,
+				NULL,
+				NULL,
+				NULL,
+				NULL,
+				NULL
+			FROM
+				TB_MED_MENU_NEW M
+			INNER JOIN
+				MENU_LAYER L
+			ON
+				M.PARENT_MENU_ID IS NOT NULL
+				AND M.MENU_ID = L.MENU_ID
+		)
+		SELECT DISTINCT
+			*
+		FROM
+			MENU_LAYER
+		ORDER BY
+			DISPORDER
+	</select>
+
+	<insert id="insertMedGovMenu" statementType="PREPARED">
+		INSER INTO TB_MED_GOV_MENU
+			VALUES (
+				USER_ID = #{medGovMenu.userId},
+				MENU_ID = #{medGovMenu.menuId},
+				CREATE_USER = #{medGovMenu.createUser},
+				CREATE_TIME = SYSDATE
+				UPTIMESTAMP_USER = #{medGovMenu.uptimestampUser},
+			)
+	</insert>
+
+	<delete id="deleteMedGovMenu" statementType="PREPARED">
+		DELETE FROM TB_MED_GOV_MENU
+		<if test="medGovMenu != null">
+			<where>
+				<if test="medGovMenu.userId != null and medGovMenu.userId != ''">
+					( USER_ID = #{medGovMenu.userId} )
+				</if>
+				<if test="medGovMenu.menuId != null and medGovMenu.menuId != ''">
+					( MENU_ID = #{medGovMenu.menuId} )
+				</if>
+			</where>
+		</if>
+	</delete>
+
+</mapper>

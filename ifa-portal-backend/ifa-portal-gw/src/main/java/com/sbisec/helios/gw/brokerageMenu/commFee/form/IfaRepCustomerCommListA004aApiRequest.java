@@ -1,0 +1,80 @@
+package com.sbisec.helios.gw.brokerageMenu.commFee.form;
+
+import java.util.List;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import lombok.Data;
+
+/**
+ * 担当顧客別手数料一覧CSV出力APIリクエスト.
+ *
+ * @author 宇田川達弥
+ */
+@Data
+@JsonSerialize
+public class IfaRepCustomerCommListA004aApiRequest {
+    
+    /** 仲介業者コード（数字）. */
+    @Pattern(regexp = "[a-zA-Z0-9\\,]*", message = "仲介業者コード")
+    @Size(max = 49, message = "仲介業者コード")
+    private List<String> brokerCode;
+    
+    /** 仲介業者除外（半角英数字）. */
+    @Size(min = 1, max = 1, message = "仲介業者除外")
+    private String chkBrokerCodeExclude;
+    
+    /** 支店コード（数字）. */
+    @Pattern(regexp = "0-9", message = "支店コード")
+    @Size(max = 3, message = "支店コード")
+    private String branchCode;
+    
+    /** 営業員コード（半角英数字）. */
+    @Size(min = 4, max = 4, message = "営業員コード")
+    private String empCode;
+    
+    /** 部店コード（半角英数字）. */
+    @Size(min = 3, max = 3, message = "部店コード")
+    private String butenCode;
+    
+    /** 口座番号（数字）. */
+    @Pattern(regexp = "0-9", message = "口座番号")
+    @Size(max = 7, message = "口座番号")
+    private String accountNumber;
+    
+    /** 顧客名（漢字／カナ）（全角半角）. */
+    @Size(max = 72, message = "顧客名（漢字／カナ）")
+    private String customerNameKanjiKana;
+    
+    /** 顧客名（漢字／カナ）_条件. */
+    private String customerNameKanjiKanaTerms;
+
+    /** 取引コース（全角半角）. */
+    @NotEmpty(message = "取引コース")
+    private List<IfaRepCustomerCommListApiRequestCourse> course;
+    
+    /** 銘柄コード（半角英数字）. */
+    @Size(max = 5, message = "銘柄コード")
+    private String brandCode;
+    
+    /** 集計単位. */
+    @NotEmpty(message = "集計単位")
+    private String chargeCustomerCountingUnit;
+    
+    /** 期間指定(From). */
+    @NotEmpty(message = "期間指定(From)")
+    private String periodYmFrom;
+    
+    /** 期間指定(To). */
+    @NotEmpty(message = "期間指定(To)")
+    private String periodYmTo;
+    
+    /** 証券種別. */
+    @NotEmpty(message = "証券種別")
+    private List<IfaRepCustomerCommListApiRequestSecurityClass> securityClass;
+    
+}

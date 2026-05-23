@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.wholePortal.psite.dao.mapper.PSiteServiceMapper">
+
+
+
+ <resultMap type="com.sbisec.helios.ap.wholePortal.psite.model.GetTempFileDirForDocumentCategoryIdModel" id="ResultSetGetTempFileDirForDocumentCategoryId">
+    <result property="fileDir" column="file_dir" typeHandler="StringTypeHandler"/>
+  </resultMap>
+
+
+  <select id="getTempFileDirForDocumentCategoryId" resultMap="ResultSetGetTempFileDirForDocumentCategoryId" statementType="PREPARED">
+
+    			select file_dir from TB_MED_TEMP_FILE_DIR
+    			where  1 = 1
+<if test="funcId != null and funcId != ''">
+				AND FUNC_ID =  #{funcId}
+</if>
+<if test="catId != null and catId != ''">
+				AND CAT_ID =  #{catId}
+</if>
+
+
+  </select>
+
+
+	<resultMap type="com.sbisec.helios.ap.wholePortal.psite.model.GetDealerNameAndRegistNoModel" id="ResultSetGetDealerNameAndRegistNoModel">
+		<result property="dealerName" column="DEALER_NAME" typeHandler="StringTypeHandler"/>
+		<result property="registNo" column="REGIST_NO" typeHandler="StringTypeHandler"/>
+	</resultMap>
+	<select id="getDealerNameAndRegistNo" resultMap="ResultSetGetDealerNameAndRegistNoModel" statementType="PREPARED">
+
+	SELECT DISTINCT
+		  NVL2(MBM.DEALER_NAME,MBM.DEALER_NAME || MC.NAME,MBM.DEALER_NAME) AS DEALER_NAME
+		, MBM.REGIST_NO AS REGIST_NO
+	FROM
+		ETINTRA.MEDIATE_BROKER_MASTER MBM
+	LEFT JOIN
+		M_CODE MC
+	ON
+		MC.CODE_TYPE = '51'
+	AND
+		MC.CODE_1 = '1'
+	AND
+		MC.CODE_2 = '1'
+	<if test="brokerCode != null and brokerCode != ''">
+	<where>
+		MBM.BROKER_CODE = #{brokerCode}
+	</where>
+	</if>
+	</select>
+
+
+	<resultMap type="com.sbisec.helios.ap.wholePortal.psite.model.GetTbMedDisclaimerModel" id="ResultSetGetTbMedDisclaimer">
+		<result property="itemName" column="ITEM_NAME" typeHandler="StringTypeHandler"/>
+		<result property="title" column="TITLE" typeHandler="StringTypeHandler"/>
+		<result property="content" column="CONTENT" typeHandler="StringTypeHandler"/>
+	</resultMap>
+	<select id="getTbMedDisclaimer" resultMap="ResultSetGetTbMedDisclaimer" statementType="PREPARED">
+	SELECT
+		T1.DISCLAIMER_ID,
+		T1.CONTENT_ID,
+		T1.ITEM_NAME,
+		T1.TITLE,
+		T1.CONTENT
+	FROM TB_MED_DISCLAIMER T1
+		INNER JOIN
+		(SELECT
+			DISCLAIMER_ID,
+			CONTENT_ID,
+			MAX(START_DATE) AS START_DATE
+		 FROM TB_MED_DISCLAIMER
+		 WHERE START_DATE &lt;= TO_CHAR(SYSDATE,'YYYYMMDD')
+		   AND END_DATE &gt; TO_CHAR(SYSDATE,'YYYYMMDD')
+		   <if test="disclaimerId != null and disclaimerId != ''">
+		   AND DISCLAIMER_ID =  #{disclaimerId}
+		   </if>
+		 GROUP BY
+			DISCLAIMER_ID,
+			CONTENT_ID
+		) T2
+		ON  T1.DISCLAIMER_ID = T2.DISCLAIMER_ID
+		AND T1.CONTENT_ID = T2.CONTENT_ID
+		AND T1.START_DATE = T2.START_DATE
+	ORDER BY T1.DISCLAIMER_ID, T1.CONTENT_ID
+	</select>
+
+</mapper>

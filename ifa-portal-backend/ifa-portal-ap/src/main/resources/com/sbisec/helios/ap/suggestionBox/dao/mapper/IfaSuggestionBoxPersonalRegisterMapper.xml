@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+   画面ID：SUB00_01-06_2
+   画面名：要望事項 新規登録
+-->
+<mapper namespace="com.sbisec.helios.ap.suggestionBox.dao.mapper.IfaSuggestionBoxPersonalRegisterMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaSuggestionBoxPersonalRegisterSql001" type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxPersonalRegisterSql001ResponseModel" >
+    </resultMap>
+
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：要望取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSuggestionBoxPersonalRegisterSql001" resultMap="ResultMapIfaSuggestionBoxPersonalRegisterSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00_01-06_2#Sql001 */
+           LPAD(SEQ_SUG_BOX_PERSONAL.NEXTVAL,6,'0') AS SBP_NO
+        FROM
+            DUAL
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：回答既読更新
+        SQLタイプ：update
+    -->
+    <insert id="insertIfaSuggestionBoxPersonalRegisterSql002" statementType="PREPARED">
+        INSERT /* @SQLID=SUB00_01-06_2#Sql002 */
+        INTO CORDYS.SUG_BOX_PERSONAL (
+            SBP_NO
+            , TITLE
+            , CATEGORY
+            , STATUS
+            , SUGGESTION
+            <if test="req.registerFileName1 != null">, FILE1</if>
+            <if test="req.registerFileName2 != null">, FILE2</if>
+            <if test="req.registerFileName3 != null">, FILE3</if>
+            , BROKER_CODE
+            , INTERMEDIARY_EMP_CD
+            , ANS_UPDATE_TIME
+            , CREATE_TIME
+            , CREATE_USER
+            , UPDATE_TIME
+            , UPDATE_USER
+        )
+        VALUES(
+            TO_NUMBER(#{req.sbpNo})
+            , #{req.title}
+            , #{req.category}
+            , '0'
+            , #{req.suggestion}
+            <if test="req.registerFileName1 != null">, #{req.registerFileName1}</if>
+            <if test="req.registerFileName2 != null">, #{req.registerFileName2}</if>
+            <if test="req.registerFileName3 != null">, #{req.registerFileName3}</if>
+            , #{req.brokerCode}
+            , #{req.intermediaryEmpCd}
+            , null
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{req.userId}
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{req.userId}
+        )
+
+    </insert>
+
+</mapper>

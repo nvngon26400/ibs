@@ -1,0 +1,37 @@
+{
+    "systemId": "ifa-portal",
+    "ignorePathList": [
+        "/alive",
+        "/dynamicjs",
+        "/procedureWaiting",
+        "/procedureCompletionCheck",
+        "/sso/ccsLoginForm",
+        "/sso/ccsView",
+        "/sso/userHasCcsData",
+        "/broker/appOrderList",
+        "/broker/appExecutionList",
+        "/broker/appManagingContractList",
+        "/common/ifaCheckUtilCheckFullWidthCharacter"
+    ],
+    "maskingParamKeyList": [
+        "password",
+        "oldPassword",
+        "newPassword",
+        "newPasswordRepeat",
+        "contents",
+        "toiawaseNaiyou",
+        "naiyou",
+        "ifaMemoContent",
+        "bikou",
+        "txtNaiyou1",
+        "txtNaiyou2",
+        "txtNaiyou3",
+        "txtNaiyou4",
+        "txtNaiyou5",
+        "restrainReason",
+        "ccsUserPw",
+        "suggestion",
+        "answerContents",
+        "answerContentsBeforeCorrect"
+    ]
+}

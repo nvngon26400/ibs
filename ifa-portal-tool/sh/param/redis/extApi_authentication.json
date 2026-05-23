@@ -1,0 +1,9 @@
+{
+    "systemIds": {
+        "ifap-xapi-sys-service-now": {
+            "userId": "ifap-xapi-usr-service-now",
+            "authToken": "ifap-xapi-aid1#QycT8t1wni04tF0cggV0PDxl9/7FJ39bjlx60x3U5eA=",
+            "sessionId": "ifap-xapi-sid1#96c3443f-b3ae-47a3-b64d-55b8236627ee"
+        }
+    }
+}

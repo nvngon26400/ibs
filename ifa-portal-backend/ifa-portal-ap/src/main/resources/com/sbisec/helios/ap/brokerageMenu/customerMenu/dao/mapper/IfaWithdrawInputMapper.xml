@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0601-01
+    画面名：出金入力
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaWithdrawInputMapper">
+    <resultMap id="ResultMapIfaWithdrawInputSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaWithdrawInputSql001ResponseModel">
+        <result property="bankKanji" column="BANK_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="bankBranchKanji" column="BANK_BRANCH_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="bankAccountName" column="BANK_ACCOUNT_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：振込先銀行口座情報を取得する
+        SQLタイプ：select
+    -->
+    <select id="selectIfaWithdrawInputSql001" resultMap="ResultMapIfaWithdrawInputSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0601-01#Sql001 */
+            BM.BANK_CODE AS BANK_CODE
+            ,BM.BRANCH_CODE AS BANK_BRANCH_CODE
+            ,BM.BANK_NAME_KANJI AS BANK_KANJI
+            ,BM.BRANCH_NAME_KANJI AS BANK_BRANCH_KANJI
+            ,MU.UAI_BANK_DEPOSIT_CLASS AS BANK_DEPOSIT_CLASS
+            ,MU.UAI_BANK_ACCOUNT AS BANK_ACCOUNT
+            ,MU.UAI_BANK_ACCOUNT_NAME AS BANK_ACCOUNT_NAME
+        FROM ETRADE.ETJP_BANK_MASTER@CORDYS_ET10.WORLD BM
+        INNER JOIN CORDYS.MEDIATE_USER_ATTRIBUTE_INFO MU
+        ON MU.UAI_BANK_CODE = BM.BANK_CODE
+        AND MU.UAI_BANK_BRANCH_CODE = BM.BRANCH_CODE
+        WHERE MU.CUSTOMER_ID = #{req.customerCode}
+    </select>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0513_01-02
+    画面名：共同募集契約マスタ登録
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.jointContract.dao.mapper.IfaJointContractMasterNewRegisterMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.jointContract.dao.model.IfaJointContractMasterNewRegisterSql001ResponseModel" >
+        <result property="brokerCode"     column="BROKER_CODE"      typeHandler="StringTypeHandler"/>
+        <result property="brokerName"     column="BRANCH_NAME"      typeHandler="StringTypeHandler"/>
+        <result property="contractStatus" column="CONTRACT_STATUS"  typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：.契約先仲介業者の存在チェック
+        SQLタイプ：select
+    -->
+    <select id="selectIfaJointContractMasterNewRegisterSql001" resultMap="ResultMapSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0513_01-02#Sql001 */
+            *
+        FROM
+            CORDYS.M_JOINT_BROKER                    <!-- テーブル「共同募集契約先仲介業者」 -->
+        WHERE
+            DELETE_FLG &lt;&gt; '1'                  <!-- 削除フラグ -->
+            AND BROKER_CODE = #{req.brokerCode}      <!-- 仲介業者コード -->
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：共同募集契約先仲介業者登録
+        SQLタイプ：update/inster
+    -->
+    <update id="updateIfaJointContractMasterNewRegisterSql002" statementType="PREPARED">
+        MERGE /* @SQLID=SUB0513_01-02#Sql002 */
+        INTO CORDYS.M_JOINT_BROKER A                        <!-- テーブル「共同募集契約先仲介業者」 -->
+        USING (
+            SELECT
+                #{req.brokerCode} AS BROKER_CODE            <!-- 仲介業者コード -->
+                , '0' AS DELETE_FLG                         <!-- 削除フラグ -->
+                , #{req.jointContract} AS CONTRACT_STATUS   <!-- 契約状態 -->
+            FROM
+                DUAL
+        ) B
+        ON (
+            A.BROKER_CODE = B.BROKER_CODE                   <!-- 仲介業者コード -->
+        )
+        WHEN MATCHED THEN
+            UPDATE SET
+                A.DELETE_FLG = '0'                          <!-- 削除フラグ -->
+                , A.CONTRACT_STATUS = B.CONTRACT_STATUS     <!-- 契約状態 -->
+        WHEN NOT MATCHED THEN
+            INSERT (
+                A.BROKER_CODE                 <!-- 仲介業者コード -->
+                , A.DELETE_FLG                <!-- 削除フラグ -->
+                , A.CONTRACT_STATUS           <!-- 契約状態 -->
+            ) VALUES (
+                B.BROKER_CODE
+                , B.DELETE_FLG
+                , B.CONTRACT_STATUS
+            )
+    </update>
+        
+    <!-- 
+        SQLID：Sql003
+        SQL名：.集計グループマスタの仲介業者コードの存在チェックを行う。
+        SQLタイプ：select
+    -->
+    <select id="selectIfaJointContractMasterNewRegisterSql003" resultType="int" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0513_01-02#Sql003 */
+            COUNT(1)
+        FROM
+            CORDYS.M_REWARD_GROUP                    <!-- テーブル「集計グループマスタ」 -->
+        WHERE
+            BROKER_CODE = #{req.brokerCode}                         <!-- 仲介業者コード -->
+            AND END_DATE_YM &gt;= TO_CHAR(SYSDATE, 'YYYYMM')        <!-- 適用終了日（年月） -->
+    </select>
+    
+</mapper>

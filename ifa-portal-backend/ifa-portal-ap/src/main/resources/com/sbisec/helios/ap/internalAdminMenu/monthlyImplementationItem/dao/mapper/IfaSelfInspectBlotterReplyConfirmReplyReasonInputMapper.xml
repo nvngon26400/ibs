@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0401_02-03
+    画面名：自己点検記録簿回答確認・回答理由入力
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.mapper.IfaSelfInspectBlotterReplyConfirmReplyReasonInputMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：自己点検確認テーブル更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaSelfInspectBlotterReplyConfirmReplyReasonInputSql001" statementType="PREPARED">
+        MERGE /* @SQLID=SUB0401_02-03#Sql001 */ INTO COR_SELF_CHECK_CONFIRMATION A
+        USING (
+            SELECT 
+                B.COR_SELF_CHECK_ID,
+                #{req.answerReason} AS COR_ANSWER_REASON,
+                #{req.userId} AS COR_UPDATE_BY
+            FROM 
+                COR_SELF_CHECK B
+            WHERE 
+                B.COR_ENFORCE_DATE = #{req.registerDate} <!-- A002.登録年月と一致 -->
+                AND B.COR_BROKER_CODE = #{req.brokerCode} <!-- 仲介業者コードが一致 -->
+        ) data
+        ON (
+            A.COR_SELF_CHECK_ID = data.COR_SELF_CHECK_ID 
+            AND A.COR_SELF_CHECK_ITEM_ID = #{req.selfCheckItemId}
+        )
+        WHEN MATCHED THEN
+            UPDATE SET
+                A.COR_ANSWER_REASON = data.COR_ANSWER_REASON,
+                A.COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE, <!-- システム日時 -->
+                A.COR_UPDATE_BY = data.COR_UPDATE_BY
+    </update>
+</mapper>

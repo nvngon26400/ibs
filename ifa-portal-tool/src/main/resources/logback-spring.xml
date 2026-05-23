@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+	<if condition='isDefined("log.level")'>
+		<then>
+			<property name="LOG_LEVEL" value="${log.level}" />
+		</then>
+		<else>
+			<property name="LOG_LEVEL" value="info" />
+		</else>
+	</if>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+		<encoder>
+			<pattern>%d{yyyy/MM/dd HH:mm:ss.SSS} %X{tool} [%-5level] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.sbisec.helios.tool" level="${LOG_LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="warn">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

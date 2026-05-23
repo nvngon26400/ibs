@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0505_01-01
+    画面名：コンプライアンス通信情報登録（管理者用）
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.mapper.IfaComplianceReportInfoRegisterManagerMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaComplianceReportInfoRegisterManagerSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.model.IfaComplianceReportInfoRegisterManagerSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaComplianceReportInfoRegisterManagerSql003" type="com.sbisec.helios.ap.companyEmployeeMenu.complianceReport.dao.model.IfaComplianceReportInfoRegisterManagerSql003ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：コンプライアンス通信情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaComplianceReportInfoRegisterManagerSql001" resultMap="ResultMapIfaComplianceReportInfoRegisterManagerSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0505_01-01#Sql001 */
+        COR_LEC_ID AS lectureId,
+        COR_COMMUNICATION_DATE AS yearMonth,
+        COR_TITLE AS title,
+        COR_BRIEF AS overview,
+        COR_FILE_NAME1 AS fileName1,
+        COR_FILE_NAME2 AS fileName2,
+        COR_FILE_NAME3 AS fileName3,
+        COR_FILE_DESC1 AS fileComment1,
+        COR_FILE_DESC2 AS fileComment2,
+        COR_FILE_DESC3 AS fileComment3,
+        COR_CONTENTS AS contents,
+        COR_HONBAN_FLG disclosureFlag,
+        COR_CONTENTS_FILE_NAME contentsFileName,
+        lastUpdateDate
+        FROM (
+            SELECT
+            COR_LEC_ID,
+            COR_COMMUNICATION_DATE,
+            COR_TITLE,
+            COR_BRIEF,
+            COR_FILE_NAME1,
+            COR_FILE_NAME2,
+            COR_FILE_NAME3,
+            COR_FILE_DESC1,
+            COR_FILE_DESC2,
+            COR_FILE_DESC3,
+            COR_CONTENTS,
+            COR_HONBAN_FLG,
+            COR_CONTENTS_FILE_NAME,
+            NVL2(COR_UPDATE_DATE,COR_UPDATE_DATE,COR_CREATE_DATE) AS lastUpdateDate
+            FROM COR_COMPLIANCE_COMMUNICATION
+            )
+            ORDER BY COR_COMMUNICATION_DATE DESC
+       
+    </select> 
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：コンプライアンス通信状態変更
+        SQLタイプ：update
+    -->
+    <update id="updateIfaComplianceReportInfoRegisterManagerSql002" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0505_01-01#Sql002 */ 
+        COR_COMPLIANCE_COMMUNICATION 
+        SET 
+        COR_HONBAN_FLG = #{req.disclosureFlag},
+        COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE,
+        COR_UPDATE_BY = #{req.updater}
+        WHERE
+        COR_LEC_ID = #{req.lectureId}
+    </update>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：ファイルディレクトリパス取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaComplianceReportInfoRegisterManagerSql003" resultMap="ResultMapIfaComplianceReportInfoRegisterManagerSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0505_01-01#Sql003 */
+        FILE_DIR AS fileDirectoryPath
+        FROM 
+        TB_MED_TEMP_FILE_DIR
+        WHERE 
+        1 = 1
+        <if test="req.functionId != null and req.functionId != ''">
+            AND FUNC_ID = #{req.functionId}
+        </if>
+        <if test="req.t9nInfoCat != null and req.t9nInfoCat != ''">
+            AND CAT_ID  = #{req.t9nInfoCat}
+        </if>
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：コンプライアンス通信テーブル情報削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaComplianceReportInfoRegisterManagerSql004" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0505_01-01#Sql004 */
+        FROM COR_COMPLIANCE_COMMUNICATION 
+        WHERE 
+        COR_LEC_ID = #{req.lectureId}
+    </delete>
+    
+</mapper>

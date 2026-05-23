@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn install
+      - mvn package
+artifacts:
+  type: zip
+  files:
+    - ./ifa-portal-tool/target/*.jar
+  name: ifa-portal-tool
+  discard-paths: yes

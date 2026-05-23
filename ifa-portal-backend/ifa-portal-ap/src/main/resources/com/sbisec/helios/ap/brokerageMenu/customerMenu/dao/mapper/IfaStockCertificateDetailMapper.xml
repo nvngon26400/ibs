@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0703-03
+    画面名：株券詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaStockCertificateDetailMapper">
+    
+    <resultMap id="ResultMapIfaStockCertificateDetailSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaStockCertificateDetailSql001ResponseModel" >
+    </resultMap>
+    <!-- 
+        SQLID：Sql001
+        SQL名：株券詳細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStockCertificateDetailSql001" resultMap="ResultMapIfaStockCertificateDetailSql001" statementType="PREPARED">
+       SELECT
+            /* @SQLID=SUB0202_0703-03#Sql001 */ *
+        FROM
+            (
+                SELECT
+                    count(*) over()                     AS TOTAL_COUNT,             <!-- 総件数 -->
+                    ACS．BRAND_CD                        AS BRAND_CD,                 <!-- 銘柄コード -->
+                    ACS．BRAND_NAME                      AS BRAND_NAME,               <!-- 銘柄名 -->
+                    ACS．STOCK_COUPON                    AS STOCK_COUPON,             <!-- 券種 -->
+                    ACS．STOCK_REMARK                    AS STOCK_REMARK,             <!-- 記号 -->
+                    ACS．STOCK_NUMBER                    AS STOCK_NUMBER,             <!-- 売却可能日 -->
+                    ACS．ACCEPT_DATE                     AS ACCEPT_DATE,              <!-- 受付日 -->
+                    ACS．RETURN_DATE                     AS RETURN_DATE,              <!-- 返却日 -->
+                    ACS．RETURN_REASON                   AS RETURN_REASON            <!-- 返却理由 -->
+                FROM
+                    CALLCENTER.ACCEPT_STOCKS ACS
+            )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+    
+</mapper>

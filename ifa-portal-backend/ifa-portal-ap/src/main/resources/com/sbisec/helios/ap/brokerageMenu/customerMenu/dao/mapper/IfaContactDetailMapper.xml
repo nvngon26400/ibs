@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0106-06
+    画面名：接触履歴詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaContactDetailMapper">
+    <!-- 
+         SQLID:Sql001
+         SQL名:問合せ情報取得
+         SQLタイプ:select
+    -->
+    <resultMap id="ResultMapIfaContactDetailSql001" 
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactDetailSql001ResponseModel" >
+        <result property="toiawaseDMei" column="TOIAWASE_D_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="toiawaseMei" column="TOIAWASE_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="toiawaseSMei" column="TOIAWASE_S_MEI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="userNm" column="USER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="toiawaseNaiyou" column="TOIAWASE_NAIYOU" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <select id="selectIfaContactDetailSql001" resultMap="ResultMapIfaContactDetailSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-06#SQL001 */
+             A.IFA_TOIAWASE_NO                                                          <!-- A.IFA問合せNO -->
+            ,A.TOIAWASE_NO                                                              <!-- A.問合せNO -->
+            ,TO_CHAR(A.TOIAWASE_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS TOIAWASE_NICHIJI   <!-- A.問合せ日時 -->
+            ,A.USER_NAME                                                                <!-- A.ユーザ名 -->
+            ,A.TOIAWASE_D_MEI                                                           <!-- A.カテゴリー名称（大） -->
+            ,A.TOIAWASE_MEI                                                             <!-- A.カテゴリー名称（中） -->
+            ,A.TOIAWASE_S_MEI                                                           <!-- A.カテゴリー名称（小） -->
+            ,A.SESSYOKU_KEIRO                                                           <!-- A.接触経路 -->
+            ,A.HOUMONBI                                                                 <!-- A.訪問日 -->
+            ,A.CREAM                                                                    <!-- A.クレーム -->
+            ,A.REQUEST                                                                  <!-- A.リクエスト -->
+            ,A.JUUYOUDO                                                                 <!-- A.重要度 -->
+            ,A.TAIOU_STS                                                                <!-- A.対応ステータス -->
+            ,A.HOUKOU                                                                   <!-- A.方向 -->
+            ,A.NEXT_HOUMONBI                                                            <!-- A.次回訪問予定日 -->
+            ,A.TOIAWASE_NAIYOU                                                          <!-- A.問合せ内容 -->
+            ,TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS TOUROKU_NICHIJI     <!-- A.登録日時 -->
+            ,C.IFA_SENYOU_FLG                                                           <!-- C.IFA専用フラグ -->
+        FROM
+            CORDYS.TB_QUESTION_IFA A                                                <!-- 【IFA問合せ】 -->
+            LEFT JOIN TB_QUESTION_MASTER_IFA C                                      <!-- 【IFA問合せマスタ】 -->
+                   ON A.TOIAWASE_D_CD = C.TOIAWASE_CD
+                  AND C.TOIAWASE_KBN = #{req.toiawaseKbn}
+                  AND C.SAKUJO_FLG = #{req.sakujoFlg}
+        WHERE
+            A.IFA_TOIAWASE_NO = #{req.ifaToiawaseNo}
+            AND A.SAKUJO_FLG = #{req.sakujoFlg}
+    </select>
+
+    <!-- 
+         SQLID:Sql002
+         SQL名:問合せ回答内容情報取得
+         SQLタイプ:select
+    -->
+    <resultMap id="ResultMapIfaContactDetailSql002" 
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactDetailSql002ResponseModel" >
+        <result property="kaitouNaiyou" column="KAITOU_NAIYOU" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="userNm" column="USER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    <select id="selectIfaContactDetailSql002" resultMap="ResultMapIfaContactDetailSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0106-06#SQL002 */
+             A.IFA_TOIAWASE_NO                                                      <!-- A.IFA問合せNO -->
+            ,A.TOIAWASE_NO                                                          <!-- A.問合せNO -->
+            ,A.IFA_KAITOU_NO                                                        <!-- A.IFA回答NO -->
+            ,A.KAITOU_NO                                                            <!-- A.回答NO -->
+            ,A.USER_NAME                                                                <!-- A.ユーザ名 -->
+            ,DECODE(A.KAITOU_NAIYOU,'-','',A.KAITOU_NAIYOU) AS KAITOU_NAIYOU        <!-- A.回答内容 -->
+            ,TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS TOUROKU_NICHIJI <!-- A.登録日時 -->
+            ,A.TOUROKU_GROUP                                                          <!-- 登録グループ -->
+        FROM
+            CORDYS.TB_ANSWER_IFA A                                                  <!-- 【IFA回答】 -->
+        WHERE
+            A.IFA_TOIAWASE_NO = #{req.ifaToiawaseNo}
+            AND A.SAKUJO_FLG = #{req.sakujoFlg}
+        ORDER BY
+             A.TOUROKU_GROUP
+            ,A.TOUROKU_NICHIJI
+            ,A.KAITOU_NO
+    </select>
+</mapper>

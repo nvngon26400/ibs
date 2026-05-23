@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.sbisec.helios.ap.common.dao.mapper.ServiceStatusMapper">
+
+	<resultMap
+		type="com.sbisec.helios.ap.common.model.ServiceStatusModel"
+		id="ServiceStatus" >
+</resultMap>
+
+	<select id="getServiceStatus" resultMap="ServiceStatus"
+		statementType="PREPARED">
+
+		SELECT SERVICE_ID
+		, SERVICE_STATUS
+		FROM SERVICE_STATUS WHERE SERVICE_ID = #{screenId}
+		UNION
+		SELECT SERVICE_ID
+		, SERVICE_STATUS
+		FROM SERVICE_STATUS WHERE SERVICE_ID in ( SELECT SERVICE_GROUP_ID FROM
+		SERVICE_GROUP WHERE SERVICE_ID = #{screenId} )
+
+
+		<!-- SELECT DISTINCT -->
+		<!-- SG.SERVICE_ID AS SERVICE_ID -->
+		<!-- , SS.SERVICE_ID AS GROUP_ID -->
+		<!-- , SS.SERVICE_STATUS AS SERVICE_STATUS -->
+		<!-- FROM SERVICE_STATUS SS -->
+		<!-- LEFT JOIN SERVICE_GROUP SG -->
+		<!-- ON SS.SERVICE_ID = SG.SERVICE_ID -->
+		<!-- OR SS.SERVICE_ID = SG.SERVICE_GROUP_ID -->
+		<!-- <where> -->
+		<!-- SG.SERVICE_ID = #{screenId} -->
+		<!-- </where> -->
+	</select>
+
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB00-07_2
+    画面名：リリースノート詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.releaseNote.dao.mapper.IfaReleaseNoteDetailMapper">
+
+    <resultMap id="ResultMapIfaReleaseNoteDetailSql002" type="com.sbisec.helios.ap.releaseNote.dao.model.IfaReleaseNoteDetailSql002ResponseModel" >
+        <result property="fileType" column="FILE_TYPE" typeHandler="StringTypeHandler"/>
+        <result property="pdfSize" column="PDF_SIZE" typeHandler="StringTypeHandler"/>
+        <result property="pdfDirection" column="PDF_DIRECTION" typeHandler="StringTypeHandler"/>
+        <result property="detailedFile" column="DETAILED_FILE" typeHandler="StringTypeHandler"/>
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：リリースノートファイルディレクトリ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaReleaseNoteFileDirectorySql001" resultType="String" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00-07_2#Sql001 */
+            FILE_DIR
+        FROM CORDYS.TB_MED_TEMP_FILE_DIR
+        <where>
+            FUNC_ID = 'M14'
+        AND
+            CAT_ID = '0'
+        </where>
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：リリースノート詳細ファイル取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaReleaseNoteDetailSql002" resultMap="ResultMapIfaReleaseNoteDetailSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00-07_2#Sql002 */
+            FILE_TYPE,
+            PDF_SIZE,
+            PDF_DIRECTION,
+            DETAILED_FILE
+        FROM CORDYS.RELEASE_NOTE
+        <where>
+            RELEASE_NOTE_NO = #{releaseNoteNo}
+            AND DETAILED_FILE IS NOT NULL
+        </where>
+    </select>
+</mapper>

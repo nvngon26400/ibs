@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0401-02_1
+    画面名：国内投信注文入力
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaDomesticMutualFundOrderInputMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaDomesticMutualFundOrderInputSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundOrderInputSql001ResponseModel" >
+        <result property="name" column="NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaDomesticMutualFundOrderInputSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundOrderInputSql002ResponseModel" >
+        <result property="name" column="NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaDomesticMutualFundOrderInputSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaDomesticMutualFundOrderInputSql003ResponseModel" >
+        <result property="mFCode" column="M_F_CODE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：短期売却確認の期間取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDomesticMutualFundOrderInputSql001" resultMap="ResultMapIfaDomesticMutualFundOrderInputSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0401-02_1#Sql001 */ 
+            NAME
+        FROM
+            M_CODE
+        WHERE
+            CODE_TYPE = '61'
+            AND CODE_1 = '1'
+            AND CODE_2 = '0'
+            AND START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+            AND END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+
+    </select>
+    
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：償還前売却確認の期間取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDomesticMutualFundOrderInputSql002" resultMap="ResultMapIfaDomesticMutualFundOrderInputSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0401-02_1#Sql002 */ 
+            NAME
+        FROM
+            M_CODE
+        WHERE
+            CODE_TYPE = '61'
+            AND CODE_1 = '2'
+            AND CODE_2 = '0'
+            AND START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+            AND END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+    </select>
+    
+    
+    <!-- 
+        SQLID：SQL003
+        SQL名：目論見書チェック用情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaDomesticMutualFundOrderInputSql003" resultMap="ResultMapIfaDomesticMutualFundOrderInputSql003" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0401-02_1#Sql003 */  
+            M_F_CODE
+        FROM 
+            FUND
+        WHERE
+            M_F_TYPE = #{req.fundType}
+            AND M_F_NRICODE = #{req.fundCodeTimes}||' '||TRIM(#{req.fundCodeIssues})||' '
+            AND M_F_DELFLG = '0'
+            AND M_F_ET_START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+    </select>
+    
+</mapper>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0406-01
+    画面名：年度別口座数・報酬額照会
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.mapper.IfaByYearAccountQuantityFeeAmountLookupMapper">
+    
+    <resultMap id="ResultMapIfaByYearAccountQuantityFeeAmountLookupSql002" type="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.model.IfaByYearAccountQuantityFeeAmountLookupSql002ResponseModel">
+    </resultMap>
+    <resultMap id="ResultMapIfaByYearAccountQuantityFeeAmountLookupSql003" type="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.model.IfaByYearAccountQuantityFeeAmountLookupSql003ResponseModel">
+        <result property="brokerName" column="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaByYearAccountQuantityFeeAmountLookupSql004" type="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.model.IfaByYearAccountQuantityFeeAmountLookupSql004ResponseModel">
+        <result property="brokerName" column="brokerName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="nameKanji" column="nameKanji" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="nameKana" column="nameKana" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="courseName" column="courseName" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="tradeKbn" column="tradeKbn" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaByYearAccountQuantityFeeAmountLookupSql005" type="com.sbisec.helios.ap.internalAdminMenu.byYearAccountQuantityFeeAmountLookup.dao.model.IfaByYearAccountQuantityFeeAmountLookupSql005ResponseModel">
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：仲介業者決算月情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaByYearAccountQuantityFeeAmountLookupSql002" resultMap="ResultMapIfaByYearAccountQuantityFeeAmountLookupSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0406-01#Sql002 */
+            MM.BROKER_CODE AS brokerCode,
+            MM.CLOSING_MONTH AS closingMonth
+        FROM
+            CORDYS.M_MEDIATE_CLOSING_MONTH MM
+        <where>
+            1=1
+           <if test="req.brokerCode != null and req.brokerCode != '' ">
+               AND MM.BROKER_CODE = #{req.brokerCode} 
+            </if> 
+            <choose>
+                <when test="(req.privId == '2'.toString() or req.privId == '3'.toString()) and req.brokerChargeList != null and !req.brokerChargeList.isEmpty()">
+                        AND (MM.BROKER_CODE IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR MM.BROKER_CODE IN (
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                                #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                    </when>
+            </choose> 
+        </where>
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：年度別口座数・報酬額情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaByYearAccountQuantityFeeAmountLookupSql003" resultMap="ResultMapIfaByYearAccountQuantityFeeAmountLookupSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0406-01#Sql003 */
+            MBR.CLOSING_KBN AS closingKbn,
+            MBR.CLOSING_YM AS closingYearMonth,
+            MBR.BROKER_CODE AS brokerCode,
+            MB.BRANCH_NAME AS brokerName,
+            MBR.PREVIOUS_NUMBER_OF_ACCOUNTS AS previousNumberOfAccounts,
+            MBR.NUMBER_OF_ACCOUNTS AS numberOfAccounts,
+            MBR.NUMBER_OF_ACTIVE_ACCOUNTS AS numberOfActiveAccounts,
+            MBR.MEDIATE_COM AS mediateCom,
+            MBR.OTHER_COM AS otherCom,
+            MBR.START_YM AS startYm,
+            CASE WHEN MBR.PREVIOUS_NUMBER_OF_ACCOUNTS IS NOT NULL
+                THEN MBR.NUMBER_OF_ACCOUNTS - MBR.PREVIOUS_NUMBER_OF_ACCOUNTS
+                ELSE NULL
+            END AS numberOfAccountsIncreaseDecrease,
+            CASE WHEN MBR.CLOSING_KBN = '0'
+                THEN '0'
+                ELSE MA.DOWNLOAD_FLG
+            END AS downloadFlg
+        FROM
+            CORDYS.MEDIATE_BUSINESS_REPORT MBR
+        LEFT OUTER JOIN
+            CORDYS.MEDIATE_ACCOUNT_MONTH MA
+            ON MA.BROKER_CODE = MBR.BROKER_CODE
+            AND MBR.CLOSING_KBN = '1'
+            AND MA.BASEDATE_YM = MBR.CLOSING_YM
+        LEFT OUTER JOIN
+            CORDYS.MEDIATE_BRANCH MB
+            ON MBR.BROKER_CODE = MB.BROKER_CODE
+            AND MB.BROKER_BRANCH_KIND = '00'
+        <where>
+           1 = 1
+            <choose>
+                <when test="req.privId == '1'.toString()">
+                    <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                        <choose>
+                            <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                AND MBR.BROKER_CODE NOT IN
+                            </when>
+                            <otherwise>
+                                AND MBR.BROKER_CODE IN
+                            </otherwise>
+                        </choose>
+                        <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                </when>
+                <when test="req.privId == '2'.toString() or req.privId == '3'.toString()">
+                    AND (MBR.BROKER_CODE IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR MBR.BROKER_CODE IN (
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                            #{brokerCharge.brokerCode}
+                    </foreach>
+                    )
+                    <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                        AND MBR.BROKER_CODE IN
+                        <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                </when>
+            </choose>
+            <if test="req.settleYearList != null and !req.settleYearList.isEmpty()">
+                AND SUBSTR(MBR.CLOSING_YM,1,4) IN
+                <foreach item="item" index="index" collection="req.settleYearList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY
+            MBR.BROKER_CODE,
+            MBR.CLOSING_YM DESC
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：媒介口座明細情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaByYearAccountQuantityFeeAmountLookupSql004" resultMap="ResultMapIfaByYearAccountQuantityFeeAmountLookupSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0406-01#Sql004 */
+            #{ req.closingYearMonth } AS closingMonth,
+            #{ req.brokerCode } AS brokerCode,
+            #{ req.brokerName } AS brokerName,
+            L.BUTEN_CODE AS butenCode,
+            L.ACCOUNT_NUMBER AS accountNumber,
+            L.NAME_KANJI AS nameKanji,
+            L.NAME_KANA AS nameKana,
+            L.DEALER_NUMBER AS dealerNumber,
+            L.OPEN_ACCT_DATE AS openAcctDate,
+            L.CUSTOMER_ATTRIBUTE_NAME AS courseName,
+            CASE WHEN L.ACTIVE_ACCOUNT_KBN = '1'
+                THEN '〇'
+                ELSE 'Ｘ'
+            END AS tradeKbn
+        FROM
+            CORDYS.LAST_MED_USER_ATTR_INFO L
+        INNER JOIN
+            CORDYS.MEDIATE_BUSINESS_REPORT MBR
+            ON L.BROKER_CODE = MBR.BROKER_CODE
+            AND MBR.CLOSING_YM = #{ req.closingYearMonth }
+        WHERE
+            L.BASE_DATE_YM = (CASE WHEN MBR.CLOSING_KBN = '1' THEN #{ req.closingYearMonth } ELSE TO_CHAR(ADD_MONTHS(MBR.CREATE_DATE, -1), 'YYYYMM') END)
+            AND L.BROKER_CODE = #{ req.brokerCode }
+            <choose>
+              <when test="req.privId == '2'.toString() or req.privId == '3'.toString()">
+                    AND (L.BROKER_CODE IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR L.BROKER_CODE IN (
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                            #{brokerCharge.brokerCode}
+                    </foreach>
+                    )
+                </when>  
+            </choose>
+        ORDER BY
+            L.BROKER_CODE,
+            L.BUTEN_CODE,
+            L.ACCOUNT_NUMBER
+    </select>
+    <!-- 
+        SQLID：Sql005
+        SQL名：媒介可否区分取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaByYearAccountQuantityFeeAmountLookupSql005" resultMap="ResultMapIfaByYearAccountQuantityFeeAmountLookupSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0406-01#Sql005 */
+           MM.BROKER_CODE  AS BROKER_CODE,          <!-- 仲介業者コード -->
+           MM.EFFECTIVE_DATE AS EFFECTIVE_DATE,     <!-- 適用開始日 -->
+           MM.MEDIATE_PROPRIETY_KBN AS MEDIATE_PROPRIETY_KBN    <!-- 媒介可否区分 -->
+        FROM
+            CORDYS.M_MEDIATE_PROPRIETY MM <!-- 仲介業者媒介可否マスタ -->
+        WHERE
+            1=1
+            <choose>
+                <when test="req.privId == '1'.toString()">
+                    <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                        <choose>
+                            <when test="req.chkBrokerCodeExclude == 'true'.toString()">
+                                AND MM.BROKER_CODE NOT IN
+                            </when>
+                            <otherwise>
+                                AND MM.BROKER_CODE IN
+                            </otherwise>
+                        </choose>
+                        <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                </when>
+                <when test="req.privId == '2'.toString() or req.privId == '3'.toString()">
+                    AND (MM.BROKER_CODE IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR MM.BROKER_CODE IN (
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                            #{brokerCharge.brokerCode}
+                    </foreach>
+                    )
+                    <if test="req.brokerCodeList != null and !req.brokerCodeList.isEmpty()">
+                        AND MM.BROKER_CODE IN
+                        <foreach item="item" index="index" collection="req.brokerCodeList" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                </when>
+            </choose>
+    </select>
+</mapper>

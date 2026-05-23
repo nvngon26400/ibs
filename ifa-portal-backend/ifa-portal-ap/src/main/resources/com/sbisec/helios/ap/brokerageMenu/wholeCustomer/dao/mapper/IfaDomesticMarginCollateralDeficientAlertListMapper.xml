@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020301_01-02
+    画面名：国内信用担保不足アラート一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaDomesticMarginCollateralDeficientAlertListMapper">
+
+    <resultMap id="ResultMapIfaDomesticMarginCollateralDeficientAlertListSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaDomesticMarginCollateralDeficientAlertListSql001ResponseModel">
+    </resultMap>
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：追証請求顧客情報取得
+         SQLタイプ：select
+    -->
+    <select id="selectIfaDomesticMarginCollateralDeficientAlertListSql001" resultMap="ResultMapIfaDomesticMarginCollateralDeficientAlertListSql001">
+        SELECT /* @SQLID=SUB020301_01-02#Sql001 */
+            COUNT(*) OVER() AS totalCount,
+            A.REFERENCE_DATE AS standardDate,
+            A.BROKER_CODE AS brokerCode,
+            A.BROKER_CHARGE_CODE AS brokerChargeCode,
+            A.BUTEN_CODE AS butenCode,
+            A.ACCOUNT_NUMBER AS accountNumber,
+            A.ACCEPTANCE_DEPOSIT AS acceptDeposit,
+            A.MAINTAIN_RATE AS maintenanceRate,
+            A.ADDITIONAL_MARGIN AS marginDemandAmount,
+            C.BROKER_BRANCH_CODE AS subBrokerId,
+            D.BRANCH_NAME AS brokerName,
+            B.CUSTOMER_ATTRIBUTE_NAME AS customerAttributeName,
+            B.NAME_KANJI AS customerNameKanji,
+            B.NAME_KANA AS customerNameKana,
+            C.BRANCH_NAME AS brokerBranchName,
+            C.BROKER_CHARGE_NAME AS employeeName
+        FROM
+            T_MARGIN_CALL A
+        INNER JOIN
+            MEDIATE_USER_ATTRIBUTE_INFO B
+        ON
+            A.BUTEN_CODE = B.BUTEN_CODE
+            AND
+            TO_NUMBER(A.ACCOUNT_NUMBER) = B.ACCOUNT_NUMBER
+        LEFT JOIN
+            V_MEDIATE_CHARGE_INFO C
+        ON
+            A.BROKER_CODE = C.BROKER_CODE
+            AND 
+            A.BROKER_CHARGE_CODE = C.BROKER_CHARGE_CODE
+        LEFT JOIN
+            MEDIATE_BRANCH D
+        ON
+            A.BROKER_CODE = D.BROKER_CODE
+            AND
+            D.BROKER_BRANCH_KIND = '00'
+            AND
+            D.DELETE_FLG = '0'
+        WHERE
+            (
+                (A.ACCEPTANCE_DEPOSIT &lt; 300000 AND A.UNSETTLED_PRICE_TOTAL &lt;&gt; 0)
+                OR
+                0 &lt; A.ADDITIONAL_MARGIN
+                OR
+                (A.MAINTAIN_RATE &lt; 25 AND A.UNSETTLED_PRICE_TOTAL &lt;&gt; 0)
+                OR
+                (25 &lt;= A.MAINTAIN_RATE AND A.MAINTAIN_RATE &lt; 31 AND A.UNSETTLED_PRICE_TOTAL &lt;&gt; 0)
+            )
+            <if test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+				AND(A.BROKER_CODE IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR A.BROKER_CODE IN(
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                        #{brokerCharge.brokerCode}
+                    </foreach>
+                    )
+            </if>
+            <if test='req.privId != "1" and req.privId != "3" and req.privId != "4" and req.privId != "5"'>
+				AND
+                ((A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN
+                    <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                        <if test="index % 1000 == 0 and index != 0">
+                            ) OR (A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN(
+                        </if>
+                        <if test="index % 1000 != 0">
+                            ,
+                        </if>
+                        (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                    </foreach>
+                    )
+            </if>
+            <if test='req.brokerCode != null and req.brokerCode != "" and req.chkBrokerCodeExclude == "false"'>
+                AND A.BROKER_CODE IN
+                <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                     #{brokerCode}
+                </foreach>
+            </if>
+            <if test='req.brokerCode != null and req.brokerCode != "" and req.chkBrokerCodeExclude == "true"'>
+                AND A.BROKER_CODE NOT IN
+                <foreach collection="req.brokerCode.split(',')" item="brokerCode" open="(" close=")" separator=",">
+                     #{brokerCode}
+                </foreach>
+            </if>
+            <if test='req.branchCode != null and req.branchCode != ""'>
+                AND C.BROKER_BRANCH_CODE = #{req.branchCode}
+            </if>
+            <if test='req.empCode != null and req.empCode != ""'>
+                AND A.BROKER_CHARGE_CODE = #{req.empCode}
+            </if>
+            <if test='req.butenCode != null and req.butenCode != ""'>
+                AND A.BUTEN_CODE = #{req.butenCode}
+            </if>
+            <if test='req.accountNumber != null and req.accountNumber != ""'>
+                AND TO_NUMBER(A.ACCOUNT_NUMBER) = TO_NUMBER(#{req.accountNumber})
+            </if>
+            <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "0"'>
+                AND (B.NAME_KANJI = #{req.customerNameKanjiKana} OR B.NAME_KANA = #{req.customerNameKanjiKana})
+            </if>
+            <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "1"'>
+                AND (B.NAME_KANJI LIKE CONCAT(#{req.customerNameKanjiKana},'%') OR B.NAME_KANA like CONCAT(#{req.customerNameKanjiKana},'%'))
+            </if>
+            <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != "" and req.customerNameKanjiKanaTerms == "2"'>
+                AND (B.NAME_KANJI LIKE CONCAT(CONCAT('%',#{req.customerNameKanjiKana}),'%') OR B.NAME_KANA like CONCAT(CONCAT('%',#{req.customerNameKanjiKana}),'%'))
+            </if>
+            AND B.CUSTOMER_ATTRIBUTE IN 
+            <foreach collection="req.course.split(',')" item="course" open="(" close=")" separator=",">
+                #{course}
+            </foreach>
+        ORDER BY
+        A.BROKER_CODE ASC, A.BROKER_CHARGE_CODE ASC, A.BUTEN_CODE ASC, A.ACCOUNT_NUMBER ASC
+        FETCH FIRST 5000 ROWS ONLY
+    </select>
+
+</mapper>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0401-03
+    画面名：投信詳細情報
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaMutualFundDetailInfoMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql001ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql002ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql003ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql004ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql005" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql005ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql006" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql006ResponseModel" >
+        <result property="fbmBody" column="FBM_BODY" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql009" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql009ResponseModel" >
+        <result property="fDPolicy" column="F_D_POLICY" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDTrustCharge" column="F_D_TRUST_CHARGE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDReservedAsset" column="F_D_RESERVED_ASSET" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDEntryText" column="F_D_ENTRY_TEXT" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDKaiyakuText" column="F_D_KAIYAKU_TEXT" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDAccountingDate" column="F_D_ACCOUNTING_DATE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDDividendsSchedule" column="F_D_DIVIDENDS_SCHEDULE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDInstructions" column="F_D_INSTRUCTIONS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDHoliday" column="F_D_HOLIDAY" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDRemarks" column="F_D_REMARKS" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="fDSyokanKbn" column="F_D_SYOKAN_KBN" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql010" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql010ResponseModel" >
+        <result property="mFName" column="M_F_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql011" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql011ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql012" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql012ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundDetailInfoSql013" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundDetailInfoSql013ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：SQL001
+        SQL名：協会コード取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-03#Sql001 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql001" resultMap="ResultMapIfaMutualFundDetailInfoSql001" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0401-03#Sql001 */  
+            M_F_CODE,M_F_TOKUSYU,M_F_SHIMEKIRI
+        FROM 
+            FUND
+        WHERE
+            M_F_TYPE IN ('1','2')
+            AND M_F_DELFLG = '0' 
+            AND M_F_ET_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') 
+            AND M_F_NRICODE = #{req.fundCodeTimes}||#{req.fundCodeIssues}||' '
+    </select>
+    
+    <!-- 
+        SQLID：SQL002
+        SQL名：投信銘柄当月休場日取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-03#Sql002 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql002" resultMap="ResultMapIfaMutualFundDetailInfoSql002" statementType="PREPARED">
+        select
+            /* @SQLID=SUB0202_0401-03#Sql002 */
+            A.FDC_CTL_DATE
+            , ( 
+                select
+                    '1' 
+                from
+                    ( 
+                        select
+                            min(to_char(c.operating_date, 'YYYYMMDD')) as dd 
+                        from
+                            OPERATING_MASTER c 
+                        where
+                            c.operating_date >= TRUNC(IFA_DATE_UTIL.IFA_GET_DATE)
+                    ) b 
+                where
+                    A.FDC_CTL_DATE = b.dd
+            ) as  BUSINESS_DAY_FLAG  
+        from
+            BF_FUND_CONTROL_DATE A 
+        where
+            A.FDC_F_CODE = #{req.kyoukaiCd}
+            AND A.FDC_CLASS = 'H' 
+            AND A.FDC_CTL_DATE >= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMM') || '01' 
+            and A.FDC_CTL_DATE &lt;= to_char( 
+                last_day(IFA_DATE_UTIL.IFA_GET_DATE)
+                , 'YYYYMMDD'
+            )
+    </select>
+    <!-- 
+        SQLID：SQL003
+        SQL名：投信銘柄翌月休場日取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-03#Sql003 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql003" resultMap="ResultMapIfaMutualFundDetailInfoSql003" statementType="PREPARED">
+        select
+            /* @SQLID=SUB0202_0401-03#Sql003 */
+            A.FDC_CTL_DATE
+            , ( 
+                select
+                    '1' 
+                from
+                    ( 
+                        select
+                            min(to_char(c.operating_date, 'YYYYMMDD')) as dd 
+                        from
+                            OPERATING_MASTER c 
+                        where
+                            c.operating_date >= TRUNC(IFA_DATE_UTIL.IFA_GET_DATE)
+                    ) b 
+                where
+                    A.FDC_CTL_DATE = b.dd
+            ) as BUSINESS_DAY_FLAG 
+        from
+            BF_FUND_CONTROL_DATE A 
+        where
+            A.FDC_F_CODE = #{req.kyoukaiCd}
+            AND A.FDC_CLASS = 'H' 
+            AND A.FDC_CTL_DATE >= TO_CHAR( 
+                ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, 1)
+                , 'YYYYMM'
+            ) || '01' 
+            and A.FDC_CTL_DATE &lt;= TO_CHAR( 
+                LAST_DAY(ADD_MONTHS(IFA_DATE_UTIL.IFA_GET_DATE, 1))
+                , 'YYYYMMDD'
+            )
+
+    </select>    
+    <!-- 
+        SQLID：SQL004
+        SQL名：締切日（直近）取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-03#Sql004 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql004" resultMap="ResultMapIfaMutualFundDetailInfoSql004" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0202_0401-03#Sql004 */
+        TO_CHAR(MIN(OPERATING_DATE), 'YYYY/MM/DD') AS deadlineDate
+        FROM
+            OPERATING_MASTER 
+        WHERE
+            OPERATING_DATE >= TRUNC(IFA_DATE_UTIL.IFA_GET_DATE) 
+            AND OPERATING_DATE &lt;= TRUNC(last_day(add_months(IFA_DATE_UTIL.IFA_GET_DATE, 1))) 
+            AND OPERATING_DATE NOT IN ( 
+                SELECT
+                    TO_DATE(FDC_CTL_DATE,'YYYYMMDD') 
+                FROM
+                    BF_FUND_CONTROL_DATE 
+                WHERE
+                    FDC_F_CODE = #{req.kyoukaiCd}
+                    AND FDC_CLASS = 'H'
+            )
+    </select>
+    <!-- 
+        SQLID：SQL005
+        SQL名：締切日（次回）取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-03#Sql005 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql005" resultMap="ResultMapIfaMutualFundDetailInfoSql005" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0202_0401-03#Sql005 */
+            TO_CHAR(MIN(OPERATING_DATE), 'YYYY/MM/DD') AS deadlineDate 
+        FROM
+            OPERATING_MASTER 
+        WHERE
+            OPERATING_DATE >= TRUNC(IFA_DATE_UTIL.IFA_GET_DATE) 
+            AND OPERATING_DATE &lt;= TRUNC(last_day(add_months(IFA_DATE_UTIL.IFA_GET_DATE, 1))) 
+            AND OPERATING_DATE NOT IN ( 
+                SELECT
+                    TO_DATE(FDC_CTL_DATE,'YYYYMMDD')
+                FROM
+                    BF_FUND_CONTROL_DATE
+                WHERE
+                    FDC_F_CODE = #{req.kyoukaiCd} 
+                    AND FDC_CLASS = 'H'
+            )
+            AND OPERATING_DATE != TO_DATE(#{req.deadlineDateRecent},'YYYY/MM/DD')
+    </select>        
+    <!-- 
+        SQLID：SQL006
+        SQL名：お知らせ取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-#Sql006 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql006" resultMap="ResultMapIfaMutualFundDetailInfoSql006" statementType="PREPARED">
+        SELECT    
+            /* @SQLID=SUB0202_0401-#Sql006 */
+            SUBSTRB(FBM_START_TIME,3,8) AS FBM_START_TIME
+            , FBM_BODY 
+        FROM
+            FUND_BULLETIN_MASTER 
+        where
+            FBM_START_TIME &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYY/MM/DD HH24:MI') 
+            AND FBM_END_TIME > IFA_DATE_UTIL.IFA_GET_SDATE('YYYY/MM/DD HH24:MI') 
+            AND FBM_DELETE_FLG = '0' 
+            AND FBM_TYPE = #{req.fbmType} 
+            AND FBM_STATE = '1' 
+            AND FBM_CODE = #{req.kyoukaiCd} 
+    </select>
+    <!-- 
+        SQLID：SQL009
+        SQL名：投信明細取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-#Sql009 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql009" resultMap="ResultMapIfaMutualFundDetailInfoSql009" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0202_0401-#Sql009 */
+            A.F_D_CODE
+            , A.F_D_GROUP
+            , A.F_D_POLICY
+            , REPLACE ( 
+                A.F_D_TRUST_CHARGE
+                , UTL_RAW.CAST_TO_NVARCHAR2(HEXTORAW('FF5E'))
+                , UTL_RAW.CAST_TO_NVARCHAR2(HEXTORAW('301C'))
+            ) as F_D_TRUST_CHARGE
+            , A.F_D_RESERVED_ASSET
+            , A.F_D_ENTRY_TEXT
+            , A.F_D_KAIYAKU_TEXT
+            , A.F_D_ACCOUNTING_DATE
+            , NVL(TO_CHAR(A.F_D_SETTING_DATE,'YYYY/MM/DD'),'-') AS F_D_SETTING_DATE
+            , A.F_D_DIVIDENDS_SCHEDULE
+            , A.F_D_INSTRUCTIONS
+            , A.F_D_TRUST_MONEY_AVERAGE
+            , A.F_D_HOLIDAY
+            , A.F_D_TRUST_CHARGE_RATIO_SALES
+            , A.F_D_TRUST_CHARGE_RATIO_TRUST
+            , A.F_D_TRUST_CHARGE_RATIO_TRUSTEE
+            , A.F_D_DAYS_WEB
+            , A.F_D_REMARKS
+            , A.F_D_SELL_WAY
+            , case A.F_D_SYOKAN_KBN 
+                when '1' then ''
+                when '2' then '（繰上償還予定）' 
+                when '3' then '（繰上償還）' 
+                end as F_D_SYOKAN_KBN 
+        from
+            fund_information A 
+            inner join fund B 
+                ON A.F_D_CODE = B.M_F_CODE 
+        WHERE
+            ( 
+                A.F_D_CREATE_HTML_FLG = '1' 
+                OR B.M_F_ET_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            ) 
+            AND B.M_F_TYPE in ('1', '2') 
+            AND B.M_F_DELFLG = '0' 
+            AND A.F_D_CODE = #{req.kyoukaiCd}
+        </select>
+    <!-- 
+        SQLID：SQL010
+        SQL名：投信明細取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-#Sql010 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql010" resultMap="ResultMapIfaMutualFundDetailInfoSql010" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0202_0401-#Sql010 */
+            M_F_TYPE
+            , M_F_NAME
+            , M_F_ITAKU_CMP
+            , M_F_GAKUMEN
+            , M_F_END_DATE
+            , case lengthb(M_F_SYOKAN_DATE) 
+                 when 8 then substrb(M_F_SYOKAN_DATE, 1, 4) || '/' || substrb(M_F_SYOKAN_DATE, 5, 2) || '/' || substrb(M_F_SYOKAN_DATE, 7, 2) 
+              else '無期限' 
+              end as M_F_SYOKAN_DATE
+            , substrb(M_F_SHIMEKIRI,1,2) || ':' || substrb(M_F_SHIMEKIRI,3,2) as M_F_SHIMEKIRI
+            , M_F_H_KUBUN
+            , M_F_H_TANIKUCHI
+            , M_F_H_MINKUCHI
+            , M_F_H_KUCHISU
+            , M_F_H_MINTANI2
+            , M_F_H_BSTANI2
+            , M_F_H_UPPER1
+            , M_F_H_GAKU1
+            , M_F_H_RITSU1
+            , M_F_H_UPPER2
+            , M_F_H_GAKU2
+            , M_F_H_RITSU2
+            , M_F_H_UPPER3
+            , M_F_H_GAKU3
+            , M_F_H_RITSU3
+            , M_F_H_UPPER4
+            , M_F_H_GAKU4
+            , M_F_H_RITSU4
+            , M_F_H_UPPER5
+            , M_F_H_GAKU5
+            , M_F_H_RITSU5
+            , M_F_H_UPPER6
+            , M_F_H_GAKU6
+            , M_F_H_RITSU6
+            , M_F_H_UPPER7
+            , M_F_H_GAKU7
+            , M_F_H_RITSU7
+            , M_F_K_MINKUCHI
+            , M_F_K_KUCHISU
+            , M_F_K_MINTANI2
+            , M_F_K_BSTANI2
+            , case trim(M_F_YKUJYOKUBUN) 
+                  when '0' then 'ご注文日の当日' 
+                  when '1' then 'ご注文日の翌営業日' 
+                  else 'ご注文日の' || trim(M_F_YKUJYOKUBUN) || '営業日後' 
+                  end as M_F_YKUJYOKUBUN
+            , '約定日から'||trim(M_F_UKEWATASHI)||'営業日後' as M_F_UKEWATASHI
+            , YUGU_RITU_BUNSI
+            , M_F_TUMITATE_KUBUN
+            , M_F_TEIKI_SELL_KUBUN
+            ,  case  
+                  when M_F_TYPE = '1' then '口数：証券口座でのお受取' 
+                  when M_F_TYPE = '2' and M_F_SAITOUSHI_KUBUN = '1' then '金額：再投資' 
+                  when M_F_TYPE = '2' and M_F_SAITOUSHI_KUBUN = '2' then '金額：証券口座でのお受取または再投資' 
+                  end as M_F_SAITOUSHI_KUBUN 
+            , M_F_H_UPPER_SEICHOU1
+            , M_F_H_GAKU_SEICHOU1
+            , M_F_H_RITSU_SEICHOU1
+            , M_F_H_UPPER_SEICHOU2
+            , M_F_H_GAKU_SEICHOU2
+            , M_F_H_RITSU_SEICHOU2
+            , M_F_H_UPPER_SEICHOU3
+            , M_F_H_GAKU_SEICHOU3
+            , M_F_H_RITSU_SEICHOU3
+            , M_F_H_UPPER_SEICHOU4
+            , M_F_H_GAKU_SEICHOU4
+            , M_F_H_RITSU_SEICHOU4
+            , M_F_H_UPPER_SEICHOU5
+            , M_F_H_GAKU_SEICHOU5
+            , M_F_H_RITSU_SEICHOU5
+            , M_F_H_UPPER_SEICHOU6
+            , M_F_H_GAKU_SEICHOU6
+            , M_F_H_RITSU_SEICHOU6
+            , M_F_H_UPPER_SEICHOU7
+            , M_F_H_GAKU_SEICHOU7
+            , M_F_H_RITSU_SEICHOU7
+            , YUGU_RITU_BUNBO_SEICHOU
+            , YUGU_RITU_BUNSI_SEICHOU
+            , M_F_SOUGO_SEICHOU_SERVICE_KBN
+            , M_F_SEICHOU_TESURYO_SETTING 
+        FROM
+            FUND 
+        WHERE
+            M_F_TYPE IN ('1', '2') 
+            AND M_F_DELFLG = '0' 
+            AND M_F_ET_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') 
+            AND M_F_CODE = #{req.kyoukaiCd}
+    </select>
+    <!-- 
+        SQLID：SQL011
+        SQL名：扱者別手数料取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-#Sql011 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql011" resultMap="ResultMapIfaMutualFundDetailInfoSql011" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0202_0401-#Sql011 */
+            FCM_TYPE
+            , FCM_CODE
+            , FCM_UPPER1
+            , FCM_RITSU1
+            , FCM_UPPER2
+            , FCM_RITSU2
+            , FCM_UPPER3
+            , FCM_RITSU3
+            , FCM_UPPER4
+            , FCM_RITSU4
+            , FCM_UPPER5
+            , FCM_RITSU5
+            , FCM_UPPER6
+            , FCM_RITSU6
+            , FCM_UPPER7
+            , FCM_RITSU7
+            , FCM_KUBUN
+            , FCM_H_UPPER_SEICHOU1
+            , FCM_H_RITSU_SEICHOU1
+            , FCM_H_UPPER_SEICHOU2
+            , FCM_H_RITSU_SEICHOU2
+            , FCM_H_UPPER_SEICHOU3
+            , FCM_H_RITSU_SEICHOU3
+            , FCM_H_UPPER_SEICHOU4
+            , FCM_H_RITSU_SEICHOU4
+            , FCM_H_UPPER_SEICHOU5
+            , FCM_H_RITSU_SEICHOU5
+            , FCM_H_UPPER_SEICHOU6
+            , FCM_H_RITSU_SEICHOU6
+            , FCM_H_UPPER_SEICHOU7
+            , FCM_H_RITSU_SEICHOU7
+            , FCM_H_SETTING_SEICHOU 
+        FROM
+            FUND_COMMISSION_MST 
+        WHERE
+            FCM_TYPE in ('1', '2') 
+            AND FCM_CODE = #{req.kyoukaiCd}
+            AND FCM_DEALER_NUMBER = '01'
+    </select>
+    <!-- 
+        SQLID：SQL012
+        SQL名：積立単位取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-#Sql012 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql012" resultMap="ResultMapIfaMutualFundDetailInfoSql012" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0202_0401-#Sql012 */
+            FUND_CODE
+            , RESERVE_UNIT 
+        FROM
+            HP_FUND_RESERVE_UNIT 
+        WHERE
+            FUND_CODE = #{req.kyoukaiCd}
+    </select>
+    <!-- 
+        SQLID：SQL013
+        SQL名：消費税取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0401-#Sql013 */ 
+    -->
+    <select id="selectIfaMutualFundDetailInfoSql013" resultMap="ResultMapIfaMutualFundDetailInfoSql013" statementType="PREPARED">
+        SELECT
+            /* @SQLID=SUB0202_0401-#Sql013 */
+            RT_TAX / 100 + 1 as todayTax
+        FROM
+            RFUND_TAX_MASTER 
+        WHERE
+            RT_DATE_FROM &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDDHH24MISS') 
+            AND RT_DATE_TO > IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDDHH24MISS')
+    </select>
+</mapper>

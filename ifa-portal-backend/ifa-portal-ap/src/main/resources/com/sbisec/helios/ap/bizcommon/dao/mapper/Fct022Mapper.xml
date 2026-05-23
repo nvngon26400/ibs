@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct022Mapper">
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct022Sql002ResponseModel" id="Fct022Sql002ResponseModel">
+    </resultMap>
+    
+    <!-- FCT022 SQL002.国内投信販売手数料取得 -->
+    <select id="getFct022Sql002" parameterType="com.sbisec.helios.ap.bizcommon.dao.model.Fct022Sql002RequestModel" resultMap="Fct022Sql002ResponseModel" statementType="PREPARED">
+        SELECT /* @SQLID=FCT022#SQL002 */
+            M_F_NRICODE as nriCd,
+            M_F_H_RITSU1 as salesCommRate1,
+            M_F_H_RITSU2 as salesCommRate2,
+            YUGU_RITU_BUNBO as transfersPreferentialRateDenominator,
+            YUGU_RITU_BUNSI as transfersPreferentialRateNumerator,
+            M_F_SHIMEKIRI as orderDeadlineTime,
+            M_F_TYPE as fundType,
+            M_F_CODE as kyoukaiCd
+        FROM
+            FUND
+        WHERE
+            M_F_TYPE in ('1','2') AND
+            M_F_DELFLG = '0' AND
+            M_F_ET_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') AND
+            M_F_NRICODE IN
+            <choose>
+                <when test="sql002Req.nriCd != null and sql002Req.nriCd.size() > 0">
+                    <foreach collection="sql002Req.nriCd" index="index" item="sql002Req" open="(" separator="," close=")">
+                        #{sql002Req} || ' '
+                    </foreach>
+                </when> 
+                <otherwise>
+                    ('')
+                </otherwise>
+            </choose>
+    </select>
+    
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct022Sql001ResponseModel" id="Fct022Sql001ResponseModel">
+    </resultMap>
+    
+    <!-- FCT022 SQL001.国内投信基準価額取得 -->
+    <select id="getFct022Sql001" resultMap="Fct022Sql001ResponseModel" statementType="PREPARED">
+        SELECT /* @SQLID=FCT022#SQL001 */
+            KYOUKAI_CD as kyoukaiCd,
+            KIJUNKAKAKU as basePrice,
+            ZENJITSU_HI as diff
+        FROM
+            TOUSHIN_KIJYUN_KAKAKU
+        WHERE
+            KYOUKAI_CD IN
+            <choose>
+                <when test="sql001Req.kyoukaiCd.size() > 0">
+                    <foreach collection="sql001Req.kyoukaiCd" index="index" item="sql001Req" open="(" separator="," close=")">
+                        #{sql001Req}
+                    </foreach>
+                </when>
+                <otherwise>
+                    ('')
+                </otherwise>
+            </choose>
+    </select>
+    
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct022Sql003ResponseModel" id="Fct022Sql003ResponseModel">
+    </resultMap>
+    
+    <!-- FCT022 SQL003.扱者個別国内投信販売手数料取得 -->
+    <select id="getFct022Sql003" resultMap="Fct022Sql003ResponseModel" statementType="PREPARED">
+        SELECT /* @SQLID=FCT022#SQL003 */
+            A.FCM_TYPE as fundType,
+            A.FCM_CODE as kyoukaiCd,
+            A.FCM_RITSU1 as salesCommRate1,
+            A.FCM_RITSU2 as salesCommRate2
+        FROM 
+            FUND_COMMISSION_MST A 
+        WHERE 
+            A.FCM_DEALER_NUMBER = (
+                SELECT 
+                    B.FCG_CHANEL_ID
+                FROM 
+                    FUND_COMIS_GROUP B 
+                WHERE 
+                    B.FCG_COMIS_CODE = #{param1.dealerNumber}
+                ) 
+                AND (A.FCM_TYPE, A.FCM_CODE) IN 
+                <choose>
+                    <when test="sql003Req.sql003ReqList.size() > 0">
+                        <foreach collection="sql003Req.sql003ReqList" index="index" item="sql003Req.sql003ReqList" open="(" separator="," close=")">
+                            (#{sql003Req.sql003ReqList.fundType}, #{sql003Req.sql003ReqList.kyoukaiCd})
+                        </foreach>
+                    </when>
+                    <otherwise>
+                        (('',''))
+                    </otherwise>
+                </choose>
+    </select>
+
+
+</mapper>

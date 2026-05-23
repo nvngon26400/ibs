@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB020302_0102-01
+    画面名：国内株当日約定一覧
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaTodayTradeListMapper">
+
+    <resultMap id="ResultMapIfaTodayTradeListSql001" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaTodayTradeListSql001ResponseModel" >
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：顧客口座情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaTodayTradeListSql001" resultMap="ResultMapIfaTodayTradeListSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0102-01#Sql001 */
+                *
+        FROM (
+            SELECT
+                COUNT(1) OVER()         AS totalCount,
+                MUAI.BUTEN_CODE         AS BUTEN_CODE,
+                MUAI.ACCOUNT_NUMBER     AS ACCOUNT_NUMBER,
+                MUAI.NAME_KANJI         AS customerNameKanji,
+                MUAI.NAME_KANA          AS customerNameKana,
+                MUAI.COURSE             AS COURSE,
+                MUAI.CUSTOMER_ATTRIBUTE AS CUSTOMER_ATTRIBUTE,
+                SAP.PROFILE_VALUE       AS marginProfile,
+                MUAI.INTERMEDIARY_EMP_CD AS empCode,
+                B.BROKER_CHARGE_NAME AS brokerChargeName,
+                MUAI.BROKER_CODE,
+                C.BRANCH_NAME AS BROKER_NAME,
+                MCI.BROKER_BRANCH_CODE AS branchCode,
+                MB.BRANCH_NAME AS branchName
+            FROM
+            (
+                SELECT
+                    BROKER_CODE,
+                    INTERMEDIARY_EMP_CD,
+                    BUTEN_CODE || '-' || SUBSTR('000000' || ACCOUNT_NUMBER, -7 ) AS ACCT_ID,
+                    BUTEN_CODE,
+                    ACCOUNT_NUMBER,
+                    CUSTOMER_ATTRIBUTE AS COURSE,
+                    CUSTOMER_ATTRIBUTE,
+                    NAME_KANJI,
+                    NAME_KANA
+                FROM
+                    MEDIATE_USER_ATTRIBUTE_INFO
+                <where>
+                    BROKER_CODE = #{req.brokerCode}
+                    AND INTERMEDIARY_EMP_CD = #{req.empCode}
+                <if test="req.butenCode != null and req.butenCode != ''">
+                    AND BUTEN_CODE = #{req.butenCode}
+                </if>
+                <if test="req.accountNumber != null and req.accountNumber != ''">
+                    AND ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                </if>
+                    AND CUSTOMER_ATTRIBUTE NOT IN ('A')
+                    AND CUSTOMER_ATTRIBUTE IN
+                    <foreach item="item" collection="req.course.split(',')" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != '' and req.customerNameSearchType == '1'.toString()">
+                    AND (NAME_KANJI = #{req.customerNameKanjiKana} OR  NAME_KANA = #{req.customerNameKanjiKana})
+                </if>
+                <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != '' and req.customerNameSearchType == '2'.toString()">
+                    AND (NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%' OR  NAME_KANA LIKE #{req.customerNameKanjiKana} || '%')
+                </if>
+                <if test="req.customerNameKanjiKana != null and req.customerNameKanjiKana != '' and req.customerNameSearchType =='3'.toString()">
+                    AND (NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%' OR  NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%')
+                </if>
+
+                <choose>
+                    <when test='req.privId == "1"'>
+                        AND 1 = 1
+                    </when>
+                    <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                        AND (BROKER_CODE IN
+                        <foreach item="brokerChargeList" index="index" collection="req.fct030Code" open="(" close=")">
+                            <if test="index%1000 == 0 and index != 0">
+                                ) OR BROKER_CODE IN(
+                            </if>
+                            <if test="index%1000 != 0">
+                                ,
+                            </if>
+                            #{brokerChargeList.brokerCode}
+                        </foreach>
+                        )
+                    </when>
+                    <otherwise>
+                        AND ((BROKER_CODE, INTERMEDIARY_EMP_CD) IN
+                        <foreach item="brokerChargeList" index="index" collection="req.fct030Code" open="(" close=")">
+                            <if test="index%1000 == 0 and index!= 0">
+                                ) OR (BROKER_CODE, INTERMEDIARY_EMP_CD) IN(
+                            </if>
+                            <if test="index%1000 != 0">
+                                ,
+                            </if>
+                            (#{brokerChargeList.brokerCode},#{brokerChargeList.empCode})
+                        </foreach>
+                        )
+                    </otherwise>
+                </choose>
+                </where>
+            ) MUAI
+            INNER JOIN SVC_ACCT_PROFILE_IFAP SAP2
+            ON  MUAI.ACCT_ID = SAP2.ACCT_ID
+            AND SAP2.PROFILE_NAME = 'AccountStatus'
+            AND SAP2.PROFILE_VALUE IN ('ACTIVE', 'SUSPENDED')
+            LEFT JOIN SVC_ACCT_PROFILE_IFAP SAP
+            ON  MUAI.ACCT_ID = SAP.ACCT_ID
+            AND SAP.PROFILE_NAME = 'AccountMode'
+            AND SAP.PROFILE_VALUE = 'MARGIN'
+            LEFT OUTER JOIN
+            (
+                SELECT DISTINCT
+                    BROKER_CODE,
+                    BROKER_CHARGE_CODE,
+                    CASE BROKER_CHARGE_CODE
+                    WHEN    '0000'   THEN    ''
+                    ELSE    BROKER_CHARGE_NAME
+                    END     AS BROKER_CHARGE_NAME
+                FROM
+                   MEDIATE_CHARGE_INFO
+                WHERE
+                   DELETE_FLG ='0'
+            ) B
+        ON MUAI.BROKER_CODE = B.BROKER_CODE
+        AND MUAI.INTERMEDIARY_EMP_CD = B.BROKER_CHARGE_CODE
+        LEFT OUTER JOIN MEDIATE_BRANCH C
+        ON MUAI.BROKER_CODE = C.BROKER_CODE
+        AND C.BROKER_BRANCH_KIND = '00'
+        LEFT OUTER JOIN MEDIATE_CHARGE_INFO MCI
+        ON MCI.BROKER_CODE = MUAI.BROKER_CODE
+        AND MCI.BROKER_CHARGE_CODE = MUAI.INTERMEDIARY_EMP_CD
+        AND (
+            SELECT
+                COUNT(*)
+            FROM
+                MEDIATE_CHARGE_INFO MCI2
+            WHERE
+                MUAI.BROKER_CODE = MCI2.BROKER_CODE
+            AND MUAI.INTERMEDIARY_EMP_CD = MCI2.BROKER_CHARGE_CODE
+        ) = 1
+        LEFT OUTER JOIN MEDIATE_BRANCH MB
+        ON  MB.BROKER_CODE = MUAI.BROKER_CODE
+        AND MCI.BROKER_BRANCH_CODE =MB.BROKER_BRANCH_CODE
+            ORDER BY  COURSE, BUTEN_CODE, ACCOUNT_NUMBER
+        )
+        <where>
+            ROWNUM &lt;= '5000'
+        </where>
+    </select>
+
+</mapper>

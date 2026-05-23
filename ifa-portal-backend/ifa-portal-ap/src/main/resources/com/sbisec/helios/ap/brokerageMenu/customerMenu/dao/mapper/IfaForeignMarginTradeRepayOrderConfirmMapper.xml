@@ -1,0 +1,200 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0303-04_2
+    画面名：米株信用取引返済注文確認
+-->
+<mapper namespace = "com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignMarginTradeRepayOrderConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler = "com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype = "com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="sql004Result" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginTradeRepayOrderConfirmSql004ResponseModel">
+        <result property="ifaOrderNo" column="IFA_ORDER_NO"/>
+    </resultMap>
+    
+    <!-- 
+            SQLID：Sql001
+            SQL名：発注前の注文登録
+            SQLタイプ：insert
+    -->
+    <insert id = "insertIfaForeignMarginTradeRepayOrderConfirmSql001" 
+        parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginTradeRepayOrderConfirmSql001RequestModel" 
+        statementType = "PREPARED">
+        insert /* @SQLID = SUB0202_0303-04_2#Sql001 */ 
+        into FOREIGN_CONSIGNMENT_ORDER(
+            IFA_ORDER_NO,
+            IFA_ORDER_SUB_NO,
+            ACCEPT_ORDER_NO,
+            ACCEPT_ORDER_SUB_NO,
+            BUTEN_CODE,
+            ACCOUNT_NUMBER,
+            BRAND_CODE,
+            BRAND_NAME,
+            EXCHANGE_CODE,
+            METHOD_TYPE,
+            TRADE_TYPE,
+            ORDER_QUANTITY,
+            TRADE_METHOD_TYPE,
+            LIMIT_PRICE,
+            STOP_PRICE,
+            CURRENCY_CODE,
+            SETTLEMENT_TYPE,
+            DEPOSIT_TYPE,
+            INVITATION_TYPE,
+            ORDER_METHOD_TYPE,
+            WARNING_APPLY_TYPE,
+            EXPLANATION_INFO_TYPE,
+            TRANSFER_INVITATION_TYPE,
+            ENG_PUB_BRAND_EXP_TYPE,
+            CONFIRMATION_TYPE,
+            ORDER_TYPE,
+            ORDER_DATE,
+            ORDER_TIME,
+            TRADE_DATE,
+            TRADE_LIMIT_DATE,
+            BROKER_CODE,
+            INTERMEDIARY_EMP_CD,
+            API_ERROR_CODE,
+            API_STATUS_CODE,
+            API_MESSAGE,
+            CREATE_TIME,
+            CREATE_USER,
+            UPDATE_TIME,
+            UPDATE_USER
+        ) 
+        values(
+            #{req.ifaOrderNo},
+            #{req.ifaOrderSubNo},
+            #{req.acceptOrderNo},
+            #{req.acceptOrderSubNo},
+            #{req.butenCode},
+            #{req.accountNumber},
+            #{req.tickerCode},
+            #{req.brandName},
+            #{req.marketCode},
+            #{req.methodType},
+            #{req.tradeKbn},
+            #{req.orderQuantity},
+            #{req.priceConditionsType},
+            #{req.sashine},
+            #{req.stopOrderPrice},
+            #{req.currencyCode},
+            #{req.settlementType},
+            #{req.depositType},
+            #{req.kanyuKbn},
+            #{req.jutyuKbn},
+            #{req.warningApplyTrade},
+            #{req.importantMatterTypeClass},
+            #{req.solicitationEtfType},
+            #{req.engPubType},
+            #{req.beforeTradeConfirmType},
+            #{req.securityClassType},
+            #{req.orderDate},
+            #{req.orderTime},
+            #{req.domesticTradeDate},
+            #{req.orderDeadline},
+            #{req.brokerCode},
+            #{req.brokerChargeCode},
+            #{req.apiErrorCode},
+            #{req.apiStatusCode},
+            #{req.apiMsg},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.createUser},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.updateUser}
+        )
+    </insert>
+    
+    <!-- 
+            SQLID：Sql002
+            SQL名：発注前の個別建玉情報登録
+            SQLタイプ：insert
+    -->
+    <insert id = "insertIfaForeignMarginTradeRepayOrderConfirmSql002" 
+        parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginTradeRepayOrderConfirmSql002RequestModel" 
+        statementType = "PREPARED">
+        insert /* @SQLID = SUB0202_0303-04_2#Sql002 */ 
+        into F_ORDER_POSITION_LINK(
+            IFA_ORDER_NO,
+            BRAND_CODE,
+            METHODE_TYPE,
+            LIMIT_TYPE,
+            TRADE_TYPE,
+            DEPOSIT_TYPE,
+            QUOTATION_TRADE_DATE,
+            QUOTATION_PRICE,
+            QUOTATION_QUANTITY,
+            REPAYMENT_QUANTITY,
+            BUTEN_CODE,
+            ACCOUNT_NUMBER,
+            REPAYMENT_METHOD_TYPE,
+            REPAYMENT_ORDER_TYPE,
+            CREATE_TIME,
+            CREATE_USER,
+            UPDATE_TIME,
+            UPDATE_USER
+        )
+        values(
+            #{req.ifaOrderNo},
+            #{req.tickerCode},
+            #{req.methodType},
+            #{req.repayPeriodType},
+            #{req.tradeKbn},
+            #{req.depositType},
+            #{req.openTradeDate},
+            #{req.positionPrice},
+            #{req.positionQuantity},
+            #{req.repayQuantity},
+            #{req.butenCode},
+            #{req.accountNumber},
+            #{req.repaymentMethodType},
+            #{req.requestType},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.createUser},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{req.updateUser}
+        )
+    </insert>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：発注後の注文更新
+        SQLタイプ：update
+    -->
+    <update id = "updateIfaForeignMarginTradeRepayOrderConfirmSql003" 
+        parameterType="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignMarginTradeRepayOrderConfirmSql003RequestModel" 
+        statementType = "PREPARED">
+        update /* @SQLID = SUB0202_0303-04_2#Sql003 */ 
+            FOREIGN_CONSIGNMENT_ORDER 
+        set
+        <if test="req.acceptOrderNo != null and req.acceptOrderNo != ''">
+            ACCEPT_ORDER_NO = #{req.acceptOrderNo},
+            ACCEPT_ORDER_SUB_NO = #{req.acceptOrderSubNo},
+            ORDER_DATE = #{req.orderDate},
+            ORDER_TIME = #{req.orderTime},
+            TRADE_LIMIT_DATE = #{req.orderDeadline},
+        </if>
+            API_ERROR_CODE = #{req.apiErrorCode},
+            API_STATUS_CODE = #{req.apiStatusCode},
+            API_MESSAGE = SUBSTRB(#{req.apiMsg}, 1, 100),
+            UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE,
+            UPDATE_USER = #{req.updateUser}
+        where
+            IFA_ORDER_NO = #{req.ifaOrderNo}
+            and IFA_ORDER_SUB_NO = #{req.ifaOrderSubNo}
+    </update>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：IFA注文番号の取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaForeignMarginTradeRepayOrderConfirmSql004" 
+        resultMap="sql004Result" 
+        statementType = "PREPARED">
+        select /* @SQLID = SUB0202_0303-04_2#Sql004 */ 
+            to_char(sysdate, 'YYYYMMDD') || lpad(SEQ_FOREIGN_CONSIGNMENT_ORDER.NEXTVAL, 5, '0') as IFA_ORDER_NO
+        from
+            dual
+    </select>
+</mapper>

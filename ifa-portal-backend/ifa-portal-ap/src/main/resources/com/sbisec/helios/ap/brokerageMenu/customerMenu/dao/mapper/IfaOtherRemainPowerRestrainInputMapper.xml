@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0110-01_1
+    画面名：その他余力拘束注文入力
+-->
+<mapper
+    namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaOtherRemainPowerRestrainInputMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaOtherRemainPowerRestrainInputSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaOtherRemainPowerRestrainInputSql001ResponseModel" >
+        <result property="hattyuRiyu" column="HATTYU_RIYU" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：その他注文履歴情報取得
+         SQLタイプ：select
+    -->
+    <select id="selectIfaOtherRemainPowerRestrainInputSql001" resultMap="ResultMapIfaOtherRemainPowerRestrainInputSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0202_0110-01_1#SQL001 */
+             A.TRAN_ID
+            ,A.EC_JUCHUU_NO
+            ,RTRIM(A.HATTYU_RIYU) AS HATTYU_RIYU
+            ,C.TORIKESHI_KBN
+        FROM
+            CORDYS.TB_ADDITIONAL_ORDER_IFA   A                                      <!-- 【IFAその他注文履歴】 -->
+            ,JSON_TABLE(
+                TO_CLOB(#{req.ecJuchuuNo}),
+                '$[*]' COLUMNS (EC_JUCHUU_NO VARCHAR(6) PATH '$')
+            ) B
+            ,(
+                SELECT
+                     D.TRAN_ID
+                    ,D.TORIKESHI_KBN
+                FROM
+                    CORDYS.TB_ADDITIONAL_ORDER_IFA   D                               <!-- 【IFAその他注文履歴】 -->
+                    ,(
+                        SELECT
+                            F.TRAN_ID
+                           ,MAX(F.EDABAN) AS EDABAN
+                        FROM
+                            CORDYS.TB_ADDITIONAL_ORDER_IFA   F                       <!-- 【IFAその他注文履歴】 -->
+                        WHERE   
+                            F.STS_CD = #{req.stsCd}                                  <!-- ステータスコード -->
+                            AND (F.SHUBETSU = '     ' OR SUBSTR(F.ERROR_CD,1,1) = 'W')     <!-- "     "(半角スペース5文字)：API正常終了(発注済)、エラーコードの先頭1文字 = "W"：APIワーニング(発注済) --> 
+                        GROUP BY
+                            F.TRAN_ID
+                     ) E
+                WHERE 
+                D.TRAN_ID = E.TRAN_ID
+                AND D.EDABAN = E.EDABAN
+            ) C
+        WHERE
+            A.BUTEN_CD = RPAD(#{req.butenCd}, 4, ' ')                  <!-- 部店CD -->
+            AND A.KOUZA_NO = RPAD(#{req.kouzaNo}, 7, ' ')              <!-- 口座番号 -->
+            AND A.STS_CD = #{req.stsCd}                                <!-- ステータスコード -->
+            AND A.SAKUJO_FLG = #{req.sakujoFlg}                        <!-- 削除フラグ -->
+            AND A.TORIKESHI_KBN IS NOT NULL                            <!-- 取消区分 -->
+            AND A.EDABAN = 1                                           <!-- 枝番 -->
+            AND A.EC_JUCHUU_NO = B.EC_JUCHUU_NO                        <!-- EC受注番号（その他商品） -->
+            AND A.TRAN_ID = C.TRAN_ID                                  <!-- トランザクションＩＤ -->
+    </select>
+</mapper>

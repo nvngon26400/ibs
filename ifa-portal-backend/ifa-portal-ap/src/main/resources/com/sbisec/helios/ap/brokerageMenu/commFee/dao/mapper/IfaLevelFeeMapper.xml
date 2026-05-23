@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020505-01
+    画面名：残高連動手数料・報酬
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.commFee.dao.mapper.IfaLevelFeeMapper">
+
+    <resultMap
+        id="ResultMapIfaLevelFeeSql001To006"
+        type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaLevelFeeSql001To006ResponseModel"
+    >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="customerNameKanji" column="CUSTOMER_NAME_KANJI" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="customerNameKana" column="CUSTOMER_NAME_KANA" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001～006
+        SQL名：残高連動手数料・報酬一覧取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaLevelFeeSql001To006"
+        resultMap="ResultMapIfaLevelFeeSql001To006"
+        statementType="PREPARED"
+    >
+        SELECT
+            /* @SQLID=SUB020505-01#Sql001～006 */
+            * 
+        FROM
+            ( 
+                SELECT
+                    COUNT(*) OVER () AS TOTAL_ROW
+                    <choose>
+                        <!-- 集計単位(日次/月次)：日次 -->
+                        <when test='req.dailyMonthlyCountingUnit == "0"'>
+                            , CALC_DATE AS DATE_YMD
+                        </when>
+                        <!-- 集計単位(日次/月次)：月次 -->
+                        <otherwise>
+                            , CALC_DATE AS DATE_YM
+                        </otherwise>
+                    </choose>
+                    , BROKER_CODE
+                    , BROKER_NAME
+                    <!-- 集計単位(仲介業者/営業員/顧客)：仲介業者以外 -->
+                    <if test='req.brokerChargeBranchCountingUnit != "0"'>
+                        , BROKER_CHARGE_CODE AS EMP_CODE
+                        , BROKER_CHARGE_NAME
+                        , BROKER_BRANCH_CODE AS BRANCH_CODE
+                        , BRANCH_NAME
+                    </if>
+                    <!-- 集計単位(仲介業者/営業員/顧客)：顧客 -->
+                    <if test='req.brokerChargeBranchCountingUnit == "2"'>
+                        , BUTEN_CODE
+                        , ACCOUNT_NUMBER
+                        , DEALER_NUMBER
+                        , NAME_KANJI AS CUSTOMER_NAME_KANJI
+                        , NAME_KANA AS CUSTOMER_NAME_KANA
+                    </if>
+                    <choose>
+                        <!-- 日次-顧客毎（SQL003） -->
+                        <when test='req.dailyMonthlyCountingUnit == "0" and req.brokerChargeBranchCountingUnit == "2"'>
+                            , CURRENCT_PRICE_SUM AS VALUATION_TOTAL_JPY_AMOUNT
+                            , FEE
+                        </when>
+                        <!-- 日次-顧客毎（SQL003）以外 -->
+                        <otherwise>
+                            , SUM(CURRENCT_PRICE_SUM) AS VALUATION_TOTAL_JPY_AMOUNT
+                            , SUM(FEE) AS FEE
+                        </otherwise>
+                    </choose>
+                FROM
+                    ( 
+                        SELECT
+                            <choose>
+                                <!-- 集計単位(日次/月次)：日次 -->
+                                <when test='req.dailyMonthlyCountingUnit == "0"'>
+                                    A.DATE_YMD AS CALC_DATE
+                                </when>
+                                <!-- 集計単位(日次/月次)：月次 -->
+                                <otherwise>
+                                    SUBSTR(A.DATE_YMD, 0, 6) AS CALC_DATE
+                                </otherwise>
+                            </choose>
+                            , A.BROKER_CODE
+                            , A.BROKER_NAME
+                            <!-- 集計単位(仲介業者/営業員/顧客)：仲介業者以外 -->
+                            <if test='req.brokerChargeBranchCountingUnit != "0"'>
+                                , A.BROKER_CHARGE_CODE
+                                , A.BROKER_CHARGE_NAME
+                                , A.BROKER_BRANCH_CODE
+                                , C.BRANCH_NAME
+                            </if>
+                            <!-- 集計単位(仲介業者/営業員/顧客)：顧客 -->
+                            <if test='req.brokerChargeBranchCountingUnit == "2"'>
+                                , A.BUTEN_CODE
+                                , A.ACCOUNT_NUMBER
+                                , A.DEALER_NUMBER
+                                , B.NAME_KANJI
+                                , B.NAME_KANA
+                            </if>
+                            , NVL(A.CURRENCT_PRICE_SUM, 0) AS CURRENCT_PRICE_SUM
+                            , NVL(A.FEE, 0) AS FEE
+                        FROM
+                            T_FEE_BASE_REWARD_COMMISSION A
+                            <!-- 集計単位(仲介業者/営業員/顧客)：顧客 -->
+                            <if test='req.brokerChargeBranchCountingUnit == "2"'>
+                                LEFT OUTER JOIN MEDIATE_USER_ATTRIBUTE_INFO B 
+                                    ON A.BUTEN_CODE = B.BUTEN_CODE 
+                                    AND A.ACCOUNT_NUMBER = B.ACCOUNT_NUMBER
+                            </if>
+                            <!-- 集計単位(仲介業者/営業員/顧客)：仲介業者以外 -->
+                            <if test='req.brokerChargeBranchCountingUnit != "0"'>
+                                LEFT OUTER JOIN MEDIATE_BRANCH C 
+                                    ON A.BROKER_CODE = C.BROKER_CODE 
+                                    AND A.BROKER_BRANCH_CODE = C.BROKER_BRANCH_CODE
+                            </if>
+                        WHERE
+                            1 = 1
+                            <if test='req.privId != "1" and req.brokerChargeList != null and !req.brokerChargeList.isEmpty()'>
+                                <choose>
+                                    <!-- ユーザ共通情報.権限コード が '3'、’４’、'5'いずれかの場合 -->
+                                    <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                                        AND(A.BROKER_CODE IN
+                                        <foreach item="brokerChargeList" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                            <if test="index % 1000 == 0 and index != 0">
+                                                ) OR A.BROKER_CODE IN (
+                                            </if>
+                                            <if test="index%1000 != 0">
+                                                ,
+                                            </if>
+                                            #{brokerChargeList.brokerCode}
+                                        </foreach>
+                                        )
+                                    </when>
+                                    <!-- ユーザ共通情報.権限コード が '1'、'3'、'4'、'5'いずれでもない場合 -->
+                                    <otherwise>
+                                        AND((A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN
+                                        <foreach item="brokerChargeList" index="index" collection="req.brokerChargeList" open="(" close=")">
+                                            <if test="index % 1000 == 0 and index != 0">
+                                                ) OR (A.BROKER_CODE, A.BROKER_CHARGE_CODE) IN (
+                                            </if>
+                                            <if test="index%1000 != 0">
+                                                ,
+                                            </if>
+                                            (#{brokerChargeList.brokerCode},#{brokerChargeList.empCode})
+                                        </foreach>
+                                        )
+                                    </otherwise>
+                                </choose>
+                            </if>
+
+                            <!-- 仲介業者コードに入力値がある場合 -->
+                            <if test='req.brokerCodeArray != null and !req.brokerCodeArray.isEmpty()'>
+                                AND
+                                <choose>
+                                    <!-- 仲介業者除外=0(false)の場合 -->
+                                    <when test='req.chkBrokerCodeExclude == "0"'>
+                                        A.BROKER_CODE IN
+                                    </when>
+                                    <!-- 仲介業者除外=1(true)の場合 -->
+                                    <otherwise>
+                                        A.BROKER_CODE NOT IN
+                                    </otherwise>
+                                </choose>
+
+                                <foreach item="brokerCode" collection="req.brokerCodeArray" open="(" separator="," close=")">
+                                    #{brokerCode}
+                                </foreach>
+                            </if>
+
+                            <!-- リクエスト.支店コードに値がある場合 -->
+                            <if test='req.branchCode != null and req.branchCode != ""'>
+                                AND A.BROKER_BRANCH_CODE = #{req.branchCode}
+                            </if>
+
+                            <!-- リクエスト.営業員コードに値がある場合 -->
+                            <if test='req.empCode != null and req.empCode != ""'>
+                                AND A.BROKER_CHARGE_CODE = #{req.empCode}
+                            </if>
+
+                            <!-- リクエスト.部店コードに値がある場合 -->
+                            <if test='req.butenCode != null and req.butenCode != ""'>
+                                AND A.BUTEN_CODE = #{req.butenCode}
+                            </if>
+
+                            <!-- リクエスト.口座番号に値がある場合 -->
+                            <if test='req.accountNumber != null and req.accountNumber != ""'>
+                                AND A.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+                            </if>
+
+                            <!-- リクエスト.顧客名（漢字／カナ）に値がある場合-->
+                            <if test='req.customerNameKanjiKana != null and req.customerNameKanjiKana != ""'>
+                                <!-- リクエスト.顧客名（漢字／カナ）_条件 = '1':と等しい の場合-->
+                                <if test='req.customerNameKanjiKanaTerms == "1"'>
+                                    AND (
+                                        B.NAME_KANJI = #{req.customerNameKanjiKana} 
+                                        OR B.NAME_KANA = #{req.customerNameKanjiKana}
+                                    )
+                                </if>
+                                <!-- リクエスト.顧客名（漢字／カナ）_条件 = '2':で始まる の場合-->
+                                <if test='req.customerNameKanjiKanaTerms == "2"'>
+                                    AND (
+                                        B.NAME_KANJI LIKE #{req.customerNameKanjiKana} || '%'
+                                        OR B.NAME_KANA LIKE #{req.customerNameKanjiKana} || '%'
+                                    )
+                                </if>
+                                <!-- リクエスト.顧客名（漢字／カナ）_条件 = '3':を含む の場合-->
+                                <if test='req.customerNameKanjiKanaTerms == "3"'>
+                                    AND (
+                                        B.NAME_KANJI LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                                        OR B.NAME_KANA LIKE '%' || #{req.customerNameKanjiKana} || '%'
+                                    )
+                                </if>
+                            </if>
+
+                            <choose>
+                                <!-- 集計単位(日次/月次)：日次 -->
+                                <when test='req.dailyMonthlyCountingUnit == "0"'>
+                                    AND (
+                                        A.DATE_YMD &gt;= TO_CHAR(TO_DATE(#{req.periodFrom}, 'YYYY/MM/DD'), 'YYYYMMDD')
+                                        AND A.DATE_YMD &lt;= TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM/DD'), 'YYYYMMDD')
+                                    )
+                                </when>
+                                <!-- 集計単位(日次/月次)：月次 -->
+                                <otherwise>
+                                    AND (
+                                        SUBSTR(A.DATE_YMD, 0, 6) &gt;= TO_CHAR(TO_DATE(#{req.periodFrom}, 'YYYY/MM'), 'YYYYMM')
+                                        AND SUBSTR(A.DATE_YMD, 0, 6) &lt;= TO_CHAR(TO_DATE(#{req.periodTo}, 'YYYY/MM'), 'YYYYMM')
+                                    )
+                                </otherwise>
+                            </choose>
+                    )
+                <!-- 日次-顧客毎（SQL003）以外 -->
+                <if test='req.dailyMonthlyCountingUnit != "0" or req.brokerChargeBranchCountingUnit != "2"'>
+                    GROUP BY
+                        CALC_DATE
+                        , BROKER_CODE
+                        , BROKER_NAME
+                        <!-- 集計単位(仲介業者/営業員/顧客)：仲介業者以外 -->
+                        <if test='req.brokerChargeBranchCountingUnit != "0"'>
+                            , BROKER_CHARGE_CODE
+                            , BROKER_CHARGE_NAME
+                            , BROKER_BRANCH_CODE
+                            , BRANCH_NAME
+                        </if>
+                        <!-- 集計単位(仲介業者/営業員/顧客)：顧客 -->
+                        <if test='req.brokerChargeBranchCountingUnit == "2"'>
+                            , BUTEN_CODE
+                            , ACCOUNT_NUMBER
+                            , DEALER_NUMBER
+                            , NAME_KANJI
+                            , NAME_KANA
+                        </if>
+                </if>
+                
+                ORDER BY
+                    CALC_DATE DESC
+                    , BROKER_CODE
+                    <!-- 集計単位(仲介業者/営業員/顧客)：仲介業者以外 -->
+                    <if test='req.brokerChargeBranchCountingUnit != "0"'>
+                        , EMP_CODE
+                    </if>
+                    <!-- 集計単位(仲介業者/営業員/顧客)：顧客 -->
+                    <if test='req.brokerChargeBranchCountingUnit == "2"'>
+                        , BUTEN_CODE
+                        , ACCOUNT_NUMBER
+                    </if>
+            )
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+</mapper>

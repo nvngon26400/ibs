@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0601_01-02_1
+    画面名：ログインID新規登録
+-->
+<mapper namespace="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.mapper.IfaLoginIdNewRegisterMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaLoginIdNewRegisterSql002" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginIdNewRegisterSql002ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaLoginIdNewRegisterSql004" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginIdNewRegisterSql004ResponseModel" >
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="createUser" column="CREATE_USER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="updateUser" column="UPDATE_USER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaLoginIdNewRegisterSql005" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginIdNewRegisterSql005ResponseModel" >
+        <result property="branchNameBrokerName" column="BRANCH_NAME_BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaLoginIdNewRegisterSql006" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginIdNewRegisterSql006ResponseModel" >
+        <result property="branchNameBrokerName" column="BRANCH_NAME_BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaLoginIdNewRegisterSql007" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginIdNewRegisterSql007ResponseModel" >
+        <result property="employeeName" column="EMPLOYEE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaLoginIdNewRegisterSql011" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.model.IfaLoginIdNewRegisterSql011ResponseModel" >
+        <result property="userName" column="USER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="employeeName" column="EMPLOYEE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="createUser" column="CREATE_USER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="updateUser" column="UPDATE_USER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：メニュー一覧取得（権限毎）
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginIdNewRegisterSql002" resultMap="ResultMapIfaLoginIdNewRegisterSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0601_01-02_1#Sql002 */ 
+			A.MENU_ID
+		FROM
+			TB_MED_MENU_PRIV_NEW A
+			INNER JOIN TB_MED_MENU_NEW B
+				ON A.MENU_ID = B.MENU_ID
+				AND (B.IS_LEAF = '1' OR B.IS_POPPAGE = '1')
+		WHERE
+			A.PRIV_ID = #{req.privId}
+		ORDER BY
+			A.MENU_ID
+    </select>
+    
+    <!-- 
+        SQLID：Sql004
+        SQL名：本支名dropDownList取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginIdNewRegisterSql004" resultMap="ResultMapIfaLoginIdNewRegisterSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0601_01-02_1#Sql004 */
+        	BRANCH_CODE,
+        	BRANCH_KIND BRANCH_CLASS,
+        	BRANCH_NAME,
+        	CREATE_DATE CREATE_TIME,
+        	CREATE_BY CREATE_USER,
+        	UPDATE_DATE UPDATE_TIME,
+        	UPDATE_BY UPDATE_USER,
+        	DELETE_DATE DELETE_TIME,
+        	DELETE_FLG
+        FROM
+        	BRANCH
+		WHERE
+			DELETE_FLG = '0'
+			<if test="req.branchClass != null and req.branchClass != ''">
+				AND BRANCH_KIND = #{req.branchClass}
+			</if>
+		ORDER BY
+			BRANCH_CODE	
+    </select>
+    
+    <!-- 
+        SQLID：Sql005
+        SQL名：仲介業者名dropDownList取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginIdNewRegisterSql005" resultMap="ResultMapIfaLoginIdNewRegisterSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0601_01-02_1#Sql005 */
+       	DISTINCT
+       		B.BROKER_CODE,
+       		B.BROKER_BRANCH_CODE SUB_BROKER_ID,
+       		B.BROKER_BRANCH_KIND BRANCH_CLASS,
+       		B.BRANCH_NAME BRANCH_NAME_BROKER_NAME
+       	FROM
+       		BRANCH_MEDIATE_INFO A
+       		INNER JOIN MEDIATE_BRANCH B
+       			ON A.BROKER_CODE = B.BROKER_CODE
+       			AND B.BROKER_BRANCH_KIND = '00'
+       			AND B.DELETE_FLG = '0'
+       			AND A.DELETE_FLG = '0'
+       	<if test="req.branchCode != null and req.branchCode != ''">
+		WHERE
+       		A.BRANCH_CODE = #{req.branchCode}   
+		</if>
+       	ORDER BY
+       		B.BROKER_CODE,
+       		B.BROKER_BRANCH_CODE
+        	
+    </select>
+    
+    <!-- 
+        SQLID：Sql006
+        SQL名：仲介業者支店名取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginIdNewRegisterSql006" resultMap="ResultMapIfaLoginIdNewRegisterSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0601_01-02_1#Sql006 */
+        DISTINCT
+        	A.BROKER_BRANCH_CODE SUB_BROKER_ID,
+        	A.BRANCH_NAME BRANCH_NAME_BROKER_NAME
+        FROM
+        	MEDIATE_BRANCH A
+        WHERE
+        	A.DELETE_FLG = '0'
+        	<if test="req.brokerCode != null and req.brokerCode != ''">
+        	AND A.BROKER_CODE = #{req.brokerCode}
+        	</if>
+        	AND A.BROKER_BRANCH_KIND != '00'
+        ORDER BY
+        	A.BROKER_BRANCH_CODE
+    </select>
+    
+    <!-- 
+        SQLID：Sql007
+        SQL名：担当者名dropDownList取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginIdNewRegisterSql007" resultMap="ResultMapIfaLoginIdNewRegisterSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0601_01-02_1#Sql007 */
+        	A.BROKER_CHARGE_CODE,
+        	A.BROKER_CHARGE_NAME EMPLOYEE_NAME
+        FROM
+        	MEDIATE_CHARGE_INFO A
+        WHERE
+        	A.DELETE_FLG = '0'
+        	<if test="req.brokerCode != null and req.brokerCode != ''">
+        		AND A.BROKER_CODE = #{req.brokerCode}
+        	</if>
+        	<if test=" req.subBrokerCode != null and req.subBrokerCode != '' and !'-1'.equals(req.subBrokerCode)">
+				AND A.BROKER_BRANCH_CODE = #{req.subBrokerCode}
+			</if>
+    </select>
+    
+    <!-- 
+        SQLID：Sql011
+        SQL名：Horusユーザー情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaLoginIdNewRegisterSql011" resultMap="ResultMapIfaLoginIdNewRegisterSql011" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0601_01-02_1#Sql011 */
+        	USER_ID,
+        	USER_NM USER_NAME,
+        	PASSWORD,
+        	LASTPWUPTIME,
+        	PRIV_ID,
+        	BRANCH_ID SBI_SECURITY_CODE,
+        	BROKER_ID BROKER_CODE,
+        	SUB_BROKER_ID,
+        	EMPLOYEE_ID,
+        	EMPLOYEE_NAME,
+        	GOVERNOR_FLAG,
+        	LOGIN_STATUS,
+        	PARTNER_USER_ID,
+        	PARTNER_USER_PW,
+        	CCS_USER_ID,
+        	CCS_USER_PW,
+        	CREATE_USER,
+        	CREATE_TIME,
+        	UPTIMESTAMP_USER UPDATE_USER,
+        	UPTIMESTAMP_TIME UPDATE_TIME,
+        	MAIL_ADDRESS
+        FROM
+        	TB_MED_USERS A
+        WHERE
+        	A.USER_ID = #{req.loginId}
+    </select>
+    
+    
+    <!-- 
+         SQLID：Sql008
+         SQL名：ユーザ情報登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaLoginIdNewRegisterSql008" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0601_01-02_1#Sql008 */ INTO TB_MED_USERS (
+        	USER_ID,
+        	USER_NM,
+        	PASSWORD,
+        	LASTPWUPTIME,
+        	PRIV_ID,
+        	BRANCH_ID,
+        	BROKER_ID,
+        	SUB_BROKER_ID,
+        	EMPLOYEE_ID,
+        	EMPLOYEE_NAME,
+        	GOVERNOR_FLAG,
+        	LOGIN_STATUS,
+        	PARTNER_USER_ID,
+        	PARTNER_USER_PW,
+        	CCS_USER_ID,
+        	CCS_USER_PW,
+        	CREATE_USER,
+        	CREATE_TIME,
+        	UPTIMESTAMP_USER,
+        	UPTIMESTAMP_TIME,
+        	MAIL_ADDRESS
+        ) VALUES (
+        		#{req.loginId},
+        		#{req.userName},
+        		#{req.password},
+        		IFA_DATE_UTIL.IFA_GET_DATE,
+        		#{req.privId},
+        		#{req.branchCode},
+        		#{req.brokerCode},
+        		#{req.subBrokerCode},
+        		#{req.employeeId},
+        		#{req.chargeName},
+        		<choose>
+					<when test='"1".equals(req.privId) || "2".equals(req.privId)'>
+						'1',
+					</when>
+					<otherwise>
+						'0',
+					</otherwise>
+				</choose>
+				'0',
+				null,
+				null,
+				null,
+				null,
+				#{req.createUser},
+				IFA_DATE_UTIL.IFA_GET_DATE,
+				#{req.updateUser},
+				IFA_DATE_UTIL.IFA_GET_DATE,
+				#{req.mailAddress}
+        )
+    </insert>
+    
+    <!-- 
+         SQLID：Sql010
+         SQL名：Cordysユーザーとメニューマッピング情報_新テーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaLoginIdNewRegisterSql010" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0601_01-02_1#Sql010 */ INTO TB_MED_GOV_MENU_NEW (
+        	USER_ID,
+        	MENU_ID,
+        	CREATE_USER,
+        	CREATE_TIME,
+        	UPDATE_USER,
+        	UPDATE_TIME
+        ) VALUES (
+        		#{req.loginId},
+        		#{req.menuId},
+        		#{req.createUser},
+        		IFA_DATE_UTIL.IFA_GET_DATE,
+        		#{req.updateUser},
+        		IFA_DATE_UTIL.IFA_GET_DATE
+        )
+    </insert>
+    
+    <!-- 
+         SQLID：Sql012
+         SQL名：認証ユーザー情報登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaLoginIdNewRegisterSql012" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0601_01-02_1#Sql012 */ INTO TB_MED_VERIFY_USERS (
+        	USER_ID,
+        	MAIL_ADDRESS,
+        	VERIFY_STATUS,
+        	UPDATE_BY,
+        	UPDATE_DATE
+        )
+        WITH M_CODE_ALL AS (
+    		SELECT
+    			*
+    		FROM
+    			M_CODE A
+    		WHERE
+				A.CODE_TYPE = '37'
+				AND CODE_1 = '3'
+				AND CODE_2 = #{req.privId}
+				AND START_DATE &lt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD')
+				AND (END_DATE &gt;= TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE, 'YYYYMMDD') OR END_DATE = NULL)	
+    	)
+		SELECT
+			#{req.loginId},
+			#{req.mailAddress},
+			'1',
+			#{req.updateUser},
+			IFA_DATE_UTIL.IFA_GET_DATE
+    	FROM
+			DUAL
+		WHERE
+			NOT EXISTS (SELECT * FROM M_CODE_ALL)
+    </insert>
+    
+    
+    <!-- 
+        SQLID：Sql009
+        SQL名：Cordysユーザーとメニューマッピング情報_新テーブル削除
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaLoginIdNewRegisterSql009" statementType="PREPARED">
+        DELETE /* @SQLID=SUB0601_01-02_1#Sql009 */
+        FROM
+        	TB_MED_GOV_MENU_NEW A
+        WHERE
+        	A.USER_ID = #{req.loginId}
+    </delete>
+    
+    
+</mapper>

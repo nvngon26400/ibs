@@ -1,0 +1,55 @@
+version: 0.2
+
+env:
+  shell: bash
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  pre_build:
+    commands:
+      - echo PreBuild started on `date`
+      - echo Generate ~/.m2/settings.xml for maven
+      - mkdir -p ~/.m2
+      - |
+        cat << 'EOF' > ~/.m2/settings.xml
+        <settings
+          xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd"
+        >
+          <mirrors>
+            <mirror>
+              <id>Jasper Third Party</id>
+              <mirrorOf>jaspersoft-third-party</mirrorOf>
+              <url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
+            </mirror>
+            </mirrors>
+        </settings>
+        EOF
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn install:install-file -Dfile=./lib/earth-0.0.42.jar -DgroupId=com.sbibits -DartifactId=earth -Dversion=ifa-0.0.42 -Dpackaging=jar -DgeneratePom=true
+      - mvn install:install-file -Dfile=./lib/pcenter-cli-core-j8-1.1.1.jar -DgroupId=pcenter-cli -DartifactId=pcenter-cli-core-j8 -Dversion=1.1.1 -Dpackaging=jar -DgeneratePom=true
+      - mvn install:install-file -Dfile=./lib/pcenter-cli-heracross-ifa-1.1.2.jar -DgroupId=pcenter-cli -DartifactId=pcenter-cli-heracross -Dversion=ifa-1.1.2 -Dpackaging=jar -DgeneratePom=true
+      - mvn install:install-file -Dfile=./lib/pcenter-cli-yanap-1.18.4.jar -DgroupId=pcenter-cli -DartifactId=pcenter-cli-yanap -Dversion=1.18.4 -Dpackaging=jar -DgeneratePom=true
+      - mvn install
+      - mvn package -P Integration
+      - pwd
+      - ls -l
+      - ls -lR
+      - mv ./ifa-portal-ap/target/ifa-portal-ap.war ./ifa-portal-ap/target/ap.war
+      - mv ./ifa-portal-ap/appspecIntegration.yml ./ifa-portal-ap/appspec.yml
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  # ap用アーティファクト
+  type: zip
+  files:
+    - ./ifa-portal-ap/target/ap.war
+    - ./ifa-portal-ap/appspec.yml
+  name: ifa-portal-ap
+  discard-paths: yes

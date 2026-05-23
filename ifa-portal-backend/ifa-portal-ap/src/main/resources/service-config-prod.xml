@@ -1,0 +1,5 @@
+<services >
+	<!-- service-config-ap.xml -->
+	<import resource="service-config-ap.xml"/>
+
+</services>

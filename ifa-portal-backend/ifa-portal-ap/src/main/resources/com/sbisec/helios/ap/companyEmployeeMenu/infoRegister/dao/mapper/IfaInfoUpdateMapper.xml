@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0501_01-03_1
+    画面名：情報更新
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.mapper.IfaInfoUpdateMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaInfoUpdateSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoUpdateSql001ResponseModel" >
+        <result property="t9nName" column="T9N_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaInfoUpdateSql002" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoUpdateSql002ResponseModel" >
+        <result property="title" column="TITLE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="attachFileName1" column="ATTACH_FILE_NAME1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="attachFileName2" column="ATTACH_FILE_NAME2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="attachFileName3" column="ATTACH_FILE_NAME3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="attachFileComment1" column="ATTACH_FILE_COMMENT1" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="attachFileComment2" column="ATTACH_FILE_COMMENT2" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="attachFileComment3" column="ATTACH_FILE_COMMENT3" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="urlComment" column="URL_COMMENT" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="createBy" column="CREATE_BY" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="updateUser" column="UPDATE_USER" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaInfoUpdateSql008" type="com.sbisec.helios.ap.companyEmployeeMenu.infoRegister.dao.model.IfaInfoUpdateSql008ResponseModel" >
+    </resultMap>
+    
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：資料種別一覧
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoUpdateSql001" resultMap="ResultMapIfaInfoUpdateSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-03_1#Sql001 */ 
+            T9N_INFO_CAT
+            , T9N_NAME
+            , T9N_REQUIRED_FLG AS REQUIRED_FLAG
+        FROM
+            PSITE_T9N_INFO_CAT 
+        WHERE
+            T9N_DEL_FLAG = '0'
+        ORDER BY
+        	T9N_SORT ASC
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：情報明細取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoUpdateSql002" resultMap="ResultMapIfaInfoUpdateSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-03_1#Sql002 */ 
+            T4N_ID AS NOTIFICATION_ID
+            , T4N_TITLE AS TITLE
+            , T4N_CONTENT AS CONTENTS
+            , T4N_CREATED_AT AS REGISTER_DAY_TIME
+            , T4N_MEM_NUM
+            , T4N_FILE1 AS ATTACH_FILE_NAME1
+            , T4N_FILE2 AS ATTACH_FILE_NAME2
+            , T4N_FILE3 AS ATTACH_FILE_NAME3
+            , T4N_CAT1 AS DOCUMENT_KIND_INPUT1
+            , T4N_FILE_COM1 AS ATTACH_FILE_COMMENT1
+            , T4N_FILE_COM2 AS ATTACH_FILE_COMMENT2
+            , T4N_FILE_COM3 AS ATTACH_FILE_COMMENT3
+            , T4N_URL AS URL
+            , COR_URL_COM AS URL_COMMENT
+            , COR_REFERENCE_CONDITION
+            , COR_DISCLAIMER AS DISCLAIMER
+            , COR_READ_FLG
+            , COR_CREATE_BY AS CREATE_BY
+            , COR_UPDATE_DATE AS UPDATE_TIME
+            , COR_UPDATE_BY AS UPDATE_USER
+        FROM 
+            PSITE_T4N_INFO 
+        WHERE
+            T4N_ID = TO_NUMBER(#{req.notificationId})
+    </select>
+    
+    <!-- 
+        SQLID：Sql008
+        SQL名：登録ファイルディレクトリ取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaInfoUpdateSql008" resultMap="ResultMapIfaInfoUpdateSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0501_01-03_1#Sql008 */ 
+            FILE_DIR AS FILE_DIRECTORY
+        FROM 
+            TB_MED_TEMP_FILE_DIR
+        WHERE 
+            FUNC_ID = #{req.functionId}
+            AND CAT_ID = #{req.t9nInfoCat}
+    </select>
+    
+    
+    <!-- 
+         SQLID：Sql004
+         SQL名：新お知らせ参照権限テーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaInfoUpdateSql004" statementType="PREPARED">
+        INSERT ALL /* @SQLID=SUB0501_01-03_1#Sql004 */
+        <foreach collection="req.notificationReferenceAuthorityList" item="item">
+            WHEN NOT EXISTS(
+                SELECT
+                    1
+                FROM
+                    PSITE_T4N_INFO_PRIV
+                WHERE
+                    T4N_ID = TO_NUMBER(#{req.notificationId})
+                    AND PRIV_ID = #{item}
+            )
+            THEN
+                INTO PSITE_T4N_INFO_PRIV(
+                    T4N_ID
+                    , PRIV_ID
+                    , COR_CREATE_DATE
+                    , COR_CREATE_BY
+                    , COR_UPDATE_DATE
+                    , COR_UPDATE_BY
+                )
+                VALUES(
+                    TO_NUMBER(#{req.notificationId})
+                    , #{item}
+                    , IFA_DATE_UTIL.IFA_GET_DATE
+                    , #{req.createBy}
+                    , IFA_DATE_UTIL.IFA_GET_DATE
+                    , #{req.updateUser}
+                )
+        </foreach>
+        SELECT * FROM DUAL
+    </insert>
+    
+    <!-- 
+         SQLID：Sql005
+         SQL名：新お知らせ既読テーブル登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaInfoUpdateSql005" statementType="PREPARED">
+        <foreach collection="req.individualRepList" item="item" index="index" open="begin" close=";end;" separator=";">
+            INSERT 
+            /* @SQLID=SUB0501_01-03_1#Sql005 */ 
+            INTO PSITE_T5N_INFO_READ (
+                T5N_ID,
+                T5N_INFO_ID,
+                T5N_FA_ID,
+                T5N_READ_FLG,
+                T5N_READ_AT,
+                T5N_LOGIN
+            )
+            SELECT
+                SEQ_PSITE_T5_INFO_READ.nextval,
+                TO_NUMBER(#{req.notificationId}),
+                '',
+                '0',
+                '',
+                #{item}
+            FROM
+                DUAL
+            WHERE
+                NOT EXISTS (
+                    SELECT 1
+                    FROM PSITE_T5N_INFO_READ
+                    WHERE
+                        T5N_INFO_ID = TO_NUMBER(#{req.notificationId})
+                        AND T5N_LOGIN = #{item}
+                )
+        </foreach>
+    </insert>
+    
+    
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：新お知らせテーブル更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaInfoUpdateSql003" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0501_01-03_1#Sql003 */ 
+            PSITE_T4N_INFO 
+            <set>
+                T4N_TITLE = #{ req.title }
+                , T4N_CONTENT = #{ req.contents }
+                <if test="req.attachFile1 != null">
+                    , T4N_FILE1 = #{ req.attachFile1 }
+                </if>
+                <if test="req.attachFile2 != null">
+                    , T4N_FILE2 = #{ req.attachFile2 }
+                </if>
+                <if test="req.attachFile3 != null">
+                    , T4N_FILE3 = #{ req.attachFile3 }
+                </if>
+                , T4N_CAT1 = TO_NUMBER(#{ req.documentKindInput1 })
+                , T4N_FILE_COM1 = #{ req.attachFileComment1 }
+                , T4N_FILE_COM2 = #{ req.attachFileComment2 }
+                , T4N_FILE_COM3 = #{ req.attachFileComment3 }
+                , T4N_URL = #{ req.url }
+                , COR_URL_COM = #{ req.urlComment }
+                , COR_REFERENCE_CONDITION = #{ req.corReferenceCondition }
+                , COR_DISCLAIMER = #{ req.disclaimer }
+                , COR_READ_FLG = #{ req.corReadFlg }
+                , COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE
+                , COR_UPDATE_BY = #{ req.updateUser }
+            </set>
+        WHERE 
+            T4N_ID = TO_NUMBER(#{req.notificationId})
+    </update>
+    
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0304-01_2
+    画面名：米株信用保証金振替確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignMarginDepositTransferConfirmMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    
+    
+    <!-- 
+         SQLID：Sql001
+         SQL名：振替指示前の指示登録
+         SQLタイプ：insert
+    -->
+    <insert id="insertIfaForeignMarginDepositTransferConfirmSql001" useGeneratedKeys="true" keyColumn="DEPOSIT_TRANSFER_NO" keyProperty="req.depositTransferNo" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0304-01_2#Sql001 */ INTO
+            DEPOSIT_TRANSFER(
+                DEPOSIT_TRANSFER_NO
+                , BUTEN_CODE
+                , ACCOUNT_NUMBER
+                , CURRENCY_CODE
+                , TRANSFER_DATE
+                , DEPOSIT_TRANSFER_TYPE
+                , TRANSFER_AMOUNT
+                , API_ERROR_CODE
+                , API_STATUS_CODE
+                , API_MESSAGE
+                , CREATE_TIME
+                , CREATE_USER
+                , UPDATE_TIME
+                , UPDATE_USER
+            )
+            VALUES(
+                TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,  'YYYYMMDD') || LPAD(SEQ_DEPOSIT_TRANSFER.NEXTVAL, 5, '0')
+                , #{req.butenCode}
+                , TO_NUMBER(#{req.accountNumber})
+                , #{req.currencyCode}
+                , IFA_DATE_UTIL.IFA_GET_DATE
+                , #{req.entrustDepositTransferClassification}
+                , TO_NUMBER(#{req.destinationAmount})
+                , null
+                , null
+                , null
+                , IFA_DATE_UTIL.IFA_GET_DATE
+                , #{req.userId}
+                , IFA_DATE_UTIL.IFA_GET_DATE
+                , #{req.userId}
+            )
+    </insert>
+    
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：振替指示後の指示更新
+        SQLタイプ：update
+    -->
+    <update id="updateIfaForeignMarginDepositTransferConfirmSql002" statementType="PREPARED">
+        <choose>
+            <when test="req.code == null and req.errMessage == null">
+            UPDATE  /* @SQLID=SUB0202_0304-01_2#Sql002 */
+                DEPOSIT_TRANSFER
+            SET
+                API_ERROR_CODE = null
+                , API_STATUS_CODE = #{req.responseCode}
+                , API_MESSAGE = null
+                , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+                , UPDATE_USER = #{req.userId}
+            WHERE
+                DEPOSIT_TRANSFER_NO = #{req.depositTransferNo}
+            </when>
+            <otherwise>
+            UPDATE  /* @SQLID=SUB0202_0304-01_2#Sql002 */
+                DEPOSIT_TRANSFER
+            SET
+                API_ERROR_CODE = #{req.code}
+                , API_STATUS_CODE = #{req.responseCode}
+                , API_MESSAGE = SubStr(#{req.errMessage},1,100)
+                , UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE
+                , UPDATE_USER = #{req.userId}
+            WHERE
+                DEPOSIT_TRANSFER_NO = #{req.depositTransferNo}
+            </otherwise>
+        </choose>
+    </update>
+    
+</mapper>

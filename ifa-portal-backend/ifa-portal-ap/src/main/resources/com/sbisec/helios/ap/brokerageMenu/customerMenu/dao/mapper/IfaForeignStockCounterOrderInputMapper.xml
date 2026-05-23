@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0302-02_1
+    画面名：外国株式店頭注文入力
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaForeignStockCounterOrderInputMapper">
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql001"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql001ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql002"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql002ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql003"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql003ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql004"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql004ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql005"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql005ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql006"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql006ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql007"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql007ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql008"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql008ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql009"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql009ResponseModel"
+    >
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaForeignStockCounterOrderInputSql010"
+        type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaForeignStockCounterOrderInputSql010ResponseModel"
+    >
+    </resultMap>
+
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：項目チェック情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql001"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql001"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql001 */
+            CASE
+                WHEN
+                    B.TRADE_STATUS = '0'                                            <!-- B.取引状態 = 取引可能 -->
+                    AND A.TRADE_STATUS = '0'                                        <!-- A.販売状態 = 販売 -->
+                THEN '0'                                                            <!-- 取引可能 -->
+                ELSE '1'                                                            <!-- 取引停止 -->
+            END AS TRADE_STATUS,                                                    <!-- 販売状態 -->
+            NVL(A.SELL_TRADE_COUNT - C.SELL_TRADE_COUNT, 0) AS SELL_TRADE_COUNT,    <!-- 売枠（株数） -->
+            NVL(A.BUY_TRADE_COUNT - C.BUY_TRADE_COUNT, 0) AS BUY_TRADE_COUNT,       <!-- 買枠（株数） -->
+            B.BASE_PRICE * (100 - A.SELL_TRADE_SPREAD) / 100 AS SELL_TRADE_PRICE,   <!-- 売取引価格 -->
+            B.BASE_PRICE * (100 + A.BUY_TRADE_SPREAD) / 100 AS BUY_TRADE_PRICE,     <!-- 買取引価格 -->
+            A.TRADE_START_TIME,                                                     <!-- 取引開始時間 -->
+            A.TRADE_END_TIME                                                        <!-- 取引終了時間 -->
+        FROM
+            T_COUNTER_BROKER_SALE A                                                 <!-- 店頭取引販売枠設定(仲介業者毎) -->
+
+        INNER JOIN
+            T_COUNTER_BRAND_SALE B                                                  <!-- 店頭取引販売枠設定(銘柄毎) -->
+        ON
+            A.BRAND_CODE = B.BRAND_CODE                                             <!-- A.銘柄コード = B.銘柄コード -->
+
+        LEFT OUTER JOIN
+            T_COUNTER_SALE_MANAGE C                                                 <!-- 店頭取引販売約定数量管理 -->
+        ON
+            A.BRAND_CODE = C.BRAND_CODE                                             <!-- A.銘柄コード　= C.銘柄コード -->
+            AND A.BROKER_CODE = C.BROKER_CODE                                       <!-- A.仲介業者コード = C.仲介業者コード -->
+
+        WHERE
+            A.BRAND_CODE = UPPER(#{req.brandCode})                                  <!-- A.銘柄コード = リクエスト.銘柄コード -->
+            AND A.BROKER_CODE = #{req.brokerCode}                                   <!-- A.仲介業者コード = リクエスト.仲介業者コード -->
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：営業日チェック情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql002"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql002"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql002 */
+            COUNT(*) AS COUNT                                                       <!-- 件数 -->
+        FROM
+            M_CALENDAR                                                              <!-- カレンダーマスタ -->
+        WHERE
+            C_DELETE_FLG = '0'                                                      <!-- 削除フラグ = 有効 -->
+            AND C_BUS_NONBUS_DIV = '0'                                              <!-- 営業日・非営業日区分 = 非営業日 -->
+            AND C_ISO_COUNTRY_CODE IN ('JP')                                         <!-- 国コード IN JP' -->
+            AND C_TARGET_DATE = IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')             <!-- 対象日付 = システム日付 -->
+            AND C_CALENDAR_ID ='T003'                                               <!-- カレンダーID = T003 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：店頭注文新規登録初期情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql003"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql003"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql003 */
+            C.BRANCH_NAME AS BROKER_NAME,                                           <!-- 仲介業者名 -->
+            NVL(A.SELL_TRADE_COUNT - D.SELL_TRADE_COUNT, 0)
+                AS MAX_SELL_LIMIT_QUANTITY,                                         <!-- 最大売枠（株数） -->
+            NVL(A.BUY_TRADE_COUNT - D.BUY_TRADE_COUNT, 0)
+                AS MAX_BUY_LIMIT_QUANTITY,                                          <!-- 最大買枠（株数） -->
+            E.BRAND_NAME,                                                           <!-- 銘柄名 -->
+            TO_CHAR(TO_DATE(E.FOREIGN_STOCK_NO, 'YYYYMMDD'), 'YYYY/MM/DD')
+                AS FOREIGN_SECURITY_INFO_DATE,                                      <!-- 外国証券情報版番 -->
+            E.ENG_PUB_BRAND_DATE AS ENGLISH_DISCLOSURE_BRAND_EFFECTIVE_DATE,        <!-- 英文開示銘柄適用日 -->
+            B.BASE_PRICE * (100 - A.SELL_TRADE_SPREAD) / 100 AS SELL_PRICE,         <!-- 売価格 -->
+            B.BASE_PRICE * (100 + A.BUY_TRADE_SPREAD) / 100 AS BUY_PRICE,           <!-- 買価格 -->
+            DECODE(F.SECTOR, 'ETF', '1', '0') AS ETF_FLAG,                          <!-- ETFフラグ -->
+            E.EXCHANGE_CODE AS MARKET_CODE                                          <!-- 市場コード -->
+        FROM
+            T_COUNTER_BROKER_SALE A                                                 <!-- 店頭取引販売枠設定(仲介業者毎) -->
+
+        INNER JOIN
+            T_COUNTER_BRAND_SALE B                                                  <!-- 店頭取引販売枠設定(銘柄毎) -->
+        ON
+            A.BRAND_CODE = B.BRAND_CODE                                             <!-- A.銘柄コード = B.銘柄コード -->
+
+        INNER JOIN
+            M_COUNTER_BRAND E                                                       <!-- 店頭取引銘柄マスタ -->
+        ON
+            A.BRAND_CODE = E.BRAND_CODE                                             <!-- A.銘柄コード = E.銘柄コード -->
+
+        LEFT OUTER JOIN
+            MEDIATE_BRANCH C                                                        <!-- 仲介業者支店 -->
+        ON
+            A.BROKER_CODE = C.BROKER_CODE                                           <!-- A.仲介業者コード = C.仲介業者コード -->
+            AND C.BROKER_BRANCH_CODE = '999'                                        <!-- 仲介業者支店コード = '999' -->
+
+        LEFT OUTER JOIN
+            T_COUNTER_SALE_MANAGE D                                                 <!-- 店頭取引販売約定数量管理 -->
+        ON
+            A.BRAND_CODE = D.BRAND_CODE                                             <!-- A.銘柄コード = D.銘柄コード -->
+            AND A.BROKER_CODE = D.BROKER_CODE                                       <!-- A.仲介業者コード = D.仲介業者コード -->
+
+        LEFT OUTER JOIN
+            ETJP_PRODUCT_MASTER F                                                   <!-- 銘柄マスタ -->
+        ON
+            A.BRAND_CODE = F.PRODUCT_CODE                                           <!-- A.銘柄コード = F.銘柄コード -->
+            AND F.COUNTRY_CODE = 'US'                                               <!-- F.国コード = 米国 -->
+            AND F.STATUS = 0                                                        <!-- F.ステータス = 取引可 -->
+
+        WHERE
+            A.BRAND_CODE = UPPER(#{req.brandCode})                                  <!-- A.銘柄コード = リクエスト.銘柄コード -->
+            AND A.BROKER_CODE = #{req.brokerCode}                                   <!-- A.仲介業者コード = リクエスト.仲介業者コード -->
+
+        ORDER BY
+            F.PRODUCT_NAME ASC,                                                     <!-- 銘柄正式名称 -->
+            F.TYPE_CODE ASC,                                                        <!-- タイプコード -->
+            F.EXCHANGE_CODE ASC,                                                    <!-- 市場コード -->
+            F.PRODUCT_CODE ASC,                                                     <!-- 銘柄コード -->
+            F.PRIMARY ASC,                                                          <!-- 優先市場フラグ -->
+            F.SECTOR ASC,                                                           <!-- 業種コード -->
+            F.COUNTRY_CODE ASC,                                                     <!-- 国コード -->
+            F.RELEASE_DATE ASC                                                      <!-- 適用日 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：店頭取引販売上限数量取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql004"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql004"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql004 */
+            NVL(A.SELL_TRADE_COUNT - B.SELL_TRADE_COUNT, 0)
+                AS MAX_SELL_LIMIT_QUANTITY,                                         <!-- 最大売枠（株数） -->
+            NVL(A.BUY_TRADE_COUNT - B.BUY_TRADE_COUNT, 0)
+                AS MAX_BUY_LIMIT_QUANTITY                                           <!-- 最大買枠（株数） -->
+        FROM
+            T_COUNTER_BROKER_SALE A                                                 <!-- 店頭取引販売枠設定(仲介業者毎) -->
+
+        INNER JOIN
+            T_COUNTER_SALE_MANAGE B                                                 <!-- 店頭取引販売約定数量管理 -->
+        ON
+            A.BRAND_CODE = B.BRAND_CODE                                             <!-- A.銘柄コード = B.銘柄コード -->
+            AND A.BROKER_CODE = B.BROKER_CODE                                       <!-- A.仲介業者コード = B.仲介業者コード -->
+
+        WHERE
+            A.BRAND_CODE = UPPER(#{req.brandCode})                                  <!-- A.銘柄コード = リクエスト.銘柄コード -->
+            AND A.BROKER_CODE = #{req.brokerCode}                                   <!-- A.仲介業者コード = リクエスト.仲介業者コード -->
+    </select>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：注文入力の使い方URL取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql005"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql005"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql005 */
+            VAR_VALUE AS ORDER_INPUT_USAGE_URL                                      <!-- 値 -->
+        FROM
+            TB_MED_SYSTEM_VARIABLE                                                  <!-- 仲介業システム値 -->
+        WHERE
+            VAR_NAME = 'USAGE_METHOD_URL'                                           <!-- 名称 = 注文入力の使い方URL -->
+    </select>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：チャートURL取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql006"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql006"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql006 */
+            VAR_VALUE AS CHART_URL                                                  <!-- 値 -->
+        FROM
+            TB_MED_SYSTEM_VARIABLE                                                  <!-- 仲介業システム値 -->
+        WHERE
+            VAR_NAME = 'CHAT_URL'                                                   <!-- 名称 = チャートURL -->
+    </select>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：株価参照URL取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql007"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql007"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql007 */
+            VAR_VALUE AS STOCK_PRICE_REFERENCE_URL                                  <!-- 値 -->
+        FROM
+            TB_MED_SYSTEM_VARIABLE                                                  <!-- 仲介業システム値 -->
+        WHERE
+            VAR_NAME = 'TICKER_URL'                                                 <!-- 名称 = 株価参照URL -->
+    </select>
+
+    <!-- 
+        SQLID：Sql008
+        SQL名：ワーニング約定金額取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql008"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql008"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql008 */
+            NAME AS WARNING_THRESHOLD_CONTRACT_AMOUNT                               <!-- 名称 -->
+        FROM
+            M_CODE                                                                  <!-- コードマスタ -->
+        WHERE
+            CODE_TYPE = '33'                                                        <!-- 種別 = 店頭と委託上限 -->
+            AND CODE_1 = '1'                                                        <!-- コード1 = 店頭 -->
+            AND CODE_2 = 'WARN_AMOUNT'                                              <!-- コード2 = ワーニング約定金額 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql009
+        SQL名：上限約定金額取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql009"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql009"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql009 */
+            NAME AS FOR_CHECK_UPPER_LIMIT_CONTRACT_AMOUNT                           <!-- 名称 -->
+        FROM
+            M_CODE                                                                  <!-- コードマスタ -->
+        WHERE
+            CODE_TYPE = '33'                                                        <!-- 種別 = 店頭と委託上限 -->
+            AND CODE_1 = '1'                                                        <!-- コード1 = 店頭 -->
+            AND CODE_2 = 'LIMIT_AMOUNT'                                             <!-- コード2 = 上限金額 -->
+    </select>
+
+    <!-- 
+        SQLID：Sql010
+        SQL名：上限注文数量取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaForeignStockCounterOrderInputSql010"
+        resultMap="ResultMapIfaForeignStockCounterOrderInputSql010"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0202_0302-02_1#Sql010 */
+            NAME AS FOR_CHECK_UPPER_LIMIT_ORDER_AMOUNT                              <!-- 名称 -->
+        FROM
+            M_CODE                                                                  <!-- コードマスタ -->
+        WHERE
+            CODE_TYPE = '33'                                                        <!-- 種別 = 店頭と委託上限 -->
+            AND CODE_1 = '1'                                                        <!-- コード1 = 店頭 -->
+            AND CODE_2 = 'LIMIT_QUANTITY'                                           <!-- コード2 = 上限数量 -->
+    </select>
+
+</mapper>

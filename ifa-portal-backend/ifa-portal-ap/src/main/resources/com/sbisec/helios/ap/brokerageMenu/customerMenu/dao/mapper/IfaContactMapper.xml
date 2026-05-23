@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0106-01
+    画面名：接触履歴
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaContactMapper">
+
+    <resultMap id="ResultMapIfaContactSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql002ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql003" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql003ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql004" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql004ResponseModel" >
+        <result property="toiawaseMei" column="TOIAWASE_MEI" typeHandler="StringTypeHandler"/>
+        <result property="toiawaseSMei" column="TOIAWASE_S_MEI" typeHandler="StringTypeHandler"/>
+        <result property="toiawaseNaiyou" column="TOIAWASE_NAIYOU" typeHandler="StringTypeHandler"/>
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql005" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql005ResponseModel" >
+        <result property="shoruiBunruiMei" column="SHORUI_BUNRUI_MEI" typeHandler="StringTypeHandler"/>
+        <result property="shoruimei" column="SHORUIMEI" typeHandler="StringTypeHandler"/>
+        <result property="naiyou" column="NAIYOU" typeHandler="StringTypeHandler"/>
+        <result property="bikou" column="BIKOU" typeHandler="StringTypeHandler"/>
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql006" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql006ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql007" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql007ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql008" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql008ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql011" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql011ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+     <resultMap id="ResultMapIfaContactSql012" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql012ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql013" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql013ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql015" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql015ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql016" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql016ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql017" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql017ResponseModel" >
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql018" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql018ResponseModel" >
+        <result property="hattyuRiyu" column="HATTYU_RIYU" typeHandler="StringTypeHandler"/>
+        <result property="userNm" column="USER_NM" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql019" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql019ResponseModel" >
+        <result property="content" column="CONTENT" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql020" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql020ResponseModel" >
+        <result property="content" column="CONTENT" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql021" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql021ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaContactSql022" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaContactSql022ResponseModel" >
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：国内株式現物注文接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql002" resultMap="ResultMapIfaContactSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql002 */
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_OCO_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_OCO_SASHINE,
+            A.DONE_OCO_SASINARI_KBN AS DONE_OCO_SASINARI_KBN,
+            A.DONE_RBE_ORDER_KIND AS DONE_RBE_ORDER_KIND,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_TRIGGER_NEDAN,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_TRIGGER_NEDAN,
+            A.DONE_TRIGGER_ZONE AS DONE_TRIGGER_ZONE,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_SASHINE,
+            A.DONE_SASINARI_KBN AS DONE_SASINARI_KBN,
+            A.IFA_ORDER_SUB_NO AS IFA_ORDER_SUB_NO,
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.OCO_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS OCO_SASHINE,
+            A.OCO_SASINARI_KBN AS OCO_SASINARI_KBN,
+            A.RBE_ORDER_KIND AS RBE_ORDER_KIND,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.TRIGGER_PRICE,'0'),'999,999,999,999,990.99')),'0'),'.') AS TRIGGER_PRICE,
+            A.TRIGGER_ZONE AS TRIGGER_ZONE,
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+            A.TRADE_KBN AS TRADE_KBN,
+            A.MARKET AS MARKET,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.PRICE,'0'),'999,999,999,999,990.99')),'0'),'.') AS PRICE,
+            A.SASINARI_KBN AS SASINARI_KBN,
+            TRIM(TO_CHAR(A.QUANTITY,'999,999,999,999,990')) AS QUANTITY,
+            A.ORDER_STATUS AS ORDER_STATUS,
+            A.ORDER_SYUBETSU AS ORDER_SYUBETSU,
+            A.BRAND_CD AS BRAND_CD,
+            A.AZUKARI_KBN AS AZUKARI_KBN,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            T_JP_ORDER A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        WHERE
+            A.TRADE_KBN IN ('1', '2')
+        AND
+            A.CUSTOMER_ID = #{req.customerId}
+        AND
+            ((TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%'))
+        ORDER BY
+            A.IFA_ORDER_NO DESC,
+            A.CREATE_TIME DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：国内株式信用新規(返済)注文接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql003" resultMap="ResultMapIfaContactSql003" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql003 */
+            A.DONE_OCO_SASINARI_KBN AS DONE_OCO_SASINARI_KBN,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_OCO_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_OCO_SASHINE,
+            A.DONE_RBE_ORDER_KIND AS DONE_RBE_ORDER_KIND,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_TRIGGER_NEDAN,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_TRIGGER_NEDAN,
+            A.DONE_TRIGGER_ZONE AS DONE_TRIGGER_ZONE,
+            A.DONE_SASINARI_KBN AS DONE_SASINARI_KBN,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.DONE_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS DONE_SASHINE,
+            A.OCO_SASINARI_KBN AS OCO_SASINARI_KBN,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.OCO_SASHINE,'0'),'999,999,999,999,990.99')),'0'),'.') AS OCO_SASHINE,
+            A.RBE_ORDER_KIND AS RBE_ORDER_KIND,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.TRIGGER_PRICE,'0'),'999,999,999,999,990.99')),'0'),'.') AS TRIGGER_PRICE,
+            A.TRIGGER_ZONE AS TRIGGER_ZONE,
+            A.MARKET AS MARKET,
+            A.SASINARI_KBN AS SASINARI_KBN,
+            RTRIM(RTRIM(TRIM(TO_CHAR(NVL(A.PRICE,'0'),'999,999,999,999,990.99')),'0'),'.') AS PRICE,
+            A.TRADE_KBN AS TRADE_KBN,
+            TRIM(TO_CHAR(A.QUANTITY,'999,999,999,999,990')) AS QUANTITY,
+            A.ORDER_SYUBETSU AS ORDER_SYUBETSU,
+            A.BRAND_CD AS BRAND_CD,
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            A.ORDER_STATUS AS ORDER_STATUS,
+            A.PAYMENT_LIMIT AS PAYMENT_LIMIT,
+            A.DAILY_CREDIT_KBN AS DAILY_CREDIT_KBN,
+            DECODE(TRIM(A.PAYMENT_LIMIT_DATE), '', A.PAYMENT_LIMIT_DATE, TO_NUMBER(TRIM(A.PAYMENT_LIMIT_DATE))) AS PAYMENT_LIMIT_DATE,
+            A.DATE_KBN AS DATE_KBN,
+            NVL(B.USER_NM, '-') AS USER_NM,
+            RTRIM(RTRIM(TRIM(TO_CHAR(C.OPEN_PRICE/100,'9,999,999,999,990.99')),'0'),'.') AS OPEN_PRICE,
+            TO_CHAR(TO_DATE(TRIM(C.OPEN_TRADE_DATE),'yyyymmdd'),'YYYY/MM/DD') AS OPEN_TRADE_DATE
+        FROM
+            T_JP_ORDER A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        LEFT JOIN
+            J_ORDER_POSITION_LINK C
+        ON
+            A.IFA_ORDER_NO = C.IFA_ORDER_NO
+        WHERE
+            A.TRADE_KBN IN ('3', '4', '5', '6')
+        AND
+            A.CUSTOMER_ID = #{req.customerId}
+        AND
+            ((TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%'))
+        ORDER BY
+            A.IFA_ORDER_NO DESC,
+            A.CREATE_TIME DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：問合せ接触履歴取得(当日まで)
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql004" resultMap="ResultMapIfaContactSql004" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql004 */
+             A.IFA_TOIAWASE_NO
+            ,A.TOIAWASE_MEI
+            ,A.TOIAWASE_S_MEI
+            ,TO_CHAR(A.TOIAWASE_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS TOIAWASE_NICHIJI
+            ,A.TAIOU_STS
+            ,A.TOIAWASE_NAIYOU
+            ,NVL(A.USER_NAME, '-') AS USER_NM
+            ,A.ANS_IFA_TOIAWASE_NO
+          FROM (
+                SELECT
+                     A.IFA_TOIAWASE_NO
+                    ,A.TOIAWASE_MEI
+                    ,A.TOIAWASE_S_MEI
+                    ,A.TOIAWASE_NICHIJI
+                    ,A.TAIOU_STS
+                    ,A.TOIAWASE_NAIYOU
+                    ,A.USER_NAME
+                    ,B.IFA_TOIAWASE_NO AS ANS_IFA_TOIAWASE_NO
+                    ,ROW_NUMBER() OVER(PARTITION BY A.IFA_TOIAWASE_NO ORDER BY B.KAITOU_NICHIJI) AS IFA_ANS_EXIST
+                  FROM
+                    CORDYS.TB_QUESTION_IFA A
+                    LEFT JOIN CORDYS.TB_ANSWER_IFA B
+                           ON A.IFA_TOIAWASE_NO = B.IFA_TOIAWASE_NO
+                 WHERE
+                    A.KOKYAKU_ID = #{req.customerId}
+                    AND A.TOIAWASE_NO IS NOT NULL
+              ) A
+         WHERE
+            A.IFA_ANS_EXIST = 1
+         ORDER BY 
+            A.TOIAWASE_NICHIJI DESC
+         FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：書類請求接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql005" resultMap="ResultMapIfaContactSql005" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql005 */
+            A.SHORUI_BUNRUI_MEI AS SHORUI_BUNRUI_MEI,
+            TO_CHAR(A.STS_SENI_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS STS_SENI_NICHIJI,
+            A.HASSOU_STS AS HASSOU_STS,
+            A.SHORUIMEI AS SHORUIMEI,
+            A.RIYUU_CD AS RIYUU_CD,
+            A.NAIYOU AS NAIYOU,
+            A.BIKOU AS BIKOU,
+            TRIM(A.MOKURONMISHO_NO) AS MOKURONMISHO_NO,
+            A.SHORUI_SEIKYUU_NO AS SHORUI_SEIKYUU_NO,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            TB_REQUEST_PAPERS_IFA A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.USER_ID = B.USER_ID
+        WHERE
+            A.KOKYAKU_ID = #{req.customerId}
+        AND
+            A.SHORUI_SEIKYUU_NO &gt;= 1
+        AND
+            A.TORIKESHI_KBN IN (0, 2)
+        AND
+            A.SAKUJO_FLG = 0
+        AND
+            A.HASSOU_STS &lt;&gt; '04'
+        ORDER BY A.STS_SENI_NICHIJI DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql006
+        SQL名：出金接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql006" resultMap="ResultMapIfaContactSql006" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql006 */
+            TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS TOUROKU_NICHIJI,
+            TRIM(TO_CHAR(A.KINGAKU, '999,999,999,990')) AS KINGAKU,
+            TO_CHAR(A.SHUKKIN_YOTEIBI, 'YYYY/MM/DD') AS SHUKKIN_YOTEIBI,
+            DECODE(TRIM(A.KEIJOUBI), NULL, NULL, SUBSTR(RTRIM(A.KEIJOUBI),1,2)||'/'||SUBSTR(RTRIM(A.KEIJOUBI),3)) AS KEIJOUBI,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            TB_CASH_PAY_REC_JOURNAL_IFA A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        WHERE
+            A.KOKYAKU_ID = #{req.customerId}
+        AND
+            A.HACCHUU_KBN = 'P'
+        AND
+            A.FURIKAE_KBN = '3 '
+        AND
+            A.TORIKESHI_STS_CD = '0'
+        AND
+            A.STS_CD = '1'
+         ORDER BY A.TOUROKU_NICHIJI DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql007
+        SQL名：出金取消接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql007" resultMap="ResultMapIfaContactSql007" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql007 */
+            TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS TOUROKU_NICHIJI,
+            A.KINGAKU AS KINGAKU,
+            TO_CHAR(A.SHUKKIN_YOTEIBI, 'YYYY/MM/DD') AS SHUKKIN_YOTEIBI,
+            A.KEIJOUBI AS KEIJOUBI,
+            A.EC_NYUSHUKKIN_NO AS EC_NYUSHUKKIN_NO,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            TB_CASH_PAY_REC_JOURNAL_IFA A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        WHERE
+            A.KOKYAKU_ID = #{req.customerId}
+        AND
+            A.HACCHUU_KBN = 'P'
+        AND
+            A.FURIKAE_KBN = '3 '
+        AND
+            A.TORIKESHI_STS_CD = '1'
+        ORDER BY A.TOUROKU_NICHIJI DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql008
+        SQL名：国内注文接触履歴見出
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql008" resultMap="ResultMapIfaContactSql008" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql008 */
+            D.CREATE_TIME AS CREATE_TIME,
+            D.CREATE_TIME_YMD || '-' || ROW_NUMBER() OVER(PARTITION BY D.CREATE_TIME_YMD ORDER BY D.CREATE_TIME ASC,D.USER_NM ASC) AS CREATE_TIME_YMD,
+            D.CREATE_USER AS CREATE_USER,
+            D.USER_NM AS USER_NM
+        FROM
+            (
+            SELECT
+                MIN(C.CREATE_TIME) AS CREATE_TIME,
+                C.CREATE_TIME_YMD AS CREATE_TIME_YMD,
+                C.CREATE_USER AS CREATE_USER,
+                C.USER_NM AS USER_NM
+            FROM
+                (
+                SELECT
+                    TO_CHAR(MIN(TJO.CREATE_TIME), 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                    TO_CHAR(MIN(TJO.CREATE_TIME), 'YYYY/MM/DD') AS CREATE_TIME_YMD,
+                    TJO.CREATE_USER AS CREATE_USER,
+                    NVL(B.USER_NM, '-') AS USER_NM
+                FROM
+                    T_JP_ORDER TJO
+                LEFT JOIN
+                    TB_MED_USERS B
+                ON
+                    TJO.CREATE_USER = B.USER_ID
+                WHERE
+                    TJO.TRADE_KBN IN ('1', '2', '3', '4', '5', '6', '7', '8')
+                AND
+                    TJO.CUSTOMER_ID = #{req.customerId}
+                AND
+                    TJO.ORDER_STATUS = '0'
+                AND
+                    ((TRIM(TJO.SHUBETU) IS NULL AND TJO.SHUBETU IS NOT NULL) OR (TRIM(TJO.SHUBETU) = 'APL' AND TJO.CODE LIKE 'W%'))
+                GROUP BY
+                    TO_CHAR(TJO.CREATE_TIME, 'YYYY/MM/DD'),
+                    TJO.CREATE_USER,
+                    B.USER_NM
+                UNION
+                SELECT
+                    TO_CHAR(MIN(JTO.CREATE_TIME), 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                    TO_CHAR(MIN(JTO.CREATE_TIME), 'YYYY/MM/DD') AS CREATE_TIME_YMD,
+                    JTO.CREATE_USER AS CREATE_USER,
+                    NVL(B.USER_NM, '-') AS USER_NM
+                FROM
+                    JP_TOUSHIN_ORDER JTO
+                LEFT JOIN
+                    TB_MED_USERS B
+                ON
+                    JTO.CREATE_USER = B.USER_ID
+                WHERE
+                    TRIM(JTO.TRADE_TYPE) IN ('0', '1', '3', '4', '6', '7', '8', '10')
+                AND
+                    JTO.CUSTOMER_ID = #{req.customerId}
+                AND
+                    JTO.ORDER_STATUS = '0'
+                AND
+                    ((TRIM(JTO.SHUBETU) IS NULL AND JTO.SHUBETU IS NOT NULL) OR (TRIM(JTO.SHUBETU) = 'APL' AND JTO.CODE LIKE 'W%'))
+                GROUP BY
+                    TO_CHAR(JTO.CREATE_TIME, 'YYYY/MM/DD'),
+                    JTO.CREATE_USER,
+                    B.USER_NM
+                UNION
+                SELECT
+                    TO_CHAR(MIN(TAOI.TOUROKU_NICHIJI), 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                    TO_CHAR(MIN(TAOI.TOUROKU_NICHIJI), 'YYYY/MM/DD') AS CREATE_TIME_YMD,
+                    TAOI.USER_ID AS CREATE_USER,
+                    NVL(B.USER_NM, '-') AS USER_NM
+                FROM
+                    TB_ADDITIONAL_ORDER_IFA TAOI
+                LEFT JOIN
+                    TB_MED_USERS B
+                ON
+                    TAOI.USER_ID = B.USER_ID
+                WHERE
+                    TAOI.HATTYUU_KBN = '3'
+                AND
+                    TAOI.KOKYAKU_ID = #{req.customerId}
+                AND
+                    TAOI.EDABAN = '1'
+                AND
+                    TAOI.STS_CD = '1'
+                GROUP BY
+                    TO_CHAR(TAOI.TOUROKU_NICHIJI, 'YYYY/MM/DD'),
+                    TAOI.USER_ID,
+                    B.USER_NM
+            )C
+            GROUP BY
+                C.CREATE_TIME_YMD,
+                C.CREATE_USER,
+                C.USER_NM
+            ORDER BY
+                MIN(C.CREATE_TIME) DESC,
+                C.USER_NM ASC
+        )D
+        WHERE
+            ROWNUM &lt;= '100'
+    </select>
+
+    <!-- 
+        SQLID：Sql011
+        SQL名：外株委託注文接触履歴取得(当日まで)
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql011" resultMap="ResultMapIfaContactSql011" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql011 */
+            C.CREATE_TIME AS CREATE_TIME,
+            C.CREATE_TIME_YMD || '-' || ROW_NUMBER() OVER(PARTITION BY C.CREATE_TIME_YMD ORDER BY C.CREATE_TIME ASC,C.USER_NM ASC) AS CREATE_TIME_YMD,
+            C.CREATE_USER AS CREATE_USER,
+            C.USER_NM AS USER_NM
+        FROM
+            (
+            SELECT
+                TO_CHAR(MIN(A.CREATE_TIME), 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                TO_CHAR(MIN(A.CREATE_TIME), 'YYYY/MM/DD') AS CREATE_TIME_YMD,
+                A.CREATE_USER AS CREATE_USER,
+                NVL(B.USER_NM, '-') AS USER_NM
+            FROM (
+                SELECT
+                    FCO.CREATE_TIME AS CREATE_TIME,
+                    FCO.CREATE_USER AS CREATE_USER,
+                    FCO.API_ERROR_CODE AS API_ERROR_CODE
+                FROM
+                    FOREIGN_CONSIGNMENT_ORDER FCO
+                WHERE
+                    FCO.BUTEN_CODE = #{req.butenCode}
+                AND
+                    FCO.ACCOUNT_NUMBER = #{req.accountNumber}
+                AND
+                    FCO.ORDER_TYPE = '0'
+                AND
+                    FCO.API_STATUS_CODE BETWEEN 200 AND 299
+                UNION
+                SELECT
+                    FCOH.CREATE_TIME AS CREATE_TIME,
+                    FCOH.CREATE_USER AS CREATE_USER,
+                    FCOH.API_ERROR_CODE AS API_ERROR_CODE
+                FROM
+                    FOREIGN_CONSIGNMENT_ORDER_HIS FCOH
+                WHERE
+                    FCOH.BUTEN_CODE = #{req.butenCode}
+                AND
+                    FCOH.ACCOUNT_NUMBER = #{req.accountNumber}
+                AND
+                    FCOH.ORDER_TYPE = '0'
+                AND
+                    FCOH.API_STATUS_CODE BETWEEN 200 AND 299
+                )A
+            LEFT JOIN
+                TB_MED_USERS B
+            ON
+                A.CREATE_USER = B.USER_ID
+            GROUP BY
+                TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD'),
+                A.CREATE_USER,
+                B.USER_NM
+            ORDER BY
+                MIN(A.CREATE_TIME) DESC,
+                B.USER_NM ASC
+            )C
+        WHERE
+            ROWNUM &lt;= '100'
+    </select>
+
+    <!-- 
+        SQLID：Sql012
+        SQL名：外株店頭注文接触履歴取得(当日まで)
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql012" resultMap="ResultMapIfaContactSql012" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql012 */
+            C.CREATE_TIME AS CREATE_TIME,
+            C.CREATE_TIME_YMD || '-' || ROW_NUMBER() OVER(PARTITION BY C.CREATE_TIME_YMD ORDER BY C.CREATE_TIME ASC,C.USER_NM ASC) AS CREATE_TIME_YMD,
+            C.CREATE_USER AS CREATE_USER,
+            C.USER_NM AS USER_NM
+        FROM
+            (
+            SELECT
+                TO_CHAR(MIN(A.CREATE_TIME), 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                TO_CHAR(MIN(A.CREATE_TIME), 'YYYY/MM/DD') AS CREATE_TIME_YMD,
+                A.CREATE_USER AS CREATE_USER,
+                NVL(B.USER_NM, '-') AS USER_NM
+            FROM (
+                SELECT
+                    TCO.CREATE_TIME AS CREATE_TIME,
+                    TCO.CREATE_USER AS CREATE_USER
+                FROM
+                    T_COUNTER_ORDER TCO
+                WHERE
+                    TCO.BUTEN_CODE = #{req.butenCode}
+                AND
+                    TCO.ACCOUNT_NUMBER = #{req.accountNumber}
+                UNION
+                SELECT
+                    TCOH.CREATE_TIME AS CREATE_TIME,
+                    TCOH.CREATE_USER AS CREATE_USER
+                FROM
+                    T_COUNTER_ORDER_HIS TCOH
+                WHERE
+                    TCOH.BUTEN_CODE = #{req.butenCode}
+                AND
+                    TCOH.ACCOUNT_NUMBER = #{req.accountNumber}
+                )A
+            LEFT JOIN
+                TB_MED_USERS B
+            ON
+                A.CREATE_USER = B.USER_ID
+            GROUP BY
+                TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD'),
+                A.CREATE_USER,
+                B.USER_NM
+            ORDER BY
+                MIN(A.CREATE_TIME) DESC,
+                B.USER_NM ASC
+            )C
+        WHERE
+            ROWNUM &lt;= '100'
+    </select>
+
+    <!-- 
+        SQLID：Sql013
+        SQL名：為替取引注文接触履歴取得(当日まで)
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql013" resultMap="ResultMapIfaContactSql013" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql013 */
+            C.CREATE_TIME AS CREATE_TIME,
+            C.CREATE_TIME_YMD || '-' || ROW_NUMBER() OVER(PARTITION BY C.CREATE_TIME_YMD ORDER BY C.CREATE_TIME ASC,C.USER_NM ASC) AS CREATE_TIME_YMD,
+            C.CREATE_USER AS CREATE_USER,
+            C.USER_NM AS USER_NM
+        FROM
+            (
+            SELECT
+                TO_CHAR(MIN(A.CREATE_TIME), 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+                TO_CHAR(MIN(A.CREATE_TIME), 'YYYY/MM/DD') AS CREATE_TIME_YMD,
+                A.CREATE_USER AS CREATE_USER,
+                NVL(B.USER_NM, '-') AS USER_NM
+            FROM
+                EXCHANGE_ORDER A
+            LEFT JOIN
+                TB_MED_USERS B
+            ON
+                A.CREATE_USER = B.USER_ID
+            WHERE
+                A.BUTEN_CODE = #{req.butenCode}
+            AND
+                A.ACCOUNT_NUMBER = #{req.accountNumber}
+            AND
+                A.FX_ORDER_STATUS = '0'
+            AND
+                A.API_STATUS_CODE IS NULL
+            GROUP BY
+                TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD'),
+                A.CREATE_USER,
+                B.USER_NM
+            ORDER BY
+                MIN(A.CREATE_TIME) DESC,
+                B.USER_NM ASC
+            )C
+        WHERE
+            ROWNUM &lt;= '100'
+    </select>
+
+    <!-- 
+        SQLID：Sql015
+        SQL名：国内株式現引現渡注文接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql015" resultMap="ResultMapIfaContactSql015" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql015 */
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+            TRIM(TO_CHAR(A.QUANTITY,'999,999,999,999,990')) AS QUANTITY,
+            A.SPECIFIC_KBN AS SPECIFIC_KBN,
+            A.BRAND_CD AS BRAND_CD,
+            A.ORDER_STATUS AS ORDER_STATUS,
+            A.TRADE_KBN AS TRADE_KBN,
+            A.PAYMENT_LIMIT AS PAYMENT_LIMIT,
+            A.DAILY_CREDIT_KBN AS DAILY_CREDIT_KBN,
+            DECODE(TRIM(A.PAYMENT_LIMIT_DATE), '', A.PAYMENT_LIMIT_DATE, TO_NUMBER(TRIM(A.PAYMENT_LIMIT_DATE))) AS PAYMENT_LIMIT_DATE,
+            A.DATE_KBN AS DATE_KBN,
+            A.AZUKARI_KBN AS AZUKARI_KBN,
+            NVL(B.USER_NM, '-') AS USER_NM,
+            RTRIM(RTRIM(TRIM(TO_CHAR(C.OPEN_PRICE/100,'9,999,999,999,990.99')),'0'),'.') AS OPEN_PRICE,
+            TO_CHAR(TO_DATE(TRIM(C.OPEN_TRADE_DATE),'yyyymmdd'),'YYYY/MM/DD') AS OPEN_TRADE_DATE,
+            C.OPEN_MARKET AS OPEN_MARKET
+        FROM
+            T_JP_ORDER A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        LEFT JOIN
+            J_ORDER_POSITION_LINK C
+        ON
+            A.IFA_ORDER_NO = C.IFA_ORDER_NO
+        WHERE
+            A.TRADE_KBN IN ('7', '8')
+        AND
+            A.CUSTOMER_ID = #{req.customerId}
+        AND
+            ((TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%'))
+        ORDER BY
+            A.IFA_ORDER_NO DESC,
+            A.CREATE_TIME DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql016
+        SQL名：国内投信(一般)注文接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql016" resultMap="ResultMapIfaContactSql016" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql016 */
+            A.FUND_CD_KAISU AS FUND_CD_KAISU,
+            TRIM(A.FUND_CD_GOU) AS FUND_CD_GOU,
+            TRIM(TO_CHAR(A.QUANTITY,'999,999,999,999,990')) AS QUANTITY,
+            A.NORIKAE_YUGU_KBN AS NORIKAE_YUGU_KBN,
+            A.TRADE_KBN AS TRADE_KBN,
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            A.ORDER_STATUS AS ORDER_STATUS,
+            A.TRADE_TYPE AS TRADE_TYPE,
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+            A.SPECIFIC_KBN AS SPECIFIC_KBN,
+            A.AZUKARI_KBN AS AZUKARI_KBN,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            JP_TOUSHIN_ORDER A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        WHERE
+            TRIM(A.TRADE_TYPE) IN ('0', '3', '7')
+        AND
+            A.CUSTOMER_ID = #{req.customerId}
+        AND
+            ((TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%'))
+        ORDER BY
+            A.IFA_ORDER_NO DESC,
+            A.CREATE_TIME DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql017
+        SQL名：国内投信(累投)注文接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql017" resultMap="ResultMapIfaContactSql017" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql017 */
+            TRIM(A.FUND_CD_GOU) AS FUND_CD_GOU,
+            A.FUND_CD_KAISU AS FUND_CD_KAISU,
+            TRIM(TO_CHAR(A.POINT,'999,999,999,999,990')) AS POINT,
+            A.POINT_TYPE AS POINT_TYPE,
+            A.NORIKAE_YUGU_KBN AS NORIKAE_YUGU_KBN,
+            TO_CHAR(A.CREATE_TIME, 'YYYY/MM/DD HH24:MI:SS') AS CREATE_TIME,
+            A.TRADE_TYPE AS TRADE_TYPE,
+            A.TRADE_KBN AS TRADE_KBN,
+            A.ORDER_STATUS AS ORDER_STATUS,
+            TRIM(TO_CHAR(A.NET_AMOUNT,'999,999,999,999,990')) AS NET_AMOUNT,
+            A.AZUKARI_KBN AS AZUKARI_KBN,
+            A.SPECIFIC_KBN AS SPECIFIC_KBN,
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            JP_TOUSHIN_ORDER A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.CREATE_USER = B.USER_ID
+        WHERE
+            TRIM(A.TRADE_TYPE) IN ('1', '4', '6', '8', '10')
+        AND
+            A.CUSTOMER_ID = #{req.customerId}
+       AND
+            ((TRIM(A.SHUBETU) IS NULL AND A.SHUBETU IS NOT NULL) OR (TRIM(A.SHUBETU) = 'APL' AND A.CODE LIKE 'W%'))
+        ORDER BY
+            A.IFA_ORDER_NO DESC,
+            A.CREATE_TIME DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql018
+        SQL名：その他注文その他余力拘束取消の接触履歴取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql018" resultMap="ResultMapIfaContactSql018" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql018 */
+            A.TRAN_ID AS TRAN_ID,
+            A.TORIKESHI_KBN AS TORIKESHI_KBN,
+            A.KOUSOKU_KBN AS KOUSOKU_KBN,
+            A.KOUSOKU_SYUBETU AS KOUSOKU_SYUBETU,
+            TRIM(TO_CHAR(A.NISA_KINGAKU,'999,999,999,999,990')) AS NISA_KINGAKU,
+            A.EDABAN AS EDABAN,
+            A.TOKUTEI_AZUKARI_BAIBAI_KBN AS TOKUTEI_AZUKARI_BAIBAI_KBN,
+            TRIM(A.HATTYU_RIYU) AS HATTYU_RIYU,
+            TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') AS TOUROKU_NICHIJI,
+            TRIM(TO_CHAR(A.SEISAN_KINGAKU,'999,999,999,999,990')) AS SEISAN_KINGAKU,
+            NVL(B.USER_NM, '-') AS USER_NM
+        FROM
+            TB_ADDITIONAL_ORDER_IFA A
+        LEFT JOIN
+            TB_MED_USERS B
+        ON
+            A.USER_ID = B.USER_ID
+        WHERE
+            A.HATTYUU_KBN = '3'
+        AND
+            A.KOKYAKU_ID = #{req.customerId}
+        AND
+            A.STS_CD = '1'
+        ORDER BY
+            A.TRAN_ID DESC,
+            A.TOUROKU_NICHIJI DESC
+        FETCH FIRST 100 ROWS ONLY
+    </select>
+
+    <!-- 
+        SQLID：Sql019
+        SQL名：IFA出金接触履歴比較
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql019" resultMap="ResultMapIfaContactSql019" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql019 */
+             RTRIM(B.CONTENT) AS CONTENT
+            ,RTRIM(B.RECORD_DATE) AS RECORD_DATE
+        FROM
+            CORDYS.TB_CASH_PAY_REC_JOURNAL_IFA A
+            INNER JOIN
+              JSON_TABLE(
+                TO_CLOB(#{req.ccsApiRtnVal}),
+                '$[*]' COLUMNS(
+                    CONTENT VARCHAR2(500) PATH '$[0]',
+                    RECORD_DATE VARCHAR2(20) PATH '$[1]'
+                )
+              ) B
+             ON TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') = RTRIM(B.RECORD_DATE)
+            AND (
+                     NVL2(A.KINGAKU, '出金額:' || TRIM(TO_CHAR(A.KINGAKU, '999,999,999,990')) || '　', '') || 
+                     NVL2(A.SHUKKIN_YOTEIBI, '出金予定日:' || TO_CHAR(A.SHUKKIN_YOTEIBI, 'YYYY/MM/DD') || '　', '') ||
+                     NVL2(A.KEIJOUBI, '計上日:'||DECODE(TRIM(A.KEIJOUBI), NULL, NULL, SUBSTR(RTRIM(A.KEIJOUBI),1,2)||'/'||SUBSTR(RTRIM(A.KEIJOUBI),3)) || '　', '') ||
+                     '振替区分:銀行振込(送金)'
+                 ) = REGEXP_REPLACE(B.CONTENT, '[ 　]+$')
+        WHERE
+               A.KOKYAKU_ID = #{req.kokyakuId}
+           AND A.HACCHUU_KBN = 'P'
+           AND A.FURIKAE_KBN = '3 '
+           AND A.TORIKESHI_STS_CD = '0'
+           AND A.STS_CD = '1'
+    </select>
+
+    <!-- 
+        SQLID：Sql020
+        SQL名：IFA出金取消接触履歴比較
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql020" resultMap="ResultMapIfaContactSql020" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql020 */
+             RTRIM(B.CONTENT) AS CONTENT
+            ,RTRIM(B.RECORD_DATE) AS RECORD_DATE
+        FROM
+            CORDYS.TB_CASH_PAY_REC_JOURNAL_IFA A
+            INNER JOIN
+              JSON_TABLE(
+                TO_CLOB(#{req.ccsApiRtnVal}),
+                '$[*]' COLUMNS(
+                    CONTENT VARCHAR2(500) PATH '$[0]',
+                    RECORD_DATE VARCHAR2(20) PATH '$[1]'
+                )
+              ) B
+             ON TO_CHAR(A.TOUROKU_NICHIJI, 'YYYY/MM/DD HH24:MI:SS') = RTRIM(B.RECORD_DATE)
+            AND (
+                     A.EC_NYUSHUKKIN_NO || '　' || 
+                     NVL2(A.SHUKKIN_YOTEIBI, '出金予定日:' || TO_CHAR(A.SHUKKIN_YOTEIBI, 'YYYY/MM/DD') || '　', '') ||
+                     '振替区分:銀行振込(送金)'
+                 ) = REGEXP_REPLACE(B.CONTENT, '[ 　]+$')
+        WHERE
+               A.KOKYAKU_ID = #{req.kokyakuId}
+           AND A.HACCHUU_KBN = 'P'
+           AND A.FURIKAE_KBN = '3 '
+           AND A.TORIKESHI_STS_CD = '1'
+    </select>
+
+    <!-- 
+        SQLID：Sql021
+        SQL名：同一のIFA注文番号内で最大情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql021" resultMap="ResultMapIfaContactSql021" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql021 */
+            A.IFA_ORDER_NO AS IFA_ORDER_NO,
+            TRIM(TO_CHAR(MAX(A.POINT),'999,999,999,999,990')) AS POINT,
+            TRIM(TO_CHAR(MAX(A.NET_AMOUNT),'999,999,999,999,990')) AS NET_AMOUNT
+        FROM
+            JP_TOUSHIN_ORDER A
+        GROUP BY
+            A.IFA_ORDER_NO
+    </select>
+
+    <!-- 
+        SQLID：Sql022
+        SQL名：同一のトランザクションID内で最大情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaContactSql022" resultMap="ResultMapIfaContactSql022" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0204_01-02_1#Sql022 */
+            A.TRAN_ID AS TRAN_ID,
+            TRIM(TO_CHAR(MAX(A.NISA_KINGAKU),'999,999,999,999,990')) AS NISA_KINGAKU,
+            TRIM(TO_CHAR(MAX(A.SEISAN_KINGAKU),'999,999,999,999,990')) AS SEISAN_KINGAKU
+        FROM
+            TB_ADDITIONAL_ORDER_IFA A
+        GROUP BY
+            A.TRAN_ID
+    </select>
+
+</mapper>

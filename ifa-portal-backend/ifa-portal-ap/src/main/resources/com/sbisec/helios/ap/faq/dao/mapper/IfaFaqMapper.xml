@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB00-05
+    画面名：よくある質問
+-->
+<mapper namespace="com.sbisec.helios.ap.faq.dao.mapper.IfaFaqMapper">
+
+    <resultMap id="ResultMapIfaFaqSql001" type="com.sbisec.helios.ap.faq.dao.model.IfaFaqSql001ResponseModel" >
+        <result property="heading" column="HEADLINE"/>
+        <result property="contentText" column="CONTENT_TEXT_HTML" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap id="ResultMapIfaFaqSql002" type="com.sbisec.helios.ap.faq.dao.model.IfaFaqSql002ResponseModel" >
+        <result property="primaryItem" column="MAJOR_ITEM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="tertiaryItem" column="MINOR_ITEM" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="heading" column="HEADLINE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />   
+        <result property="contentsNo" column="CONTENT_NUM"/>
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaFaqSql003" type="com.sbisec.helios.ap.faq.dao.model.IfaFaqSql003ResponseModel" >
+        <result property="count" column="ROWN"/>
+        <result property="contentsNo" column="CONTENT_NUM"/>
+        <result property="heading" column="HEADLINE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="contentText" column="CONTENT_TEXT_DISP" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001
+        SQL名：コンテンツ本文取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaFaqSql001" resultMap="ResultMapIfaFaqSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00-05#Sql001 */ 
+            HEADLINE
+          , CONTENT_TEXT_HTML
+        FROM 
+            M_MANUAL_FAQ
+        WHERE
+            CONTENT_NUM = #{req.contentsNo}
+            AND OPERATION_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND OPERATION_END_DATE &gt; IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：コンテンツリスト取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaFaqSql002" resultMap="ResultMapIfaFaqSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB00-05#Sql002 */
+            MAJOR_ITEM
+          , MINOR_ITEM
+          , HEADLINE          
+          , CONTENT_NUM
+        FROM
+            M_MANUAL_FAQ
+        WHERE
+            OPERATION_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+            AND OPERATION_END_DATE &gt; IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+        ORDER BY
+            MAJOR_ITEM_NUM
+          , MINOR_ITEM_NUM
+          , HEADLINE_NUM
+    </select>
+    
+    <!-- 
+        SQLID：Sql003
+        SQL名：コンテンツ本文検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaFaqSql003" resultMap="ResultMapIfaFaqSql003" statementType="PREPARED">
+        WITH S AS (
+            SELECT
+                row_number() over (order by CONTENT_NUM) ROWN
+              , CONTENT_NUM
+              , HEADLINE
+              , CONTENT_TEXT_DISP
+            FROM (
+                SELECT
+                    CONTENT_NUM
+                  , HEADLINE
+                  , CONTENT_TEXT_DISP
+                FROM
+                    M_MANUAL_FAQ
+                WHERE
+                   <choose>
+                        <when test='req.searchKeyWordList != null and req.searchKeyWordList.size() &gt; 0'>
+                            <foreach item="searchKeyWord" collection="req.searchKeyWordList" index="i" open="" separator="" close="">
+                                <choose>
+                                    <when test="i == 0">
+                                        UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(HEADLINE)), 'kana_fwkatakana') 
+                                            LIKE '%' || UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE( #{searchKeyWord} )), 'kana_fwkatakana') || '%'
+                                    </when>
+                                    <otherwise>
+                                        AND UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(HEADLINE)), 'kana_fwkatakana') 
+                                            LIKE '%' || UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE( #{searchKeyWord} )), 'kana_fwkatakana') || '%'
+                                    </otherwise>
+                                </choose>
+                            </foreach>
+                        </when>
+                        <otherwise>
+                            1 = 0
+                        </otherwise>
+                    </choose>
+                    AND OPERATION_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+                    AND OPERATION_END_DATE &gt; IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+                UNION
+                SELECT
+                    CONTENT_NUM
+                  , HEADLINE
+                  , CONTENT_TEXT_DISP
+                FROM
+                    M_MANUAL_FAQ
+                WHERE
+                    <choose>
+                        <when test='req.searchKeyWordList != null and req.searchKeyWordList.size() &gt; 0'>
+                            <foreach item="searchKeyWord" collection="req.searchKeyWordList" index="i" open="" separator="" close="">
+                                <choose>
+                                    <when test="i == 0">
+                                        UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(CONTENT_TEXT_DISP)), 'kana_fwkatakana') 
+                                            LIKE '%' || UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE( #{searchKeyWord} )), 'kana_fwkatakana') || '%'
+                                    </when>
+                                    <otherwise>
+                                        AND UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(CONTENT_TEXT_DISP)), 'kana_fwkatakana') 
+                                            LIKE '%' || UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE( #{searchKeyWord} )), 'kana_fwkatakana') || '%'
+                                    </otherwise>
+                                </choose>
+                            </foreach>
+                        </when>
+                        <otherwise>
+                            1 = 0
+                        </otherwise>
+                    </choose>
+                    AND OPERATION_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+                    AND OPERATION_END_DATE &gt; IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+                )  
+        )
+        SELECT /* @SQLID=SUB00-05#Sql003 */
+            (SELECT MAX(ROWN) FROM S) ROWN
+          , S.CONTENT_NUM
+          , S.HEADLINE
+          , S.CONTENT_TEXT_DISP
+        FROM
+            S
+        WHERE
+            S.ROWN &lt;= #{req.maxCount}
+        ORDER BY
+            CONTENT_NUM
+    </select>
+</mapper>

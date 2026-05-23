@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0511_02-02
+    画面名：皆様からの要望新規登録
+-->
+<mapper namespace="com.sbisec.helios.ap.suggestionBox.dao.mapper.IfaSuggestionBoxCommonRegisterMapper">
+
+    
+    <resultMap
+	    id="ResultMapIfaSuggestionBoxCommonRegisterSql001" 
+	    type="com.sbisec.helios.ap.suggestionBox.dao.model.IfaSuggestionBoxCommonRegisterSql001ResponseModel" 
+	>
+    </resultMap>
+        
+    <!--
+        SQLID：Sql001
+        SQL名：要望No取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaSuggestionBoxCommonRegisterSql001"
+        resultMap="ResultMapIfaSuggestionBoxCommonRegisterSql001"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB0511_02-02#Sql001 */
+           LPAD(SEQ_SUG_BOX_COMMON.NEXTVAL,6,'0') AS SBC_NO
+        FROM
+            DUAL
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：要望登録
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaSuggestionBoxCommonRegisterSql003" statementType="PREPARED">
+        INSERT  /* @SQLID=SUB0511_02-02#Sql003 */
+        INTO CORDYS.SUG_BOX_COMMON (
+		    SBC_NO
+		    , TITLE
+		    , CATEGORY
+		    , STATUS
+		    , SUGGESTION
+		    , FILE1
+		    , FILE2
+		    , FILE3
+		    , CREATE_TIME
+		    , CREATE_USER
+		    , UPDATE_TIME
+		    , UPDATE_USER
+		)
+		VALUES(
+			TO_NUMBER(#{req.sbcNo})
+			, #{req.title}
+			, #{req.category}
+			, #{req.status}
+			, #{req.suggestion}
+			, #{req.registerFileName1}
+			, #{req.registerFileName2}
+			, #{req.registerFileName3}
+			, IFA_DATE_UTIL.IFA_GET_DATE
+			, #{req.userId}
+			, IFA_DATE_UTIL.IFA_GET_DATE
+			, #{req.userId}
+		)
+
+    </insert>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：回答登録
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaSuggestionBoxCommonRegisterSql004" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0511_02-02#Sql004 */
+        INTO CORDYS.SUG_BOX_COMMON_A (
+		    SBC_NO
+		    , SBCA_NO
+		    , ANSWER_DATE
+		    , ANSWER_UPDATE_DATE
+		    , ANSWER
+		    , CREATE_TIME
+		    , CREATE_USER
+		    , UPDATE_TIME
+		    , UPDATE_USER
+		) 
+		VALUES ( 
+            TO_NUMBER(#{req.sbcNo})
+            , TO_NUMBER(#{req.answerNo})
+            , #{req.answerRegisterDate}
+            , #{req.answerRegisterDate}
+            , #{req.answerContents}
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{req.userId}
+            , IFA_DATE_UTIL.IFA_GET_DATE
+            , #{req.userId}
+        )
+    </insert>
+</mapper>

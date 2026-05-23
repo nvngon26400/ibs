@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0401_01-01
+    画面名：コンプライアンス通信閲覧状況照会(内部管理責任者用)
+-->
+<mapper namespace="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.mapper.IfaComplianceReportViewStatusLookupInternalAdminMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaComplianceReportViewStatusLookupInternalAdminSql001" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaComplianceReportViewStatusLookupInternalAdminSql001ResponseModel" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaComplianceReportViewStatusLookupInternalAdminSql002" type="com.sbisec.helios.ap.internalAdminMenu.monthlyImplementationItem.dao.model.IfaComplianceReportViewStatusLookupInternalAdminSql002ResponseModel" >
+    </resultMap>
+    <!-- 
+        SQLID：Sql001
+        SQL名：タイトル取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaComplianceReportViewStatusLookupInternalAdminSql001" resultMap="ResultMapIfaComplianceReportViewStatusLookupInternalAdminSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_01-01#Sql001 */
+        TITLE_DESC,
+        TITLE_VALUE,
+        COMMDATE
+        FROM
+        (
+            SELECT 
+            ' ' AS TITLE_DESC,
+            ' ' AS TITLE_VALUE,
+            '999999' AS COMMDATE
+            FROM
+            DUAL
+        )
+        UNION
+        SELECT
+        COR_TITLE AS TITLE_DESC,
+        COR_TITLE AS TITLE_VALUE,
+        COR_COMMUNICATION_DATE AS COMMDATE
+        FROM
+        COR_COMPLIANCE_COMMUNICATION
+        WHERE
+        COR_COMMUNICATION_DATE > (SELECT TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE - INTERVAL '5' YEAR,'YYYYMM') FROM DUAL)
+        AND COR_COMMUNICATION_DATE &lt;= (SELECT TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYYMM') FROM DUAL)
+        
+        ORDER BY COMMDATE DESC
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：コンプライアンス通信の閲覧状況取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaComplianceReportViewStatusLookupInternalAdminSql002" resultMap="ResultMapIfaComplianceReportViewStatusLookupInternalAdminSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0401_01-01#Sql002 */
+        N.COUNT AS totalCount, <!-- 総件数 -->
+        N.COR_TITLE AS title, <!-- タイトル -->
+        N.EMPLOYEE_ID AS employeeId, <!-- 仲介業者担当者コード -->
+        N.USER_NM AS userId, <!-- ユーザー名 -->
+        N.BRANCH_NAME AS brokerBranchName, <!-- 仲介業者支店名 -->
+        N.COR_CONFIRMATION_DATE AS confirmDateTime, <!-- 確認日時(YYYY/MM/DD) -->
+        N.CODE_NAME AS codeName, <!-- コード名称 -->
+        N.BROKER_ID AS brokerCode, <!-- 仲介業者コード -->
+        N.COR_BROWSE_FLAG AS corBrowseFlag <!-- 閲覧要否フラグ -->
+        FROM (
+            SELECT
+            COUNT(*) OVER() AS COUNT,
+            M.COR_TITLE,
+            M.EMPLOYEE_ID,
+            M.USER_NM,
+            M.BRANCH_NAME,
+            A.COR_CONFIRMATION_DATE,
+            CM.CODE_NAME,
+            M.BROKER_ID,
+            C.COR_BROWSE_FLAG
+            FROM
+            (
+                SELECT 
+                MU.USER_ID,
+                MU.EMPLOYEE_ID,
+                MU.USER_NM,
+                MU.BROKER_ID,
+                MU.SUB_BROKER_ID,
+                CC.COR_LEC_ID,
+                CC.COR_TITLE,
+                CC.COR_COMMUNICATION_DATE,
+                MB.BRANCH_NAME
+                FROM COR_COMPLIANCE_COMMUNICATION CC, TB_MED_USERS MU
+                <choose>
+                    <when test='req.brokerName != null and req.brokerName != ""'>
+                        INNER JOIN MEDIATE_BRANCH MB
+                        ON MU.BROKER_ID = MB.BROKER_CODE
+                        AND MB.BROKER_BRANCH_KIND = '00'
+                        AND UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(MB.BRANCH_NAME)),'kana_fwkatakana') LIKE '%'||
+                        UTL_I18N.TRANSLITERATE(UPPER(TO_MULTI_BYTE(#{req.brokerName})), 'kana_fwkatakana')||'%'
+                    </when>
+                    <otherwise>
+                        LEFT JOIN MEDIATE_BRANCH MB
+                        ON MU.BROKER_ID = MB.BROKER_CODE
+                        AND MB.BROKER_BRANCH_KIND = '00'
+                    </otherwise>
+                </choose>
+                WHERE
+                MU.PRIV_ID &lt;> '1'
+                AND MU.PRIV_ID &lt;> '2'
+                AND (
+                <choose>
+					<when test='(req.titleThisMonth == null or req.titleThisMonth == "") and (req.titleLastMonth == null or req.titleLastMonth == "")'>
+						CC.COR_COMMUNICATION_DATE > (SELECT TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE - INTERVAL '5' YEAR,'YYYYMM') FROM DUAL)
+                        AND 
+                        CC.COR_COMMUNICATION_DATE &lt;= (SELECT TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYYMM') FROM DUAL)
+					</when>
+					<otherwise>
+						<choose>
+							<when test='req.titleLastMonth != null and req.titleLastMonth != ""'>
+								CC.COR_COMMUNICATION_DATE > (SELECT TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE - INTERVAL '5' YEAR,'YYYYMM') FROM DUAL)
+		                        AND 
+		                        CC.COR_COMMUNICATION_DATE &lt; (SELECT TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYYMM') FROM DUAL)
+							</when>
+							<otherwise>
+								CC.COR_COMMUNICATION_DATE = (SELECT TO_CHAR(IFA_DATE_UTIL.IFA_GET_DATE,'YYYYMM') FROM DUAL) 
+							</otherwise>
+						</choose>
+					</otherwise>
+				</choose>
+                )
+            ) M
+            LEFT JOIN COR_COMPLIANCE_CONFIRMATION A
+            ON M.COR_LEC_ID = A.COR_LEC_ID 
+            AND M.USER_ID = A.COR_USER_ID
+            LEFT JOIN COR_BROWSE_CONTROL_INDV C
+            ON M.USER_ID = C.COR_USER_ID
+            LEFT JOIN CORDYS_CODE_MASTER CM
+            ON CM.FUNCTION_ID = '013'
+            AND A.COR_CONFIRMATION_FLG = CM.CODE_ID
+            <where>
+            <if test='req.brokerChargeName != null and req.brokerChargeName != ""'>
+            M.USER_NM LIKE '%'||#{req.brokerChargeName}||'%'
+            </if>
+            <if test='req.privId != "1" and req.brokerChargeList != null and req.brokerChargeList.size() &gt; 0'>
+                <choose>
+                    <when test='req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                        AND (M.BROKER_ID IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR M.BROKER_ID IN(
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                            #{brokerCharge.brokerCode}
+                        </foreach>
+                        )
+                    </when>
+                    <otherwise>
+                        AND ((M.BROKER_ID, M.EMPLOYEE_ID) IN
+                        <foreach item="brokerCharge" index="index" collection="req.brokerChargeList" open="(" close=")">
+                            <if test="index % 1000 == 0 and index != 0">
+                                ) OR (M.BROKER_ID, M.EMPLOYEE_ID) IN(
+                            </if>
+                            <if test="index % 1000 != 0">
+                                ,
+                            </if>
+                            (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                        </foreach>
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+            <if test='req.title != null and req.title.trim() != ""'>
+            AND M.COR_TITLE = #{req.title}
+            </if>
+            <if test='req.viewStatus == "1"'>
+                AND A.COR_CONFIRMATION_FLG = #{req.viewStatus}
+            </if>
+            <if test='req.viewStatus == "3"'>
+                AND (A.COR_CONFIRMATION_FLG IS NULL OR A.COR_CONFIRMATION_FLG = #{req.viewStatus})
+            </if>
+            <if test='req.viewTarget == "0"'>
+                AND (C.COR_BROWSE_FLAG IS NULL OR C.COR_BROWSE_FLAG = #{req.viewTarget})
+            </if>
+            <if test='req.viewTarget == "1"'>
+                AND C.COR_BROWSE_FLAG = #{req.viewTarget}
+            </if>
+            </where>
+            ORDER BY M.COR_COMMUNICATION_DATE DESC, M.BROKER_ID
+        ) N
+        WHERE 
+        1=1　
+        AND ROWNUM &lt;= #{req.maxRowNum}
+    </select>
+    
+    
+</mapper>

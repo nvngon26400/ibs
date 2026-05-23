@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020502-01
+    画面名：手数料・報酬
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.commFee.dao.mapper.IfaCommFeeMapper">
+
+    <resultMap
+        id="ResultMapIfaCommFeeSql001To012"
+        type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaCommFeeSql001To012ResponseModel"
+    >
+        <result property="brokerName" column="BROKER_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="brokerChargeName" column="BROKER_CHARGE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="course" column="COURSE" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+        <result property="branchName" column="BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+
+    <resultMap
+        id="ResultMapIfaCommFeeSql015"
+        type="com.sbisec.helios.ap.brokerageMenu.commFee.dao.model.IfaCommFeeSql015ResponseModel"
+    >
+        <result property="serviceName" column="SERVICE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql001～12
+        SQL名：手数料・報酬一覧取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaCommFeeSql001To012"
+        resultMap="ResultMapIfaCommFeeSql001To012"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB020502-01#Sql001～012 */
+            *
+        FROM (
+            SELECT
+                count(*) over () as TOTAL_ROW                                   <!-- 総件数 -->
+
+                <!-- 日次の場合 -->
+                <if test='req.dailyMonthlyCountingUnit == "0"'>
+                    , CALC_DATE AS DATE_YMD                                     <!-- 年月日 -->
+                </if>
+
+                <!-- 月次の場合 -->
+                <if test='req.dailyMonthlyCountingUnit == "1"'>
+                    , CALC_DATE AS DATE_YM                                      <!-- 年月 -->
+                </if>
+
+                , BROKER_CODE                                                   <!-- 仲介業者コード -->
+                , MAX(BROKER_NAME) AS BROKER_NAME                               <!-- 仲介業者名 -->
+
+                <!-- 営業員コード～営業員名は、営業員毎の集計時のみ取得 -->
+                <if test='req.brokerChargeBranchCountingUnit == "1"'>
+                    , BROKER_CHARGE_CODE AS EMP_CODE                            <!-- 営業員コード -->
+                    , MAX(BROKER_CHARGE_NAME) AS BROKER_CHARGE_NAME             <!-- 営業員名 -->
+                </if>
+
+                <!-- 仲介業支店コード～仲介業支店名は、営業員毎/支店毎の集計時のみ取得 -->
+                <if test='req.brokerChargeBranchCountingUnit == "1" or req.brokerChargeBranchCountingUnit == "2"'>
+                    , MAX(BROKER_BRANCH_CODE) AS BRANCH_CODE                    <!-- 仲介業支店コード -->
+                    , MAX(BROKER_BRANCH_NAME) AS BRANCH_NAME                    <!-- 仲介業支店名 -->
+                </if>
+                
+                <!-- 扱者コード～取引コース名は、仲介業者毎かつ扱者毎の集計時のみ取得 -->
+                <if test='req.brokerChargeBranchCountingUnit == "0" and req.aggregatorHandlerCountingUnit == "1"'>
+                    , DEALER_NUMBER                                             <!-- 扱者コード -->
+                    , CUSTOMER_ATTRIBUTE                                        <!-- 取引コース -->
+                    , MAX(CUSTOMER_ATTRIBUTE_NAME) AS COURSE                    <!-- 取引コース名 -->
+                </if>
+
+                <!-- その他1～その他6は、SQL007, 008のみ取得 -->
+                <if test='req.pattern == "7" or req.pattern == "8"'>
+                    , SUM(NVL(REWARD_EXTRA_1, 0)) AS OTHER1                     <!-- その他1 -->
+                    , SUM(NVL(REWARD_EXTRA_2, 0)) AS OTHER2                     <!-- その他2 -->
+                    , SUM(NVL(REWARD_EXTRA_3, 0)) AS OTHER3                     <!-- その他3 -->
+                    , SUM(NVL(REWARD_EXTRA_4, 0)) AS OTHER4                     <!-- その他4 -->
+                    , SUM(NVL(REWARD_EXTRA_5, 0)) AS OTHER5                     <!-- その他5 -->
+                    , SUM(NVL(REWARD_EXTRA_6, 0)) AS OTHER6                     <!-- その他6 -->
+                </if>
+
+                <!-- 消費税～支払報酬額は、SQL007のみ取得 -->
+                <if test='req.pattern == "7"'>
+                    , SUM(NVL(EXCISE_TAX, 0)) AS CONSUMPTION_TAX                <!-- 消費税 -->
+                    , SUM(NVL(TOTAL, 0)) AS PAYMENT_FEE_AMOUNT                  <!-- 支払報酬額 -->
+                </if>
+
+                , SUM(NVL(INTERNAL_KABU, 0)) AS DOMESTIC_STOCK_SPOT             <!-- 国内株式 現物-->
+                , SUM(NVL(FEE_2, 0)) AS DOMESTIC_STOCK_MARGIN                   <!-- 国内株式 信用-->
+                , SUM(NVL(FEE_3, 0)) AS DOMESTIC_STOCK_IPO_PO                   <!-- 国内株式 IPO・PO-->
+                , SUM(NVL(INTERNAL_CB, 0)) AS DOMESTIC_CB                       <!-- 国内株式 CB -->
+                , SUM(NVL(INTERNAL_TOUSHIN, 0)) AS DOMESTIC_MUTUAL_FUND_SALES   <!-- 国内投信 販売 -->
+                , SUM(NVL(INTERNAL_TOUSHIN_SHINTAKU, 0))
+                        AS DOMESTIC_MUTUAL_FUND_TRUST_FEE                       <!-- 国内投信 信報 -->
+                , SUM(NVL(FOREIGN_TOUSHIN, 0)) AS FOREIGN_MUTUAL_FUND_SALES     <!-- 外国投信 販売 -->
+                , SUM(NVL(FOREIGN_TOUSHIN_SHINTAKU, 0))
+                        AS FOREIGN_MUTUAL_FUND_TRUST_FEE                        <!-- 外国投信 信報 -->
+                , SUM(NVL(FOREIGN_TOUSHIN_SHINTAKU_SHIBO, 0))
+                        AS FOREIGN_MUTUAL_FUND_OTHER_TRUST_FEE                  <!-- 外国投信 信報(その他) -->
+                , SUM(NVL(SAKIMONOOP, 0)) AS FUTURES_OPTIONS                    <!-- 先物 OP -->
+                , SUM(NVL(INTERNAL_SAIKEN, 0)) AS DOMESTIC_BOND                 <!-- 国内債券 -->
+                , SUM(NVL(FOREIGN_SAIKEN_ENKA, 0)) AS JPY_FOREIGN_BOND          <!-- 外国債券(円建) -->
+                , SUM(NVL(FOREIGN_SAIKEN_ENCHI, 0)) AS FOREIGN_BOND             <!-- 外国債券(外貨建) -->
+                , SUM(NVL(FOREIGN_KABU_ENKETU, 0)) AS FOREIGN_STOCK             <!-- 外国株式 -->
+                , SUM(NVL(GAI_MMF_SHINTAKU, 0)) AS FOREIGN_MMF_TRUST_FEE        <!-- 外貨建MMF -->
+                , SUM(NVL(KAWASE_TORI, 0)) AS FX_TRADE                          <!-- 為替取引 -->
+                , SUM(NVL(AMERICAN_STOCK_CREDIT,0))AS AMERICA_STOCK_MARGIN      <!-- 米株信用 -->
+                , SUM(NVL(ST, 0)) AS ST                                         <!-- ST -->
+                , SUM(NVL(ST_SINTAKU, 0)) AS ST_SINTAKU                         <!-- ST信報 -->
+                , SUM(NVL(SBI_RAP_01, 0)) AS SBI_RAP_01             <!-- SBIラップ管理報酬(ネット) -->
+                , SUM(NVL(SBI_RAP_02, 0)) AS SBI_RAP_02           <!-- SBIラップ管理報酬(店頭) -->
+                , SUM(NVL(SBI_RAP_03, 0)) AS SBI_RAP_03          <!-- SBIラップ管理報酬(匠) -->
+                , SUM(NVL(SBI_RAP_04, 0)) AS SBI_RAP_04      <!-- SBIラップ管理報酬(x投資) -->
+                , SUM(NVL(SBI_RAP_05, 0)) AS SBI_RAP_05                  <!-- SBIラップコース05 -->
+                , SUM(NVL(SBI_RAP_06, 0)) AS SBI_RAP_06                  <!-- SBIラップコース06 -->
+                , SUM(NVL(SBI_RAP_07, 0)) AS SBI_RAP_07                  <!-- SBIラップコース07 -->
+                , SUM(NVL(SBI_RAP_08, 0)) AS SBI_RAP_08                  <!-- SBIラップコース08 -->
+                , SUM(NVL(SBI_RAP_09, 0)) AS SBI_RAP_09                  <!-- SBIラップコース09 -->
+                , SUM(NVL(SBI_RAP_10, 0)) AS SBI_RAP_10                  <!-- SBIラップコース10 -->
+                , SUM(NVL(SBI_RAP_11, 0)) AS SBI_RAP_11                  <!-- SBIラップコース11 -->
+                , SUM(NVL(SBI_RAP_12, 0)) AS SBI_RAP_12                  <!-- SBIラップコース12 -->
+                , SUM(NVL(SBI_RAP_13, 0)) AS SBI_RAP_13                  <!-- SBIラップコース13 -->
+                , SUM(NVL(SBI_RAP_14, 0)) AS SBI_RAP_14                  <!-- SBIラップコース14 -->
+                , SUM(NVL(SBI_RAP_15, 0)) AS SBI_RAP_15                  <!-- SBIラップコース15 -->
+                , SUM(NVL(SBI_RAP_16, 0)) AS SBI_RAP_16                  <!-- SBIラップコース16 -->
+                , SUM(NVL(SBI_RAP_17, 0)) AS SBI_RAP_17                  <!-- SBIラップコース17 -->
+
+                <!-- 手数料合計は、表示内容が手数料の場合のみ取得 -->
+                <if test='req.displayContent == "0"'>
+                    , SUM(NVL(FEE, 0)) AS COMM_TOTAL                            <!-- 手数料合計 -->
+                </if>
+
+                <!-- 予備～合計は、表示内容が報酬の場合のみ取得 -->
+                <if test='req.displayContent == "1"'>
+                    , SUM(NVL(REWARD_37, 0)) AS REWARD_37                       <!-- 予備 -->
+                    , SUM(NVL(REWARD_38, 0)) AS REWARD_38                       <!-- 予備 -->
+                    , SUM(NVL(REWARD_39, 0)) AS REWARD_39                       <!-- 予備 -->
+                    , SUM(NVL(REWARD_40, 0)) AS REWARD_40                       <!-- 予備 -->
+                    , SUM(NVL(RAP_MILEAGE, 0)) AS MUTUAL_FUND_SBI_WRAP_MILEAGE  <!-- 投信(SBIラップ)マイレージ  -->      
+                    , SUM(NVL(MILEAGE, 0)) AS MUTUAL_FUND_MILEAGE               <!-- 投信マイレージ -->
+                    , SUM(NVL(STOCK_POINT, 0)) AS SPOT_STOCK_POINT              <!-- 現株ポイント -->
+                    , SUM(NVL(REWARD_SUBTOTAL, 0)) AS REWARD_SUBTOTAL           <!-- 小計 -->
+                    , SUM(NVL(REWARD_TOTAL, 0)) AS TOTAL                        <!-- 合計 -->
+                </if>
+
+                FROM (
+                    SELECT
+                        COMM_FEE.BROKER_CODE
+                        , COMM_FEE.BROKER_NAME
+
+                        <!-- 営業員コード～営業員名は、営業員毎の集計時のみ取得 -->
+                        <if test='req.brokerChargeBranchCountingUnit == "1"'>
+                            , COMM_FEE.BROKER_CHARGE_CODE
+                            , COMM_FEE.BROKER_CHARGE_NAME
+                        </if>
+
+                        <!-- 扱者コード～取引コース名は、仲介業者毎かつ扱者毎の集計時のみ取得 -->
+                        , COMM_FEE.DEALER_NUMBER
+                        , COMM_FEE.CUSTOMER_ATTRIBUTE
+                        , COMM_FEE.CUSTOMER_ATTRIBUTE_NAME
+
+                        <!-- その他1～その他6は、SQL007, 008のみ取得 -->
+                        <if test='req.pattern == "7" or req.pattern == "8"'>
+                            , NVL(REWARD_EXTRA_1, 0) AS REWARD_EXTRA_1
+                            , NVL(REWARD_EXTRA_2, 0) AS REWARD_EXTRA_2
+                            , NVL(REWARD_EXTRA_3, 0) AS REWARD_EXTRA_3
+                            , NVL(REWARD_EXTRA_4, 0) AS REWARD_EXTRA_4
+                            , NVL(REWARD_EXTRA_5, 0) AS REWARD_EXTRA_5
+                            , NVL(REWARD_EXTRA_6, 0) AS REWARD_EXTRA_6
+                        </if>
+
+                        <!-- 消費税～支払報酬額は、SQL007のみ取得 -->
+                        <if test='req.pattern == "7"'>
+                            , NVL(EXCISE_TAX, 0) AS EXCISE_TAX
+                            , NVL(PAY, 0) AS TOTAL
+                        </if>
+
+                        <!-- 表示内容が手数料の場合 -->
+                        <if test='req.displayContent == "0"'>
+                            <!-- 日次の場合  -->
+                            <if test='req.dailyMonthlyCountingUnit == "0"'>
+                                ,TO_CHAR(TO_DATE(COMM_FEE.SUM_DATE_YMD, 'YYYYMMDD'), 'YYYY/MM/DD') AS CALC_DATE
+                            </if>
+                            <!-- 月次の場合 -->
+                            <if test='req.dailyMonthlyCountingUnit == "1"'>
+                                ,TO_CHAR(TO_DATE(COMM_FEE.SUM_DATE_YM, 'YYYYMM'), 'YYYY/MM') AS CALC_DATE
+                            </if>
+                            , NVL(COMM_FEE.FEE_1, 0) AS INTERNAL_KABU
+                            , NVL(COMM_FEE.FEE_2, 0) AS FEE_2
+                            , NVL(COMM_FEE.FEE_3, 0) AS FEE_3
+                            , NVL(COMM_FEE.FEE_4, 0) AS INTERNAL_CB
+                            , NVL(COMM_FEE.FEE_5, 0) AS INTERNAL_TOUSHIN
+                            , NVL(COMM_FEE.FEE_6, 0) AS INTERNAL_TOUSHIN_SHINTAKU
+                            , NVL(COMM_FEE.FEE_7, 0) AS FOREIGN_TOUSHIN
+                            , NVL(COMM_FEE.FEE_8, 0) AS FOREIGN_TOUSHIN_SHINTAKU
+                            , NVL(COMM_FEE.FEE_9, 0) AS FOREIGN_TOUSHIN_SHINTAKU_SHIBO
+                            , NVL(COMM_FEE.FEE_10, 0) AS SAKIMONOOP
+                            , NVL(COMM_FEE.FEE_11, 0) AS INTERNAL_SAIKEN
+                            , NVL(COMM_FEE.FEE_12, 0) AS FOREIGN_SAIKEN_ENKA
+                            , NVL(COMM_FEE.FEE_13, 0) AS FOREIGN_SAIKEN_ENCHI
+                            , NVL(COMM_FEE.FEE_14, 0) AS FOREIGN_KABU_ENKETU
+                            , NVL(COMM_FEE.FEE_15, 0) AS GAI_MMF_SHINTAKU
+                            , NVL(COMM_FEE.FEE_16, 0) AS KAWASE_TORI
+                            , NVL(COMM_FEE.FEE_17, 0) AS AMERICAN_STOCK_CREDIT
+                            , NVL(COMM_FEE.FEE_18, 0) AS ST
+                            , NVL(COMM_FEE.FEE_19, 0) AS SBI_RAP_01
+                            , NVL(COMM_FEE.FEE_20, 0) AS SBI_RAP_02
+                            , NVL(COMM_FEE.FEE_21, 0) AS SBI_RAP_03
+                            , NVL(COMM_FEE.FEE_22, 0) AS SBI_RAP_04
+                            , NVL(COMM_FEE.FEE_23, 0) AS SBI_RAP_05
+                            , NVL(COMM_FEE.FEE_24, 0) AS SBI_RAP_06
+                            , NVL(COMM_FEE.FEE_25, 0) AS SBI_RAP_07
+                            , NVL(COMM_FEE.FEE_26, 0) AS SBI_RAP_08
+                            , NVL(COMM_FEE.FEE_27, 0) AS SBI_RAP_09
+                            , NVL(COMM_FEE.FEE_28, 0) AS SBI_RAP_10
+                            , NVL(COMM_FEE.FEE_29, 0) AS SBI_RAP_11
+                            , NVL(COMM_FEE.FEE_30, 0) AS SBI_RAP_12
+                            , NVL(COMM_FEE.FEE_31, 0) AS SBI_RAP_13
+                            , NVL(COMM_FEE.FEE_32, 0) AS SBI_RAP_14
+                            , NVL(COMM_FEE.FEE_33, 0) AS SBI_RAP_15
+                            , NVL(COMM_FEE.FEE_34, 0) AS SBI_RAP_16
+                            , NVL(COMM_FEE.FEE_35, 0) AS SBI_RAP_17
+                            , NVL(COMM_FEE.FEE_36, 0) AS ST_SINTAKU
+                            , NVL(COMM_FEE.FEE_37, 0) AS REWARD_37
+                            , NVL(COMM_FEE.FEE_38, 0) AS REWARD_38
+                            , NVL(COMM_FEE.FEE_39, 0) AS REWARD_39
+                            , NVL(COMM_FEE.FEE_40, 0) AS REWARD_40
+                            , NVL(COMM_FEE.FEE_TOTAL, 0) AS FEE
+                        </if>
+
+                        <!-- 表示内容が報酬の場合 -->
+                        <if test='req.displayContent == "1"'>
+                            , TO_CHAR(TO_DATE(COMM_FEE.SUM_DATE_YM, 'YYYYMM'), 'YYYY/MM') AS CALC_DATE
+                            , NVL(COMM_FEE.REWARD_1, 0) AS INTERNAL_KABU
+                            , NVL(COMM_FEE.REWARD_2, 0) AS FEE_2
+                            , NVL(COMM_FEE.REWARD_3, 0) AS FEE_3
+                            , NVL(COMM_FEE.REWARD_4, 0) AS INTERNAL_CB
+                            , NVL(COMM_FEE.REWARD_5, 0) AS INTERNAL_TOUSHIN
+                            , NVL(COMM_FEE.REWARD_6, 0) AS INTERNAL_TOUSHIN_SHINTAKU
+                            , NVL(COMM_FEE.REWARD_7, 0) AS FOREIGN_TOUSHIN
+                            , NVL(COMM_FEE.REWARD_8, 0) AS FOREIGN_TOUSHIN_SHINTAKU
+                            , NVL(COMM_FEE.REWARD_9, 0) AS FOREIGN_TOUSHIN_SHINTAKU_SHIBO
+                            , NVL(COMM_FEE.REWARD_10, 0) AS SAKIMONOOP
+                            , NVL(COMM_FEE.REWARD_11, 0) AS INTERNAL_SAIKEN
+                            , NVL(COMM_FEE.REWARD_12, 0) AS FOREIGN_SAIKEN_ENKA
+                            , NVL(COMM_FEE.REWARD_13, 0) AS FOREIGN_SAIKEN_ENCHI
+                            , NVL(COMM_FEE.REWARD_14, 0) AS FOREIGN_KABU_ENKETU
+                            , NVL(COMM_FEE.REWARD_15, 0) AS GAI_MMF_SHINTAKU
+                            , NVL(COMM_FEE.REWARD_16, 0) AS KAWASE_TORI
+                            , NVL(COMM_FEE.REWARD_17, 0) AS AMERICAN_STOCK_CREDIT
+                            , NVL(COMM_FEE.REWARD_18, 0) AS ST
+                            , NVL(COMM_FEE.REWARD_19, 0) AS SBI_RAP_01
+                            , NVL(COMM_FEE.REWARD_20, 0) AS SBI_RAP_02
+                            , NVL(COMM_FEE.REWARD_21, 0) AS SBI_RAP_03
+                            , NVL(COMM_FEE.REWARD_22, 0) AS SBI_RAP_04
+                            , NVL(COMM_FEE.REWARD_23, 0) AS SBI_RAP_05
+                            , NVL(COMM_FEE.REWARD_24, 0) AS SBI_RAP_06
+                            , NVL(COMM_FEE.REWARD_25, 0) AS SBI_RAP_07
+                            , NVL(COMM_FEE.REWARD_26, 0) AS SBI_RAP_08
+                            , NVL(COMM_FEE.REWARD_27, 0) AS SBI_RAP_09
+                            , NVL(COMM_FEE.REWARD_28, 0) AS SBI_RAP_10
+                            , NVL(COMM_FEE.REWARD_29, 0) AS SBI_RAP_11
+                            , NVL(COMM_FEE.REWARD_30, 0) AS SBI_RAP_12
+                            , NVL(COMM_FEE.REWARD_31, 0) AS SBI_RAP_13
+                            , NVL(COMM_FEE.REWARD_32, 0) AS SBI_RAP_14
+                            , NVL(COMM_FEE.REWARD_33, 0) AS SBI_RAP_15
+                            , NVL(COMM_FEE.REWARD_34, 0) AS SBI_RAP_16
+                            , NVL(COMM_FEE.REWARD_35, 0) AS SBI_RAP_17
+                            , NVL(COMM_FEE.REWARD_36, 0) AS ST_SINTAKU
+                            , NVL(COMM_FEE.REWARD_37, 0) AS REWARD_37
+                            , NVL(COMM_FEE.REWARD_38, 0) AS REWARD_38
+                            , NVL(COMM_FEE.REWARD_39, 0) AS REWARD_39
+                            , NVL(COMM_FEE.REWARD_40, 0) AS REWARD_40
+                            , NVL(COMM_FEE.RAP_MILEAGE,0) AS RAP_MILEAGE
+                            , NVL(COMM_FEE.MILEAGE,0) AS MILEAGE
+                            , NVL(COMM_FEE.STOCK_POINT,0) AS STOCK_POINT
+                            <!-- SQL009, 012 -->
+                            <if test='req.pattern == "9" or req.pattern == "12"'>
+                                , 0 AS REWARD_SUBTOTAL
+                                , NVL(COMM_FEE.REWARD_SUBTOTAL,0) AS REWARD_TOTAL
+                            </if>
+                            <if test='req.pattern != "9" and req.pattern != "12"'>
+                                , NVL(COMM_FEE.REWARD_SUBTOTAL,0) AS REWARD_SUBTOTAL
+                                , NVL(COMM_FEE.REWARD_TOTAL,0) AS REWARD_TOTAL
+                            </if>
+                        </if>
+
+                        <!-- 仲介業支店コード～仲介業支店名は、営業員毎/支店毎の集計時のみ取得 -->
+                        <if test='req.brokerChargeBranchCountingUnit == "1" or req.brokerChargeBranchCountingUnit == "2"'>
+                            , COMM_FEE.BROKER_BRANCH_CODE
+                            , COMM_FEE.BROKER_BRANCH_NAME
+                        </if>
+
+                        <!-- SQL001, 002 -->
+                        <if test='req.pattern == "1" or req.pattern == "2"'>
+                            FROM
+                                V_FEE_DAY COMM_FEE
+                        </if>
+
+                        <!-- SQL003, 010 -->
+                        <if test='req.pattern == "3" or req.pattern == "10"'>
+                            FROM (
+                                SELECT
+                                    FEE.*,
+                                    MB.BRANCH_NAME AS BROKER_BRANCH_NAME
+                                FROM
+                                    V_FEE_DAY FEE
+                                LEFT OUTER JOIN
+                                    MEDIATE_BRANCH MB
+                                ON
+                                    FEE.BROKER_CODE = MB.BROKER_CODE
+                                    AND FEE.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                            ) COMM_FEE
+                        </if>
+
+                        <!-- SQL004, 005 -->
+                        <if test='req.pattern == "4" or req.pattern == "5"'>
+                            FROM
+                                V_FEE_MONTH COMM_FEE
+                        </if>
+
+                        <!-- SQL006, 011 -->
+                        <if test='req.pattern == "6" or req.pattern == "11"'>
+                            FROM (
+                                SELECT
+                                    FEE.*,
+                                    MB.BRANCH_NAME AS BROKER_BRANCH_NAME
+                                FROM
+                                    V_FEE_MONTH FEE
+                                LEFT OUTER JOIN
+                                    MEDIATE_BRANCH MB
+                                ON
+                                    FEE.BROKER_CODE = MB.BROKER_CODE
+                                    AND FEE.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                            ) COMM_FEE
+                        </if>
+
+                        <!-- SQL007, 008 -->
+                        <if test='req.pattern == "7" or req.pattern == "8"'>
+                            FROM V_REWARD COMM_FEE
+                        </if>
+
+                        <!-- SQL009, 012 -->
+                        <if test='req.pattern == "9" or req.pattern == "12"'>
+                            FROM (
+                                SELECT
+                                    REWARD.*,
+                                    MB.BRANCH_NAME AS BROKER_BRANCH_NAME
+                                FROM
+                                    V_REWARD REWARD
+                                LEFT OUTER JOIN
+                                    MEDIATE_BRANCH MB
+                                ON
+                                    REWARD.BROKER_CODE = MB.BROKER_CODE
+                                    AND REWARD.BROKER_BRANCH_CODE = MB.BROKER_BRANCH_CODE
+                            ) COMM_FEE
+                        </if>
+
+                        WHERE
+                            1=1
+                            <!-- 日次の場合 -->
+                            <if test='req.dailyMonthlyCountingUnit == "0"'>
+                                AND #{req.periodFrom} 
+                                        &lt;= TO_CHAR(TO_DATE(COMM_FEE.SUM_DATE_YMD, 'YYYYMMDD'), 'YYYY/MM/DD')
+                                AND TO_CHAR(TO_DATE(COMM_FEE.SUM_DATE_YMD, 'YYYYMMDD'), 'YYYY/MM/DD')
+                                        &lt;= #{req.periodTo}
+                            </if>
+                            <!-- 月次の場合 -->
+                            <if test='req.dailyMonthlyCountingUnit == "1"'>
+                                AND #{req.periodFrom} 
+                                        &lt;= TO_CHAR(TO_DATE(COMM_FEE.SUM_DATE_YM, 'YYYYMM'), 'YYYY/MM')
+                                AND TO_CHAR(TO_DATE(COMM_FEE.SUM_DATE_YM, 'YYYYMM'), 'YYYY/MM')
+                                        &lt;= #{req.periodTo}
+                            </if>
+
+                            <!-- 仲介業者コード以外で集計 かつ 支店コードに入力値がある-->
+                            <if test='req.brokerChargeBranchCountingUnit != "0" and req.branchCode != null and req.branchCode != ""'>
+                                AND  COMM_FEE.BROKER_BRANCH_CODE = #{req.branchCode}
+                            </if>
+
+                            <!-- 営業員毎の集計 かつ 営業員コードに入力値がある-->
+                            <if test='req.brokerChargeBranchCountingUnit == "1" and req.empCode != null and req.empCode != ""'>
+                                AND COMM_FEE.BROKER_CHARGE_CODE = #{req.empCode}
+                            </if>
+
+                            <!-- 仲介業者コードに入力値がある かつ 仲介業者除外=falseの場合 -->
+                            <if test='req.brokerCodeArray != null and !req.brokerCodeArray.isEmpty() and req.chkBrokerCodeExclude == "0"'>
+                                AND COMM_FEE.BROKER_CODE IN
+                                <foreach item="brokerCode" collection="req.brokerCodeArray" open="(" separator="," close=")">
+                                    #{brokerCode}
+                                </foreach>
+                            </if>
+
+                            <!-- 仲介業者コードに入力値がある かつ 仲介業者除外=trueの場合 -->
+                            <if test='req.brokerCodeArray != null and !req.brokerCodeArray.isEmpty() and req.chkBrokerCodeExclude == "1"'>
+                                AND COMM_FEE.BROKER_CODE NOT IN
+                                <foreach item="brokerCode" collection="req.brokerCodeArray" open="(" separator="," close=")">
+                                    #{brokerCode}
+                                </foreach>
+                            </if>
+
+                            <!-- ユーザ共通情報.権限コード != '1':SBI証券本店の場合 -->
+                            <if test='req.privId != "1"'>
+                                <choose>
+                                    <!--
+                                        SQL007, SQL008
+                                        かつ、ユーザ共通情報.権限コードが
+                                            '2':SBI証券支店
+
+                                        または、ユーザ共通情報.権限コードが
+                                            '3':仲介業者 - 内部管理責任者
+                                            '4':仲介業者 - 営業責任者
+                                            '5':仲介業者 - 外務員
+                                        の場合
+                                    -->
+                                    <when test='((req.pattern == "7" or req.pattern == "8") and req.privId == "2") or req.privId == "3" or req.privId == "4" or req.privId == "5"'>
+                                        AND (COMM_FEE.BROKER_CODE IN
+                                        <foreach item="brokerCharge" collection="req.brokerChargeList" index="index" open="(" separator="" close=")">
+                                            <if test="index % 1000 == 0 and index != 0">
+                                                ) OR COMM_FEE.BROKER_CODE IN (
+                                            </if>
+                                            <if test="index % 1000 != 0">
+                                                ,
+                                            </if>
+                                            #{brokerCharge.brokerCode}
+                                        </foreach>
+                                        )
+                                    </when>
+
+                                    <!--
+                                        SQL007, SQL008
+                                        かつ、ユーザ共通情報.権限コード
+                                            '2':SBI証券支店
+                                        ではない
+                               
+
+                                        または、ユーザ共通情報.権限コードが下記のいずれでもない
+                                            '3':仲介業者 - 内部管理責任者
+                                            '4':仲介業者 - 営業責任者
+                                            '5':仲介業者 - 外務員
+                                        場合
+                                    -->
+                                    <otherwise>
+                                        AND ((COMM_FEE.BROKER_CODE, COMM_FEE.BROKER_CHARGE_CODE) IN
+                                        <foreach item="brokerCharge" collection="req.brokerChargeList" index="index" open="(" separator="" close=")">
+                                            <if test="index % 1000 == 0 and index != 0">
+                                                ) OR (COMM_FEE.BROKER_CODE, COMM_FEE.BROKER_CHARGE_CODE) IN (
+                                            </if>
+                                            <if test="index % 1000 != 0">
+                                                ,
+                                            </if>
+                                            (#{brokerCharge.brokerCode}, #{brokerCharge.empCode})
+                                        </foreach>
+                                        )
+                                    </otherwise>
+                                </choose>
+                            </if>
+                )
+
+                GROUP BY
+                    <!-- 仲介業者毎 集計の場合 -->
+                    <if test='req.brokerChargeBranchCountingUnit == "0" and req.aggregatorHandlerCountingUnit == "0"'>
+                        CALC_DATE
+                        , BROKER_CODE
+                    </if>
+                    
+                    <!-- 仲介業者毎 扱者の場合 -->
+                    <if test='req.brokerChargeBranchCountingUnit == "0" and req.aggregatorHandlerCountingUnit == "1"'>
+                        CALC_DATE
+                        , BROKER_CODE
+                        , DEALER_NUMBER
+                        , CUSTOMER_ATTRIBUTE
+                    </if>
+
+                    <!-- 営業員毎の場合 -->
+                    <if test='req.brokerChargeBranchCountingUnit == "1"'>
+                        CALC_DATE
+                        , BROKER_CODE
+                        , BROKER_CHARGE_CODE
+                    </if>
+
+                    <!-- 支店毎の場合 -->
+                    <if test='req.brokerChargeBranchCountingUnit == "2"'>
+                        CALC_DATE
+                        , BROKER_CODE
+                        , BROKER_BRANCH_CODE
+                    </if>
+
+                ORDER BY
+                    <!-- 支店毎 -->
+                    <if test='req.brokerChargeBranchCountingUnit == "2"'>
+                        CALC_DATE DESC
+                        ,BROKER_CODE
+                        ,BROKER_BRANCH_CODE
+                    </if>
+
+                    <!-- 支店毎以外 -->
+                    <if test='req.brokerChargeBranchCountingUnit != "2"'>
+                        CALC_DATE DESC
+                        ,BROKER_CODE
+                    </if>
+        )
+
+        WHERE
+            ROWNUM &lt;= #{req.maxRowNum}
+
+    </select>
+    
+    <!--
+        SQLID：Sql015
+        SQL名：SBIラップ管理報酬サービス表示制御情報取得
+        SQLタイプ：select
+    -->
+    <select
+        id="selectIfaCommFeeSql015"
+        resultMap="ResultMapIfaCommFeeSql015"
+        statementType="PREPARED"
+    >
+        SELECT /* @SQLID=SUB020502-01#Sql015 */
+            SERVICE_NAME,                                                       <!-- サービス名 -->
+            SERVICE_NO,                                                         <!-- サービスNo -->
+            DISPLAY_CONTROL_FLAG,                                               <!-- 表示制御フラグ -->
+            'sbiRap' || SERVICE_NO AS ITEM_NAME                                 <!-- アイテム名 -->
+        FROM (
+            SELECT
+                DISTINCT MC1.NAME AS SERVICE_NAME,                                       <!-- サービス名 -->
+                MC1.CODE_1 AS SERVICE_NO,                                       <!-- サービスNo -->
+                NVL2(MC2.CODE_2, 0, 1) AS DISPLAY_CONTROL_FLAG                  <!-- 表示制御フラグ -->
+            FROM
+                M_CODE MC1                                                      <!-- コードマスタ -->
+
+            LEFT OUTER JOIN
+                M_CODE MC2                                                      <!-- コードマスタ -->
+            ON
+                MC1.CODE_1 = MC2.CODE_2                                         <!-- MC1.コード1 = MC2.コード2 -->
+                AND MC2.CODE_TYPE = '48'                                        <!-- MC2.種別 = SBIラップ管理手数料発注経路 -->
+                <if test='req.brokerCode != null'>
+                    AND MC2.CODE_1 = #{req.brokerCode}                          <!-- MC2.コード１ = ユーザ共通情報.仲介業者コード -->
+                </if>
+                AND IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+                    BETWEEN MC2.START_DATE AND MC2.END_DATE                     <!-- 適用開始日 <= システム日付 <= 適用終了日-->
+
+            WHERE
+                MC1.CODE_TYPE = '49'                                            <!-- MC1.種別 = SBIラップ管理報酬 -->
+                AND MC1.CODE_2 = '03'                                           <!-- MC1.コード2 = 表示名 -->
+                AND IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD')
+                    BETWEEN MC1.START_DATE AND MC1.END_DATE                     <!-- 適用開始日 <= システム日付 <= 適用終了日-->
+        )
+        ORDER BY
+            SERVICE_NO                                                          <!-- サービスNo 昇順 -->
+    </select>
+
+</mapper>

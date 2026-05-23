@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB020302_0302-01
+    画面名：信用建玉一覧（国内）
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.mapper.IfaMarginPositionListDomesticMapperMariaDB">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaMarginPositionListDomesticSql002" type="com.sbisec.helios.ap.brokerageMenu.wholeCustomer.dao.model.IfaMarginPositionListDomesticSql002ResponseModel" >
+    </resultMap>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaMarginPositionListDomesticSql002" resultMap="ResultMapIfaMarginPositionListDomesticSql002" statementType="PREPARED">
+        SELECT /* @SQLID=SUB020302_0302-01#Sql002 */ 
+        	LOCALCODE SECURITY_CODE
+        	, ISIN ISIN_CODE
+			, NAME SHORT_BRAND
+			, NAME_EN SHORT_BRAND_ENGLISH
+			, FULLNAME BRAND_NAME
+			, FULLNAME_EN BRAND_NAME_ENGLISH
+			, FULLNAME_KANA BRAND_NAME_KANA
+			, SHARECLS STOCK_TYPE
+			, FUNDCLS MUTUAL_FUND
+			, INDCODE COUNCIL_INUSTRY_CODE
+			, PREEXCODE MAIN_EXCHANGE_CODE
+			, PREEXCODESBI SBI_MAIN_EXCHANGE_CODE
+			, SHAREUNIT  UNIT_STOCK
+        FROM 
+        	stock_master
+        <where>
+        <if test="req.sqlSyori == '1'.toString()">
+        	LOCALCODE = #{req.reqBrandCode}
+        </if>
+        <if test="req.sqlSyori == '2'.toString()">
+        	LOCALCODE = #{req.brandCode}
+        </if>
+        </where> 
+    </select>
+    
+</mapper>

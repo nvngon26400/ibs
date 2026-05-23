@@ -1,0 +1,21 @@
+package com.sbisec.helios.gw.suggestionBox.form;
+
+import javax.validation.constraints.NotEmpty;
+import lombok.Data;
+
+
+/**
+ * 画面ID：SUB0511_01-02
+ * 画面名：仲介業者からの要望詳細
+ *
+ * @author SCSK山岸
+ 2025/07/25 新規作成
+ */
+@Data
+public class IfaSuggestionBoxPersonalDetailFromBrokerA002aApiRequest {
+
+    /** 添付ファイル */
+    @NotEmpty(message = "添付ファイル")
+    private String attachFile;
+
+}

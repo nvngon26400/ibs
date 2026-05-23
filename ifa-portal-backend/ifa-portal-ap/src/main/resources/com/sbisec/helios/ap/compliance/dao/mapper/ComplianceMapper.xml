@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.compliance.dao.mapper.ComplianceMapper">
+    
+    <resultMap type="com.sbisec.helios.ap.compliance.model.GetIdAndDirectoryModel" id="ResultSetGetIdAndDirectory"/>
+
+    <select id="GetIdAndDirectory" resultMap="ResultSetGetIdAndDirectory" statementType="PREPARED">
+        select
+            /* @SQLID=SUB0302_01#SQL001 */ 
+            /* @SQLID=SUB0505_01-03_1#SQL003 */
+            /* @SQLID=SUB0505_01-04_1#SQL003 */
+            *
+        from 
+            TB_MED_TEMP_FILE_DIR
+        where
+            FUNC_ID = #{FUNC_ID}
+            AND CAT_ID = #{CAT_ID}
+    </select>
+    
+    <resultMap type="com.sbibits.earth.model.RowCount" id="RowCount" />
+
+    <select id="countMissedComplianceForPreviousMonths" resultMap="RowCount" statementType="PREPARED">
+        -- Check that previous months from the last REMINDER_COMPLIANCE_START_YM　to last month has been confirmed.
+        SELECT /* @SQLID=SUB0302_01#SQL008 */
+           COUNT(1) AS row_count
+        FROM(
+            SELECT 
+                COM.COR_LEC_ID,
+                NVL(TO_CHAR(CON.COR_LEC_ID), 'A') AS UNREAD
+            FROM 
+                COR_COMPLIANCE_COMMUNICATION COM
+            LEFT JOIN 
+                COR_COMPLIANCE_CONFIRMATION CON
+            ON 
+                CON.COR_LEC_ID = COM.COR_LEC_ID
+                AND CON.COR_USER_ID = #{userId}
+                AND CON.COR_CONFIRMATION_FLG = '1'
+            LEFT JOIN          
+                COR_BROWSE_CONTROL_BULK BUL
+		    ON
+		        BUL.COR_BROKER_CODE = #{brokerCode}
+		    LEFT JOIN
+		        COR_BROWSE_CONTROL_INDV IND
+		    ON
+		        IND.COR_USER_ID = #{userId}
+            WHERE 
+                COM.COR_HONBAN_FLG = '1'
+                AND COM.COR_COMMUNICATION_DATE &gt;= #{reminderComplianceStartYm}
+                AND COM.COR_COMMUNICATION_DATE &lt; #{currentMonth}
+                AND BUL.COR_BROKER_CODE IS NULL
+                AND IND.COR_USER_ID IS NULL
+        ) CON1
+        WHERE
+            CON1.UNREAD = 'A'
+    </select>
+
+    <select id="countMissedComplianceForTargetMonth" resultMap="RowCount" statementType="PREPARED">
+        -- Check if there is unread compliance letters from target month
+        SELECT /* @SQLID=SUB0302_01#SQL009 */
+            COUNT(1) AS row_count
+        FROM (
+            SELECT
+                COM.COR_LEC_ID,
+                NVL(TO_CHAR(CON.COR_LEC_ID), 'A') AS UNREAD
+            FROM
+                COR_COMPLIANCE_COMMUNICATION COM
+            LEFT JOIN
+                COR_COMPLIANCE_CONFIRMATION CON
+            ON
+                CON.COR_LEC_ID = COM.COR_LEC_ID
+                AND CON.COR_USER_ID = #{userId}
+                AND CON.COR_CONFIRMATION_FLG = '1'
+            LEFT JOIN
+                COR_BROWSE_CONTROL_BULK BUL
+		    ON
+		        BUL.COR_BROKER_CODE = #{brokerCode}
+		    LEFT JOIN
+		        COR_BROWSE_CONTROL_INDV IND
+		    ON
+		        IND.COR_USER_ID = #{userId}
+            WHERE
+                COM.COR_HONBAN_FLG = '1'
+                AND COM.COR_COMMUNICATION_DATE = #{yearMonth}
+                AND BUL.COR_BROKER_CODE IS NULL
+                AND IND.COR_USER_ID IS NULL
+        ) CON1
+        WHERE
+            CON1.UNREAD = 'A'
+    </select>
+
+    <select id="countUnreadSelfcheckLettersForMonth" resultMap="RowCount" statementType="PREPARED">
+        SELECT
+            ( CSCI1.ITEMS - CSC1.READS ) AS row_count
+        FROM (
+            SELECT 
+                CASE COUNT(1)
+                WHEN 0 THEN 0 ELSE 1 END AS ITEMS
+            FROM
+                COR_SELF_CHECK_ITEM CSCI
+            WHERE
+                CSCI.COR_INDICATION_FLG = '1'
+                AND CSCI.COR_ENFORCE_DATE = #{yearMonth}
+        ) CSCI1, (
+            SELECT
+                COUNT(1) AS READS
+            FROM
+                COR_SELF_CHECK CSC
+            WHERE
+                CSC.COR_BROKER_CODE = #{brokerCode}
+                AND CSC.COR_ENFORCE_DATE = #{yearMonth}
+        ) CSC1
+    </select>
+
+    <resultMap type="com.sbisec.helios.ap.compliance.model.getCorComplianceCommunicationObjectModel" id="ResultSetgetCorComplianceCommunicationObject">
+        <result property="corTitle" column="COR_TITLE" typeHandler="StringTypeHandler"/>
+        <result property="corBrief" column="COR_BRIEF" typeHandler="StringTypeHandler"/>
+        <result property="corFileName1" column="COR_FILE_NAME1" typeHandler="StringTypeHandler"/>
+        <result property="corFileName2" column="COR_FILE_NAME2" typeHandler="StringTypeHandler"/>
+        <result property="corFileName3" column="COR_FILE_NAME3" typeHandler="StringTypeHandler"/>
+        <result property="corFileDesc1" column="COR_FILE_DESC1" typeHandler="StringTypeHandler"/>
+        <result property="corFileDesc2" column="COR_FILE_DESC2" typeHandler="StringTypeHandler"/>
+        <result property="corFileDesc3" column="COR_FILE_DESC3" typeHandler="StringTypeHandler"/>
+        <result property="corContents" column="COR_CONTENTS" typeHandler="StringTypeHandler"/>
+        <result property="corCreateBy" column="COR_CREATE_BY" typeHandler="StringTypeHandler"/>
+        <result property="corUpdateBy" column="COR_UPDATE_BY" typeHandler="StringTypeHandler"/>
+        <result property="corContentsFileName" column="COR_CONTENTS_FILE_NAME" typeHandler="StringTypeHandler"/>
+    </resultMap>
+    
+    <select id="getCorComplianceCommunicationObject" resultMap="ResultSetgetCorComplianceCommunicationObject" statementType="PREPARED">
+        <if test="COR_LEC_ID != null and COR_LEC_ID != ''">
+            select
+            	/* @SQLID=SUB0302_01#SQL004 */ 
+            	/* @SQLID=SUB0505_01-04_1#SQL001 */
+                * 
+            from
+                COR_COMPLIANCE_COMMUNICATION
+            where
+                COR_LEC_ID = #{COR_LEC_ID}
+        </if>
+    </select>
+
+    <update id="UpdComplianceContentsFullByLectId" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0505_01-04_1#SQL002 */
+            COR_COMPLIANCE_COMMUNICATION
+        SET
+            COR_COMMUNICATION_DATE = #{COMMUNICATIONDATE},  --  通信年月
+            COR_TITLE = #{TITLE},                           --  タイトル
+            COR_BRIEF = #{BRIEF},                           --  概要
+            COR_FILE_NAME1 = #{FILENAME1},                  --  ファイル１－ファイル名
+            COR_FILE_NAME2 = #{FILENAME2},                  --  ファイル２－ファイル名
+            COR_FILE_NAME3 = #{FILENAME3},                  --  ファイル３－ファイル名
+            COR_FILE_DESC1 = #{FILEDESC1},                  --  ファイル１－(コメント)
+            COR_FILE_DESC2 = #{FILEDESC2},                  --  ファイル２－(コメント)
+            COR_FILE_DESC3 = #{FILEDESC3},                  --  ファイル３－(コメント)
+            COR_CONTENTS = #{CONTENTS},                     --  コンテンツファイル－(コメント)
+            COR_CONTENTS_FILE_NAME = #{CONTENTSFILE},       --  コンテンツファイル－パス
+            COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE,   --  更新日
+            COR_UPDATE_BY = #{USERID}                       --  更新者
+        WHERE
+            COR_LEC_ID = #{LECTUREID}
+    </update>
+  
+    <insert id="insertPrivateInformationDownloadRecord" statementType="PREPARED">
+        INSERT INTO COR_USER_ATTRBUTE_INFO (
+            COR_USER_ID,
+            COR_TS,
+            COR_NAME_FLG,
+            COR_ADDRESS_FLG,
+            COR_TELNO_FLG,
+            COR_OFFICE_FLG,
+            COR_BIRTH_FLG,
+            COR_SEX_FLG,
+            COR_EMPLOYMENT_FLG,
+            COR_OCCUPATION_FLG,
+            COR_BUTEN_ACCOUNT_FLG,
+            COR_EMAIL_FLG,
+            COR_DRAWERSACCOUNT_FLG,
+            COR_DOCUMENT,
+            COR_DATA_COUNT,
+            COR_TRANSACTION_DESC,
+            COR_TRANSFER_CODE,
+            COR_DEPOSIT,
+            COR_DONATION,
+            COR_DEPOSITORY,
+            COR_DEPOSITORY_TERM,
+            COR_DIPOSAL_METHOD,
+            COR_DIPOSAL_FLG,
+            COR_DIPOSAL_DATE,
+            COR_DEPOSIT_OUTLINE,
+            COR_DONATION_OUTLINE,
+            COR_DEPOSITORY_OUTLINE,
+            COR_CREATE_DATE,
+            COR_CREATE_BY,
+            COR_UPDATE_DATE,
+            COR_UPDATE_BY,
+            COR_ID,
+            BROKER_CODE,
+            INITIAL_GET_INFO_USER_NAME,
+            INITIAL_GET_INFO_USER_ID
+        ) VALUES (
+            #{userId},
+            SYSDATE,
+            #{nameFlag},
+            #{addressFlag},
+            #{telnoFlag},
+            #{officeFlag},
+            #{birthFlag},
+            #{sexFlag},
+            #{employmentFlag},
+            #{occupationFlag},
+            #{butenAccountFlag},
+            #{emailFlag},
+            #{drawersAccountFlag},
+            #{document},
+            #{dataCount},
+            #{transactionDesc},
+            #{transferCode},
+            #{deposit},
+            #{donation},
+            #{depository},
+            #{depositoryTerm},
+            #{diposalMethod},
+            #{diposalFlag},
+            #{diposalDate},
+            #{depositOutline},
+            #{donationOutline},
+            #{depositoryOutline},
+            SYSDATE,
+            #{createBy},
+            null,
+            null,
+            SEQ_COR_USER_ATTRBUTE_INFO.NEXTVAL,
+            #{brokerId},
+            #{initialGetInfoUserName},
+            #{userId}
+        )
+    </insert>
+ 
+    <resultMap type="com.sbisec.helios.ap.compliance.model.GetCorComplianceConfirmationObjectModel" id="ResultSetGetCorComplianceConfirmationObject">
+        <result property="corCreateBy" column="COR_CREATE_BY" typeHandler="StringTypeHandler"/>
+        <result property="corUpdateBy" column="COR_UPDATE_BY" typeHandler="StringTypeHandler"/>
+        <result property="corBrowseFlagBul" column="COR_BROWSE_FLAG_BUL" typeHandler="StringTypeHandler"/>
+        <result property="corBrowseFlagInd" column="COR_BROWSE_FLAG_IND" typeHandler="StringTypeHandler"/>
+    </resultMap>
+
+    <select id="GetCorComplianceConfirmationObject" resultMap="ResultSetGetCorComplianceConfirmationObject" statementType="PREPARED">
+        SELECT  /* @SQLID=SUB0302_01#SQL005 */
+            CON.COR_LEC_ID,
+            CON.COR_USER_ID,
+            CON.COR_CONFIRMATION_DATE,
+            CON.COR_CONFIRMATION_FLG,
+            CON.COR_CREATE_DATE,
+            CON.COR_CREATE_BY,
+            CON.COR_UPDATE_DATE,
+            CON.COR_UPDATE_BY,
+            BUL.COR_BROWSE_FLAG AS COR_BROWSE_FLAG_BUL,
+            IND.COR_BROWSE_FLAG AS COR_BROWSE_FLAG_IND
+        FROM 
+            COR_COMPLIANCE_COMMUNICATION COM
+        LEFT JOIN
+            COR_COMPLIANCE_CONFIRMATION CON
+        ON
+            CON.COR_LEC_ID = COM.COR_LEC_ID
+            AND CON.COR_USER_ID = #{COR_USER_ID}
+        LEFT JOIN 
+            COR_BROWSE_CONTROL_BULK BUL
+		ON
+		    BUL.COR_BROKER_CODE = #{brokerCode}
+		LEFT JOIN
+		    COR_BROWSE_CONTROL_INDV IND
+		ON
+		    IND.COR_USER_ID = #{COR_USER_ID}
+		WHERE
+			COM.COR_LEC_ID = #{COR_LEC_ID}
+    </select>
+  
+    <resultMap type="com.sbisec.helios.ap.compliance.model.getCommunicationDateforSelectModel" id="ResultSetgetCommunicationDateforSelect">
+    </resultMap>
+
+    <select id="getCommunicationDateforSelect" resultMap="ResultSetgetCommunicationDateforSelect" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0302_01#SQL003 */
+            COR_LEC_ID,
+            SUBSTR(COR_COMMUNICATION_DATE,1,4) || '年' || SUBSTR(COR_COMMUNICATION_DATE,5,2) || '月' COR_COMMUNICATION_DATE
+        FROM
+            COR_COMPLIANCE_COMMUNICATION
+        WHERE
+            COR_HONBAN_FLG = '1'
+            AND COR_COMMUNICATION_DATE &gt; #{FROMDATE}
+            AND COR_COMMUNICATION_DATE &lt;= #{TODATE}
+        ORDER BY COR_COMMUNICATION_DATE DESC
+    </select>
+  
+    <resultMap type="com.sbisec.helios.ap.compliance.model.GetComplianceLetterListOfMustReadDates" id="ResultSetGetComplianceLetterListOfMustReadDates">
+        <result property="communicationDate" column="COR_COMMUNICATION_DATE" typeHandler="StringTypeHandler"/>
+        <result property="lecId" column="COR_LEC_ID" typeHandler="StringTypeHandler"/>
+        <result property="honbanFlg" column="COR_HONBAN_FLG" typeHandler="StringTypeHandler"/>
+        <result property="confirmationFlg" column="COR_CONFIRMATION_FLG" typeHandler="StringTypeHandler"/>
+        <result property="browseFlg" column="COR_BROWSE_FLAG" typeHandler="StringTypeHandler"/>
+    </resultMap>
+
+    <select id="getComplianceLetterListOfMustReadDates" resultMap="ResultSetGetComplianceLetterListOfMustReadDates" statementType="PREPARED">
+	    SELECT  /* @SQLID=SUB0302_01#SQL002 */
+	        COM.COR_COMMUNICATION_DATE,
+	        COM.COR_LEC_ID,
+	        COM.COR_HONBAN_FLG,
+	        CON.COR_CONFIRMATION_FLG,
+	        IND.COR_BROWSE_FLAG
+	    FROM
+	        COR_COMPLIANCE_COMMUNICATION COM
+	    LEFT JOIN
+	        COR_COMPLIANCE_CONFIRMATION CON
+	    ON
+	        CON.COR_LEC_ID = COM.COR_LEC_ID
+	        AND CON.COR_USER_ID = #{userId}
+	        AND CON.COR_CONFIRMATION_FLG = '1'
+	    LEFT JOIN
+	        COR_BROWSE_CONTROL_BULK BUL
+	    ON
+	        BUL.COR_BROKER_CODE = #{brokerCode}
+	    LEFT JOIN
+	        COR_BROWSE_CONTROL_INDV IND
+	    ON
+	        IND.COR_USER_ID = #{userId}
+	    WHERE
+	        COM.COR_HONBAN_FLG = '1'
+	        AND COM.COR_COMMUNICATION_DATE &gt;= #{reminderComplianceStartYm}
+	        AND COM.COR_COMMUNICATION_DATE &lt;= #{currentMonth}
+	        AND NVL(TO_CHAR(CON.COR_LEC_ID), 'A') = 'A'
+	        AND (BUL.COR_BROWSE_FLAG IS NULL AND IND.COR_BROWSE_FLAG IS NULL)
+	    ORDER BY COR_COMMUNICATION_DATE ASC
+    </select>
+
+    <insert id="InsertCorComplianceConfirmation" statementType="PREPARED">
+        INSERT  /* @SQLID=SUB0302_01#SQL006 */
+        INTO COR_COMPLIANCE_CONFIRMATION (
+            COR_LEC_ID,
+            COR_USER_ID,
+            COR_CONFIRMATION_DATE,
+            COR_CONFIRMATION_FLG,
+            COR_CREATE_DATE,
+            COR_CREATE_BY,
+            COR_UPDATE_DATE,
+            COR_UPDATE_BY
+        ) VALUES (
+            #{COR_LEC_ID},
+            #{COR_USER_ID},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{COR_CONFIRMATION_FLG},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{COR_CREATE_BY},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{COR_UPDATE_BY}
+        )
+    </insert>
+  
+    <update id="updateCorComplianceConfirmation" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0302_01#SQL007 */
+            COR_COMPLIANCE_CONFIRMATION
+        SET
+            COR_CONFIRMATION_FLG = #{COR_CONFIRMATION_FLG},
+            COR_UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE,
+            COR_UPDATE_BY = #{COR_UPDATE_BY}
+        WHERE
+            COR_LEC_ID = #{COR_LEC_ID}
+            AND COR_USER_ID = #{COR_USER_ID}
+    </update>
+
+    <insert id="InsertIntoCOR_COMPLIANCE_COMMUNICATION" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0505_01-03_1#SQL002 */
+        INTO COR_COMPLIANCE_COMMUNICATION (
+            COR_LEC_ID,                   --  LEC_ID
+            COR_COMMUNICATION_DATE,       --  通信年月
+            COR_TITLE,                    --  タイトル
+            COR_BRIEF,                    --  概要
+            COR_FILE_NAME1,               --  ファイル１－ファイル名
+            COR_FILE_NAME2,               --  ファイル２－ファイル名
+            COR_FILE_NAME3,               --  ファイル３－ファイル名
+            COR_FILE_DESC1,               --  ファイル１－(コメント)
+            COR_FILE_DESC2,               --  ファイル２－(コメント)
+            COR_FILE_DESC3,               --  ファイル３－(コメント)
+            COR_CONTENTS,                 --  コンテンツファイル－(コメント)
+            COR_HONBAN_FLG,               --  状態
+            COR_CREATE_DATE,              --  作成日
+            COR_CREATE_BY,                --  作成者
+            COR_UPDATE_DATE,              --  更新日
+            COR_UPDATE_BY,                --  更新者
+            COR_CONTENTS_FILE_NAME        --  コンテンツファイル－パス
+        ) VALUES (
+            SEQ_COMPLIANCE.NEXTVAL,
+            #{COMMUNICATIONDATE},
+            #{TITLE},
+            #{BRIEF},
+            #{FILENAME1},
+            #{FILENAME2},
+            #{FILENAME3},
+            #{FILEDESC1},
+            #{FILEDESC2},
+            #{FILEDESC3},
+            #{CONTENTS},
+            #{HONBANFLG},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{USERID},
+            IFA_DATE_UTIL.IFA_GET_DATE,
+            #{USERID1},
+            #{CONTENTSFILE}
+        )
+    </insert>
+  
+    <resultMap type="com.sbisec.helios.ap.compliance.model.GetSelectCountModel" id="ResultSetGetSelectCount">
+    </resultMap>
+
+    <select id="GetSelectCount" resultMap="ResultSetGetSelectCount" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0505_01-03_1#SQL001 */
+            COUNT(1) AS CNT
+        FROM
+            COR_COMPLIANCE_COMMUNICATION
+        <if test="COMDATE != null and COMDATE != ''">
+        WHERE
+            COR_COMMUNICATION_DATE = #{COMDATE}
+        </if>
+    </select>
+</mapper>

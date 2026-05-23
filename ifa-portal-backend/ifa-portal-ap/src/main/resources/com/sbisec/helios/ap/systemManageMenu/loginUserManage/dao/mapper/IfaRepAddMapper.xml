@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0601_01-06_1
+    画面名：担当者追加
+-->
+<mapper namespace="com.sbisec.helios.ap.systemManageMenu.loginUserManage.dao.mapper.IfaRepAddMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+    
+    <resultMap id="ResultMapIfaRepAddSql001" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.model.IfaRepAddSql001ModelResponse" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaRepAddSql002" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.model.IfaRepAddSql002ModelResponse" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaRepAddSql003" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.model.IfaRepAddSql003ModelResponse" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaRepAddSql004" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.model.IfaRepAddSql004ModelResponse" >
+    </resultMap>
+    
+    <resultMap id="ResultMapIfaRepAddSql006" type="com.sbisec.helios.ap.systemManageMenu.loginUserManage.model.IfaRepAddSql006ModelResponse" >
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaRepAddSql001" resultMap="ResultMapIfaRepAddSql001"
+        statementType="PREPARED">
+        <!--/* @SQLID=SUB0601_01-06_1#Sql001 */-->
+        SELECT DISTINCT
+         B.BROKER_CODE brokerCode,
+         B.BROKER_BRANCH_CODE subBrokerId,
+         B.BROKER_BRANCH_KIND brokerBranchKind,
+         B.BRANCH_NAME brokerBranchName 
+        FROM BRANCH_MEDIATE_INFO A
+        INNER JOIN MEDIATE_BRANCH B
+        ON A.BROKER_CODE = B.BROKER_CODE
+        AND B.BROKER_BRANCH_KIND = '00'
+        AND B.DELETE_FLG = '0'
+        AND A.DELETE_FLG = '0'
+        WHERE A.BRANCH_CODE = #{req.sbiSecurityCode}
+        ORDER BY B.BROKER_CODE ASC, B.BROKER_BRANCH_CODE ASC
+    </select>
+    
+    <!-- 
+        SQLID：Sql002
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaRepAddSql002" resultMap="ResultMapIfaRepAddSql002"
+        statementType="PREPARED">
+        <!--/* @SQLID=SUB0601_01-06_1#Sql002 */-->
+        SELECT DISTINCT
+        A.BROKER_BRANCH_CODE subBrokerId,
+        A.BRANCH_NAME brokerBranchName
+        FROM MEDIATE_BRANCH A
+        WHERE A.DELETE_FLG = '0'
+        AND A.BROKER_CODE = #{req.brokerCode}
+        AND A.BROKER_BRANCH_KIND != '00'
+        ORDER BY A.BROKER_BRANCH_CODE ASC
+    </select>
+
+    <!-- 
+        SQLID：Sql003
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaRepAddSql003" resultMap="ResultMapIfaRepAddSql003"
+        statementType="PREPARED">
+        <!--/* @SQLID=SUB0601_01-06_1#Sql003 */-->
+        SELECT
+        A.BROKER_CHARGE_CODE brokerChargeCode,
+        A.BROKER_CHARGE_NAME employeeName
+        FROM MEDIATE_CHARGE_INFO A
+        WHERE A.DELETE_FLG = '0'
+        AND A.BROKER_CODE = #{req.brokerCode}
+        <if test="req.subBrokerId != '-1'">
+            AND A.BROKER_BRANCH_CODE = #{req.subBrokerId}
+        </if>
+        ORDER BY A.BROKER_BRANCH_CODE ASC
+    </select>
+
+    <!-- 
+        SQLID：Sql004
+        SQL名：検索
+        SQLタイプ：select
+    -->
+    <select id="selectIfaRepAddSql004" resultMap="ResultMapIfaRepAddSql004" statementType="PREPARED">
+        <!--/* @SQLID=SUB0601_01-06_1#Sql004 */ 1 FROM BRANCH_MEDIATE_INFO WHERE 1 = 1;-->
+        SELECT
+        COUNT(*) searchResultCount
+        FROM TB_MED_USERS A
+        LEFT OUTER JOIN TB_MED_USERS_PRIV B
+        ON A.USER_ID = B.USER_ID
+        WHERE (
+        A.USER_ID = #{req.userId}
+        AND A.BROKER_ID = #{req.brokerCode}
+        AND A.EMPLOYEE_ID = #{req.employeeId}
+        ) OR (
+        B.USER_ID = #{req.userId}
+        AND B.BROKER_ID = #{req.brokerCode}
+        AND B.EMPLOYEE_ID = #{req.employeeId}
+        AND B.DELETE_FLG = '0'
+        )    
+    </select>
+
+    <!-- 
+        SQLID：Sql005
+        SQL名：登録
+        SQLタイプ：insert
+    -->
+    <insert id="insertIfaRepAddSql005"
+     parameterType="com.sbisec.helios.ap.systemManageMenu.loginUserManage.model.IfaRepAddSql005ModelRequest"
+      statementType="PREPARED">
+        <!--/* @SQLID=SUB0601_01-06_1#Sql005 */-->
+        INSERT INTO TB_MED_USERS_PRIV (
+        USER_ID,
+        SEQ_NO,
+        BRANCH_ID,
+        BROKER_ID,
+        SUB_BROKER_ID,
+        EMPLOYEE_ID,
+        EMPLOYEE_NAME,
+        DELETE_FLG,
+        CREATE_USER,
+        CREATE_TIME
+        )
+        VALUES (
+        #{req.userId},
+        SEQ_TB_MED_USERS_PRIV.NEXTVAL,
+        #{req.sbiSecurityCode},
+        #{req.brokerCode},
+        #{req.subBrokerId},
+        #{req.employeeId},
+        #{req.chargeName},
+        '0',
+        #{req.createUser},
+        IFA_DATE_UTIL.IFA_GET_DATE
+        )
+    </insert>
+    
+    <select id="selectIfaRepAddSql006" resultMap="ResultMapIfaRepAddSql006"
+        statementType="PREPARED">
+        <!--/* @SQLID=SUB0601_01-06_1#Sql006 */-->
+        SELECT
+            BRANCH_CODE,
+            BRANCH_KIND,
+            BRANCH_NAME,
+            CREATE_DATE,
+            CREATE_BY,
+            UPDATE_DATE,
+            UPDATE_BY,
+            DELETE_DATE,
+            DELETE_FLG
+        FROM BRANCH
+        WHERE DELETE_FLG = '0'
+        AND BRANCH_KIND = #{req.branchKind}
+        ORDER BY BRANCH_CODE ASC
+    </select>
+</mapper>

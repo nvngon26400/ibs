@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0204_02-02_2
+    画面名：BB申込訂正確認
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.ipoPo.dao.mapper.IfaBbApplyCorrectConfirmEtintraMapper">
+	<!-- 
+        SQLID：Sql015a
+        SQL名：BB申込情報訂正
+        SQLタイプ：update
+    -->
+    <update id="updateIfaBbApplyCorrectConfirmSql015a" statementType="PREPARED">
+        UPDATE /* @SQLID=SUB0204_02-02_2#Sql015a */
+            BB_ACCEPT O
+        SET
+            O.BB_QUANTITY = TO_NUMBER(#{req.quantity}),
+            O.BB_PRICE = DECODE(#{req.price}, null, null, TO_NUMBER(#{req.price})),
+            O.BB_DISCOUNT = DECODE(#{req.discountRate}, null, null, TO_NUMBER(#{req.discountRate})),
+            O.BB_SEQ = TO_NUMBER(#{req.investorAttributeValue}),
+            O.BB_INVESTOR_ATT_NAME = #{req.investorAttributeName},
+            O.BB_REMARK = #{req.bbRemark},
+            O.BB_STRIKE_PRICE = NVL(#{req.marketOrder}, 0),
+            O.BB_UPDATE_DATE = #{req.sysDate},
+            O.BB_UPDATE_USER_ID = #{req.userId},
+            O.BB_UPDATE_SECTION_ID = #{req.sectionId},
+            O.BB_UPDATE_SECTION_NAME = #{req.branchName},
+            O.BB_UPDATE_USER_NAME = #{req.userId}
+        WHERE
+            O.BB_PRODUCT_CODE = #{req.brandCode}
+        AND
+            O.BB_PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom})
+        AND    
+            O.BB_BRANCH_CODE = UPPER(RPAD(#{req.butenCode}, 4, ' '))
+        AND
+            TO_NUMBER(O.BB_ACCOUNT_NUMBER) = TO_NUMBER(#{req.accountNumber})
+        AND
+            (TO_CHAR(O.BB_UPDATE_DATE, 'yyyy/MM/dd hh24:mi:ss') = #{req.bbCreateDate}    
+        OR
+            O.BB_UPDATE_DATE IS NULL）
+    </update>
+    
+    <!-- 
+        SQLID：Sql015b
+        SQL名：BB申込情報訂正
+        SQLタイプ：delete
+    -->
+    <delete id="deleteIfaBbApplyCorrectConfirmSql015b">
+		DELETE /* @SQLID=SUB0204_02-02_2#Sql015b */
+        FROM
+            SR_ACCEPT P
+        WHERE
+            P.BB_PRODUCT_CODE = #{req.brandCode}
+        AND
+            P.BB_PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom})
+        AND
+            P.BB_BRANCH_CODE = UPPER(RPAD(#{req.butenCode}, 4, ' '))
+        AND
+            TO_NUMBER(P.BB_ACCOUNT_NUMBER) = TO_NUMBER(#{req.accountNumber})
+	</delete>
+	
+	<!-- 
+        SQLID：Sql015c
+        SQL名：BB申込情報訂正
+        SQLタイプ：update
+    -->
+	<update id="updateIfaBbApplyCorrectConfirmSql015c">
+		UPDATE /* @SQLID=SUB0204_02-02_2#Sql015c */
+            SR_ACCEPT Q
+        SET
+            Q.BB_QUANTITY = TO_NUMBER(#{req.quantity}),
+            Q.QUANTITY_SAIRYOU = TO_NUMBER(#{req.discretionQuantity}),
+            Q.CHOSE_REASON = #{req.selectReason},
+            Q.SR_UPDATE_DATE = #{req.sysDate},
+            Q.SR_UPDATE_USER_ID = #{req.userId}
+        WHERE
+            Q.BB_PRODUCT_CODE = #{req.brandCode}
+        AND    
+            Q.BB_PRESENTATION_FROM = TO_NUMBER(#{req.bookBuildingPresentationFrom})
+        AND
+            Q.BB_BRANCH_CODE = UPPER(RPAD(#{req.butenCode}, 4, ' '))
+        AND
+            TO_NUMBER(Q.BB_ACCOUNT_NUMBER) = TO_NUMBER(#{req.accountNumber})
+	</update>
+	
+	<!-- 
+        SQLID：Sql015d
+        SQL名：BB申込情報訂正
+        SQLタイプ：insert
+    -->
+	<insert id="insertIfaBbApplyCorrectConfirmSql015d">
+		INSERT /* @SQLID=SUB0204_02-02_2#Sql015d */
+        INTO
+        SR_ACCEPT I (
+            I.BB_PRODUCT_CODE,
+            I.BB_PRESENTATION_FROM,
+            I.BB_BRANCH_CODE,
+            I.BB_ACCOUNT_NUMBER,
+            I.BB_QUANTITY,
+            I.QUANTITY_SAIRYOU,
+            I.CHOSE_REASON,
+            I.SAIRYOU_ALLO_QUANTITY,
+            I.SR_CREATE_DATE,
+            I.SR_UPDATE_USER_ID
+        )
+        VALUES (
+            #{req.brandCode},
+            TO_NUMBER(#{req.bookBuildingPresentationFrom}),
+            UPPER(RPAD(#{req.butenCode}, 4, ' ')),
+            LPAD(#{req.accountNumber}, 7, 0),
+            TO_NUMBER(#{req.quantity}),
+            DECODE(#{req.discretionQuantity}, null, null, TO_NUMBER(#{req.discretionQuantity})),
+            #{req.selectReason},
+            NULL,
+            #{req.sysDate},
+            #{req.userId}
+        )
+	</insert>
+</mapper>

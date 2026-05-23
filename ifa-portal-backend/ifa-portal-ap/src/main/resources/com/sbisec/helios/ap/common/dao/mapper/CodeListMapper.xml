@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.CodeListMapper">
+
+    <!-- ＜２＞リスト取得 -->
+    <select id="getCodeList" resultType="com.sbisec.helios.ap.common.model.IfaCodeListDispPatternModel">
+        SELECT
+            S.KEY
+            , D.VALUE
+        FROM
+            IFA_CODE_LIST_DISP_PATTERN D
+            INNER JOIN IFA_CODE_LIST_SELECT_PATTERN S
+                ON D.CODE_LIST_ID = S.CODE_LIST_ID
+        <if test="dispPattern != null">
+                AND D.DISP_PATTERN = #{dispPattern}
+        </if>
+        <if test="dispPattern == null">
+                AND D.DISP_PATTERN = '1'
+        </if>
+        <if test="selectPattern != null">
+                AND S.SELECT_PATTERN = #{selectPattern}
+        </if>
+        <if test="selectPattern == null">
+                AND S.SELECT_PATTERN = '1'
+        </if>
+                AND D.KEY = S.KEY
+        WHERE
+            D.CODE_LIST_ID = #{codeListId}
+        ORDER BY
+            S.SELECT_ORDER
+    </select>
+
+    <!-- ＜３＞外部コードと内部コードの相互変換
+     ①APIリクエストパラメータの編集で内部コード→外部コードへ変換 -->
+    <select id="convertKeyToExtKey" resultType="java.lang.String">
+        SELECT
+            EXT_KEY
+        FROM
+            IFA_CODE_LIST_EXT_SYSTEM E
+        WHERE
+            E.CODE_LIST_ID = #{codeListId}
+            AND E.API_TYPE = #{apiType}
+            AND KEY = #{codeListKey}
+    </select>
+
+    <!-- ＜３＞外部コードと内部コードの相互変換
+     ②APIレスポンスパラメータの編集で外部コード→内部コードへ変換 -->
+    <select id="convertExtKeyToKey" resultType="java.lang.String">
+        SELECT
+            KEY
+        FROM
+            IFA_CODE_LIST_EXT_SYSTEM E
+        WHERE
+            E.CODE_LIST_ID = #{codeListId}
+            AND E.API_TYPE = #{apiType}
+            AND EXT_KEY = #{codeListExtKey}
+    </select>
+
+    <!-- ＜４＞区分値の日本語名称取得
+     ①区分値⇒区分名称 -->
+    <select id="getValue" resultType="java.lang.String">
+        SELECT
+            VALUE
+        FROM
+            IFA_CODE_LIST_DISP_PATTERN D
+        WHERE
+            D.CODE_LIST_ID = #{codeListId}
+        <if test="dispPattern != null">
+            AND D.DISP_PATTERN = #{dispPattern}
+        </if>
+        <if test="dispPattern == null">
+            AND D.DISP_PATTERN = '1'
+        </if>
+            AND D.KEY = #{codeListKey}
+    </select>
+
+    <!-- ＜４＞区分値の日本語名称取得
+     ②区分名称⇒区分値 -->
+    <select id="getKey" resultType="java.lang.String">
+        SELECT
+            KEY
+        FROM
+            IFA_CODE_LIST_DISP_PATTERN D
+        WHERE
+            D.CODE_LIST_ID = #{codeListId}
+        <if test="dispPattern != null">
+            AND D.DISP_PATTERN = #{dispPattern}
+        </if>
+        <if test="dispPattern == null">
+            AND D.DISP_PATTERN = '1'
+        </if>
+            AND D.VALUE = #{codeListValue}
+    </select>
+
+</mapper>

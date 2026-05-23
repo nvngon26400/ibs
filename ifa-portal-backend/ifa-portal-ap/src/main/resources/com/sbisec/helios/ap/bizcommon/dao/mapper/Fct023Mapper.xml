@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.bizcommon.dao.mapper.Fct023Mapper">
+
+    <resultMap type="com.sbisec.helios.ap.bizcommon.dao.model.Fct023Sql001ResponseModel" id="Fct023Sql001ResponseModel"></resultMap>
+
+    <!-- FCT023 SQL001.国内投信販売手数料取得-->
+    <select id="getFct023Sql001" resultMap="Fct023Sql001ResponseModel">
+        SELECT /* @SQLID=FCT023#SQL001 */
+            M_F_NAME as fundOfficalName,
+            M_F_TANI as basePriceUnit,
+            M_F_H_MINKUCHI as numberOfSalesMinimum,
+            M_F_H_MINTANI2 as salesMinimunUnitPriceAfter2nd,
+            M_F_H_KUCHISU as numberOfSalesUnit,
+            M_F_H_BSTANI2 as salesTradingUnitPriceAfter2nd,
+            M_F_K_KUCHISU as numberOfCancelTradingUnit,
+            M_F_K_BSTANI2 as cancelTradingUnitPriceAfter2nd,
+            M_F_SHIMEKIRI as orderDeadlineTime,
+            M_F_SELL_WAY as saleMethod,
+            M_F_TYPE as fundType,
+            M_F_SAITOUSHI_KUBUN as reinvestmentDivison,
+            M_F_TOKUSYU as specialType
+        FROM
+            FUND
+        WHERE
+            M_F_TYPE in ('1','2') AND
+            M_F_DELFLG = '0' AND
+            M_F_ET_START_DATE &lt;= IFA_DATE_UTIL.IFA_GET_SDATE('YYYYMMDD') AND
+            M_F_NRICODE = #{sql001Req.nriCd}
+        
+    </select>
+</mapper>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    IfaServiceNowBranchAndBrokerInfomationMapper
+-->
+<mapper namespace="com.sbisec.helios.ap.extapi.servicenow.dao.mapper.IfaServiceNowBranchAndBrokerInfomationMapper">
+    <resultMap
+        type="com.sbisec.helios.ap.extapi.servicenow.dto.common.IfaServiceNowBranchDto"
+        id="IfaServiceNowBranchDto"
+    >
+    </resultMap>
+
+    <resultMap
+        type="com.sbisec.helios.ap.extapi.servicenow.dto.common.IfaServiceNowBrokerDto"
+        id="IfaServiceNowBrokerDto"
+    >
+        <result property="brokerBranchName" column="BROKER_BRANCH_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <resultMap
+        type="com.sbisec.helios.ap.extapi.servicenow.dto.common.IfaServiceNowEmployeeDto"
+        id="IfaServiceNowEmployeeDto"
+    >
+        <result property="employeeName" column="EMPLOYEE_NAME" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler" />
+    </resultMap>
+    
+    <!-- 
+         SQLID：selectA001Branch
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA001Branch"
+        statementType="PREPARED"
+        resultMap="IfaServiceNowBranchDto"
+    >
+        SELECT /* @SQLID=EXTAPI_01-001#selectA001Branch */
+            B.BRANCH_CODE, 
+            B.BRANCH_KIND, 
+            B.BRANCH_NAME, 
+            TO_CHAR(B.CREATE_DATE, 'yyyyMMddHH24miss') CREATE_DATE, 
+            B.CREATE_BY, 
+            TO_CHAR(B.UPDATE_DATE, 'yyyyMMddHH24miss') UPDATE_DATE, 
+            B.UPDATE_BY, 
+            TO_CHAR(B.DELETE_DATE, 'yyyyMMddHH24miss') DELETE_DATE, 
+            B.DELETE_FLG 
+        FROM
+            BRANCH B 
+        WHERE
+            1 = 0 OR (B.DELETE_FLG = '0'
+            <if test="req.branchKind != null and req.branchKind != ''">
+                AND B.BRANCH_KIND = #{req.branchKind}
+            </if>
+            ) 
+        ORDER BY
+            B.BRANCH_CODE ASC
+        
+    </select>
+    
+    <!-- 
+         SQLID：selectA002Broker
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA002Broker"
+        statementType="PREPARED"
+        resultMap="IfaServiceNowBrokerDto"
+    >
+        SELECT /* @SQLID=EXTAPI_01-002#selectA002Broker */
+            DISTINCT
+            BMI.BRANCH_CODE,
+            MB.BROKER_CODE, 
+            MB.BROKER_BRANCH_CODE, 
+            MB.BROKER_BRANCH_KIND, 
+            MB.BRANCH_NAME         As BROKER_BRANCH_NAME 
+        FROM
+            BRANCH_MEDIATE_INFO BMI 
+            INNER JOIN MEDIATE_BRANCH MB 
+                ON BMI.BROKER_CODE = MB.BROKER_CODE 
+                AND MB.BROKER_BRANCH_KIND = '00' 
+                AND MB.DELETE_FLG = '0' 
+                AND BMI.DELETE_FLG = '0' 
+            	<if test="req.branchCode != null and req.branchCode != ''">
+                	AND BMI.BRANCH_CODE = #{req.branchCode}
+            	</if>
+        ORDER BY
+            MB.BROKER_CODE ASC, MB.BROKER_BRANCH_CODE ASC
+        
+    </select>
+    
+    <!-- 
+         SQLID：selectA003Broker
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA003Broker"
+        statementType="PREPARED"
+        resultMap="IfaServiceNowBrokerDto"
+    >
+    
+        SELECT /* @SQLID=EXTAPI_01-003#selectA003Broker */
+            DISTINCT
+            MB.BROKER_CODE,
+            MB.BROKER_BRANCH_CODE,
+            MB.BRANCH_NAME         As BROKER_BRANCH_NAME 
+        FROM
+            MEDIATE_BRANCH MB
+        WHERE
+            MB.DELETE_FLG = '0'
+        	AND MB.BROKER_BRANCH_KIND != '00'
+            <if test="req.brokerCode != null and req.brokerCode != ''">
+                AND MB.BROKER_CODE = #{req.brokerCode}
+            </if>
+        ORDER BY
+            MB.BROKER_BRANCH_CODE ASC
+        
+    </select>
+    
+    <!-- 
+         SQLID：selectA004Employee
+         SQL名：検索
+         SQLタイプ：select
+    -->
+    <select 
+        id="selectA004Employee"
+        statementType="PREPARED"
+        resultMap="IfaServiceNowEmployeeDto"
+    >
+    
+        SELECT /* @SQLID=EXTAPI_01-004#selectA004Employee */
+            MCI.BROKER_CODE,
+            MCI.BROKER_BRANCH_CODE,
+            MCI.BROKER_CHARGE_CODE  As EMPLOYEE_ID, 
+            MCI.BROKER_CHARGE_NAME  As EMPLOYEE_NAME
+        FROM
+            MEDIATE_CHARGE_INFO MCI 
+        WHERE
+            MCI.DELETE_FLG = '0' 
+            <if test="req.brokerCode != null and req.brokerCode != ''">
+            	AND MCI.BROKER_CODE = #{req.brokerCode}
+            </if>
+            <if test="req.brokerBranchCode != null and req.brokerBranchCode != ''">
+                AND MCI.BROKER_BRANCH_CODE = #{req.brokerBranchCode}
+            </if>
+        
+    </select>    
+</mapper>

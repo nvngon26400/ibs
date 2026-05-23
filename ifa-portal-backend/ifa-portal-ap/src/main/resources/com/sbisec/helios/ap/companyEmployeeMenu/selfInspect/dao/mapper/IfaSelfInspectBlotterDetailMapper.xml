@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0506_01-02
+    画面名：自己点検記録簿詳細
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.mapper.IfaSelfInspectBlotterDetailMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaSelfInspectBlotterDetailSql001" type="com.sbisec.helios.ap.companyEmployeeMenu.selfInspect.dao.model.IfaSelfInspectBlotterDetailSql001ResponseModel" >
+        <result property="corAnswerReason" column="COR_ANSWER_REASON" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+        <result property="corMemo" column="COR_MEMO" typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+    </resultMap>
+
+
+    <!--
+        SQLID：Sql001
+        SQL名：自己点検記録簿情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaSelfInspectBlotterDetailSql001" resultMap="ResultMapIfaSelfInspectBlotterDetailSql001" statementType="PREPARED">
+        SELECT /* @SQLID=SUB0506_01-02#Sql001 */
+            M.BROKER_CODE
+            , B.COR_SELF_CHECK_ID
+            , A.COR_SORT_NO
+            , A.COR_SELF_CHECK_ITEM_ID
+            , A.COR_SELF_CHECK_ITEM_NAME
+            , C.COR_CONFIRMATION_FLG
+            , C.COR_ANSWER_REASON
+            , C.COR_ANSWER_RESULT
+            , B.COR_MEMO
+        FROM
+            COR_SELF_CHECK_ITEM A
+            , COR_SELF_CHECK B
+            , COR_SELF_CHECK_CONFIRMATION C
+            , MEDIATE_BRANCH M
+        WHERE
+            A.COR_INDICATION_FLG = '1'
+            AND B.COR_ENFORCE_DATE = #{req.registerDate}
+            AND B.COR_BROKER_CODE = M.BROKER_CODE
+            AND B.COR_SELF_CHECK_ID = C.COR_SELF_CHECK_ID
+            AND C.COR_SELF_CHECK_ITEM_ID = A.COR_SELF_CHECK_ITEM_ID
+            AND M.BROKER_CODE = #{req.brokerCode}
+            AND M.BROKER_BRANCH_KIND = '00'
+        ORDER BY
+            A.COR_SORT_NO
+    </select>
+</mapper>

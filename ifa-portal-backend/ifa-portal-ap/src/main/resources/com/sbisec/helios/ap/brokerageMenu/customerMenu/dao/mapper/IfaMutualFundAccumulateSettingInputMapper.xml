@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0403-02_1
+    画面名：投信積立設定入力
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaMutualFundAccumulateSettingInputMapper">
+
+    <resultMap id="ResultMapIfaMutualFundAccumulateSettingInputSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundAccumulateSettingInputSql001ResponseModel" >
+    </resultMap>
+    <resultMap id="ResultMapIfaMutualFundAccumulateSettingInputSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaMutualFundAccumulateSettingInputSql002ResponseModel" >
+    </resultMap>
+    <!-- 
+        SQLID：SQL001
+        SQL名：投信積立買付設定取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0403-02_1#Sql001 */ 
+    -->
+    <select id="selectIfaMutualFundAccumulateSettingInputSql001" resultMap="ResultMapIfaMutualFundAccumulateSettingInputSql001" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0403-02_1#Sql001 */  
+            COUNT(1) as row_count
+        FROM 
+            ETRADE.FUND_RESERVE_ORDER@CORDYS_ET10.WORLD A
+        WHERE
+            A.BUTEN_CODE = #{req.butenCode}
+            AND TO_NUMBER(TRIM(A.ACCOUNT_NUMBER)) = #{req.accountNumber}
+            AND A.NRI_CODE_KAISU = #{req.mfkaisu}
+            AND A.NRI_CODE_GO = #{req.mfgo}
+            AND A.DELETE_KBN='0'
+    </select>
+
+    <!-- 
+        SQLID：SQL002
+        SQL名：投信クレカ積立買付設定取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0403-02_1#Sql002 */ 
+    -->
+    <select id="selectIfaMutualFundAccumulateSettingInputSql002" resultMap="ResultMapIfaMutualFundAccumulateSettingInputSql002" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0403-02_1#Sql001 */  
+            COUNT(1) as row_count
+        FROM 
+            ETRADE.CREDIT_RESERVE_ORDER@CORDYS_ET10.WORLD A
+        WHERE
+            A.BUTEN_CODE = #{req.butenCode}
+            AND TO_NUMBER(TRIM(A.ACCOUNT_NUMBER)) = #{req.accountNumber}
+            AND A.NRI_CODE_KAISU = #{req.mfkaisu}
+            AND A.NRI_CODE_GO = #{req.mfgo}
+            AND A.DELETE_KBN='0'
+    </select>
+
+</mapper>

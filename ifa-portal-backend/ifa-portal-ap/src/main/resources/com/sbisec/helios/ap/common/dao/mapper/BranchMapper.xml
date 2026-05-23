@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.BranchMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.Branch" id="Branch">
+		<result property="branchName"    column="BRANCH_NAME"    typeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"/>
+	</resultMap>
+
+	<select id="getBranch" resultMap="Branch" statementType="PREPARED">
+		SELECT
+			BRANCH_CODE,
+			BRANCH_KIND,
+			BRANCH_NAME
+		FROM
+		    BRANCH
+		WHERE
+			BRANCH_CODE = #{branchCode}
+	</select>
+
+
+</mapper>

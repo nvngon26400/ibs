@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    画面ID：SUB0504_02-01
+    画面名：電子交付同意データ登録
+-->
+<mapper namespace="com.sbisec.helios.ap.companyEmployeeMenu.tradeDataManage.dao.mapper.IfaEdelivAgreementDataRegisterMapper">
+
+	<select id="selectIfaEdelivAgreementDataRegisterSql001" resultType="Integer" statementType="PREPARED">
+		SELECT /* @SQLID=SUB0504_02-01#Sql001 */
+			COUNT(1)
+		FROM
+			MEDIATE_USER_ATTRIBUTE_INFO MUAI
+		WHERE
+			1 = 1
+			AND MUAI.BUTEN_CODE = #{req.butenCode}
+			AND MUAI.ACCOUNT_NUMBER = TO_NUMBER(#{req.accountNumber})
+	</select>
+
+	<update id="mergeIfaEdelivAgreementDataRegisterSql002" statementType="PREPARED">
+		MERGE INTO T_IPO_PO_EDELIV_AGRMNT TIPEA /* @SQLID=SUB0504_02-01#Sql002 */
+		USING (
+			SELECT
+				#{req.butenCode} AS BUTEN_CODE,
+				TO_NUMBER(#{req.accountNumber}) AS ACCOUNT_NUMBER,
+				<choose>
+					<when test="req.edelivAgreementDate != null and req.edelivAgreementDate != ''">
+						TO_DATE(#{req.edelivAgreementDate}, 'YYYY/MM/DD') AS EDELIV_AGREEMENT_DATE,
+					</when>
+					<otherwise>
+						NULL AS EDELIV_AGREEMENT_DATE,
+					</otherwise>
+				</choose>
+				#{req.edelivAgreementKbn} AS EDELIV_AGREEMENT_KBN,
+				#{req.userId} AS USER_ID
+			FROM
+				DUAL
+		) A
+		ON (
+			TIPEA.BUTEN_CODE = A.BUTEN_CODE
+			AND TIPEA.ACCOUNT_NUMBER = A.ACCOUNT_NUMBER
+		)
+		WHEN MATCHED THEN
+			UPDATE SET
+				TIPEA.EDELIV_AGREEMENT_DATE = A.EDELIV_AGREEMENT_DATE,
+				TIPEA.EDELIV_AGREEMENT_KBN = A.EDELIV_AGREEMENT_KBN,
+				TIPEA.UPDATE_TIME = IFA_DATE_UTIL.IFA_GET_DATE(),
+				TIPEA.UPDATE_USER = A.USER_ID,
+				TIPEA.SYS_ID = 'SUB0504'
+		WHEN NOT MATCHED THEN
+			INSERT (
+				TIPEA.BUTEN_CODE,
+				TIPEA.ACCOUNT_NUMBER,
+				TIPEA.EDELIV_AGREEMENT_DATE,
+				TIPEA.EDELIV_AGREEMENT_KBN,
+				TIPEA.CREATE_TIME,
+				TIPEA.CREATE_USER,
+				TIPEA.UPDATE_TIME,
+				TIPEA.UPDATE_USER,
+				TIPEA.SYS_ID
+			) VALUES (
+				A.BUTEN_CODE,
+				A.ACCOUNT_NUMBER,
+				A.EDELIV_AGREEMENT_DATE,
+				A.EDELIV_AGREEMENT_KBN,
+				IFA_DATE_UTIL.IFA_GET_DATE(),
+				A.USER_ID,
+				IFA_DATE_UTIL.IFA_GET_DATE(),
+				A.USER_ID,
+				'SUB0504'
+			)
+	</update>
+</mapper>

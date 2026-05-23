@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0208-02
+    画面名：株式詳細情報
+-->
+<mapper namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaStockDetailInfoMapper">
+    <!-- 全角が入る場合はtypeHandler="com.sbibits.earth.dao.typehandler.StringTypeHandler"を設定すること -->
+    <!-- 住所が入る場合はtype="com.sbibits.horus.ap.common.typehandler.AddressConvertHandler"を設定すること -->
+
+    <resultMap id="ResultMapIfaStockDetailInfoSql001" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaStockDetailInfoSql001ResponseModel" >
+    </resultMap>
+
+    <resultMap id="ResultMapIfaStockDetailInfoSql002" type="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.model.IfaStockDetailInfoSql002ResponseModel" >
+    </resultMap>
+
+    <!-- 
+        SQLID：Sql001
+        SQL名：指定銘柄銘柄名取得
+        SQLタイプ：select
+                    /* @SQLID=SUB0202_0208-02#Sql001 */ 
+    -->
+    <select id="selectIfaStockDetailInfoSql001" resultMap="ResultMapIfaStockDetailInfoSql001" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0208-02#Sql001 */ 
+            BRAND_NAME
+        FROM 
+            ETINTRA.STAR_BRAND_MASTER
+        WHERE 
+            <!--#{req.brandCode}-->
+            SUBSTR(COMPANY_CD,-4,4)=SUBSTR(#{req.brandCode},1,4)
+            AND NEW_OLD_CLASSIFY = SUBSTR(#{req.brandCode},-1) 
+            AND RIGHT_CLASSIFY = ' '
+            AND PRODUCT_CLASSIFY = 'K'
+            AND DOMESTIC_FOREIGN_CLASSIFY = '0'
+    </select>
+
+    <!-- 
+        SQLID：Sql002
+        SQL名：株式詳細情報取得
+        SQLタイプ：select
+    -->
+    <select id="selectIfaStockDetailInfoSql002" resultMap="ResultMapIfaStockDetailInfoSql002" statementType="PREPARED">
+        SELECT 
+            /* @SQLID=SUB0202_0208-02#Sql002 */
+            A.SOR_SERVICE_KBN
+            ,A.DAY_MG_BUY_KBN
+            ,A.DAY_MG_SELL_KBN
+            ,A.PREMIUM_SHORT_SELLING_KBN
+            ,A.MKT_LOAN_KBN_TKY
+            ,A.MKT_LOAN_KBN_NGY
+            ,A.MKT_LOAN_KBN_FKO
+            ,A.MKT_LOAN_KBN_SPR
+            ,B.MKT_LOAN_KBN_PTS
+        FROM 
+            STOCK_DETAIL_MASTER A
+        LEFT JOIN (
+            SELECT 
+                SEC_CODE
+                ,MKT_LOAN_KBN_PTS 
+            FROM 
+                CORDYS.PTS_BRAND_MASTER 
+            WHERE 
+                SEC_CODE = TRIM(#{req.brandCode})
+        ) B 
+        ON A.SEC_CODE = B.SEC_CODE
+        WHERE 
+            A.SEC_CODE = TRIM(#{req.brandCode})
+    </select>
+
+</mapper>

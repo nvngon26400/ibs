@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sbisec.helios.ap.common.dao.mapper.MedVerifyUsersMapper">
+
+	<resultMap type="com.sbisec.helios.ap.common.model.MedVerifyUser" id="MedVerifyUsers">
+		<result property="userId"    	column="USER_ID"    	typeHandler="StringTypeHandler"/>
+		<result property="mailAddress"  column="MAIL_ADDRESS"  	typeHandler="StringTypeHandler"/>
+		<result property="verifyStatus" column="VERIFY_STATUS"  typeHandler="StringTypeHandler"/>
+		<result property="updateBy"     column="UPDATE_BY"      typeHandler="StringTypeHandler"/>
+	</resultMap>
+
+	<select id="getMedVerifyUserInfo" resultMap="MedVerifyUsers" statementType="PREPARED">
+		SELECT
+			USER_ID,
+			MAIL_ADDRESS,
+			VERIFY_STATUS,
+			UPDATE_BY,
+			UPDATE_DATE
+		FROM
+		    TB_MED_VERIFY_USERS
+		WHERE
+			USER_ID = #{userId}
+		AND VERIFY_STATUS = '1'
+	</select>
+
+	<update id="updateMedVerifyMailAddress" statementType="PREPARED">
+		UPDATE TB_MED_VERIFY_USERS SET
+			MAIL_ADDRESS = #{medVerifyUser.mailAddress},
+			UPDATE_BY = #{medVerifyUser.updateBy},
+			UPDATE_DATE = IFA_DATE_UTIL.IFA_GET_DATE
+		WHERE
+			USER_ID = #{medVerifyUser.userId}
+	</update>
+</mapper>

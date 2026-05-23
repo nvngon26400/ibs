@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    画面ID：SUB0202_0403-02_2
+    画面名：投信積立設定確認
+-->
+<mapper
+    namespace="com.sbisec.helios.ap.brokerageMenu.customerMenu.dao.mapper.IfaMutualFundAccumulateSettingConfirmMapper">
+
+    <!-- 
+         SQLID：Sql001
+         SQL名：投信積立設定テーブルに、積立設定情報をインサートする。
+         SQLタイプ：insert
+    -->
+
+    <insert id="insertIfaMutualFundAccumulateSettingConfirmSql001" statementType="PREPARED">
+        INSERT /* @SQLID=SUB0202_0401-02_2#Sql001 */
+        INTO CORDYS.FUND_RESERVE_SETTING(
+            BUTEN_CODE
+            , ACCOUNT_NUMBER
+            , FUND_CD_KAISU
+            , FUND_CD_GOU
+            , AZUKARI_KBN
+            , MODIFY_KBN
+            , PAYMENT_METHOD
+            , NISA_BARELY_BUYING_KBN
+            , NISA_EXCESS_BUYING_KBN
+            , SETTING_AMOUNT
+            , COURSE_KBN
+            , SETTING_RESERVE_DD
+            , SETTING_RESERVE_BIMONTHLY
+            , SETTING_RESERVE_WEEKLY
+            , SETTING_RESERVE_MULTIDAY
+            , ONE_MONTH_SUM_AMOUNT
+            , SETTING_BONUS_FLAG
+            , PAYMENT_BONUS
+            , RESERVE_MM_B1
+            , RESERVE_DD_B1
+            , RESERVE_MM_B2
+            , RESERVE_DD_B2
+            , PLAN_DATE
+            , PLAN_DATE_BONUS1
+            , PLAN_DATE_BONUS2
+            , NEXT_RESERVE_DATE
+            , KANYU_KBN
+            , UKETUKE_HOUHOU
+            , CHECK_COMP_WRN_ALERT
+            , RECEPTION_ROUTE_KBN
+            , OPERATOR_ID
+            , BROKER_CODE
+            , INTERMEDIARY_EMP_CD
+            , DELETE_KBN
+            , CREATE_TIME
+            , CREATE_USER
+            , UPDATE_TIME
+            , UPDATE_USER
+        )
+        VALUES (
+            #{req.butenCode}                      <!-- 部店コードCHAR(3) -->
+            ,#{req.accountNumber}                 <!-- 口座番号CHAR(7) -->
+            ,#{req.fundCdKaisu}                   <!-- ファンドコード（回数）CHAR(4) -->
+            ,#{req.fundCdGou}                     <!-- ファンドコード（号）CHAR(3) -->
+            ,#{req.azukariKbn}                    <!-- 預り区分CHAR(1) -->
+            ,#{req.modifyKbn}                     <!-- 更新区分CHAR(1) -->
+            ,#{req.paymentMethod}                 <!-- 決済方法CHAR(1) -->
+            ,#{req.nisaBarelyBuyingKbn}           <!-- NISA枠ぎりぎり買付区分CHAR(1) -->
+            ,#{req.nisaExcessBuyingKbn}           <!-- NISA枠超過時買付区分CHAR(1) -->
+            ,TO_NUMBER(#{req.settingAmount})      <!-- 設定金額NUMBER(15) -->
+            ,#{req.courseKbn}                     <!-- コース区分CHAR(1) -->
+            ,#{req.settingReserveDd}              <!-- 積立日付CHAR(2) -->
+            ,#{req.settingReserveBimonthly}       <!-- 積立隔月設定VARCHAR2(1) -->
+            ,#{req.settingReserveWeekly}          <!-- 積立毎週設定VARCHAR2(1) -->
+            ,#{req.settingReserveMultiday}        <!-- 積立複数日設定VARCHAR2(93) -->
+            <choose>
+                <when test="req.oneMonthSumAmount == null">
+                  ,NULL                                             <!-- 1カ月あたりの積立金額NUMBER(15) -->
+                </when>
+                <otherwise>
+                  ,TO_NUMBER(#{req.oneMonthSumAmount})              <!-- 1カ月あたりの積立金額NUMBER(15) -->
+                </otherwise>
+            </choose>
+            ,#{req.settingBonusFlag}              <!-- ボーナス設定有無CHAR(1) -->
+            <choose>
+                <when test="req.paymentBonus == null">
+                  ,NULL                                        <!-- ボーナス設定金額NUMBER(15) -->
+                </when>
+                <otherwise>
+                  ,TO_NUMBER(#{req.paymentBonus})              <!-- ボーナス設定金額NUMBER(15) -->
+                </otherwise>
+            </choose>
+            ,#{req.reserveMmB1}                   <!-- ボーナス１設定月CHAR(2) -->
+            ,#{req.reserveDdB1}                   <!-- ボーナス１設定日CHAR(2) -->
+            ,#{req.reserveMmB2}                   <!-- ボーナス２設定月CHAR(2) -->
+            ,#{req.reserveDdB2}                   <!-- ボーナス２設定日CHAR(2) -->
+            ,#{req.planDate}                      <!-- 買付予定日CHAR(8) -->
+            ,#{req.planDateBonus1}                <!-- ボーナス１買付予定日CHAR(8) -->
+            ,#{req.planDateBonus2}                <!-- ボーナス２買付予定日CHAR(8) -->
+            ,#{req.nextReserveDate}               <!-- 次回買付日CHAR(8) -->
+            ,#{req.kanyuKbn}                      <!-- 勧誘区分CHAR(1) -->
+            ,#{req.uketukeHouhou}                 <!-- 受付方法CHAR(1) -->
+            ,#{req.checkCompWrnAlert}             <!-- アラート内容確認.コンプラチェックワーニング確認CHAR(1) -->
+            ,#{req.receptionRouteKbn}             <!-- 受付経路区分CHAR(1) -->
+            ,#{req.operatorId}                    <!-- オペレータＩＤVARCHAR2(32) -->
+            ,#{req.brokerCode}                    <!-- 仲介業者コードCHAR(4) -->
+            ,#{req.brokerChargeCode}              <!-- 仲介業者営業員コードCHAR(4) -->
+            ,#{req.deleteKbn}                     <!-- 削除区分CHAR(1) -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE           <!-- 作成日時DATE -->
+            ,#{req.createUser}                    <!-- 作成者VARCHAR2(20) -->
+            ,IFA_DATE_UTIL.IFA_GET_DATE           <!-- 更新日時DATE -->
+            ,#{req.updateUser}                    <!-- 更新者VARCHAR2(20) -->
+        )
+    </insert>
+
+</mapper>
